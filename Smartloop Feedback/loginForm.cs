@@ -51,5 +51,12 @@ namespace Smartloop_Feedback
         {
             this.Close();
         }
+
+        private void registerBtn_Click(object sender, EventArgs e)
+        {
+            registerForm register = new registerForm();
+            register.Show();
+            this.Hide();
+        }
     }
 }

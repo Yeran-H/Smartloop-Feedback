@@ -29,59 +29,52 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(registerForm));
-            this.passwordPl = new System.Windows.Forms.Panel();
-            this.usernameTb = new System.Windows.Forms.TextBox();
+            this.studentPl = new System.Windows.Forms.Panel();
+            this.studentTb = new System.Windows.Forms.TextBox();
             this.namePl = new System.Windows.Forms.Panel();
             this.nameTb = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.registerBtn = new System.Windows.Forms.Button();
-            this.signBtn = new System.Windows.Forms.Button();
+            this.passwordPl = new System.Windows.Forms.Panel();
+            this.passwordTb = new System.Windows.Forms.TextBox();
+            this.degreePl = new System.Windows.Forms.Panel();
+            this.degreeTb = new System.Windows.Forms.TextBox();
+            this.backBtn = new System.Windows.Forms.Button();
+            this.resgisterBtn = new System.Windows.Forms.Button();
             this.exitPb = new System.Windows.Forms.PictureBox();
             this.degreePb = new System.Windows.Forms.PictureBox();
-            this.pictureBox2 = new System.Windows.Forms.PictureBox();
-            this.usern = new System.Windows.Forms.PictureBox();
+            this.passwordPb = new System.Windows.Forms.PictureBox();
+            this.studentPb = new System.Windows.Forms.PictureBox();
             this.namePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.usernamePb = new System.Windows.Forms.PictureBox();
-            this.usernamePl = new System.Windows.Forms.Panel();
-            this.username = new System.Windows.Forms.PictureBox();
-            this.passwordTb = new System.Windows.Forms.TextBox();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usern)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.username)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             this.SuspendLayout();
             // 
-            // passwordPl
+            // studentPl
             // 
-            this.passwordPl.BackColor = System.Drawing.Color.White;
-            this.passwordPl.Location = new System.Drawing.Point(41, 229);
-            this.passwordPl.Name = "passwordPl";
-            this.passwordPl.Size = new System.Drawing.Size(250, 1);
-            this.passwordPl.TabIndex = 16;
+            this.studentPl.BackColor = System.Drawing.Color.White;
+            this.studentPl.Location = new System.Drawing.Point(41, 229);
+            this.studentPl.Name = "studentPl";
+            this.studentPl.Size = new System.Drawing.Size(250, 1);
+            this.studentPl.TabIndex = 16;
             // 
-            // usernameTb
+            // studentTb
             // 
-            this.usernameTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.usernameTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.usernameTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.usernameTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.usernameTb.HideSelection = false;
-            this.usernameTb.Location = new System.Drawing.Point(72, 206);
-            this.usernameTb.Name = "usernameTb";
-            this.usernameTb.Size = new System.Drawing.Size(219, 20);
-            this.usernameTb.TabIndex = 15;
-            this.usernameTb.TabStop = false;
-            this.usernameTb.Text = "Student ID";
+            this.studentTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.studentTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.studentTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.studentTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.studentTb.HideSelection = false;
+            this.studentTb.Location = new System.Drawing.Point(72, 206);
+            this.studentTb.Name = "studentTb";
+            this.studentTb.Size = new System.Drawing.Size(219, 20);
+            this.studentTb.TabIndex = 15;
+            this.studentTb.TabStop = false;
+            this.studentTb.Text = "Student ID";
+            this.studentTb.Click += new System.EventHandler(this.studentTb_Click);
             // 
             // namePl
             // 
@@ -104,78 +97,82 @@
             this.nameTb.TabIndex = 13;
             this.nameTb.TabStop = false;
             this.nameTb.Text = "Name";
+            this.nameTb.Click += new System.EventHandler(this.nameTb_Click);
             // 
-            // panel1
+            // passwordPl
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(41, 278);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(250, 1);
-            this.panel1.TabIndex = 20;
+            this.passwordPl.BackColor = System.Drawing.Color.White;
+            this.passwordPl.Location = new System.Drawing.Point(41, 278);
+            this.passwordPl.Name = "passwordPl";
+            this.passwordPl.Size = new System.Drawing.Size(250, 1);
+            this.passwordPl.TabIndex = 20;
             // 
-            // textBox1
+            // passwordTb
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Aptos", 12F);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.textBox1.HideSelection = false;
-            this.textBox1.Location = new System.Drawing.Point(72, 255);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(219, 20);
-            this.textBox1.TabIndex = 19;
-            this.textBox1.TabStop = false;
-            this.textBox1.Text = "Password";
+            this.passwordTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.passwordTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.passwordTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.passwordTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.passwordTb.HideSelection = false;
+            this.passwordTb.Location = new System.Drawing.Point(72, 255);
+            this.passwordTb.Name = "passwordTb";
+            this.passwordTb.Size = new System.Drawing.Size(219, 20);
+            this.passwordTb.TabIndex = 19;
+            this.passwordTb.TabStop = false;
+            this.passwordTb.Text = "Password";
+            this.passwordTb.Click += new System.EventHandler(this.passwordTb_Click);
             // 
-            // panel2
+            // degreePl
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(41, 322);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(250, 1);
-            this.panel2.TabIndex = 23;
+            this.degreePl.BackColor = System.Drawing.Color.White;
+            this.degreePl.Location = new System.Drawing.Point(41, 322);
+            this.degreePl.Name = "degreePl";
+            this.degreePl.Size = new System.Drawing.Size(250, 1);
+            this.degreePl.TabIndex = 23;
             // 
-            // textBox2
+            // degreeTb
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Aptos", 12F);
-            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.textBox2.HideSelection = false;
-            this.textBox2.Location = new System.Drawing.Point(72, 299);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(219, 20);
-            this.textBox2.TabIndex = 22;
-            this.textBox2.TabStop = false;
-            this.textBox2.Text = "Degree";
+            this.degreeTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.degreeTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.degreeTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.degreeTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.degreeTb.HideSelection = false;
+            this.degreeTb.Location = new System.Drawing.Point(72, 299);
+            this.degreeTb.Name = "degreeTb";
+            this.degreeTb.Size = new System.Drawing.Size(219, 20);
+            this.degreeTb.TabIndex = 22;
+            this.degreeTb.TabStop = false;
+            this.degreeTb.Text = "Degree";
+            this.degreeTb.Click += new System.EventHandler(this.degreeTb_Click);
             // 
-            // registerBtn
+            // backBtn
             // 
-            this.registerBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.registerBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.registerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.registerBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.registerBtn.Location = new System.Drawing.Point(39, 404);
-            this.registerBtn.Name = "registerBtn";
-            this.registerBtn.Size = new System.Drawing.Size(252, 52);
-            this.registerBtn.TabIndex = 26;
-            this.registerBtn.Text = "Back";
-            this.registerBtn.UseVisualStyleBackColor = false;
+            this.backBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.backBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.backBtn.Location = new System.Drawing.Point(39, 404);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(252, 52);
+            this.backBtn.TabIndex = 26;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = false;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // signBtn
+            // resgisterBtn
             // 
-            this.signBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.signBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.signBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.signBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.signBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.signBtn.Location = new System.Drawing.Point(39, 346);
-            this.signBtn.Name = "signBtn";
-            this.signBtn.Size = new System.Drawing.Size(252, 52);
-            this.signBtn.TabIndex = 25;
-            this.signBtn.Text = "Register";
-            this.signBtn.UseVisualStyleBackColor = false;
+            this.resgisterBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.resgisterBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.resgisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.resgisterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.resgisterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.resgisterBtn.Location = new System.Drawing.Point(39, 346);
+            this.resgisterBtn.Name = "resgisterBtn";
+            this.resgisterBtn.Size = new System.Drawing.Size(252, 52);
+            this.resgisterBtn.TabIndex = 25;
+            this.resgisterBtn.Text = "Register";
+            this.resgisterBtn.UseVisualStyleBackColor = false;
             // 
             // exitPb
             // 
@@ -187,10 +184,11 @@
             this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.exitPb.TabIndex = 27;
             this.exitPb.TabStop = false;
+            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
             // degreePb
             // 
-            this.degreePb.Image = global::Smartloop_Feedback.Properties.Resources.icons8_degree_96;
+            this.degreePb.Image = global::Smartloop_Feedback.Properties.Resources.degree1;
             this.degreePb.Location = new System.Drawing.Point(39, 289);
             this.degreePb.Name = "degreePb";
             this.degreePb.Size = new System.Drawing.Size(27, 27);
@@ -198,25 +196,25 @@
             this.degreePb.TabIndex = 24;
             this.degreePb.TabStop = false;
             // 
-            // pictureBox2
+            // passwordPb
             // 
-            this.pictureBox2.Image = global::Smartloop_Feedback.Properties.Resources.pass1;
-            this.pictureBox2.Location = new System.Drawing.Point(39, 245);
-            this.pictureBox2.Name = "pictureBox2";
-            this.pictureBox2.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox2.TabIndex = 21;
-            this.pictureBox2.TabStop = false;
+            this.passwordPb.Image = global::Smartloop_Feedback.Properties.Resources.pass1;
+            this.passwordPb.Location = new System.Drawing.Point(39, 245);
+            this.passwordPb.Name = "passwordPb";
+            this.passwordPb.Size = new System.Drawing.Size(27, 27);
+            this.passwordPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.passwordPb.TabIndex = 21;
+            this.passwordPb.TabStop = false;
             // 
-            // usern
+            // studentPb
             // 
-            this.usern.Image = global::Smartloop_Feedback.Properties.Resources.person1;
-            this.usern.Location = new System.Drawing.Point(39, 196);
-            this.usern.Name = "usern";
-            this.usern.Size = new System.Drawing.Size(27, 27);
-            this.usern.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.usern.TabIndex = 18;
-            this.usern.TabStop = false;
+            this.studentPb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
+            this.studentPb.Location = new System.Drawing.Point(39, 196);
+            this.studentPb.Name = "studentPb";
+            this.studentPb.Size = new System.Drawing.Size(27, 27);
+            this.studentPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.studentPb.TabIndex = 18;
+            this.studentPb.TabStop = false;
             // 
             // namePb
             // 
@@ -238,55 +236,6 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
-            // usernamePb
-            // 
-            this.usernamePb.Location = new System.Drawing.Point(41, 146);
-            this.usernamePb.Name = "usernamePb";
-            this.usernamePb.Size = new System.Drawing.Size(27, 27);
-            this.usernamePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.usernamePb.TabIndex = 17;
-            this.usernamePb.TabStop = false;
-            // 
-            // usernamePl
-            // 
-            this.usernamePl.BackColor = System.Drawing.Color.White;
-            this.usernamePl.Location = new System.Drawing.Point(41, 179);
-            this.usernamePl.Name = "usernamePl";
-            this.usernamePl.Size = new System.Drawing.Size(250, 1);
-            this.usernamePl.TabIndex = 14;
-            // 
-            // username
-            // 
-            this.username.Location = new System.Drawing.Point(39, 196);
-            this.username.Name = "username";
-            this.username.Size = new System.Drawing.Size(27, 27);
-            this.username.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.username.TabIndex = 18;
-            this.username.TabStop = false;
-            // 
-            // passwordTb
-            // 
-            this.passwordTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.passwordTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.passwordTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.passwordTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.passwordTb.HideSelection = false;
-            this.passwordTb.Location = new System.Drawing.Point(72, 206);
-            this.passwordTb.Name = "passwordTb";
-            this.passwordTb.Size = new System.Drawing.Size(219, 20);
-            this.passwordTb.TabIndex = 15;
-            this.passwordTb.TabStop = false;
-            this.passwordTb.Text = "Student ID";
-            // 
-            // pictureBox3
-            // 
-            this.pictureBox3.Location = new System.Drawing.Point(39, 289);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(27, 27);
-            this.pictureBox3.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox3.TabIndex = 24;
-            this.pictureBox3.TabStop = false;
-            // 
             // registerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -294,18 +243,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(314, 495);
             this.Controls.Add(this.exitPb);
-            this.Controls.Add(this.registerBtn);
-            this.Controls.Add(this.signBtn);
+            this.Controls.Add(this.backBtn);
+            this.Controls.Add(this.resgisterBtn);
             this.Controls.Add(this.degreePb);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.pictureBox2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.usern);
-            this.Controls.Add(this.namePb);
+            this.Controls.Add(this.degreePl);
+            this.Controls.Add(this.degreeTb);
+            this.Controls.Add(this.passwordPb);
             this.Controls.Add(this.passwordPl);
-            this.Controls.Add(this.usernameTb);
+            this.Controls.Add(this.passwordTb);
+            this.Controls.Add(this.studentPb);
+            this.Controls.Add(this.namePb);
+            this.Controls.Add(this.studentPl);
+            this.Controls.Add(this.studentTb);
             this.Controls.Add(this.namePl);
             this.Controls.Add(this.nameTb);
             this.Controls.Add(this.pictureBox1);
@@ -316,13 +265,10 @@
             this.Text = "registerForm";
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usern)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.username)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -330,26 +276,21 @@
 
         #endregion
 
-        private System.Windows.Forms.PictureBox usern;
+        private System.Windows.Forms.PictureBox studentPb;
         private System.Windows.Forms.PictureBox namePb;
-        private System.Windows.Forms.Panel passwordPl;
-        private System.Windows.Forms.TextBox usernameTb;
+        private System.Windows.Forms.Panel studentPl;
+        private System.Windows.Forms.TextBox studentTb;
         private System.Windows.Forms.Panel namePl;
         private System.Windows.Forms.TextBox nameTb;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.PictureBox pictureBox2;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.PictureBox degreePb;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Button registerBtn;
-        private System.Windows.Forms.Button signBtn;
-        private System.Windows.Forms.PictureBox exitPb;
-        private System.Windows.Forms.PictureBox usernamePb;
-        private System.Windows.Forms.Panel usernamePl;
-        private System.Windows.Forms.PictureBox username;
+        private System.Windows.Forms.PictureBox passwordPb;
+        private System.Windows.Forms.Panel passwordPl;
         private System.Windows.Forms.TextBox passwordTb;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.PictureBox degreePb;
+        private System.Windows.Forms.Panel degreePl;
+        private System.Windows.Forms.TextBox degreeTb;
+        private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.Button resgisterBtn;
+        private System.Windows.Forms.PictureBox exitPb;
     }
 }
