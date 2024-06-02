@@ -1,6 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace Smartloop_Feedback
 {
     public partial class loginForm : Form
     {
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         public loginForm()
         {
             InitializeComponent();
@@ -57,6 +60,30 @@ namespace Smartloop_Feedback
             registerForm register = new registerForm();
             register.Show();
             this.Hide();
+        }
+
+        private void signBtn_Click(object sender, EventArgs e)
+        {
+            int studentId = Convert.ToInt32(usernameTb.Text);
+            string password = passwordTb.Text;
+
+            using (MySqlConnection conn = new MySqlConnection(connStr)) 
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT StudentID FROM Students WHERE studentID = @studentID AND password = @password", conn);
+                cmd.Parameters.AddWithValue("@studentId", studentId);
+                cmd.Parameters.AddWithValue("@password", password);
+                object result = cmd.ExecuteNonQuery();
+
+                if(result != null)
+                {
+                    MessageBox.Show("Login into " + studentId + " is correct", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Incorrect Login", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
         }
     }
 }

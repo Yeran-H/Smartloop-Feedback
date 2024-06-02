@@ -121,19 +121,25 @@
   <data name="pass1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\pass1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="person1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\person1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="pass2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pass2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="degree2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\degree2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="person2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\person2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="pass2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pass2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="person1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\person1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="degree1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\degree1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="degree2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\degree2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="email1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\email1.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="email2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\email2.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>

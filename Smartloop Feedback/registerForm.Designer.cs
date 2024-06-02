@@ -47,6 +47,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.profileBtn = new System.Windows.Forms.Button();
+            this.emailPb = new System.Windows.Forms.PictureBox();
+            this.emailPl = new System.Windows.Forms.Panel();
+            this.emailTb = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
@@ -54,12 +57,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailPb)).BeginInit();
             this.SuspendLayout();
             // 
             // studentPl
             // 
             this.studentPl.BackColor = System.Drawing.Color.White;
-            this.studentPl.Location = new System.Drawing.Point(41, 229);
+            this.studentPl.Location = new System.Drawing.Point(41, 256);
             this.studentPl.Name = "studentPl";
             this.studentPl.Size = new System.Drawing.Size(250, 1);
             this.studentPl.TabIndex = 16;
@@ -71,7 +75,7 @@
             this.studentTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.studentTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.studentTb.HideSelection = false;
-            this.studentTb.Location = new System.Drawing.Point(72, 206);
+            this.studentTb.Location = new System.Drawing.Point(72, 233);
             this.studentTb.Name = "studentTb";
             this.studentTb.Size = new System.Drawing.Size(219, 20);
             this.studentTb.TabIndex = 15;
@@ -82,7 +86,7 @@
             // namePl
             // 
             this.namePl.BackColor = System.Drawing.Color.White;
-            this.namePl.Location = new System.Drawing.Point(41, 179);
+            this.namePl.Location = new System.Drawing.Point(41, 175);
             this.namePl.Name = "namePl";
             this.namePl.Size = new System.Drawing.Size(250, 1);
             this.namePl.TabIndex = 14;
@@ -94,7 +98,7 @@
             this.nameTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.nameTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.nameTb.HideSelection = false;
-            this.nameTb.Location = new System.Drawing.Point(72, 157);
+            this.nameTb.Location = new System.Drawing.Point(72, 153);
             this.nameTb.Name = "nameTb";
             this.nameTb.Size = new System.Drawing.Size(219, 20);
             this.nameTb.TabIndex = 13;
@@ -105,7 +109,7 @@
             // passwordPl
             // 
             this.passwordPl.BackColor = System.Drawing.Color.White;
-            this.passwordPl.Location = new System.Drawing.Point(41, 278);
+            this.passwordPl.Location = new System.Drawing.Point(41, 305);
             this.passwordPl.Name = "passwordPl";
             this.passwordPl.Size = new System.Drawing.Size(250, 1);
             this.passwordPl.TabIndex = 20;
@@ -117,7 +121,7 @@
             this.passwordTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.passwordTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.passwordTb.HideSelection = false;
-            this.passwordTb.Location = new System.Drawing.Point(72, 255);
+            this.passwordTb.Location = new System.Drawing.Point(72, 282);
             this.passwordTb.Name = "passwordTb";
             this.passwordTb.Size = new System.Drawing.Size(219, 20);
             this.passwordTb.TabIndex = 19;
@@ -128,7 +132,7 @@
             // degreePl
             // 
             this.degreePl.BackColor = System.Drawing.Color.White;
-            this.degreePl.Location = new System.Drawing.Point(41, 322);
+            this.degreePl.Location = new System.Drawing.Point(41, 349);
             this.degreePl.Name = "degreePl";
             this.degreePl.Size = new System.Drawing.Size(250, 1);
             this.degreePl.TabIndex = 23;
@@ -140,7 +144,7 @@
             this.degreeTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.degreeTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.degreeTb.HideSelection = false;
-            this.degreeTb.Location = new System.Drawing.Point(72, 299);
+            this.degreeTb.Location = new System.Drawing.Point(72, 326);
             this.degreeTb.Name = "degreeTb";
             this.degreeTb.Size = new System.Drawing.Size(219, 20);
             this.degreeTb.TabIndex = 22;
@@ -155,7 +159,7 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(39, 502);
+            this.backBtn.Location = new System.Drawing.Point(39, 517);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(252, 52);
             this.backBtn.TabIndex = 26;
@@ -170,12 +174,13 @@
             this.resgisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resgisterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resgisterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.resgisterBtn.Location = new System.Drawing.Point(39, 444);
+            this.resgisterBtn.Location = new System.Drawing.Point(39, 459);
             this.resgisterBtn.Name = "resgisterBtn";
             this.resgisterBtn.Size = new System.Drawing.Size(252, 52);
             this.resgisterBtn.TabIndex = 25;
             this.resgisterBtn.Text = "Register";
             this.resgisterBtn.UseVisualStyleBackColor = false;
+            this.resgisterBtn.Click += new System.EventHandler(this.resgisterBtn_Click);
             // 
             // exitPb
             // 
@@ -192,7 +197,7 @@
             // degreePb
             // 
             this.degreePb.Image = global::Smartloop_Feedback.Properties.Resources.degree1;
-            this.degreePb.Location = new System.Drawing.Point(39, 289);
+            this.degreePb.Location = new System.Drawing.Point(39, 316);
             this.degreePb.Name = "degreePb";
             this.degreePb.Size = new System.Drawing.Size(27, 27);
             this.degreePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -202,7 +207,7 @@
             // passwordPb
             // 
             this.passwordPb.Image = global::Smartloop_Feedback.Properties.Resources.pass1;
-            this.passwordPb.Location = new System.Drawing.Point(39, 245);
+            this.passwordPb.Location = new System.Drawing.Point(39, 272);
             this.passwordPb.Name = "passwordPb";
             this.passwordPb.Size = new System.Drawing.Size(27, 27);
             this.passwordPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -212,7 +217,7 @@
             // studentPb
             // 
             this.studentPb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
-            this.studentPb.Location = new System.Drawing.Point(39, 196);
+            this.studentPb.Location = new System.Drawing.Point(39, 223);
             this.studentPb.Name = "studentPb";
             this.studentPb.Size = new System.Drawing.Size(27, 27);
             this.studentPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -222,7 +227,7 @@
             // namePb
             // 
             this.namePb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
-            this.namePb.Location = new System.Drawing.Point(41, 146);
+            this.namePb.Location = new System.Drawing.Point(41, 142);
             this.namePb.Name = "namePb";
             this.namePb.Size = new System.Drawing.Size(27, 27);
             this.namePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -242,7 +247,7 @@
             // profilePb
             // 
             this.profilePb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.profilePb.Location = new System.Drawing.Point(41, 339);
+            this.profilePb.Location = new System.Drawing.Point(41, 354);
             this.profilePb.Name = "profilePb";
             this.profilePb.Size = new System.Drawing.Size(96, 96);
             this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -256,7 +261,7 @@
             this.profileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.profileBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.profileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.profileBtn.Location = new System.Drawing.Point(143, 363);
+            this.profileBtn.Location = new System.Drawing.Point(143, 378);
             this.profileBtn.Name = "profileBtn";
             this.profileBtn.Size = new System.Drawing.Size(126, 52);
             this.profileBtn.TabIndex = 29;
@@ -264,12 +269,48 @@
             this.profileBtn.UseVisualStyleBackColor = false;
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             // 
+            // emailPb
+            // 
+            this.emailPb.Image = global::Smartloop_Feedback.Properties.Resources.email1;
+            this.emailPb.Location = new System.Drawing.Point(39, 182);
+            this.emailPb.Name = "emailPb";
+            this.emailPb.Size = new System.Drawing.Size(27, 27);
+            this.emailPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.emailPb.TabIndex = 32;
+            this.emailPb.TabStop = false;
+            // 
+            // emailPl
+            // 
+            this.emailPl.BackColor = System.Drawing.Color.White;
+            this.emailPl.Location = new System.Drawing.Point(41, 211);
+            this.emailPl.Name = "emailPl";
+            this.emailPl.Size = new System.Drawing.Size(250, 1);
+            this.emailPl.TabIndex = 31;
+            // 
+            // emailTb
+            // 
+            this.emailTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.emailTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.emailTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.emailTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.emailTb.HideSelection = false;
+            this.emailTb.Location = new System.Drawing.Point(72, 192);
+            this.emailTb.Name = "emailTb";
+            this.emailTb.Size = new System.Drawing.Size(219, 20);
+            this.emailTb.TabIndex = 30;
+            this.emailTb.TabStop = false;
+            this.emailTb.Text = "Email";
+            this.emailTb.Click += new System.EventHandler(this.emailTb_Click);
+            // 
             // registerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(314, 574);
+            this.Controls.Add(this.emailPb);
+            this.Controls.Add(this.emailPl);
+            this.Controls.Add(this.emailTb);
             this.Controls.Add(this.profileBtn);
             this.Controls.Add(this.profilePb);
             this.Controls.Add(this.exitPb);
@@ -300,6 +341,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.emailPb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -325,5 +367,8 @@
         private System.Windows.Forms.PictureBox exitPb;
         private System.Windows.Forms.PictureBox profilePb;
         private System.Windows.Forms.Button profileBtn;
+        private System.Windows.Forms.PictureBox emailPb;
+        private System.Windows.Forms.Panel emailPl;
+        private System.Windows.Forms.TextBox emailTb;
     }
 }

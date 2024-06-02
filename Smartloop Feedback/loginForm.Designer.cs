@@ -104,6 +104,7 @@
             this.signBtn.TabIndex = 7;
             this.signBtn.Text = "Sigin In";
             this.signBtn.UseVisualStyleBackColor = false;
+            this.signBtn.Click += new System.EventHandler(this.signBtn_Click);
             // 
             // registerBtn
             // 
