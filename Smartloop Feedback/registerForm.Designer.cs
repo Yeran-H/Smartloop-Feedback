@@ -45,12 +45,15 @@
             this.studentPb = new System.Windows.Forms.PictureBox();
             this.namePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.profilePb = new System.Windows.Forms.PictureBox();
+            this.profileBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
             this.SuspendLayout();
             // 
             // studentPl
@@ -152,7 +155,7 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(39, 404);
+            this.backBtn.Location = new System.Drawing.Point(39, 502);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(252, 52);
             this.backBtn.TabIndex = 26;
@@ -167,7 +170,7 @@
             this.resgisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resgisterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resgisterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.resgisterBtn.Location = new System.Drawing.Point(39, 346);
+            this.resgisterBtn.Location = new System.Drawing.Point(39, 444);
             this.resgisterBtn.Name = "resgisterBtn";
             this.resgisterBtn.Size = new System.Drawing.Size(252, 52);
             this.resgisterBtn.TabIndex = 25;
@@ -236,12 +239,39 @@
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
+            // profilePb
+            // 
+            this.profilePb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.profilePb.Location = new System.Drawing.Point(41, 339);
+            this.profilePb.Name = "profilePb";
+            this.profilePb.Size = new System.Drawing.Size(96, 96);
+            this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profilePb.TabIndex = 28;
+            this.profilePb.TabStop = false;
+            // 
+            // profileBtn
+            // 
+            this.profileBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.profileBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.profileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.profileBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.profileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.profileBtn.Location = new System.Drawing.Point(143, 363);
+            this.profileBtn.Name = "profileBtn";
+            this.profileBtn.Size = new System.Drawing.Size(126, 52);
+            this.profileBtn.TabIndex = 29;
+            this.profileBtn.Text = "Upload Profile Image";
+            this.profileBtn.UseVisualStyleBackColor = false;
+            this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
+            // 
             // registerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(314, 495);
+            this.ClientSize = new System.Drawing.Size(314, 574);
+            this.Controls.Add(this.profileBtn);
+            this.Controls.Add(this.profilePb);
             this.Controls.Add(this.exitPb);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.resgisterBtn);
@@ -269,6 +299,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.studentPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.namePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -292,5 +323,7 @@
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button resgisterBtn;
         private System.Windows.Forms.PictureBox exitPb;
+        private System.Windows.Forms.PictureBox profilePb;
+        private System.Windows.Forms.Button profileBtn;
     }
 }

@@ -83,5 +83,17 @@ namespace Smartloop_Feedback
             loginForm.Show();
             this.Hide();
         }
+
+        private void profileBtn_Click(object sender, EventArgs e)
+        {
+            using (OpenFileDialog ofd = new OpenFileDialog())
+            {
+                ofd.Filter = "Image Files|*.jpg;*.jpeg;*.png;";
+                if (ofd.ShowDialog() == DialogResult.OK)
+                {
+                    profilePb.Image = Image.FromFile(ofd.FileName);
+                }
+            }
+        }
     }
 }
