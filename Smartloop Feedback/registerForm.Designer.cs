@@ -241,7 +241,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(-32, -51);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(375, 259);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 12;
             this.pictureBox1.TabStop = false;
             // 
@@ -251,7 +251,7 @@
             this.profilePb.Location = new System.Drawing.Point(41, 354);
             this.profilePb.Name = "profilePb";
             this.profilePb.Size = new System.Drawing.Size(96, 96);
-            this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.profilePb.TabIndex = 28;
             this.profilePb.TabStop = false;
             // 
