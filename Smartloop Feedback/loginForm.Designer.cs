@@ -59,6 +59,7 @@
             this.usernameTb.TabStop = false;
             this.usernameTb.Text = "Student ID";
             this.usernameTb.Click += new System.EventHandler(this.usernameTb_Click);
+            this.usernameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.usernameTb_KeyPress);
             // 
             // usernamePl
             // 

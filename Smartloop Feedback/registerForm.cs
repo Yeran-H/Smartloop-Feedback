@@ -17,16 +17,27 @@ namespace Smartloop_Feedback
     public partial class registerForm : Form
     {
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+        private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
 
         public registerForm()
         {
             InitializeComponent();
+
+            textBoxClicked[nameTb] = false;
+            textBoxClicked[emailTb] = false;
+            textBoxClicked[studentTb] = false;
+            textBoxClicked[passwordTb] = false;
+            textBoxClicked[degreeTb] = false;
         }
 
         private void nameTb_Click(object sender, EventArgs e)
         {
             defaultUI();
-            nameTb.Clear();
+            if (!textBoxClicked[nameTb])
+            {
+                nameTb.Clear();
+                textBoxClicked[nameTb] = true;
+            }
             namePb.Image = Properties.Resources.person2;
             namePl.BackColor = Color.FromArgb(254, 0, 57);
             nameTb.ForeColor = Color.FromArgb(254, 0, 57);
@@ -35,7 +46,11 @@ namespace Smartloop_Feedback
         private void emailTb_Click(object sender, EventArgs e)
         {
             defaultUI();
-            emailTb.Clear();
+            if (!textBoxClicked[emailTb])
+            {
+                emailTb.Clear();
+                textBoxClicked[emailTb] = true;
+            }
             emailPb.Image = Properties.Resources.email2;
             emailPl.BackColor = Color.FromArgb(254, 0, 57);
             emailTb.ForeColor = Color.FromArgb(254, 0, 57);
@@ -44,7 +59,11 @@ namespace Smartloop_Feedback
         private void studentTb_Click(object sender, EventArgs e)
         {
             defaultUI();
-            studentTb.Clear();
+            if (!textBoxClicked[studentTb])
+            {
+                studentTb.Clear();
+                textBoxClicked[studentTb] = true;
+            }
             studentPb.Image = Properties.Resources.person2;
             studentPl.BackColor = Color.FromArgb(254, 0, 57);
             studentTb.ForeColor = Color.FromArgb(254, 0, 57);
@@ -53,7 +72,11 @@ namespace Smartloop_Feedback
         private void passwordTb_Click(object sender, EventArgs e)
         {
             defaultUI();
-            passwordTb.Clear();
+            if (!textBoxClicked[passwordTb])
+            {
+                passwordTb.Clear();
+                textBoxClicked[passwordTb] = true;
+            }
             passwordPb.Image = Properties.Resources.pass2;
             passwordPl.BackColor = Color.FromArgb(254, 0, 57);
             passwordTb.ForeColor = Color.FromArgb(254, 0, 57);
@@ -62,7 +85,11 @@ namespace Smartloop_Feedback
         private void degreeTb_Click(object sender, EventArgs e)
         {
             defaultUI();
-            degreeTb.Clear();
+            if (!textBoxClicked[degreeTb])
+            {
+                degreeTb.Clear();
+                textBoxClicked[degreeTb] = true;
+            }
             degreePb.Image = Properties.Resources.degree2;
             degreePl.BackColor = Color.FromArgb(254, 0, 57);
             degreeTb.ForeColor = Color.FromArgb(254, 0, 57);
@@ -89,6 +116,17 @@ namespace Smartloop_Feedback
             degreePb.Image = Properties.Resources.degree1;
             degreePl.BackColor = Color.FromArgb(193, 193, 193);
             degreeTb.ForeColor = Color.FromArgb(193, 193, 193);
+        }
+
+        private void studentTb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true;
+                }
+            }
         }
 
         private void exitPb_Click(object sender, EventArgs e)
@@ -133,6 +171,26 @@ namespace Smartloop_Feedback
                 }
             }
 
+            Student newStudent = new Student(name, email, studentId, password, degree, profileImage);
+
+            if (!newStudent.ValidatePassword())
+            {
+                MessageBox.Show("Password must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!newStudent.ValidateStudentId())
+            {
+                MessageBox.Show("Student ID must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            if (!newStudent.ValidateEmail())
+            {
+                MessageBox.Show("Email must end with @student.uts.edu.au or @gmail.com.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 conn.Open();
@@ -149,7 +207,6 @@ namespace Smartloop_Feedback
                     cmd.ExecuteNonQuery();
                 }
             }
-
 
             MessageBox.Show("Data inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
