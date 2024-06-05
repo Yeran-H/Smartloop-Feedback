@@ -77,16 +77,17 @@
             this.assessmentBtn.FlatAppearance.BorderSize = 0;
             this.assessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.assessmentBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.assessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.assessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.assessmentBtn.Image = global::Smartloop_Feedback.Properties.Resources.tracker;
             this.assessmentBtn.Location = new System.Drawing.Point(0, 390);
             this.assessmentBtn.Name = "assessmentBtn";
             this.assessmentBtn.Size = new System.Drawing.Size(186, 49);
             this.assessmentBtn.TabIndex = 7;
-            this.assessmentBtn.Text = "Assignment\r\nTracker";
-            this.assessmentBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.assessmentBtn.Text = "     Assignment\r\nTracker";
+            this.assessmentBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.assessmentBtn.UseVisualStyleBackColor = true;
             this.assessmentBtn.Click += new System.EventHandler(this.assessmentBtn_Click);
+            this.assessmentBtn.Leave += new System.EventHandler(this.assessmentBtn_Leave);
             // 
             // courseBtn
             // 
@@ -94,16 +95,17 @@
             this.courseBtn.FlatAppearance.BorderSize = 0;
             this.courseBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.courseBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.courseBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.courseBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.courseBtn.Image = global::Smartloop_Feedback.Properties.Resources.schedule;
             this.courseBtn.Location = new System.Drawing.Point(0, 337);
             this.courseBtn.Name = "courseBtn";
             this.courseBtn.Size = new System.Drawing.Size(186, 53);
             this.courseBtn.TabIndex = 6;
-            this.courseBtn.Text = "Course    \r\nSchedule";
-            this.courseBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.courseBtn.Text = "     Course\r\n     Schedule";
+            this.courseBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.courseBtn.UseVisualStyleBackColor = true;
             this.courseBtn.Click += new System.EventHandler(this.courseBtn_Click);
+            this.courseBtn.Leave += new System.EventHandler(this.courseBtn_Leave);
             // 
             // navPl
             // 
@@ -119,14 +121,14 @@
             this.setttingBtn.FlatAppearance.BorderSize = 0;
             this.setttingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.setttingBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.setttingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.setttingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.setttingBtn.Image = global::Smartloop_Feedback.Properties.Resources.setting;
             this.setttingBtn.Location = new System.Drawing.Point(0, 496);
             this.setttingBtn.Name = "setttingBtn";
             this.setttingBtn.Size = new System.Drawing.Size(186, 42);
             this.setttingBtn.TabIndex = 4;
-            this.setttingBtn.Text = "Settings";
-            this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.setttingBtn.Text = "     Settings";
+            this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.setttingBtn.UseVisualStyleBackColor = true;
             this.setttingBtn.Click += new System.EventHandler(this.setttingBtn_Click);
             this.setttingBtn.Leave += new System.EventHandler(this.setttingBtn_Leave);
@@ -137,14 +139,14 @@
             this.academicBtn.FlatAppearance.BorderSize = 0;
             this.academicBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.academicBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.academicBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.academicBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.academicBtn.Image = global::Smartloop_Feedback.Properties.Resources.portfolio;
             this.academicBtn.Location = new System.Drawing.Point(0, 286);
             this.academicBtn.Name = "academicBtn";
             this.academicBtn.Size = new System.Drawing.Size(186, 51);
             this.academicBtn.TabIndex = 3;
-            this.academicBtn.Text = "Academic \r\nPortfolio   ";
-            this.academicBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.academicBtn.Text = "     Academic\r\n   Portfolio";
+            this.academicBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.academicBtn.UseVisualStyleBackColor = true;
             this.academicBtn.Click += new System.EventHandler(this.academicBtn_Click);
             this.academicBtn.Leave += new System.EventHandler(this.academicBtn_Leave);
@@ -155,14 +157,14 @@
             this.resultBtn.FlatAppearance.BorderSize = 0;
             this.resultBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resultBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.resultBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.resultBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.resultBtn.Image = global::Smartloop_Feedback.Properties.Resources.results;
             this.resultBtn.Location = new System.Drawing.Point(0, 244);
             this.resultBtn.Name = "resultBtn";
             this.resultBtn.Size = new System.Drawing.Size(186, 42);
             this.resultBtn.TabIndex = 2;
-            this.resultBtn.Text = "Result          ";
-            this.resultBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.resultBtn.Text = "     Result          ";
+            this.resultBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.resultBtn.UseVisualStyleBackColor = true;
             this.resultBtn.Click += new System.EventHandler(this.resultBtn_Click);
             this.resultBtn.Leave += new System.EventHandler(this.resultBtn_Leave);
@@ -173,14 +175,14 @@
             this.dashboardBtn.FlatAppearance.BorderSize = 0;
             this.dashboardBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.dashboardBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.dashboardBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dashboardBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.dashboardBtn.Image = ((System.Drawing.Image)(resources.GetObject("dashboardBtn.Image")));
             this.dashboardBtn.Location = new System.Drawing.Point(0, 202);
             this.dashboardBtn.Name = "dashboardBtn";
             this.dashboardBtn.Size = new System.Drawing.Size(186, 42);
             this.dashboardBtn.TabIndex = 1;
-            this.dashboardBtn.Text = "Dashboard";
-            this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
+            this.dashboardBtn.Text = "     Dashboard";
+            this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.dashboardBtn.UseVisualStyleBackColor = true;
             this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
             this.dashboardBtn.Leave += new System.EventHandler(this.dashboardBtn_Leave);
@@ -201,7 +203,7 @@
             // 
             this.studentIdLb.AutoSize = true;
             this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
-            this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.studentIdLb.Location = new System.Drawing.Point(59, 181);
             this.studentIdLb.Name = "studentIdLb";
             this.studentIdLb.Size = new System.Drawing.Size(64, 15);
@@ -212,7 +214,7 @@
             // 
             this.nameLb.AutoSize = true;
             this.nameLb.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.nameLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.nameLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.nameLb.Location = new System.Drawing.Point(63, 162);
             this.nameLb.Name = "nameLb";
             this.nameLb.Size = new System.Drawing.Size(49, 19);

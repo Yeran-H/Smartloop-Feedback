@@ -184,6 +184,16 @@ namespace Smartloop_Feedback
             setttingBtn.BackColor = Color.FromArgb(10, 22, 39);
         }
 
+        private void courseBtn_Leave(object sender, EventArgs e)
+        {
+            courseBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
+        private void assessmentBtn_Leave(object sender, EventArgs e)
+        {
+            assessmentBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
         private void exitPb_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show("Do you want to sign out?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
