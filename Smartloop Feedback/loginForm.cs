@@ -7,6 +7,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,12 +18,25 @@ namespace Smartloop_Feedback
     {
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHieghtEllipse
+        );
 
         public loginForm()
         {
             InitializeComponent();
             textBoxClicked[usernameTb] = false;
             textBoxClicked[passwordTb] = false;
+
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 
         private void usernameTb_Click(object sender, EventArgs e)
@@ -112,8 +126,9 @@ namespace Smartloop_Feedback
                             profileImage = reader.GetFieldValue<byte[]>(5)
                         };
 
-                        // Display student information or perform other operations with student object
-                        MessageBox.Show("Login into " + student.studentId + " is correct", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        mainForm main = new mainForm(student);
+                        main.Show();
+                        this.Hide();
                     }
                     else
                     {

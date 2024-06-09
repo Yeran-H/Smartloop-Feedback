@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Configuration;
+using System.Runtime.InteropServices;
 
 namespace Smartloop_Feedback
 {
@@ -18,6 +19,17 @@ namespace Smartloop_Feedback
     {
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHieghtEllipse
+        );
 
         public registerForm()
         {
@@ -28,6 +40,7 @@ namespace Smartloop_Feedback
             textBoxClicked[studentTb] = false;
             textBoxClicked[passwordTb] = false;
             textBoxClicked[degreeTb] = false;
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 
         private void nameTb_Click(object sender, EventArgs e)
@@ -208,7 +221,9 @@ namespace Smartloop_Feedback
                 }
             }
 
-            MessageBox.Show("Data inserted successfully", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            mainForm main = new mainForm(newStudent);
+            main.Show();
+            this.Hide();
         }
     }
 }

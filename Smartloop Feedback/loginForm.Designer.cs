@@ -146,7 +146,7 @@
             // 
             this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
             this.exitPb.Image = ((System.Drawing.Image)(resources.GetObject("exitPb.Image")));
-            this.exitPb.Location = new System.Drawing.Point(295, 0);
+            this.exitPb.Location = new System.Drawing.Point(292, 1);
             this.exitPb.Name = "exitPb";
             this.exitPb.Size = new System.Drawing.Size(21, 21);
             this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -160,7 +160,7 @@
             this.pictureBox1.Location = new System.Drawing.Point(-32, -51);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(375, 259);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
             // 
