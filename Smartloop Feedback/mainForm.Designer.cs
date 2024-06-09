@@ -46,6 +46,7 @@
             this.formLoaderPl = new System.Windows.Forms.Panel();
             this.exitPb = new System.Windows.Forms.PictureBox();
             this.titleLb = new System.Windows.Forms.Label();
+            this.menuDropPl = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
@@ -57,6 +58,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.panel1.Controls.Add(this.menuDropPl);
             this.panel1.Controls.Add(this.assessmentBtn);
             this.panel1.Controls.Add(this.courseBtn);
             this.panel1.Controls.Add(this.navPl);
@@ -79,11 +81,11 @@
             this.assessmentBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
             this.assessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.assessmentBtn.Image = global::Smartloop_Feedback.Properties.Resources.tracker;
-            this.assessmentBtn.Location = new System.Drawing.Point(0, 390);
+            this.assessmentBtn.Location = new System.Drawing.Point(0, 388);
             this.assessmentBtn.Name = "assessmentBtn";
-            this.assessmentBtn.Size = new System.Drawing.Size(186, 49);
+            this.assessmentBtn.Size = new System.Drawing.Size(186, 51);
             this.assessmentBtn.TabIndex = 7;
-            this.assessmentBtn.Text = "     Assignment\r\nTracker";
+            this.assessmentBtn.Text = "Assignment\r\nTracker";
             this.assessmentBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.assessmentBtn.UseVisualStyleBackColor = true;
             this.assessmentBtn.Click += new System.EventHandler(this.assessmentBtn_Click);
@@ -99,9 +101,9 @@
             this.courseBtn.Image = global::Smartloop_Feedback.Properties.Resources.schedule;
             this.courseBtn.Location = new System.Drawing.Point(0, 337);
             this.courseBtn.Name = "courseBtn";
-            this.courseBtn.Size = new System.Drawing.Size(186, 53);
+            this.courseBtn.Size = new System.Drawing.Size(186, 51);
             this.courseBtn.TabIndex = 6;
-            this.courseBtn.Text = "     Course\r\n     Schedule";
+            this.courseBtn.Text = "Course\r\n    Schedule";
             this.courseBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.courseBtn.UseVisualStyleBackColor = true;
             this.courseBtn.Click += new System.EventHandler(this.courseBtn_Click);
@@ -283,6 +285,14 @@
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "Dashboard";
             // 
+            // menuDropPl
+            // 
+            this.menuDropPl.Location = new System.Drawing.Point(0, 204);
+            this.menuDropPl.Name = "menuDropPl";
+            this.menuDropPl.Size = new System.Drawing.Size(186, 294);
+            this.menuDropPl.TabIndex = 8;
+            this.menuDropPl.Visible = false;
+            // 
             // mainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,5 +338,6 @@
         private System.Windows.Forms.Panel formLoaderPl;
         private System.Windows.Forms.Button assessmentBtn;
         private System.Windows.Forms.Button courseBtn;
+        private System.Windows.Forms.Panel menuDropPl;
     }
 }

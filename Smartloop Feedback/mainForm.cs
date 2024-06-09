@@ -41,10 +41,10 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             dashboardForm dashboard = new dashboardForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            dashboard.FormboarderStyle = FormBorderStyle.None;
+            dashboard.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(dashboard);
             dashboard.Show();
-             */
+            */
 
             this.student = student;
         }
@@ -73,10 +73,10 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             dashboardForm dashboard = new dashboardForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            dashboard.FormboarderStyle = FormBorderStyle.None;
+            dashboard.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(dashboard);
             dashboard.Show();
-             */
+            */
         }
 
         private void resultBtn_Click(object sender, EventArgs e)
@@ -90,7 +90,7 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             resultForm result = new resultForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            result.FormboarderStyle = FormBorderStyle.None;
+            result.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(result);
             result.Show();
              */
@@ -105,9 +105,10 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Academic Portfolio";
             this.formLoaderPl.Controls.Clear();
+            menuDropPl.Visible = true;
             /*
             academicForm academic = new academicForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            academic.FormboarderStyle = FormBorderStyle.None;
+            academic.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(academic);
             academic.Show();
              */
@@ -124,7 +125,7 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             courseForm course = new courseForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            course.FormboarderStyle = FormBorderStyle.None;
+            course.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(course);
             course.Show();
              */
@@ -141,7 +142,7 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             assessmentForm assessment = new assessmentForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            assessment.FormboarderStyle = FormBorderStyle.None;
+            assessment.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(assessment);
             assessment.Show();
              */
@@ -158,7 +159,7 @@ namespace Smartloop_Feedback
             this.formLoaderPl.Controls.Clear();
             /*
             settingForm setting = new settingForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            setting.FormboarderStyle = FormBorderStyle.None;
+            setting.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(setting);
             setting.Show();
              */
