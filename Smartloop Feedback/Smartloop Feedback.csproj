@@ -131,6 +131,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="academicYearBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="academicYearBar.Designer.cs">
+      <DependentUpon>academicYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addYearForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addYearForm.Designer.cs">
+      <DependentUpon>addYearForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -157,6 +169,12 @@
       <DependentUpon>registerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student.cs" />
+    <EmbeddedResource Include="academicYearBar.resx">
+      <DependentUpon>academicYearBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addYearForm.resx">
+      <DependentUpon>addYearForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="loginForm.resx">
       <DependentUpon>loginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -232,6 +250,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\tracker.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\back.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\add.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\calendar.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -103,10 +103,14 @@ namespace Smartloop_Feedback
             navPl.Left = academicBtn.Left;
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
+            academicYearBar year = new academicYearBar(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            year.FormBorderStyle = FormBorderStyle.None;
+            menuDropPl.Visible = true;
+            this.menuDropPl.Controls.Add(year);
+            year.Show();
+            /*
             titleLb.Text = "Academic Portfolio";
             this.formLoaderPl.Controls.Clear();
-            menuDropPl.Visible = true;
-            /*
             academicForm academic = new academicForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             academic.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(academic);
@@ -204,6 +208,12 @@ namespace Smartloop_Feedback
                 login.Show();
                 this.Hide();
             }
+        }
+
+        public void removePannel()
+        {
+            menuDropPl.Visible = false;
+            dashboardBtn_Click(this, EventArgs.Empty);
         }
     }
 }
