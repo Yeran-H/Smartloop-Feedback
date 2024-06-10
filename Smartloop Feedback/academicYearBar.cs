@@ -13,39 +13,65 @@ namespace Smartloop_Feedback
     public partial class academicYearBar : Form
     {
         private mainForm mainForm;
+        private Student student;
+
         private int buttonCount = 0;
         Button[] buttons = new Button[5];
 
-        public academicYearBar(mainForm form)
+        public academicYearBar(mainForm form, Student student)
         {
             InitializeComponent();
             mainForm = form;
+            this.student = student;
+            initaliseBar();
+        }
+
+        private void initaliseBar() 
+        {
+            buttonCount = student.numYears();
+
+            for(int i = 1; i <= buttonCount; i++)
+            {
+                Button btn = null;
+                switch (i)
+                {
+                    case 1:
+                        btn = oneBtn;
+                        break;
+                    case 2:
+                        btn = secondBtn;
+                        break;
+                    case 3:
+                        btn = thirdBtn;
+                        break;
+                    case 4:
+                        btn = fourthBtn;
+                        break;
+                    case 5:
+                        btn = fifthBtn;
+                        addBtn.Visible = false;
+                        break;
+                }
+
+                if (btn != null)
+                {
+                    btn.Visible = true;
+                    btn.Text = student.yearList[i - 1].name;
+                    buttons[i - 1] = btn;
+                }
+            }
+
+            UpdatePanel();
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            oneBtn.Dock = DockStyle.None;
-            oneBtn.Visible = false;
-            secondBtn.Dock = DockStyle.None;
-            secondBtn.Visible = false;
-            thirdBtn.Dock = DockStyle.None;
-            thirdBtn.Visible = false;
-            fourthBtn.Dock = DockStyle.None;
-            fourthBtn.Visible = false;
-            fifthBtn.Dock = DockStyle.None;
-            fifthBtn.Visible = false;
-
-            addBtn.Visible = true;
-            addBtn.Dock = DockStyle.Top;
-
-            buttonCount = 0;
-
             mainForm.removePannel();
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addYearForm = new addYearForm())
+            using (var addYearForm = new addYearForm(student))
             {
                 if(addYearForm.ShowDialog() == DialogResult.OK)
                 {
@@ -53,6 +79,8 @@ namespace Smartloop_Feedback
 
                     if (buttonCount < 5)
                     {
+                        student.yearList.Add(new Year(yearName, student.studentId));
+
                         buttonCount++;
                         Button btn = null;
                         switch (buttonCount)

@@ -101,9 +101,11 @@ namespace Smartloop_Feedback
             navPl.Height = academicBtn.Height;
             navPl.Top = academicBtn.Top;
             navPl.Left = academicBtn.Left;
-            academicBtn.BackColor = Color.FromArgb(16, 34, 61);
+            academicBtn.BackColor = Color.FromArgb(16, 34, 61); 
 
-            academicYearBar year = new academicYearBar(this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+
+
+            academicYearBar year = new academicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             year.FormBorderStyle = FormBorderStyle.None;
             menuDropPl.Visible = true;
             this.menuDropPl.Controls.Add(year);

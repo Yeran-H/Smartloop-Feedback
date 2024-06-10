@@ -116,15 +116,7 @@ namespace Smartloop_Feedback
                 {
                     if (reader.Read())
                     {
-                        Student student = new Student
-                        {
-                            studentId = reader.GetInt32(0),
-                            name = reader.GetString(1),
-                            email = reader.GetString(2),
-                            degree = reader.GetString(3),
-                            password = reader.GetString(4),
-                            profileImage = reader.GetFieldValue<byte[]>(5)
-                        };
+                        Student student = new Student(reader.GetInt32(0), reader.GetString(1),reader.GetString(2), reader.GetString(3),reader.GetString(4),reader.GetFieldValue<byte[]>(5));
 
                         mainForm main = new mainForm(student);
                         main.Show();

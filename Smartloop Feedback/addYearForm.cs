@@ -13,22 +13,24 @@ namespace Smartloop_Feedback
     public partial class addYearForm : Form
     {
         public string yearName { get; set; } 
-        public addYearForm()
+        public Student student { get; }
+        public addYearForm(Student student)
         {
             InitializeComponent();
+            this.student = student;
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
             yearName = yearTb.Text;
-            if(!string.IsNullOrEmpty(yearName))
+            if(!string.IsNullOrEmpty(yearName) && student.uniqueYear(yearName))
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }
             else
             {
-                MessageBox.Show("Please enter a year name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter a unique name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 

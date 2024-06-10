@@ -184,7 +184,7 @@ namespace Smartloop_Feedback
                 }
             }
 
-            Student newStudent = new Student(name, email, studentId, password, degree, profileImage);
+            Student newStudent = new Student(studentId, email, name, password, degree, profileImage);
 
             if (!newStudent.ValidatePassword())
             {

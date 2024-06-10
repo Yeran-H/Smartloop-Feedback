@@ -143,6 +143,7 @@
     <Compile Include="addYearForm.Designer.cs">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseConfig.cs" />
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,6 +170,7 @@
       <DependentUpon>registerForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student.cs" />
+    <Compile Include="Year.cs" />
     <EmbeddedResource Include="academicYearBar.resx">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </EmbeddedResource>

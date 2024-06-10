@@ -1,5 +1,8 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -10,14 +13,17 @@ namespace Smartloop_Feedback
 {
     public class Student
     {
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+
         public string name { get; set; }
         public string email { get; set; }
         public int studentId { get; set; }
         public string password { get; set; }
         public string degree { get; set; }
         public byte[] profileImage { get; set; }
+        public List<Year> yearList {  get; set; }
 
-        public Student(string name, string email, int studentId, string password, string degree, byte[] profileImage)
+        public Student(int studentId, string name, string email, string degree, string password, byte[] profileImage)
         {
             this.name = name;
             this.email = email;
@@ -25,9 +31,31 @@ namespace Smartloop_Feedback
             this.password = password;
             this.degree = degree;
             this.profileImage = profileImage;
+            yearList = new List<Year>();
+            getYearFromDatabase(studentId);
         }
 
         public Student() { }
+
+        private void getYearFromDatabase(int studentId)
+        {
+            using (MySqlConnection conn = new MySqlConnection(connStr))
+            {
+                conn.Open();
+                MySqlCommand cmd = new MySqlCommand("SELECT name, id FROM years WHERE studentId = @studentId", conn);
+                cmd.Parameters.AddWithValue("@studentId", studentId);
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string name = reader.GetString(0);
+                        int id = reader.GetInt32(1);
+                        yearList.Add(new Year(name, studentId, id));
+                    }
+                }
+            }
+        }
 
         public bool ValidatePassword()
         {
@@ -43,6 +71,24 @@ namespace Smartloop_Feedback
         public bool ValidateEmail()
         {
             return Regex.IsMatch(email, @"@(student\.uts\.edu\.au|gmail\.com)$");
+        }
+
+        public int numYears()
+        {
+            return yearList == null ? 0 : yearList.Count;
+        }
+
+        public bool uniqueYear(string name)
+        {
+            foreach (Year year in yearList)
+            {
+                if(year.name ==  name)
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
