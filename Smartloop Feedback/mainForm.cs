@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
+using Google.Protobuf.WellKnownTypes;
 
 namespace Smartloop_Feedback
 {
@@ -101,15 +102,10 @@ namespace Smartloop_Feedback
             navPl.Height = academicBtn.Height;
             navPl.Top = academicBtn.Top;
             navPl.Left = academicBtn.Left;
-            academicBtn.BackColor = Color.FromArgb(16, 34, 61); 
+            academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
+            menuPannel(0, 0);
 
-
-            academicYearBar year = new academicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            year.FormBorderStyle = FormBorderStyle.None;
-            menuDropPl.Visible = true;
-            this.menuDropPl.Controls.Add(year);
-            year.Show();
             /*
             titleLb.Text = "Academic Portfolio";
             this.formLoaderPl.Controls.Clear();
@@ -212,10 +208,33 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void removePannel()
+        public void menuPannel(int num, int index)
         {
-            menuDropPl.Visible = false;
-            dashboardBtn_Click(this, EventArgs.Empty);
+            menuDropPl.Controls.Clear();
+
+            switch (num)
+            {
+                case 0:
+                    academicYearBar year = new academicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    year.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(year);
+                    year.Show();
+                    break;
+                case 1:
+                    menuDropPl.Visible = false;
+                    dashboardBtn_Click(this, EventArgs.Empty);
+                    break;
+                case 2:
+                    academicSemesterBar semester = new academicSemesterBar(this, student.yearList[index]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    semester.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(semester);
+                    semester.Show();
+                    break;
+
+            }
         }
+
     }
 }

@@ -32,12 +32,12 @@ namespace Smartloop_Feedback
             this.degree = degree;
             this.profileImage = profileImage;
             yearList = new List<Year>();
-            getYearFromDatabase(studentId);
+            getYearFromDatabase();
         }
 
         public Student() { }
 
-        private void getYearFromDatabase(int studentId)
+        private void getYearFromDatabase()
         {
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {

@@ -131,6 +131,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="academicSemesterBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="academicSemesterBar.Designer.cs">
+      <DependentUpon>academicSemesterBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="academicYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -143,7 +149,6 @@
     <Compile Include="addYearForm.Designer.cs">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="DatabaseConfig.cs" />
     <Compile Include="loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -169,8 +174,12 @@
     <Compile Include="registerForm.Designer.cs">
       <DependentUpon>registerForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Semester.cs" />
     <Compile Include="Student.cs" />
     <Compile Include="Year.cs" />
+    <EmbeddedResource Include="academicSemesterBar.resx">
+      <DependentUpon>academicSemesterBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="academicYearBar.resx">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </EmbeddedResource>
@@ -261,6 +270,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\calendar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Spring.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Summer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Autumn.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Winter.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

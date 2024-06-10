@@ -37,21 +37,22 @@
             this.fifthBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // oneBtn
+            // backBtn
             // 
-            this.oneBtn.FlatAppearance.BorderSize = 0;
-            this.oneBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.oneBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.oneBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.oneBtn.Image = global::Smartloop_Feedback.Properties.Resources.calendar;
-            this.oneBtn.Location = new System.Drawing.Point(0, 144);
-            this.oneBtn.Name = "oneBtn";
-            this.oneBtn.Size = new System.Drawing.Size(170, 42);
-            this.oneBtn.TabIndex = 2;
-            this.oneBtn.Text = "";
-            this.oneBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.oneBtn.UseVisualStyleBackColor = true;
-            this.oneBtn.Visible = false;
+            this.backBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.backBtn.FlatAppearance.BorderSize = 0;
+            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
+            this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.backBtn.Image = global::Smartloop_Feedback.Properties.Resources.back;
+            this.backBtn.Location = new System.Drawing.Point(0, 0);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(170, 42);
+            this.backBtn.TabIndex = 0;
+            this.backBtn.Text = "Back";
+            this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.backBtn.UseVisualStyleBackColor = true;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // addBtn
             // 
@@ -70,22 +71,21 @@
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
-            // backBtn
+            // oneBtn
             // 
-            this.backBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.backBtn.FlatAppearance.BorderSize = 0;
-            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.backBtn.Image = global::Smartloop_Feedback.Properties.Resources.back;
-            this.backBtn.Location = new System.Drawing.Point(0, 0);
-            this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(170, 42);
-            this.backBtn.TabIndex = 0;
-            this.backBtn.Text = "Back";
-            this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.backBtn.UseVisualStyleBackColor = true;
-            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            this.oneBtn.FlatAppearance.BorderSize = 0;
+            this.oneBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.oneBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
+            this.oneBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.oneBtn.Image = global::Smartloop_Feedback.Properties.Resources.calendar;
+            this.oneBtn.Location = new System.Drawing.Point(0, 144);
+            this.oneBtn.Name = "oneBtn";
+            this.oneBtn.Size = new System.Drawing.Size(170, 42);
+            this.oneBtn.TabIndex = 2;
+            this.oneBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.oneBtn.UseVisualStyleBackColor = true;
+            this.oneBtn.Visible = false;
+            this.oneBtn.Click += new System.EventHandler(this.oneBtn_Click);
             // 
             // secondBtn
             // 
@@ -98,10 +98,10 @@
             this.secondBtn.Name = "secondBtn";
             this.secondBtn.Size = new System.Drawing.Size(170, 42);
             this.secondBtn.TabIndex = 3;
-            this.secondBtn.Text = "";
             this.secondBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.secondBtn.UseVisualStyleBackColor = true;
             this.secondBtn.Visible = false;
+            this.secondBtn.Click += new System.EventHandler(this.secondBtn_Click);
             // 
             // thirdBtn
             // 
@@ -114,10 +114,10 @@
             this.thirdBtn.Name = "thirdBtn";
             this.thirdBtn.Size = new System.Drawing.Size(170, 42);
             this.thirdBtn.TabIndex = 4;
-            this.thirdBtn.Text = "";
             this.thirdBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.thirdBtn.UseVisualStyleBackColor = true;
             this.thirdBtn.Visible = false;
+            this.thirdBtn.Click += new System.EventHandler(this.thirdBtn_Click);
             // 
             // fourthBtn
             // 
@@ -130,10 +130,10 @@
             this.fourthBtn.Name = "fourthBtn";
             this.fourthBtn.Size = new System.Drawing.Size(170, 42);
             this.fourthBtn.TabIndex = 5;
-            this.fourthBtn.Text = "";
             this.fourthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fourthBtn.UseVisualStyleBackColor = true;
             this.fourthBtn.Visible = false;
+            this.fourthBtn.Click += new System.EventHandler(this.fourthBtn_Click);
             // 
             // fifthBtn
             // 
@@ -146,10 +146,10 @@
             this.fifthBtn.Name = "fifthBtn";
             this.fifthBtn.Size = new System.Drawing.Size(170, 42);
             this.fifthBtn.TabIndex = 6;
-            this.fifthBtn.Text = "";
             this.fifthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fifthBtn.UseVisualStyleBackColor = true;
             this.fifthBtn.Visible = false;
+            this.fifthBtn.Click += new System.EventHandler(this.fifthBtn_Click);
             // 
             // academicYearBar
             // 

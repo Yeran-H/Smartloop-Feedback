@@ -66,7 +66,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.removePannel();
+            mainForm.menuPannel(1, 0);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -79,7 +79,7 @@ namespace Smartloop_Feedback
 
                     if (buttonCount < 5)
                     {
-                        student.yearList.Add(new Year(yearName, student.studentId));
+                        student.yearList.Add(new Year(yearName, student.studentId, addYearForm.semesterNames));
 
                         buttonCount++;
                         Button btn = null;
@@ -141,6 +141,31 @@ namespace Smartloop_Feedback
             }
             Controls.Add(backBtn);
             backBtn.Dock = DockStyle.Top;
+        }
+
+        private void oneBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.menuPannel(2, 0);
+        }
+
+        private void secondBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.menuPannel(2, 1);
+        }
+
+        private void thirdBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.menuPannel(2, 2);
+        }
+
+        private void fourthBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.menuPannel(2, 3);
+        }
+
+        private void fifthBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.menuPannel(2, 4);
         }
     }
 }
