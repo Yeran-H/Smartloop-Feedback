@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -34,12 +34,12 @@ namespace Smartloop_Feedback
 
         public void addSemesterToDatabase()
         {
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO semesters (name, yearId, studentId) VALUES (@name, @yearId, @studentId)";
+                string sql = "INSERT INTO semester (name, yearId, studentId) VALUES (@name, @yearId, @studentId)";
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@yearId", yearId);

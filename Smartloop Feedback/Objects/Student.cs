@@ -1,8 +1,7 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -39,13 +38,13 @@ namespace Smartloop_Feedback
 
         private void getYearFromDatabase()
         {
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT name, id FROM years WHERE studentId = @studentId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT name, id FROM year WHERE studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {
@@ -70,7 +69,7 @@ namespace Smartloop_Feedback
 
         public bool ValidateEmail()
         {
-            return Regex.IsMatch(email, @"@(student\.uts\.edu\.au|gmail\.com)$");
+            return email.EndsWith("@student.uts.edu.au", StringComparison.OrdinalIgnoreCase) || email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase);
         }
 
         public int numYears()

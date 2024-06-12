@@ -214,7 +214,7 @@
             this.studentIdLb.AutoSize = true;
             this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
             this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.studentIdLb.Location = new System.Drawing.Point(59, 181);
+            this.studentIdLb.Location = new System.Drawing.Point(65, 181);
             this.studentIdLb.Name = "studentIdLb";
             this.studentIdLb.Size = new System.Drawing.Size(64, 15);
             this.studentIdLb.TabIndex = 2;

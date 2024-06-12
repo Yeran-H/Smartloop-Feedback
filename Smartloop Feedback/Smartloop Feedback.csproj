@@ -131,46 +131,46 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="academicSemesterBar.cs">
+    <Compile Include="MenuBar\academicSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="academicSemesterBar.Designer.cs">
+    <Compile Include="MenuBar\academicSemesterBar.Designer.cs">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="academicSubjectBar.cs">
+    <Compile Include="MenuBar\academicSubjectBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="academicSubjectBar.Designer.cs">
+    <Compile Include="MenuBar\academicSubjectBar.Designer.cs">
       <DependentUpon>academicSubjectBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="academicYearBar.cs">
+    <Compile Include="MenuBar\academicYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="academicYearBar.Designer.cs">
+    <Compile Include="MenuBar\academicYearBar.Designer.cs">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="addSubjectForm.cs">
+    <Compile Include="Forms\addSubjectForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addSubjectForm.Designer.cs">
+    <Compile Include="Forms\addSubjectForm.Designer.cs">
       <DependentUpon>addSubjectForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="addYearForm.cs">
+    <Compile Include="Forms\addYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="addYearForm.Designer.cs">
+    <Compile Include="Forms\addYearForm.Designer.cs">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="loginForm.cs">
+    <Compile Include="Forms\loginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="loginForm.Designer.cs">
+    <Compile Include="Forms\loginForm.Designer.cs">
       <DependentUpon>loginForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="mainForm.cs">
+    <Compile Include="Forms\mainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="mainForm.Designer.cs">
+    <Compile Include="Forms\mainForm.Designer.cs">
       <DependentUpon>mainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
@@ -180,35 +180,35 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="registerForm.cs">
+    <Compile Include="Forms\registerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="registerForm.Designer.cs">
+    <Compile Include="Forms\registerForm.Designer.cs">
       <DependentUpon>registerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Semester.cs" />
-    <Compile Include="Student.cs" />
-    <Compile Include="Subject.cs" />
-    <Compile Include="Year.cs" />
-    <EmbeddedResource Include="academicSemesterBar.resx">
+    <Compile Include="Objects\Semester.cs" />
+    <Compile Include="Objects\Student.cs" />
+    <Compile Include="Objects\Subject.cs" />
+    <Compile Include="Objects\Year.cs" />
+    <EmbeddedResource Include="MenuBar\academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="academicSubjectBar.resx">
+    <EmbeddedResource Include="MenuBar\academicSubjectBar.resx">
       <DependentUpon>academicSubjectBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="academicYearBar.resx">
+    <EmbeddedResource Include="MenuBar\academicYearBar.resx">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addSubjectForm.resx">
+    <EmbeddedResource Include="Forms\addSubjectForm.resx">
       <DependentUpon>addSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="addYearForm.resx">
+    <EmbeddedResource Include="Forms\addYearForm.resx">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="loginForm.resx">
+    <EmbeddedResource Include="Forms\loginForm.resx">
       <DependentUpon>loginForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="mainForm.resx">
+    <EmbeddedResource Include="Forms\mainForm.resx">
       <DependentUpon>mainForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -216,7 +216,7 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="registerForm.resx">
+    <EmbeddedResource Include="Forms\registerForm.resx">
       <DependentUpon>registerForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
@@ -305,8 +305,9 @@
   <ItemGroup>
     <None Include="Resources\School.png" />
   </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
-    <Folder Include="SQL\" />
+    <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

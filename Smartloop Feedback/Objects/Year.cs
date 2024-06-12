@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -37,12 +37,12 @@ namespace Smartloop_Feedback
 
         public void addYearToDatabase()
         {
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO years (name, studentId) VALUES (@name, @studentId); SELECT LAST_INSERT_ID();";
+                string sql = "INSERT INTO year (name, studentId) VALUES (@name, @studentId); SELECT SCOPE_IDENTITY();";
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@studentId", studentId);
@@ -61,14 +61,14 @@ namespace Smartloop_Feedback
 
         private void getSemesterFromDatabase()
         {
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT name, id FROM semesters WHERE yearId = @yearId AND studentId = @studentId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT name, id FROM semester WHERE yearId = @yearId AND studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@yearId", id);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     while (reader.Read())
                     {

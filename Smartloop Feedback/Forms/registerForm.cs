@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -184,7 +184,7 @@ namespace Smartloop_Feedback
                 }
             }
 
-            Student newStudent = new Student(studentId, email, name, password, degree, profileImage);
+            Student newStudent = new Student(studentId, name, email, password, degree, profileImage);
 
             if (!newStudent.ValidatePassword())
             {
@@ -204,12 +204,12 @@ namespace Smartloop_Feedback
                 return;
             }
 
-            using (MySqlConnection conn = new MySqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO students (name, email, studentId, password, degree, profileImage) VALUES (@name, @mail, @studentId, @password, @degree, @profileImage)";
+                string sql = "INSERT INTO student (name, email, studentId, password, degree, profileImage) VALUES (@name, @mail, @studentId, @password, @degree, @profileImage)";
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@mail", email);
