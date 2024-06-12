@@ -49,5 +49,10 @@ namespace Smartloop_Feedback
         {
             mainForm.menuPannel(0, 0);
         }
+
+        private void summerBtn_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

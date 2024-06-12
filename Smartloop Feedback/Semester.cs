@@ -14,18 +14,21 @@ namespace Smartloop_Feedback
         public string name {  get; set; }
         public int id { get; set; }
         public int yearId { get; set; }
+        public int studentId { get; set; }
 
-        public Semester(string name, int id, int yearId) 
+        public Semester(string name, int id, int yearId, int studentId) 
         {
             this.name = name;
             this.id = id;
             this.yearId = yearId;
+            this.studentId = studentId;
         }
 
-        public Semester(string name, int yearId)
+        public Semester(string name, int yearId, int studentId)
         {
             this.name = name;
             this.yearId = yearId;
+            this.studentId = studentId;
             addSemesterToDatabase();
         }
 
@@ -34,12 +37,13 @@ namespace Smartloop_Feedback
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO semesters (name, yearId) VALUES (@name, @yearId)";
+                string sql = "INSERT INTO semesters (name, yearId, studentId) VALUES (@name, @yearId, @studentId)";
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@yearId", yearId);
+                    cmd.Parameters.AddWithValue("@studentId", studentId);
                     id = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }

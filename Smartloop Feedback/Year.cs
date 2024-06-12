@@ -55,7 +55,7 @@ namespace Smartloop_Feedback
         {
             foreach(string name in semesterName) 
             {
-                semesterList.Add(new Semester(name, id));
+                semesterList.Add(new Semester(name, id, studentId));
             }
         }
 
@@ -64,8 +64,9 @@ namespace Smartloop_Feedback
             using (MySqlConnection conn = new MySqlConnection(connStr))
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT name, id FROM semesters WHERE yearId = @yearId", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT name, id FROM semesters WHERE yearId = @yearId AND studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@yearId", id);
+                cmd.Parameters.AddWithValue("@studentId", studentId);
 
                 using (MySqlDataReader reader = cmd.ExecuteReader())
                 {

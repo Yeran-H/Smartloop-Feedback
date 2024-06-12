@@ -102,6 +102,7 @@
             this.summerBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.summerBtn.UseVisualStyleBackColor = true;
             this.summerBtn.Visible = false;
+            this.summerBtn.Click += new System.EventHandler(this.summerBtn_Click);
             // 
             // backBtn
             // 

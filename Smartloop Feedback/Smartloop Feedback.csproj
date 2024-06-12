@@ -137,11 +137,23 @@
     <Compile Include="academicSemesterBar.Designer.cs">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </Compile>
+    <Compile Include="academicSubjectBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="academicSubjectBar.Designer.cs">
+      <DependentUpon>academicSubjectBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="academicYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="academicYearBar.Designer.cs">
       <DependentUpon>academicYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="addSubjectForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="addSubjectForm.Designer.cs">
+      <DependentUpon>addSubjectForm.cs</DependentUpon>
     </Compile>
     <Compile Include="addYearForm.cs">
       <SubType>Form</SubType>
@@ -176,12 +188,19 @@
     </Compile>
     <Compile Include="Semester.cs" />
     <Compile Include="Student.cs" />
+    <Compile Include="Subject.cs" />
     <Compile Include="Year.cs" />
     <EmbeddedResource Include="academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="academicSubjectBar.resx">
+      <DependentUpon>academicSubjectBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="academicYearBar.resx">
       <DependentUpon>academicYearBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="addSubjectForm.resx">
+      <DependentUpon>addSubjectForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="addYearForm.resx">
       <DependentUpon>addYearForm.cs</DependentUpon>
@@ -282,6 +301,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Winter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\School.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SQL\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
