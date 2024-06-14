@@ -135,6 +135,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\addAssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\addAssessmentForm.Designer.cs">
+      <DependentUpon>addAssessmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\courseForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -183,7 +189,10 @@
     <Compile Include="Forms\mainForm.Designer.cs">
       <DependentUpon>mainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Assessment.cs" />
     <Compile Include="Objects\Course.cs" />
+    <Compile Include="Objects\Criteria.cs" />
+    <Compile Include="Objects\Rating.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -199,7 +208,6 @@
     </Compile>
     <Compile Include="Objects\Semester.cs" />
     <Compile Include="Objects\Student.cs" />
-    <Compile Include="Objects\Subject.cs" />
     <Compile Include="Objects\Year.cs" />
     <EmbeddedResource Include="Forms\courseForm.resx">
       <DependentUpon>courseForm.cs</DependentUpon>
