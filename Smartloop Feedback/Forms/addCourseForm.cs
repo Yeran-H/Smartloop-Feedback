@@ -35,13 +35,14 @@ namespace Smartloop_Feedback
             textBoxClicked[nameTb] = false;
             textBoxClicked[creditTb] = false;
             textBoxClicked[descriptionTb] = false;
+            textBoxClicked[canvasTb] = false;
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text);
-            if (!string.IsNullOrEmpty(course.title) || !string.IsNullOrEmpty(course.description))
+            course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, canvasTb.Text);
+            if (!string.IsNullOrEmpty(course.title) || !string.IsNullOrEmpty(course.description) || !string.IsNullOrEmpty(course.canvasLink))
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close();
@@ -127,6 +128,17 @@ namespace Smartloop_Feedback
             descriptionPl.BackColor = Color.FromArgb(254, 0, 57);
             descriptionTb.ForeColor = Color.FromArgb(254, 0, 57);
         }
+        private void canvasTb_Click(object sender, EventArgs e)
+        {
+            defaultUI();
+            if (!textBoxClicked[canvasTb])
+            {
+                canvasTb.Clear();
+                textBoxClicked[canvasTb] = true;
+            }
+            canvasPl.BackColor = Color.FromArgb(254, 0, 57);
+            canvasTb.ForeColor = Color.FromArgb(254, 0, 57);
+        }
 
         private void defaultUI()
         {
@@ -141,6 +153,9 @@ namespace Smartloop_Feedback
 
             descriptionPl.BackColor = Color.FromArgb(193, 193, 193);
             descriptionTb.ForeColor = Color.FromArgb(193, 193, 193);
+
+            canvasPl.BackColor = Color.FromArgb(193, 193, 193);
+            canvasTb.ForeColor = Color.FromArgb(193, 193, 193);
         }
     }
 }

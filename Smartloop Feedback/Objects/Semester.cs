@@ -58,7 +58,7 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@semesterId", id);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
 
@@ -71,7 +71,8 @@ namespace Smartloop_Feedback
                         string title = reader.GetString(2);
                         int creditPoint = reader.GetInt32(3);
                         string description = reader.GetString(4);
-                        courseList.Add(new Course(id, code, title, creditPoint, description, this.id, studentId));
+                        string canvasLink = reader.GetString(5);
+                        courseList.Add(new Course(id, code, title, creditPoint, description, canvasLink, this.id, studentId));
                     }
                 }
             }

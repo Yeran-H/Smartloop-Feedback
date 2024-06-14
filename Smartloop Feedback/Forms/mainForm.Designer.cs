@@ -61,7 +61,6 @@
             this.panel1.Controls.Add(this.menuDropPl);
             this.panel1.Controls.Add(this.assessmentBtn);
             this.panel1.Controls.Add(this.courseBtn);
-            this.panel1.Controls.Add(this.navPl);
             this.panel1.Controls.Add(this.setttingBtn);
             this.panel1.Controls.Add(this.academicBtn);
             this.panel1.Controls.Add(this.resultBtn);
@@ -120,7 +119,7 @@
             // navPl
             // 
             this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 193);
+            this.navPl.Location = new System.Drawing.Point(0, 186);
             this.navPl.Name = "navPl";
             this.navPl.Size = new System.Drawing.Size(3, 100);
             this.navPl.TabIndex = 5;
@@ -202,6 +201,7 @@
             this.panel2.Controls.Add(this.studentIdLb);
             this.panel2.Controls.Add(this.nameLb);
             this.panel2.Controls.Add(this.profilePb);
+            this.panel2.Controls.Add(this.navPl);
             this.panel2.Controls.Add(this.pictureBox1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
@@ -286,8 +286,9 @@
             // 
             this.titleLb.AutoSize = true;
             this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.titleLb.Location = new System.Drawing.Point(20, 17);
+            this.titleLb.MaximumSize = new System.Drawing.Size(700, 0);
             this.titleLb.Name = "titleLb";
             this.titleLb.Size = new System.Drawing.Size(153, 36);
             this.titleLb.TabIndex = 0;

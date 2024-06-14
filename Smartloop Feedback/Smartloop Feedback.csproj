@@ -135,6 +135,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\courseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\courseForm.Designer.cs">
+      <DependentUpon>courseForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuBar\academicSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -195,6 +201,9 @@
     <Compile Include="Objects\Student.cs" />
     <Compile Include="Objects\Subject.cs" />
     <Compile Include="Objects\Year.cs" />
+    <EmbeddedResource Include="Forms\courseForm.resx">
+      <DependentUpon>courseForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MenuBar\academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </EmbeddedResource>

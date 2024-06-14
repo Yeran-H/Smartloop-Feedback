@@ -36,6 +36,7 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
             this.fifthBtn = new System.Windows.Forms.Button();
+            this.navPl = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // secondBtn
@@ -52,6 +53,8 @@
             this.secondBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.secondBtn.UseVisualStyleBackColor = true;
             this.secondBtn.Visible = false;
+            this.secondBtn.Click += new System.EventHandler(this.secondBtn_Click);
+            this.secondBtn.Leave += new System.EventHandler(this.secondBtn_Leave);
             // 
             // oneBtn
             // 
@@ -67,6 +70,8 @@
             this.oneBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.oneBtn.UseVisualStyleBackColor = true;
             this.oneBtn.Visible = false;
+            this.oneBtn.Click += new System.EventHandler(this.oneBtn_Click);
+            this.oneBtn.Leave += new System.EventHandler(this.oneBtn_Leave);
             // 
             // thirdBtn
             // 
@@ -82,6 +87,8 @@
             this.thirdBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.thirdBtn.UseVisualStyleBackColor = true;
             this.thirdBtn.Visible = false;
+            this.thirdBtn.Click += new System.EventHandler(this.thirdBtn_Click);
+            this.thirdBtn.Leave += new System.EventHandler(this.thirdBtn_Leave);
             // 
             // fourthBtn
             // 
@@ -97,6 +104,8 @@
             this.fourthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fourthBtn.UseVisualStyleBackColor = true;
             this.fourthBtn.Visible = false;
+            this.fourthBtn.Click += new System.EventHandler(this.fourthBtn_Click);
+            this.fourthBtn.Leave += new System.EventHandler(this.fourthBtn_Leave);
             // 
             // addBtn
             // 
@@ -146,13 +155,24 @@
             this.fifthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fifthBtn.UseVisualStyleBackColor = true;
             this.fifthBtn.Visible = false;
+            this.fifthBtn.Click += new System.EventHandler(this.fifthBtn_Click);
+            this.fifthBtn.Leave += new System.EventHandler(this.fifthBtn_Leave);
             // 
-            // academicSubjectBar
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(0, 87);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 14;
+            // 
+            // academicCourseBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(170, 255);
+            this.Controls.Add(this.navPl);
             this.Controls.Add(this.secondBtn);
             this.Controls.Add(this.oneBtn);
             this.Controls.Add(this.thirdBtn);
@@ -161,7 +181,7 @@
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.fifthBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "academicSubjectBar";
+            this.Name = "academicCourseBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "academicSubjectBar";
             this.ResumeLayout(false);
@@ -177,5 +197,6 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button fifthBtn;
+        private System.Windows.Forms.Panel navPl;
     }
 }

@@ -22,6 +22,10 @@ namespace Smartloop_Feedback
         public academicCourseBar(mainForm form, Semester semester)
         {
             InitializeComponent();
+            navPl.Height = backBtn.Height;
+            navPl.Top = backBtn.Top;
+            navPl.Left = backBtn.Left;
+
             mainForm = form;
             this.semester = semester;
             initaliseBar();
@@ -92,7 +96,7 @@ namespace Smartloop_Feedback
                         Course course = addCourseForm.course;
                         if (course != null)
                         {
-                            semester.courseList.Add(new Course(course.code, course.title, course.creditPoint, course.description, semester.id, semester.studentId));
+                            semester.courseList.Add(new Course(course.code, course.title, course.creditPoint, course.description, course.canvasLink, semester.id, semester.studentId));
                         }
                         else
                         {
@@ -160,6 +164,86 @@ namespace Smartloop_Feedback
             }
             Controls.Add(backBtn);
             backBtn.Dock = DockStyle.Top;
+        }
+
+        private void oneBtn_Click(object sender, EventArgs e)
+        {
+            navPl.Height = oneBtn.Height;
+            navPl.Top = oneBtn.Top;
+            navPl.Left = oneBtn.Left;
+            oneBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            mainForm.position[2] = 0;
+            mainForm.mainPannel(0);
+        }
+
+        private void secondBtn_Click(object sender, EventArgs e)
+        {
+            navPl.Height = secondBtn.Height;
+            navPl.Top = secondBtn.Top;
+            navPl.Left = secondBtn.Left;
+            oneBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            mainForm.position[2] = 1;
+            mainForm.mainPannel(0);
+        }
+
+        private void thirdBtn_Click(object sender, EventArgs e)
+        {
+            navPl.Height = thirdBtn.Height;
+            navPl.Top = thirdBtn.Top;
+            navPl.Left = thirdBtn.Left;
+            thirdBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            mainForm.position[2] = 2;
+            mainForm.mainPannel(0);
+        }
+
+        private void fourthBtn_Click(object sender, EventArgs e)
+        {
+            navPl.Height = fourthBtn.Height;
+            navPl.Top = fourthBtn.Top;
+            navPl.Left = fourthBtn.Left;
+            fourthBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            mainForm.position[2] = 3;
+            mainForm.mainPannel(0);
+        }
+
+        private void fifthBtn_Click(object sender, EventArgs e)
+        {
+            navPl.Height = fifthBtn.Height;
+            navPl.Top = fifthBtn.Top;
+            navPl.Left = fifthBtn.Left;
+            fifthBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            mainForm.position[2] = 4;
+            mainForm.mainPannel(0);
+        }
+
+        private void oneBtn_Leave(object sender, EventArgs e)
+        {
+            oneBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
+        private void secondBtn_Leave(object sender, EventArgs e)
+        {
+            secondBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
+        private void thirdBtn_Leave(object sender, EventArgs e)
+        {
+            thirdBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
+        private void fourthBtn_Leave(object sender, EventArgs e)
+        {
+            fourthBtn.BackColor = Color.FromArgb(10, 22, 39);
+        }
+
+        private void fifthBtn_Leave(object sender, EventArgs e)
+        {
+            fifthBtn.BackColor = Color.FromArgb(10, 22, 39);
         }
     }
 }

@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using System.Runtime.InteropServices;
 using System.IO;
 using Google.Protobuf.WellKnownTypes;
+using Smartloop_Feedback.Forms;
 
 namespace Smartloop_Feedback
 {
@@ -56,7 +57,7 @@ namespace Smartloop_Feedback
         {
             nameLb.Text = student.name;
             studentIdLb.Text = student.studentId.ToString();
-            if(student.profileImage != null)
+            if (student.profileImage != null)
             {
                 using (MemoryStream ms = new MemoryStream(student.profileImage))
                 {
@@ -245,5 +246,19 @@ namespace Smartloop_Feedback
             }
         }
 
+        public void mainPannel(int num)
+        {
+            switch (num)
+            {
+                case 0:
+                    titleLb.Text = student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].title;
+                    this.formLoaderPl.Controls.Clear();
+                    courseForm course = new courseForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    course.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(course);
+                    course.Show();
+                    break;
+            }
+        }
     }
 }

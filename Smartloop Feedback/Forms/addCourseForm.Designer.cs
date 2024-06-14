@@ -39,6 +39,8 @@
             this.creditTb = new System.Windows.Forms.TextBox();
             this.descriptionPl = new System.Windows.Forms.Panel();
             this.descriptionTb = new System.Windows.Forms.TextBox();
+            this.canvasPl = new System.Windows.Forms.Panel();
+            this.canvasTb = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // codePl
@@ -56,7 +58,7 @@
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.cancelBtn.Location = new System.Drawing.Point(14, 362);
+            this.cancelBtn.Location = new System.Drawing.Point(16, 390);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(211, 55);
             this.cancelBtn.TabIndex = 16;
@@ -71,7 +73,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.saveBtn.Location = new System.Drawing.Point(14, 292);
+            this.saveBtn.Location = new System.Drawing.Point(16, 320);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(211, 55);
             this.saveBtn.TabIndex = 15;
@@ -177,12 +179,37 @@
             this.descriptionTb.Text = "Description";
             this.descriptionTb.Click += new System.EventHandler(this.descriptionTb_Click);
             // 
+            // canvasPl
+            // 
+            this.canvasPl.BackColor = System.Drawing.Color.White;
+            this.canvasPl.Location = new System.Drawing.Point(20, 288);
+            this.canvasPl.Name = "canvasPl";
+            this.canvasPl.Size = new System.Drawing.Size(206, 1);
+            this.canvasPl.TabIndex = 19;
+            // 
+            // canvasTb
+            // 
+            this.canvasTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.canvasTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.canvasTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.canvasTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.canvasTb.HideSelection = false;
+            this.canvasTb.Location = new System.Drawing.Point(20, 266);
+            this.canvasTb.Name = "canvasTb";
+            this.canvasTb.Size = new System.Drawing.Size(206, 20);
+            this.canvasTb.TabIndex = 18;
+            this.canvasTb.TabStop = false;
+            this.canvasTb.Text = "Canvas Link";
+            this.canvasTb.Click += new System.EventHandler(this.canvasTb_Click);
+            // 
             // addCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(238, 445);
+            this.ClientSize = new System.Drawing.Size(238, 454);
+            this.Controls.Add(this.canvasPl);
+            this.Controls.Add(this.canvasTb);
             this.Controls.Add(this.descriptionPl);
             this.Controls.Add(this.descriptionTb);
             this.Controls.Add(this.creditPl);
@@ -215,5 +242,7 @@
         private System.Windows.Forms.TextBox creditTb;
         private System.Windows.Forms.Panel descriptionPl;
         private System.Windows.Forms.TextBox descriptionTb;
+        private System.Windows.Forms.Panel canvasPl;
+        private System.Windows.Forms.TextBox canvasTb;
     }
 }
