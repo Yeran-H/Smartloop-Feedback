@@ -74,7 +74,7 @@ namespace Smartloop_Feedback
                     {
                         string name = reader.GetString(0);
                         int id = reader.GetInt32(1);
-                        semesterList.Add(new Semester(name, id, this.id));
+                        semesterList.Add(new Semester(name, id, this.id, studentId));
                     }
                 }
             }
@@ -83,6 +83,18 @@ namespace Smartloop_Feedback
         public int numSemester()
         {
             return semesterList == null ? 0 : semesterList.Count;
+        }
+
+        public int semesterIndex(string semesterName)
+        {
+            for (int i = 0; i < numSemester(); i++) 
+            {
+                if (semesterList[i].name == semesterName)
+                {
+                    return i;
+                }
+            }
+            return 0;
         }
     }
 }

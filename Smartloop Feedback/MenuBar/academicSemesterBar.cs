@@ -47,12 +47,31 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(0, 0);
+            mainForm.menuPannel(0);
         }
 
         private void summerBtn_Click(object sender, EventArgs e)
         {
+            mainForm.position[1] = year.semesterIndex("Summer");
+            mainForm.menuPannel(3);
+        }
 
+        private void autumnBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.position[1] = year.semesterIndex("Autumn");
+            mainForm.menuPannel(3);
+        }
+
+        private void winterBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.position[1] = year.semesterIndex("Winter");
+            mainForm.menuPannel(3);
+        }
+
+        private void springBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.position[1] = year.semesterIndex("Spring");
+            mainForm.menuPannel(3);
         }
     }
 }

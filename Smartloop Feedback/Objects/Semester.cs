@@ -5,6 +5,7 @@ using System.Configuration;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback
 {
@@ -15,6 +16,7 @@ namespace Smartloop_Feedback
         public int id { get; set; }
         public int yearId { get; set; }
         public int studentId { get; set; }
+        public List<Course> courseList { get; set; }
 
         public Semester(string name, int id, int yearId, int studentId) 
         {
@@ -22,6 +24,8 @@ namespace Smartloop_Feedback
             this.id = id;
             this.yearId = yearId;
             this.studentId = studentId;
+            courseList = new List<Course>();
+            getCourseFromDatabase();
         }
 
         public Semester(string name, int yearId, int studentId)
@@ -37,7 +41,7 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO semester (name, yearId, studentId) VALUES (@name, @yearId, @studentId)";
+                string sql = "INSERT INTO semester (name, yearId, studentId) VALUES (@name, @yearId, @studentId); SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -47,6 +51,35 @@ namespace Smartloop_Feedback
                     id = Convert.ToInt32(cmd.ExecuteScalar());
                 }
             }
+        }
+
+        private void getCourseFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn);
+                cmd.Parameters.AddWithValue("@semesterId", id);
+                cmd.Parameters.AddWithValue("@studentId", studentId);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        int code = reader.GetInt32(1);
+                        string title = reader.GetString(2);
+                        int creditPoint = reader.GetInt32(3);
+                        string description = reader.GetString(4);
+                        courseList.Add(new Course(id, code, title, creditPoint, description, this.id, studentId));
+                    }
+                }
+            }
+        }
+
+        public int numCourse()
+        {
+            return courseList == null ? 0 : courseList.Count;
         }
     }
 }

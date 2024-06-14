@@ -16,6 +16,7 @@ namespace Smartloop_Feedback
     public partial class mainForm : Form
     {
         private Student student;
+        public int[] position;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -48,6 +49,7 @@ namespace Smartloop_Feedback
             */
 
             this.student = student;
+            position = new int[5];
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -104,7 +106,7 @@ namespace Smartloop_Feedback
             navPl.Left = academicBtn.Left;
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            menuPannel(0, 0);
+            menuPannel(0);
 
             /*
             titleLb.Text = "Academic Portfolio";
@@ -208,7 +210,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void menuPannel(int num, int index)
+        public void menuPannel(int num)
         {
             menuDropPl.Controls.Clear();
 
@@ -226,11 +228,18 @@ namespace Smartloop_Feedback
                     dashboardBtn_Click(this, EventArgs.Empty);
                     break;
                 case 2:
-                    academicSemesterBar semester = new academicSemesterBar(this, student.yearList[index]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    academicSemesterBar semester = new academicSemesterBar(this, student.yearList[position[0]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     semester.FormBorderStyle = FormBorderStyle.None;
                     menuDropPl.Visible = true;
                     this.menuDropPl.Controls.Add(semester);
                     semester.Show();
+                    break;
+                case 3:
+                    academicCourseBar subject = new academicCourseBar(this, student.yearList[position[0]].semesterList[position[1]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    subject.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(subject);
+                    subject.Show();
                     break;
 
             }

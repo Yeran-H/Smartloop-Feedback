@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicSubjectBar : Form
+    public partial class academicCourseBar : Form
     {
         private mainForm mainForm;
         private Semester semester;
@@ -18,7 +19,7 @@ namespace Smartloop_Feedback
         private int buttonCount = 0;
         Button[] buttons = new Button[5];
 
-        public academicSubjectBar(mainForm form, Semester semester)
+        public academicCourseBar(mainForm form, Semester semester)
         {
             InitializeComponent();
             mainForm = form;
@@ -28,7 +29,7 @@ namespace Smartloop_Feedback
 
         private void initaliseBar()
         {
-            //buttonCount = semester.numSubjects();
+            buttonCount = semester.numCourse();
 
             for (int i = 1; i <= buttonCount; i++)
             {
@@ -56,7 +57,7 @@ namespace Smartloop_Feedback
                 if (btn != null)
                 {
                     btn.Visible = true;
-                   // btn.Text = student.yearList[i - 1].name;
+                    btn.Text = semester.courseList[i - 1].code.ToString();
                     buttons[i - 1] = btn;
                 }
             }
@@ -66,20 +67,38 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(1, 0);
+            mainForm.menuPannel(2);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-           /* using (var addYearForm = new addYearForm(student))
+            if (semester == null)
             {
-                if (addYearForm.ShowDialog() == DialogResult.OK)
-                {
-                    string yearName = addYearForm.yearName;
+                MessageBox.Show("Semester object is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            if (semester.courseList == null)
+            {
+                semester.courseList = new List<Course>();
+            }
+
+            using (var addCourseForm = new addCourseForm())
+            {
+                if (addCourseForm.ShowDialog() == DialogResult.OK)
+                {
                     if (buttonCount < 5)
                     {
-                        student.yearList.Add(new Year(yearName, student.studentId, addYearForm.semesterNames));
+                        Course course = addCourseForm.course;
+                        if (course != null)
+                        {
+                            semester.courseList.Add(new Course(course.code, course.title, course.creditPoint, course.description, semester.id, semester.studentId));
+                        }
+                        else
+                        {
+                            MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            return;
+                        }
 
                         buttonCount++;
                         Button btn = null;
@@ -106,13 +125,13 @@ namespace Smartloop_Feedback
                         if (btn != null)
                         {
                             btn.Visible = true;
-                            btn.Text = yearName;
+                            btn.Text = course.code.ToString();
                             buttons[buttonCount - 1] = btn;
                             UpdatePanel();
                         }
                     }
                 }
-            }*/
+            }
         }
 
         private void UpdatePanel()

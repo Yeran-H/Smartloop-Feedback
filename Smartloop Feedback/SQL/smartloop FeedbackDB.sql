@@ -45,9 +45,9 @@ CREATE TABLE semester (
 GO
 
 -- Create the subject table
-CREATE TABLE subject (
+CREATE TABLE course (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    subjectCode INT,
+    code INT,
     title VARCHAR(225),
     creditPoint INT,
     description VARCHAR(225),

@@ -66,7 +66,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(1, 0);
+            mainForm.menuPannel(1);
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -145,27 +145,32 @@ namespace Smartloop_Feedback
 
         private void oneBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2, 0);
+            mainForm.position[0] = 0;
+            mainForm.menuPannel(2);
         }
 
         private void secondBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2, 1);
+            mainForm.position[0] = 1;
+            mainForm.menuPannel(2);
         }
 
         private void thirdBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2, 2);
+            mainForm.position[0] = 2;
+            mainForm.menuPannel(2);
         }
 
         private void fourthBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2, 3);
+            mainForm.position[0] = 3;
+            mainForm.menuPannel(2);
         }
 
         private void fifthBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2, 4);
+            mainForm.position[0] = 4;
+            mainForm.menuPannel(2);
         }
     }
 }
