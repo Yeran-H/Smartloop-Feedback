@@ -15,10 +15,12 @@ namespace Smartloop_Feedback.Forms
     public partial class courseForm : Form
     {
         private Course course;
-        public courseForm(Course course)
+        private mainForm mainForm;
+        public courseForm(Course course, mainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
+            this.mainForm = mainForm;
         }
 
         private void canvasBtn_Click(object sender, EventArgs e)
@@ -45,6 +47,11 @@ namespace Smartloop_Feedback.Forms
             {
                 MessageBox.Show("Unable to open the URL: " + ex.Message);
             }
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.mainPannel(1);
         }
     }
 }

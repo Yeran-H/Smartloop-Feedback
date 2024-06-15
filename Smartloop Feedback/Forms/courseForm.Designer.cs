@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.assessmentLv = new System.Windows.Forms.ListView();
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -38,38 +38,38 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.passwordPl = new System.Windows.Forms.Panel();
-            this.passwordTb = new System.Windows.Forms.TextBox();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.registerBtn = new System.Windows.Forms.Button();
+            this.currentPl = new System.Windows.Forms.Panel();
+            this.currentTb = new System.Windows.Forms.TextBox();
+            this.cPl = new System.Windows.Forms.Panel();
+            this.cTb = new System.Windows.Forms.TextBox();
+            this.dPl = new System.Windows.Forms.Panel();
+            this.dTb = new System.Windows.Forms.TextBox();
+            this.hdPl = new System.Windows.Forms.Panel();
+            this.hdTb = new System.Windows.Forms.TextBox();
+            this.addBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.handbookBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listView1
+            // assessmentLv
             // 
-            this.listView1.Activation = System.Windows.Forms.ItemActivation.OneClick;
-            this.listView1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.listView1.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listView1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.listView1.FullRowSelect = true;
-            this.listView1.GridLines = true;
-            this.listView1.HideSelection = false;
-            this.listView1.HotTracking = true;
-            this.listView1.HoverSelection = true;
-            this.listView1.Location = new System.Drawing.Point(12, 109);
-            this.listView1.MultiSelect = false;
-            this.listView1.Name = "listView1";
-            this.listView1.OwnerDraw = true;
-            this.listView1.Size = new System.Drawing.Size(316, 264);
-            this.listView1.TabIndex = 1;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.assessmentLv.Activation = System.Windows.Forms.ItemActivation.OneClick;
+            this.assessmentLv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.assessmentLv.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.assessmentLv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.assessmentLv.FullRowSelect = true;
+            this.assessmentLv.GridLines = true;
+            this.assessmentLv.HideSelection = false;
+            this.assessmentLv.HotTracking = true;
+            this.assessmentLv.HoverSelection = true;
+            this.assessmentLv.Location = new System.Drawing.Point(12, 109);
+            this.assessmentLv.MultiSelect = false;
+            this.assessmentLv.Name = "assessmentLv";
+            this.assessmentLv.OwnerDraw = true;
+            this.assessmentLv.Size = new System.Drawing.Size(316, 264);
+            this.assessmentLv.TabIndex = 1;
+            this.assessmentLv.UseCompatibleStateImageBehavior = false;
+            this.assessmentLv.View = System.Windows.Forms.View.Details;
             // 
             // titleLb
             // 
@@ -129,107 +129,108 @@
             this.label4.Text = "Mark needed\r\n for HD";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // passwordPl
+            // currentPl
             // 
-            this.passwordPl.BackColor = System.Drawing.Color.White;
-            this.passwordPl.Location = new System.Drawing.Point(473, 155);
-            this.passwordPl.Name = "passwordPl";
-            this.passwordPl.Size = new System.Drawing.Size(200, 1);
-            this.passwordPl.TabIndex = 16;
+            this.currentPl.BackColor = System.Drawing.Color.White;
+            this.currentPl.Location = new System.Drawing.Point(473, 155);
+            this.currentPl.Name = "currentPl";
+            this.currentPl.Size = new System.Drawing.Size(200, 1);
+            this.currentPl.TabIndex = 16;
             // 
-            // passwordTb
+            // currentTb
             // 
-            this.passwordTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.passwordTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.passwordTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.passwordTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.passwordTb.HideSelection = false;
-            this.passwordTb.Location = new System.Drawing.Point(473, 133);
-            this.passwordTb.Name = "passwordTb";
-            this.passwordTb.ReadOnly = true;
-            this.passwordTb.Size = new System.Drawing.Size(200, 20);
-            this.passwordTb.TabIndex = 15;
-            this.passwordTb.TabStop = false;
+            this.currentTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.currentTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.currentTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.currentTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.currentTb.HideSelection = false;
+            this.currentTb.Location = new System.Drawing.Point(473, 133);
+            this.currentTb.Name = "currentTb";
+            this.currentTb.ReadOnly = true;
+            this.currentTb.Size = new System.Drawing.Size(200, 20);
+            this.currentTb.TabIndex = 15;
+            this.currentTb.TabStop = false;
             // 
-            // panel1
+            // cPl
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(398, 250);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(100, 1);
-            this.panel1.TabIndex = 18;
+            this.cPl.BackColor = System.Drawing.Color.White;
+            this.cPl.Location = new System.Drawing.Point(398, 250);
+            this.cPl.Name = "cPl";
+            this.cPl.Size = new System.Drawing.Size(100, 1);
+            this.cPl.TabIndex = 18;
             // 
-            // textBox1
+            // cTb
             // 
-            this.textBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.textBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox1.Font = new System.Drawing.Font("Aptos", 12F);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.textBox1.HideSelection = false;
-            this.textBox1.Location = new System.Drawing.Point(398, 228);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(100, 20);
-            this.textBox1.TabIndex = 17;
-            this.textBox1.TabStop = false;
+            this.cTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.cTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.cTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.cTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.cTb.HideSelection = false;
+            this.cTb.Location = new System.Drawing.Point(398, 228);
+            this.cTb.Name = "cTb";
+            this.cTb.ReadOnly = true;
+            this.cTb.Size = new System.Drawing.Size(100, 20);
+            this.cTb.TabIndex = 17;
+            this.cTb.TabStop = false;
             // 
-            // panel2
+            // dPl
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(510, 250);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(100, 1);
-            this.panel2.TabIndex = 20;
+            this.dPl.BackColor = System.Drawing.Color.White;
+            this.dPl.Location = new System.Drawing.Point(510, 250);
+            this.dPl.Name = "dPl";
+            this.dPl.Size = new System.Drawing.Size(100, 1);
+            this.dPl.TabIndex = 20;
             // 
-            // textBox2
+            // dTb
             // 
-            this.textBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.textBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox2.Font = new System.Drawing.Font("Aptos", 12F);
-            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.textBox2.HideSelection = false;
-            this.textBox2.Location = new System.Drawing.Point(510, 228);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(100, 20);
-            this.textBox2.TabIndex = 19;
-            this.textBox2.TabStop = false;
+            this.dTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.dTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.dTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.dTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.dTb.HideSelection = false;
+            this.dTb.Location = new System.Drawing.Point(510, 228);
+            this.dTb.Name = "dTb";
+            this.dTb.ReadOnly = true;
+            this.dTb.Size = new System.Drawing.Size(100, 20);
+            this.dTb.TabIndex = 19;
+            this.dTb.TabStop = false;
             // 
-            // panel3
+            // hdPl
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Location = new System.Drawing.Point(627, 250);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(100, 1);
-            this.panel3.TabIndex = 20;
+            this.hdPl.BackColor = System.Drawing.Color.White;
+            this.hdPl.Location = new System.Drawing.Point(627, 250);
+            this.hdPl.Name = "hdPl";
+            this.hdPl.Size = new System.Drawing.Size(100, 1);
+            this.hdPl.TabIndex = 20;
             // 
-            // textBox3
+            // hdTb
             // 
-            this.textBox3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.textBox3.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBox3.Font = new System.Drawing.Font("Aptos", 12F);
-            this.textBox3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.textBox3.HideSelection = false;
-            this.textBox3.Location = new System.Drawing.Point(627, 228);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.ReadOnly = true;
-            this.textBox3.Size = new System.Drawing.Size(100, 20);
-            this.textBox3.TabIndex = 19;
-            this.textBox3.TabStop = false;
+            this.hdTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.hdTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.hdTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.hdTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.hdTb.HideSelection = false;
+            this.hdTb.Location = new System.Drawing.Point(627, 228);
+            this.hdTb.Name = "hdTb";
+            this.hdTb.ReadOnly = true;
+            this.hdTb.Size = new System.Drawing.Size(100, 20);
+            this.hdTb.TabIndex = 19;
+            this.hdTb.TabStop = false;
             // 
-            // registerBtn
+            // addBtn
             // 
-            this.registerBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.registerBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.registerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.registerBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.registerBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.registerBtn.Location = new System.Drawing.Point(32, 379);
-            this.registerBtn.Name = "registerBtn";
-            this.registerBtn.Size = new System.Drawing.Size(252, 52);
-            this.registerBtn.TabIndex = 21;
-            this.registerBtn.Text = "Add Assessment";
-            this.registerBtn.UseVisualStyleBackColor = false;
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.addBtn.Location = new System.Drawing.Point(32, 379);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(252, 52);
+            this.addBtn.TabIndex = 21;
+            this.addBtn.Text = "Add Assessment";
+            this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // canvasBtn
             // 
@@ -267,21 +268,21 @@
             this.ClientSize = new System.Drawing.Size(746, 477);
             this.Controls.Add(this.handbookBtn);
             this.Controls.Add(this.canvasBtn);
-            this.Controls.Add(this.registerBtn);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.passwordPl);
-            this.Controls.Add(this.passwordTb);
+            this.Controls.Add(this.addBtn);
+            this.Controls.Add(this.hdPl);
+            this.Controls.Add(this.hdTb);
+            this.Controls.Add(this.dPl);
+            this.Controls.Add(this.dTb);
+            this.Controls.Add(this.cPl);
+            this.Controls.Add(this.cTb);
+            this.Controls.Add(this.currentPl);
+            this.Controls.Add(this.currentTb);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.titleLb);
-            this.Controls.Add(this.listView1);
+            this.Controls.Add(this.assessmentLv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "courseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -292,7 +293,7 @@
         }
 
         #endregion
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView assessmentLv;
         private System.Windows.Forms.ColumnHeader columnHeader2;
         private System.Windows.Forms.ColumnHeader columnHeader3;
         private System.Windows.Forms.ColumnHeader columnHeader4;
@@ -302,15 +303,15 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.Panel passwordPl;
-        private System.Windows.Forms.TextBox passwordTb;
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Panel panel3;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.Button registerBtn;
+        private System.Windows.Forms.Panel currentPl;
+        private System.Windows.Forms.TextBox currentTb;
+        private System.Windows.Forms.Panel cPl;
+        private System.Windows.Forms.TextBox cTb;
+        private System.Windows.Forms.Panel dPl;
+        private System.Windows.Forms.TextBox dTb;
+        private System.Windows.Forms.Panel hdPl;
+        private System.Windows.Forms.TextBox hdTb;
+        private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button canvasBtn;
         private System.Windows.Forms.Button handbookBtn;
     }
