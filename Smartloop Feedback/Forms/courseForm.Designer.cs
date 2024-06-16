@@ -49,12 +49,23 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.handbookBtn = new System.Windows.Forms.Button();
+            this.nameCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.typeCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dateCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.markCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // assessmentLv
             // 
             this.assessmentLv.Activation = System.Windows.Forms.ItemActivation.OneClick;
             this.assessmentLv.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.assessmentLv.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.nameCh,
+            this.typeCh,
+            this.dateCh,
+            this.statusCh,
+            this.markCh});
             this.assessmentLv.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.assessmentLv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.assessmentLv.FullRowSelect = true;
@@ -66,10 +77,13 @@
             this.assessmentLv.MultiSelect = false;
             this.assessmentLv.Name = "assessmentLv";
             this.assessmentLv.OwnerDraw = true;
-            this.assessmentLv.Size = new System.Drawing.Size(316, 264);
+            this.assessmentLv.Size = new System.Drawing.Size(352, 264);
             this.assessmentLv.TabIndex = 1;
             this.assessmentLv.UseCompatibleStateImageBehavior = false;
             this.assessmentLv.View = System.Windows.Forms.View.Details;
+            this.assessmentLv.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.assessmentLv_DrawColumnHeader);
+            this.assessmentLv.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.assessmentLv_DrawSubItem);
+            this.assessmentLv.ItemActivate += new System.EventHandler(this.assessmentLv_ItemActivate);
             // 
             // titleLb
             // 
@@ -260,6 +274,29 @@
             this.handbookBtn.UseVisualStyleBackColor = false;
             this.handbookBtn.Click += new System.EventHandler(this.handbookBtn_Click);
             // 
+            // nameCh
+            // 
+            this.nameCh.Text = "Name";
+            this.nameCh.Width = 73;
+            // 
+            // typeCh
+            // 
+            this.typeCh.Text = "Type";
+            this.typeCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dateCh
+            // 
+            this.dateCh.Text = "Date";
+            this.dateCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // statusCh
+            // 
+            this.statusCh.Text = "Status";
+            // 
+            // markCh
+            // 
+            this.markCh.Text = "Mark";
+            // 
             // courseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -314,5 +351,10 @@
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button canvasBtn;
         private System.Windows.Forms.Button handbookBtn;
+        private System.Windows.Forms.ColumnHeader nameCh;
+        private System.Windows.Forms.ColumnHeader typeCh;
+        private System.Windows.Forms.ColumnHeader dateCh;
+        private System.Windows.Forms.ColumnHeader statusCh;
+        private System.Windows.Forms.ColumnHeader markCh;
     }
 }

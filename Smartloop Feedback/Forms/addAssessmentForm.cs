@@ -82,45 +82,30 @@ namespace Smartloop_Feedback.Forms
         {
             int textBoxWidth = 100;
             int controlHeight = 30;
-            int panelHeight = 1;
-            int verticalGap = 5; // Gap between TextBox and Panel
-            int gapBetweenControls = 5; // Gap between consecutive TextBox-Panel pairs
+            int gapBetweenControls = 5;
 
-            int startY = (controlHeight + panelHeight + verticalGap + gapBetweenControls) * columnIndex;
+            int startY = (controlHeight + gapBetweenControls) * columnIndex;
 
-            // Create the TextBox
             TextBox txt = new TextBox();
             txt.Name = "txtColumn" + columnIndex;
-            txt.Text = $"Add Column {columnIndex} Rating";
+            txt.Text = $"Click to change Column {columnIndex} Rating";
             txt.Size = new System.Drawing.Size(textBoxWidth, controlHeight);
             txt.Location = new System.Drawing.Point(10, startY);
             txt.BackColor = Color.FromArgb(16, 34, 61);
             txt.ForeColor = Color.FromArgb(193, 193, 193);
             txt.Tag = columnIndex;
-            txt.BorderStyle = BorderStyle.None;
             txt.TextChanged += new EventHandler(ColumnTextBox_TextChanged);
             txt.Click += new EventHandler(ColumnTextBox_Click);
 
-            // Create the Panel
-            Panel panel = new Panel();
-            panel.Size = new System.Drawing.Size(textBoxWidth, panelHeight);
-            panel.Location = new System.Drawing.Point(10, startY + controlHeight + verticalGap);
-            panel.BackColor = Color.FromArgb(193, 193, 193);
-
-            // Add TextBox and Panel to the panelColumnInputs
             panelColumnInputs.Controls.Add(txt);
-            panelColumnInputs.Controls.Add(panel);
 
-            // Adjust panelColumnInputs size to accommodate new controls
-            int totalControlHeight = controlHeight + panelHeight + verticalGap + gapBetweenControls;
+            int totalControlHeight = controlHeight + gapBetweenControls;
             int panelHeightTotal = (columnIndex + 1) * totalControlHeight;
             panelColumnInputs.AutoScrollMinSize = new System.Drawing.Size(panelColumnInputs.Width - 50, panelHeightTotal);
 
             panelColumnInputs.HorizontalScroll.Maximum = 0;
             panelColumnInputs.AutoScroll = true;
         }
-
-
 
         private void ColumnTextBox_TextChanged(object sender, EventArgs e)
         {
@@ -141,9 +126,31 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
-
         private void submitBtn_Click(object sender, EventArgs e)
         {
+            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), indvidualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
+
+            List<string> columnNameList = new List<string>();
+
+            foreach(DataGridViewColumn column in criteriaDgv.Columns)
+            {
+                columnNameList.Add(column.HeaderText);
+            }
+
+            columnNameList.RemoveAt(0);
+
+            foreach(DataGridViewRow row in criteriaDgv.Rows)
+            {
+                if (row.IsNewRow) continue;
+
+                course.assessmentList.Last().criteriaList.Add(new Criteria(row.Cells[0].Value.ToString(), course.assessmentList.Last().id, course.assessmentList.Last().studentId));
+
+                for(int i = 0; i < columnNameList.Count(); i++)
+                {
+                    course.assessmentList.Last().criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], course.assessmentList.Last().criteriaList.Last().id, course.assessmentList.Last().studentId));
+                }
+            }
+
             mainForm.mainPannel(0);
         }
 

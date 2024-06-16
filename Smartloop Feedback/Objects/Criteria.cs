@@ -34,6 +34,7 @@ namespace Smartloop_Feedback.Objects
             this.ratingList = ratingList;
             this.assessmentId = assessmentId;
             this.studentId = studentId;
+            ratingList = new List<Rating>();
             addCriteriaToDatabase();
         }
 

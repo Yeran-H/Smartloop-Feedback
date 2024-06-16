@@ -94,7 +94,6 @@
             this.descriptionTb.Location = new System.Drawing.Point(133, 94);
             this.descriptionTb.Multiline = true;
             this.descriptionTb.Name = "descriptionTb";
-            this.descriptionTb.ReadOnly = true;
             this.descriptionTb.Size = new System.Drawing.Size(200, 128);
             this.descriptionTb.TabIndex = 29;
             this.descriptionTb.TabStop = false;
@@ -118,7 +117,6 @@
             this.canvasTb.HideSelection = false;
             this.canvasTb.Location = new System.Drawing.Point(386, 263);
             this.canvasTb.Name = "canvasTb";
-            this.canvasTb.ReadOnly = true;
             this.canvasTb.Size = new System.Drawing.Size(200, 20);
             this.canvasTb.TabIndex = 19;
             this.canvasTb.TabStop = false;
@@ -142,7 +140,6 @@
             this.weightTb.HideSelection = false;
             this.weightTb.Location = new System.Drawing.Point(387, 174);
             this.weightTb.Name = "weightTb";
-            this.weightTb.ReadOnly = true;
             this.weightTb.Size = new System.Drawing.Size(200, 20);
             this.weightTb.TabIndex = 27;
             this.weightTb.TabStop = false;
@@ -167,7 +164,6 @@
             this.markTb.HideSelection = false;
             this.markTb.Location = new System.Drawing.Point(387, 140);
             this.markTb.Name = "markTb";
-            this.markTb.ReadOnly = true;
             this.markTb.Size = new System.Drawing.Size(200, 20);
             this.markTb.TabIndex = 19;
             this.markTb.TabStop = false;
@@ -184,13 +180,13 @@
             this.groupRbtn.Name = "groupRbtn";
             this.groupRbtn.Size = new System.Drawing.Size(109, 24);
             this.groupRbtn.TabIndex = 26;
-            this.groupRbtn.TabStop = true;
             this.groupRbtn.Text = "Group Work";
             this.groupRbtn.UseVisualStyleBackColor = true;
             // 
             // indvidualRbtn
             // 
             this.indvidualRbtn.AutoSize = true;
+            this.indvidualRbtn.Checked = true;
             this.indvidualRbtn.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.indvidualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.indvidualRbtn.Location = new System.Drawing.Point(428, 201);
@@ -298,7 +294,6 @@
             this.titleTb.HideSelection = false;
             this.titleTb.Location = new System.Drawing.Point(134, 68);
             this.titleTb.Name = "titleTb";
-            this.titleTb.ReadOnly = true;
             this.titleTb.Size = new System.Drawing.Size(200, 20);
             this.titleTb.TabIndex = 17;
             this.titleTb.TabStop = false;

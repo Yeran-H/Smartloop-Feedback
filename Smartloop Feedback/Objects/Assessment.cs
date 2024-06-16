@@ -21,11 +21,14 @@ namespace Smartloop_Feedback.Objects
         public string status { get; set; }
         public int weight { get; set; }
         public int mark { get; set; }
+        public bool individual { get; set; }
+        public bool group { get; set; }
+        public string canvasLink { get; set; }
         public List<Criteria> criteriaList { get; set; }
         public int courseId { get; set; }
         public int studentId { get; set; }
 
-        public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, int courseId, int studentId)
+        public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.id = id;
             this.name = name;
@@ -35,13 +38,16 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.individual = individual;
+            this.group = group;
+            this.canvasLink = canvasLink;
             this.courseId = courseId;
             this.studentId = studentId;
             criteriaList = new List<Criteria>();
             getCriteriaFromDatabase();
         }
 
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, int courseId, int studentId)
+        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.name = name;
             this.description = description;
@@ -50,13 +56,16 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.individual = individual;
+            this.group = group;
+            this.canvasLink = canvasLink;
             criteriaList = new List<Criteria>();
             this.courseId = courseId;
             this.studentId = studentId;
             addAssessmentToDatabase();
         }
 
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark)
+        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink)
         {
             this.name = name;
             this.description = description;
@@ -65,6 +74,9 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.individual = individual;
+            this.group = group;
+            this.canvasLink = canvasLink;
             criteriaList = new List<Criteria>();
         }
 
@@ -73,7 +85,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @courseId, @studentId); SELECT SCOPE_IDENTITY();";
+                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, individual, [group], canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @individual, @group, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -84,6 +96,9 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@status", status);
                     cmd.Parameters.AddWithValue("@weight", weight);
                     cmd.Parameters.AddWithValue("@mark", mark);
+                    cmd.Parameters.AddWithValue("@individual", individual);
+                    cmd.Parameters.AddWithValue("@group", group);
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
                     cmd.Parameters.AddWithValue("@courseId", courseId);
                     cmd.Parameters.AddWithValue("@studentId", studentId);
                     id = Convert.ToInt32(cmd.ExecuteScalar());
@@ -96,7 +111,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, description FROM course WHERE assessmentId = @assessmentId AND studentId = @studentId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, description FROM criteria WHERE assessmentId = @assessmentId AND studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@assessmentId", id);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
 

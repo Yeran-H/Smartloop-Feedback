@@ -33,7 +33,6 @@
             this.menuDropPl = new System.Windows.Forms.Panel();
             this.assessmentBtn = new System.Windows.Forms.Button();
             this.courseBtn = new System.Windows.Forms.Button();
-            this.navPl = new System.Windows.Forms.Panel();
             this.setttingBtn = new System.Windows.Forms.Button();
             this.academicBtn = new System.Windows.Forms.Button();
             this.resultBtn = new System.Windows.Forms.Button();
@@ -42,6 +41,7 @@
             this.studentIdLb = new System.Windows.Forms.Label();
             this.nameLb = new System.Windows.Forms.Label();
             this.profilePb = new System.Windows.Forms.PictureBox();
+            this.navPl = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel3 = new System.Windows.Forms.Panel();
             this.formLoaderPl = new System.Windows.Forms.Panel();
@@ -115,14 +115,6 @@
             this.courseBtn.UseVisualStyleBackColor = true;
             this.courseBtn.Click += new System.EventHandler(this.courseBtn_Click);
             this.courseBtn.Leave += new System.EventHandler(this.courseBtn_Leave);
-            // 
-            // navPl
-            // 
-            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 186);
-            this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
-            this.navPl.TabIndex = 5;
             // 
             // setttingBtn
             // 
@@ -240,6 +232,14 @@
             this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.profilePb.TabIndex = 0;
             this.profilePb.TabStop = false;
+            // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(0, 186);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 5;
             // 
             // pictureBox1
             // 

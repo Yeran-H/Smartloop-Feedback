@@ -82,7 +82,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, individual, [group], canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn);
                 cmd.Parameters.AddWithValue("@courseId", id);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
 
@@ -98,7 +98,10 @@ namespace Smartloop_Feedback.Objects
                         string status = reader.GetString(5);
                         int weight = reader.GetInt32(6);
                         int mark = reader.GetInt32(7);
-                        assessmentList.Add(new Assessment(id, name, description, type, date, status, weight, mark, this.id, studentId));
+                        bool individual = reader.GetBoolean(8);
+                        bool group = reader.GetBoolean(9);
+                        string canvasLink = reader.GetString(10);
+                        assessmentList.Add(new Assessment(id, name, description, type, date, status, weight, mark, individual, group, canvasLink, this.id, studentId));
                     }
                 }
             }
