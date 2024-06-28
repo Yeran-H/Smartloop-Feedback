@@ -1,4 +1,4 @@
-﻿using MySql.Data.MySqlClient;
+﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -105,26 +105,18 @@ namespace Smartloop_Feedback
             int studentId = Convert.ToInt32(usernameTb.Text);
             string password = passwordTb.Text;
 
-            using (MySqlConnection conn = new MySqlConnection(connStr)) 
+            using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open();
-                MySqlCommand cmd = new MySqlCommand("SELECT studentID, name, email, degree, password, profileImage FROM Students WHERE studentID = @studentID AND password = @password", conn);
+                SqlCommand cmd = new SqlCommand("SELECT studentID, name, email, degree, password, profileImage FROM Student WHERE studentID = @studentID AND password = @password", conn);
                 cmd.Parameters.AddWithValue("@studentId", studentId);
                 cmd.Parameters.AddWithValue("@password", password);
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader())
                 {
                     if (reader.Read())
                     {
-                        Student student = new Student
-                        {
-                            studentId = reader.GetInt32(0),
-                            name = reader.GetString(1),
-                            email = reader.GetString(2),
-                            degree = reader.GetString(3),
-                            password = reader.GetString(4),
-                            profileImage = reader.GetFieldValue<byte[]>(5)
-                        };
+                        Student student = new Student(reader.GetInt32(0), reader.GetString(1),reader.GetString(2), reader.GetString(3),reader.GetString(4),reader.GetFieldValue<byte[]>(5));
 
                         mainForm main = new mainForm(student);
                         main.Show();
