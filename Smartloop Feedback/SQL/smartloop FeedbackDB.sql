@@ -44,16 +44,60 @@ CREATE TABLE semester (
 );
 GO
 
--- Create the subject table
+-- Create the course table
 CREATE TABLE course (
     id INT IDENTITY(1,1) PRIMARY KEY,
     code INT,
     title VARCHAR(225),
     creditPoint INT,
-    description VARCHAR(225),
+    description VARCHAR(MAX),
+    canvasLink VARCHAR(MAX),
     semesterId INT,
     studentId INT,
     FOREIGN KEY (semesterId) REFERENCES semester(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the assessment table
+CREATE TABLE assessment (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(225),
+    description VARCHAR(MAX),
+    type VARCHAR(225),
+    date DATE,
+    status VARCHAR(225),
+    weight INT,
+    mark INT,
+    individual BIT,
+    [group] BIT,
+    canvasLink VARCHAR(MAX),
+    courseId INT,
+    studentId INT,
+    FOREIGN KEY (courseId) REFERENCES course(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the criteria table
+CREATE TABLE criteria (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    description VARCHAR(MAX),
+    assessmentId INT,
+    studentId INT,
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the rating table
+CREATE TABLE rating (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    description VARCHAR(MAX),
+    grade VARCHAR(225),
+    criteriaId INT,
+    studentId INT,
+    FOREIGN KEY (criteriaId) REFERENCES criteria(id),
     FOREIGN KEY (studentId) REFERENCES student(studentId)
 );
 GO
