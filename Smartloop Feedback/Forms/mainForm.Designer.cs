@@ -30,7 +30,6 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.panel1 = new System.Windows.Forms.Panel();
-            this.menuDropPl = new System.Windows.Forms.Panel();
             this.assessmentBtn = new System.Windows.Forms.Button();
             this.courseBtn = new System.Windows.Forms.Button();
             this.setttingBtn = new System.Windows.Forms.Button();
@@ -43,6 +42,7 @@
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.navPl = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.menuDropPl = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.formLoaderPl = new System.Windows.Forms.Panel();
             this.exitPb = new System.Windows.Forms.PictureBox();
@@ -72,14 +72,6 @@
             this.panel1.Size = new System.Drawing.Size(186, 538);
             this.panel1.TabIndex = 0;
             // 
-            // menuDropPl
-            // 
-            this.menuDropPl.Location = new System.Drawing.Point(0, 202);
-            this.menuDropPl.Name = "menuDropPl";
-            this.menuDropPl.Size = new System.Drawing.Size(186, 294);
-            this.menuDropPl.TabIndex = 8;
-            this.menuDropPl.Visible = false;
-            // 
             // assessmentBtn
             // 
             this.assessmentBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -93,6 +85,7 @@
             this.assessmentBtn.Size = new System.Drawing.Size(186, 51);
             this.assessmentBtn.TabIndex = 7;
             this.assessmentBtn.Text = "Assignment\r\nTracker";
+            this.assessmentBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.assessmentBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.assessmentBtn.UseVisualStyleBackColor = true;
             this.assessmentBtn.Click += new System.EventHandler(this.assessmentBtn_Click);
@@ -111,6 +104,7 @@
             this.courseBtn.Size = new System.Drawing.Size(186, 51);
             this.courseBtn.TabIndex = 6;
             this.courseBtn.Text = "Course\r\nSchedule";
+            this.courseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.courseBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.courseBtn.UseVisualStyleBackColor = true;
             this.courseBtn.Click += new System.EventHandler(this.courseBtn_Click);
@@ -129,6 +123,7 @@
             this.setttingBtn.Size = new System.Drawing.Size(186, 42);
             this.setttingBtn.TabIndex = 4;
             this.setttingBtn.Text = " Settings";
+            this.setttingBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.setttingBtn.UseVisualStyleBackColor = true;
             this.setttingBtn.Click += new System.EventHandler(this.setttingBtn_Click);
@@ -147,6 +142,7 @@
             this.academicBtn.Size = new System.Drawing.Size(186, 51);
             this.academicBtn.TabIndex = 3;
             this.academicBtn.Text = "Academic\r\nPortfolio";
+            this.academicBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.academicBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.academicBtn.UseVisualStyleBackColor = true;
             this.academicBtn.Click += new System.EventHandler(this.academicBtn_Click);
@@ -165,6 +161,7 @@
             this.resultBtn.Size = new System.Drawing.Size(186, 42);
             this.resultBtn.TabIndex = 2;
             this.resultBtn.Text = "Result          ";
+            this.resultBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.resultBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.resultBtn.UseVisualStyleBackColor = true;
             this.resultBtn.Click += new System.EventHandler(this.resultBtn_Click);
@@ -183,6 +180,7 @@
             this.dashboardBtn.Size = new System.Drawing.Size(186, 42);
             this.dashboardBtn.TabIndex = 1;
             this.dashboardBtn.Text = "Dashboard";
+            this.dashboardBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.dashboardBtn.UseVisualStyleBackColor = true;
             this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
@@ -206,7 +204,7 @@
             this.studentIdLb.AutoSize = true;
             this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
             this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.studentIdLb.Location = new System.Drawing.Point(65, 181);
+            this.studentIdLb.Location = new System.Drawing.Point(61, 181);
             this.studentIdLb.Name = "studentIdLb";
             this.studentIdLb.Size = new System.Drawing.Size(64, 15);
             this.studentIdLb.TabIndex = 2;
@@ -250,6 +248,14 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
+            // 
+            // menuDropPl
+            // 
+            this.menuDropPl.Location = new System.Drawing.Point(0, 202);
+            this.menuDropPl.Name = "menuDropPl";
+            this.menuDropPl.Size = new System.Drawing.Size(186, 294);
+            this.menuDropPl.TabIndex = 8;
+            this.menuDropPl.Visible = false;
             // 
             // panel3
             // 

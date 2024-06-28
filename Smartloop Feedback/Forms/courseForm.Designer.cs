@@ -29,6 +29,11 @@
         private void InitializeComponent()
         {
             this.assessmentLv = new System.Windows.Forms.ListView();
+            this.nameCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.typeCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.dateCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.statusCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.markCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader2 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader3 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeader4 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -49,11 +54,6 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.handbookBtn = new System.Windows.Forms.Button();
-            this.nameCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.typeCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.dateCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.statusCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.markCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // assessmentLv
@@ -84,6 +84,29 @@
             this.assessmentLv.DrawColumnHeader += new System.Windows.Forms.DrawListViewColumnHeaderEventHandler(this.assessmentLv_DrawColumnHeader);
             this.assessmentLv.DrawSubItem += new System.Windows.Forms.DrawListViewSubItemEventHandler(this.assessmentLv_DrawSubItem);
             this.assessmentLv.ItemActivate += new System.EventHandler(this.assessmentLv_ItemActivate);
+            // 
+            // nameCh
+            // 
+            this.nameCh.Text = "Name";
+            this.nameCh.Width = 73;
+            // 
+            // typeCh
+            // 
+            this.typeCh.Text = "Type";
+            this.typeCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // dateCh
+            // 
+            this.dateCh.Text = "Date";
+            this.dateCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // statusCh
+            // 
+            this.statusCh.Text = "Status";
+            // 
+            // markCh
+            // 
+            this.markCh.Text = "Mark";
             // 
             // titleLb
             // 
@@ -238,7 +261,7 @@
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.addBtn.Location = new System.Drawing.Point(32, 379);
+            this.addBtn.Location = new System.Drawing.Point(61, 379);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(252, 52);
             this.addBtn.TabIndex = 21;
@@ -273,29 +296,6 @@
             this.handbookBtn.Text = "UTS Handbook";
             this.handbookBtn.UseVisualStyleBackColor = false;
             this.handbookBtn.Click += new System.EventHandler(this.handbookBtn_Click);
-            // 
-            // nameCh
-            // 
-            this.nameCh.Text = "Name";
-            this.nameCh.Width = 73;
-            // 
-            // typeCh
-            // 
-            this.typeCh.Text = "Type";
-            this.typeCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // dateCh
-            // 
-            this.dateCh.Text = "Date";
-            this.dateCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // statusCh
-            // 
-            this.statusCh.Text = "Status";
-            // 
-            // markCh
-            // 
-            this.markCh.Text = "Mark";
             // 
             // courseForm
             // 
