@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.codePl = new System.Windows.Forms.Panel();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
@@ -41,6 +42,7 @@
             this.descriptionTb = new System.Windows.Forms.TextBox();
             this.canvasPl = new System.Windows.Forms.Panel();
             this.canvasTb = new System.Windows.Forms.TextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // codePl
@@ -70,6 +72,7 @@
             // 
             this.saveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.saveBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.saveBtn.Enabled = false;
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
@@ -102,11 +105,11 @@
             this.codeTb.Location = new System.Drawing.Point(20, 88);
             this.codeTb.Name = "codeTb";
             this.codeTb.Size = new System.Drawing.Size(206, 20);
-            this.codeTb.TabIndex = 14;
-            this.codeTb.TabStop = false;
+            this.codeTb.TabIndex = 1;
             this.codeTb.Text = "Course Code";
-            this.codeTb.Click += new System.EventHandler(this.codeTb_Click);
+            this.toolTip1.SetToolTip(this.codeTb, "Please enter the Course Code");
             this.codeTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.codeTb_KeyPress);
+            this.codeTb.Leave += new System.EventHandler(this.codeTb_Leave);
             // 
             // namePl
             // 
@@ -126,10 +129,9 @@
             this.nameTb.Location = new System.Drawing.Point(20, 115);
             this.nameTb.Name = "nameTb";
             this.nameTb.Size = new System.Drawing.Size(206, 20);
-            this.nameTb.TabIndex = 18;
-            this.nameTb.TabStop = false;
+            this.nameTb.TabIndex = 2;
             this.nameTb.Text = "Course Name";
-            this.nameTb.Click += new System.EventHandler(this.nameTb_Click);
+            this.toolTip1.SetToolTip(this.nameTb, "Please enter the Course Name");
             // 
             // creditPl
             // 
@@ -149,10 +151,9 @@
             this.creditTb.Location = new System.Drawing.Point(19, 145);
             this.creditTb.Name = "creditTb";
             this.creditTb.Size = new System.Drawing.Size(206, 20);
-            this.creditTb.TabIndex = 20;
-            this.creditTb.TabStop = false;
+            this.creditTb.TabIndex = 3;
             this.creditTb.Text = "Credit Point";
-            this.creditTb.Click += new System.EventHandler(this.creditTb_Click);
+            this.toolTip1.SetToolTip(this.creditTb, "Please enter the credit point");
             this.creditTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.creditTb_KeyPress);
             // 
             // descriptionPl
@@ -174,10 +175,9 @@
             this.descriptionTb.Multiline = true;
             this.descriptionTb.Name = "descriptionTb";
             this.descriptionTb.Size = new System.Drawing.Size(206, 85);
-            this.descriptionTb.TabIndex = 22;
-            this.descriptionTb.TabStop = false;
+            this.descriptionTb.TabIndex = 4;
             this.descriptionTb.Text = "Description";
-            this.descriptionTb.Click += new System.EventHandler(this.descriptionTb_Click);
+            this.toolTip1.SetToolTip(this.descriptionTb, "Please Enter Course Description");
             // 
             // canvasPl
             // 
@@ -197,10 +197,8 @@
             this.canvasTb.Location = new System.Drawing.Point(20, 266);
             this.canvasTb.Name = "canvasTb";
             this.canvasTb.Size = new System.Drawing.Size(206, 20);
-            this.canvasTb.TabIndex = 18;
-            this.canvasTb.TabStop = false;
-            this.canvasTb.Text = "Canvas Link";
-            this.canvasTb.Click += new System.EventHandler(this.canvasTb_Click);
+            this.canvasTb.TabIndex = 5;
+            this.canvasTb.Text = "Please Enter Canvas Link";
             // 
             // addCourseForm
             // 
@@ -244,5 +242,6 @@
         private System.Windows.Forms.TextBox descriptionTb;
         private System.Windows.Forms.Panel canvasPl;
         private System.Windows.Forms.TextBox canvasTb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
