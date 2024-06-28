@@ -298,7 +298,7 @@
     <None Include="Resources\setting.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\smartloop-feedback-high-resolution-logo.png" />
+    <None Include="Resources\logo.png" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\resize logo.png" />
@@ -335,6 +335,8 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <None Include="Resources\close.png" />
+    <None Include="Resources\smartloop-feedback-high-resolution-logo.png" />
     <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

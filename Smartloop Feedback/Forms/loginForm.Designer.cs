@@ -39,10 +39,13 @@
             this.usernamePb = new System.Windows.Forms.PictureBox();
             this.exitPb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.formTitle = new System.Windows.Forms.Label();
+            this.headerPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.headerPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // usernameTb
@@ -145,8 +148,8 @@
             // exitPb
             // 
             this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.exitPb.Image = ((System.Drawing.Image)(resources.GetObject("exitPb.Image")));
-            this.exitPb.Location = new System.Drawing.Point(292, 1);
+            this.exitPb.Image = global::Smartloop_Feedback.Properties.Resources.close;
+            this.exitPb.Location = new System.Drawing.Point(293, 10);
             this.exitPb.Name = "exitPb";
             this.exitPb.Size = new System.Drawing.Size(21, 21);
             this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -156,13 +159,35 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-32, -51);
+            this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(-35, -21);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(375, 259);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.pictureBox1.TabIndex = 0;
             this.pictureBox1.TabStop = false;
+            // 
+            // formTitle
+            // 
+            this.formTitle.AutoSize = true;
+            this.formTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.formTitle.ForeColor = System.Drawing.Color.White;
+            this.formTitle.Location = new System.Drawing.Point(10, 10);
+            this.formTitle.Name = "formTitle";
+            this.formTitle.Size = new System.Drawing.Size(82, 21);
+            this.formTitle.TabIndex = 7;
+            this.formTitle.Text = "Welcome";
+            // 
+            // headerPanel
+            // 
+            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.headerPanel.Controls.Add(this.formTitle);
+            this.headerPanel.Controls.Add(this.exitPb);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(314, 40);
+            this.headerPanel.TabIndex = 12;
             // 
             // loginForm
             // 
@@ -170,9 +195,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(314, 495);
+            this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.passwordPb);
             this.Controls.Add(this.usernamePb);
-            this.Controls.Add(this.exitPb);
             this.Controls.Add(this.registerBtn);
             this.Controls.Add(this.signBtn);
             this.Controls.Add(this.passwordPl);
@@ -192,6 +217,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -209,6 +236,8 @@
         private System.Windows.Forms.PictureBox exitPb;
         private System.Windows.Forms.PictureBox usernamePb;
         private System.Windows.Forms.PictureBox passwordPb;
+        private System.Windows.Forms.Label formTitle;
+        private System.Windows.Forms.Panel headerPanel;
     }
 }
 
