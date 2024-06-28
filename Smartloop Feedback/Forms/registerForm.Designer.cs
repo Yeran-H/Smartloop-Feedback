@@ -39,7 +39,6 @@
             this.degreeTb = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();
             this.resgisterBtn = new System.Windows.Forms.Button();
-            this.exitPb = new System.Windows.Forms.PictureBox();
             this.degreePb = new System.Windows.Forms.PictureBox();
             this.passwordPb = new System.Windows.Forms.PictureBox();
             this.studentPb = new System.Windows.Forms.PictureBox();
@@ -50,7 +49,9 @@
             this.emailPb = new System.Windows.Forms.PictureBox();
             this.emailPl = new System.Windows.Forms.Panel();
             this.emailTb = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
+            this.headerPanel = new System.Windows.Forms.Panel();
+            this.formTitle = new System.Windows.Forms.Label();
+            this.exitPb = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentPb)).BeginInit();
@@ -58,6 +59,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.emailPb)).BeginInit();
+            this.headerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
             // 
             // studentPl
@@ -160,7 +163,7 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(39, 517);
+            this.backBtn.Location = new System.Drawing.Point(39, 534);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(252, 52);
             this.backBtn.TabIndex = 26;
@@ -175,25 +178,13 @@
             this.resgisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.resgisterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.resgisterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.resgisterBtn.Location = new System.Drawing.Point(39, 459);
+            this.resgisterBtn.Location = new System.Drawing.Point(39, 476);
             this.resgisterBtn.Name = "resgisterBtn";
             this.resgisterBtn.Size = new System.Drawing.Size(252, 52);
             this.resgisterBtn.TabIndex = 25;
             this.resgisterBtn.Text = "Register";
             this.resgisterBtn.UseVisualStyleBackColor = false;
             this.resgisterBtn.Click += new System.EventHandler(this.resgisterBtn_Click);
-            // 
-            // exitPb
-            // 
-            this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.exitPb.Image = ((System.Drawing.Image)(resources.GetObject("exitPb.Image")));
-            this.exitPb.Location = new System.Drawing.Point(295, 0);
-            this.exitPb.Name = "exitPb";
-            this.exitPb.Size = new System.Drawing.Size(21, 21);
-            this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.exitPb.TabIndex = 27;
-            this.exitPb.TabStop = false;
-            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
             // degreePb
             // 
@@ -238,7 +229,7 @@
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(-32, -51);
+            this.pictureBox1.Location = new System.Drawing.Point(-32, -43);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(375, 259);
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -248,7 +239,7 @@
             // profilePb
             // 
             this.profilePb.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.profilePb.Location = new System.Drawing.Point(41, 354);
+            this.profilePb.Location = new System.Drawing.Point(41, 371);
             this.profilePb.Name = "profilePb";
             this.profilePb.Size = new System.Drawing.Size(96, 96);
             this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -262,7 +253,7 @@
             this.profileBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.profileBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.profileBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.profileBtn.Location = new System.Drawing.Point(143, 378);
+            this.profileBtn.Location = new System.Drawing.Point(143, 395);
             this.profileBtn.Name = "profileBtn";
             this.profileBtn.Size = new System.Drawing.Size(126, 52);
             this.profileBtn.TabIndex = 29;
@@ -303,18 +294,52 @@
             this.emailTb.Text = "Email";
             this.emailTb.Click += new System.EventHandler(this.emailTb_Click);
             // 
+            // headerPanel
+            // 
+            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.headerPanel.Controls.Add(this.formTitle);
+            this.headerPanel.Controls.Add(this.exitPb);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(314, 40);
+            this.headerPanel.TabIndex = 33;
+            // 
+            // formTitle
+            // 
+            this.formTitle.AutoSize = true;
+            this.formTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.formTitle.ForeColor = System.Drawing.Color.White;
+            this.formTitle.Location = new System.Drawing.Point(10, 10);
+            this.formTitle.Name = "formTitle";
+            this.formTitle.Size = new System.Drawing.Size(82, 21);
+            this.formTitle.TabIndex = 7;
+            this.formTitle.Text = "Welcome";
+            // 
+            // exitPb
+            // 
+            this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitPb.Image = global::Smartloop_Feedback.Properties.Resources.close;
+            this.exitPb.Location = new System.Drawing.Point(293, 10);
+            this.exitPb.Name = "exitPb";
+            this.exitPb.Size = new System.Drawing.Size(21, 21);
+            this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.exitPb.TabIndex = 9;
+            this.exitPb.TabStop = false;
+            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
+            // 
             // registerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(314, 574);
+            this.ClientSize = new System.Drawing.Size(314, 608);
+            this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.emailPb);
             this.Controls.Add(this.emailPl);
             this.Controls.Add(this.emailTb);
             this.Controls.Add(this.profileBtn);
             this.Controls.Add(this.profilePb);
-            this.Controls.Add(this.exitPb);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.resgisterBtn);
             this.Controls.Add(this.degreePb);
@@ -335,7 +360,6 @@
             this.Name = "registerForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "registerForm";
-            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentPb)).EndInit();
@@ -343,6 +367,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.emailPb)).EndInit();
+            this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -365,11 +392,13 @@
         private System.Windows.Forms.TextBox degreeTb;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button resgisterBtn;
-        private System.Windows.Forms.PictureBox exitPb;
         private System.Windows.Forms.PictureBox profilePb;
         private System.Windows.Forms.Button profileBtn;
         private System.Windows.Forms.PictureBox emailPb;
         private System.Windows.Forms.Panel emailPl;
         private System.Windows.Forms.TextBox emailTb;
+        private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Label formTitle;
+        private System.Windows.Forms.PictureBox exitPb;
     }
 }
