@@ -45,7 +45,7 @@ namespace Smartloop_Feedback
                 if (control is TextBox)
                 {
                     (control as TextBox).TextChanged += new EventHandler(TextBox_TextChanged);
-                    (control as TextBox).Enter += new EventHandler(TextBox_Enter); // Attach Enter event
+                    (control as TextBox).Enter += new EventHandler(TextBox_Enter); 
                 }
             }
 

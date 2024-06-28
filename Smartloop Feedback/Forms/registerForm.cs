@@ -17,10 +17,14 @@ namespace Smartloop_Feedback
 {
     public partial class registerForm : Form
     {
+        // Connection string for the database
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
-        private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
-        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
+        // Dictionary to track if a textbox has been clicked
+        private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
+
+        // P/Invoke to create a rounded rectangle region
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
         private static extern IntPtr CreateRoundRectRgn
         (
             int nLeftRect,
@@ -28,86 +32,89 @@ namespace Smartloop_Feedback
             int nRightRect,
             int nBottomRect,
             int nWidthEllipse,
-            int nHieghtEllipse
+            int nHeightEllipse
         );
 
         public registerForm()
         {
             InitializeComponent();
 
+            // Initialize dictionary with textboxes
             textBoxClicked[nameTb] = false;
             textBoxClicked[emailTb] = false;
             textBoxClicked[studentTb] = false;
             textBoxClicked[passwordTb] = false;
             textBoxClicked[degreeTb] = false;
+
+            // Set the form's region to a rounded rectangle
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-        }
 
-        private void nameTb_Click(object sender, EventArgs e)
-        {
-            defaultUI();
-            if (!textBoxClicked[nameTb])
+            // Attach TextChanged and Enter event handlers to all textboxes
+            foreach (var control in this.Controls)
             {
-                nameTb.Clear();
-                textBoxClicked[nameTb] = true;
+                if (control is TextBox)
+                {
+                    (control as TextBox).TextChanged += new EventHandler(TextBox_TextChanged);
+                    (control as TextBox).Enter += new EventHandler(TextBox_Enter);
+                }
             }
-            namePb.Image = Properties.Resources.person2;
-            namePl.BackColor = Color.FromArgb(254, 0, 57);
-            nameTb.ForeColor = Color.FromArgb(254, 0, 57);
         }
 
-        private void emailTb_Click(object sender, EventArgs e)
+        // Event handler to enable the register button if all textboxes are filled
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            defaultUI();
-            if (!textBoxClicked[emailTb])
-            {
-                emailTb.Clear();
-                textBoxClicked[emailTb] = true;
-            }
-            emailPb.Image = Properties.Resources.email2;
-            emailPl.BackColor = Color.FromArgb(254, 0, 57);
-            emailTb.ForeColor = Color.FromArgb(254, 0, 57);
+            bool allFilled = this.Controls.OfType<TextBox>().All(tb => !string.IsNullOrEmpty(tb.Text));
+            registerBtn.Enabled = allFilled;
         }
 
-        private void studentTb_Click(object sender, EventArgs e)
+        // Common event handler for when any textbox receives focus
+        private void TextBox_Enter(object sender, EventArgs e)
         {
-            defaultUI();
-            if (!textBoxClicked[studentTb])
+            defaultUI(); // Reset UI to default state
+
+            TextBox currentTextBox = sender as TextBox;
+
+            // Clear the textbox on first focus
+            if (!textBoxClicked[currentTextBox])
             {
-                studentTb.Clear();
-                textBoxClicked[studentTb] = true;
+                currentTextBox.Clear();
+                textBoxClicked[currentTextBox] = true;
             }
-            studentPb.Image = Properties.Resources.person2;
-            studentPl.BackColor = Color.FromArgb(254, 0, 57);
-            studentTb.ForeColor = Color.FromArgb(254, 0, 57);
+
+            // Update UI to indicate the textbox is active
+            if (currentTextBox == nameTb)
+            {
+                namePb.Image = Properties.Resources.person2;
+                namePl.BackColor = Color.FromArgb(254, 0, 57);
+                nameTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
+            else if (currentTextBox == emailTb)
+            {
+                emailPb.Image = Properties.Resources.email2;
+                emailPl.BackColor = Color.FromArgb(254, 0, 57);
+                emailTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
+            else if (currentTextBox == studentTb)
+            {
+                studentPb.Image = Properties.Resources.person2;
+                studentPl.BackColor = Color.FromArgb(254, 0, 57);
+                studentTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
+            else if (currentTextBox == passwordTb)
+            {
+                passwordPb.Image = Properties.Resources.pass2;
+                passwordPl.BackColor = Color.FromArgb(254, 0, 57);
+                passwordTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
+            else if (currentTextBox == degreeTb)
+            {
+                degreePb.Image = Properties.Resources.degree2;
+                degreePl.BackColor = Color.FromArgb(254, 0, 57);
+                degreeTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
         }
 
-        private void passwordTb_Click(object sender, EventArgs e)
-        {
-            defaultUI();
-            if (!textBoxClicked[passwordTb])
-            {
-                passwordTb.Clear();
-                textBoxClicked[passwordTb] = true;
-            }
-            passwordPb.Image = Properties.Resources.pass2;
-            passwordPl.BackColor = Color.FromArgb(254, 0, 57);
-            passwordTb.ForeColor = Color.FromArgb(254, 0, 57);
-        }
-
-        private void degreeTb_Click(object sender, EventArgs e)
-        {
-            defaultUI();
-            if (!textBoxClicked[degreeTb])
-            {
-                degreeTb.Clear();
-                textBoxClicked[degreeTb] = true;
-            }
-            degreePb.Image = Properties.Resources.degree2;
-            degreePl.BackColor = Color.FromArgb(254, 0, 57);
-            degreeTb.ForeColor = Color.FromArgb(254, 0, 57);
-        }
-
+        // Reset the UI to its default state
         private void defaultUI()
         {
             namePb.Image = Properties.Resources.person1;
@@ -131,22 +138,22 @@ namespace Smartloop_Feedback
             degreeTb.ForeColor = Color.FromArgb(193, 193, 193);
         }
 
+        // Ensure the student ID textbox only accepts numeric input
         private void studentTb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    e.Handled = true;
-                }
+                e.Handled = true;
             }
         }
 
+        // Close the form when the exit picture box is clicked
         private void exitPb_Click(object sender, EventArgs e)
         {
             this.Close();
         }
 
+        // Navigate back to the login form when the back button is clicked
         private void backBtn_Click(object sender, EventArgs e)
         {
             loginForm loginForm = new loginForm();
@@ -154,6 +161,7 @@ namespace Smartloop_Feedback
             this.Hide();
         }
 
+        // Allow the user to upload a profile image
         private void profileBtn_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -166,6 +174,7 @@ namespace Smartloop_Feedback
             }
         }
 
+        // Handle the registration button click event
         private void resgisterBtn_Click(object sender, EventArgs e)
         {
             string name = nameTb.Text;
@@ -175,6 +184,7 @@ namespace Smartloop_Feedback
             string degree = degreeTb.Text;
             byte[] profileImage = null;
 
+            // Convert the profile image to a byte array
             if (profilePb.Image != null)
             {
                 using (MemoryStream ms = new MemoryStream())
@@ -186,24 +196,28 @@ namespace Smartloop_Feedback
 
             Student newStudent = new Student(studentId, name, email, password, degree, profileImage);
 
+            // Validate the password
             if (!newStudent.ValidatePassword())
             {
                 MessageBox.Show("Password must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            // Validate the student ID
             if (!newStudent.ValidateStudentId())
             {
                 MessageBox.Show("Student ID must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            // Validate the email address
             if (!newStudent.ValidateEmail())
             {
                 MessageBox.Show("Email must end with @student.uts.edu.au or @gmail.com.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            // Insert the new student record into the database
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
@@ -221,9 +235,21 @@ namespace Smartloop_Feedback
                 }
             }
 
+            // Show the main form and hide the current form
             mainForm main = new mainForm(newStudent);
             main.Show();
             this.Hide();
+        }
+
+        // Override ProcessCmdKey to detect Enter key presses
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            if (keyData == Keys.Enter)
+            {
+                registerBtn.PerformClick(); // Simulate a click on the register button
+                return true; // Indicate that the key press has been handled
+            }
+            return base.ProcessCmdKey(ref msg, keyData); // Call the base method for other key presses
         }
     }
 }

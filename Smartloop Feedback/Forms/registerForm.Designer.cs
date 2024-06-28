@@ -1,4 +1,6 @@
-﻿namespace Smartloop_Feedback
+﻿using System.Windows.Forms;
+
+namespace Smartloop_Feedback
 {
     partial class registerForm
     {
@@ -28,6 +30,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(registerForm));
             this.studentPl = new System.Windows.Forms.Panel();
             this.studentTb = new System.Windows.Forms.TextBox();
@@ -38,7 +41,7 @@
             this.degreePl = new System.Windows.Forms.Panel();
             this.degreeTb = new System.Windows.Forms.TextBox();
             this.backBtn = new System.Windows.Forms.Button();
-            this.resgisterBtn = new System.Windows.Forms.Button();
+            this.registerBtn = new System.Windows.Forms.Button();
             this.degreePb = new System.Windows.Forms.PictureBox();
             this.passwordPb = new System.Windows.Forms.PictureBox();
             this.studentPb = new System.Windows.Forms.PictureBox();
@@ -52,6 +55,7 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.formTitle = new System.Windows.Forms.Label();
             this.exitPb = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studentPb)).BeginInit();
@@ -81,10 +85,10 @@
             this.studentTb.Location = new System.Drawing.Point(72, 233);
             this.studentTb.Name = "studentTb";
             this.studentTb.Size = new System.Drawing.Size(219, 20);
-            this.studentTb.TabIndex = 15;
-            this.studentTb.TabStop = false;
+            this.studentTb.TabIndex = 3;
             this.studentTb.Text = "Student ID";
-            this.studentTb.Click += new System.EventHandler(this.studentTb_Click);
+            this.toolTip1.SetToolTip(this.studentTb, "Please enter your student ID.");
+            this.studentTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             this.studentTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.studentTb_KeyPress);
             // 
             // namePl
@@ -105,10 +109,10 @@
             this.nameTb.Location = new System.Drawing.Point(72, 153);
             this.nameTb.Name = "nameTb";
             this.nameTb.Size = new System.Drawing.Size(219, 20);
-            this.nameTb.TabIndex = 13;
-            this.nameTb.TabStop = false;
+            this.nameTb.TabIndex = 1;
             this.nameTb.Text = "Name";
-            this.nameTb.Click += new System.EventHandler(this.nameTb_Click);
+            this.toolTip1.SetToolTip(this.nameTb, "Please enter your full name.");
+            this.nameTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             // 
             // passwordPl
             // 
@@ -128,10 +132,10 @@
             this.passwordTb.Location = new System.Drawing.Point(72, 282);
             this.passwordTb.Name = "passwordTb";
             this.passwordTb.Size = new System.Drawing.Size(219, 20);
-            this.passwordTb.TabIndex = 19;
-            this.passwordTb.TabStop = false;
+            this.passwordTb.TabIndex = 4;
             this.passwordTb.Text = "Password";
-            this.passwordTb.Click += new System.EventHandler(this.passwordTb_Click);
+            this.toolTip1.SetToolTip(this.passwordTb, "Please enter a secure password.");
+            this.passwordTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             // 
             // degreePl
             // 
@@ -151,10 +155,10 @@
             this.degreeTb.Location = new System.Drawing.Point(72, 326);
             this.degreeTb.Name = "degreeTb";
             this.degreeTb.Size = new System.Drawing.Size(219, 20);
-            this.degreeTb.TabIndex = 22;
-            this.degreeTb.TabStop = false;
+            this.degreeTb.TabIndex = 5;
             this.degreeTb.Text = "Degree";
-            this.degreeTb.Click += new System.EventHandler(this.degreeTb_Click);
+            this.toolTip1.SetToolTip(this.degreeTb, "Please enter your degree.");
+            this.degreeTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             // 
             // backBtn
             // 
@@ -171,20 +175,20 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // resgisterBtn
+            // registerBtn
             // 
-            this.resgisterBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.resgisterBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.resgisterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.resgisterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.resgisterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.resgisterBtn.Location = new System.Drawing.Point(39, 476);
-            this.resgisterBtn.Name = "resgisterBtn";
-            this.resgisterBtn.Size = new System.Drawing.Size(252, 52);
-            this.resgisterBtn.TabIndex = 25;
-            this.resgisterBtn.Text = "Register";
-            this.resgisterBtn.UseVisualStyleBackColor = false;
-            this.resgisterBtn.Click += new System.EventHandler(this.resgisterBtn_Click);
+            this.registerBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.registerBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.registerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.registerBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.registerBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.registerBtn.Location = new System.Drawing.Point(39, 476);
+            this.registerBtn.Name = "registerBtn";
+            this.registerBtn.Size = new System.Drawing.Size(252, 52);
+            this.registerBtn.TabIndex = 25;
+            this.registerBtn.Text = "Register";
+            this.registerBtn.UseVisualStyleBackColor = false;
+            this.registerBtn.Click += new System.EventHandler(this.resgisterBtn_Click);
             // 
             // degreePb
             // 
@@ -258,6 +262,7 @@
             this.profileBtn.Size = new System.Drawing.Size(126, 52);
             this.profileBtn.TabIndex = 29;
             this.profileBtn.Text = "Upload Profile Image";
+            this.toolTip1.SetToolTip(this.profileBtn, "Upload your profile image.");
             this.profileBtn.UseVisualStyleBackColor = false;
             this.profileBtn.Click += new System.EventHandler(this.profileBtn_Click);
             // 
@@ -289,10 +294,10 @@
             this.emailTb.Location = new System.Drawing.Point(72, 192);
             this.emailTb.Name = "emailTb";
             this.emailTb.Size = new System.Drawing.Size(219, 20);
-            this.emailTb.TabIndex = 30;
-            this.emailTb.TabStop = false;
+            this.emailTb.TabIndex = 2;
             this.emailTb.Text = "Email";
-            this.emailTb.Click += new System.EventHandler(this.emailTb_Click);
+            this.toolTip1.SetToolTip(this.emailTb, "Please enter your email address.");
+            this.emailTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             // 
             // headerPanel
             // 
@@ -312,9 +317,9 @@
             this.formTitle.ForeColor = System.Drawing.Color.White;
             this.formTitle.Location = new System.Drawing.Point(10, 10);
             this.formTitle.Name = "formTitle";
-            this.formTitle.Size = new System.Drawing.Size(82, 21);
+            this.formTitle.Size = new System.Drawing.Size(72, 21);
             this.formTitle.TabIndex = 7;
-            this.formTitle.Text = "Welcome";
+            this.formTitle.Text = "Register";
             // 
             // exitPb
             // 
@@ -341,7 +346,7 @@
             this.Controls.Add(this.profileBtn);
             this.Controls.Add(this.profilePb);
             this.Controls.Add(this.backBtn);
-            this.Controls.Add(this.resgisterBtn);
+            this.Controls.Add(this.registerBtn);
             this.Controls.Add(this.degreePb);
             this.Controls.Add(this.degreePl);
             this.Controls.Add(this.degreeTb);
@@ -391,7 +396,7 @@
         private System.Windows.Forms.Panel degreePl;
         private System.Windows.Forms.TextBox degreeTb;
         private System.Windows.Forms.Button backBtn;
-        private System.Windows.Forms.Button resgisterBtn;
+        private System.Windows.Forms.Button registerBtn;
         private System.Windows.Forms.PictureBox profilePb;
         private System.Windows.Forms.Button profileBtn;
         private System.Windows.Forms.PictureBox emailPb;
@@ -400,5 +405,16 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.PictureBox exitPb;
+        private System.Windows.Forms.ToolTip toolTip1;
+
+        // Method to move to the next input field when Enter is pressed
+        private void MoveNextOnEnter(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                this.SelectNextControl((Control)sender, true, true, true, true);
+                e.Handled = e.SuppressKeyPress = true;
+            }
+        }
     }
 }

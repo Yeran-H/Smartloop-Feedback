@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loginForm));
             this.usernameTb = new System.Windows.Forms.TextBox();
             this.usernamePl = new System.Windows.Forms.Panel();
@@ -43,6 +44,7 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.showPasswordCb = new System.Windows.Forms.CheckBox();
             this.rememberMeCb = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -61,6 +63,7 @@
             this.usernameTb.Name = "usernameTb";
             this.usernameTb.Size = new System.Drawing.Size(218, 20);
             this.usernameTb.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.usernameTb, "Please Enter Student ID");
             this.usernameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.usernameTb_KeyPress);
             // 
             // usernamePl
@@ -90,6 +93,7 @@
             this.passwordTb.Name = "passwordTb";
             this.passwordTb.Size = new System.Drawing.Size(219, 20);
             this.passwordTb.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.passwordTb, "Please Enter Password");
             // 
             // signBtn
             // 
@@ -172,9 +176,9 @@
             this.formTitle.ForeColor = System.Drawing.Color.White;
             this.formTitle.Location = new System.Drawing.Point(10, 10);
             this.formTitle.Name = "formTitle";
-            this.formTitle.Size = new System.Drawing.Size(82, 21);
+            this.formTitle.Size = new System.Drawing.Size(53, 21);
             this.formTitle.TabIndex = 7;
-            this.formTitle.Text = "Welcome";
+            this.formTitle.Text = "Login";
             // 
             // headerPanel
             // 
@@ -197,6 +201,7 @@
             this.showPasswordCb.Size = new System.Drawing.Size(137, 23);
             this.showPasswordCb.TabIndex = 13;
             this.showPasswordCb.Text = "Show Password";
+            this.toolTip1.SetToolTip(this.showPasswordCb, "Click to View Password");
             this.showPasswordCb.UseVisualStyleBackColor = true;
             this.showPasswordCb.CheckedChanged += new System.EventHandler(this.showPasswordCb_CheckedChanged);
             // 
@@ -210,6 +215,7 @@
             this.rememberMeCb.Size = new System.Drawing.Size(126, 23);
             this.rememberMeCb.TabIndex = 14;
             this.rememberMeCb.Text = "Remember Me";
+            this.toolTip1.SetToolTip(this.rememberMeCb, "Click to remeber ID and Password");
             this.rememberMeCb.UseVisualStyleBackColor = true;
             // 
             // loginForm
@@ -265,5 +271,6 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.CheckBox showPasswordCb;
         private System.Windows.Forms.CheckBox rememberMeCb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
