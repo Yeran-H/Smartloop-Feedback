@@ -13,7 +13,8 @@ namespace Smartloop_Feedback
         private Semester semester; // Reference to the current semester
 
         private int buttonCount = 0; // Counter for the number of buttons
-        Button[] buttons = new Button[5]; // Array to hold the course buttons
+        private Button[] buttons = new Button[5]; // Array to hold the course buttons
+        private Button[] allButtons;
 
         // Constructor for academicCourseBar
         public academicCourseBar(mainForm form, Semester semester)
@@ -33,7 +34,7 @@ namespace Smartloop_Feedback
         {
             buttonCount = semester.numCourse(); // Get the number of courses in the semester
 
-            Button[] allButtons = { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
+            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
             for (int i = 0; i < buttonCount; i++)
             {
@@ -88,7 +89,7 @@ namespace Smartloop_Feedback
                             return;
                         }
 
-                        Button btn = buttons[buttonCount];
+                        Button btn = allButtons[buttonCount];
                         btn.Visible = true;
                         btn.Text = course.code.ToString();
                         buttonCount++;

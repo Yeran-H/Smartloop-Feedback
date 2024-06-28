@@ -13,6 +13,7 @@ namespace Smartloop_Feedback
 
         private int buttonCount = 0; // Counter for the number of buttons
         private Button[] buttons = new Button[5]; // Array to hold the year buttons
+        private Button[] allButtons;
 
         // Constructor for the academicYearBar form
         public academicYearBar(mainForm form, Student student)
@@ -27,7 +28,7 @@ namespace Smartloop_Feedback
         private void InitializeBar()
         {
             buttonCount = student.numYears(); // Get the number of years for the student
-            Button[] allButtons = { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
+            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
 
             // Loop through the number of years and make corresponding buttons visible
             for (int i = 0; i < buttonCount; i++)
@@ -36,6 +37,7 @@ namespace Smartloop_Feedback
                 btn.Visible = true; // Make the button visible
                 btn.Text = student.yearList[i].name; // Set the button text to the year's name
                 buttons[i] = btn; // Store the button in the array
+                buttons[i].Click += YearButton_Click; // Attach the event handler to the button
             }
 
             // Hide the add button if the maximum number of buttons (5) is reached
@@ -65,8 +67,11 @@ namespace Smartloop_Feedback
                     if (buttonCount < 5) // Ensure the button count is less than 5
                     {
                         student.yearList.Add(new Year(yearName, student.studentId, addYearForm.semesterNames)); // Add the new year to the student's year list
-                        buttons[buttonCount].Visible = true; // Make the new button visible
-                        buttons[buttonCount].Text = yearName; // Set the new button's text
+                        Button btn = allButtons[buttonCount];
+                        btn.Visible = true; // Make the new button visible
+                        btn.Text = yearName; // Set the new button's text
+                        btn.Click += YearButton_Click; // Attach the event handler to the button
+                        buttons[buttonCount] = btn;
                         buttonCount++; // Increment the button count
 
                         if (buttonCount == 5) // Hide the add button if the maximum number of buttons is reached

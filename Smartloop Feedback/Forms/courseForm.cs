@@ -65,6 +65,7 @@ namespace Smartloop_Feedback.Forms
                 item.SubItems.Add(assessment.date.ToString());
                 item.SubItems.Add(assessment.status);
                 item.SubItems.Add(assessment.mark.ToString());
+                item.SubItems.Add(assessment.weight.ToString());
                 item.Tag = assessment;
 
                 assessmentLv.Items.Add(item);

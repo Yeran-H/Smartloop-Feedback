@@ -54,6 +54,7 @@
             this.addBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.handbookBtn = new System.Windows.Forms.Button();
+            this.weightCh = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // assessmentLv
@@ -65,7 +66,8 @@
             this.typeCh,
             this.dateCh,
             this.statusCh,
-            this.markCh});
+            this.markCh,
+            this.weightCh});
             this.assessmentLv.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.assessmentLv.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.assessmentLv.FullRowSelect = true;
@@ -73,11 +75,11 @@
             this.assessmentLv.HideSelection = false;
             this.assessmentLv.HotTracking = true;
             this.assessmentLv.HoverSelection = true;
-            this.assessmentLv.Location = new System.Drawing.Point(12, 109);
+            this.assessmentLv.Location = new System.Drawing.Point(1, 109);
             this.assessmentLv.MultiSelect = false;
             this.assessmentLv.Name = "assessmentLv";
             this.assessmentLv.OwnerDraw = true;
-            this.assessmentLv.Size = new System.Drawing.Size(352, 264);
+            this.assessmentLv.Size = new System.Drawing.Size(409, 264);
             this.assessmentLv.TabIndex = 1;
             this.assessmentLv.UseCompatibleStateImageBehavior = false;
             this.assessmentLv.View = System.Windows.Forms.View.Details;
@@ -99,6 +101,7 @@
             // 
             this.dateCh.Text = "Date";
             this.dateCh.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.dateCh.Width = 74;
             // 
             // statusCh
             // 
@@ -106,7 +109,8 @@
             // 
             // markCh
             // 
-            this.markCh.Text = "Mark";
+            this.markCh.Text = "Final Marks";
+            this.markCh.Width = 78;
             // 
             // titleLb
             // 
@@ -124,7 +128,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(477, 94);
+            this.label1.Location = new System.Drawing.Point(494, 94);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(196, 36);
             this.label1.TabIndex = 8;
@@ -135,7 +139,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label2.Location = new System.Drawing.Point(399, 187);
+            this.label2.Location = new System.Drawing.Point(416, 187);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 38);
             this.label2.TabIndex = 12;
@@ -147,7 +151,7 @@
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
             this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label3.Location = new System.Drawing.Point(506, 187);
+            this.label3.Location = new System.Drawing.Point(523, 187);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(97, 38);
             this.label3.TabIndex = 13;
@@ -159,7 +163,7 @@
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
             this.label4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label4.Location = new System.Drawing.Point(623, 187);
+            this.label4.Location = new System.Drawing.Point(640, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(97, 38);
             this.label4.TabIndex = 14;
@@ -169,7 +173,7 @@
             // currentPl
             // 
             this.currentPl.BackColor = System.Drawing.Color.White;
-            this.currentPl.Location = new System.Drawing.Point(473, 155);
+            this.currentPl.Location = new System.Drawing.Point(490, 155);
             this.currentPl.Name = "currentPl";
             this.currentPl.Size = new System.Drawing.Size(200, 1);
             this.currentPl.TabIndex = 16;
@@ -181,7 +185,7 @@
             this.currentTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.currentTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.currentTb.HideSelection = false;
-            this.currentTb.Location = new System.Drawing.Point(473, 133);
+            this.currentTb.Location = new System.Drawing.Point(490, 133);
             this.currentTb.Name = "currentTb";
             this.currentTb.ReadOnly = true;
             this.currentTb.Size = new System.Drawing.Size(200, 20);
@@ -191,7 +195,7 @@
             // cPl
             // 
             this.cPl.BackColor = System.Drawing.Color.White;
-            this.cPl.Location = new System.Drawing.Point(398, 250);
+            this.cPl.Location = new System.Drawing.Point(415, 250);
             this.cPl.Name = "cPl";
             this.cPl.Size = new System.Drawing.Size(100, 1);
             this.cPl.TabIndex = 18;
@@ -203,7 +207,7 @@
             this.cTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.cTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.cTb.HideSelection = false;
-            this.cTb.Location = new System.Drawing.Point(398, 228);
+            this.cTb.Location = new System.Drawing.Point(415, 228);
             this.cTb.Name = "cTb";
             this.cTb.ReadOnly = true;
             this.cTb.Size = new System.Drawing.Size(100, 20);
@@ -213,7 +217,7 @@
             // dPl
             // 
             this.dPl.BackColor = System.Drawing.Color.White;
-            this.dPl.Location = new System.Drawing.Point(510, 250);
+            this.dPl.Location = new System.Drawing.Point(527, 250);
             this.dPl.Name = "dPl";
             this.dPl.Size = new System.Drawing.Size(100, 1);
             this.dPl.TabIndex = 20;
@@ -225,7 +229,7 @@
             this.dTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.dTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.dTb.HideSelection = false;
-            this.dTb.Location = new System.Drawing.Point(510, 228);
+            this.dTb.Location = new System.Drawing.Point(527, 228);
             this.dTb.Name = "dTb";
             this.dTb.ReadOnly = true;
             this.dTb.Size = new System.Drawing.Size(100, 20);
@@ -235,7 +239,7 @@
             // hdPl
             // 
             this.hdPl.BackColor = System.Drawing.Color.White;
-            this.hdPl.Location = new System.Drawing.Point(627, 250);
+            this.hdPl.Location = new System.Drawing.Point(644, 250);
             this.hdPl.Name = "hdPl";
             this.hdPl.Size = new System.Drawing.Size(100, 1);
             this.hdPl.TabIndex = 20;
@@ -247,7 +251,7 @@
             this.hdTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.hdTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.hdTb.HideSelection = false;
-            this.hdTb.Location = new System.Drawing.Point(627, 228);
+            this.hdTb.Location = new System.Drawing.Point(644, 228);
             this.hdTb.Name = "hdTb";
             this.hdTb.ReadOnly = true;
             this.hdTb.Size = new System.Drawing.Size(100, 20);
@@ -275,7 +279,7 @@
             this.canvasBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canvasBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.canvasBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.canvasBtn.Location = new System.Drawing.Point(431, 301);
+            this.canvasBtn.Location = new System.Drawing.Point(448, 301);
             this.canvasBtn.Name = "canvasBtn";
             this.canvasBtn.Size = new System.Drawing.Size(135, 52);
             this.canvasBtn.TabIndex = 22;
@@ -289,13 +293,17 @@
             this.handbookBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.handbookBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.handbookBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.handbookBtn.Location = new System.Drawing.Point(572, 301);
+            this.handbookBtn.Location = new System.Drawing.Point(589, 301);
             this.handbookBtn.Name = "handbookBtn";
             this.handbookBtn.Size = new System.Drawing.Size(135, 52);
             this.handbookBtn.TabIndex = 24;
             this.handbookBtn.Text = "UTS Handbook";
             this.handbookBtn.UseVisualStyleBackColor = false;
             this.handbookBtn.Click += new System.EventHandler(this.handbookBtn_Click);
+            // 
+            // weightCh
+            // 
+            this.weightCh.Text = "Weight";
             // 
             // courseForm
             // 
@@ -356,5 +364,6 @@
         private System.Windows.Forms.ColumnHeader dateCh;
         private System.Windows.Forms.ColumnHeader statusCh;
         private System.Windows.Forms.ColumnHeader markCh;
+        private System.Windows.Forms.ColumnHeader weightCh;
     }
 }
