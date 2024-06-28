@@ -1,86 +1,91 @@
-﻿using System.Data.SqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback
 {
     public class Semester
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
-        public string name {  get; set; }
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
+
+        // Public properties for semester details
+        public string name { get; set; }
         public int id { get; set; }
         public int yearId { get; set; }
         public int studentId { get; set; }
         public List<Course> courseList { get; set; }
 
-        public Semester(string name, int id, int yearId, int studentId) 
+        // Constructor to initialize a Semester object and fetch courses from the database
+        public Semester(string name, int id, int yearId, int studentId)
         {
             this.name = name;
             this.id = id;
             this.yearId = yearId;
             this.studentId = studentId;
-            courseList = new List<Course>();
-            getCourseFromDatabase();
+            courseList = new List<Course>(); // Initialize the course list
+            getCourseFromDatabase(); // Fetch courses from the database
         }
 
+        // Constructor to initialize a Semester object and add it to the database
         public Semester(string name, int yearId, int studentId)
         {
             this.name = name;
             this.yearId = yearId;
             this.studentId = studentId;
-            addSemesterToDatabase();
+            courseList = new List<Course>(); // Initialize the course list
+            addSemesterToDatabase(); // Add the semester to the database
         }
 
+        // Add the semester to the database and get the generated ID
         public void addSemesterToDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                string sql = "INSERT INTO semester (name, yearId, studentId) VALUES (@name, @yearId, @studentId); SELECT SCOPE_IDENTITY();";
+                conn.Open(); // Open the connection
+                string sql = "INSERT INTO semester (name, yearId, studentId) VALUES (@name, @yearId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@yearId", yearId);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@yearId", yearId); // Set the yearId parameter
+                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
+        // Fetch courses from the database and initialize the course list
         private void getCourseFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn);
-                cmd.Parameters.AddWithValue("@semesterId", id);
-                cmd.Parameters.AddWithValue("@studentId", studentId);
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn); // SQL query to fetch courses
+                cmd.Parameters.AddWithValue("@semesterId", id); // Set the semesterId parameter
+                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
-                    while (reader.Read())
+                    while (reader.Read()) // Read each row
                     {
-                        int id = reader.GetInt32(0);
-                        int code = reader.GetInt32(1);
-                        string title = reader.GetString(2);
-                        int creditPoint = reader.GetInt32(3);
-                        string description = reader.GetString(4);
-                        string canvasLink = reader.GetString(5);
-                        courseList.Add(new Course(id, code, title, creditPoint, description, canvasLink, this.id, studentId));
+                        int courseId = reader.GetInt32(0); // Get the course ID
+                        int code = reader.GetInt32(1); // Get the course code
+                        string title = reader.GetString(2); // Get the course title
+                        int creditPoint = reader.GetInt32(3); // Get the course credit points
+                        string description = reader.GetString(4); // Get the course description
+                        string canvasLink = reader.GetString(5); // Get the course canvas link
+                        courseList.Add(new Course(courseId, code, title, creditPoint, description, canvasLink, this.id, studentId)); // Add the course to the course list
                     }
                 }
             }
         }
 
+        // Get the number of courses in the semester
         public int numCourse()
         {
-            return courseList == null ? 0 : courseList.Count;
+            return courseList?.Count ?? 0; // Return the count of the course list, or 0 if it is null
         }
     }
 }
