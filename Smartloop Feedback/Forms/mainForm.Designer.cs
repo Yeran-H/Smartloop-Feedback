@@ -243,7 +243,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.smartloop_feedback_high_resolution_logo;
+            this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.logo;
             this.pictureBox1.Location = new System.Drawing.Point(-23, -32);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(233, 165);
