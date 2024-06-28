@@ -99,7 +99,6 @@
             // 
             this.signBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.signBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.signBtn.Enabled = false;
             this.signBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
