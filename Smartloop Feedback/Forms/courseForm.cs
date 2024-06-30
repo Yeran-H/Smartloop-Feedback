@@ -58,16 +58,20 @@ namespace Smartloop_Feedback.Forms
 
         private void PopulateListView()
         {
-            foreach(Assessment assessment in course.assessmentList)
+            if(course.assessmentList != null)
             {
-                ListViewItem item = new ListViewItem(assessment.name);
-                item.SubItems.Add(assessment.type);
-                item.SubItems.Add(assessment.date.ToString());
-                item.SubItems.Add(assessment.status);
-                item.SubItems.Add(assessment.mark.ToString());
-                item.Tag = assessment;
+                foreach (Assessment assessment in course.assessmentList)
+                {
+                    ListViewItem item = new ListViewItem(assessment.name);
+                    item.SubItems.Add(assessment.type);
+                    item.SubItems.Add(assessment.date.ToString());
+                    item.SubItems.Add(assessment.status);
+                    item.SubItems.Add(assessment.mark.ToString());
+                    item.SubItems.Add(assessment.weight.ToString());
+                    item.Tag = assessment;
 
-                assessmentLv.Items.Add(item);
+                    assessmentLv.Items.Add(item);
+                }
             }
         }
 

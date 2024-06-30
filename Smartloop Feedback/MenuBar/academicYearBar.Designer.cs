@@ -85,7 +85,7 @@
             this.oneBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.oneBtn.UseVisualStyleBackColor = true;
             this.oneBtn.Visible = false;
-            this.oneBtn.Click += new System.EventHandler(this.oneBtn_Click);
+            this.oneBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
             // secondBtn
             // 
@@ -101,7 +101,7 @@
             this.secondBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.secondBtn.UseVisualStyleBackColor = true;
             this.secondBtn.Visible = false;
-            this.secondBtn.Click += new System.EventHandler(this.secondBtn_Click);
+            this.secondBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
             // thirdBtn
             // 
@@ -117,7 +117,7 @@
             this.thirdBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.thirdBtn.UseVisualStyleBackColor = true;
             this.thirdBtn.Visible = false;
-            this.thirdBtn.Click += new System.EventHandler(this.thirdBtn_Click);
+            this.thirdBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
             // fourthBtn
             // 
@@ -133,7 +133,7 @@
             this.fourthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fourthBtn.UseVisualStyleBackColor = true;
             this.fourthBtn.Visible = false;
-            this.fourthBtn.Click += new System.EventHandler(this.fourthBtn_Click);
+            this.fourthBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
             // fifthBtn
             // 
@@ -149,7 +149,7 @@
             this.fifthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.fifthBtn.UseVisualStyleBackColor = true;
             this.fifthBtn.Visible = false;
-            this.fifthBtn.Click += new System.EventHandler(this.fifthBtn_Click);
+            this.fifthBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
             // academicYearBar
             // 

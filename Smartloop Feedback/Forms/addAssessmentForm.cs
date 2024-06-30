@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,7 @@ namespace Smartloop_Feedback.Forms
             this.course = course;
             this.mainForm = mainForm;
 
+            // Initialize the dictionary to track if TextBox has been clicked
             textBoxClicked[titleTb] = false;
             textBoxClicked[descriptionTb] = false;
             textBoxClicked[markTb] = false;
@@ -32,14 +34,17 @@ namespace Smartloop_Feedback.Forms
 
         private void addAssessmentForm_Load(object sender, EventArgs e)
         {
+            // Set initial visibility of panels
             panelDetails.Visible = true;
             panelCriteria.Visible = false;
 
+            // Configure the DataGridView for criteria
             ConfigureDataGridView();
         }
 
         private void ConfigureDataGridView()
         {
+            // Set up the initial DataGridView column
             criteriaDgv.ColumnCount = 1;
             criteriaDgv.Columns[0].Name = "Criteria";
             criteriaDgv.Columns[0].Width = 300;
@@ -50,17 +55,20 @@ namespace Smartloop_Feedback.Forms
 
         private void cancelBtn_Click(object sender, EventArgs e)
         {
+            // Go back to the main panel
             mainForm.mainPannel(0);
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
         {
+            // Switch to the criteria panel
             panelDetails.Visible = false;
             panelCriteria.Visible = true;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
+            // Switch back to the details panel
             panelDetails.Visible = true;
             panelCriteria.Visible = false;
         }
@@ -68,7 +76,7 @@ namespace Smartloop_Feedback.Forms
         private void columnBtn_Click(object sender, EventArgs e)
         {
             int columnIndex = criteriaDgv.ColumnCount;
-            if(columnIndex < 10)
+            if (columnIndex < 10) // Limit the number of columns to 10
             {
                 string columnName = "Rating " + columnIndex;
                 criteriaDgv.Columns.Add(columnName, columnName);
@@ -80,10 +88,10 @@ namespace Smartloop_Feedback.Forms
 
         private void AddColumnInputControls(int columnIndex)
         {
+            // Define the size and position of the TextBox
             int textBoxWidth = 100;
             int controlHeight = 30;
             int gapBetweenControls = 5;
-
             int startY = (controlHeight + gapBetweenControls) * columnIndex;
 
             TextBox txt = new TextBox();
@@ -93,12 +101,14 @@ namespace Smartloop_Feedback.Forms
             txt.Location = new System.Drawing.Point(10, startY);
             txt.BackColor = Color.FromArgb(16, 34, 61);
             txt.ForeColor = Color.FromArgb(193, 193, 193);
+            toolTip1.SetToolTip(txt, "Please enter Rating for the column e.g HD, D, C, P");
             txt.Tag = columnIndex;
             txt.TextChanged += new EventHandler(ColumnTextBox_TextChanged);
             txt.Click += new EventHandler(ColumnTextBox_Click);
 
             panelColumnInputs.Controls.Add(txt);
 
+            // Adjust the panel's scroll size
             int totalControlHeight = controlHeight + gapBetweenControls;
             int panelHeightTotal = (columnIndex + 1) * totalControlHeight;
             panelColumnInputs.AutoScrollMinSize = new System.Drawing.Size(panelColumnInputs.Width - 50, panelHeightTotal);
@@ -109,6 +119,7 @@ namespace Smartloop_Feedback.Forms
 
         private void ColumnTextBox_TextChanged(object sender, EventArgs e)
         {
+            // Update the DataGridView column header text
             TextBox txt = sender as TextBox;
             if (txt != null)
             {
@@ -119,6 +130,7 @@ namespace Smartloop_Feedback.Forms
 
         private void ColumnTextBox_Click(object sender, EventArgs e)
         {
+            // Clear the TextBox text on click
             TextBox txt = sender as TextBox;
             if (txt != null)
             {
@@ -128,128 +140,101 @@ namespace Smartloop_Feedback.Forms
 
         private void submitBtn_Click(object sender, EventArgs e)
         {
-            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), indvidualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
+            // Add a new assessment to the course
+            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
 
+            // Prepare column names for ratings
             List<string> columnNameList = new List<string>();
-
-            foreach(DataGridViewColumn column in criteriaDgv.Columns)
+            foreach (DataGridViewColumn column in criteriaDgv.Columns)
             {
                 columnNameList.Add(column.HeaderText);
             }
+            columnNameList.RemoveAt(0); // Remove the criteria column
 
-            columnNameList.RemoveAt(0);
-
-            foreach(DataGridViewRow row in criteriaDgv.Rows)
+            // Add criteria and ratings to the assessment
+            foreach (DataGridViewRow row in criteriaDgv.Rows)
             {
                 if (row.IsNewRow) continue;
 
-                course.assessmentList.Last().criteriaList.Add(new Criteria(row.Cells[0].Value.ToString(), course.assessmentList.Last().id, course.assessmentList.Last().studentId));
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), course.assessmentList.Last().id, course.assessmentList.Last().studentId);
+                course.assessmentList.Last().criteriaList.Add(criteria);
 
-                for(int i = 0; i < columnNameList.Count(); i++)
+                for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.assessmentList.Last().criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], course.assessmentList.Last().criteriaList.Last().id, course.assessmentList.Last().studentId));
+                    var rating = new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, course.assessmentList.Last().studentId);
+                    course.assessmentList.Last().criteriaList.Last().ratingList.Add(rating);
                 }
             }
 
+            // Go back to the main panel
             mainForm.mainPannel(0);
         }
 
-        private void titleTb_Click(object sender, EventArgs e)
+        private void textBox_Enter(object sender, EventArgs e)
         {
-            defaultUI();
-            if (!textBoxClicked[titleTb])
+            // Handle the first click on TextBox to clear the text and change color
+            TextBox textBox = sender as TextBox;
+            if (!textBoxClicked[textBox])
             {
-                titleTb.Clear();
-                textBoxClicked[titleTb] = true;
+                textBox.Clear();
+                textBoxClicked[textBox] = true;
             }
-            titlePl.BackColor = Color.FromArgb(254, 0, 57);
-            titleTb.ForeColor = Color.FromArgb(254, 0, 57);
+            textBox.ForeColor = Color.FromArgb(254, 0, 57);
         }
 
-        private void markTb_Click(object sender, EventArgs e)
+        private void numberOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
-            defaultUI();
-            if (!textBoxClicked[markTb])
+            // Allow only numbers to be entered in the TextBox
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
-                markTb.Clear();
-                textBoxClicked[markTb] = true;
+                e.Handled = true;
             }
-            markPl.BackColor = Color.FromArgb(254, 0, 57);
-            markTb.ForeColor = Color.FromArgb(254, 0, 57);
         }
 
-        private void weightTb_Click(object sender, EventArgs e)
+        private void loadBtn_Click(object sender, EventArgs e)
         {
-            defaultUI();
-            if (!textBoxClicked[weightTb])
+            // Open file dialog to select CSV file
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
-                weightTb.Clear();
-                textBoxClicked[weightTb] = true;
+                LoadData(openFileDialog.FileName);
             }
-            weightPl.BackColor = Color.FromArgb(254, 0, 57);
-            weightTb.ForeColor = Color.FromArgb(254, 0, 57);
         }
 
-        private void canvasTb_Click(object sender, EventArgs e)
+        private void LoadData(string filePath)
         {
-            defaultUI();
-            if (!textBoxClicked[canvasTb])
+            // Clear existing data and controls
+            criteriaDgv.Rows.Clear();
+            criteriaDgv.Columns.Clear();
+            panelColumnInputs.Controls.Clear();
+
+            // Read data from CSV file
+            var lines = File.ReadAllLines(filePath);
+            if (lines.Length > 0)
             {
-                canvasTb.Clear();
-                textBoxClicked[canvasTb] = true;
-            }
-            canvasPl.BackColor = Color.FromArgb(254, 0, 57);
-            canvasTb.ForeColor = Color.FromArgb(254, 0, 57);
-        }
-
-        private void descriptionTb_Click(object sender, EventArgs e)
-        {
-            defaultUI();
-            if (!textBoxClicked[descriptionTb])
-            {
-                descriptionTb.Clear();
-                textBoxClicked[descriptionTb] = true;
-            }
-            descriptionPl.BackColor = Color.FromArgb(254, 0, 57);
-            descriptionTb.ForeColor = Color.FromArgb(254, 0, 57);
-        }
-
-        private void defaultUI()
-        {
-            titlePl.BackColor = Color.FromArgb(193, 193, 193);
-            titleTb.ForeColor = Color.FromArgb(193, 193, 193);
-
-            weightPl.BackColor = Color.FromArgb(193, 193, 193);
-            weightTb.ForeColor = Color.FromArgb(193, 193, 193);
-
-            markPl.BackColor = Color.FromArgb(193, 193, 193);
-            markTb.ForeColor = Color.FromArgb(193, 193, 193);
-
-            canvasPl.BackColor = Color.FromArgb(193, 193, 193);
-            canvasTb.ForeColor = Color.FromArgb(193, 193, 193);
-
-            descriptionPl.BackColor = Color.FromArgb(193, 193, 193);
-            descriptionTb.ForeColor = Color.FromArgb(193, 193, 193);
-        }
-
-        private void markTb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar))
-            {
-                if (!char.IsDigit(e.KeyChar))
+                // Add columns from CSV headers
+                var headers = lines[0].Split(',');
+                for (int i = 0; i < headers.Length; i++)
                 {
-                    e.Handled = true;
+                    criteriaDgv.Columns.Add(headers[i], headers[i]);
+                    if (i > 0) // Skip the first column as it's the criteria column
+                    {
+                        AddColumnInputControls(i);
+                        // Set the header text in the TextBox
+                        TextBox textBox = panelColumnInputs.Controls.Find("txtColumn" + i, true).FirstOrDefault() as TextBox;
+                        if (textBox != null)
+                        {
+                            textBox.Text = headers[i];
+                        }
+                    }
                 }
-            }
-        }
 
-        private void weightTb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar))
-            {
-                if (!char.IsDigit(e.KeyChar))
+                // Add rows from CSV data
+                for (int i = 1; i < lines.Length; i++)
                 {
-                    e.Handled = true;
+                    var cells = lines[i].Split(',');
+                    criteriaDgv.Rows.Add(cells);
                 }
             }
         }

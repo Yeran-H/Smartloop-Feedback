@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loginForm));
             this.usernameTb = new System.Windows.Forms.TextBox();
             this.usernamePl = new System.Windows.Forms.Panel();
@@ -41,6 +42,9 @@
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.formTitle = new System.Windows.Forms.Label();
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.showPasswordCb = new System.Windows.Forms.CheckBox();
+            this.rememberMeCb = new System.Windows.Forms.CheckBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -58,10 +62,8 @@
             this.usernameTb.Location = new System.Drawing.Point(71, 184);
             this.usernameTb.Name = "usernameTb";
             this.usernameTb.Size = new System.Drawing.Size(218, 20);
-            this.usernameTb.TabIndex = 2;
-            this.usernameTb.TabStop = false;
-            this.usernameTb.Text = "Student ID";
-            this.usernameTb.Click += new System.EventHandler(this.usernameTb_Click);
+            this.usernameTb.TabIndex = 1;
+            this.toolTip1.SetToolTip(this.usernameTb, "Please Enter Student ID");
             this.usernameTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.usernameTb_KeyPress);
             // 
             // usernamePl
@@ -90,23 +92,22 @@
             this.passwordTb.Location = new System.Drawing.Point(70, 239);
             this.passwordTb.Name = "passwordTb";
             this.passwordTb.Size = new System.Drawing.Size(219, 20);
-            this.passwordTb.TabIndex = 5;
-            this.passwordTb.TabStop = false;
-            this.passwordTb.Text = "Password";
-            this.passwordTb.Click += new System.EventHandler(this.passwordTb_Click);
+            this.passwordTb.TabIndex = 2;
+            this.toolTip1.SetToolTip(this.passwordTb, "Please Enter Password");
             // 
             // signBtn
             // 
             this.signBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.signBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.signBtn.Enabled = false;
             this.signBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.signBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.signBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.signBtn.Location = new System.Drawing.Point(37, 328);
+            this.signBtn.Location = new System.Drawing.Point(37, 340);
             this.signBtn.Name = "signBtn";
             this.signBtn.Size = new System.Drawing.Size(252, 52);
-            this.signBtn.TabIndex = 7;
-            this.signBtn.Text = "Sigin In";
+            this.signBtn.TabIndex = 3;
+            this.signBtn.Text = "Sign In";
             this.signBtn.UseVisualStyleBackColor = false;
             this.signBtn.Click += new System.EventHandler(this.signBtn_Click);
             // 
@@ -117,10 +118,11 @@
             this.registerBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.registerBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.registerBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.registerBtn.Location = new System.Drawing.Point(37, 386);
+            this.registerBtn.Location = new System.Drawing.Point(37, 398);
             this.registerBtn.Name = "registerBtn";
             this.registerBtn.Size = new System.Drawing.Size(252, 52);
-            this.registerBtn.TabIndex = 8;
+            this.registerBtn.TabIndex = 4;
+            this.registerBtn.TabStop = false;
             this.registerBtn.Text = "Register";
             this.registerBtn.UseVisualStyleBackColor = false;
             this.registerBtn.Click += new System.EventHandler(this.registerBtn_Click);
@@ -174,9 +176,9 @@
             this.formTitle.ForeColor = System.Drawing.Color.White;
             this.formTitle.Location = new System.Drawing.Point(10, 10);
             this.formTitle.Name = "formTitle";
-            this.formTitle.Size = new System.Drawing.Size(82, 21);
+            this.formTitle.Size = new System.Drawing.Size(53, 21);
             this.formTitle.TabIndex = 7;
-            this.formTitle.Text = "Welcome";
+            this.formTitle.Text = "Login";
             // 
             // headerPanel
             // 
@@ -189,12 +191,41 @@
             this.headerPanel.Size = new System.Drawing.Size(314, 40);
             this.headerPanel.TabIndex = 12;
             // 
+            // showPasswordCb
+            // 
+            this.showPasswordCb.AutoSize = true;
+            this.showPasswordCb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.showPasswordCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.showPasswordCb.Location = new System.Drawing.Point(99, 275);
+            this.showPasswordCb.Name = "showPasswordCb";
+            this.showPasswordCb.Size = new System.Drawing.Size(137, 23);
+            this.showPasswordCb.TabIndex = 13;
+            this.showPasswordCb.Text = "Show Password";
+            this.toolTip1.SetToolTip(this.showPasswordCb, "Click to View Password");
+            this.showPasswordCb.UseVisualStyleBackColor = true;
+            this.showPasswordCb.CheckedChanged += new System.EventHandler(this.showPasswordCb_CheckedChanged);
+            // 
+            // rememberMeCb
+            // 
+            this.rememberMeCb.AutoSize = true;
+            this.rememberMeCb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.rememberMeCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.rememberMeCb.Location = new System.Drawing.Point(99, 300);
+            this.rememberMeCb.Name = "rememberMeCb";
+            this.rememberMeCb.Size = new System.Drawing.Size(126, 23);
+            this.rememberMeCb.TabIndex = 14;
+            this.rememberMeCb.Text = "Remember Me";
+            this.toolTip1.SetToolTip(this.rememberMeCb, "Click to remeber ID and Password");
+            this.rememberMeCb.UseVisualStyleBackColor = true;
+            // 
             // loginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(314, 495);
+            this.Controls.Add(this.rememberMeCb);
+            this.Controls.Add(this.showPasswordCb);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.passwordPb);
             this.Controls.Add(this.usernamePb);
@@ -238,6 +269,8 @@
         private System.Windows.Forms.PictureBox passwordPb;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.CheckBox showPasswordCb;
+        private System.Windows.Forms.CheckBox rememberMeCb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
-

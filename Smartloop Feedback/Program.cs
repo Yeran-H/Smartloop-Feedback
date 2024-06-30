@@ -1,13 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
+using System.IO;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
     internal static class Program
     {
+        private static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;";
+        private static string databaseName = "smartloop_feedbackdb";
+        private static string sqlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\smartloop FeedbackDB.sql");
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -16,7 +19,43 @@ namespace Smartloop_Feedback
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+
+            if (!DatabaseExists())
+            {
+                ExecuteSqlFile();
+            }
+
             Application.Run(new loginForm());
+        }
+
+        private static bool DatabaseExists()
+        {
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                connection.Open();
+                SqlCommand command = new SqlCommand($"SELECT database_id FROM sys.databases WHERE Name = '{databaseName}'", connection);
+                var result = command.ExecuteScalar();
+                return result != null;
+            }
+        }
+
+        private static void ExecuteSqlFile()
+        {
+            try
+            {
+                string script = File.ReadAllText(sqlFilePath);
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    connection.Open();
+                    SqlCommand command = new SqlCommand(script, connection);
+                    command.ExecuteNonQuery();
+                }
+                MessageBox.Show("Database created successfully.");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}");
+            }
         }
     }
 }

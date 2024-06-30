@@ -1,79 +1,64 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
     public partial class academicCourseBar : Form
     {
-        private mainForm mainForm;
-        private Semester semester;
+        private mainForm mainForm; // Reference to the main form
+        private Semester semester; // Reference to the current semester
 
-        private int buttonCount = 0;
-        Button[] buttons = new Button[5];
+        private int buttonCount = 0; // Counter for the number of buttons
+        private Button[] buttons = new Button[5]; // Array to hold the course buttons
+        private Button[] allButtons;
 
+        // Constructor for academicCourseBar
         public academicCourseBar(mainForm form, Semester semester)
         {
-            InitializeComponent();
+            InitializeComponent(); // Initialize form components
             navPl.Height = backBtn.Height;
             navPl.Top = backBtn.Top;
             navPl.Left = backBtn.Left;
 
-            mainForm = form;
-            this.semester = semester;
-            initaliseBar();
+            mainForm = form; // Set the main form reference
+            this.semester = semester; // Set the semester reference
+            InitializeBar(); // Initialize the course bar
         }
 
-        private void initaliseBar()
+        // Initialize the course bar with course buttons based on the number of courses
+        private void InitializeBar()
         {
-            buttonCount = semester.numCourse();
+            buttonCount = semester.numCourse(); // Get the number of courses in the semester
 
-            for (int i = 1; i <= buttonCount; i++)
+            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
+
+            for (int i = 0; i < buttonCount; i++)
             {
-                Button btn = null;
-                switch (i)
-                {
-                    case 1:
-                        btn = oneBtn;
-                        break;
-                    case 2:
-                        btn = secondBtn;
-                        break;
-                    case 3:
-                        btn = thirdBtn;
-                        break;
-                    case 4:
-                        btn = fourthBtn;
-                        break;
-                    case 5:
-                        btn = fifthBtn;
-                        addBtn.Visible = false;
-                        break;
-                }
-
-                if (btn != null)
-                {
-                    btn.Visible = true;
-                    btn.Text = semester.courseList[i - 1].code.ToString();
-                    buttons[i - 1] = btn;
-                }
+                Button btn = allButtons[i]; // Get the button for the current course
+                btn.Visible = true; // Make the button visible
+                btn.Text = semester.courseList[i].code.ToString(); // Set the button text to the course code
+                buttons[i] = btn; // Store the button in the array
             }
 
-            UpdatePanel();
+            if (buttonCount == 5)
+            {
+                addBtn.Visible = false; // Hide the add button if the maximum number of buttons is reached
+            }
+
+            UpdatePanel(); // Update the panel to reflect changes
         }
 
+        // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2);
+            mainForm.menuPannel(2); // Navigate to the previous menu panel
         }
 
+        // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
             if (semester == null)
@@ -104,146 +89,67 @@ namespace Smartloop_Feedback
                             return;
                         }
 
+                        Button btn = allButtons[buttonCount];
+                        btn.Visible = true;
+                        btn.Text = course.code.ToString();
+                        buttons[buttonCount] = btn;
                         buttonCount++;
-                        Button btn = null;
-                        switch (buttonCount)
+
+                        if (buttonCount == 5)
                         {
-                            case 1:
-                                btn = oneBtn;
-                                break;
-                            case 2:
-                                btn = secondBtn;
-                                break;
-                            case 3:
-                                btn = thirdBtn;
-                                break;
-                            case 4:
-                                btn = fourthBtn;
-                                break;
-                            case 5:
-                                btn = fifthBtn;
-                                addBtn.Visible = false;
-                                break;
+                            addBtn.Visible = false; // Hide the add button if the maximum number of buttons is reached
                         }
 
-                        if (btn != null)
-                        {
-                            btn.Visible = true;
-                            btn.Text = course.code.ToString();
-                            buttons[buttonCount - 1] = btn;
-                            UpdatePanel();
-                        }
+                        UpdatePanel(); // Update the panel to reflect changes
                     }
                 }
             }
         }
 
+        // Update the panel by re-adding controls in the correct order
         private void UpdatePanel()
         {
-            for (int i = 0; i < buttonCount; i++)
-            {
-                Controls.Remove(buttons[i]);
-            }
+            Controls.Clear(); // Clear all controls
 
-            if (buttonCount < 5)
-            {
-                Controls.Remove(addBtn);
-            }
-            Controls.Remove(backBtn);
-
+            // Add the year buttons in reverse order to dock them at the top
             for (int i = buttonCount - 1; i >= 0; i--)
             {
                 Controls.Add(buttons[i]);
                 buttons[i].Dock = DockStyle.Top;
             }
 
+            // Add the add button if there are less than 5 buttons
             if (buttonCount < 5)
             {
                 Controls.Add(addBtn);
                 addBtn.Dock = DockStyle.Top;
             }
-            Controls.Add(backBtn);
+            Controls.Add(backBtn); // Add the back button
             backBtn.Dock = DockStyle.Top;
         }
 
-        private void oneBtn_Click(object sender, EventArgs e)
+        // Common event handler for all course button clicks
+        private void CourseBtn_Click(object sender, EventArgs e)
         {
-            navPl.Height = oneBtn.Height;
-            navPl.Top = oneBtn.Top;
-            navPl.Left = oneBtn.Left;
-            oneBtn.BackColor = Color.FromArgb(16, 34, 61);
+            Button clickedButton = sender as Button; // Get the clicked button
+            int index = Array.IndexOf(buttons, clickedButton); // Get the index of the clicked button
+            if (index >= 0)
+            {
+                mainForm.position[2] = index; // Set the main form's position to the selected course
+                mainForm.mainPannel(0); // Navigate to the corresponding course panel
+            }
 
-            mainForm.position[2] = 0;
-            mainForm.mainPannel(0);
+            navPl.Height = clickedButton.Height; // Adjust the navigation panel to the clicked button
+            navPl.Top = clickedButton.Top;
+            navPl.Left = clickedButton.Left;
+            clickedButton.BackColor = Color.FromArgb(16, 34, 61); // Change the button color
         }
 
-        private void secondBtn_Click(object sender, EventArgs e)
+        // Reset button color when focus is lost
+        private void ResetButtonColor(object sender, EventArgs e)
         {
-            navPl.Height = secondBtn.Height;
-            navPl.Top = secondBtn.Top;
-            navPl.Left = secondBtn.Left;
-            oneBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            mainForm.position[2] = 1;
-            mainForm.mainPannel(0);
-        }
-
-        private void thirdBtn_Click(object sender, EventArgs e)
-        {
-            navPl.Height = thirdBtn.Height;
-            navPl.Top = thirdBtn.Top;
-            navPl.Left = thirdBtn.Left;
-            thirdBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            mainForm.position[2] = 2;
-            mainForm.mainPannel(0);
-        }
-
-        private void fourthBtn_Click(object sender, EventArgs e)
-        {
-            navPl.Height = fourthBtn.Height;
-            navPl.Top = fourthBtn.Top;
-            navPl.Left = fourthBtn.Left;
-            fourthBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            mainForm.position[2] = 3;
-            mainForm.mainPannel(0);
-        }
-
-        private void fifthBtn_Click(object sender, EventArgs e)
-        {
-            navPl.Height = fifthBtn.Height;
-            navPl.Top = fifthBtn.Top;
-            navPl.Left = fifthBtn.Left;
-            fifthBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            mainForm.position[2] = 4;
-            mainForm.mainPannel(0);
-        }
-
-        private void oneBtn_Leave(object sender, EventArgs e)
-        {
-            oneBtn.BackColor = Color.FromArgb(10, 22, 39);
-        }
-
-        private void secondBtn_Leave(object sender, EventArgs e)
-        {
-            secondBtn.BackColor = Color.FromArgb(10, 22, 39);
-        }
-
-        private void thirdBtn_Leave(object sender, EventArgs e)
-        {
-            thirdBtn.BackColor = Color.FromArgb(10, 22, 39);
-        }
-
-        private void fourthBtn_Leave(object sender, EventArgs e)
-        {
-            fourthBtn.BackColor = Color.FromArgb(10, 22, 39);
-        }
-
-        private void fifthBtn_Leave(object sender, EventArgs e)
-        {
-            fifthBtn.BackColor = Color.FromArgb(10, 22, 39);
+            Button btn = sender as Button;
+            btn.BackColor = Color.FromArgb(10, 22, 39);
         }
     }
 }
