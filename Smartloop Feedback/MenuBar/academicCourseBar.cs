@@ -92,6 +92,7 @@ namespace Smartloop_Feedback
                         Button btn = allButtons[buttonCount];
                         btn.Visible = true;
                         btn.Text = course.code.ToString();
+                        buttons[buttonCount] = btn;
                         buttonCount++;
 
                         if (buttonCount == 5)
@@ -110,7 +111,7 @@ namespace Smartloop_Feedback
         {
             Controls.Clear(); // Clear all controls
 
-            // Add the course buttons in reverse order to dock them at the top
+            // Add the year buttons in reverse order to dock them at the top
             for (int i = buttonCount - 1; i >= 0; i--)
             {
                 Controls.Add(buttons[i]);

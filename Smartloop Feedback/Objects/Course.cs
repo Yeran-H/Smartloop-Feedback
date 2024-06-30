@@ -46,6 +46,7 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
+            assessmentList = new List<Assessment>();
             addCourseToDatabase(); // Add the course to the database
         }
 
@@ -57,6 +58,7 @@ namespace Smartloop_Feedback.Objects
             this.creditPoint = creditPoint;
             this.description = description;
             this.canvasLink = canvasLink;
+            assessmentList = new List<Assessment>();
         }
 
         // Add the course to the database and get the generated ID

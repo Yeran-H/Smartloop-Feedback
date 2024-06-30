@@ -67,6 +67,7 @@ namespace Smartloop_Feedback
                     if (buttonCount < 5) // Ensure the button count is less than 5
                     {
                         student.yearList.Add(new Year(yearName, student.studentId, addYearForm.semesterNames)); // Add the new year to the student's year list
+                        
                         Button btn = allButtons[buttonCount];
                         btn.Visible = true; // Make the new button visible
                         btn.Text = yearName; // Set the new button's text
