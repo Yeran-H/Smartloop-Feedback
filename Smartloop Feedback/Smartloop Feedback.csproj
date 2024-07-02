@@ -144,11 +144,23 @@
     <Compile Include="Forms\addAssessmentForm.Designer.cs">
       <DependentUpon>addAssessmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\addEventForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\addEventForm.Designer.cs">
+      <DependentUpon>addEventForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\courseForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Forms\courseForm.Designer.cs">
       <DependentUpon>courseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\courseScheduleForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\courseScheduleForm.Designer.cs">
+      <DependentUpon>courseScheduleForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MenuBar\academicSemesterBar.cs">
       <SubType>Form</SubType>
@@ -198,6 +210,7 @@
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\Rating.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -218,8 +231,14 @@
     <EmbeddedResource Include="Forms\addAssessmentForm.resx">
       <DependentUpon>addAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Forms\addEventForm.resx">
+      <DependentUpon>addEventForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\courseForm.resx">
       <DependentUpon>courseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\courseScheduleForm.resx">
+      <DependentUpon>courseScheduleForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuBar\academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
@@ -340,6 +359,9 @@
   <ItemGroup>
     <None Include="Resources\close.png" />
     <None Include="Resources\smartloop-feedback-high-resolution-logo.png" />
+    <None Include="Resources\right arrow.png" />
+    <None Include="Resources\back1.png" />
+    <None Include="Resources\Event.png" />
     <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
