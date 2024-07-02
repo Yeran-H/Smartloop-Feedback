@@ -90,7 +90,7 @@ namespace Smartloop_Feedback.Forms
                     dayButton.FlatAppearance.BorderColor = Color.Blue;
                     dayButton.FlatAppearance.BorderSize = 2;
                 }
-                //dayButton.Click += (sender, e) => DayButton_Click(sender, e, date);
+                dayButton.Click += (sender, e) => DayButton_Click(sender, e, date);
                 calendarTable.Controls.Add(dayButton, col, row);
             }
         }
@@ -104,6 +104,33 @@ namespace Smartloop_Feedback.Forms
         private bool HasEvents(DateTime date)
         {
             return student.eventList.Any(e => e.date.Date == date.Date);
+        }
+
+        private void DayButton_Click(object sender, EventArgs e, DateTime date)
+        {
+            var dayEvents = student.eventList.Where(ev => ev.date.Date == date.Date).ToList();
+            if (dayEvents.Count > 0)
+            {
+                using (eventListForm eventListForm = new eventListForm(dayEvents))
+                {
+                    if (eventListForm.ShowDialog() == DialogResult.OK)
+                    {
+                        var selectedEvent = eventListForm.selectedEvent;
+                        if (eventListForm.IsEdit)
+                        {
+                            EditEvent(selectedEvent);
+                        }
+                        else if (eventListForm.IsDelete)
+                        {
+                            DeleteEvent(selectedEvent);
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("No events for " + date.ToString("d"));
+            }
         }
 
         private void previousPb_Click(object sender, EventArgs e)
@@ -120,7 +147,7 @@ namespace Smartloop_Feedback.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (addEventForm addEventForm = new addEventForm(student.getCourseList()))
+            using (addEventForm addEventForm = new addEventForm(student.getCourseList(), null))
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
@@ -128,6 +155,36 @@ namespace Smartloop_Feedback.Forms
                     DisplayCurrentMonth();
                 }
             }
+        }
+
+        private Event GetSelectedEvent()
+        {
+            using (eventListForm eventListForm = new eventListForm(student.eventList))
+            {
+                if (eventListForm.ShowDialog() == DialogResult.OK)
+                {
+                    return eventListForm.selectedEvent;
+                }
+            }
+            return null;
+        }
+
+        private void EditEvent(Event selectedEvent)
+        {
+            using (addEventForm editEventForm = new addEventForm(student.getCourseList(), selectedEvent))
+            {
+                if (editEventForm.ShowDialog() == DialogResult.OK)
+                {
+                    student.updateEvent(editEventForm.newEvent);
+                    DisplayCurrentMonth();
+                }
+            }
+        }
+
+        private void DeleteEvent(Event selectedEvent)
+        {
+            student.deleteEvent(selectedEvent);
+            DisplayCurrentMonth();
         }
     }
 }

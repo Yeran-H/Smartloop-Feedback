@@ -49,6 +49,11 @@ namespace Smartloop_Feedback.Objects
 
         public void addEventToDatabase()
         {
+            if(category == "None")
+            {
+                courseId = 0;
+            }
+
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection

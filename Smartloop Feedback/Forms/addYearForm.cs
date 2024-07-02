@@ -87,5 +87,11 @@ namespace Smartloop_Feedback
             }
             return base.ProcessCmdKey(ref msg, keyData); // Call the base method for other key presses
         }
+
+        private void exitPb_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close();
+        }
     }
 }

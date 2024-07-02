@@ -60,7 +60,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        private void getEventFromDatabase()
+        public void getEventFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
@@ -82,6 +82,66 @@ namespace Smartloop_Feedback
                     }
                 }
             }
+        }
+
+        public void updateEvent(Event selectedEvent)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE event
+                    SET 
+                        name = @name,
+                        date = @date,
+                        courseId = @courseId,
+                        category = @category,
+                        color = @color
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", selectedEvent.id);
+                    cmd.Parameters.AddWithValue("@name", selectedEvent.name);
+                    cmd.Parameters.AddWithValue("@date", selectedEvent.date);
+                    cmd.Parameters.AddWithValue("@courseId", selectedEvent.courseId);
+                    cmd.Parameters.AddWithValue("@category", selectedEvent.category);
+                    cmd.Parameters.AddWithValue("@color", selectedEvent.color);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            eventList.Clear();
+            getEventFromDatabase();
+        }
+
+        public void deleteEvent(Event selectedEvent)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM event
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", selectedEvent.id);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            eventList.Clear();
+            getEventFromDatabase();
         }
 
         // Validate if the password meets the minimum length requirement

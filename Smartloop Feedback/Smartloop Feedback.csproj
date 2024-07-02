@@ -162,6 +162,12 @@
     <Compile Include="Forms\courseScheduleForm.Designer.cs">
       <DependentUpon>courseScheduleForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Forms\eventListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\eventListForm.Designer.cs">
+      <DependentUpon>eventListForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="MenuBar\academicSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -239,6 +245,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\courseScheduleForm.resx">
       <DependentUpon>courseScheduleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\eventListForm.resx">
+      <DependentUpon>eventListForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuBar\academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>

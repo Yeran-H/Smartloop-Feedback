@@ -29,16 +29,20 @@
         private void InitializeComponent()
         {
             this.categoryCb = new System.Windows.Forms.ComboBox();
-            this.dateDp = new Smartloop_Feedback.Objects.DatePicker();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
-            this.titleLb = new System.Windows.Forms.Label();
             this.passwordPl = new System.Windows.Forms.Panel();
             this.eventTb = new System.Windows.Forms.TextBox();
             this.passwordPb = new System.Windows.Forms.PictureBox();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.saveBtn = new System.Windows.Forms.Button();
             this.colourBtn = new System.Windows.Forms.Button();
+            this.headerPanel = new System.Windows.Forms.Panel();
+            this.formTitle = new System.Windows.Forms.Label();
+            this.exitPb = new System.Windows.Forms.PictureBox();
+            this.dateDp = new Smartloop_Feedback.Objects.DatePicker();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
+            this.headerPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
             // 
             // categoryCb
@@ -51,30 +55,6 @@
             this.categoryCb.Name = "categoryCb";
             this.categoryCb.Size = new System.Drawing.Size(260, 23);
             this.categoryCb.TabIndex = 8;
-            // 
-            // dateDp
-            // 
-            this.dateDp.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.dateDp.BorderSize = 0;
-            this.dateDp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.dateDp.Location = new System.Drawing.Point(47, 105);
-            this.dateDp.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateDp.Name = "dateDp";
-            this.dateDp.Size = new System.Drawing.Size(200, 35);
-            this.dateDp.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.dateDp.TabIndex = 12;
-            this.dateDp.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            // 
-            // titleLb
-            // 
-            this.titleLb.AutoSize = true;
-            this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.titleLb.Location = new System.Drawing.Point(77, 23);
-            this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(142, 36);
-            this.titleLb.TabIndex = 13;
-            this.titleLb.Text = "Add Event";
             // 
             // passwordPl
             // 
@@ -155,26 +135,77 @@
             this.colourBtn.UseVisualStyleBackColor = false;
             this.colourBtn.Click += new System.EventHandler(this.colourBtn_Click);
             // 
+            // headerPanel
+            // 
+            this.headerPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.headerPanel.Controls.Add(this.formTitle);
+            this.headerPanel.Controls.Add(this.exitPb);
+            this.headerPanel.Dock = System.Windows.Forms.DockStyle.Top;
+            this.headerPanel.Location = new System.Drawing.Point(0, 0);
+            this.headerPanel.Name = "headerPanel";
+            this.headerPanel.Size = new System.Drawing.Size(288, 40);
+            this.headerPanel.TabIndex = 22;
+            // 
+            // formTitle
+            // 
+            this.formTitle.AutoSize = true;
+            this.formTitle.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
+            this.formTitle.ForeColor = System.Drawing.Color.White;
+            this.formTitle.Location = new System.Drawing.Point(10, 10);
+            this.formTitle.Name = "formTitle";
+            this.formTitle.Size = new System.Drawing.Size(88, 21);
+            this.formTitle.TabIndex = 7;
+            this.formTitle.Text = "Add Event";
+            // 
+            // exitPb
+            // 
+            this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitPb.Image = global::Smartloop_Feedback.Properties.Resources.close;
+            this.exitPb.Location = new System.Drawing.Point(251, 10);
+            this.exitPb.Name = "exitPb";
+            this.exitPb.Size = new System.Drawing.Size(21, 21);
+            this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.exitPb.TabIndex = 9;
+            this.exitPb.TabStop = false;
+            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
+            // 
+            // dateDp
+            // 
+            this.dateDp.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dateDp.BorderSize = 0;
+            this.dateDp.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.dateDp.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateDp.Location = new System.Drawing.Point(74, 101);
+            this.dateDp.MinimumSize = new System.Drawing.Size(4, 35);
+            this.dateDp.Name = "dateDp";
+            this.dateDp.Size = new System.Drawing.Size(130, 35);
+            this.dateDp.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.dateDp.TabIndex = 10;
+            this.dateDp.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            // 
             // addEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(288, 255);
+            this.Controls.Add(this.dateDp);
+            this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.colourBtn);
             this.Controls.Add(this.cancelBtn);
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.passwordPb);
             this.Controls.Add(this.passwordPl);
             this.Controls.Add(this.eventTb);
-            this.Controls.Add(this.titleLb);
-            this.Controls.Add(this.dateDp);
             this.Controls.Add(this.categoryCb);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "addEventForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEventForm";
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).EndInit();
+            this.headerPanel.ResumeLayout(false);
+            this.headerPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -182,14 +213,16 @@
 
         #endregion
         private System.Windows.Forms.ComboBox categoryCb;
-        private Objects.DatePicker dateDp;
         private System.Windows.Forms.ColorDialog colorDialog;
-        private System.Windows.Forms.Label titleLb;
         private System.Windows.Forms.PictureBox passwordPb;
         private System.Windows.Forms.Panel passwordPl;
         private System.Windows.Forms.TextBox eventTb;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button saveBtn;
         private System.Windows.Forms.Button colourBtn;
+        private System.Windows.Forms.Panel headerPanel;
+        private System.Windows.Forms.Label formTitle;
+        private System.Windows.Forms.PictureBox exitPb;
+        private Objects.DatePicker dateDp;
     }
 }

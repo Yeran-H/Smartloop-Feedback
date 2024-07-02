@@ -234,5 +234,11 @@ namespace Smartloop_Feedback
                 }
             }
         }
+
+        private void exitPb_Click(object sender, EventArgs e)
+        {
+            this.DialogResult = DialogResult.Cancel;
+            this.Close(); // Close the form without saving
+        }
     }
 }
