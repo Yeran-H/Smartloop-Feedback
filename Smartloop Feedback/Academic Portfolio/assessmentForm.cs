@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -23,9 +24,36 @@ namespace Smartloop_Feedback
             this.assessment = assessment;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AssessmentForm_Load(object sender, EventArgs e)
         {
+            markTb.Text = assessment.finalMark.ToString() + "/" + assessment.mark.ToString();
+            dateP.Value = assessment.date;
+            descriptionRb.Text = assessment.description;
+        }
 
+        private void canvasBtn_Click(object sender, EventArgs e)
+        {
+            OpenUrl(assessment.canvasLink);
+        }
+        private void OpenUrl(string url)
+        {
+            try
+            {
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = url,
+                    UseShellExecute = true
+                });
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Unable to open the URL: " + ex.Message);
+            }
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.MainPannel(1);
         }
     }
 }

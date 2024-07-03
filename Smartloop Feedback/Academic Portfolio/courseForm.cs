@@ -1,15 +1,8 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using System.Diagnostics;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Drawing;
+using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
@@ -22,7 +15,12 @@ namespace Smartloop_Feedback.Forms
             InitializeComponent();
             this.course = course;
             this.mainForm = mainForm;
-            PopulateListView();
+        }
+
+        private void CourseForm_Load(object sender, EventArgs e)
+        {
+            PopulateAssessmentView();
+            PopulateEventView();
         }
 
         private void canvasBtn_Click(object sender, EventArgs e)
@@ -56,9 +54,9 @@ namespace Smartloop_Feedback.Forms
             mainForm.MainPannel(1);
         }
 
-        private void PopulateListView()
+        private void PopulateAssessmentView()
         {
-            if(course.assessmentList != null)
+            if (course.assessmentList != null)
             {
                 foreach (Assessment assessment in course.assessmentList)
                 {
@@ -70,6 +68,21 @@ namespace Smartloop_Feedback.Forms
                     item.SubItems.Add(assessment.weight.ToString());
 
                     assessmentLv.Items.Add(item);
+                }
+            }
+        }
+
+        private void PopulateEventView()
+        {
+            course.GetEventsFromDatabase();
+            if (course.eventList != null)
+            {
+                foreach (Event events in course.eventList)
+                {
+                    ListViewItem item = new ListViewItem(events.name);
+                    item.SubItems.Add(events.date.ToString());
+
+                    eventLv.Items.Add(item);
                 }
             }
         }
@@ -96,7 +109,7 @@ namespace Smartloop_Feedback.Forms
             SolidBrush backBrush = new SolidBrush(color);
 
 
-            if (e.ColumnIndex == 3) 
+            if (e.ColumnIndex == 3)
             {
                 int status = int.Parse(e.SubItem.Text);
                 Rectangle bounds = e.Bounds;
@@ -107,6 +120,16 @@ namespace Smartloop_Feedback.Forms
             {
                 e.DrawDefault = true;
             }
+        }
+
+        private void eventBtn_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void eventLv_ItemActivate(object sender, EventArgs e)
+        {
+            MessageBox.Show("Hi");
         }
     }
 }

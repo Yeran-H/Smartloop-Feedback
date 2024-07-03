@@ -18,6 +18,7 @@ namespace Smartloop_Feedback.Objects
         public string status { get; set; }
         public int weight { get; set; }
         public int mark { get; set; }
+        public int finalMark { get; set; }
         public bool individual { get; set; }
         public bool group { get; set; }
         public string canvasLink { get; set; }
@@ -26,7 +27,7 @@ namespace Smartloop_Feedback.Objects
         public int studentId { get; set; }
 
         // Constructor to initialize an Assessment object and fetch criteria from the database
-        public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
+        public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.id = id;
             this.name = name;
@@ -36,6 +37,7 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.finalMark = finalMark;
             this.individual = individual;
             this.group = group;
             this.canvasLink = canvasLink;
@@ -46,7 +48,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize an Assessment object and add it to the database
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
+        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.name = name;
             this.description = description;
@@ -55,6 +57,7 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.finalMark = finalMark;
             this.individual = individual;
             this.group = group;
             this.canvasLink = canvasLink;
@@ -65,7 +68,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize an Assessment object without interacting with the database
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink)
+        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink)
         {
             this.name = name;
             this.description = description;
@@ -74,6 +77,7 @@ namespace Smartloop_Feedback.Objects
             this.status = status;
             this.weight = weight;
             this.mark = mark;
+            this.finalMark = finalMark;
             this.individual = individual;
             this.group = group;
             this.canvasLink = canvasLink;
@@ -86,7 +90,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, individual, [group], canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @individual, @group, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
+                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, finalMark, individual, [group], canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @totalMark, @individual, @group, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -97,6 +101,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@status", status); // Set the status parameter
                     cmd.Parameters.AddWithValue("@weight", weight); // Set the weight parameter
                     cmd.Parameters.AddWithValue("@mark", mark); // Set the mark parameter
+                    cmd.Parameters.AddWithValue("@finalMark", finalMark);
                     cmd.Parameters.AddWithValue("@individual", individual); // Set the individual parameter
                     cmd.Parameters.AddWithValue("@group", group); // Set the group parameter
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink); // Set the canvasLink parameter

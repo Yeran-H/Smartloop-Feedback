@@ -20,6 +20,7 @@ namespace Smartloop_Feedback.Objects
         public int studentId { get; set; }
         public string canvasLink { get; set; }
         public List<Assessment> assessmentList { get; set; } // List of assessments for the course
+        public List<Event> eventList { get; set; }
 
         // Constructor to initialize a Course object and fetch assessments from the database
         public Course(int id, int code, string title, int creditPoint, string description, string canvasLink, int semesterId, int studentId)
@@ -33,6 +34,7 @@ namespace Smartloop_Feedback.Objects
             this.semesterId = semesterId;
             this.studentId = studentId;
             assessmentList = new List<Assessment>(); // Initialize the assessment list
+            eventList = new List<Event>();
             GetAssessmentFromDatabase(); // Fetch assessments from the database
         }
 
@@ -47,6 +49,7 @@ namespace Smartloop_Feedback.Objects
             this.semesterId = semesterId;
             this.studentId = studentId;
             assessmentList = new List<Assessment>();
+            eventList = new List<Event>();
             AddCourseToDatabase(); // Add the course to the database
         }
 
@@ -89,7 +92,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, individual, [group], canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
@@ -105,12 +108,36 @@ namespace Smartloop_Feedback.Objects
                         string status = reader.GetString(5); // Get the assessment status
                         int weight = reader.GetInt32(6); // Get the assessment weight
                         int mark = reader.GetInt32(7); // Get the assessment mark
-                        bool individual = reader.GetBoolean(8); // Get the individual status
-                        bool group = reader.GetBoolean(9); // Get the group status
-                        string canvasLink = reader.GetString(10); // Get the assessment canvas link
+                        int finalMark = reader.GetInt32(8);
+                        bool individual = reader.GetBoolean(9); // Get the individual status
+                        bool group = reader.GetBoolean(10); // Get the group status
+                        string canvasLink = reader.GetString(11); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        assessmentList.Add(new Assessment(assessmentId, name, description, type, date, status, weight, mark, individual, group, canvasLink, this.id, studentId));
+                        assessmentList.Add(new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, canvasLink, this.id, studentId));
+                    }
+                }
+            }
+        }
+
+        public void GetEventsFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, category, color FROM event WHERE courseId = @courseId", conn);
+                cmd.Parameters.AddWithValue("@courseId", id);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        DateTime date = reader.GetDateTime(2);
+                        string category = reader.GetString(3);
+                        int color = reader.GetInt32(4);
+                        eventList.Add(new Event(id, name, date, studentId, id, category, color));
                     }
                 }
             }

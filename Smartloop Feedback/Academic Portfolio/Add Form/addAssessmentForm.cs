@@ -141,7 +141,7 @@ namespace Smartloop_Feedback.Forms
         private void submitBtn_Click(object sender, EventArgs e)
         {
             // Add a new assessment to the course
-            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
+            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
 
             // Prepare column names for ratings
             List<string> columnNameList = new List<string>();
