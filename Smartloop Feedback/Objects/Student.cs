@@ -1,8 +1,10 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -20,6 +22,7 @@ namespace Smartloop_Feedback
         public string degree { get; set; }
         public byte[] profileImage { get; set; }
         public List<Year> yearList { get; set; }
+        public List<Event> eventList { get; set; }
 
         // Constructor to initialize a Student object with details and fetch years from the database
         public Student(int studentId, string name, string email, string degree, string password, byte[] profileImage)
@@ -31,7 +34,9 @@ namespace Smartloop_Feedback
             this.degree = degree;
             this.profileImage = profileImage;
             yearList = new List<Year>(); // Initialize the year list
+            eventList = new List<Event>();
             getYearFromDatabase(); // Fetch years from the database
+            getEventFromDatabase();
         }
 
         // Private method to fetch years from the database for the student
@@ -53,6 +58,90 @@ namespace Smartloop_Feedback
                     }
                 }
             }
+        }
+
+        public void getEventFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) 
+            {
+                conn.Open(); 
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, courseId, category, color FROM event WHERE studentId = @studentId", conn); 
+                cmd.Parameters.AddWithValue("@studentId", studentId); 
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) 
+                {
+                    while (reader.Read()) 
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        DateTime date = reader.GetDateTime(2);
+                        int courseId = reader.GetInt32(3);
+                        string category = reader.GetString(4);
+                        int color = reader.GetInt32(5);
+                        eventList.Add(new Event(id, name, date, studentId, courseId, category, color)); 
+                    }
+                }
+            }
+        }
+
+        public void updateEvent(Event selectedEvent)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE event
+                    SET 
+                        name = @name,
+                        date = @date,
+                        courseId = @courseId,
+                        category = @category,
+                        color = @color
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", selectedEvent.id);
+                    cmd.Parameters.AddWithValue("@name", selectedEvent.name);
+                    cmd.Parameters.AddWithValue("@date", selectedEvent.date);
+                    cmd.Parameters.AddWithValue("@courseId", selectedEvent.courseId);
+                    cmd.Parameters.AddWithValue("@category", selectedEvent.category);
+                    cmd.Parameters.AddWithValue("@color", selectedEvent.color);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            eventList.Clear();
+            getEventFromDatabase();
+        }
+
+        public void deleteEvent(Event selectedEvent)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM event
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", selectedEvent.id);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+
+            eventList.Clear();
+            getEventFromDatabase();
         }
 
         // Validate if the password meets the minimum length requirement
@@ -84,6 +173,48 @@ namespace Smartloop_Feedback
         public bool uniqueYear(string name)
         {
             return yearList.All(year => year.name != name);
+        }
+
+        public List<string> getCourseList()
+        {
+            List<string> courseList = new List<string>();
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT title FROM course WHERE studentId = @studentId", conn); 
+                cmd.Parameters.AddWithValue("@studentId", studentId); 
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) 
+                {
+                    while (reader.Read()) 
+                    {
+                        string title = reader.GetString(0);
+                        courseList.Add(title);
+                    }
+                    return courseList;
+                }
+            }
+        }
+
+        public int findCourseId(string title)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id FROM course WHERE studentId = @studentId AND title = @title", conn);
+                cmd.Parameters.AddWithValue("@studentId", studentId);
+                cmd.Parameters.AddWithValue("@title", title);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        return reader.GetInt32(0);
+                    }
+                }
+            }
+            return -1;
         }
     }
 }

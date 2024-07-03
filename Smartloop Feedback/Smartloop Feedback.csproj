@@ -138,46 +138,64 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\addAssessmentForm.cs">
+    <Compile Include="Academic Portfolio\Add Form\addAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\addAssessmentForm.Designer.cs">
+    <Compile Include="Academic Portfolio\Add Form\addAssessmentForm.Designer.cs">
       <DependentUpon>addAssessmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\courseForm.cs">
+    <Compile Include="Course Schedule\addEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\courseForm.Designer.cs">
+    <Compile Include="Course Schedule\addEventForm.Designer.cs">
+      <DependentUpon>addEventForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\courseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\courseForm.Designer.cs">
       <DependentUpon>courseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuBar\academicSemesterBar.cs">
+    <Compile Include="Course Schedule\courseScheduleForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuBar\academicSemesterBar.Designer.cs">
+    <Compile Include="Course Schedule\courseScheduleForm.Designer.cs">
+      <DependentUpon>courseScheduleForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Course Schedule\eventListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Course Schedule\eventListForm.Designer.cs">
+      <DependentUpon>eventListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\Menu Bar\academicSemesterBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\Menu Bar\academicSemesterBar.Designer.cs">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuBar\academicCourseBar.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\academicCourseBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuBar\academicCourseBar.Designer.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\academicCourseBar.Designer.cs">
       <DependentUpon>academicCourseBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuBar\academicYearBar.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\academicYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MenuBar\academicYearBar.Designer.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\academicYearBar.Designer.cs">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\addCourseForm.cs">
+    <Compile Include="Academic Portfolio\Add Form\addCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\addCourseForm.Designer.cs">
+    <Compile Include="Academic Portfolio\Add Form\addCourseForm.Designer.cs">
       <DependentUpon>addCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\addYearForm.cs">
+    <Compile Include="Academic Portfolio\Add Form\addYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\addYearForm.Designer.cs">
+    <Compile Include="Academic Portfolio\Add Form\addYearForm.Designer.cs">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\loginForm.cs">
@@ -198,6 +216,7 @@
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\Rating.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -215,25 +234,34 @@
     <Compile Include="Objects\Semester.cs" />
     <Compile Include="Objects\Student.cs" />
     <Compile Include="Objects\Year.cs" />
-    <EmbeddedResource Include="Forms\addAssessmentForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\Add Form\addAssessmentForm.resx">
       <DependentUpon>addAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\courseForm.resx">
+    <EmbeddedResource Include="Course Schedule\addEventForm.resx">
+      <DependentUpon>addEventForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\courseForm.resx">
       <DependentUpon>courseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuBar\academicSemesterBar.resx">
+    <EmbeddedResource Include="Course Schedule\courseScheduleForm.resx">
+      <DependentUpon>courseScheduleForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Course Schedule\eventListForm.resx">
+      <DependentUpon>eventListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\academicSemesterBar.resx">
       <DependentUpon>academicSemesterBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuBar\academicCourseBar.resx">
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\academicCourseBar.resx">
       <DependentUpon>academicCourseBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MenuBar\academicYearBar.resx">
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\academicYearBar.resx">
       <DependentUpon>academicYearBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\addCourseForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\Add Form\addCourseForm.resx">
       <DependentUpon>addCourseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Forms\addYearForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\Add Form\addYearForm.resx">
       <DependentUpon>addYearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\loginForm.resx">
@@ -340,6 +368,9 @@
   <ItemGroup>
     <None Include="Resources\close.png" />
     <None Include="Resources\smartloop-feedback-high-resolution-logo.png" />
+    <None Include="Resources\right arrow.png" />
+    <None Include="Resources\back1.png" />
+    <None Include="Resources\Event.png" />
     <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
