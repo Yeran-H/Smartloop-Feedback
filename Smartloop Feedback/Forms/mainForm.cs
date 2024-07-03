@@ -14,7 +14,7 @@ using Smartloop_Feedback.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class mainForm : Form
+    public partial class MainForm : Form
     {
         private Student student;
         public int[] position;
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
-        public mainForm(Student student)
+        public MainForm(Student student)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -107,7 +107,7 @@ namespace Smartloop_Feedback
             navPl.Left = academicBtn.Left;
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            menuPannel(0);
+            MenuPannel(0);
 
             /*
             titleLb.Text = "Academic Portfolio";
@@ -183,13 +183,13 @@ namespace Smartloop_Feedback
             DialogResult result = MessageBox.Show("Do you want to sign out?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (result == DialogResult.Yes)
             {
-                loginForm login = new loginForm();
+                LoginForm login = new LoginForm();
                 login.Show();
                 this.Hide();
             }
         }
 
-        public void menuPannel(int num)
+        public void MenuPannel(int num)
         {
             menuDropPl.Controls.Clear();
 
@@ -224,7 +224,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void mainPannel(int num)
+        public void MainPannel(int num)
         {
             switch (num)
             {

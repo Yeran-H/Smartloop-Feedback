@@ -14,7 +14,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class loginForm : Form
+    public partial class LoginForm : Form
     {
         // Connection string for the database, retrieved from configuration settings
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
@@ -32,7 +32,7 @@ namespace Smartloop_Feedback
         );
 
         // Constructor for the login form
-        public loginForm()
+        public LoginForm()
         {
             InitializeComponent();
 
@@ -63,7 +63,7 @@ namespace Smartloop_Feedback
         // Common event handler for when any textbox receives focus
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            defaultUI(); // Reset UI to default state
+            DefaultUI(); // Reset UI to default state
 
             TextBox currentTextBox = sender as TextBox;
 
@@ -84,7 +84,7 @@ namespace Smartloop_Feedback
         }
 
         // Method to reset the UI to the default state
-        private void defaultUI()
+        private void DefaultUI()
         {
             // Reset username UI elements to default colors and images
             usernamePb.Image = Properties.Resources.person1;
@@ -118,7 +118,7 @@ namespace Smartloop_Feedback
         // Event handler for the register button click event to open the registration form
         private void registerBtn_Click(object sender, EventArgs e)
         {
-            registerForm register = new registerForm(); // Create a new registration form
+            RegisterForm register = new RegisterForm(); // Create a new registration form
             register.Show(); // Show the registration form
             this.Hide(); // Hide the current form
         }
@@ -164,7 +164,7 @@ namespace Smartloop_Feedback
                             this.Invoke(new Action(() =>
                             {
                                 // Create and show the main form, passing the student object
-                                mainForm main = new mainForm(student);
+                                MainForm main = new MainForm(student);
                                 main.Show();
                                 this.Hide(); // Hide the login form
                             }));

@@ -16,8 +16,8 @@ namespace Smartloop_Feedback.Forms
     public partial class courseForm : Form
     {
         private Course course;
-        private mainForm mainForm;
-        public courseForm(Course course, mainForm mainForm)
+        private MainForm mainForm;
+        public courseForm(Course course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -53,7 +53,7 @@ namespace Smartloop_Feedback.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            mainForm.mainPannel(1);
+            mainForm.MainPannel(1);
         }
 
         private void PopulateListView()

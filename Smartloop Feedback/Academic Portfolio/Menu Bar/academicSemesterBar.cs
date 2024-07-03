@@ -5,11 +5,11 @@ namespace Smartloop_Feedback
 {
     public partial class academicSemesterBar : Form
     {
-        private mainForm mainForm; // Reference to the main form
+        private MainForm mainForm; // Reference to the main form
         private Year year; // Reference to the current year
 
         // Constructor for academicSemesterBar
-        public academicSemesterBar(mainForm form, Year year)
+        public academicSemesterBar(MainForm form, Year year)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
@@ -40,7 +40,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(0); // Navigate to the main menu panel
+            mainForm.MenuPannel(0); // Navigate to the main menu panel
         }
 
         // Common event handler for all semester button clicks
@@ -49,7 +49,7 @@ namespace Smartloop_Feedback
             Button clickedButton = sender as Button; // Get the clicked button
             string semesterName = clickedButton.Text; // Get the semester name from the button text
             mainForm.position[1] = year.SemesterIndex(semesterName); // Set the main form's position to the selected semester
-            mainForm.menuPannel(3); // Navigate to the corresponding semester panel
+            mainForm.MenuPannel(3); // Navigate to the corresponding semester panel
         }
     }
 }

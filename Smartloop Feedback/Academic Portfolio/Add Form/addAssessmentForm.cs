@@ -15,10 +15,10 @@ namespace Smartloop_Feedback.Forms
     public partial class addAssessmentForm : Form
     {
         private Course course;
-        private mainForm mainForm;
+        private MainForm mainForm;
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
 
-        public addAssessmentForm(Course course, mainForm mainForm)
+        public addAssessmentForm(Course course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -56,7 +56,7 @@ namespace Smartloop_Feedback.Forms
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             // Go back to the main panel
-            mainForm.mainPannel(0);
+            mainForm.MainPannel(0);
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
@@ -167,7 +167,7 @@ namespace Smartloop_Feedback.Forms
             }
 
             // Go back to the main panel
-            mainForm.mainPannel(0);
+            mainForm.MainPannel(0);
         }
 
         private void textBox_Enter(object sender, EventArgs e)
