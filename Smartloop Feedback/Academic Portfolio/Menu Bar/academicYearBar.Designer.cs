@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback
 {
-    partial class academicYearBar
+    partial class AcademicYearBar
     {
         /// <summary>
         /// Required designer variable.

@@ -25,7 +25,7 @@ namespace Smartloop_Feedback
                 ExecuteSqlFile();
             }
 
-            Application.Run(new loginForm());
+            Application.Run(new LoginForm());
         }
 
         private static bool DatabaseExists()

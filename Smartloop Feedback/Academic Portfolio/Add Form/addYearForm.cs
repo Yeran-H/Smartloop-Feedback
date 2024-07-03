@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class addYearForm : Form
+    public partial class AddYearForm : Form
     {
         // Public properties to hold the year name and semester names
         public string yearName { get; set; }
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
         );
 
         // Constructor to initialize the form with a student object
-        public addYearForm(Student student)
+        public AddYearForm(Student student)
         {
             InitializeComponent();
             this.student = student;
@@ -45,7 +45,7 @@ namespace Smartloop_Feedback
         {
             yearName = yearTb.Text;
             // Validate that the year name is not empty, unique, and semesters are selected
-            if (!string.IsNullOrEmpty(yearName) && student.uniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
+            if (!string.IsNullOrEmpty(yearName) && student.UniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
             {
                 // Add selected semesters to the semesterNames list
                 foreach (string item in semesterCb.CheckedItems)

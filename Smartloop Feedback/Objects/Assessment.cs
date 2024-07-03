@@ -42,7 +42,7 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.studentId = studentId;
             criteriaList = new List<Criteria>(); // Initialize the criteria list
-            getCriteriaFromDatabase(); // Fetch criteria from the database
+            GetCriteriaFromDatabase(); // Fetch criteria from the database
         }
 
         // Constructor to initialize an Assessment object and add it to the database
@@ -61,7 +61,7 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.studentId = studentId;
             criteriaList = new List<Criteria>(); // Initialize the criteria list
-            addAssessmentToDatabase(); // Add the assessment to the database
+            AddAssessmentToDatabase(); // Add the assessment to the database
         }
 
         // Constructor to initialize an Assessment object without interacting with the database
@@ -81,7 +81,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Add the assessment to the database and get the generated ID
-        public void addAssessmentToDatabase()
+        public void AddAssessmentToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -108,7 +108,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Fetch criteria from the database and initialize the criteria list
-        private void getCriteriaFromDatabase()
+        private void GetCriteriaFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {

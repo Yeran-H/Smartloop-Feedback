@@ -33,7 +33,7 @@ namespace Smartloop_Feedback.Objects
             this.grade = grade;
             this.criteriaId = criteriaId;
             this.studentId = studentId;
-            addRatingToDatabase(); // Add the rating to the database
+            AddRatingToDatabase(); // Add the rating to the database
         }
 
         // Constructor to initialize a Rating object without interacting with the database
@@ -44,7 +44,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Add the rating to the database and get the generated ID
-        public void addRatingToDatabase()
+        public void AddRatingToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
