@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class addYearForm : Form
+    public partial class AddYearForm : Form
     {
         // Public properties to hold the year name and semester names
         public string yearName { get; set; }
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
         );
 
         // Constructor to initialize the form with a student object
-        public addYearForm(Student student)
+        public AddYearForm(Student student)
         {
             InitializeComponent();
             this.student = student;

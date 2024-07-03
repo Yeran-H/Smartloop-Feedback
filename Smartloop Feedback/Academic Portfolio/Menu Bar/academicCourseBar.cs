@@ -7,7 +7,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicCourseBar : Form
+    public partial class AcademicCourseBar : Form
     {
         private MainForm mainForm; // Reference to the main form
         private Semester semester; // Reference to the current semester
@@ -17,7 +17,7 @@ namespace Smartloop_Feedback
         private Button[] allButtons;
 
         // Constructor for academicCourseBar
-        public academicCourseBar(MainForm form, Semester semester)
+        public AcademicCourseBar(MainForm form, Semester semester)
         {
             InitializeComponent(); // Initialize form components
             navPl.Height = backBtn.Height;
@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
                 semester.courseList = new List<Course>();
             }
 
-            using (var addCourseForm = new addCourseForm())
+            using (var addCourseForm = new AddCourseForm())
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK)
                 {

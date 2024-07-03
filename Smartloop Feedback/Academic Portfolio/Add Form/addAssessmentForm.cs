@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class addAssessmentForm : Form
+    public partial class AddAssessmentForm : Form
     {
         private Course course;
         private MainForm mainForm;
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
 
-        public addAssessmentForm(Course course, MainForm mainForm)
+        public AddAssessmentForm(Course course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;

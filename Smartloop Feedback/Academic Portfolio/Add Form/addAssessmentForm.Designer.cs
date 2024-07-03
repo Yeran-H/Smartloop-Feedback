@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Forms
 {
-    partial class addAssessmentForm
+    partial class AddAssessmentForm
     {
         private System.ComponentModel.IContainer components = null;
 

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicYearBar : Form
+    public partial class AcademicYearBar : Form
     {
         private MainForm mainForm; // Reference to the main form
         private Student student; // Reference to the student object
@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
         private Button[] allButtons;
 
         // Constructor for the academicYearBar form
-        public academicYearBar(MainForm form, Student student)
+        public AcademicYearBar(MainForm form, Student student)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
@@ -58,7 +58,7 @@ namespace Smartloop_Feedback
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addYearForm = new addYearForm(student)) // Open the add year form
+            using (var addYearForm = new AddYearForm(student)) // Open the add year form
             {
                 if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
                 {

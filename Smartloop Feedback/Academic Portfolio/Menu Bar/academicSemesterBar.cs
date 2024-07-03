@@ -3,13 +3,13 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicSemesterBar : Form
+    public partial class AcademicSemesterBar : Form
     {
         private MainForm mainForm; // Reference to the main form
         private Year year; // Reference to the current year
 
         // Constructor for academicSemesterBar
-        public academicSemesterBar(MainForm form, Year year)
+        public AcademicSemesterBar(MainForm form, Year year)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference

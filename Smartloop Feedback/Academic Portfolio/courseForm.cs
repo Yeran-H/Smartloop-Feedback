@@ -13,11 +13,11 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class courseForm : Form
+    public partial class CourseForm : Form
     {
         private Course course;
         private MainForm mainForm;
-        public courseForm(Course course, MainForm mainForm)
+        public CourseForm(Course course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
