@@ -136,23 +136,6 @@ namespace Smartloop_Feedback
              
         }
 
-        private void assessmentBtn_Click(object sender, EventArgs e)
-        {
-            navPl.Height = assessmentBtn.Height;
-            navPl.Top = assessmentBtn.Top;
-            navPl.Left = assessmentBtn.Left;
-            assessmentBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            titleLb.Text = "Assessment Tracker";
-            this.formLoaderPl.Controls.Clear();
-            /*
-            assessmentForm assessment = new assessmentForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            assessment.FormBorderStyle = FormBorderStyle.None;
-            this.formLoaderPl.Controls.Add(assessment);
-            assessment.Show();
-             */
-        }
-
         private void setttingBtn_Click(object sender, EventArgs e)
         {
             navPl.Height = setttingBtn.Height;
@@ -193,11 +176,6 @@ namespace Smartloop_Feedback
         private void courseBtn_Leave(object sender, EventArgs e)
         {
             courseBtn.BackColor = Color.FromArgb(10, 22, 39);
-        }
-
-        private void assessmentBtn_Leave(object sender, EventArgs e)
-        {
-            assessmentBtn.BackColor = Color.FromArgb(10, 22, 39);
         }
 
         private void exitPb_Click(object sender, EventArgs e)

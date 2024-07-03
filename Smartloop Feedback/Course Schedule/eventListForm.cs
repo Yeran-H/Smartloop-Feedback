@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -17,12 +18,25 @@ namespace Smartloop_Feedback.Forms
         public bool IsEdit { get; private set; }
         public bool IsDelete { get; private set; }
 
+        [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
+
+        private static extern IntPtr CreateRoundRectRgn
+        (
+            int nLeftRect,
+            int nTopRect,
+            int nRightRect,
+            int nBottomRect,
+            int nWidthEllipse,
+            int nHieghtEllipse
+        );
+
         public eventListForm(List<Event> eventList)
         {
             InitializeComponent();
             eventLst.DataSource = eventList;
             eventLst.DisplayMember = "Name";
             formTitle.Text = eventList[0].date.ToString("dd MMMM yyyy");
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 
         private void exitPb_Click(object sender, EventArgs e)
