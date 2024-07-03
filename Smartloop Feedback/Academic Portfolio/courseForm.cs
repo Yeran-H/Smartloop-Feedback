@@ -68,7 +68,6 @@ namespace Smartloop_Feedback.Forms
                     item.SubItems.Add(assessment.status);
                     item.SubItems.Add(assessment.mark.ToString());
                     item.SubItems.Add(assessment.weight.ToString());
-                    item.Tag = assessment;
 
                     assessmentLv.Items.Add(item);
                 }
@@ -79,8 +78,8 @@ namespace Smartloop_Feedback.Forms
         {
             if (assessmentLv.SelectedItems.Count > 0)
             {
-                ListViewItem selectedItem = assessmentLv.SelectedItems[0];
-                MessageBox.Show("You clicked: " + selectedItem.Text);
+                mainForm.position[3] = assessmentLv.SelectedIndices[0];
+                mainForm.MainPannel(2);
             }
         }
 

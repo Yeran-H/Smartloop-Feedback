@@ -13,19 +13,9 @@ namespace Smartloop_Feedback
 {
     public partial class AssessmentForm : Form
     {
-        public Assessment assessment;
-        public MainForm mainForm;
-
-        public AssessmentForm(Assessment assessment, MainForm mainForm)
+        public AssessmentForm()
         {
             InitializeComponent();
-            this.mainForm = mainForm;
-            this.assessment = assessment;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

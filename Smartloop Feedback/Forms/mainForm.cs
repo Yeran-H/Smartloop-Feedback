@@ -239,7 +239,15 @@ namespace Smartloop_Feedback
                 case 1:
                     titleLb.Text = student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].title;
                     this.formLoaderPl.Controls.Clear();
-                    AddAssessmentForm assessmentForm = new AddAssessmentForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    AddAssessmentForm addAssessmentForm = new AddAssessmentForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    addAssessmentForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(addAssessmentForm);
+                    addAssessmentForm.Show();
+                    break;
+                case 2:
+                    titleLb.Text = student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].assessmentList[position[3]].name;
+                    this.formLoaderPl.Controls.Clear();
+                    AssessmentForm assessmentForm = new AssessmentForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].assessmentList[position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     assessmentForm.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(assessmentForm);
                     assessmentForm.Show();
