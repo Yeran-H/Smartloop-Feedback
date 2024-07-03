@@ -129,7 +129,7 @@ namespace Smartloop_Feedback
             titleLb.Text = "Course Schedule";
             this.formLoaderPl.Controls.Clear();
             
-            courseScheduleForm course = new courseScheduleForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            CourseScheduleForm course = new CourseScheduleForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             course.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(course);
             course.Show();

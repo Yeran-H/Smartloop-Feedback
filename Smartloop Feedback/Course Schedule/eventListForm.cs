@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class eventListForm : Form
+    public partial class EventListForm : Form
     {
         public Event selectedEvent { get; private set; }
         public bool IsEdit { get; private set; }
@@ -30,7 +30,7 @@ namespace Smartloop_Feedback.Forms
             int nHieghtEllipse
         );
 
-        public eventListForm(List<Event> eventList)
+        public EventListForm(List<Event> eventList)
         {
             InitializeComponent();
             eventLst.DataSource = eventList;
