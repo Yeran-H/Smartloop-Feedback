@@ -1,18 +1,15 @@
-﻿using System.Data.SqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Smartloop_Feedback.Objects;
-using Org.BouncyCastle.Asn1.X509;
+using System.Data.SqlClient;
 
 namespace Smartloop_Feedback.Objects
 {
     public class Assessment
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+
+        // Public properties for assessment details
         public int id { get; set; }
         public string name { get; set; }
         public string description { get; set; }
@@ -24,10 +21,11 @@ namespace Smartloop_Feedback.Objects
         public bool individual { get; set; }
         public bool group { get; set; }
         public string canvasLink { get; set; }
-        public List<Criteria> criteriaList { get; set; }
+        public List<Criteria> criteriaList { get; set; } // List of criteria for the assessment
         public int courseId { get; set; }
         public int studentId { get; set; }
 
+        // Constructor to initialize an Assessment object and fetch criteria from the database
         public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.id = id;
@@ -43,10 +41,11 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.courseId = courseId;
             this.studentId = studentId;
-            criteriaList = new List<Criteria>();
-            getCriteriaFromDatabase();
+            criteriaList = new List<Criteria>(); // Initialize the criteria list
+            getCriteriaFromDatabase(); // Fetch criteria from the database
         }
 
+        // Constructor to initialize an Assessment object and add it to the database
         public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.name = name;
@@ -59,12 +58,13 @@ namespace Smartloop_Feedback.Objects
             this.individual = individual;
             this.group = group;
             this.canvasLink = canvasLink;
-            criteriaList = new List<Criteria>();
             this.courseId = courseId;
             this.studentId = studentId;
-            addAssessmentToDatabase();
+            criteriaList = new List<Criteria>(); // Initialize the criteria list
+            addAssessmentToDatabase(); // Add the assessment to the database
         }
 
+        // Constructor to initialize an Assessment object without interacting with the database
         public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, bool individual, bool group, string canvasLink)
         {
             this.name = name;
@@ -77,51 +77,53 @@ namespace Smartloop_Feedback.Objects
             this.individual = individual;
             this.group = group;
             this.canvasLink = canvasLink;
-            criteriaList = new List<Criteria>();
+            criteriaList = new List<Criteria>(); // Initialize the criteria list
         }
 
-        public void addAssessmentToDatabase() 
+        // Add the assessment to the database and get the generated ID
+        public void addAssessmentToDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, individual, [group], canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @individual, @group, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();";
+                conn.Open(); // Open the connection
+                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, individual, [group], canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @individual, @group, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@type", type);
-                    cmd.Parameters.AddWithValue("@date", date);
-                    cmd.Parameters.AddWithValue("@status", status);
-                    cmd.Parameters.AddWithValue("@weight", weight);
-                    cmd.Parameters.AddWithValue("@mark", mark);
-                    cmd.Parameters.AddWithValue("@individual", individual);
-                    cmd.Parameters.AddWithValue("@group", group);
-                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
-                    cmd.Parameters.AddWithValue("@courseId", courseId);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@type", type); // Set the type parameter
+                    cmd.Parameters.AddWithValue("@date", date); // Set the date parameter
+                    cmd.Parameters.AddWithValue("@status", status); // Set the status parameter
+                    cmd.Parameters.AddWithValue("@weight", weight); // Set the weight parameter
+                    cmd.Parameters.AddWithValue("@mark", mark); // Set the mark parameter
+                    cmd.Parameters.AddWithValue("@individual", individual); // Set the individual parameter
+                    cmd.Parameters.AddWithValue("@group", group); // Set the group parameter
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink); // Set the canvasLink parameter
+                    cmd.Parameters.AddWithValue("@courseId", courseId); // Set the courseId parameter
+                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
+        // Fetch criteria from the database and initialize the criteria list
         private void getCriteriaFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, description FROM criteria WHERE assessmentId = @assessmentId AND studentId = @studentId", conn);
-                cmd.Parameters.AddWithValue("@assessmentId", id);
-                cmd.Parameters.AddWithValue("@studentId", studentId);
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, description FROM criteria WHERE assessmentId = @assessmentId AND studentId = @studentId", conn); // SQL query to fetch criteria
+                cmd.Parameters.AddWithValue("@assessmentId", id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
-                    while (reader.Read())
+                    while (reader.Read()) // Read each row
                     {
-                        int id = reader.GetInt32(0);
-                        string description = reader.GetString(1);
-                        criteriaList.Add(new Criteria(id, description, this.id, studentId));
+                        int criteriaId = reader.GetInt32(0); // Get the criteria ID
+                        string criteriaDescription = reader.GetString(1); // Get the criteria description
+                        criteriaList.Add(new Criteria(criteriaId, criteriaDescription, this.id, studentId)); // Add the criteria to the criteria list
                     }
                 }
             }

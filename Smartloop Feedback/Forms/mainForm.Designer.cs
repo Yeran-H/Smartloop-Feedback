@@ -31,7 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuDropPl = new System.Windows.Forms.Panel();
-            this.assessmentBtn = new System.Windows.Forms.Button();
             this.courseBtn = new System.Windows.Forms.Button();
             this.setttingBtn = new System.Windows.Forms.Button();
             this.academicBtn = new System.Windows.Forms.Button();
@@ -59,7 +58,6 @@
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.panel1.Controls.Add(this.menuDropPl);
-            this.panel1.Controls.Add(this.assessmentBtn);
             this.panel1.Controls.Add(this.courseBtn);
             this.panel1.Controls.Add(this.setttingBtn);
             this.panel1.Controls.Add(this.academicBtn);
@@ -80,24 +78,6 @@
             this.menuDropPl.TabIndex = 8;
             this.menuDropPl.Visible = false;
             // 
-            // assessmentBtn
-            // 
-            this.assessmentBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.assessmentBtn.FlatAppearance.BorderSize = 0;
-            this.assessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.assessmentBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.assessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.assessmentBtn.Image = global::Smartloop_Feedback.Properties.Resources.tracker;
-            this.assessmentBtn.Location = new System.Drawing.Point(0, 388);
-            this.assessmentBtn.Name = "assessmentBtn";
-            this.assessmentBtn.Size = new System.Drawing.Size(186, 51);
-            this.assessmentBtn.TabIndex = 7;
-            this.assessmentBtn.Text = "Assignment\r\nTracker";
-            this.assessmentBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.assessmentBtn.UseVisualStyleBackColor = true;
-            this.assessmentBtn.Click += new System.EventHandler(this.assessmentBtn_Click);
-            this.assessmentBtn.Leave += new System.EventHandler(this.assessmentBtn_Leave);
-            // 
             // courseBtn
             // 
             this.courseBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -111,6 +91,7 @@
             this.courseBtn.Size = new System.Drawing.Size(186, 51);
             this.courseBtn.TabIndex = 6;
             this.courseBtn.Text = "Course\r\nSchedule";
+            this.courseBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.courseBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.courseBtn.UseVisualStyleBackColor = true;
             this.courseBtn.Click += new System.EventHandler(this.courseBtn_Click);
@@ -129,6 +110,7 @@
             this.setttingBtn.Size = new System.Drawing.Size(186, 42);
             this.setttingBtn.TabIndex = 4;
             this.setttingBtn.Text = " Settings";
+            this.setttingBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.setttingBtn.UseVisualStyleBackColor = true;
             this.setttingBtn.Click += new System.EventHandler(this.setttingBtn_Click);
@@ -147,6 +129,7 @@
             this.academicBtn.Size = new System.Drawing.Size(186, 51);
             this.academicBtn.TabIndex = 3;
             this.academicBtn.Text = "Academic\r\nPortfolio";
+            this.academicBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.academicBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.academicBtn.UseVisualStyleBackColor = true;
             this.academicBtn.Click += new System.EventHandler(this.academicBtn_Click);
@@ -165,6 +148,7 @@
             this.resultBtn.Size = new System.Drawing.Size(186, 42);
             this.resultBtn.TabIndex = 2;
             this.resultBtn.Text = "Result          ";
+            this.resultBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.resultBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.resultBtn.UseVisualStyleBackColor = true;
             this.resultBtn.Click += new System.EventHandler(this.resultBtn_Click);
@@ -183,6 +167,7 @@
             this.dashboardBtn.Size = new System.Drawing.Size(186, 42);
             this.dashboardBtn.TabIndex = 1;
             this.dashboardBtn.Text = "Dashboard";
+            this.dashboardBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.dashboardBtn.UseVisualStyleBackColor = true;
             this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
@@ -206,7 +191,7 @@
             this.studentIdLb.AutoSize = true;
             this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
             this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.studentIdLb.Location = new System.Drawing.Point(65, 181);
+            this.studentIdLb.Location = new System.Drawing.Point(61, 181);
             this.studentIdLb.Name = "studentIdLb";
             this.studentIdLb.Size = new System.Drawing.Size(64, 15);
             this.studentIdLb.TabIndex = 2;
@@ -253,6 +238,7 @@
             // 
             // panel3
             // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
             this.panel3.Controls.Add(this.formLoaderPl);
             this.panel3.Controls.Add(this.exitPb);
             this.panel3.Controls.Add(this.titleLb);
@@ -264,6 +250,7 @@
             // 
             // formLoaderPl
             // 
+            this.formLoaderPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.formLoaderPl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.formLoaderPl.Location = new System.Drawing.Point(0, 61);
             this.formLoaderPl.Name = "formLoaderPl";
@@ -337,7 +324,6 @@
         private System.Windows.Forms.PictureBox exitPb;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel formLoaderPl;
-        private System.Windows.Forms.Button assessmentBtn;
         private System.Windows.Forms.Button courseBtn;
         private System.Windows.Forms.Panel menuDropPl;
     }

@@ -2,15 +2,8 @@
 {
     partial class addAssessmentForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
-        /// <summary>
-        /// Clean up any resources being used.
-        /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,12 +15,9 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelDetails = new System.Windows.Forms.Panel();
             this.descriptionTb = new System.Windows.Forms.TextBox();
             this.canvasPl = new System.Windows.Forms.Panel();
@@ -37,7 +27,7 @@
             this.markPl = new System.Windows.Forms.Panel();
             this.markTb = new System.Windows.Forms.TextBox();
             this.groupRbtn = new System.Windows.Forms.RadioButton();
-            this.indvidualRbtn = new System.Windows.Forms.RadioButton();
+            this.individualRbtn = new System.Windows.Forms.RadioButton();
             this.nextBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
             this.typeCb = new System.Windows.Forms.ComboBox();
@@ -53,6 +43,8 @@
             this.backBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.loadBtn = new System.Windows.Forms.Button();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
@@ -68,7 +60,7 @@
             this.panelDetails.Controls.Add(this.markPl);
             this.panelDetails.Controls.Add(this.markTb);
             this.panelDetails.Controls.Add(this.groupRbtn);
-            this.panelDetails.Controls.Add(this.indvidualRbtn);
+            this.panelDetails.Controls.Add(this.individualRbtn);
             this.panelDetails.Controls.Add(this.nextBtn);
             this.panelDetails.Controls.Add(this.cancelBtn);
             this.panelDetails.Controls.Add(this.typeCb);
@@ -98,7 +90,8 @@
             this.descriptionTb.TabIndex = 29;
             this.descriptionTb.TabStop = false;
             this.descriptionTb.Text = "Description";
-            this.descriptionTb.Click += new System.EventHandler(this.descriptionTb_Click);
+            this.toolTip1.SetToolTip(this.descriptionTb, "Please enter description of assessment");
+            this.descriptionTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // canvasPl
             // 
@@ -121,7 +114,8 @@
             this.canvasTb.TabIndex = 19;
             this.canvasTb.TabStop = false;
             this.canvasTb.Text = "Canvas Link";
-            this.canvasTb.Click += new System.EventHandler(this.canvasTb_Click);
+            this.toolTip1.SetToolTip(this.canvasTb, "Please provide canvas link to Assessment");
+            this.canvasTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // weightPl
             // 
@@ -144,8 +138,9 @@
             this.weightTb.TabIndex = 27;
             this.weightTb.TabStop = false;
             this.weightTb.Text = "Weight";
-            this.weightTb.Click += new System.EventHandler(this.weightTb_Click);
-            this.weightTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.weightTb_KeyPress);
+            this.toolTip1.SetToolTip(this.weightTb, "Please enter weight of assessment");
+            this.weightTb.Enter += new System.EventHandler(this.textBox_Enter);
+            this.weightTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberOnly_KeyPress);
             // 
             // markPl
             // 
@@ -168,41 +163,44 @@
             this.markTb.TabIndex = 19;
             this.markTb.TabStop = false;
             this.markTb.Text = "Total Mark";
-            this.markTb.Click += new System.EventHandler(this.markTb_Click);
-            this.markTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.markTb_KeyPress);
+            this.toolTip1.SetToolTip(this.markTb, "Please enter Total marks of assessment ");
+            this.markTb.Enter += new System.EventHandler(this.textBox_Enter);
+            this.markTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberOnly_KeyPress);
             // 
             // groupRbtn
             // 
             this.groupRbtn.AutoSize = true;
-            this.groupRbtn.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupRbtn.Font = new System.Drawing.Font("Aptos", 12F);
             this.groupRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.groupRbtn.Location = new System.Drawing.Point(428, 224);
             this.groupRbtn.Name = "groupRbtn";
             this.groupRbtn.Size = new System.Drawing.Size(109, 24);
             this.groupRbtn.TabIndex = 26;
             this.groupRbtn.Text = "Group Work";
+            this.toolTip1.SetToolTip(this.groupRbtn, "Select if assessment is group");
             this.groupRbtn.UseVisualStyleBackColor = true;
             // 
-            // indvidualRbtn
+            // individualRbtn
             // 
-            this.indvidualRbtn.AutoSize = true;
-            this.indvidualRbtn.Checked = true;
-            this.indvidualRbtn.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.indvidualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.indvidualRbtn.Location = new System.Drawing.Point(428, 201);
-            this.indvidualRbtn.Name = "indvidualRbtn";
-            this.indvidualRbtn.Size = new System.Drawing.Size(91, 24);
-            this.indvidualRbtn.TabIndex = 25;
-            this.indvidualRbtn.TabStop = true;
-            this.indvidualRbtn.Text = "Indvidual";
-            this.indvidualRbtn.UseVisualStyleBackColor = true;
+            this.individualRbtn.AutoSize = true;
+            this.individualRbtn.Checked = true;
+            this.individualRbtn.Font = new System.Drawing.Font("Aptos", 12F);
+            this.individualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.individualRbtn.Location = new System.Drawing.Point(428, 201);
+            this.individualRbtn.Name = "individualRbtn";
+            this.individualRbtn.Size = new System.Drawing.Size(95, 24);
+            this.individualRbtn.TabIndex = 25;
+            this.individualRbtn.TabStop = true;
+            this.individualRbtn.Text = "Individual";
+            this.toolTip1.SetToolTip(this.individualRbtn, "Select if assessment is individual");
+            this.individualRbtn.UseVisualStyleBackColor = true;
             // 
             // nextBtn
             // 
             this.nextBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.nextBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nextBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.nextBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.nextBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.nextBtn.Location = new System.Drawing.Point(367, 316);
             this.nextBtn.Name = "nextBtn";
@@ -217,7 +215,7 @@
             this.cancelBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.cancelBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.cancelBtn.Location = new System.Drawing.Point(220, 316);
             this.cancelBtn.Name = "cancelBtn";
@@ -230,7 +228,7 @@
             // typeCb
             // 
             this.typeCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.typeCb.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.typeCb.Font = new System.Drawing.Font("Aptos", 12F);
             this.typeCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.typeCb.FormattingEnabled = true;
             this.typeCb.Items.AddRange(new object[] {
@@ -248,6 +246,7 @@
             this.typeCb.Size = new System.Drawing.Size(201, 28);
             this.typeCb.TabIndex = 21;
             this.typeCb.Text = "Type of Assessment";
+            this.toolTip1.SetToolTip(this.typeCb, "Type or Select the type of assessment");
             // 
             // datePl
             // 
@@ -298,7 +297,8 @@
             this.titleTb.TabIndex = 17;
             this.titleTb.TabStop = false;
             this.titleTb.Text = "Title";
-            this.titleTb.Click += new System.EventHandler(this.titleTb_Click);
+            this.toolTip1.SetToolTip(this.titleTb, "Please enter Title of Assessment");
+            this.titleTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // dateP
             // 
@@ -313,9 +313,11 @@
             this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.dateP.TabIndex = 9;
             this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.toolTip1.SetToolTip(this.dateP, "Please enter due date of assessment");
             // 
             // panelCriteria
             // 
+            this.panelCriteria.Controls.Add(this.loadBtn);
             this.panelCriteria.Controls.Add(this.submitBtn);
             this.panelCriteria.Controls.Add(this.columnBtn);
             this.panelCriteria.Controls.Add(this.backBtn);
@@ -332,9 +334,9 @@
             this.submitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.submitBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.submitBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.submitBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.submitBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.submitBtn.Location = new System.Drawing.Point(426, 367);
+            this.submitBtn.Location = new System.Drawing.Point(486, 367);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(141, 52);
             this.submitBtn.TabIndex = 26;
@@ -347,13 +349,14 @@
             this.columnBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.columnBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.columnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.columnBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.columnBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.columnBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.columnBtn.Location = new System.Drawing.Point(166, 367);
             this.columnBtn.Name = "columnBtn";
             this.columnBtn.Size = new System.Drawing.Size(141, 52);
             this.columnBtn.TabIndex = 25;
             this.columnBtn.Text = "Add Column";
+            this.toolTip1.SetToolTip(this.columnBtn, "Click to add more columns to criteria");
             this.columnBtn.UseVisualStyleBackColor = false;
             this.columnBtn.Click += new System.EventHandler(this.columnBtn_Click);
             // 
@@ -362,7 +365,7 @@
             this.backBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.backBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.backBtn.Location = new System.Drawing.Point(19, 367);
             this.backBtn.Name = "backBtn";
@@ -391,6 +394,22 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(150, 337);
             this.panelColumnInputs.TabIndex = 4;
             // 
+            // loadBtn
+            // 
+            this.loadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.loadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.loadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.loadBtn.Location = new System.Drawing.Point(313, 367);
+            this.loadBtn.Name = "loadBtn";
+            this.loadBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadBtn.TabIndex = 27;
+            this.loadBtn.Text = "Load Data";
+            this.toolTip1.SetToolTip(this.loadBtn, "Click to add more columns to criteria");
+            this.loadBtn.UseVisualStyleBackColor = false;
+            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
+            // 
             // addAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -415,7 +434,7 @@
         #endregion
 
         private System.Windows.Forms.Panel panelDetails;
-        private Objects.DatePicker dateP;
+        private Smartloop_Feedback.Objects.DatePicker dateP;
         private System.Windows.Forms.Panel titlePl;
         private System.Windows.Forms.TextBox titleTb;
         private System.Windows.Forms.Panel descriptionPl;
@@ -425,7 +444,7 @@
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.RadioButton groupRbtn;
-        private System.Windows.Forms.RadioButton indvidualRbtn;
+        private System.Windows.Forms.RadioButton individualRbtn;
         private System.Windows.Forms.Panel canvasPl;
         private System.Windows.Forms.TextBox canvasTb;
         private System.Windows.Forms.Panel weightPl;
@@ -439,5 +458,7 @@
         private System.Windows.Forms.DataGridView criteriaDgv;
         private System.Windows.Forms.Panel panelColumnInputs;
         private System.Windows.Forms.TextBox descriptionTb;
+        private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button loadBtn;
     }
 }

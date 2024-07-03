@@ -1,82 +1,86 @@
-﻿using System.Data.SqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.SqlClient;
 using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback.Objects
 {
     public class Criteria
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+
+        // Public properties for criteria details
         public int id { get; set; }
         public string description { get; set; }
         public int assessmentId { get; set; }
-        public List<Rating> ratingList { get; set; }
+        public List<Rating> ratingList { get; set; } // List of ratings for the criteria
         public int studentId { get; set; }
+
+        // Constructor to initialize a Criteria object and fetch ratings from the database
         public Criteria(int id, string description, int assessmentId, int studentId)
         {
             this.id = id;
             this.description = description;
-            this.ratingList = ratingList;
             this.assessmentId = assessmentId;
             this.studentId = studentId;
-            ratingList = new List<Rating>();
-            getRatingFromDatabase();
+            ratingList = new List<Rating>(); // Initialize the rating list
+            getRatingFromDatabase(); // Fetch ratings from the database
         }
 
+        // Constructor to initialize a Criteria object and add it to the database
         public Criteria(string description, int assessmentId, int studentId)
         {
             this.description = description;
-            this.ratingList = ratingList;
             this.assessmentId = assessmentId;
             this.studentId = studentId;
-            ratingList = new List<Rating>();
-            addCriteriaToDatabase();
+            ratingList = new List<Rating>(); // Initialize the rating list
+            addCriteriaToDatabase(); // Add the criteria to the database
         }
 
+        // Constructor to initialize a Criteria object without interacting with the database
         public Criteria(string description)
         {
             this.description = description;
+            ratingList = new List<Rating>(); // Initialize the rating list
         }
 
+        // Add the criteria to the database and get the generated ID
         public void addCriteriaToDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                string sql = "INSERT INTO criteria (description, assessmentId, studentId) VALUES (@description, @assessmentId, @studentId); SELECT SCOPE_IDENTITY();";
+                conn.Open(); // Open the connection
+                string sql = "INSERT INTO criteria (description, assessmentId, studentId) VALUES (@description, @assessmentId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert criteria and get the generated ID
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@assessmentId", assessmentId);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@assessmentId", assessmentId); // Set the assessmentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
+        // Fetch ratings from the database and initialize the rating list
         private void getRatingFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id,  description, grade FROM rating WHERE criteriaId = @criteriaId AND studentId = @studentId", conn);
-                cmd.Parameters.AddWithValue("@criteriaId", id);
-                cmd.Parameters.AddWithValue("@studentId", studentId);
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, description, grade FROM rating WHERE criteriaId = @criteriaId AND studentId = @studentId", conn); // SQL query to fetch ratings
+                cmd.Parameters.AddWithValue("@criteriaId", id); // Set the criteriaId parameter
+                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
-                    while (reader.Read())
+                    while (reader.Read()) // Read each row
                     {
-                        int id = reader.GetInt32(0);
-                        string description = reader.GetString(1);
-                        string grade = reader.GetString(2);
-                        ratingList.Add(new Rating(id, description, grade, this.id, studentId));
+                        int ratingId = reader.GetInt32(0); // Get the rating ID
+                        string ratingDescription = reader.GetString(1); // Get the rating description
+                        string grade = reader.GetString(2); // Get the rating grade
+                        ratingList.Add(new Rating(ratingId, ratingDescription, grade, this.id, studentId)); // Add the rating to the rating list
                     }
                 }
             }

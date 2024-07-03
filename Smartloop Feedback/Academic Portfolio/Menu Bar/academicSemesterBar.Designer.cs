@@ -51,7 +51,7 @@
             this.springBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.springBtn.UseVisualStyleBackColor = true;
             this.springBtn.Visible = false;
-            this.springBtn.Click += new System.EventHandler(this.springBtn_Click);
+            this.springBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
             // 
             // winterBtn
             // 
@@ -69,7 +69,7 @@
             this.winterBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.winterBtn.UseVisualStyleBackColor = true;
             this.winterBtn.Visible = false;
-            this.winterBtn.Click += new System.EventHandler(this.winterBtn_Click);
+            this.winterBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
             // 
             // autumnBtn
             // 
@@ -87,7 +87,7 @@
             this.autumnBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.autumnBtn.UseVisualStyleBackColor = true;
             this.autumnBtn.Visible = false;
-            this.autumnBtn.Click += new System.EventHandler(this.autumnBtn_Click);
+            this.autumnBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
             // 
             // summerBtn
             // 
@@ -105,7 +105,7 @@
             this.summerBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.summerBtn.UseVisualStyleBackColor = true;
             this.summerBtn.Visible = false;
-            this.summerBtn.Click += new System.EventHandler(this.summerBtn_Click);
+            this.summerBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
             // 
             // backBtn
             // 

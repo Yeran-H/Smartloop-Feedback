@@ -1,100 +1,105 @@
-﻿using System.Data.SqlClient;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Data.SqlClient;
 
 namespace Smartloop_Feedback
 {
     public class Year
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
-        public string name { get; set; }
-        public int studentId { get; }
-        public int id { get; set; }
-        public List<Semester> semesterList { get; set; }
+        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
+        // Public properties for year details
+        public string name { get; set; }
+        public int studentId { get; } // Student ID associated with the year
+        public int id { get; set; } // Year ID
+        public List<Semester> semesterList { get; set; } // List of semesters in the year
+
+        // Constructor to initialize a Year object and fetch semesters from the database
         public Year(string name, int studentId, int id)
         {
             this.name = name;
             this.studentId = studentId;
             this.id = id;
-            semesterList = new List<Semester>();
-            getSemesterFromDatabase();
+            semesterList = new List<Semester>(); // Initialize the semester list
+            getSemesterFromDatabase(); // Fetch semesters from the database
         }
 
-        public Year(string name, int studentId, List<string> semesterName)
+        // Constructor to initialize a Year object and add it to the database
+        public Year(string name, int studentId, List<string> semesterNames)
         {
             this.name = name;
             this.studentId = studentId;
-            semesterList = new List<Semester>();
-            addYearToDatabase();
-            addSemesterToDatabase(semesterName);
+            semesterList = new List<Semester>(); // Initialize the semester list
+            addYearToDatabase(); // Add the year to the database
+            addSemesterToDatabase(semesterNames); // Add the semesters to the database
         }
 
+        // Add the year to the database and get the generated ID
         public void addYearToDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                string sql = "INSERT INTO year (name, studentId) VALUES (@name, @studentId); SELECT SCOPE_IDENTITY();";
+                conn.Open(); // Open the connection
+                string sql = "INSERT INTO year (name, studentId) VALUES (@name, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert year and get the generated ID
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    id = Convert.ToInt32(cmd.ExecuteScalar());
+                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
-        public void addSemesterToDatabase(List<string> semesterName)
+        // Add the semesters to the database and initialize the semester list
+        public void addSemesterToDatabase(List<string> semesterNames)
         {
-            foreach(string name in semesterName) 
+            foreach (string semesterName in semesterNames) // Loop through each semester name
             {
-                semesterList.Add(new Semester(name, id, studentId));
+                semesterList.Add(new Semester(semesterName, id, studentId)); // Add a new semester to the semester list
             }
         }
 
+        // Fetch semesters from the database and initialize the semester list
         private void getSemesterFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT name, id FROM semester WHERE yearId = @yearId AND studentId = @studentId", conn);
-                cmd.Parameters.AddWithValue("@yearId", id);
-                cmd.Parameters.AddWithValue("@studentId", studentId);
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, id FROM semester WHERE yearId = @yearId AND studentId = @studentId", conn); // SQL query to fetch semesters
+                cmd.Parameters.AddWithValue("@yearId", id); // Set the yearId parameter
+                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
-                    while (reader.Read())
+                    while (reader.Read()) // Read each row
                     {
-                        string name = reader.GetString(0);
-                        int id = reader.GetInt32(1);
-                        semesterList.Add(new Semester(name, id, this.id, studentId));
+                        string name = reader.GetString(0); // Get the semester name
+                        int id = reader.GetInt32(1); // Get the semester ID
+                        semesterList.Add(new Semester(name, id, this.id, studentId)); // Add the semester to the semester list
                     }
                 }
             }
         }
 
+        // Get the number of semesters in the year
         public int numSemester()
         {
-            return semesterList == null ? 0 : semesterList.Count;
+            return semesterList?.Count ?? 0; // Return the count of the semester list, or 0 if it is null
         }
 
+        // Get the index of a semester by its name
         public int semesterIndex(string semesterName)
         {
-            for (int i = 0; i < numSemester(); i++) 
+            for (int i = 0; i < numSemester(); i++) // Loop through each semester
             {
-                if (semesterList[i].name == semesterName)
+                if (semesterList[i].name.Equals(semesterName, StringComparison.OrdinalIgnoreCase)) // Compare the semester name
                 {
-                    return i;
+                    return i; // Return the index if the names match
                 }
             }
-            return 0;
+            return -1; // Return -1 if the semester is not found
         }
     }
 }
