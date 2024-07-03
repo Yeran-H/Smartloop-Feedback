@@ -36,7 +36,7 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.category = category;
             this.color = color;
-            addEventToDatabase();
+            AddEventToDatabase();
         }
 
         public Event(string name, DateTime date, string category, int color)
@@ -47,7 +47,7 @@ namespace Smartloop_Feedback.Objects
             this.color = color;
         }
 
-        public void addEventToDatabase()
+        public void AddEventToDatabase()
         {
             if(category == "None")
             {

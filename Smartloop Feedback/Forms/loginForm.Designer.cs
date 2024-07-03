@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback
 {
-    partial class loginForm
+    partial class LoginForm
     {
         /// <summary>
         /// Required designer variable.
@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(loginForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(LoginForm));
             this.usernameTb = new System.Windows.Forms.TextBox();
             this.usernamePl = new System.Windows.Forms.Panel();
             this.passwordPl = new System.Windows.Forms.Panel();

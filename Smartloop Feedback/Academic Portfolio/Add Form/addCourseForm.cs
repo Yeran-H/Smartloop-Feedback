@@ -14,7 +14,7 @@ using HtmlAgilityPack;
 
 namespace Smartloop_Feedback
 {
-    public partial class addCourseForm : Form
+    public partial class AddCourseForm : Form
     {
         public Course course; // Public Course object to store course details
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Dictionary to track if a TextBox has been clicked
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
-        public addCourseForm()
+        public AddCourseForm()
         {
             InitializeComponent(); // Initialize form components
 

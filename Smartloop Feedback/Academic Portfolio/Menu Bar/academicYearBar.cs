@@ -6,9 +6,9 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicYearBar : Form
+    public partial class AcademicYearBar : Form
     {
-        private mainForm mainForm; // Reference to the main form
+        private MainForm mainForm; // Reference to the main form
         private Student student; // Reference to the student object
 
         private int buttonCount = 0; // Counter for the number of buttons
@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
         private Button[] allButtons;
 
         // Constructor for the academicYearBar form
-        public academicYearBar(mainForm form, Student student)
+        public AcademicYearBar(MainForm form, Student student)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
@@ -27,7 +27,7 @@ namespace Smartloop_Feedback
         // Initialize the bar with year buttons based on the student's number of years
         private void InitializeBar()
         {
-            buttonCount = student.numYears(); // Get the number of years for the student
+            buttonCount = student.NumYears(); // Get the number of years for the student
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
 
             // Loop through the number of years and make corresponding buttons visible
@@ -52,13 +52,13 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(1); // Navigate to the previous menu panel
+            mainForm.MenuPannel(1); // Navigate to the previous menu panel
         }
 
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addYearForm = new addYearForm(student)) // Open the add year form
+            using (var addYearForm = new AddYearForm(student)) // Open the add year form
             {
                 if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
                 {
@@ -115,7 +115,7 @@ namespace Smartloop_Feedback
             if (index >= 0)
             {
                 mainForm.position[0] = index; // Set the main form's position
-                mainForm.menuPannel(2); // Navigate to the corresponding year's panel
+                mainForm.MenuPannel(2); // Navigate to the corresponding year's panel
             }
         }
     }

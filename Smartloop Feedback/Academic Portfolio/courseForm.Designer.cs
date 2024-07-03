@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Forms
 {
-    partial class courseForm
+    partial class CourseForm
     {
         /// <summary>
         /// Required designer variable.

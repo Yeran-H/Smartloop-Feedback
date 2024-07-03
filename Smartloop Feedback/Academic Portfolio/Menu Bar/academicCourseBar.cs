@@ -7,9 +7,9 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class academicCourseBar : Form
+    public partial class AcademicCourseBar : Form
     {
-        private mainForm mainForm; // Reference to the main form
+        private MainForm mainForm; // Reference to the main form
         private Semester semester; // Reference to the current semester
 
         private int buttonCount = 0; // Counter for the number of buttons
@@ -17,7 +17,7 @@ namespace Smartloop_Feedback
         private Button[] allButtons;
 
         // Constructor for academicCourseBar
-        public academicCourseBar(mainForm form, Semester semester)
+        public AcademicCourseBar(MainForm form, Semester semester)
         {
             InitializeComponent(); // Initialize form components
             navPl.Height = backBtn.Height;
@@ -32,7 +32,7 @@ namespace Smartloop_Feedback
         // Initialize the course bar with course buttons based on the number of courses
         private void InitializeBar()
         {
-            buttonCount = semester.numCourse(); // Get the number of courses in the semester
+            buttonCount = semester.NumCourse(); // Get the number of courses in the semester
 
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
@@ -55,7 +55,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.menuPannel(2); // Navigate to the previous menu panel
+            mainForm.MenuPannel(2); // Navigate to the previous menu panel
         }
 
         // Event handler for the add button click
@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
                 semester.courseList = new List<Course>();
             }
 
-            using (var addCourseForm = new addCourseForm())
+            using (var addCourseForm = new AddCourseForm())
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK)
                 {
@@ -136,7 +136,7 @@ namespace Smartloop_Feedback
             if (index >= 0)
             {
                 mainForm.position[2] = index; // Set the main form's position to the selected course
-                mainForm.mainPannel(0); // Navigate to the corresponding course panel
+                mainForm.MainPannel(0); // Navigate to the corresponding course panel
             }
 
             navPl.Height = clickedButton.Height; // Adjust the navigation panel to the clicked button

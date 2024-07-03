@@ -25,7 +25,7 @@ namespace Smartloop_Feedback
             this.yearId = yearId;
             this.studentId = studentId;
             courseList = new List<Course>(); // Initialize the course list
-            getCourseFromDatabase(); // Fetch courses from the database
+            GetCourseFromDatabase(); // Fetch courses from the database
         }
 
         // Constructor to initialize a Semester object and add it to the database
@@ -35,11 +35,11 @@ namespace Smartloop_Feedback
             this.yearId = yearId;
             this.studentId = studentId;
             courseList = new List<Course>(); // Initialize the course list
-            addSemesterToDatabase(); // Add the semester to the database
+            AddSemesterToDatabase(); // Add the semester to the database
         }
 
         // Add the semester to the database and get the generated ID
-        public void addSemesterToDatabase()
+        public void AddSemesterToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -57,7 +57,7 @@ namespace Smartloop_Feedback
         }
 
         // Fetch courses from the database and initialize the course list
-        private void getCourseFromDatabase()
+        private void GetCourseFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -83,7 +83,7 @@ namespace Smartloop_Feedback
         }
 
         // Get the number of courses in the semester
-        public int numCourse()
+        public int NumCourse()
         {
             return courseList?.Count ?? 0; // Return the count of the course list, or 0 if it is null
         }
