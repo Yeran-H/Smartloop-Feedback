@@ -32,7 +32,7 @@ namespace Smartloop_Feedback
         // Initialize the course bar with course buttons based on the number of courses
         private void InitializeBar()
         {
-            buttonCount = semester.numCourse(); // Get the number of courses in the semester
+            buttonCount = semester.NumCourse(); // Get the number of courses in the semester
 
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 

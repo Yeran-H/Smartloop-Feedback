@@ -27,7 +27,7 @@ namespace Smartloop_Feedback
         // Initialize the bar with year buttons based on the student's number of years
         private void InitializeBar()
         {
-            buttonCount = student.numYears(); // Get the number of years for the student
+            buttonCount = student.NumYears(); // Get the number of years for the student
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
 
             // Loop through the number of years and make corresponding buttons visible

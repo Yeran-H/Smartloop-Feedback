@@ -33,7 +33,7 @@ namespace Smartloop_Feedback.Objects
             this.semesterId = semesterId;
             this.studentId = studentId;
             assessmentList = new List<Assessment>(); // Initialize the assessment list
-            getAssessmentFromDatabase(); // Fetch assessments from the database
+            GetAssessmentFromDatabase(); // Fetch assessments from the database
         }
 
         // Constructor to initialize a Course object and add it to the database
@@ -47,7 +47,7 @@ namespace Smartloop_Feedback.Objects
             this.semesterId = semesterId;
             this.studentId = studentId;
             assessmentList = new List<Assessment>();
-            addCourseToDatabase(); // Add the course to the database
+            AddCourseToDatabase(); // Add the course to the database
         }
 
         // Constructor to initialize a Course object without interacting with the database
@@ -62,7 +62,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Add the course to the database and get the generated ID
-        public void addCourseToDatabase()
+        public void AddCourseToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -84,7 +84,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Fetch assessments from the database and initialize the assessment list
-        private void getAssessmentFromDatabase()
+        private void GetAssessmentFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {

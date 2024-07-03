@@ -48,7 +48,7 @@ namespace Smartloop_Feedback
         {
             Button clickedButton = sender as Button; // Get the clicked button
             string semesterName = clickedButton.Text; // Get the semester name from the button text
-            mainForm.position[1] = year.semesterIndex(semesterName); // Set the main form's position to the selected semester
+            mainForm.position[1] = year.SemesterIndex(semesterName); // Set the main form's position to the selected semester
             mainForm.menuPannel(3); // Navigate to the corresponding semester panel
         }
     }

@@ -22,7 +22,7 @@ namespace Smartloop_Feedback
             this.studentId = studentId;
             this.id = id;
             semesterList = new List<Semester>(); // Initialize the semester list
-            getSemesterFromDatabase(); // Fetch semesters from the database
+            GetSemesterFromDatabase(); // Fetch semesters from the database
         }
 
         // Constructor to initialize a Year object and add it to the database
@@ -31,12 +31,12 @@ namespace Smartloop_Feedback
             this.name = name;
             this.studentId = studentId;
             semesterList = new List<Semester>(); // Initialize the semester list
-            addYearToDatabase(); // Add the year to the database
-            addSemesterToDatabase(semesterNames); // Add the semesters to the database
+            AddYearToDatabase(); // Add the year to the database
+            AddSemesterToDatabase(semesterNames); // Add the semesters to the database
         }
 
         // Add the year to the database and get the generated ID
-        public void addYearToDatabase()
+        public void AddYearToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -53,7 +53,7 @@ namespace Smartloop_Feedback
         }
 
         // Add the semesters to the database and initialize the semester list
-        public void addSemesterToDatabase(List<string> semesterNames)
+        public void AddSemesterToDatabase(List<string> semesterNames)
         {
             foreach (string semesterName in semesterNames) // Loop through each semester name
             {
@@ -62,7 +62,7 @@ namespace Smartloop_Feedback
         }
 
         // Fetch semesters from the database and initialize the semester list
-        private void getSemesterFromDatabase()
+        private void GetSemesterFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -84,15 +84,15 @@ namespace Smartloop_Feedback
         }
 
         // Get the number of semesters in the year
-        public int numSemester()
+        public int NumSemester()
         {
             return semesterList?.Count ?? 0; // Return the count of the semester list, or 0 if it is null
         }
 
         // Get the index of a semester by its name
-        public int semesterIndex(string semesterName)
+        public int SemesterIndex(string semesterName)
         {
-            for (int i = 0; i < numSemester(); i++) // Loop through each semester
+            for (int i = 0; i < NumSemester(); i++) // Loop through each semester
             {
                 if (semesterList[i].name.Equals(semesterName, StringComparison.OrdinalIgnoreCase)) // Compare the semester name
                 {

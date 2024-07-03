@@ -45,7 +45,7 @@ namespace Smartloop_Feedback
         {
             yearName = yearTb.Text;
             // Validate that the year name is not empty, unique, and semesters are selected
-            if (!string.IsNullOrEmpty(yearName) && student.uniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
+            if (!string.IsNullOrEmpty(yearName) && student.UniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
             {
                 // Add selected semesters to the semesterNames list
                 foreach (string item in semesterCb.CheckedItems)

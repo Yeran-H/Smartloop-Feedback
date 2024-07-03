@@ -35,12 +35,12 @@ namespace Smartloop_Feedback
             this.profileImage = profileImage;
             yearList = new List<Year>(); // Initialize the year list
             eventList = new List<Event>();
-            getYearFromDatabase(); // Fetch years from the database
-            getEventFromDatabase();
+            GetYearFromDatabase(); // Fetch years from the database
+            GetEventFromDatabase();
         }
 
         // Private method to fetch years from the database for the student
-        private void getYearFromDatabase()
+        private void GetYearFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -60,7 +60,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void getEventFromDatabase()
+        public void GetEventFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
@@ -84,7 +84,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void updateEvent(Event selectedEvent)
+        public void UpdateEvent(Event selectedEvent)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -117,10 +117,10 @@ namespace Smartloop_Feedback
             }
 
             eventList.Clear();
-            getEventFromDatabase();
+            GetEventFromDatabase();
         }
 
-        public void deleteEvent(Event selectedEvent)
+        public void DeleteEvent(Event selectedEvent)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -141,7 +141,7 @@ namespace Smartloop_Feedback
             }
 
             eventList.Clear();
-            getEventFromDatabase();
+            GetEventFromDatabase();
         }
 
         // Validate if the password meets the minimum length requirement
@@ -164,18 +164,18 @@ namespace Smartloop_Feedback
         }
 
         // Get the number of years associated with the student
-        public int numYears()
+        public int NumYears()
         {
             return yearList == null ? 0 : yearList.Count;
         }
 
         // Check if a year name is unique within the student's year list
-        public bool uniqueYear(string name)
+        public bool UniqueYear(string name)
         {
             return yearList.All(year => year.name != name);
         }
 
-        public List<string> getCourseList()
+        public List<string> GetCourseList()
         {
             List<string> courseList = new List<string>();
 
@@ -197,7 +197,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public int findCourseId(string title)
+        public int FindCourseId(string title)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {

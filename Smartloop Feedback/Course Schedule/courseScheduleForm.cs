@@ -147,11 +147,11 @@ namespace Smartloop_Feedback.Forms
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (addEventForm addEventForm = new addEventForm(student.getCourseList(), null))
+            using (addEventForm addEventForm = new addEventForm(student.GetCourseList(), null))
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    student.eventList.Add(new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.findCourseId(addEventForm.newEvent.category)));
+                    student.eventList.Add(new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category)));
                     DisplayCurrentMonth();
                 }
             }
@@ -171,11 +171,11 @@ namespace Smartloop_Feedback.Forms
 
         private void EditEvent(Event selectedEvent)
         {
-            using (addEventForm editEventForm = new addEventForm(student.getCourseList(), selectedEvent))
+            using (addEventForm editEventForm = new addEventForm(student.GetCourseList(), selectedEvent))
             {
                 if (editEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    student.updateEvent(editEventForm.newEvent);
+                    student.UpdateEvent(editEventForm.newEvent);
                     DisplayCurrentMonth();
                 }
             }
@@ -183,7 +183,7 @@ namespace Smartloop_Feedback.Forms
 
         private void DeleteEvent(Event selectedEvent)
         {
-            student.deleteEvent(selectedEvent);
+            student.DeleteEvent(selectedEvent);
             DisplayCurrentMonth();
         }
     }
