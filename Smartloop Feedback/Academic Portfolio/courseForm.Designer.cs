@@ -333,6 +333,7 @@
             this.eventLv.TabIndex = 41;
             this.eventLv.UseCompatibleStateImageBehavior = false;
             this.eventLv.View = System.Windows.Forms.View.Details;
+            this.eventLv.ItemActivate += new System.EventHandler(this.eventLv_ItemActivate);
             // 
             // titleCh
             // 

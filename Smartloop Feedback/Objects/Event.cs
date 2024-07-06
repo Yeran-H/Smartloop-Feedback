@@ -71,5 +71,59 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void UpdateEventInDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE event
+                    SET 
+                        name = @name,
+                        date = @date,
+                        courseId = @courseId,
+                        category = @category,
+                        color = @color
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@courseId", courseId);
+                    cmd.Parameters.AddWithValue("@category", category);
+                    cmd.Parameters.AddWithValue("@color", color);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteEventFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM event
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

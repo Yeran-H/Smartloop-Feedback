@@ -138,5 +138,23 @@ namespace Smartloop_Feedback.Forms
                 }
             }
         }
+
+        private void eventLv_ItemActivate(object sender, EventArgs e)
+        {
+            if (eventLv.SelectedItems.Count > 0)
+            {
+                List<string> courseName = new List<string>();
+                courseName.Add(course.title);
+
+                using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)eventLv.SelectedItems[0].Tag))
+                {
+                    if (editEventForm.ShowDialog() == DialogResult.OK)
+                    {
+                        editEventForm.newEvent.UpdateEventInDatabase();
+                        PopulateEventView();
+                    }
+                }
+            }
+        }
     }
 }
