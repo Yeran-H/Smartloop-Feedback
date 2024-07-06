@@ -157,18 +157,6 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
-        private Event GetSelectedEvent()
-        {
-            using (EventListForm eventListForm = new EventListForm(student.eventList))
-            {
-                if (eventListForm.ShowDialog() == DialogResult.OK)
-                {
-                    return eventListForm.selectedEvent;
-                }
-            }
-            return null;
-        }
-
         private void EditEvent(Event selectedEvent)
         {
             using (AddEventForm editEventForm = new AddEventForm(student.GetCourseList(), selectedEvent))

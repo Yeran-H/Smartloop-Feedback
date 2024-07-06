@@ -1,5 +1,6 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
@@ -81,6 +82,7 @@ namespace Smartloop_Feedback.Forms
                 {
                     ListViewItem item = new ListViewItem(events.name);
                     item.SubItems.Add(events.date.ToString());
+                    item.Tag = events;
 
                     eventLv.Items.Add(item);
                 }
@@ -124,12 +126,17 @@ namespace Smartloop_Feedback.Forms
 
         private void eventBtn_Click(object sender, EventArgs e)
         {
+            List<string> courseName = new List<string>();
+            courseName.Add(course.title);
 
-        }
-
-        private void eventLv_ItemActivate(object sender, EventArgs e)
-        {
-            MessageBox.Show("Hi");
+            using (AddEventForm addEventForm = new AddEventForm(courseName, null))
+            {
+                if (addEventForm.ShowDialog() == DialogResult.OK)
+                {
+                    new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, course.title, addEventForm.newEvent.color, course.studentId, course.id);
+                    PopulateEventView();
+                }
+            }
         }
     }
 }
