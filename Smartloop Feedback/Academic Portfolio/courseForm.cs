@@ -65,9 +65,10 @@ namespace Smartloop_Feedback.Forms
                     ListViewItem item = new ListViewItem(assessment.name);
                     item.SubItems.Add(assessment.type);
                     item.SubItems.Add(assessment.date.ToString());
-                    item.SubItems.Add(assessment.status);
+                    item.SubItems.Add(assessment.status.ToString());
                     item.SubItems.Add(assessment.mark.ToString());
                     item.SubItems.Add(assessment.weight.ToString());
+                    item.Tag = assessment.id;
 
                     assessmentLv.Items.Add(item);
                 }
@@ -93,7 +94,7 @@ namespace Smartloop_Feedback.Forms
         {
             if (assessmentLv.SelectedItems.Count > 0)
             {
-                mainForm.position[3] = assessmentLv.SelectedIndices[0];
+                mainForm.position[3] = assessmentLv.SelectedItems[0].Tag;
                 mainForm.MainPannel(2);
             }
         }

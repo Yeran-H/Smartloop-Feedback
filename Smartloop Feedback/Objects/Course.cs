@@ -105,7 +105,7 @@ namespace Smartloop_Feedback.Objects
                         string description = reader.GetString(2); // Get the assessment description
                         string type = reader.GetString(3); // Get the assessment type
                         DateTime date = reader.GetDateTime(4); // Get the assessment date
-                        string status = reader.GetString(5); // Get the assessment status
+                        int status = reader.GetInt32(5); // Get the assessment status
                         int weight = reader.GetInt32(6); // Get the assessment weight
                         int mark = reader.GetInt32(7); // Get the assessment mark
                         int finalMark = reader.GetInt32(8);

@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -15,7 +17,7 @@ namespace Smartloop_Feedback.Objects
         public string description { get; set; }
         public string type { get; set; }
         public DateTime date { get; set; }
-        public string status { get; set; }
+        public int status { get; set; }
         public int weight { get; set; }
         public int mark { get; set; }
         public int finalMark { get; set; }
@@ -23,11 +25,12 @@ namespace Smartloop_Feedback.Objects
         public bool group { get; set; }
         public string canvasLink { get; set; }
         public Dictionary<int, Criteria> criteriaList { get; set; } // List of criteria for the assessment
+        public List<CheckList> checkList { get; set; }
         public int courseId { get; set; }
         public int studentId { get; set; }
 
         // Constructor to initialize an Assessment object and fetch criteria from the database
-        public Assessment(int id, string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
+        public Assessment(int id, string name, string description, string type, DateTime date, int status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.id = id;
             this.name = name;
@@ -44,11 +47,13 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.studentId = studentId;
             criteriaList = new Dictionary<int, Criteria>(); // Initialize the criteria list
+            checkList = new List<CheckList>();
             GetCriteriaFromDatabase(); // Fetch criteria from the database
+            GetCheckListFromDatabase();
         }
 
         // Constructor to initialize an Assessment object and add it to the database
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
+        public Assessment(string name, string description, string type, DateTime date, int status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink, int courseId, int studentId)
         {
             this.name = name;
             this.description = description;
@@ -64,6 +69,7 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.studentId = studentId;
             criteriaList = new Dictionary<int, Criteria>(); // Initialize the criteria list
+            checkList = new List<CheckList>();
             AddAssessmentToDatabase(); // Add the assessment to the database
         }
 
@@ -116,5 +122,43 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        private void GetCheckListFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, name, isChecked FROM checkList WHERE assessmentId = @assessmentId AND studentId = @studentId", conn); // SQL query to fetch criteria
+                cmd.Parameters.AddWithValue("@assessmentId", id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        int checkListId = reader.GetInt32(0);
+                        string checkListName = reader.GetString(1);
+                        bool isChecked = reader.GetBoolean(2);
+                        checkList.Add(new CheckList(checkListId, checkListName, isChecked, id, studentId));
+                    }
+                }
+            }
+
+            CalculateStatus();
+        }
+
+        public void CalculateStatus()
+        {
+            if (checkList.Count != 0)
+            {
+                int count = checkList.Count(item => item.isChecked);
+                status = (int)((count / (double)checkList.Count) * 100);
+            }
+            else
+            {
+                status = 0;
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using Smartloop_Feedback.Academic_Portfolio.Add_Form;
+using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -29,6 +30,24 @@ namespace Smartloop_Feedback
             markTb.Text = assessment.finalMark.ToString() + "/" + assessment.mark.ToString();
             dateP.Value = assessment.date;
             descriptionRb.Text = assessment.description;
+            PopulateCheckListBox();
+        }
+
+        private void PopulateCheckListBox()
+        {
+            checklistCb.Items.Clear();
+
+            foreach(var item in assessment.checkList)
+            {
+                // Add item to the CheckedListBox
+                int index = checklistCb.Items.Add(item.name);
+
+                // Set the checked state based on isChecked property
+                checklistCb.SetItemChecked(index, item.isChecked);
+            }
+
+            assessment.CalculateStatus();
+            progressBar.Value = assessment.status;
         }
 
         private void canvasBtn_Click(object sender, EventArgs e)
@@ -53,7 +72,32 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MainPannel(1);
+            mainForm.MainPannel(0);
+        }
+
+        private void itemBtn_Click(object sender, EventArgs e)
+        {
+            using (var addCheckList = new AddCheckListForm()) // Open the add year form
+            {
+                if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+                {
+                    string name = addCheckList.name; // Get the new year's name
+
+                    assessment.checkList.Add(new CheckList(name, assessment.studentId, false, assessment.id));
+                    
+                    PopulateCheckListBox();
+                }
+            }
+        }
+
+        private void checklistCb_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            int index = e.Index;
+            bool isChecked = e.NewValue == CheckState.Checked;
+            assessment.checkList[index].UpdateChecked(isChecked);
+
+            assessment.CalculateStatus();
+            progressBar.Value = assessment.status;
         }
     }
 }

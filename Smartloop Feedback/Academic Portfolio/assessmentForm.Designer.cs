@@ -123,6 +123,7 @@
             this.checklistCb.Name = "checklistCb";
             this.checklistCb.Size = new System.Drawing.Size(200, 154);
             this.checklistCb.TabIndex = 30;
+            this.checklistCb.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checklistCb_ItemCheck);
             // 
             // itemBtn
             // 
@@ -137,6 +138,7 @@
             this.itemBtn.TabIndex = 31;
             this.itemBtn.Text = "Add Item";
             this.itemBtn.UseVisualStyleBackColor = false;
+            this.itemBtn.Click += new System.EventHandler(this.itemBtn_Click);
             // 
             // backBtn
             // 
