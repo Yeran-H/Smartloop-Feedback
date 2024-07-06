@@ -22,7 +22,7 @@ namespace Smartloop_Feedback.Objects
         public bool individual { get; set; }
         public bool group { get; set; }
         public string canvasLink { get; set; }
-        public List<Criteria> criteriaList { get; set; } // List of criteria for the assessment
+        public Dictionary<int, Criteria> criteriaList { get; set; } // List of criteria for the assessment
         public int courseId { get; set; }
         public int studentId { get; set; }
 
@@ -43,7 +43,7 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.courseId = courseId;
             this.studentId = studentId;
-            criteriaList = new List<Criteria>(); // Initialize the criteria list
+            criteriaList = new Dictionary<int, Criteria>(); // Initialize the criteria list
             GetCriteriaFromDatabase(); // Fetch criteria from the database
         }
 
@@ -63,25 +63,8 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.courseId = courseId;
             this.studentId = studentId;
-            criteriaList = new List<Criteria>(); // Initialize the criteria list
+            criteriaList = new Dictionary<int, Criteria>(); // Initialize the criteria list
             AddAssessmentToDatabase(); // Add the assessment to the database
-        }
-
-        // Constructor to initialize an Assessment object without interacting with the database
-        public Assessment(string name, string description, string type, DateTime date, string status, int weight, int mark, int finalMark, bool individual, bool group, string canvasLink)
-        {
-            this.name = name;
-            this.description = description;
-            this.type = type;
-            this.date = date;
-            this.status = status;
-            this.weight = weight;
-            this.mark = mark;
-            this.finalMark = finalMark;
-            this.individual = individual;
-            this.group = group;
-            this.canvasLink = canvasLink;
-            criteriaList = new List<Criteria>(); // Initialize the criteria list
         }
 
         // Add the assessment to the database and get the generated ID
@@ -128,7 +111,7 @@ namespace Smartloop_Feedback.Objects
                     {
                         int criteriaId = reader.GetInt32(0); // Get the criteria ID
                         string criteriaDescription = reader.GetString(1); // Get the criteria description
-                        criteriaList.Add(new Criteria(criteriaId, criteriaDescription, this.id, studentId)); // Add the criteria to the criteria list
+                        criteriaList.Add(criteriaId, new Criteria(criteriaId, criteriaDescription, this.id, studentId)); // Add the criteria to the criteria list
                     }
                 }
             }

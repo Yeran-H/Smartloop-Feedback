@@ -19,8 +19,8 @@ namespace Smartloop_Feedback.Objects
         public int semesterId { get; set; }
         public int studentId { get; set; }
         public string canvasLink { get; set; }
-        public List<Assessment> assessmentList { get; set; } // List of assessments for the course
-        public List<Event> eventList { get; set; }
+        public Dictionary<int, Assessment> assessmentList { get; set; } // List of assessments for the course
+        public Dictionary<int, Event> eventList { get; set; }
 
         // Constructor to initialize a Course object and fetch assessments from the database
         public Course(int id, int code, string title, int creditPoint, string description, string canvasLink, int semesterId, int studentId)
@@ -33,8 +33,8 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
-            assessmentList = new List<Assessment>(); // Initialize the assessment list
-            eventList = new List<Event>();
+            assessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
+            eventList = new Dictionary<int, Event>();
             GetAssessmentFromDatabase(); // Fetch assessments from the database
         }
 
@@ -48,8 +48,8 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
-            assessmentList = new List<Assessment>();
-            eventList = new List<Event>();
+            assessmentList = new Dictionary<int, Assessment>();
+            eventList = new Dictionary<int, Event>();
             AddCourseToDatabase(); // Add the course to the database
         }
 
@@ -61,7 +61,7 @@ namespace Smartloop_Feedback.Objects
             this.creditPoint = creditPoint;
             this.description = description;
             this.canvasLink = canvasLink;
-            assessmentList = new List<Assessment>();
+            assessmentList = new Dictionary<int, Assessment>();
         }
 
         // Add the course to the database and get the generated ID
@@ -114,7 +114,7 @@ namespace Smartloop_Feedback.Objects
                         string canvasLink = reader.GetString(11); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        assessmentList.Add(new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, canvasLink, this.id, studentId));
+                        assessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, canvasLink, this.id, studentId));
                     }
                 }
             }
@@ -126,7 +126,7 @@ namespace Smartloop_Feedback.Objects
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT id, name, date, category, color FROM event WHERE courseId = @courseId", conn);
-                cmd.Parameters.AddWithValue("@courseId", id);
+                cmd.Parameters.AddWithValue("@courseId", this.id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -137,10 +137,15 @@ namespace Smartloop_Feedback.Objects
                         DateTime date = reader.GetDateTime(2);
                         string category = reader.GetString(3);
                         int color = reader.GetInt32(4);
-                        eventList.Add(new Event(id, name, date, studentId, id, category, color));
+                        eventList.Add(id, new Event(id, name, date, studentId, this.id, category, color));
                     }
                 }
             }
+        }
+
+        public void UpdateEvent(Event selectedEvent)
+        {
+            eventList[selectedEvent.id].UpdateEventInDatabase(selectedEvent);
         }
     }
 }

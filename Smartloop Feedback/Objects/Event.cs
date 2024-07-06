@@ -72,8 +72,14 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
-        public void UpdateEventInDatabase()
+        public void UpdateEventInDatabase(Event selectedEvent)
         {
+            name = selectedEvent.name;
+            date = selectedEvent.date;
+            category = selectedEvent.category;
+            courseId = selectedEvent.courseId;
+            color = selectedEvent.color;
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();

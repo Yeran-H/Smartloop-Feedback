@@ -15,7 +15,7 @@ namespace Smartloop_Feedback
         public int id { get; set; }
         public int yearId { get; set; }
         public int studentId { get; set; }
-        public List<Course> courseList { get; set; }
+        public Dictionary<int, Course> courseList { get; set; }
 
         // Constructor to initialize a Semester object and fetch courses from the database
         public Semester(string name, int id, int yearId, int studentId)
@@ -24,7 +24,7 @@ namespace Smartloop_Feedback
             this.id = id;
             this.yearId = yearId;
             this.studentId = studentId;
-            courseList = new List<Course>(); // Initialize the course list
+            courseList = new Dictionary<int, Course>(); // Initialize the course list
             GetCourseFromDatabase(); // Fetch courses from the database
         }
 
@@ -34,7 +34,7 @@ namespace Smartloop_Feedback
             this.name = name;
             this.yearId = yearId;
             this.studentId = studentId;
-            courseList = new List<Course>(); // Initialize the course list
+            courseList = new Dictionary<int, Course>(); // Initialize the course list
             AddSemesterToDatabase(); // Add the semester to the database
         }
 
@@ -76,7 +76,7 @@ namespace Smartloop_Feedback
                         int creditPoint = reader.GetInt32(3); // Get the course credit points
                         string description = reader.GetString(4); // Get the course description
                         string canvasLink = reader.GetString(5); // Get the course canvas link
-                        courseList.Add(new Course(courseId, code, title, creditPoint, description, canvasLink, this.id, studentId)); // Add the course to the course list
+                        courseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, canvasLink, this.id, studentId)); // Add the course to the course list
                     }
                 }
             }

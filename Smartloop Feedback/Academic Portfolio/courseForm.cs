@@ -20,6 +20,7 @@ namespace Smartloop_Feedback.Forms
 
         private void CourseForm_Load(object sender, EventArgs e)
         {
+            course.GetEventsFromDatabase();
             PopulateAssessmentView();
             PopulateEventView();
         }
@@ -59,7 +60,7 @@ namespace Smartloop_Feedback.Forms
         {
             if (course.assessmentList != null)
             {
-                foreach (Assessment assessment in course.assessmentList)
+                foreach (Assessment assessment in course.assessmentList.Values)
                 {
                     ListViewItem item = new ListViewItem(assessment.name);
                     item.SubItems.Add(assessment.type);
@@ -75,10 +76,9 @@ namespace Smartloop_Feedback.Forms
 
         private void PopulateEventView()
         {
-            course.GetEventsFromDatabase();
             if (course.eventList != null)
             {
-                foreach (Event events in course.eventList)
+                foreach (Event events in course.eventList.Values)
                 {
                     ListViewItem item = new ListViewItem(events.name);
                     item.SubItems.Add(events.date.ToString());
@@ -150,7 +150,7 @@ namespace Smartloop_Feedback.Forms
                 {
                     if (editEventForm.ShowDialog() == DialogResult.OK)
                     {
-                        editEventForm.newEvent.UpdateEventInDatabase();
+                        course.UpdateEvent(editEventForm.newEvent);
                         PopulateEventView();
                     }
                 }

@@ -13,7 +13,7 @@ namespace Smartloop_Feedback
         public string name { get; set; }
         public int studentId { get; } // Student ID associated with the year
         public int id { get; set; } // Year ID
-        public List<Semester> semesterList { get; set; } // List of semesters in the year
+        public Dictionary<string, Semester> semesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
         public Year(string name, int studentId, int id)
@@ -21,7 +21,7 @@ namespace Smartloop_Feedback
             this.name = name;
             this.studentId = studentId;
             this.id = id;
-            semesterList = new List<Semester>(); // Initialize the semester list
+            semesterList = new Dictionary<string, Semester>(); // Initialize the semester list
             GetSemesterFromDatabase(); // Fetch semesters from the database
         }
 
@@ -30,7 +30,7 @@ namespace Smartloop_Feedback
         {
             this.name = name;
             this.studentId = studentId;
-            semesterList = new List<Semester>(); // Initialize the semester list
+            semesterList = new Dictionary<string, Semester>(); // Initialize the semester list
             AddYearToDatabase(); // Add the year to the database
             AddSemesterToDatabase(semesterNames); // Add the semesters to the database
         }
@@ -57,7 +57,8 @@ namespace Smartloop_Feedback
         {
             foreach (string semesterName in semesterNames) // Loop through each semester name
             {
-                semesterList.Add(new Semester(semesterName, id, studentId)); // Add a new semester to the semester list
+                Semester semester = new Semester(semesterName, id, studentId);
+                semesterList.Add(semester.name, semester); // Add a new semester to the semester list
             }
         }
 
@@ -77,29 +78,10 @@ namespace Smartloop_Feedback
                     {
                         string name = reader.GetString(0); // Get the semester name
                         int id = reader.GetInt32(1); // Get the semester ID
-                        semesterList.Add(new Semester(name, id, this.id, studentId)); // Add the semester to the semester list
+                        semesterList.Add(name, new Semester(name, id, this.id, studentId)); // Add the semester to the semester list
                     }
                 }
             }
-        }
-
-        // Get the number of semesters in the year
-        public int NumSemester()
-        {
-            return semesterList?.Count ?? 0; // Return the count of the semester list, or 0 if it is null
-        }
-
-        // Get the index of a semester by its name
-        public int SemesterIndex(string semesterName)
-        {
-            for (int i = 0; i < NumSemester(); i++) // Loop through each semester
-            {
-                if (semesterList[i].name.Equals(semesterName, StringComparison.OrdinalIgnoreCase)) // Compare the semester name
-                {
-                    return i; // Return the index if the names match
-                }
-            }
-            return -1; // Return -1 if the semester is not found
         }
     }
 }
