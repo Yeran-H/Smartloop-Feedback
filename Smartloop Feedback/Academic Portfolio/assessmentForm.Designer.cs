@@ -376,7 +376,6 @@
             // 
             this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
             this.dateP.BorderSize = 0;
-            this.dateP.Enabled = false;
             this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
             this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
             this.dateP.Location = new System.Drawing.Point(587, 9);
