@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
 
@@ -164,5 +165,41 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        public void UpdateToDatabase(string description, DateTime date, bool isFinalised)
+        {
+            this.description = description;
+            this.date = date;
+            this.isFinalised = isFinalised;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE assessment
+                    SET 
+                        mark = @mark,
+                        finalMark = @finalMark,
+                        description = @description,
+                        date = @date,
+                        isFinalised = @isFinalised
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@mark", mark);
+                    cmd.Parameters.AddWithValue("@finalMark", finalMark);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -111,6 +111,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
+            assessment.UpdateToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
             mainForm.MainPannel(0);
         }
 
@@ -145,8 +146,8 @@ namespace Smartloop_Feedback
 
             if(parts.Length == 2)
             {
-                int firstNumber = int.Parse(parts[0]);
-                int secondNumber = int.Parse(parts[1]);
+                double firstNumber = double.Parse(parts[0]);
+                double secondNumber = double.Parse(parts[1]);
 
                 if(firstNumber > secondNumber)
                 {
