@@ -40,6 +40,7 @@ namespace Smartloop_Feedback
 
             // Configure the DataGridView for criteria
             LoadData();
+            isFinalised();
         }
 
         private void PopulateCheckListBox()
@@ -88,6 +89,19 @@ namespace Smartloop_Feedback
                 criteriaDgv.Rows.Add(row);
             }
         }   
+
+        private void isFinalised()
+        {
+            if(assessment.isFinalised)
+            {
+                markTb.Enabled = false;
+                dateP.Enabled = false;
+                descriptionRb.Enabled = false;
+                checklistCb.Enabled = false;
+                itemBtn.Enabled = false;
+                submissionBtn.Enabled = false;
+            }
+        }
 
         private void canvasBtn_Click(object sender, EventArgs e)
         {
