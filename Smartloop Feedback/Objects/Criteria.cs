@@ -14,7 +14,7 @@ namespace Smartloop_Feedback.Objects
         public int id { get; set; }
         public string description { get; set; }
         public int assessmentId { get; set; }
-        public Dictionary<int, Rating> ratingList { get; set; } // List of ratings for the criteria
+        public List<Rating> ratingList { get; set; } // List of ratings for the criteria
         public int studentId { get; set; }
 
         // Constructor to initialize a Criteria object and fetch ratings from the database
@@ -24,7 +24,7 @@ namespace Smartloop_Feedback.Objects
             this.description = description;
             this.assessmentId = assessmentId;
             this.studentId = studentId;
-            ratingList = new Dictionary<int, Rating>(); // Initialize the rating list
+            ratingList = new List<Rating>(); // Initialize the rating list
             GetRatingFromDatabase(); // Fetch ratings from the database
         }
 
@@ -34,7 +34,7 @@ namespace Smartloop_Feedback.Objects
             this.description = description;
             this.assessmentId = assessmentId;
             this.studentId = studentId;
-            ratingList = new Dictionary<int, Rating>(); // Initialize the rating list
+            ratingList = new List<Rating>(); // Initialize the rating list
             AddCriteriaToDatabase(); // Add the criteria to the database
         }
 
@@ -42,7 +42,7 @@ namespace Smartloop_Feedback.Objects
         public Criteria(string description)
         {
             this.description = description;
-            ratingList = new Dictionary<int, Rating>(); // Initialize the rating list
+            ratingList = new List<Rating>(); // Initialize the rating list
         }
 
         // Add the criteria to the database and get the generated ID
@@ -80,7 +80,7 @@ namespace Smartloop_Feedback.Objects
                         int ratingId = reader.GetInt32(0); // Get the rating ID
                         string ratingDescription = reader.GetString(1); // Get the rating description
                         string grade = reader.GetString(2); // Get the rating grade
-                        ratingList.Add(ratingId, new Rating(ratingId, ratingDescription, grade, this.id, studentId)); // Add the rating to the rating list
+                        ratingList.Add(new Rating(ratingId, ratingDescription, grade, this.id, studentId)); // Add the rating to the rating list
                     }
                 }
             }

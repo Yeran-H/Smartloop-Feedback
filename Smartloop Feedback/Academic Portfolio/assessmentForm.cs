@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -30,7 +31,15 @@ namespace Smartloop_Feedback
             markTb.Text = assessment.finalMark.ToString() + "/" + assessment.mark.ToString();
             dateP.Value = assessment.date;
             descriptionRb.Text = assessment.description;
+            finaliseCb.Checked = assessment.isFinalised;
             PopulateCheckListBox();
+
+            // Set initial visibility of panels
+            panelDetails.Visible = true;
+            panelCriteria.Visible = false;
+
+            // Configure the DataGridView for criteria
+            LoadData();
         }
 
         private void PopulateCheckListBox()
@@ -49,6 +58,36 @@ namespace Smartloop_Feedback
             assessment.CalculateStatus();
             progressBar.Value = assessment.status;
         }
+
+        private void LoadData()
+        {
+            // Set up the initial DataGridView column
+            criteriaDgv.ColumnCount = 1;
+            criteriaDgv.Columns[0].Name = "Criteria";
+            criteriaDgv.Columns[0].Width = 300;
+
+            // Allow the user to add rows
+            criteriaDgv.AllowUserToAddRows = true;
+
+            foreach(Rating rating in assessment.criteriaList[0].ratingList)
+            {
+                criteriaDgv.Columns.Add(rating.grade, rating.grade);
+            }
+
+            for(int i = 0; i < assessment.criteriaList.Count; i++)
+            {
+                DataGridViewRow row = new DataGridViewRow();
+                row.CreateCells(criteriaDgv);
+                row.Cells[0].Value = assessment.criteriaList[i].description;
+
+                for(int j = 0; j < assessment.criteriaList[i].ratingList.Count; j++)
+                {
+                    row.Cells[j+1].Value = assessment.criteriaList[i].ratingList[j].description;
+                }
+
+                criteriaDgv.Rows.Add(row);
+            }
+        }   
 
         private void canvasBtn_Click(object sender, EventArgs e)
         {
@@ -98,6 +137,52 @@ namespace Smartloop_Feedback
 
             assessment.CalculateStatus();
             progressBar.Value = assessment.status;
+        }
+
+        private void markTb_Leave(object sender, EventArgs e)
+        {
+            string[] parts = markTb.Text.Split('/');
+
+            if(parts.Length == 2)
+            {
+                int firstNumber = int.Parse(parts[0]);
+                int secondNumber = int.Parse(parts[1]);
+
+                if(firstNumber > secondNumber)
+                {
+                    MessageBox.Show("Please ensure that the total mark is not more then 100%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                assessment.finalMark = firstNumber;
+                assessment.mark = secondNumber;
+            }
+            else
+            {
+                MessageBox.Show("Please enter marks as xx/xx", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void markTb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Check if the key pressed is not a digit or '/'
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '/' && !char.IsControl(e.KeyChar))
+            {
+                // If it's not, then handle the event and prevent the character from being entered
+                e.Handled = true;
+            }
+        }
+
+        private void bacBtn_Click(object sender, EventArgs e)
+        {
+            panelDetails.Visible = true;
+            panelCriteria.Visible = false;
+        }
+
+        private void rubricBtn_Click(object sender, EventArgs e)
+        {
+            panelDetails.Visible = false;
+            panelCriteria.Visible = true;
         }
     }
 }

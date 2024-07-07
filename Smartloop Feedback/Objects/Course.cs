@@ -92,7 +92,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
@@ -106,15 +106,16 @@ namespace Smartloop_Feedback.Objects
                         string type = reader.GetString(3); // Get the assessment type
                         DateTime date = reader.GetDateTime(4); // Get the assessment date
                         int status = reader.GetInt32(5); // Get the assessment status
-                        int weight = reader.GetInt32(6); // Get the assessment weight
-                        int mark = reader.GetInt32(7); // Get the assessment mark
-                        int finalMark = reader.GetInt32(8);
+                        double weight = (double)reader.GetDecimal(6); // Get the assessment weight
+                        double mark = (double)reader.GetDecimal(7); // Get the assessment mark
+                        double finalMark = (double)reader.GetDecimal(8);
                         bool individual = reader.GetBoolean(9); // Get the individual status
                         bool group = reader.GetBoolean(10); // Get the group status
-                        string canvasLink = reader.GetString(11); // Get the assessment canvas link
+                        bool isFinalised = reader.GetBoolean(11);
+                        string canvasLink = reader.GetString(12); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        assessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, canvasLink, this.id, studentId));
+                        assessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, this.id, studentId));
                     }
                 }
             }
@@ -122,6 +123,7 @@ namespace Smartloop_Feedback.Objects
 
         public void GetEventsFromDatabase()
         {
+            eventList.Clear();
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
@@ -146,6 +148,57 @@ namespace Smartloop_Feedback.Objects
         public void UpdateEvent(Event selectedEvent)
         {
             eventList[selectedEvent.id].UpdateEventInDatabase(selectedEvent);
+        }
+
+        public double CalculateCurrentMark()
+        {
+            double totalWeightedMarks = 0.0;
+            double TotalWeight = 0.0;
+
+            foreach(var assessment in assessmentList.Values)
+            {
+                if(assessment.isFinalised)
+                {
+                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
+                    TotalWeight += assessment.weight;
+                }
+            }
+
+            return TotalWeight > 0 ? (totalWeightedMarks / TotalWeight) * 100 : 0.0;
+        }
+
+        public double CalculateTargetMark(double targetMark)
+        {
+            double totalWeightedMarks = 0.0;
+            double totalWeight = 0.0;
+            double remainingWeight = 0.0;
+
+            foreach (var assessment in assessmentList.Values)
+            {
+                if (assessment.isFinalised)
+                {
+                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
+                    totalWeight += assessment.weight;
+                }
+                else
+                {
+                    remainingWeight += assessment.weight;
+                }
+            }
+
+            remainingWeight += 100 - totalWeight - remainingWeight;
+
+            if (remainingWeight == 0)
+            {
+                // All assessments are finalized
+                double currentMark = totalWeight > 0 ? totalWeightedMarks / totalWeight : 0.0;
+                return currentMark >= targetMark ? 0.0 : double.NaN; // Return NaN if it's not possible to achieve the target
+            }
+
+            double requiredTotalMarks = targetMark * (totalWeight + remainingWeight);
+            double requiredAdditionalMarks = requiredTotalMarks - totalWeightedMarks;
+
+            return (requiredAdditionalMarks / remainingWeight) * 100;
         }
     }
 }

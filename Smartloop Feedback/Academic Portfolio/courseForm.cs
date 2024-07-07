@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.PerformanceData;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -23,6 +24,10 @@ namespace Smartloop_Feedback.Forms
             course.GetEventsFromDatabase();
             PopulateAssessmentView();
             PopulateEventView();
+            currentTb.Text = course.CalculateCurrentMark().ToString("F2") + "%";
+            cTb.Text = course.CalculateTargetMark(0.65).ToString("F2") + "%";
+            dTb.Text = course.CalculateTargetMark(0.75).ToString("F2") + "%";
+            hdTb.Text = course.CalculateTargetMark(0.85).ToString("F2") + "%";
         }
 
         private void canvasBtn_Click(object sender, EventArgs e)
@@ -62,11 +67,13 @@ namespace Smartloop_Feedback.Forms
             {
                 foreach (Assessment assessment in course.assessmentList.Values)
                 {
+                    double percentage = (assessment.finalMark / assessment.mark) * 100;
+
                     ListViewItem item = new ListViewItem(assessment.name);
                     item.SubItems.Add(assessment.type);
                     item.SubItems.Add(assessment.date.ToString());
                     item.SubItems.Add(assessment.status.ToString());
-                    item.SubItems.Add(assessment.mark.ToString());
+                    item.SubItems.Add(percentage.ToString("F2") + "%");
                     item.SubItems.Add(assessment.weight.ToString());
                     item.Tag = assessment.id;
 

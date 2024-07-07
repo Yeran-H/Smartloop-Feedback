@@ -141,7 +141,7 @@ namespace Smartloop_Feedback.Forms
         private void submitBtn_Click(object sender, EventArgs e)
         {
             // Add a new assessment to the course
-            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, 0, Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId);
+            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, 0, Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.id, course.studentId);
             course.assessmentList.Add(assessment.id, assessment);
 
             // Prepare column names for ratings
@@ -158,12 +158,11 @@ namespace Smartloop_Feedback.Forms
                 if (row.IsNewRow) continue;
 
                 var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.id, assessment.studentId);
-                course.assessmentList[assessment.id].criteriaList.Add(criteria.id, criteria);
+                course.assessmentList[assessment.id].criteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    var rating = new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, assessment.studentId);
-                    course.assessmentList[assessment.id].criteriaList[criteria.id].ratingList.Add(rating.id, rating);
+                    course.assessmentList[assessment.id].criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, assessment.studentId));
                 }
             }
 
