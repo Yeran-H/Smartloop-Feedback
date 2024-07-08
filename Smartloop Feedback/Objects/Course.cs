@@ -19,7 +19,8 @@ namespace Smartloop_Feedback.Objects
         public int semesterId { get; set; }
         public int studentId { get; set; }
         public string canvasLink { get; set; }
-        public List<Assessment> assessmentList { get; set; } // List of assessments for the course
+        public Dictionary<int, Assessment> assessmentList { get; set; } // List of assessments for the course
+        public Dictionary<int, Event> eventList { get; set; }
 
         // Constructor to initialize a Course object and fetch assessments from the database
         public Course(int id, int code, string title, int creditPoint, string description, string canvasLink, int semesterId, int studentId)
@@ -32,7 +33,8 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
-            assessmentList = new List<Assessment>(); // Initialize the assessment list
+            assessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
+            eventList = new Dictionary<int, Event>();
             GetAssessmentFromDatabase(); // Fetch assessments from the database
         }
 
@@ -46,7 +48,8 @@ namespace Smartloop_Feedback.Objects
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
-            assessmentList = new List<Assessment>();
+            assessmentList = new Dictionary<int, Assessment>();
+            eventList = new Dictionary<int, Event>();
             AddCourseToDatabase(); // Add the course to the database
         }
 
@@ -58,7 +61,7 @@ namespace Smartloop_Feedback.Objects
             this.creditPoint = creditPoint;
             this.description = description;
             this.canvasLink = canvasLink;
-            assessmentList = new List<Assessment>();
+            assessmentList = new Dictionary<int, Assessment>();
         }
 
         // Add the course to the database and get the generated ID
@@ -89,7 +92,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, individual, [group], canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
@@ -102,18 +105,100 @@ namespace Smartloop_Feedback.Objects
                         string description = reader.GetString(2); // Get the assessment description
                         string type = reader.GetString(3); // Get the assessment type
                         DateTime date = reader.GetDateTime(4); // Get the assessment date
-                        string status = reader.GetString(5); // Get the assessment status
-                        int weight = reader.GetInt32(6); // Get the assessment weight
-                        int mark = reader.GetInt32(7); // Get the assessment mark
-                        bool individual = reader.GetBoolean(8); // Get the individual status
-                        bool group = reader.GetBoolean(9); // Get the group status
-                        string canvasLink = reader.GetString(10); // Get the assessment canvas link
+                        int status = reader.GetInt32(5); // Get the assessment status
+                        double weight = (double)reader.GetDecimal(6); // Get the assessment weight
+                        double mark = (double)reader.GetDecimal(7); // Get the assessment mark
+                        double finalMark = (double)reader.GetDecimal(8);
+                        bool individual = reader.GetBoolean(9); // Get the individual status
+                        bool group = reader.GetBoolean(10); // Get the group status
+                        bool isFinalised = reader.GetBoolean(11);
+                        string canvasLink = reader.GetString(12); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        assessmentList.Add(new Assessment(assessmentId, name, description, type, date, status, weight, mark, individual, group, canvasLink, this.id, studentId));
+                        assessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, this.id, studentId));
                     }
                 }
             }
+        }
+
+        public void GetEventsFromDatabase()
+        {
+            eventList.Clear();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, category, color FROM event WHERE courseId = @courseId", conn);
+                cmd.Parameters.AddWithValue("@courseId", this.id);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        DateTime date = reader.GetDateTime(2);
+                        string category = reader.GetString(3);
+                        int color = reader.GetInt32(4);
+                        eventList.Add(id, new Event(id, name, date, studentId, this.id, category, color));
+                    }
+                }
+            }
+        }
+
+        public void UpdateEvent(Event selectedEvent)
+        {
+            eventList[selectedEvent.id].UpdateEventInDatabase(selectedEvent);
+        }
+
+        public double CalculateCurrentMark()
+        {
+            double totalWeightedMarks = 0.0;
+            double TotalWeight = 0.0;
+
+            foreach(var assessment in assessmentList.Values)
+            {
+                if(assessment.isFinalised)
+                {
+                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
+                    TotalWeight += assessment.weight;
+                }
+            }
+
+            return TotalWeight > 0 ? (totalWeightedMarks / TotalWeight) * 100 : 0.0;
+        }
+
+        public double CalculateTargetMark(double targetMark)
+        {
+            double totalWeightedMarks = 0.0;
+            double totalWeight = 0.0;
+            double remainingWeight = 0.0;
+
+            foreach (var assessment in assessmentList.Values)
+            {
+                if (assessment.isFinalised)
+                {
+                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
+                    totalWeight += assessment.weight;
+                }
+                else
+                {
+                    remainingWeight += assessment.weight;
+                }
+            }
+
+            remainingWeight += 100 - totalWeight - remainingWeight;
+
+            if (remainingWeight == 0)
+            {
+                // All assessments are finalized
+                double currentMark = totalWeight > 0 ? totalWeightedMarks / totalWeight : 0.0;
+                return currentMark >= targetMark ? 0.0 : double.NaN; // Return NaN if it's not possible to achieve the target
+            }
+
+            double requiredTotalMarks = targetMark * (totalWeight + remainingWeight);
+            double requiredAdditionalMarks = requiredTotalMarks - totalWeightedMarks;
+
+            return (requiredAdditionalMarks / remainingWeight) * 100;
         }
     }
 }

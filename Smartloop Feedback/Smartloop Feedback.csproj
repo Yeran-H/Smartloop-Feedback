@@ -144,6 +144,18 @@
     <Compile Include="Academic Portfolio\Add Form\AddAssessmentForm.Designer.cs">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.Designer.cs">
+      <DependentUpon>AddCheckListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\AssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\AssessmentForm.Designer.cs">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,6 +223,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Assessment.cs" />
+    <Compile Include="Objects\CheckList.cs" />
     <Compile Include="Objects\Course.cs" />
     <Compile Include="Objects\Criteria.cs" />
     <Compile Include="Objects\DataPicker.cs">
@@ -236,6 +249,12 @@
     <Compile Include="Objects\Year.cs" />
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\Add Form\AddCheckListForm.resx">
+      <DependentUpon>AddCheckListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\assessmentForm.resx">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Course Schedule\AddEventForm.resx">
       <DependentUpon>AddEventForm.cs</DependentUpon>

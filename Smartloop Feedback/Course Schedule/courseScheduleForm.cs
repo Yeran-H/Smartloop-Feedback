@@ -97,18 +97,18 @@ namespace Smartloop_Feedback.Forms
 
         private Color GetEventColor(DateTime date)
         {
-            var eventForDate = student.eventList.FirstOrDefault(e => e.date.Date == date.Date);
+            var eventForDate = student.eventList.Values.FirstOrDefault(e => e.date.Date == date.Date);
             return eventForDate != null ? Color.FromArgb(eventForDate.color) : SystemColors.Control;
         }
 
         private bool HasEvents(DateTime date)
         {
-            return student.eventList.Any(e => e.date.Date == date.Date);
+            return student.eventList.Values.Any(e => e.date.Date == date.Date);
         }
 
         private void DayButton_Click(object sender, EventArgs e, DateTime date)
         {
-            var dayEvents = student.eventList.Where(ev => ev.date.Date == date.Date).ToList();
+            var dayEvents = student.eventList.Values.Where(ev => ev.date.Date == date.Date).ToList();
             if (dayEvents.Count > 0)
             {
                 using (EventListForm eventListForm = new EventListForm(dayEvents))
@@ -151,22 +151,11 @@ namespace Smartloop_Feedback.Forms
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    student.eventList.Add(new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category)));
+                    Event events = new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category));
+                    student.eventList.Add(events.id, events);
                     DisplayCurrentMonth();
                 }
             }
-        }
-
-        private Event GetSelectedEvent()
-        {
-            using (EventListForm eventListForm = new EventListForm(student.eventList))
-            {
-                if (eventListForm.ShowDialog() == DialogResult.OK)
-                {
-                    return eventListForm.selectedEvent;
-                }
-            }
-            return null;
         }
 
         private void EditEvent(Event selectedEvent)

@@ -53,15 +53,19 @@ namespace Smartloop_Feedback.Forms
 
         private void FillCategory()
         {
+            categoryCb.Items.Clear(); // Clear any existing items
             categoryCb.Items.Add("None");
 
-            foreach(var item in courseList)
+            // Assuming courseList is a Dictionary<int, string> or Dictionary<string, string>
+            foreach (String name in courseList)
             {
-                categoryCb.Items.Add(item);
+                categoryCb.Items.Add(name);
             }
 
             categoryCb.SelectedIndex = 0;
         }
+
+
 
         private void eventTb_Click(object sender, EventArgs e)
         {

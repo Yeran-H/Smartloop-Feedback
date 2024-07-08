@@ -17,7 +17,7 @@ namespace Smartloop_Feedback
     public partial class MainForm : Form
     {
         private Student student;
-        public int[] position;
+        public List<object> position;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -50,7 +50,7 @@ namespace Smartloop_Feedback
             */
 
             this.student = student;
-            position = new int[5];
+            position = new List<object>(new object[5]);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -207,14 +207,14 @@ namespace Smartloop_Feedback
                     dashboardBtn_Click(this, EventArgs.Empty);
                     break;
                 case 2:
-                    AcademicSemesterBar semester = new AcademicSemesterBar(this, student.yearList[position[0]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    AcademicSemesterBar semester = new AcademicSemesterBar(this, student.yearList[(string)position[0]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     semester.FormBorderStyle = FormBorderStyle.None;
                     menuDropPl.Visible = true;
                     this.menuDropPl.Controls.Add(semester);
                     semester.Show();
                     break;
                 case 3:
-                    AcademicCourseBar subject = new AcademicCourseBar(this, student.yearList[position[0]].semesterList[position[1]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    AcademicCourseBar subject = new AcademicCourseBar(this, student.yearList[(string)position[0]].semesterList[(string)position[1]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     subject.FormBorderStyle = FormBorderStyle.None;
                     menuDropPl.Visible = true;
                     this.menuDropPl.Controls.Add(subject);
@@ -229,17 +229,25 @@ namespace Smartloop_Feedback
             switch (num)
             {
                 case 0:
-                    titleLb.Text = student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].title;
+                    titleLb.Text = student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]].title;
                     this.formLoaderPl.Controls.Clear();
-                    CourseForm course = new CourseForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CourseForm course = new CourseForm(student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     course.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(course);
                     course.Show();
                     break;
                 case 1:
-                    titleLb.Text = student.yearList[position[0]].semesterList[position[1]].courseList[position[2]].title;
+                    titleLb.Text = student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]].title;
                     this.formLoaderPl.Controls.Clear();
-                    AddAssessmentForm assessmentForm = new AddAssessmentForm(student.yearList[position[0]].semesterList[position[1]].courseList[position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    AddAssessmentForm addAssessmentForm = new AddAssessmentForm(student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    addAssessmentForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(addAssessmentForm);
+                    addAssessmentForm.Show();
+                    break;
+                case 2:
+                    titleLb.Text = student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]].assessmentList[(int)position[3]].name;
+                    this.formLoaderPl.Controls.Clear();
+                    AssessmentForm assessmentForm = new AssessmentForm(student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]].assessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     assessmentForm.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(assessmentForm);
                     assessmentForm.Show();

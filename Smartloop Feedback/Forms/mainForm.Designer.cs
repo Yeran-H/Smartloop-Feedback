@@ -178,8 +178,8 @@
             this.panel2.Controls.Add(this.studentIdLb);
             this.panel2.Controls.Add(this.nameLb);
             this.panel2.Controls.Add(this.profilePb);
-            this.panel2.Controls.Add(this.navPl);
             this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.navPl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -243,9 +243,9 @@
             this.panel3.Controls.Add(this.exitPb);
             this.panel3.Controls.Add(this.titleLb);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(189, 0);
+            this.panel3.Location = new System.Drawing.Point(185, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(746, 538);
+            this.panel3.Size = new System.Drawing.Size(750, 538);
             this.panel3.TabIndex = 2;
             // 
             // formLoaderPl
@@ -254,7 +254,7 @@
             this.formLoaderPl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.formLoaderPl.Location = new System.Drawing.Point(0, 61);
             this.formLoaderPl.Name = "formLoaderPl";
-            this.formLoaderPl.Size = new System.Drawing.Size(746, 477);
+            this.formLoaderPl.Size = new System.Drawing.Size(750, 477);
             this.formLoaderPl.TabIndex = 11;
             // 
             // exitPb
@@ -281,7 +281,7 @@
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "Dashboard";
             // 
-            // mainForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -291,7 +291,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mainForm";
             this.Load += new System.EventHandler(this.mainForm_Load);
