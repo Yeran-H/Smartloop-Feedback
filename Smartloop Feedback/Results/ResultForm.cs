@@ -20,7 +20,6 @@ namespace Smartloop_Feedback.Results
         public List<double> wamSemesterList;
         public List<double> gpaYearList;
         public List<double> gpaSemesterList;
-        public int totalCreditPoint;
 
         public ResultForm(Student student)
         {
@@ -34,6 +33,7 @@ namespace Smartloop_Feedback.Results
             PopulateDgv();
             filterCb.Text = "Year";
             PopulateCharts();
+            CalculateWAMGPA();
         }
 
         private void PopulateDgv()
@@ -81,7 +81,6 @@ namespace Smartloop_Feedback.Results
                     wamYear += wamSemester * totalCreditPointsSemester;
                     gpaYear += gpaSemester * totalCreditPointsSemester;
                     totalCreditPointsYear += totalCreditPointsSemester;
-                    totalCreditPoint += totalCreditPointsSemester;
 
                     wamSemesterList.Add(wamSemester);
                     gpaSemesterList.Add(gpaSemester);
@@ -133,6 +132,48 @@ namespace Smartloop_Feedback.Results
                 gpaChart.Series["GPA"].Points.AddXY(i + 1, gpaList[i]);
             }
         }
+
+        private void CalculateWAMGPA()
+        {
+            double totalWAM = 0.0;
+            double totalGPA = 0.0;
+            int totalCreditPoints = 0;
+
+            // Ensure that totalCreditPoint is the sum of all credit points
+            foreach (Year year in student.yearList.Values)
+            {
+                foreach (Semester semester in year.semesterList.Values)
+                {
+                    foreach (Course course in semester.courseList.Values)
+                    {
+                        totalCreditPoints += course.creditPoint;
+                    }
+                }
+            }
+
+            // Calculate the total WAM
+            for (int i = 0; i < wamYearList.Count; i++)
+            {
+                totalWAM += wamYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+            }
+
+            // Calculate the total GPA
+            for (int i = 0; i < gpaYearList.Count; i++)
+            {
+                totalGPA += gpaYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+            }
+
+            if (totalCreditPoints > 0)
+            {
+                totalWAM /= totalCreditPoints;
+                totalGPA /= totalCreditPoints;
+            }
+
+            // Print the total WAM and GPA
+            wamTb.Text= totalWAM.ToString();
+            gpaTb.Text= totalGPA.ToString();
+        }
+
 
         private void searchTextBox_TextChanged(object sender, EventArgs e)
         {
