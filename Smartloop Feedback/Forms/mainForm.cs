@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using System.IO;
 using Google.Protobuf.WellKnownTypes;
 using Smartloop_Feedback.Forms;
+using Smartloop_Feedback.Results;
 
 namespace Smartloop_Feedback
 {
@@ -92,12 +93,12 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Results";
             this.formLoaderPl.Controls.Clear();
-            /*
-            resultForm result = new resultForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            
+            ResultForm result = new ResultForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             result.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(result);
             result.Show();
-             */
+             
         }
 
         private void academicBtn_Click(object sender, EventArgs e)
@@ -108,15 +109,6 @@ namespace Smartloop_Feedback
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
             MenuPannel(0);
-
-            /*
-            titleLb.Text = "Academic Portfolio";
-            this.formLoaderPl.Controls.Clear();
-            academicForm academic = new academicForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            academic.FormBorderStyle = FormBorderStyle.None;
-            this.formLoaderPl.Controls.Add(academic);
-            academic.Show();
-             */
         }
 
         private void courseBtn_Click(object sender, EventArgs e)
