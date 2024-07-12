@@ -124,6 +124,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -225,6 +226,7 @@
     <Compile Include="Objects\Assessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
     <Compile Include="Objects\Course.cs" />
+    <Compile Include="Objects\CourseResult.cs" />
     <Compile Include="Objects\Criteria.cs" />
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
@@ -247,6 +249,12 @@
     <Compile Include="Objects\Semester.cs" />
     <Compile Include="Objects\Student.cs" />
     <Compile Include="Objects\Year.cs" />
+    <Compile Include="Results\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Results\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -296,6 +304,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Results\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -390,6 +401,7 @@
     <None Include="Resources\right arrow.png" />
     <None Include="Resources\back1.png" />
     <None Include="Resources\Event.png" />
+    <None Include="Resources\search.png" />
     <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
