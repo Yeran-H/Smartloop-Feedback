@@ -65,7 +65,7 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); 
-                SqlCommand cmd = new SqlCommand("SELECT id, name, date, courseId, category, color FROM event WHERE studentId = @studentId", conn); 
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, courseId, category, color FROM event WHERE studentId = @studentId ORDER BY date", conn); 
                 cmd.Parameters.AddWithValue("@studentId", studentId); 
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) 

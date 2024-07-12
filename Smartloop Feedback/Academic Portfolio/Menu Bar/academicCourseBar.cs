@@ -83,7 +83,7 @@ namespace Smartloop_Feedback
                         Course course = addCourseForm.course;
                         if (course != null)
                         {
-                            Course temp = new Course(course.code, course.title, course.creditPoint, course.description, course.canvasLink, semester.id, semester.studentId);
+                            Course temp = new Course(course.code, course.title, course.creditPoint, course.description, false, course.canvasLink, semester.id, semester.studentId);
                             semester.courseList.Add(temp.id, temp);
                         }
                         else

@@ -128,7 +128,7 @@ namespace Smartloop_Feedback
         private void saveBtn_Click(object sender, EventArgs e)
         {
             // Create a new Course object with details from the form
-            course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, canvasTb.Text);
+            course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, false, canvasTb.Text);
             if (!string.IsNullOrEmpty(course.title) || !string.IsNullOrEmpty(course.description) || !string.IsNullOrEmpty(course.canvasLink))
             {
                 this.DialogResult = DialogResult.OK;

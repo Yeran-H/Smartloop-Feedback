@@ -15,12 +15,12 @@
 
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea5 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend5 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series5 = new System.Windows.Forms.DataVisualization.Charting.Series();
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea6 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend6 = new System.Windows.Forms.DataVisualization.Charting.Legend();
-            System.Windows.Forms.DataVisualization.Charting.Series series6 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.Series series2 = new System.Windows.Forms.DataVisualization.Charting.Series();
             this.resultDgv = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.titlePl = new System.Windows.Forms.Panel();
@@ -156,17 +156,17 @@
             // 
             // wamChart
             // 
-            chartArea5.Name = "ChartArea1";
-            this.wamChart.ChartAreas.Add(chartArea5);
-            legend5.Name = "Legend1";
-            this.wamChart.Legends.Add(legend5);
+            chartArea1.Name = "ChartArea1";
+            this.wamChart.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.wamChart.Legends.Add(legend1);
             this.wamChart.Location = new System.Drawing.Point(0, 0);
             this.wamChart.Name = "wamChart";
-            series5.ChartArea = "ChartArea1";
-            series5.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series5.Legend = "Legend1";
-            series5.Name = "WAM";
-            this.wamChart.Series.Add(series5);
+            series1.ChartArea = "ChartArea1";
+            series1.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series1.Legend = "Legend1";
+            series1.Name = "WAM";
+            this.wamChart.Series.Add(series1);
             this.wamChart.Size = new System.Drawing.Size(241, 262);
             this.wamChart.TabIndex = 0;
             this.wamChart.Text = "chart";
@@ -177,24 +177,24 @@
             this.gpaTabPage.Location = new System.Drawing.Point(4, 22);
             this.gpaTabPage.Name = "gpaTabPage";
             this.gpaTabPage.Padding = new System.Windows.Forms.Padding(3);
-            this.gpaTabPage.Size = new System.Drawing.Size(242, 234);
+            this.gpaTabPage.Size = new System.Drawing.Size(247, 268);
             this.gpaTabPage.TabIndex = 1;
             this.gpaTabPage.Text = "GPA";
             this.gpaTabPage.UseVisualStyleBackColor = true;
             // 
             // gpaChart
             // 
-            chartArea6.Name = "ChartArea2";
-            this.gpaChart.ChartAreas.Add(chartArea6);
-            legend6.Name = "Legend2";
-            this.gpaChart.Legends.Add(legend6);
+            chartArea2.Name = "ChartArea2";
+            this.gpaChart.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend2";
+            this.gpaChart.Legends.Add(legend2);
             this.gpaChart.Location = new System.Drawing.Point(0, 0);
             this.gpaChart.Name = "gpaChart";
-            series6.ChartArea = "ChartArea2";
-            series6.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
-            series6.Legend = "Legend2";
-            series6.Name = "GPA";
-            this.gpaChart.Series.Add(series6);
+            series2.ChartArea = "ChartArea2";
+            series2.ChartType = System.Windows.Forms.DataVisualization.Charting.SeriesChartType.Line;
+            series2.Legend = "Legend2";
+            series2.Name = "GPA";
+            this.gpaChart.Series.Add(series2);
             this.gpaChart.Size = new System.Drawing.Size(242, 234);
             this.gpaChart.TabIndex = 0;
             this.gpaChart.Text = "chart";
@@ -276,6 +276,7 @@
             this.Name = "ResultForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ResultForm";
+            this.Load += new System.EventHandler(this.ResultForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.resultDgv)).EndInit();
             this.tabControl.ResumeLayout(false);
             this.wamTabPage.ResumeLayout(false);
