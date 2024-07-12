@@ -149,7 +149,7 @@ namespace Smartloop_Feedback.Dashboard
                 {
                     if (events.category == selectedCourse)
                     {
-                        eventDgv.Rows.Add(events.name, events.date, events.category);
+                        eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
                     }
                 }
             }
@@ -161,8 +161,26 @@ namespace Smartloop_Feedback.Dashboard
                 {
                     if (events.date >= today)
                     {
-                        eventDgv.Rows.Add(events.name, events.date, events.category);
+                        eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
                     }
+                }
+            }
+        }
+
+        private void filterBtn_Click(object sender, EventArgs e)
+        {
+            DateTime startDate = fromDp.Value;
+            DateTime endDate = toDp.Value;
+
+            // Clear existing rows
+            eventDgv.Rows.Clear();
+
+            // Filter events based on the selected date range
+            foreach (Event events in student.eventList.Values)
+            {
+                if (events.date >= startDate && events.date <= endDate)
+                {
+                    eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
                 }
             }
         }
