@@ -16,6 +16,7 @@ namespace Smartloop_Feedback.Objects
         public string title { get; set; }
         public int creditPoint { get; set; }
         public string description { get; set; }
+        public bool isCompleted { get; set; }
         public int semesterId { get; set; }
         public int studentId { get; set; }
         public string canvasLink { get; set; }
@@ -23,13 +24,14 @@ namespace Smartloop_Feedback.Objects
         public Dictionary<int, Event> eventList { get; set; }
 
         // Constructor to initialize a Course object and fetch assessments from the database
-        public Course(int id, int code, string title, int creditPoint, string description, string canvasLink, int semesterId, int studentId)
+        public Course(int id, int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
             this.id = id;
             this.code = code;
             this.title = title;
             this.creditPoint = creditPoint;
             this.description = description;
+            this.isCompleted = isCompleted;
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
@@ -39,12 +41,13 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize a Course object and add it to the database
-        public Course(int code, string title, int creditPoint, string description, string canvasLink, int semesterId, int studentId)
+        public Course(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
             this.code = code;
             this.title = title;
             this.creditPoint = creditPoint;
             this.description = description;
+            this.isCompleted = isCompleted;
             this.canvasLink = canvasLink;
             this.semesterId = semesterId;
             this.studentId = studentId;
@@ -54,12 +57,13 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize a Course object without interacting with the database
-        public Course(int code, string title, int creditPoint, string description, string canvasLink)
+        public Course(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink)
         {
             this.code = code;
             this.title = title;
             this.creditPoint = creditPoint;
             this.description = description;
+            this.isCompleted = isCompleted;
             this.canvasLink = canvasLink;
             assessmentList = new Dictionary<int, Assessment>();
         }
@@ -70,7 +74,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO course (code, title, creditPoint, description, canvasLink, semesterId, studentId) VALUES (@code, @title, @creditPoint, @description, @canvasLink, @semesterId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                string sql = "INSERT INTO course (code, title, creditPoint, description, isCompleted, canvasLink, semesterId, studentId) VALUES (@code, @title, @creditPoint, @description, @isCompleted, @canvasLink, @semesterId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -78,6 +82,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@title", title); // Set the title parameter
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint); // Set the creditPoint parameter
                     cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@isCompleted", isCompleted);
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink); // Set the canvasLink parameter
                     cmd.Parameters.AddWithValue("@semesterId", semesterId); // Set the semesterId parameter
                     cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
@@ -192,7 +197,12 @@ namespace Smartloop_Feedback.Objects
             {
                 // All assessments are finalized
                 double currentMark = totalWeight > 0 ? totalWeightedMarks / totalWeight : 0.0;
+                isCompleted = true;
                 return currentMark >= targetMark ? 0.0 : double.NaN; // Return NaN if it's not possible to achieve the target
+            }
+            else
+            {
+                isCompleted = false;
             }
 
             double requiredTotalMarks = targetMark * (totalWeight + remainingWeight);

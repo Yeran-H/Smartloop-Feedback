@@ -12,6 +12,7 @@ using System.IO;
 using Google.Protobuf.WellKnownTypes;
 using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Results;
+using Smartloop_Feedback.Dashboard;
 
 namespace Smartloop_Feedback
 {
@@ -43,12 +44,11 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Dashboard";
             this.formLoaderPl.Controls.Clear();
-            /*
-            dashboardForm dashboard = new dashboardForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+
+            DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             dashboard.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(dashboard);
             dashboard.Show();
-            */
 
             this.student = student;
             position = new List<object>(new object[5]);
@@ -76,12 +76,12 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Dashboard";
             this.formLoaderPl.Controls.Clear();
-            /*
-            dashboardForm dashboard = new dashboardForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            
+            DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             dashboard.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(dashboard);
             dashboard.Show();
-            */
+            
         }
 
         private void resultBtn_Click(object sender, EventArgs e)

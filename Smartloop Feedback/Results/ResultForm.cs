@@ -30,6 +30,11 @@ namespace Smartloop_Feedback.Results
             this.wamSemesterList = new List<double>();
             this.gpaYearList = new List<double>();
             this.gpaSemesterList = new List<double>();
+        }
+
+
+        private void ResultForm_Load(object sender, EventArgs e)
+        {
             PopulateDgv();
             filterCb.Text = "Year";
             PopulateCharts();
