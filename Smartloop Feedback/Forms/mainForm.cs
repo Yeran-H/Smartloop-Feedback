@@ -13,6 +13,7 @@ using Google.Protobuf.WellKnownTypes;
 using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Results;
 using Smartloop_Feedback.Dashboard;
+using Smartloop_Feedback.Settings;
 
 namespace Smartloop_Feedback
 {
@@ -137,12 +138,12 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Settings";
             this.formLoaderPl.Controls.Clear();
-            /*
-            settingForm setting = new settingForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+
+            SettingForm setting = new SettingForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             setting.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(setting);
             setting.Show();
-             */
+             
         }
 
         private void dashboardBtn_Leave(object sender, EventArgs e)
