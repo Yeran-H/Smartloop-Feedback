@@ -30,8 +30,6 @@
         {
             this.settingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage5 = new System.Windows.Forms.TabPage();
             this.emailPb = new System.Windows.Forms.PictureBox();
             this.emailPl = new System.Windows.Forms.Panel();
             this.emailTb = new System.Windows.Forms.TextBox();
@@ -60,8 +58,6 @@
             // settingsTab
             // 
             this.settingsTab.Controls.Add(this.tabPage1);
-            this.settingsTab.Controls.Add(this.tabPage2);
-            this.settingsTab.Controls.Add(this.tabPage5);
             this.settingsTab.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.settingsTab.Location = new System.Drawing.Point(0, 0);
             this.settingsTab.Margin = new System.Windows.Forms.Padding(0);
@@ -97,26 +93,6 @@
             this.tabPage1.Size = new System.Drawing.Size(742, 450);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Account";
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 23);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(742, 450);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Year";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage5
-            // 
-            this.tabPage5.Location = new System.Drawing.Point(4, 23);
-            this.tabPage5.Name = "tabPage5";
-            this.tabPage5.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage5.Size = new System.Drawing.Size(742, 450);
-            this.tabPage5.TabIndex = 4;
-            this.tabPage5.Text = "Assessment";
-            this.tabPage5.UseVisualStyleBackColor = true;
             // 
             // emailPb
             // 
@@ -329,8 +305,6 @@
 
         private System.Windows.Forms.TabControl settingsTab;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
-        private System.Windows.Forms.TabPage tabPage5;
         private System.Windows.Forms.PictureBox emailPb;
         private System.Windows.Forms.Panel emailPl;
         private System.Windows.Forms.TextBox emailTb;

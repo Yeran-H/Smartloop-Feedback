@@ -20,6 +20,7 @@ namespace Smartloop_Feedback.Settings
         private void SettingForm_Load(object sender, EventArgs e)
         {
             PopulateValue();
+            AddTabs();
         }
 
         private void settingsTab_SelectedIndexChanged(object sender, EventArgs e)
@@ -66,6 +67,15 @@ namespace Smartloop_Feedback.Settings
                 {
                     profilePb.Image = System.Drawing.Image.FromStream(ms);
                 }
+            }
+        }
+
+        private void AddTabs()
+        {
+            foreach(Year year in student.yearList.Values)
+            {
+                TabPage tabPage = new TabPage(year.name);
+                settingsTab.Controls.Add(tabPage);
             }
         }
 

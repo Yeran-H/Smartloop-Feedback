@@ -267,6 +267,24 @@
     <Compile Include="Settings\EditAssessment.Designer.cs">
       <DependentUpon>EditAssessment.cs</DependentUpon>
     </Compile>
+    <Compile Include="Settings\EditCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\EditCourse.Designer.cs">
+      <DependentUpon>EditCourse.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\EditSemester.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\EditSemester.Designer.cs">
+      <DependentUpon>EditSemester.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Settings\EditYear.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Settings\EditYear.Designer.cs">
+      <DependentUpon>EditYear.cs</DependentUpon>
+    </Compile>
     <Compile Include="Settings\SettingForm.cs">
       <SubType>Form</SubType>
     </Compile>
