@@ -141,6 +141,8 @@ namespace Smartloop_Feedback.Settings
             {
                 student.DeleteStudentFromDatabase();
             }
+
+            mainForm.MainPannel(4);
         }
     }
 }

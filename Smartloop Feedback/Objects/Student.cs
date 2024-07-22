@@ -28,7 +28,7 @@ namespace Smartloop_Feedback
         public Dictionary<int, Event> eventList { get; set; }
 
         // Constructor to initialize a Student object with details and fetch years from the database
-        public Student(int studentId, string name, string email, string degree, string password, byte[] profileImage)
+        public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage)
         {
             this.name = name;
             this.email = email;

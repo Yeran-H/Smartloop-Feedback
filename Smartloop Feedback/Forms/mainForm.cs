@@ -256,6 +256,11 @@ namespace Smartloop_Feedback
                         }
                     }
                     break;
+                case 4:
+                    LoginForm login = new LoginForm();
+                    login.Show();
+                    this.Hide();
+                    break;
             }
         }
     }
