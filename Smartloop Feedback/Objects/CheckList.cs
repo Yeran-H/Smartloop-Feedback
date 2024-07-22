@@ -75,5 +75,26 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void DeleteCheckListFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM checkList
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

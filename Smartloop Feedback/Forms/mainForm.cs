@@ -139,7 +139,7 @@ namespace Smartloop_Feedback
             titleLb.Text = "Settings";
             this.formLoaderPl.Controls.Clear();
 
-            SettingForm setting = new SettingForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            SettingForm setting = new SettingForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             setting.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(setting);
             setting.Show();
@@ -244,6 +244,17 @@ namespace Smartloop_Feedback
                     assessmentForm.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(assessmentForm);
                     assessmentForm.Show();
+                    break;
+                case 3:
+                    nameLb.Text = student.name;
+                    studentIdLb.Text = student.studentId.ToString();
+                    if (student.profileImage != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream(student.profileImage))
+                        {
+                            profilePb.Image = Image.FromStream(ms);
+                        }
+                    }
                     break;
             }
         }

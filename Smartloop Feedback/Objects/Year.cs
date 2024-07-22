@@ -83,5 +83,31 @@ namespace Smartloop_Feedback
                 }
             }
         }
+
+        public void DeleteYearFromDatabase()
+        {
+            foreach (Semester semester in semesterList.Values)
+            {
+                semester.DeleteSemesterFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM year
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -126,6 +126,32 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        public void DeleteCourseFromDatabase()
+        {
+            foreach (Assessment assessment in assessmentList.Values)
+            {
+                assessment.DeleteAssessmentFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM course
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void GetEventsFromDatabase()
         {
             eventList.Clear();

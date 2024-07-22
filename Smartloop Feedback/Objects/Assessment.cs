@@ -152,6 +152,37 @@ namespace Smartloop_Feedback.Objects
             CalculateStatus();
         }
 
+        public void DeleteAssessmentFromDatabase()
+        {
+            foreach (CheckList checkList in checkList)
+            {
+                checkList.DeleteCheckListFromDatabase();
+            }
+
+            foreach (Criteria criteria in criteriaList)
+            {
+                criteria.DeleteCriteriaFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM assessment
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
         public void CalculateStatus()
         {
             if (checkList.Count != 0)
