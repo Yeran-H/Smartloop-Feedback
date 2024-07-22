@@ -28,30 +28,31 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
+            this.settingsTab = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.tabPage5 = new System.Windows.Forms.TabPage();
-            this.tabControl1.SuspendLayout();
+            this.settingsTab.SuspendLayout();
             this.SuspendLayout();
             // 
-            // tabControl1
+            // settingsTab
             // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Controls.Add(this.tabPage4);
-            this.tabControl1.Controls.Add(this.tabPage5);
-            this.tabControl1.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(0, 0, 0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.Padding = new System.Drawing.Point(0, 0);
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(750, 477);
-            this.tabControl1.TabIndex = 0;
+            this.settingsTab.Controls.Add(this.tabPage1);
+            this.settingsTab.Controls.Add(this.tabPage2);
+            this.settingsTab.Controls.Add(this.tabPage3);
+            this.settingsTab.Controls.Add(this.tabPage4);
+            this.settingsTab.Controls.Add(this.tabPage5);
+            this.settingsTab.Font = new System.Drawing.Font("Aptos", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.settingsTab.Location = new System.Drawing.Point(0, 0);
+            this.settingsTab.Margin = new System.Windows.Forms.Padding(0);
+            this.settingsTab.Name = "settingsTab";
+            this.settingsTab.Padding = new System.Drawing.Point(0, 0);
+            this.settingsTab.SelectedIndex = 0;
+            this.settingsTab.Size = new System.Drawing.Size(750, 477);
+            this.settingsTab.TabIndex = 0;
+            this.settingsTab.SelectedIndexChanged += new System.EventHandler(this.settingsTab_SelectedIndexChanged);
             // 
             // tabPage1
             // 
@@ -109,19 +110,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
-            this.Controls.Add(this.tabControl1);
+            this.Controls.Add(this.settingsTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "SettingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "SettingForm";
-            this.tabControl1.ResumeLayout(false);
+            this.Load += new System.EventHandler(this.SettingForm_Load);
+            this.settingsTab.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.TabControl tabControl1;
+        private System.Windows.Forms.TabControl settingsTab;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;

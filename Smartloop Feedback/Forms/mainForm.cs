@@ -139,7 +139,7 @@ namespace Smartloop_Feedback
             titleLb.Text = "Settings";
             this.formLoaderPl.Controls.Clear();
 
-            SettingForm setting = new SettingForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            SettingForm setting = new SettingForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
             setting.FormBorderStyle = FormBorderStyle.None;
             this.formLoaderPl.Controls.Add(setting);
             setting.Show();

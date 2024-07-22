@@ -1,9 +1,16 @@
-﻿namespace Smartloop_Feedback.Forms
+﻿namespace Smartloop_Feedback.Settings
 {
-    partial class AddAssessmentForm
+    partial class EditAssessmentForm
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -15,9 +22,14 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.assessmentTab = new System.Windows.Forms.TabControl();
+            this.tab1 = new System.Windows.Forms.TabPage();
             this.panelDetails = new System.Windows.Forms.Panel();
             this.descriptionTb = new System.Windows.Forms.TextBox();
             this.canvasPl = new System.Windows.Forms.Panel();
@@ -44,14 +56,38 @@
             this.backBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
-            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.button1 = new System.Windows.Forms.Button();
+            this.assessmentTab.SuspendLayout();
+            this.tab1.SuspendLayout();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
             this.SuspendLayout();
             // 
+            // assessmentTab
+            // 
+            this.assessmentTab.Controls.Add(this.tab1);
+            this.assessmentTab.Location = new System.Drawing.Point(0, 0);
+            this.assessmentTab.Name = "assessmentTab";
+            this.assessmentTab.SelectedIndex = 0;
+            this.assessmentTab.Size = new System.Drawing.Size(742, 450);
+            this.assessmentTab.TabIndex = 0;
+            // 
+            // tab1
+            // 
+            this.tab1.Controls.Add(this.panelDetails);
+            this.tab1.Controls.Add(this.panelCriteria);
+            this.tab1.Location = new System.Drawing.Point(4, 22);
+            this.tab1.Name = "tab1";
+            this.tab1.Padding = new System.Windows.Forms.Padding(3);
+            this.tab1.Size = new System.Drawing.Size(734, 424);
+            this.tab1.TabIndex = 0;
+            this.tab1.Text = "tab1";
+            this.tab1.UseVisualStyleBackColor = true;
+            // 
             // panelDetails
             // 
+            this.panelDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.panelDetails.Controls.Add(this.descriptionTb);
             this.panelDetails.Controls.Add(this.canvasPl);
             this.panelDetails.Controls.Add(this.canvasTb);
@@ -70,11 +106,11 @@
             this.panelDetails.Controls.Add(this.titlePl);
             this.panelDetails.Controls.Add(this.titleTb);
             this.panelDetails.Controls.Add(this.dateP);
-            this.panelDetails.Location = new System.Drawing.Point(0, 5);
+            this.panelDetails.Location = new System.Drawing.Point(2, 2);
             this.panelDetails.Margin = new System.Windows.Forms.Padding(2);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(734, 434);
-            this.panelDetails.TabIndex = 1;
+            this.panelDetails.Size = new System.Drawing.Size(736, 424);
+            this.panelDetails.TabIndex = 2;
             // 
             // descriptionTb
             // 
@@ -90,8 +126,6 @@
             this.descriptionTb.TabIndex = 29;
             this.descriptionTb.TabStop = false;
             this.descriptionTb.Text = "Description";
-            this.toolTip1.SetToolTip(this.descriptionTb, "Please enter description of assessment");
-            this.descriptionTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // canvasPl
             // 
@@ -114,8 +148,6 @@
             this.canvasTb.TabIndex = 19;
             this.canvasTb.TabStop = false;
             this.canvasTb.Text = "Canvas Link";
-            this.toolTip1.SetToolTip(this.canvasTb, "Please provide canvas link to Assessment");
-            this.canvasTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // weightPl
             // 
@@ -138,9 +170,6 @@
             this.weightTb.TabIndex = 27;
             this.weightTb.TabStop = false;
             this.weightTb.Text = "Weight";
-            this.toolTip1.SetToolTip(this.weightTb, "Please enter weight of assessment");
-            this.weightTb.Enter += new System.EventHandler(this.textBox_Enter);
-            this.weightTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberOnly_KeyPress);
             // 
             // markPl
             // 
@@ -163,9 +192,6 @@
             this.markTb.TabIndex = 19;
             this.markTb.TabStop = false;
             this.markTb.Text = "Total Mark";
-            this.toolTip1.SetToolTip(this.markTb, "Please enter Total marks of assessment ");
-            this.markTb.Enter += new System.EventHandler(this.textBox_Enter);
-            this.markTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberOnly_KeyPress);
             // 
             // groupRbtn
             // 
@@ -177,7 +203,6 @@
             this.groupRbtn.Size = new System.Drawing.Size(109, 24);
             this.groupRbtn.TabIndex = 26;
             this.groupRbtn.Text = "Group Work";
-            this.toolTip1.SetToolTip(this.groupRbtn, "Select if assessment is group");
             this.groupRbtn.UseVisualStyleBackColor = true;
             // 
             // individualRbtn
@@ -192,7 +217,6 @@
             this.individualRbtn.TabIndex = 25;
             this.individualRbtn.TabStop = true;
             this.individualRbtn.Text = "Individual";
-            this.toolTip1.SetToolTip(this.individualRbtn, "Select if assessment is individual");
             this.individualRbtn.UseVisualStyleBackColor = true;
             // 
             // nextBtn
@@ -208,7 +232,6 @@
             this.nextBtn.TabIndex = 24;
             this.nextBtn.Text = "Next";
             this.nextBtn.UseVisualStyleBackColor = false;
-            this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             // 
             // cancelBtn
             // 
@@ -223,7 +246,6 @@
             this.cancelBtn.TabIndex = 23;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = false;
-            this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
             // typeCb
             // 
@@ -246,7 +268,6 @@
             this.typeCb.Size = new System.Drawing.Size(201, 28);
             this.typeCb.TabIndex = 21;
             this.typeCb.Text = "Type of Assessment";
-            this.toolTip1.SetToolTip(this.typeCb, "Type or Select the type of assessment");
             // 
             // datePl
             // 
@@ -297,8 +318,6 @@
             this.titleTb.TabIndex = 17;
             this.titleTb.TabStop = false;
             this.titleTb.Text = "Title";
-            this.toolTip1.SetToolTip(this.titleTb, "Please enter Title of Assessment");
-            this.titleTb.Enter += new System.EventHandler(this.textBox_Enter);
             // 
             // dateP
             // 
@@ -313,21 +332,22 @@
             this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.dateP.TabIndex = 9;
             this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.toolTip1.SetToolTip(this.dateP, "Please enter due date of assessment");
             // 
             // panelCriteria
             // 
+            this.panelCriteria.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.panelCriteria.Controls.Add(this.button1);
             this.panelCriteria.Controls.Add(this.loadBtn);
             this.panelCriteria.Controls.Add(this.submitBtn);
             this.panelCriteria.Controls.Add(this.columnBtn);
             this.panelCriteria.Controls.Add(this.backBtn);
             this.panelCriteria.Controls.Add(this.criteriaDgv);
             this.panelCriteria.Controls.Add(this.panelColumnInputs);
-            this.panelCriteria.Location = new System.Drawing.Point(-2, 5);
+            this.panelCriteria.Location = new System.Drawing.Point(4, 0);
             this.panelCriteria.Margin = new System.Windows.Forms.Padding(2);
             this.panelCriteria.Name = "panelCriteria";
-            this.panelCriteria.Size = new System.Drawing.Size(736, 432);
-            this.panelCriteria.TabIndex = 2;
+            this.panelCriteria.Size = new System.Drawing.Size(729, 422);
+            this.panelCriteria.TabIndex = 3;
             // 
             // loadBtn
             // 
@@ -336,14 +356,12 @@
             this.loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.loadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.loadBtn.Location = new System.Drawing.Point(313, 367);
+            this.loadBtn.Location = new System.Drawing.Point(311, 344);
             this.loadBtn.Name = "loadBtn";
-            this.loadBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadBtn.Size = new System.Drawing.Size(111, 52);
             this.loadBtn.TabIndex = 27;
             this.loadBtn.Text = "Load Data";
-            this.toolTip1.SetToolTip(this.loadBtn, "Click to add more columns to criteria");
             this.loadBtn.UseVisualStyleBackColor = false;
-            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
             // 
             // submitBtn
             // 
@@ -352,13 +370,12 @@
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.submitBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.submitBtn.Location = new System.Drawing.Point(486, 367);
+            this.submitBtn.Location = new System.Drawing.Point(434, 344);
             this.submitBtn.Name = "submitBtn";
-            this.submitBtn.Size = new System.Drawing.Size(141, 52);
+            this.submitBtn.Size = new System.Drawing.Size(109, 52);
             this.submitBtn.TabIndex = 26;
-            this.submitBtn.Text = "Submit";
+            this.submitBtn.Text = "Update";
             this.submitBtn.UseVisualStyleBackColor = false;
-            this.submitBtn.Click += new System.EventHandler(this.submitBtn_Click);
             // 
             // columnBtn
             // 
@@ -367,14 +384,12 @@
             this.columnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.columnBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.columnBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.columnBtn.Location = new System.Drawing.Point(166, 367);
+            this.columnBtn.Location = new System.Drawing.Point(181, 344);
             this.columnBtn.Name = "columnBtn";
-            this.columnBtn.Size = new System.Drawing.Size(141, 52);
+            this.columnBtn.Size = new System.Drawing.Size(123, 52);
             this.columnBtn.TabIndex = 25;
             this.columnBtn.Text = "Add Column";
-            this.toolTip1.SetToolTip(this.columnBtn, "Click to add more columns to criteria");
             this.columnBtn.UseVisualStyleBackColor = false;
-            this.columnBtn.Click += new System.EventHandler(this.columnBtn_Click);
             // 
             // backBtn
             // 
@@ -383,46 +398,60 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(19, 367);
+            this.backBtn.Location = new System.Drawing.Point(54, 344);
             this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(141, 52);
+            this.backBtn.Size = new System.Drawing.Size(117, 52);
             this.backBtn.TabIndex = 24;
             this.backBtn.Text = "Back";
             this.backBtn.UseVisualStyleBackColor = false;
-            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
             // criteriaDgv
             // 
             this.criteriaDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.criteriaDgv.Location = new System.Drawing.Point(17, 16);
+            this.criteriaDgv.Location = new System.Drawing.Point(2, 6);
             this.criteriaDgv.Margin = new System.Windows.Forms.Padding(2);
             this.criteriaDgv.Name = "criteriaDgv";
             this.criteriaDgv.RowHeadersWidth = 51;
             this.criteriaDgv.RowTemplate.Height = 24;
-            this.criteriaDgv.Size = new System.Drawing.Size(550, 337);
+            this.criteriaDgv.Size = new System.Drawing.Size(518, 303);
             this.criteriaDgv.TabIndex = 0;
             // 
             // panelColumnInputs
             // 
-            this.panelColumnInputs.Location = new System.Drawing.Point(571, 16);
+            this.panelColumnInputs.Location = new System.Drawing.Point(539, 6);
             this.panelColumnInputs.Margin = new System.Windows.Forms.Padding(2);
             this.panelColumnInputs.Name = "panelColumnInputs";
-            this.panelColumnInputs.Size = new System.Drawing.Size(150, 337);
+            this.panelColumnInputs.Size = new System.Drawing.Size(156, 303);
             this.panelColumnInputs.TabIndex = 4;
             // 
-            // AddAssessmentForm
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.button1.Location = new System.Drawing.Point(549, 344);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 52);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = false;
+            // 
+            // EditAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.ClientSize = new System.Drawing.Size(738, 438);
-            this.Controls.Add(this.panelCriteria);
-            this.Controls.Add(this.panelDetails);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.ClientSize = new System.Drawing.Size(742, 450);
+            this.Controls.Add(this.assessmentTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AddAssessmentForm";
+            this.Name = "EditAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "addAssessmentForm";
-            this.Load += new System.EventHandler(this.addAssessmentForm_Load);
+            this.Text = "EditAssessment";
+            this.Load += new System.EventHandler(this.EditAssessmentForm_Load);
+            this.assessmentTab.ResumeLayout(false);
+            this.tab1.ResumeLayout(false);
             this.panelDetails.ResumeLayout(false);
             this.panelDetails.PerformLayout();
             this.panelCriteria.ResumeLayout(false);
@@ -433,32 +462,34 @@
 
         #endregion
 
+        private System.Windows.Forms.TabControl assessmentTab;
+        private System.Windows.Forms.TabPage tab1;
         private System.Windows.Forms.Panel panelDetails;
-        private Smartloop_Feedback.Objects.DatePicker dateP;
-        private System.Windows.Forms.Panel titlePl;
-        private System.Windows.Forms.TextBox titleTb;
-        private System.Windows.Forms.Panel descriptionPl;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox typeCb;
-        private System.Windows.Forms.Panel datePl;
-        private System.Windows.Forms.Button cancelBtn;
-        private System.Windows.Forms.Button nextBtn;
-        private System.Windows.Forms.RadioButton groupRbtn;
-        private System.Windows.Forms.RadioButton individualRbtn;
+        private System.Windows.Forms.TextBox descriptionTb;
         private System.Windows.Forms.Panel canvasPl;
         private System.Windows.Forms.TextBox canvasTb;
         private System.Windows.Forms.Panel weightPl;
         private System.Windows.Forms.TextBox weightTb;
         private System.Windows.Forms.Panel markPl;
         private System.Windows.Forms.TextBox markTb;
+        private System.Windows.Forms.RadioButton groupRbtn;
+        private System.Windows.Forms.RadioButton individualRbtn;
+        private System.Windows.Forms.Button nextBtn;
+        private System.Windows.Forms.Button cancelBtn;
+        private System.Windows.Forms.ComboBox typeCb;
+        private System.Windows.Forms.Panel datePl;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel descriptionPl;
+        private System.Windows.Forms.Panel titlePl;
+        private System.Windows.Forms.TextBox titleTb;
+        private Objects.DatePicker dateP;
         private System.Windows.Forms.Panel panelCriteria;
+        private System.Windows.Forms.Button loadBtn;
         private System.Windows.Forms.Button submitBtn;
         private System.Windows.Forms.Button columnBtn;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.DataGridView criteriaDgv;
         private System.Windows.Forms.Panel panelColumnInputs;
-        private System.Windows.Forms.TextBox descriptionTb;
-        private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button loadBtn;
+        private System.Windows.Forms.Button button1;
     }
 }
