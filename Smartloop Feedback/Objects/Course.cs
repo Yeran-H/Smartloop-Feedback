@@ -128,9 +128,16 @@ namespace Smartloop_Feedback.Objects
 
         public void DeleteCourseFromDatabase()
         {
+            GetEventsFromDatabase();
+
             foreach (Assessment assessment in assessmentList.Values)
             {
                 assessment.DeleteAssessmentFromDatabase();
+            }
+
+            foreach (Event events in eventList.Values)
+            {
+                events.DeleteEventFromDatabase();
             }
 
             using (SqlConnection conn = new SqlConnection(connStr))

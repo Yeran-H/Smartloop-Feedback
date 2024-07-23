@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Settings
 {
-    public partial class EditCourse : Form
+    public partial class EditSemesterForm : Form
     {
-        public EditCourse()
+        public EditSemesterForm()
         {
             InitializeComponent();
         }

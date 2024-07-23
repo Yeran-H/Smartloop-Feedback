@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Smartloop_Feedback
 {
@@ -80,6 +81,33 @@ namespace Smartloop_Feedback
                         int id = reader.GetInt32(1); // Get the semester ID
                         semesterList.Add(name, new Semester(name, id, this.id, studentId)); // Add the semester to the semester list
                     }
+                }
+            }
+        }
+
+        public void UpdateToDatabase(string yearName)
+        {
+            name = yearName;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE year
+                    SET 
+                        name = @name
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

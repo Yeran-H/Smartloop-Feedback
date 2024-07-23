@@ -42,7 +42,7 @@ namespace Smartloop_Feedback
             GetEventFromDatabase();
         }
 
-        public void UpdateInDatabase(Student selectedStudent)
+        public void UpdateToDatabase(Student selectedStudent)
         {
             name = selectedStudent.name;
             email = selectedStudent.email;
@@ -110,6 +110,13 @@ namespace Smartloop_Feedback
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void DeleteYearFromDatabase(string yearName)
+        {
+            yearList[yearName].DeleteYearFromDatabase();
+
+            yearList.Remove(yearName);
         }
 
         // Private method to fetch years from the database for the student

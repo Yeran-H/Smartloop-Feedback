@@ -261,6 +261,12 @@ namespace Smartloop_Feedback
                     login.Show();
                     this.Hide();
                     break;
+                case 5:
+                    SettingForm setting = new SettingForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    setting.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(setting);
+                    setting.Show();
+                    break;
             }
         }
     }

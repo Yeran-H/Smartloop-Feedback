@@ -261,29 +261,29 @@
     <Compile Include="Results\ResultForm.Designer.cs">
       <DependentUpon>ResultForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditAssessment.cs">
+    <Compile Include="Settings\EditAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\EditAssessment.Designer.cs">
-      <DependentUpon>EditAssessment.cs</DependentUpon>
+    <Compile Include="Settings\EditAssessmentForm.Designer.cs">
+      <DependentUpon>EditAssessmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditCourse.cs">
+    <Compile Include="Settings\EditCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\EditCourse.Designer.cs">
-      <DependentUpon>EditCourse.cs</DependentUpon>
+    <Compile Include="Settings\EditCourseForm.Designer.cs">
+      <DependentUpon>EditCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditSemester.cs">
+    <Compile Include="Settings\EditSemesterForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\EditSemester.Designer.cs">
-      <DependentUpon>EditSemester.cs</DependentUpon>
+    <Compile Include="Settings\EditSemesterForm.Designer.cs">
+      <DependentUpon>EditSemesterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditYear.cs">
+    <Compile Include="Settings\EditYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\EditYear.Designer.cs">
-      <DependentUpon>EditYear.cs</DependentUpon>
+    <Compile Include="Settings\EditYearForm.Designer.cs">
+      <DependentUpon>EditYearForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\SettingForm.cs">
       <SubType>Form</SubType>
@@ -347,8 +347,11 @@
     <EmbeddedResource Include="Results\ResultForm.resx">
       <DependentUpon>ResultForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings\EditAssessment.resx">
-      <DependentUpon>EditAssessment.cs</DependentUpon>
+    <EmbeddedResource Include="Settings\EditAssessmentForm.resx">
+      <DependentUpon>EditAssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Settings\EditYearForm.resx">
+      <DependentUpon>EditYearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>

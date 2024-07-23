@@ -17,7 +17,7 @@ namespace Smartloop_Feedback.Settings
             this.mainForm = mainForm;
         }
 
-        private void SettingForm_Load(object sender, EventArgs e)
+        public void SettingForm_Load(object sender, EventArgs e)
         {
             PopulateValue();
             AddTabs();
@@ -31,26 +31,23 @@ namespace Smartloop_Feedback.Settings
             {
                 string name = selectedTab.Text;
 
-                switch (name)
+                if (name != "Account")
                 {
-                    case "Assessment":
-                        EditAssessmentForm assessmentForm = new EditAssessmentForm(student)
-                        {
-                            Dock = DockStyle.Fill,
-                            TopLevel = false,
-                            TopMost = true,
-                            FormBorderStyle = FormBorderStyle.None
-                        };
+                    object[] position = {name, "", 0, 0};
+                    EditYearForm yearForm = new EditYearForm(student, position)
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false,
+                        TopMost = true,
+                        FormBorderStyle = FormBorderStyle.None
+                    };
 
-                        // Clear any existing controls in the selected tab page
-                        selectedTab.Controls.Clear();
+                    // Clear any existing controls in the selected tab page
+                    selectedTab.Controls.Clear();
 
-                        // Add the form to the selected tab page
-                        selectedTab.Controls.Add(assessmentForm);
-                        assessmentForm.Show();
-                        break;
-                    default:
-                        break;
+                    // Add the form to the selected tab page
+                    selectedTab.Controls.Add(yearForm);
+                    yearForm.Show();
                 }
             }
         }
@@ -132,7 +129,7 @@ namespace Smartloop_Feedback.Settings
                 return;
             }
 
-            student.UpdateInDatabase(newStudent);
+            student.UpdateToDatabase(newStudent);
 
             mainForm.MainPannel(3);
         }
