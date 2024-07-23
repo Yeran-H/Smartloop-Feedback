@@ -273,12 +273,6 @@
     <Compile Include="Settings\EditCourseForm.Designer.cs">
       <DependentUpon>EditCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditSemesterForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Settings\EditSemesterForm.Designer.cs">
-      <DependentUpon>EditSemesterForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Settings\EditYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -349,9 +343,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\EditAssessmentForm.resx">
       <DependentUpon>EditAssessmentForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Settings\EditSemesterForm.resx">
-      <DependentUpon>EditSemesterForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\EditYearForm.resx">
       <DependentUpon>EditYearForm.cs</DependentUpon>

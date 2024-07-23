@@ -100,7 +100,7 @@ namespace Smartloop_Feedback.Settings
                 if (name != (string)position[0])
                 {
                     position[1] = name;
-                    EditSemesterForm semesterForm = new EditSemesterForm()
+                    EditCourseForm courseForm = new EditCourseForm()
                     {
                         Dock = DockStyle.Fill,
                         TopLevel = false,
@@ -112,8 +112,8 @@ namespace Smartloop_Feedback.Settings
                     selectedTab.Controls.Clear();
 
                     // Add the form to the selected tab page
-                    selectedTab.Controls.Add(semesterForm);
-                    semesterForm.Show();
+                    selectedTab.Controls.Add(courseForm);
+                    courseForm.Show();
                 }
             }
         }
