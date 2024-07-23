@@ -26,6 +26,7 @@ namespace Smartloop_Feedback.Settings
             tabPage1.Text = (string)position[0];
             yearTb.Text = (string)position[0];
             AddTabs();
+            CheckItemsInCheckedListBox();
         }
 
         private void AddTabs()
@@ -34,6 +35,18 @@ namespace Smartloop_Feedback.Settings
             {
                 TabPage tabPage = new TabPage(semester.name);
                 yearTab.Controls.Add(tabPage);
+            }
+        }
+
+        private void CheckItemsInCheckedListBox()
+        {
+            foreach (string item in student.yearList[(string)position[0]].semesterList.Keys)
+            {
+                int index = semesterCb.Items.IndexOf(item);
+                if (index != -1)
+                {
+                    semesterCb.SetItemChecked(index, true);
+                }
             }
         }
 
@@ -73,6 +86,67 @@ namespace Smartloop_Feedback.Settings
             {
                 student.DeleteYearFromDatabase((string)position[0]);
                 this.Close();
+            }
+        }
+
+        private void yearTab_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TabPage selectedTab = yearTab.SelectedTab;
+
+            if (selectedTab != null && selectedTab.Controls.Count == 0)
+            {
+                string name = selectedTab.Text;
+
+                if (name != (string)position[0])
+                {
+                    position[1] = name;
+                    EditSemesterForm semesterForm = new EditSemesterForm()
+                    {
+                        Dock = DockStyle.Fill,
+                        TopLevel = false,
+                        TopMost = true,
+                        FormBorderStyle = FormBorderStyle.None
+                    };
+
+                    // Clear any existing controls in the selected tab page
+                    selectedTab.Controls.Clear();
+
+                    // Add the form to the selected tab page
+                    selectedTab.Controls.Add(semesterForm);
+                    semesterForm.Show();
+                }
+            }
+        }
+
+        private void addSemsterBtn_Click(object sender, EventArgs e)
+        {
+            foreach (string item in semesterCb.CheckedItems)
+            {
+                if (!student.yearList[(string)position[0]].semesterList.ContainsKey(item))
+                {
+                    student.yearList[(string)position[0]].semesterList.Add(item, new Semester(item, student.yearList[(string)position[0]].id, student.studentId));
+                }
+            }
+        }
+
+        private void deleteSemesterBtn_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show(
+                    "Are you sure you want to delete? The boxes Unselected will be removed and associated objects as well.",
+                    "Confirm Deletion",
+                    MessageBoxButtons.YesNo,
+                    MessageBoxIcon.Warning
+                    );
+
+            if (result == DialogResult.Yes)
+            {
+                for (int i = 0; i < semesterCb.Items.Count; i++)
+                {
+                    if(!semesterCb.GetItemChecked(i))
+                    {
+                        student.yearList[(string)position[0]].DeleteSemesterFromDatabase(semesterCb.Items[i].ToString());
+                    }
+                }
             }
         }
     }

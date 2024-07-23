@@ -112,6 +112,15 @@ namespace Smartloop_Feedback
             }
         }
 
+        public void DeleteSemesterFromDatabase(string semesterName)
+        {
+            if(semesterList.ContainsKey(semesterName))
+            {
+                semesterList[semesterName].DeleteSemesterFromDatabase();
+                semesterList.Remove(semesterName);
+            }
+        }
+
         public void DeleteYearFromDatabase()
         {
             foreach (Semester semester in semesterList.Values)

@@ -350,6 +350,9 @@
     <EmbeddedResource Include="Settings\EditAssessmentForm.resx">
       <DependentUpon>EditAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Settings\EditSemesterForm.resx">
+      <DependentUpon>EditSemesterForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Settings\EditYearForm.resx">
       <DependentUpon>EditYearForm.cs</DependentUpon>
     </EmbeddedResource>
