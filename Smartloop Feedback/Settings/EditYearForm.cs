@@ -100,7 +100,7 @@ namespace Smartloop_Feedback.Settings
                 if (name != (string)position[0])
                 {
                     position[1] = name;
-                    EditCourseForm courseForm = new EditCourseForm()
+                    EditCourseForm courseForm = new EditCourseForm(student.yearList[(string)position[0]].semesterList[(string)position[1]], position)
                     {
                         Dock = DockStyle.Fill,
                         TopLevel = false,

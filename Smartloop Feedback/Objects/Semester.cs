@@ -108,5 +108,11 @@ namespace Smartloop_Feedback
                 }
             }
         }
+
+        public void DeleteCourseFromDatabase(int courseId)
+        {
+            courseList[courseId].DeleteCourseFromDatabase();
+            courseList.Remove(courseId);
+        }
     }
 }
