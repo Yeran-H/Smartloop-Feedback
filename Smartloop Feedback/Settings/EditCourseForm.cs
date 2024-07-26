@@ -276,7 +276,27 @@ namespace Smartloop_Feedback.Settings
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
+            TabPage selectedTab = courseTab.SelectedTab;
 
+            TextBox codeTb = (TextBox)selectedTab.Controls["codeTb"];
+            TextBox nameTb = (TextBox)selectedTab.Controls["nameTb"];
+            TextBox creditTb = (TextBox)selectedTab.Controls["creditTb"];
+            TextBox descriptionTb = (TextBox)selectedTab.Controls["descriptionTb"];
+            TextBox canvasTb = (TextBox)selectedTab.Controls["canvasTb"];
+
+            int code = int.Parse(codeTb.Text);
+            string title = nameTb.Text;
+            int creditPoint = int.Parse(creditTb.Text);
+            string description = descriptionTb.Text;
+            string canvasLink = canvasTb.Text;
+
+
+            if (selectedTab != null)
+            {
+                int courseId = (int)selectedTab.Tag;
+
+                semester.courseList[courseId].UpdateCourseToDatabase(code, title, creditPoint, description, canvasLink);
+            }
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)
