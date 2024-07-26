@@ -48,15 +48,15 @@
             this.descriptionPl = new System.Windows.Forms.Panel();
             this.titlePl = new System.Windows.Forms.Panel();
             this.titleTb = new System.Windows.Forms.TextBox();
-            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelCriteria = new System.Windows.Forms.Panel();
+            this.button1 = new System.Windows.Forms.Button();
             this.loadBtn = new System.Windows.Forms.Button();
             this.submitBtn = new System.Windows.Forms.Button();
             this.columnBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
+            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.assessmentTab.SuspendLayout();
             this.tab1.SuspendLayout();
             this.panelDetails.SuspendLayout();
@@ -70,7 +70,7 @@
             this.assessmentTab.Location = new System.Drawing.Point(0, 0);
             this.assessmentTab.Name = "assessmentTab";
             this.assessmentTab.SelectedIndex = 0;
-            this.assessmentTab.Size = new System.Drawing.Size(742, 450);
+            this.assessmentTab.Size = new System.Drawing.Size(734, 424);
             this.assessmentTab.TabIndex = 0;
             // 
             // tab1
@@ -80,7 +80,7 @@
             this.tab1.Location = new System.Drawing.Point(4, 22);
             this.tab1.Name = "tab1";
             this.tab1.Padding = new System.Windows.Forms.Padding(3);
-            this.tab1.Size = new System.Drawing.Size(734, 424);
+            this.tab1.Size = new System.Drawing.Size(726, 398);
             this.tab1.TabIndex = 0;
             this.tab1.Text = "tab1";
             this.tab1.UseVisualStyleBackColor = true;
@@ -109,7 +109,7 @@
             this.panelDetails.Location = new System.Drawing.Point(2, 2);
             this.panelDetails.Margin = new System.Windows.Forms.Padding(2);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(736, 424);
+            this.panelDetails.Size = new System.Drawing.Size(722, 396);
             this.panelDetails.TabIndex = 2;
             // 
             // descriptionTb
@@ -119,7 +119,7 @@
             this.descriptionTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.descriptionTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.descriptionTb.HideSelection = false;
-            this.descriptionTb.Location = new System.Drawing.Point(133, 94);
+            this.descriptionTb.Location = new System.Drawing.Point(132, 54);
             this.descriptionTb.Multiline = true;
             this.descriptionTb.Name = "descriptionTb";
             this.descriptionTb.Size = new System.Drawing.Size(200, 128);
@@ -130,7 +130,7 @@
             // canvasPl
             // 
             this.canvasPl.BackColor = System.Drawing.Color.White;
-            this.canvasPl.Location = new System.Drawing.Point(386, 282);
+            this.canvasPl.Location = new System.Drawing.Point(385, 242);
             this.canvasPl.Name = "canvasPl";
             this.canvasPl.Size = new System.Drawing.Size(200, 1);
             this.canvasPl.TabIndex = 20;
@@ -142,7 +142,7 @@
             this.canvasTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.canvasTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.canvasTb.HideSelection = false;
-            this.canvasTb.Location = new System.Drawing.Point(386, 263);
+            this.canvasTb.Location = new System.Drawing.Point(385, 223);
             this.canvasTb.Name = "canvasTb";
             this.canvasTb.Size = new System.Drawing.Size(200, 20);
             this.canvasTb.TabIndex = 19;
@@ -152,7 +152,7 @@
             // weightPl
             // 
             this.weightPl.BackColor = System.Drawing.Color.White;
-            this.weightPl.Location = new System.Drawing.Point(387, 193);
+            this.weightPl.Location = new System.Drawing.Point(386, 153);
             this.weightPl.Name = "weightPl";
             this.weightPl.Size = new System.Drawing.Size(200, 1);
             this.weightPl.TabIndex = 28;
@@ -164,7 +164,7 @@
             this.weightTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.weightTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.weightTb.HideSelection = false;
-            this.weightTb.Location = new System.Drawing.Point(387, 174);
+            this.weightTb.Location = new System.Drawing.Point(386, 134);
             this.weightTb.Name = "weightTb";
             this.weightTb.Size = new System.Drawing.Size(200, 20);
             this.weightTb.TabIndex = 27;
@@ -174,7 +174,7 @@
             // markPl
             // 
             this.markPl.BackColor = System.Drawing.Color.White;
-            this.markPl.Location = new System.Drawing.Point(387, 159);
+            this.markPl.Location = new System.Drawing.Point(386, 119);
             this.markPl.Name = "markPl";
             this.markPl.Size = new System.Drawing.Size(200, 1);
             this.markPl.TabIndex = 20;
@@ -186,7 +186,7 @@
             this.markTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.markTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.markTb.HideSelection = false;
-            this.markTb.Location = new System.Drawing.Point(387, 140);
+            this.markTb.Location = new System.Drawing.Point(386, 100);
             this.markTb.Name = "markTb";
             this.markTb.Size = new System.Drawing.Size(200, 20);
             this.markTb.TabIndex = 19;
@@ -198,7 +198,7 @@
             this.groupRbtn.AutoSize = true;
             this.groupRbtn.Font = new System.Drawing.Font("Aptos", 12F);
             this.groupRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.groupRbtn.Location = new System.Drawing.Point(428, 224);
+            this.groupRbtn.Location = new System.Drawing.Point(427, 184);
             this.groupRbtn.Name = "groupRbtn";
             this.groupRbtn.Size = new System.Drawing.Size(109, 24);
             this.groupRbtn.TabIndex = 26;
@@ -211,7 +211,7 @@
             this.individualRbtn.Checked = true;
             this.individualRbtn.Font = new System.Drawing.Font("Aptos", 12F);
             this.individualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.individualRbtn.Location = new System.Drawing.Point(428, 201);
+            this.individualRbtn.Location = new System.Drawing.Point(427, 161);
             this.individualRbtn.Name = "individualRbtn";
             this.individualRbtn.Size = new System.Drawing.Size(95, 24);
             this.individualRbtn.TabIndex = 25;
@@ -226,7 +226,7 @@
             this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.nextBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.nextBtn.Location = new System.Drawing.Point(367, 316);
+            this.nextBtn.Location = new System.Drawing.Point(366, 276);
             this.nextBtn.Name = "nextBtn";
             this.nextBtn.Size = new System.Drawing.Size(141, 52);
             this.nextBtn.TabIndex = 24;
@@ -240,7 +240,7 @@
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.cancelBtn.Location = new System.Drawing.Point(220, 316);
+            this.cancelBtn.Location = new System.Drawing.Point(219, 276);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(141, 52);
             this.cancelBtn.TabIndex = 23;
@@ -263,7 +263,7 @@
             "Presentation",
             "Essay",
             "Peer Review"});
-            this.typeCb.Location = new System.Drawing.Point(386, 101);
+            this.typeCb.Location = new System.Drawing.Point(385, 61);
             this.typeCb.Name = "typeCb";
             this.typeCb.Size = new System.Drawing.Size(201, 28);
             this.typeCb.TabIndex = 21;
@@ -272,7 +272,7 @@
             // datePl
             // 
             this.datePl.BackColor = System.Drawing.Color.White;
-            this.datePl.Location = new System.Drawing.Point(133, 282);
+            this.datePl.Location = new System.Drawing.Point(132, 242);
             this.datePl.Name = "datePl";
             this.datePl.Size = new System.Drawing.Size(200, 1);
             this.datePl.TabIndex = 19;
@@ -282,7 +282,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Aptos", 12F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label1.Location = new System.Drawing.Point(129, 249);
+            this.label1.Location = new System.Drawing.Point(128, 209);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
@@ -292,7 +292,7 @@
             // descriptionPl
             // 
             this.descriptionPl.BackColor = System.Drawing.Color.White;
-            this.descriptionPl.Location = new System.Drawing.Point(133, 224);
+            this.descriptionPl.Location = new System.Drawing.Point(132, 184);
             this.descriptionPl.Name = "descriptionPl";
             this.descriptionPl.Size = new System.Drawing.Size(200, 1);
             this.descriptionPl.TabIndex = 19;
@@ -300,7 +300,7 @@
             // titlePl
             // 
             this.titlePl.BackColor = System.Drawing.Color.White;
-            this.titlePl.Location = new System.Drawing.Point(134, 87);
+            this.titlePl.Location = new System.Drawing.Point(133, 47);
             this.titlePl.Name = "titlePl";
             this.titlePl.Size = new System.Drawing.Size(200, 1);
             this.titlePl.TabIndex = 18;
@@ -312,26 +312,12 @@
             this.titleTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.titleTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.titleTb.HideSelection = false;
-            this.titleTb.Location = new System.Drawing.Point(134, 68);
+            this.titleTb.Location = new System.Drawing.Point(133, 28);
             this.titleTb.Name = "titleTb";
             this.titleTb.Size = new System.Drawing.Size(200, 20);
             this.titleTb.TabIndex = 17;
             this.titleTb.TabStop = false;
             this.titleTb.Text = "Title";
-            // 
-            // dateP
-            // 
-            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.dateP.BorderSize = 0;
-            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateP.Location = new System.Drawing.Point(203, 241);
-            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateP.Name = "dateP";
-            this.dateP.Size = new System.Drawing.Size(130, 35);
-            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.dateP.TabIndex = 9;
-            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             // 
             // panelCriteria
             // 
@@ -346,8 +332,22 @@
             this.panelCriteria.Location = new System.Drawing.Point(4, 0);
             this.panelCriteria.Margin = new System.Windows.Forms.Padding(2);
             this.panelCriteria.Name = "panelCriteria";
-            this.panelCriteria.Size = new System.Drawing.Size(729, 422);
+            this.panelCriteria.Size = new System.Drawing.Size(722, 398);
             this.panelCriteria.TabIndex = 3;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.button1.Location = new System.Drawing.Point(553, 338);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(109, 52);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Delete";
+            this.button1.UseVisualStyleBackColor = false;
             // 
             // loadBtn
             // 
@@ -356,7 +356,7 @@
             this.loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.loadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.loadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.loadBtn.Location = new System.Drawing.Point(311, 344);
+            this.loadBtn.Location = new System.Drawing.Point(315, 338);
             this.loadBtn.Name = "loadBtn";
             this.loadBtn.Size = new System.Drawing.Size(111, 52);
             this.loadBtn.TabIndex = 27;
@@ -370,7 +370,7 @@
             this.submitBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.submitBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.submitBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.submitBtn.Location = new System.Drawing.Point(434, 344);
+            this.submitBtn.Location = new System.Drawing.Point(438, 338);
             this.submitBtn.Name = "submitBtn";
             this.submitBtn.Size = new System.Drawing.Size(109, 52);
             this.submitBtn.TabIndex = 26;
@@ -384,7 +384,7 @@
             this.columnBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.columnBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.columnBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.columnBtn.Location = new System.Drawing.Point(181, 344);
+            this.columnBtn.Location = new System.Drawing.Point(185, 338);
             this.columnBtn.Name = "columnBtn";
             this.columnBtn.Size = new System.Drawing.Size(123, 52);
             this.columnBtn.TabIndex = 25;
@@ -398,7 +398,7 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(54, 344);
+            this.backBtn.Location = new System.Drawing.Point(58, 338);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(117, 52);
             this.backBtn.TabIndex = 24;
@@ -424,26 +424,26 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(156, 303);
             this.panelColumnInputs.TabIndex = 4;
             // 
-            // button1
+            // dateP
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.button1.Location = new System.Drawing.Point(549, 344);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 52);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Delete";
-            this.button1.UseVisualStyleBackColor = false;
+            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dateP.BorderSize = 0;
+            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateP.Location = new System.Drawing.Point(202, 201);
+            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
+            this.dateP.Name = "dateP";
+            this.dateP.Size = new System.Drawing.Size(130, 35);
+            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.dateP.TabIndex = 9;
+            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             // 
             // EditAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
-            this.ClientSize = new System.Drawing.Size(742, 450);
+            this.ClientSize = new System.Drawing.Size(734, 424);
             this.Controls.Add(this.assessmentTab);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "EditAssessmentForm";

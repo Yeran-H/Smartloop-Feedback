@@ -8,51 +8,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Smartloop_Feedback.Settings
 {
     public partial class EditAssessmentForm : Form
     {
-        public Student student;
-        public EditAssessmentForm(Student student)
+        public Course course;
+        public object[] position;
+        public EditAssessmentForm(Course course, object[] position)
         {
             InitializeComponent();
-            this.student = student;
+            this.course = course;
+            this.position = position;
         }
 
         private void EditAssessmentForm_Load(object sender, EventArgs e)
         {
-            foreach(var year in student.yearList)
+            foreach (Assessment assessment in course.assessmentList.Values)
             {
-                object[] name = { "", "", 0, 0};
-                name[0] = year.Key;
+                var tabPage = CreateTabPage(assessment);
 
-                foreach(var semester in year.Value.semesterList)
-                {
-                    name[1] = semester.Key;
-
-                    foreach(var course in semester.Value.courseList)
-                    {
-                        name[2] = course.Key;
-
-                        foreach (Assessment assessment in course.Value.assessmentList.Values)
-                        {
-                            name[3] = assessment.name;
-
-                            var tabPage = CreateTabPage(assessment, name);
-                            
-                            assessmentTab.Controls.Add(tabPage);
-                        }
-                    }
-                }
+                assessmentTab.Controls.Add(tabPage);
             }
         }
 
-        private TabPage CreateTabPage(Assessment assessment, Object[] name)
+        private TabPage CreateTabPage(Assessment assessment)
         {
             var tabPage = new TabPage(assessment.name)
             {
-                Tag = name
+                Tag = assessment.name
             };
 
             var panelDetails = new Panel

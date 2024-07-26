@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace Smartloop_Feedback.Settings
 {
@@ -239,7 +240,6 @@ namespace Smartloop_Feedback.Settings
             {
                 BackColor = System.Drawing.Color.FromArgb(254, 0, 57),
                 Cursor = System.Windows.Forms.Cursors.Hand,
-                Enabled = false,
                 FlatStyle = System.Windows.Forms.FlatStyle.Flat,
                 Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
                 ForeColor = System.Drawing.Color.FromArgb(16, 34, 61),
@@ -324,7 +324,28 @@ namespace Smartloop_Feedback.Settings
 
         private void assessmentBtn_Click(object sender, EventArgs e)
         {
+            TabPage selectedTab = courseTab.SelectedTab;
 
+            if (selectedTab != null)
+            {
+                int courseId = (int)selectedTab.Tag;
+
+                position[2] = courseId;
+                EditAssessmentForm assessmentForm = new EditAssessmentForm(semester.courseList[(int)position[2]], position)
+                {
+                    Dock = DockStyle.Fill,
+                    TopLevel = false,
+                    TopMost = true,
+                    FormBorderStyle = FormBorderStyle.None
+                };
+
+                // Clear any existing controls in the selected tab page
+                selectedTab.Controls.Clear();
+
+                // Add the form to the selected tab page
+                selectedTab.Controls.Add(assessmentForm);
+                assessmentForm.Show();
+            }
         }
     }
 }
