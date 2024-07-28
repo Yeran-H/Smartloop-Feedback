@@ -47,6 +47,16 @@ namespace Smartloop_Feedback.Settings
                 Location = new System.Drawing.Point(2, 2)
             };
 
+            var label2 = new Label
+            {
+                AutoSize = true,
+                Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.FromArgb(193, 193, 193),
+                Location = new System.Drawing.Point(78, 28),
+                Size = new System.Drawing.Size(49, 20),
+                Text = "Title: "
+            };
+
             var descriptionTb = new TextBox
             {
                 BackColor = System.Drawing.Color.FromArgb(16, 34, 61),
@@ -57,6 +67,16 @@ namespace Smartloop_Feedback.Settings
                 Multiline = true,
                 Size = new System.Drawing.Size(200, 128),
                 Text = "Description"
+            };
+
+            var label3 = new Label
+            {
+                AutoSize = true,
+                Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.FromArgb(193, 193, 193),
+                Location = new System.Drawing.Point(25, 54),
+                Size = new System.Drawing.Size(101, 20),
+                Text = "Description: "
             };
 
             var canvasPl = new Panel
@@ -77,6 +97,16 @@ namespace Smartloop_Feedback.Settings
                 Text = "Canvas Link"
             };
 
+            var label6 = new Label
+            {
+                AutoSize = true,
+                Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.FromArgb(193, 193, 193),
+                Location = new System.Drawing.Point(353, 220),
+                Size = new System.Drawing.Size(104, 20),
+                Text = "Canvas Link: "
+            };
+
             var weightPl = new Panel
             {
                 BackColor = System.Drawing.Color.White,
@@ -95,6 +125,16 @@ namespace Smartloop_Feedback.Settings
                 Text = "Weight"
             };
 
+            var label5 = new Label
+            {
+                AutoSize = true,
+                Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.FromArgb(193, 193, 193),
+                Location = new System.Drawing.Point(391, 131),
+                Size = new System.Drawing.Size(67, 20),
+                Text = "Weight: "
+            };
+
             var markPl = new Panel
             {
                 BackColor = System.Drawing.Color.White,
@@ -111,6 +151,16 @@ namespace Smartloop_Feedback.Settings
                 Location = new System.Drawing.Point(387, 140),
                 Size = new System.Drawing.Size(200, 20),
                 Text = "Total Mark"
+            };
+
+            var label4 = new Label
+            {
+                AutoSize = true,
+                Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0))),
+                ForeColor = System.Drawing.Color.FromArgb(193, 193, 193),
+                Location = new System.Drawing.Point(365, 97),
+                Size = new System.Drawing.Size(93, 20),
+                Text = "Total Mark: "
             };
 
             var groupRbtn = new RadioButton
@@ -170,7 +220,7 @@ namespace Smartloop_Feedback.Settings
 
             typeCb.Items.AddRange(new object[]
             {
-                "Reflection", "Report", "Coding", "Project", "Quiz", "Test", "Presentation", "Essay", "Peer Review"
+        "Reflection", "Report", "Coding", "Project", "Quiz", "Test", "Presentation", "Essay", "Peer Review"
             });
 
             var datePl = new Panel
@@ -228,13 +278,18 @@ namespace Smartloop_Feedback.Settings
                 TextColor = System.Drawing.Color.FromArgb(193, 193, 193)
             };
 
+            panelDetails.Controls.Add(label2);
             panelDetails.Controls.Add(descriptionTb);
+            panelDetails.Controls.Add(label3);
             panelDetails.Controls.Add(canvasPl);
             panelDetails.Controls.Add(canvasTb);
+            panelDetails.Controls.Add(label6);
             panelDetails.Controls.Add(weightPl);
             panelDetails.Controls.Add(weightTb);
+            panelDetails.Controls.Add(label5);
             panelDetails.Controls.Add(markPl);
             panelDetails.Controls.Add(markTb);
+            panelDetails.Controls.Add(label4);
             panelDetails.Controls.Add(groupRbtn);
             panelDetails.Controls.Add(individualRbtn);
             panelDetails.Controls.Add(nextBtn);
@@ -251,6 +306,5 @@ namespace Smartloop_Feedback.Settings
 
             return tabPage;
         }
-
     }
 }
