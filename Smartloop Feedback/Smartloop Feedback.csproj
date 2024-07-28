@@ -285,11 +285,23 @@
     <Compile Include="Settings\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\Bar\SettingSemesterBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingSemesterBar.Designer.cs">
+      <DependentUpon>SettingSemesterBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setting\Bar\SettingYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Setting\Bar\SettingYearBar.Designer.cs">
       <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditYearForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditYearForms.Designer.cs">
+      <DependentUpon>EditYearForms.cs</DependentUpon>
     </Compile>
     <Compile Include="Setting\Form\EditAccountForm.cs">
       <SubType>Form</SubType>
@@ -365,11 +377,17 @@
     <EmbeddedResource Include="Settings\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingSemesterBar.resx">
+      <DependentUpon>SettingSemesterBar.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Setting\Bar\SettingYearBar.resx">
       <DependentUpon>SettingYearBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Form\EditAccountForm.resx">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditYearForms.resx">
+      <DependentUpon>EditYearForms.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

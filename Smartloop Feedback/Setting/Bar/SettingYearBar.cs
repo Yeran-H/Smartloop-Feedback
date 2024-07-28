@@ -23,10 +23,6 @@ namespace Smartloop_Feedback.Setting.Bar
         public SettingYearBar(Student student, MainForm mainForm)
         {
             InitializeComponent();
-            navPl.Height = backBtn.Height;
-            navPl.Top = backBtn.Top;
-            navPl.Left = backBtn.Left;
-
             this.mainForm = mainForm;
             this.student = student;
         }
@@ -68,7 +64,8 @@ namespace Smartloop_Feedback.Setting.Bar
             if (sender is Button clickedButton)
             {
                 mainForm.position[0] = clickedButton.Text; 
-                mainForm.MenuPannel(2); 
+                mainForm.MenuPannel(5); 
+                mainForm.MainPannel(7);
             }
         }
     }

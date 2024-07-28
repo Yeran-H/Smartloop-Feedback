@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.navPl = new System.Windows.Forms.Panel();
             this.backBtn = new System.Windows.Forms.Button();
             this.secondBtn = new System.Windows.Forms.Button();
             this.oneBtn = new System.Windows.Forms.Button();
@@ -36,14 +35,6 @@
             this.fourthBtn = new System.Windows.Forms.Button();
             this.fifthBtn = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // navPl
-            // 
-            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 92);
-            this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
-            this.navPl.TabIndex = 22;
             // 
             // backBtn
             // 
@@ -143,7 +134,6 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(170, 255);
-            this.Controls.Add(this.navPl);
             this.Controls.Add(this.secondBtn);
             this.Controls.Add(this.oneBtn);
             this.Controls.Add(this.thirdBtn);
@@ -160,8 +150,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Panel navPl;
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button secondBtn;
         private System.Windows.Forms.Button oneBtn;

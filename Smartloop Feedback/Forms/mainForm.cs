@@ -204,7 +204,13 @@ namespace Smartloop_Feedback
                     this.menuDropPl.Controls.Add(yearBar);
                     yearBar.Show();
                     break;
-
+                case 5:
+                    SettingSemesterBar semesterBar = new SettingSemesterBar(student.yearList[(string)position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    semesterBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(semesterBar);
+                    semesterBar.Show();
+                    break;
 
             }
         }
@@ -268,6 +274,13 @@ namespace Smartloop_Feedback
                             profilePb.Image = Image.FromStream(ms);
                         }
                     }
+                    break;
+                case 7:
+                    this.formLoaderPl.Controls.Clear();
+                    EditYearForms yearForms = new EditYearForms(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    yearForms.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(yearForms);
+                    yearForms.Show();
                     break;
             }
         }
