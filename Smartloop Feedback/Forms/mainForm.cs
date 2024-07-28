@@ -14,6 +14,8 @@ using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Results;
 using Smartloop_Feedback.Dashboard;
 using Smartloop_Feedback.Settings;
+using Smartloop_Feedback.Setting;
+using Smartloop_Feedback.Setting.Bar;
 
 namespace Smartloop_Feedback
 {
@@ -42,17 +44,11 @@ namespace Smartloop_Feedback
             navPl.Top = dashboardBtn.Top;
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
-
-            titleLb.Text = "Dashboard";
-            this.formLoaderPl.Controls.Clear();
-
-            DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            dashboard.FormBorderStyle = FormBorderStyle.None;
-            this.formLoaderPl.Controls.Add(dashboard);
-            dashboard.Show();
-
+            
             this.student = student;
             position = new List<object>(new object[5]);
+
+            MainPannel(5);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
@@ -75,14 +71,7 @@ namespace Smartloop_Feedback
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            titleLb.Text = "Dashboard";
-            this.formLoaderPl.Controls.Clear();
-            
-            DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            dashboard.FormBorderStyle = FormBorderStyle.None;
-            this.formLoaderPl.Controls.Add(dashboard);
-            dashboard.Show();
-            
+            MainPannel(5);
         }
 
         private void resultBtn_Click(object sender, EventArgs e)
@@ -137,13 +126,8 @@ namespace Smartloop_Feedback
             setttingBtn.BackColor = Color.FromArgb(16, 34, 61);
 
             titleLb.Text = "Settings";
-            this.formLoaderPl.Controls.Clear();
-
-            SettingForm setting = new SettingForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            setting.FormBorderStyle = FormBorderStyle.None;
-            this.formLoaderPl.Controls.Add(setting);
-            setting.Show();
-             
+            MainPannel(4);
+            MenuPannel(4);
         }
 
         private void dashboardBtn_Leave(object sender, EventArgs e)
@@ -213,6 +197,14 @@ namespace Smartloop_Feedback
                     this.menuDropPl.Controls.Add(subject);
                     subject.Show();
                     break;
+                case 4:
+                    SettingYearBar yearBar = new SettingYearBar(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    yearBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(yearBar);
+                    yearBar.Show();
+                    break;
+
 
             }
         }
@@ -246,6 +238,27 @@ namespace Smartloop_Feedback
                     assessmentForm.Show();
                     break;
                 case 3:
+                    LoginForm login = new LoginForm();
+                    login.Show();
+                    this.Hide();
+                    break;
+                case 4:
+                    this.formLoaderPl.Controls.Clear();
+                    EditAccountForm accountForm = new EditAccountForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    accountForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(accountForm);
+                    accountForm.Show();
+                    break;
+                case 5:
+                    titleLb.Text = "Dashboard";
+                    this.formLoaderPl.Controls.Clear();
+
+                    DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    dashboard.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(dashboard);
+                    dashboard.Show();
+                    break;
+                case 6:
                     nameLb.Text = student.name;
                     studentIdLb.Text = student.studentId.ToString();
                     if (student.profileImage != null)
@@ -255,17 +268,6 @@ namespace Smartloop_Feedback
                             profilePb.Image = Image.FromStream(ms);
                         }
                     }
-                    break;
-                case 4:
-                    LoginForm login = new LoginForm();
-                    login.Show();
-                    this.Hide();
-                    break;
-                case 5:
-                    SettingForm setting = new SettingForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                    setting.FormBorderStyle = FormBorderStyle.None;
-                    this.formLoaderPl.Controls.Add(setting);
-                    setting.Show();
                     break;
             }
         }

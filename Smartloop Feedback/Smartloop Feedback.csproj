@@ -285,6 +285,18 @@
     <Compile Include="Settings\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\Bar\SettingYearBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingYearBar.Designer.cs">
+      <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditAccountForm.Designer.cs">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -352,6 +364,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingYearBar.resx">
+      <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditAccountForm.resx">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
