@@ -13,7 +13,6 @@ using Google.Protobuf.WellKnownTypes;
 using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Results;
 using Smartloop_Feedback.Dashboard;
-using Smartloop_Feedback.Settings;
 using Smartloop_Feedback.Setting;
 using Smartloop_Feedback.Setting.Bar;
 
@@ -302,6 +301,13 @@ namespace Smartloop_Feedback
                     courseForm.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(courseForm);
                     courseForm.Show();
+                    break;
+                case 9:
+                    this.formLoaderPl.Controls.Clear();
+                    EditAssessmentForm assessmentForm1 = new EditAssessmentForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    assessmentForm1.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(assessmentForm1);
+                    assessmentForm1.Show();
                     break;
             }
         }

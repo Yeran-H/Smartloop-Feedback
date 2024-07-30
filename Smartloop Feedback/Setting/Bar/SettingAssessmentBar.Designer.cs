@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingAssessmentBar));
             this.backBtn = new System.Windows.Forms.Button();
             this.secondBtn = new System.Windows.Forms.Button();
+            this.navPl = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // backBtn
@@ -49,6 +50,7 @@
             this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            this.backBtn.Leave += new System.EventHandler(this.ResetButtonColor);
             // 
             // secondBtn
             // 
@@ -67,13 +69,22 @@
             this.secondBtn.UseVisualStyleBackColor = true;
             this.secondBtn.Visible = false;
             // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(0, 0);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 20;
+            // 
             // SettingAssessmentBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(170, 94);
+            this.ClientSize = new System.Drawing.Size(170, 105);
+            this.Controls.Add(this.navPl);
             this.Controls.Add(this.secondBtn);
             this.Controls.Add(this.backBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -89,5 +100,6 @@
 
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button secondBtn;
+        private System.Windows.Forms.Panel navPl;
     }
 }
