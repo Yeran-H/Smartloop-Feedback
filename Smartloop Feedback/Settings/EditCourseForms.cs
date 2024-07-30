@@ -12,11 +12,11 @@ using System.Xml.Linq;
 
 namespace Smartloop_Feedback.Settings
 {
-    public partial class EditCourseForm : Form
+    public partial class EditCourseForms : Form
     {
         public Semester semester;
         public object[] position;
-        public EditCourseForm(Semester semester, object[] position)
+        public EditCourseForms(Semester semester, object[] position)
         {
             InitializeComponent();
             this.semester = semester;

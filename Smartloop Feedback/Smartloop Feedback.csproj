@@ -267,11 +267,11 @@
     <Compile Include="Settings\EditAssessmentForm.Designer.cs">
       <DependentUpon>EditAssessmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Settings\EditCourseForm.cs">
+    <Compile Include="Settings\EditCourseForms.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Settings\EditCourseForm.Designer.cs">
-      <DependentUpon>EditCourseForm.cs</DependentUpon>
+    <Compile Include="Settings\EditCourseForms.Designer.cs">
+      <DependentUpon>EditCourseForms.cs</DependentUpon>
     </Compile>
     <Compile Include="Settings\EditYearForm.cs">
       <SubType>Form</SubType>
@@ -285,6 +285,18 @@
     <Compile Include="Settings\SettingForm.Designer.cs">
       <DependentUpon>SettingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Setting\Bar\SettingAssessmentBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingAssessmentBar.Designer.cs">
+      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingCourseBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingCourseBar.Designer.cs">
+      <DependentUpon>SettingCourseBar.cs</DependentUpon>
+    </Compile>
     <Compile Include="Setting\Bar\SettingSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -296,6 +308,12 @@
     </Compile>
     <Compile Include="Setting\Bar\SettingYearBar.Designer.cs">
       <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditCourseForm.Designer.cs">
+      <DependentUpon>EditCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Setting\Form\EditYearForms.cs">
       <SubType>Form</SubType>
@@ -368,14 +386,20 @@
     <EmbeddedResource Include="Settings\EditAssessmentForm.resx">
       <DependentUpon>EditAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Settings\EditCourseForm.resx">
-      <DependentUpon>EditCourseForm.cs</DependentUpon>
+    <EmbeddedResource Include="Settings\EditCourseForms.resx">
+      <DependentUpon>EditCourseForms.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\EditYearForm.resx">
       <DependentUpon>EditYearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Settings\SettingForm.resx">
       <DependentUpon>SettingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingAssessmentBar.resx">
+      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingCourseBar.resx">
+      <DependentUpon>SettingCourseBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Bar\SettingSemesterBar.resx">
       <DependentUpon>SettingSemesterBar.cs</DependentUpon>
@@ -385,6 +409,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Form\EditAccountForm.resx">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditCourseForm.resx">
+      <DependentUpon>EditCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Form\EditYearForms.resx">
       <DependentUpon>EditYearForms.cs</DependentUpon>

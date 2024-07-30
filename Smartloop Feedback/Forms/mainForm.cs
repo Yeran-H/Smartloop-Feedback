@@ -211,6 +211,20 @@ namespace Smartloop_Feedback
                     this.menuDropPl.Controls.Add(semesterBar);
                     semesterBar.Show();
                     break;
+                case 6:
+                    SettingCourseBar courseBar = new SettingCourseBar(student.yearList[(string)position[0]].semesterList[(string)position[1]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    courseBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(courseBar);
+                    courseBar.Show();
+                    break;
+                case 7:
+                    SettingAssessmentBar assessmentBar = new SettingAssessmentBar(student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    assessmentBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(assessmentBar);
+                    assessmentBar.Show();
+                    break;
 
             }
         }
@@ -281,6 +295,13 @@ namespace Smartloop_Feedback
                     yearForms.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(yearForms);
                     yearForms.Show();
+                    break;
+                case 8:
+                    this.formLoaderPl.Controls.Clear();
+                    EditCourseForm courseForm = new EditCourseForm(student.yearList[(string)position[0]].semesterList[(string)position[1]], this, (int)position[2]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    courseForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(courseForm);
+                    courseForm.Show();
                     break;
             }
         }
