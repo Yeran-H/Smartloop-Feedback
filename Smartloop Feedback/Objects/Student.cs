@@ -7,6 +7,9 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using System.Xml.Linq;
+using System.Drawing;
 
 namespace Smartloop_Feedback
 {
@@ -25,7 +28,7 @@ namespace Smartloop_Feedback
         public Dictionary<int, Event> eventList { get; set; }
 
         // Constructor to initialize a Student object with details and fetch years from the database
-        public Student(int studentId, string name, string email, string degree, string password, byte[] profileImage)
+        public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage)
         {
             this.name = name;
             this.email = email;
@@ -37,6 +40,83 @@ namespace Smartloop_Feedback
             eventList = new Dictionary<int, Event>();
             GetYearFromDatabase(); // Fetch years from the database
             GetEventFromDatabase();
+        }
+
+        public void UpdateToDatabase(Student selectedStudent)
+        {
+            name = selectedStudent.name;
+            email = selectedStudent.email;
+            password = selectedStudent.password;
+            degree = selectedStudent.degree;
+            profileImage = selectedStudent.profileImage;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE student
+                    SET 
+                        name = @name,
+                        email = @email,
+                        password = @password,
+                        degree = @degree,
+                        profileImage = @profileImage
+                    WHERE
+                        studentId = @studentId";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@studentId", studentId);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@email", email);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.Parameters.AddWithValue("@degree", degree);
+                    cmd.Parameters.AddWithValue("@profileImage", profileImage);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteStudentFromDatabase()
+        {
+            foreach(Year year in yearList.Values)
+            {
+                year.DeleteYearFromDatabase();
+            }
+
+            foreach (Event events in eventList.Values)
+            {
+                events.DeleteEventFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM student
+                    WHERE studentId = @studentId";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@studentId", studentId);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteYearFromDatabase(string yearName)
+        {
+            yearList[yearName].DeleteYearFromDatabase();
+
+            yearList.Remove(yearName);
         }
 
         // Private method to fetch years from the database for the student

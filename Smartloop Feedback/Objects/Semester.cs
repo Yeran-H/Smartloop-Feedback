@@ -83,10 +83,36 @@ namespace Smartloop_Feedback
             }
         }
 
-        // Get the number of courses in the semester
-        public int NumCourse()
+        public void DeleteSemesterFromDatabase()
         {
-            return courseList?.Count ?? 0; // Return the count of the course list, or 0 if it is null
+            foreach (Course course in courseList.Values)
+            {
+                course.DeleteCourseFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM semester
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteCourseFromDatabase(int courseId)
+        {
+            courseList[courseId].DeleteCourseFromDatabase();
+            courseList.Remove(courseId);
         }
     }
 }

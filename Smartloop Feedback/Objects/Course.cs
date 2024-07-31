@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using Org.BouncyCastle.Asn1.X509;
+using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
+using System.Xml.Linq;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -124,6 +127,84 @@ namespace Smartloop_Feedback.Objects
                     }
                 }
             }
+        }
+
+        public void UpdateCourseToDatabase(int code, string title, int creditPoint, string description, string canvasLink)
+        {
+            this.code = code;
+            this.title = title;
+            this.creditPoint = creditPoint;
+            this.description = description;
+            this.canvasLink = canvasLink;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE course
+                    SET 
+                        code = @code,
+                        title = @title,
+                        creditPoint = @creditPoint,
+                        description = @description,
+                        canvasLink = @canvasLink
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@title", title);
+                    cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteCourseFromDatabase()
+        {
+            GetEventsFromDatabase();
+
+            foreach (Assessment assessment in assessmentList.Values)
+            {
+                assessment.DeleteAssessmentFromDatabase();
+            }
+
+            foreach (Event events in eventList.Values)
+            {
+                events.DeleteEventFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM course
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteAssessmentFromDatabase(int assessmentId)
+        {
+            assessmentList[assessmentId].DeleteAssessmentFromDatabase();
+            assessmentList.Remove(assessmentId);
         }
 
         public void GetEventsFromDatabase()

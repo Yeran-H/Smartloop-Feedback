@@ -72,6 +72,7 @@
             // 
             // menuDropPl
             // 
+            this.menuDropPl.AutoScroll = true;
             this.menuDropPl.Location = new System.Drawing.Point(0, 202);
             this.menuDropPl.Name = "menuDropPl";
             this.menuDropPl.Size = new System.Drawing.Size(186, 294);
