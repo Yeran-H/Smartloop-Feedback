@@ -15,7 +15,7 @@ using System.Runtime.InteropServices;
 
 namespace Smartloop_Feedback
 {
-    public partial class registerForm : Form
+    public partial class RegisterForm : Form
     {
         // Connection string for the database
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
@@ -35,7 +35,7 @@ namespace Smartloop_Feedback
             int nHeightEllipse
         );
 
-        public registerForm()
+        public RegisterForm()
         {
             InitializeComponent();
 
@@ -70,7 +70,7 @@ namespace Smartloop_Feedback
         // Common event handler for when any textbox receives focus
         private void TextBox_Enter(object sender, EventArgs e)
         {
-            defaultUI(); // Reset UI to default state
+            DefaultUI(); // Reset UI to default state
 
             TextBox currentTextBox = sender as TextBox;
 
@@ -115,7 +115,7 @@ namespace Smartloop_Feedback
         }
 
         // Reset the UI to its default state
-        private void defaultUI()
+        private void DefaultUI()
         {
             namePb.Image = Properties.Resources.person1;
             namePl.BackColor = Color.FromArgb(193, 193, 193);
@@ -156,7 +156,7 @@ namespace Smartloop_Feedback
         // Navigate back to the login form when the back button is clicked
         private void backBtn_Click(object sender, EventArgs e)
         {
-            loginForm loginForm = new loginForm();
+            LoginForm loginForm = new LoginForm();
             loginForm.Show();
             this.Hide();
         }
@@ -230,13 +230,22 @@ namespace Smartloop_Feedback
                     cmd.Parameters.AddWithValue("@studentId", studentId);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@degree", degree);
-                    cmd.Parameters.AddWithValue("@profileImage", profileImage);
+                    SqlParameter profileImageParam = new SqlParameter("@profileImage", SqlDbType.VarBinary);
+                    if (profileImage != null)
+                    {
+                        profileImageParam.Value = profileImage;
+                    }
+                    else
+                    {
+                        profileImageParam.Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add(profileImageParam);
                     cmd.ExecuteNonQuery();
                 }
             }
 
             // Show the main form and hide the current form
-            mainForm main = new mainForm(newStudent);
+            MainForm main = new MainForm(newStudent);
             main.Show();
             this.Hide();
         }

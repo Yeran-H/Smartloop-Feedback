@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class addEventForm : Form
+    public partial class AddEventForm : Form
     {
         public Event newEvent;
         public List<string> courseList;
@@ -28,12 +28,12 @@ namespace Smartloop_Feedback.Forms
             int nHieghtEllipse
         );
 
-        public addEventForm(List<string> courseList, Event selectedEvent)
+        public AddEventForm(List<string> courseList, Event selectedEvent)
         {
             InitializeComponent();
             this.courseList = courseList;
             this.newEvent = selectedEvent;
-            fillCategory();
+            FillCategory();
 
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
@@ -51,17 +51,21 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
-        private void fillCategory()
+        private void FillCategory()
         {
+            categoryCb.Items.Clear(); // Clear any existing items
             categoryCb.Items.Add("None");
 
-            foreach(var item in courseList)
+            // Assuming courseList is a Dictionary<int, string> or Dictionary<string, string>
+            foreach (String name in courseList)
             {
-                categoryCb.Items.Add(item);
+                categoryCb.Items.Add(name);
             }
 
             categoryCb.SelectedIndex = 0;
         }
+
+
 
         private void eventTb_Click(object sender, EventArgs e)
         {

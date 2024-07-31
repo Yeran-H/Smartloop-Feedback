@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class addAssessmentForm : Form
+    public partial class AddAssessmentForm : Form
     {
         private Course course;
-        private mainForm mainForm;
+        private MainForm mainForm;
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
 
-        public addAssessmentForm(Course course, mainForm mainForm)
+        public AddAssessmentForm(Course course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -56,7 +56,7 @@ namespace Smartloop_Feedback.Forms
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             // Go back to the main panel
-            mainForm.mainPannel(0);
+            mainForm.MainPannel(0);
         }
 
         private void nextBtn_Click(object sender, EventArgs e)
@@ -141,7 +141,8 @@ namespace Smartloop_Feedback.Forms
         private void submitBtn_Click(object sender, EventArgs e)
         {
             // Add a new assessment to the course
-            course.assessmentList.Add(new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, "0", Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text, course.id, course.studentId));
+            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, 0, Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.id, course.studentId);
+            course.assessmentList.Add(assessment.id, assessment);
 
             // Prepare column names for ratings
             List<string> columnNameList = new List<string>();
@@ -156,18 +157,17 @@ namespace Smartloop_Feedback.Forms
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), course.assessmentList.Last().id, course.assessmentList.Last().studentId);
-                course.assessmentList.Last().criteriaList.Add(criteria);
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.id, assessment.studentId);
+                course.assessmentList[assessment.id].criteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    var rating = new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, course.assessmentList.Last().studentId);
-                    course.assessmentList.Last().criteriaList.Last().ratingList.Add(rating);
+                    course.assessmentList[assessment.id].criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, assessment.studentId));
                 }
             }
 
             // Go back to the main panel
-            mainForm.mainPannel(0);
+            mainForm.MainPannel(0);
         }
 
         private void textBox_Enter(object sender, EventArgs e)

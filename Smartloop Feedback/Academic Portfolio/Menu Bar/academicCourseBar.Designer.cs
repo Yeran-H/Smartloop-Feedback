@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback
 {
-    partial class academicCourseBar
+    partial class AcademicCourseBar
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(academicCourseBar));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AcademicCourseBar));
             this.secondBtn = new System.Windows.Forms.Button();
             this.oneBtn = new System.Windows.Forms.Button();
             this.thirdBtn = new System.Windows.Forms.Button();

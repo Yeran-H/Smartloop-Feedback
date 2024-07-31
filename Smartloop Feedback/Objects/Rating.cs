@@ -33,7 +33,7 @@ namespace Smartloop_Feedback.Objects
             this.grade = grade;
             this.criteriaId = criteriaId;
             this.studentId = studentId;
-            addRatingToDatabase(); // Add the rating to the database
+            AddRatingToDatabase(); // Add the rating to the database
         }
 
         // Constructor to initialize a Rating object without interacting with the database
@@ -44,7 +44,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Add the rating to the database and get the generated ID
-        public void addRatingToDatabase()
+        public void AddRatingToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -58,6 +58,27 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@criteriaId", criteriaId); // Set the criteriaId parameter
                     cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
                     id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                }
+            }
+        }
+
+        public void DeleteRatingFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM rating
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

@@ -36,7 +36,7 @@ namespace Smartloop_Feedback.Objects
             this.courseId = courseId;
             this.category = category;
             this.color = color;
-            addEventToDatabase();
+            AddEventToDatabase();
         }
 
         public Event(string name, DateTime date, string category, int color)
@@ -47,7 +47,7 @@ namespace Smartloop_Feedback.Objects
             this.color = color;
         }
 
-        public void addEventToDatabase()
+        public void AddEventToDatabase()
         {
             if(category == "None")
             {
@@ -68,6 +68,66 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@courseId", courseId); // Set the courseId parameter
                     cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
                     id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                }
+            }
+        }
+
+        public void UpdateEventInDatabase(Event selectedEvent)
+        {
+            name = selectedEvent.name;
+            date = selectedEvent.date;
+            category = selectedEvent.category;
+            courseId = selectedEvent.courseId;
+            color = selectedEvent.color;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE event
+                    SET 
+                        name = @name,
+                        date = @date,
+                        courseId = @courseId,
+                        category = @category,
+                        color = @color
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@courseId", courseId);
+                    cmd.Parameters.AddWithValue("@category", category);
+                    cmd.Parameters.AddWithValue("@color", color);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteEventFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM event
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

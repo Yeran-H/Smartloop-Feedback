@@ -15,7 +15,7 @@ namespace Smartloop_Feedback
         public int id { get; set; }
         public int yearId { get; set; }
         public int studentId { get; set; }
-        public List<Course> courseList { get; set; }
+        public Dictionary<int, Course> courseList { get; set; }
 
         // Constructor to initialize a Semester object and fetch courses from the database
         public Semester(string name, int id, int yearId, int studentId)
@@ -24,8 +24,8 @@ namespace Smartloop_Feedback
             this.id = id;
             this.yearId = yearId;
             this.studentId = studentId;
-            courseList = new List<Course>(); // Initialize the course list
-            getCourseFromDatabase(); // Fetch courses from the database
+            courseList = new Dictionary<int, Course>(); // Initialize the course list
+            GetCourseFromDatabase(); // Fetch courses from the database
         }
 
         // Constructor to initialize a Semester object and add it to the database
@@ -34,12 +34,12 @@ namespace Smartloop_Feedback
             this.name = name;
             this.yearId = yearId;
             this.studentId = studentId;
-            courseList = new List<Course>(); // Initialize the course list
-            addSemesterToDatabase(); // Add the semester to the database
+            courseList = new Dictionary<int, Course>(); // Initialize the course list
+            AddSemesterToDatabase(); // Add the semester to the database
         }
 
         // Add the semester to the database and get the generated ID
-        public void addSemesterToDatabase()
+        public void AddSemesterToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -57,12 +57,12 @@ namespace Smartloop_Feedback
         }
 
         // Fetch courses from the database and initialize the course list
-        private void getCourseFromDatabase()
+        private void GetCourseFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn); // SQL query to fetch courses
+                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, isCompleted, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn); // SQL query to fetch courses
                 cmd.Parameters.AddWithValue("@semesterId", id); // Set the semesterId parameter
                 cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
 
@@ -75,17 +75,44 @@ namespace Smartloop_Feedback
                         string title = reader.GetString(2); // Get the course title
                         int creditPoint = reader.GetInt32(3); // Get the course credit points
                         string description = reader.GetString(4); // Get the course description
-                        string canvasLink = reader.GetString(5); // Get the course canvas link
-                        courseList.Add(new Course(courseId, code, title, creditPoint, description, canvasLink, this.id, studentId)); // Add the course to the course list
+                        bool isCompleted = reader.GetBoolean(5);
+                        string canvasLink = reader.GetString(6); // Get the course canvas link
+                        courseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, isCompleted, canvasLink, this.id, studentId)); // Add the course to the course list
                     }
                 }
             }
         }
 
-        // Get the number of courses in the semester
-        public int numCourse()
+        public void DeleteSemesterFromDatabase()
         {
-            return courseList?.Count ?? 0; // Return the count of the course list, or 0 if it is null
+            foreach (Course course in courseList.Values)
+            {
+                course.DeleteCourseFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM semester
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void DeleteCourseFromDatabase(int courseId)
+        {
+            courseList[courseId].DeleteCourseFromDatabase();
+            courseList.Remove(courseId);
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Smartloop_Feedback.Objects
             this.assessmentId = assessmentId;
             this.studentId = studentId;
             ratingList = new List<Rating>(); // Initialize the rating list
-            getRatingFromDatabase(); // Fetch ratings from the database
+            GetRatingFromDatabase(); // Fetch ratings from the database
         }
 
         // Constructor to initialize a Criteria object and add it to the database
@@ -35,7 +35,7 @@ namespace Smartloop_Feedback.Objects
             this.assessmentId = assessmentId;
             this.studentId = studentId;
             ratingList = new List<Rating>(); // Initialize the rating list
-            addCriteriaToDatabase(); // Add the criteria to the database
+            AddCriteriaToDatabase(); // Add the criteria to the database
         }
 
         // Constructor to initialize a Criteria object without interacting with the database
@@ -46,7 +46,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Add the criteria to the database and get the generated ID
-        public void addCriteriaToDatabase()
+        public void AddCriteriaToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -64,7 +64,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Fetch ratings from the database and initialize the rating list
-        private void getRatingFromDatabase()
+        private void GetRatingFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -82,6 +82,32 @@ namespace Smartloop_Feedback.Objects
                         string grade = reader.GetString(2); // Get the rating grade
                         ratingList.Add(new Rating(ratingId, ratingDescription, grade, this.id, studentId)); // Add the rating to the rating list
                     }
+                }
+            }
+        }
+
+        public void DeleteCriteriaFromDatabase()
+        {
+            foreach (Rating rating in ratingList)
+            {
+                rating.DeleteRatingFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM criteria
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for studentId
+                    cmd.Parameters.AddWithValue("@id", id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }
