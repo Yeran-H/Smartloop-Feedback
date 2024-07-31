@@ -5,6 +5,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.InteropServices;
+using ZstdSharp.Unsafe;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -226,6 +227,63 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public void UpdateAssessmentToDatabase(string title, string description, DateTime date, string type, double mark, double weight, bool individual, bool group, string canvasLink)
+        {
+            foreach (Criteria criteria in criteriaList)
+            {
+                criteria.DeleteCriteriaFromDatabase();
+            }
+
+
+            this.name = title;
+            this.description = description;
+            this.date = date;
+            this.type = type;
+            this.mark = mark;
+            this.weight = weight;
+            this.individual = individual;
+            this.group = group;
+            this.canvasLink = canvasLink;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE assessment
+                    SET 
+                        name = @name,
+                        description = @description,
+                        date = @date,
+                        type = @type,
+                        mark = @mark,
+                        weight = @weight,
+                        individual = @individual,
+                        group = @group,
+                        canvasLink = @canvasLink
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@type", type);
+                    cmd.Parameters.AddWithValue("@mark", mark);
+                    cmd.Parameters.AddWithValue("@weight", weight);
+                    cmd.Parameters.AddWithValue("@individual", individual);
+                    cmd.Parameters.AddWithValue("@group", group);
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
 
                     // Execute the update command
                     cmd.ExecuteNonQuery();

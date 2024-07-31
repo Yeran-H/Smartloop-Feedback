@@ -304,7 +304,7 @@ namespace Smartloop_Feedback
                     break;
                 case 9:
                     this.formLoaderPl.Controls.Clear();
-                    EditAssessmentForm assessmentForm1 = new EditAssessmentForm() { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    EditAssessmentForm assessmentForm1 = new EditAssessmentForm(student.yearList[(string)position[0]].semesterList[(string)position[1]].courseList[(int)position[2]], this, (int)position[3]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     assessmentForm1.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(assessmentForm1);
                     assessmentForm1.Show();

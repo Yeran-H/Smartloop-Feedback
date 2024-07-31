@@ -201,6 +201,12 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        public void DeleteAssessmentFromDatabase(int assessmentId)
+        {
+            assessmentList[assessmentId].DeleteAssessmentFromDatabase();
+            assessmentList.Remove(assessmentId);
+        }
+
         public void GetEventsFromDatabase()
         {
             eventList.Clear();
