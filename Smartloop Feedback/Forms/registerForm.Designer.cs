@@ -188,7 +188,7 @@ namespace Smartloop_Feedback
             this.registerBtn.TabIndex = 25;
             this.registerBtn.Text = "Register";
             this.registerBtn.UseVisualStyleBackColor = false;
-            this.registerBtn.Click += new System.EventHandler(this.resgisterBtn_Click);
+            this.registerBtn.Click += new System.EventHandler(this.registerBtn_Click);
             // 
             // degreePb
             // 
@@ -333,7 +333,7 @@ namespace Smartloop_Feedback
             this.exitPb.TabStop = false;
             this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
-            // registerForm
+            // RegisterForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -362,7 +362,7 @@ namespace Smartloop_Feedback
             this.Controls.Add(this.pictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "registerForm";
+            this.Name = "RegisterForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "registerForm";
             ((System.ComponentModel.ISupportInitialize)(this.degreePb)).EndInit();
