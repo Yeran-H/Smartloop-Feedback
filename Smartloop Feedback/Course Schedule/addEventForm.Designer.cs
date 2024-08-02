@@ -40,6 +40,8 @@
             this.formTitle = new System.Windows.Forms.Label();
             this.exitPb = new System.Windows.Forms.PictureBox();
             this.dateDp = new Smartloop_Feedback.Objects.DatePicker();
+            this.startTimeDp = new System.Windows.Forms.DateTimePicker();
+            this.endTimeDp = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -95,7 +97,7 @@
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.cancelBtn.Location = new System.Drawing.Point(144, 206);
+            this.cancelBtn.Location = new System.Drawing.Point(144, 283);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(103, 32);
             this.cancelBtn.TabIndex = 18;
@@ -111,7 +113,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.saveBtn.Location = new System.Drawing.Point(35, 206);
+            this.saveBtn.Location = new System.Drawing.Point(35, 283);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(103, 32);
             this.saveBtn.TabIndex = 17;
@@ -126,7 +128,7 @@
             this.colourBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.colourBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.colourBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.colourBtn.Location = new System.Drawing.Point(14, 168);
+            this.colourBtn.Location = new System.Drawing.Point(14, 245);
             this.colourBtn.Name = "colourBtn";
             this.colourBtn.Size = new System.Drawing.Size(262, 32);
             this.colourBtn.TabIndex = 19;
@@ -183,12 +185,32 @@
             this.dateDp.TabIndex = 10;
             this.dateDp.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             // 
+            // startTimeDp
+            // 
+            this.startTimeDp.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startTimeDp.ShowUpDown = true;
+            this.startTimeDp.Location = new System.Drawing.Point(12, 170);
+            this.startTimeDp.Name = "startTimeDp";
+            this.startTimeDp.Size = new System.Drawing.Size(260, 23);
+            this.startTimeDp.TabIndex = 23;
+            // 
+            // endTimeDp
+            // 
+            this.endTimeDp.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.endTimeDp.ShowUpDown = true;
+            this.endTimeDp.Location = new System.Drawing.Point(12, 210);
+            this.endTimeDp.Name = "endTimeDp";
+            this.endTimeDp.Size = new System.Drawing.Size(260, 23);
+            this.endTimeDp.TabIndex = 24;
+            // 
             // addEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(288, 255);
+            this.ClientSize = new System.Drawing.Size(288, 355);
+            this.Controls.Add(this.endTimeDp);
+            this.Controls.Add(this.startTimeDp);
             this.Controls.Add(this.dateDp);
             this.Controls.Add(this.headerPanel);
             this.Controls.Add(this.colourBtn);
@@ -208,7 +230,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
-
         }
 
         #endregion
@@ -223,6 +244,8 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.PictureBox exitPb;
-        private Objects.DatePicker dateDp;
+        private Smartloop_Feedback.Objects.DatePicker dateDp;
+        private System.Windows.Forms.DateTimePicker startTimeDp;
+        private System.Windows.Forms.DateTimePicker endTimeDp;
     }
 }
