@@ -48,6 +48,8 @@ namespace Smartloop_Feedback.Forms
                 dateDp.Value = newEvent.date;
                 categoryCb.SelectedItem = newEvent.category;
                 colourBtn.BackColor = Color.FromArgb(newEvent.color);
+                startTimeDp.Value = DateTime.Today.Add(newEvent.startTime);
+                endTimeDp.Value = DateTime.Today.Add(newEvent.endTime);
             }
         }
 
@@ -82,19 +84,20 @@ namespace Smartloop_Feedback.Forms
 
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            if(newEvent != null)
+            if (newEvent != null)
             {
                 newEvent.name = eventTb.Text;
                 newEvent.date = dateDp.Value;
                 newEvent.category = categoryCb.SelectedItem?.ToString();
-                newEvent.color = colourBtn.BackColor.ToArgb(); 
+                newEvent.color = colourBtn.BackColor.ToArgb();
+                newEvent.startTime = startTimeDp.Value.TimeOfDay;
+                newEvent.endTime = endTimeDp.Value.TimeOfDay;
             }
             else
             {
-
-                newEvent = new Event(eventTb.Text, dateDp.Value, categoryCb.SelectedItem?.ToString(), colourBtn.BackColor.ToArgb());
+                newEvent = new Event(eventTb.Text, dateDp.Value, startTimeDp.Value.TimeOfDay, endTimeDp.Value.TimeOfDay, categoryCb.SelectedItem?.ToString(), colourBtn.BackColor.ToArgb());
             }
-            
+
             this.DialogResult = DialogResult.OK;
             this.Close();
         }
