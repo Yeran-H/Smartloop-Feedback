@@ -30,13 +30,13 @@ namespace Smartloop_Feedback.Setting.Bar
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
             int buttonCount = 0;
-            foreach (Course course in semester.courseList.Values)
+            foreach (Course course in semester.CourseList.Values)
             {
                 Button btn = allButtons[buttonCount]; 
                 btn.Visible = true; 
-                btn.Text = course.code.ToString(); 
+                btn.Text = course.Code.ToString(); 
                 buttons[buttonCount] = btn; 
-                btn.Tag = course.id;
+                btn.Tag = course.Id;
 
                 buttonCount++;
             }

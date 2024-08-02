@@ -21,7 +21,7 @@ namespace Smartloop_Feedback.Forms
 
         private void CourseForm_Load(object sender, EventArgs e)
         {
-            course.GetEventsFromDatabase();
+            course.LoadEventsFromDatabase();
             PopulateAssessmentView();
             PopulateEventView();
             currentTb.Text = course.CalculateCurrentMark().ToString("F2") + "%";
@@ -32,12 +32,12 @@ namespace Smartloop_Feedback.Forms
 
         private void canvasBtn_Click(object sender, EventArgs e)
         {
-            OpenUrl(course.canvasLink);
+            OpenUrl(course.CanvasLink);
         }
 
         private void handbookBtn_Click(object sender, EventArgs e)
         {
-            OpenUrl($"https://handbook.uts.edu.au/subjects/details/{course.code}.html");
+            OpenUrl($"https://handbook.uts.edu.au/subjects/details/{course.Code}.html");
         }
 
         private void OpenUrl(string url)
@@ -63,19 +63,19 @@ namespace Smartloop_Feedback.Forms
 
         private void PopulateAssessmentView()
         {
-            if (course.assessmentList != null)
+            if (course.AssessmentList != null)
             {
-                foreach (Assessment assessment in course.assessmentList.Values)
+                foreach (Assessment assessment in course.AssessmentList.Values)
                 {
-                    double percentage = (assessment.finalMark / assessment.mark) * 100;
+                    double percentage = (assessment.FinalMark / assessment.Mark) * 100;
 
-                    ListViewItem item = new ListViewItem(assessment.name);
-                    item.SubItems.Add(assessment.type);
-                    item.SubItems.Add(assessment.date.ToString());
-                    item.SubItems.Add(assessment.status.ToString());
+                    ListViewItem item = new ListViewItem(assessment.Name);
+                    item.SubItems.Add(assessment.Type);
+                    item.SubItems.Add(assessment.Date.ToString());
+                    item.SubItems.Add(assessment.Status.ToString());
                     item.SubItems.Add(percentage.ToString("F2") + "%");
-                    item.SubItems.Add(assessment.weight.ToString());
-                    item.Tag = assessment.id;
+                    item.SubItems.Add(assessment.Weight.ToString());
+                    item.Tag = assessment.Id;
 
                     assessmentLv.Items.Add(item);
                 }
@@ -84,12 +84,12 @@ namespace Smartloop_Feedback.Forms
 
         private void PopulateEventView()
         {
-            if (course.eventList != null)
+            if (course.EventList != null)
             {
-                foreach (Event events in course.eventList.Values)
+                foreach (Event events in course.EventList.Values)
                 {
-                    ListViewItem item = new ListViewItem(events.name);
-                    item.SubItems.Add(events.date.ToString());
+                    ListViewItem item = new ListViewItem(events.Name);
+                    item.SubItems.Add(events.Date.ToString());
                     item.Tag = events;
 
                     eventLv.Items.Add(item);
@@ -135,13 +135,13 @@ namespace Smartloop_Feedback.Forms
         private void eventBtn_Click(object sender, EventArgs e)
         {
             List<string> courseName = new List<string>();
-            courseName.Add(course.title);
+            courseName.Add(course.Title);
 
             using (AddEventForm addEventForm = new AddEventForm(courseName, null))
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.startTime, addEventForm.newEvent.endTime, course.title, addEventForm.newEvent.color, course.studentId, course.id);
+                    new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, course.Title, addEventForm.newEvent.Color, course.StudentId, course.Id);
                     PopulateEventView();
                 }
             }
@@ -152,7 +152,7 @@ namespace Smartloop_Feedback.Forms
             if (eventLv.SelectedItems.Count > 0)
             {
                 List<string> courseName = new List<string>();
-                courseName.Add(course.title);
+                courseName.Add(course.Title);
 
                 using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)eventLv.SelectedItems[0].Tag))
                 {

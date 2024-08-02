@@ -25,13 +25,13 @@ namespace Smartloop_Feedback.Setting
 
         private void EditAccountForm_Load(object sender, EventArgs e)
         {
-            nameTb.Text = student.name;
-            emailTb.Text = student.email;
-            passwordTb.Text = student.password;
-            degreeTb.Text = student.degree;
-            if (student.profileImage != null)
+            nameTb.Text = student.Name;
+            emailTb.Text = student.Email;
+            passwordTb.Text = student.Password;
+            degreeTb.Text = student.Degree;
+            if (student.ProfileImage != null)
             {
-                using (var ms = new System.IO.MemoryStream(student.profileImage))
+                using (var ms = new System.IO.MemoryStream(student.ProfileImage))
                 {
                     profilePb.Image = System.Drawing.Image.FromStream(ms);
                 }
@@ -71,7 +71,7 @@ namespace Smartloop_Feedback.Setting
                 }
                 catch (ExternalException)
                 {
-                    profileImage = student.profileImage;
+                    profileImage = student.ProfileImage;
                 }
             }
 

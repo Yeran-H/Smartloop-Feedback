@@ -30,11 +30,11 @@ namespace Smartloop_Feedback
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
 
             buttonCount = 0;
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button for the current year
                 btn.Visible = true; // Make the button visible
-                btn.Text = year.name; // Set the button text to the year's name
+                btn.Text = year.Name; // Set the button text to the year's name
                 buttons[buttonCount] = btn; // Store the button in the array
                 buttons[buttonCount].Click += YearButton_Click; // Attach the event handler to the button
 
@@ -67,8 +67,8 @@ namespace Smartloop_Feedback
 
                     if (buttonCount < 5) // Ensure the button count is less than 5
                     {
-                        Year year = new Year(yearName, student.studentId, addYearForm.semesterNames);
-                        student.yearList.Add(year.name, year); // Add the new year to the student's year list
+                        Year year = new Year(yearName, student.StudentId, addYearForm.semesterNames);
+                        student.YearList.Add(year.Name, year); // Add the new year to the student's year list
                         
                         Button btn = allButtons[buttonCount];
                         btn.Visible = true; // Make the new button visible

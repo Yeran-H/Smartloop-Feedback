@@ -35,13 +35,13 @@ namespace Smartloop_Feedback
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
             buttonCount = 0;
-            foreach (Course course in semester.courseList.Values)
+            foreach (Course course in semester.CourseList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button for the current course
                 btn.Visible = true; // Make the button visible
-                btn.Text = course.code.ToString(); // Set the button text to the course code
+                btn.Text = course.Code.ToString(); // Set the button text to the course code
                 buttons[buttonCount] = btn; // Store the button in the array
-                btn.Tag = course.id;
+                btn.Tag = course.Id;
 
                 buttonCount++;
             }
@@ -69,9 +69,9 @@ namespace Smartloop_Feedback
                 return;
             }
 
-            if (semester.courseList == null)
+            if (semester.CourseList == null)
             {
-                semester.courseList = new Dictionary<int,Course>();
+                semester.CourseList = new Dictionary<int,Course>();
             }
 
             using (var addCourseForm = new AddCourseForm())
@@ -83,8 +83,8 @@ namespace Smartloop_Feedback
                         Course course = addCourseForm.course;
                         if (course != null)
                         {
-                            Course temp = new Course(course.code, course.title, course.creditPoint, course.description, false, course.canvasLink, semester.id, semester.studentId);
-                            semester.courseList.Add(temp.id, temp);
+                            Course temp = new Course(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
+                            semester.CourseList.Add(temp.Id, temp);
                         }
                         else
                         {
@@ -94,7 +94,7 @@ namespace Smartloop_Feedback
 
                         Button btn = allButtons[buttonCount];
                         btn.Visible = true;
-                        btn.Text = course.code.ToString();
+                        btn.Text = course.Code.ToString();
                         buttons[buttonCount] = btn;
                         buttonCount++;
 

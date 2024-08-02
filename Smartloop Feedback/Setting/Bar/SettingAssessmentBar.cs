@@ -31,12 +31,12 @@ namespace Smartloop_Feedback.Setting.Bar
             Image buttonImage = Properties.Resources.School;
 
             int buttonCount = 0;
-            foreach (Assessment assessment in course.assessmentList.Values)
+            foreach (Assessment assessment in course.AssessmentList.Values)
             {
                 Button btn = new Button
                 {
-                    Text = assessment.name,
-                    Tag = assessment.id,
+                    Text = assessment.Name,
+                    Tag = assessment.Id,
                     Dock = DockStyle.Top,
                     Height = 42, 
                     FlatStyle = FlatStyle.Flat,

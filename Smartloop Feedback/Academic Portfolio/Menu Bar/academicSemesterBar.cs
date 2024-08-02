@@ -26,7 +26,7 @@ namespace Smartloop_Feedback
 
             // Loop through each semester in the year's semester list
             semesterButtons
-                .Where(button => year.semesterList.Keys.Contains(button.Text))
+                .Where(button => year.SemesterList.Keys.Contains(button.Text))
                 .ToList()
                 .ForEach(button => button.Visible = true);
         }

@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace Smartloop_Feedback.Objects
 {
-    public  class CourseResult
+    public class CourseResult
     {
-        public string Year { get; set; }
-        public string Semester { get; set; }
-        public string Course { get; set; }
-        public string Grade { get; set; }
-        public double Score { get; set; }
-        public int CreditPoint { get; set; }
+        // Public properties for course result details
+        public string Year { get; set; } // Academic year of the course
+        public string Semester { get; set; } // Semester of the course
+        public string Course { get; set; } // Name of the course
+        public string Grade { get; private set; } // Grade received in the course
+        public double Score { get; set; } // Score received in the course
+        public int CreditPoint { get; set; } // Credit points of the course
 
+        // Constructor to initialize a CourseResult object with default values
         public CourseResult()
         {
             Year = string.Empty;
@@ -25,28 +27,30 @@ namespace Smartloop_Feedback.Objects
             CreditPoint = 0;
         }
 
+        // Calculate the grade based on the score
         public void CalculateGrade()
         {
             switch (Score)
             {
                 case double s when (s >= 85 && s <= 100):
-                    Grade =  "HD";
+                    Grade = "HD"; // High Distinction
                     break;
                 case double s when (s >= 75 && s < 85):
-                    Grade = "D";
+                    Grade = "D"; // Distinction
                     break;
                 case double s when (s >= 65 && s < 75):
-                    Grade = "C";
+                    Grade = "C"; // Credit
                     break;
                 case double s when (s >= 50 && s < 65):
-                    Grade = "P";
+                    Grade = "P"; // Pass
                     break;
                 default:
-                    Grade = "F";
+                    Grade = "F"; // Fail
                     break;
             }
         }
 
+        // Get the grade point corresponding to the grade
         public double GetGradePoint()
         {
             switch (Grade)
@@ -65,6 +69,5 @@ namespace Smartloop_Feedback.Objects
                     return 0.0;
             }
         }
-
     }
 }

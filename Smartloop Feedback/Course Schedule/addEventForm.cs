@@ -44,12 +44,12 @@ namespace Smartloop_Feedback.Forms
 
             if (newEvent != null)
             {
-                eventTb.Text = newEvent.name;
-                dateDp.Value = newEvent.date;
-                categoryCb.SelectedItem = newEvent.category;
-                colourBtn.BackColor = Color.FromArgb(newEvent.color);
-                startTimeDp.Value = DateTime.Today.Add(newEvent.startTime);
-                endTimeDp.Value = DateTime.Today.Add(newEvent.endTime);
+                eventTb.Text = newEvent.Name;
+                dateDp.Value = newEvent.Date;
+                categoryCb.SelectedItem = newEvent.Category;
+                colourBtn.BackColor = Color.FromArgb(newEvent.Color);
+                startTimeDp.Value = DateTime.Today.Add(newEvent.StartTime);
+                endTimeDp.Value = DateTime.Today.Add(newEvent.EndTime);
             }
         }
 
@@ -86,12 +86,12 @@ namespace Smartloop_Feedback.Forms
         {
             if (newEvent != null)
             {
-                newEvent.name = eventTb.Text;
-                newEvent.date = dateDp.Value;
-                newEvent.category = categoryCb.SelectedItem?.ToString();
-                newEvent.color = colourBtn.BackColor.ToArgb();
-                newEvent.startTime = startTimeDp.Value.TimeOfDay;
-                newEvent.endTime = endTimeDp.Value.TimeOfDay;
+                newEvent.Name = eventTb.Text;
+                newEvent.Date = dateDp.Value;
+                newEvent.Category = categoryCb.SelectedItem?.ToString();
+                newEvent.Color = colourBtn.BackColor.ToArgb();
+                newEvent.StartTime = startTimeDp.Value.TimeOfDay;
+                newEvent.EndTime = endTimeDp.Value.TimeOfDay;
             }
             else
             {

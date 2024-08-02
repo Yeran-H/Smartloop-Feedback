@@ -148,16 +148,16 @@ namespace Smartloop_Feedback.Forms
             for (int day = 0; day < 7; day++)
             {
                 DateTime date = startOfWeek.AddDays(day);
-                var dayEvents = student.eventList.Values.Where(e => e.date.Date == date.Date).ToList();
+                var dayEvents = student.EventList.Values.Where(e => e.Date.Date == date.Date).ToList();
                 foreach (var dayEvent in dayEvents)
                 {
-                    for (int hour = dayEvent.startTime.Hours; hour <= dayEvent.endTime.Hours; hour++)
+                    for (int hour = dayEvent.StartTime.Hours; hour <= dayEvent.EndTime.Hours; hour++)
                     {
                         Button eventButton = new Button()
                         {
-                            Text = dayEvent.name,
+                            Text = dayEvent.Name,
                             Dock = DockStyle.Fill,
-                            BackColor = Color.FromArgb(dayEvent.color),
+                            BackColor = Color.FromArgb(dayEvent.Color),
                             Font = new Font("Aptos", 12, FontStyle.Bold),
                             ForeColor = Color.FromArgb(16, 34, 61),
                             FlatStyle = FlatStyle.Flat
@@ -172,18 +172,18 @@ namespace Smartloop_Feedback.Forms
 
         private Color GetEventColor(DateTime date)
         {
-            var eventForDate = student.eventList.Values.FirstOrDefault(e => e.date.Date == date.Date);
-            return eventForDate != null ? Color.FromArgb(eventForDate.color) : SystemColors.Control;
+            var eventForDate = student.EventList.Values.FirstOrDefault(e => e.Date.Date == date.Date);
+            return eventForDate != null ? Color.FromArgb(eventForDate.Color) : SystemColors.Control;
         }
 
         private bool HasEvents(DateTime date)
         {
-            return student.eventList.Values.Any(e => e.date.Date == date.Date);
+            return student.EventList.Values.Any(e => e.Date.Date == date.Date);
         }
 
         private void DayButton_Click(object sender, EventArgs e, DateTime date)
         {
-            var dayEvents = student.eventList.Values.Where(ev => ev.date.Date == date.Date).ToList();
+            var dayEvents = student.EventList.Values.Where(ev => ev.Date.Date == date.Date).ToList();
             if (dayEvents.Count > 0)
             {
                 using (EventListForm eventListForm = new EventListForm(dayEvents))
@@ -242,8 +242,8 @@ namespace Smartloop_Feedback.Forms
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    Event events = new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.startTime, addEventForm.newEvent.endTime, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category));
-                    student.eventList.Add(events.id, events);
+                    Event events = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, addEventForm.newEvent.Category, addEventForm.newEvent.Color, student.StudentId, student.FindCourseId(addEventForm.newEvent.Category));
+                    student.EventList.Add(events.Id, events);
                     if (isWeeklyView)
                     {
                         DisplayCurrentWeek();

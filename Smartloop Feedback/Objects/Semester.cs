@@ -8,38 +8,38 @@ namespace Smartloop_Feedback
 {
     public class Semester
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
         // Public properties for semester details
-        public string name { get; set; }
-        public int id { get; set; }
-        public int yearId { get; set; }
-        public int studentId { get; set; }
-        public Dictionary<int, Course> courseList { get; set; }
+        public string Name { get; set; } // Name of the semester
+        public int Id { get; set; } // ID of the semester
+        public int YearId { get; set; } // ID of the year this semester belongs to
+        public int StudentId { get; set; } // ID of the student
+        public Dictionary<int, Course> CourseList { get; set; } // List of courses in the semester
 
         // Constructor to initialize a Semester object and fetch courses from the database
         public Semester(string name, int id, int yearId, int studentId)
         {
-            this.name = name;
-            this.id = id;
-            this.yearId = yearId;
-            this.studentId = studentId;
-            courseList = new Dictionary<int, Course>(); // Initialize the course list
-            GetCourseFromDatabase(); // Fetch courses from the database
+            Name = name;
+            Id = id;
+            YearId = yearId;
+            StudentId = studentId;
+            CourseList = new Dictionary<int, Course>(); // Initialize the course list
+            LoadCoursesFromDatabase(); // Fetch courses from the database
         }
 
         // Constructor to initialize a Semester object and add it to the database
         public Semester(string name, int yearId, int studentId)
         {
-            this.name = name;
-            this.yearId = yearId;
-            this.studentId = studentId;
-            courseList = new Dictionary<int, Course>(); // Initialize the course list
+            Name = name;
+            YearId = yearId;
+            StudentId = studentId;
+            CourseList = new Dictionary<int, Course>(); // Initialize the course list
             AddSemesterToDatabase(); // Add the semester to the database
         }
 
         // Add the semester to the database and get the generated ID
-        public void AddSemesterToDatabase()
+        private void AddSemesterToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -48,44 +48,50 @@ namespace Smartloop_Feedback
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
-                    cmd.Parameters.AddWithValue("@yearId", yearId); // Set the yearId parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@yearId", YearId); // Set the yearId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
         // Fetch courses from the database and initialize the course list
-        private void GetCourseFromDatabase()
+        private void LoadCoursesFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, code, title, creditPoint, description, isCompleted, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId", conn); // SQL query to fetch courses
-                cmd.Parameters.AddWithValue("@semesterId", id); // Set the semesterId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                string sql = "SELECT id, code, title, creditPoint, description, isCompleted, canvasLink FROM course WHERE semesterId = @semesterId AND studentId = @studentId"; // SQL query to fetch courses
 
-                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) // Read each row
+                    cmd.Parameters.AddWithValue("@semesterId", Id); // Set the semesterId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        int courseId = reader.GetInt32(0); // Get the course ID
-                        int code = reader.GetInt32(1); // Get the course code
-                        string title = reader.GetString(2); // Get the course title
-                        int creditPoint = reader.GetInt32(3); // Get the course credit points
-                        string description = reader.GetString(4); // Get the course description
-                        bool isCompleted = reader.GetBoolean(5);
-                        string canvasLink = reader.GetString(6); // Get the course canvas link
-                        courseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, isCompleted, canvasLink, this.id, studentId)); // Add the course to the course list
+                        while (reader.Read()) // Read each row
+                        {
+                            int courseId = reader.GetInt32(0); // Get the course ID
+                            int code = reader.GetInt32(1); // Get the course code
+                            string title = reader.GetString(2); // Get the course title
+                            int creditPoint = reader.GetInt32(3); // Get the course credit points
+                            string description = reader.GetString(4); // Get the course description
+                            bool isCompleted = reader.GetBoolean(5); // Get the course completion status
+                            string canvasLink = reader.GetString(6); // Get the course canvas link
+                            CourseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, isCompleted, canvasLink, Id, StudentId)); // Add the course to the course list
+                        }
                     }
                 }
             }
         }
 
+        // Delete the semester and related courses from the database
         public void DeleteSemesterFromDatabase()
         {
-            foreach (Course course in courseList.Values)
+            // Delete all courses associated with the semester
+            foreach (Course course in CourseList.Values)
             {
                 course.DeleteCourseFromDatabase();
             }
@@ -100,8 +106,8 @@ namespace Smartloop_Feedback
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
+                    // Add the parameter for semester ID
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -109,10 +115,14 @@ namespace Smartloop_Feedback
             }
         }
 
+        // Delete a course from the database
         public void DeleteCourseFromDatabase(int courseId)
         {
-            courseList[courseId].DeleteCourseFromDatabase();
-            courseList.Remove(courseId);
+            if (CourseList.ContainsKey(courseId))
+            {
+                CourseList[courseId].DeleteCourseFromDatabase(); // Delete the course from the database
+                CourseList.Remove(courseId); // Remove the course from the list
+            }
         }
     }
 }

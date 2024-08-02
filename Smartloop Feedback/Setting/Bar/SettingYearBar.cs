@@ -32,11 +32,11 @@ namespace Smartloop_Feedback.Setting.Bar
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
             int buttonCount = 0;
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
                 Button btn = allButtons[buttonCount]; 
                 btn.Visible = true;
-                btn.Text = year.name; 
+                btn.Text = year.Name; 
                 buttons[buttonCount] = btn; 
                 buttons[buttonCount].Click += YearButton_Click; 
 

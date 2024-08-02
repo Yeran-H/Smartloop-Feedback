@@ -43,27 +43,27 @@ namespace Smartloop_Feedback.Results
 
         private void PopulateDgv()
         {
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
                 double wamYear = 0.0;
                 double gpaYear = 0.0;
                 int totalCreditPointsYear = 0;
 
-                foreach (Semester semester in year.semesterList.Values)
+                foreach (Semester semester in year.SemesterList.Values)
                 {
                     double wamSemester = 0.0;
                     double gpaSemester = 0.0;
                     int totalCreditPointsSemester = 0;
 
-                    foreach (Course course in semester.courseList.Values)
+                    foreach (Course course in semester.CourseList.Values)
                     {
                         CourseResult courseResult = new CourseResult
                         {
-                            Year = year.name,
-                            Semester = semester.name,
-                            Course = course.title,
+                            Year = year.Name,
+                            Semester = semester.Name,
+                            Course = course.Title,
                             Score = course.CalculateCurrentMark(),
-                            CreditPoint = course.creditPoint
+                            CreditPoint = course.CreditPoint
                         };
                         courseResult.CalculateGrade();
 
@@ -145,13 +145,13 @@ namespace Smartloop_Feedback.Results
             int totalCreditPoints = 0;
 
             // Ensure that totalCreditPoint is the sum of all credit points
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
-                foreach (Semester semester in year.semesterList.Values)
+                foreach (Semester semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.courseList.Values)
+                    foreach (Course course in semester.CourseList.Values)
                     {
-                        totalCreditPoints += course.creditPoint;
+                        totalCreditPoints += course.CreditPoint;
                     }
                 }
             }
@@ -159,13 +159,13 @@ namespace Smartloop_Feedback.Results
             // Calculate the total WAM
             for (int i = 0; i < wamYearList.Count; i++)
             {
-                totalWAM += wamYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+                totalWAM += wamYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
             }
 
             // Calculate the total GPA
             for (int i = 0; i < gpaYearList.Count; i++)
             {
-                totalGPA += gpaYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+                totalGPA += gpaYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
             }
 
             if (totalCreditPoints > 0)

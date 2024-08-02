@@ -23,7 +23,7 @@ namespace Smartloop_Feedback.Setting
 
         private void EditYearForms_Load(object sender, EventArgs e)
         {
-            yearTb.Text = student.yearList[(string)mainForm.position[0]].name;
+            yearTb.Text = student.YearList[(string)mainForm.position[0]].Name;
             PopulateCheckedList();
         }
 
@@ -35,7 +35,7 @@ namespace Smartloop_Feedback.Setting
 
             foreach (string semster in semesters)
             {
-                if (student.yearList[(string)mainForm.position[0]].semesterList.ContainsKey(semster))
+                if (student.YearList[(string)mainForm.position[0]].SemesterList.ContainsKey(semster))
                 {
                     deleteSemesterCb.Items.Add(semster);
                 }
@@ -52,12 +52,12 @@ namespace Smartloop_Feedback.Setting
             // Validate that the year name is not empty, unique, and semesters are selected
             if (!string.IsNullOrEmpty(yearName) && student.UniqueYear(yearName))
             {
-                student.yearList[(string)mainForm.position[0]].UpdateToDatabase(yearName);
+                student.YearList[(string)mainForm.position[0]].UpdateYearInDatabase(yearName);
 
-                Year year = student.yearList[(string)mainForm.position[0]];
+                Year year = student.YearList[(string)mainForm.position[0]];
 
-                student.yearList.Remove((string)mainForm.position[0]);
-                student.yearList[yearName] = year;
+                student.YearList.Remove((string)mainForm.position[0]);
+                student.YearList[yearName] = year;
 
                 mainForm.position[0] = yearName;
             }
@@ -88,7 +88,7 @@ namespace Smartloop_Feedback.Setting
         {
             foreach (string item in addSemesterCb.CheckedItems)
             {
-                student.yearList[(string)mainForm.position[0]].semesterList.Add(item, new Semester(item, student.yearList[(string)mainForm.position[0]].id, student.studentId));
+                student.YearList[(string)mainForm.position[0]].SemesterList.Add(item, new Semester(item, student.YearList[(string)mainForm.position[0]].Id, student.StudentId));
             }
 
             PopulateCheckedList();
@@ -108,7 +108,7 @@ namespace Smartloop_Feedback.Setting
             {
                 foreach (string item in deleteSemesterCb.CheckedItems)
                 {
-                    student.yearList[(string)mainForm.position[0]].DeleteSemesterFromDatabase(item);
+                    student.YearList[(string)mainForm.position[0]].DeleteSemesterFromDatabase(item);
                 }
 
                 PopulateCheckedList();

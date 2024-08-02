@@ -8,45 +8,38 @@ namespace Smartloop_Feedback.Objects
 {
     public class Criteria
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for criteria details
-        public int id { get; set; }
-        public string description { get; set; }
-        public int assessmentId { get; set; }
-        public List<Rating> ratingList { get; set; } // List of ratings for the criteria
-        public int studentId { get; set; }
+        public int Id { get; private set; } // Criteria ID
+        public string Description { get; set; } // Criteria description
+        public int AssessmentId { get; set; } // ID of the assessment associated with the criteria
+        public List<Rating> RatingList { get; private set; } // List of ratings for the criteria
+        public int StudentId { get; set; } // ID of the student associated with the criteria
 
         // Constructor to initialize a Criteria object and fetch ratings from the database
         public Criteria(int id, string description, int assessmentId, int studentId)
         {
-            this.id = id;
-            this.description = description;
-            this.assessmentId = assessmentId;
-            this.studentId = studentId;
-            ratingList = new List<Rating>(); // Initialize the rating list
-            GetRatingFromDatabase(); // Fetch ratings from the database
+            Id = id;
+            Description = description;
+            AssessmentId = assessmentId;
+            StudentId = studentId;
+            RatingList = new List<Rating>(); // Initialize the rating list
+            LoadRatingsFromDatabase(); // Fetch ratings from the database
         }
 
         // Constructor to initialize a Criteria object and add it to the database
         public Criteria(string description, int assessmentId, int studentId)
         {
-            this.description = description;
-            this.assessmentId = assessmentId;
-            this.studentId = studentId;
-            ratingList = new List<Rating>(); // Initialize the rating list
+            Description = description;
+            AssessmentId = assessmentId;
+            StudentId = studentId;
+            RatingList = new List<Rating>(); // Initialize the rating list
             AddCriteriaToDatabase(); // Add the criteria to the database
         }
 
-        // Constructor to initialize a Criteria object without interacting with the database
-        public Criteria(string description)
-        {
-            this.description = description;
-            ratingList = new List<Rating>(); // Initialize the rating list
-        }
-
         // Add the criteria to the database and get the generated ID
-        public void AddCriteriaToDatabase()
+        private void AddCriteriaToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -55,40 +48,46 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
-                    cmd.Parameters.AddWithValue("@assessmentId", assessmentId); // Set the assessmentId parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@assessmentId", AssessmentId); // Set the assessmentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
         // Fetch ratings from the database and initialize the rating list
-        private void GetRatingFromDatabase()
+        private void LoadRatingsFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, description, grade FROM rating WHERE criteriaId = @criteriaId AND studentId = @studentId", conn); // SQL query to fetch ratings
-                cmd.Parameters.AddWithValue("@criteriaId", id); // Set the criteriaId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                string sql = "SELECT id, description, grade FROM rating WHERE criteriaId = @criteriaId AND studentId = @studentId"; // SQL query to fetch ratings
 
-                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) // Read each row
+                    cmd.Parameters.AddWithValue("@criteriaId", Id); // Set the criteriaId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        int ratingId = reader.GetInt32(0); // Get the rating ID
-                        string ratingDescription = reader.GetString(1); // Get the rating description
-                        string grade = reader.GetString(2); // Get the rating grade
-                        ratingList.Add(new Rating(ratingId, ratingDescription, grade, this.id, studentId)); // Add the rating to the rating list
+                        while (reader.Read()) // Read each row
+                        {
+                            int ratingId = reader.GetInt32(0); // Get the rating ID
+                            string ratingDescription = reader.GetString(1); // Get the rating description
+                            string grade = reader.GetString(2); // Get the rating grade
+                            RatingList.Add(new Rating(ratingId, ratingDescription, grade, Id, StudentId)); // Add the rating to the rating list
+                        }
                     }
                 }
             }
         }
 
+        // Delete the criteria and related ratings from the database
         public void DeleteCriteriaFromDatabase()
         {
-            foreach (Rating rating in ratingList)
+            // Delete all ratings associated with the criteria
+            foreach (Rating rating in RatingList)
             {
                 rating.DeleteRatingFromDatabase();
             }
@@ -103,8 +102,8 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
+                    // Add the parameter for criteria ID
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();

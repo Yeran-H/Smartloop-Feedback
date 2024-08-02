@@ -35,7 +35,7 @@ namespace Smartloop_Feedback.Forms
             InitializeComponent();
             eventLst.DataSource = eventList;
             eventLst.DisplayMember = "Name";
-            formTitle.Text = eventList[0].date.ToString("dd MMMM yyyy");
+            formTitle.Text = eventList[0].Date.ToString("dd MMMM yyyy");
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
         }
 

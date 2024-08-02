@@ -27,16 +27,16 @@ namespace Smartloop_Feedback.Setting
 
         private void EditCourseForm_Load(object sender, EventArgs e)
         {
-            codeTb.Text = semester.courseList[courseId].code.ToString();
-            nameTb.Text = semester.courseList[courseId].title;
-            creditTb.Text = semester.courseList[courseId].creditPoint.ToString();
-            descriptionTb.Text = semester.courseList[courseId].description;
-            canvasTb.Text = semester.courseList[courseId].canvasLink;
+            codeTb.Text = semester.CourseList[courseId].Code.ToString();
+            nameTb.Text = semester.CourseList[courseId].Title;
+            creditTb.Text = semester.CourseList[courseId].CreditPoint.ToString();
+            descriptionTb.Text = semester.CourseList[courseId].Description;
+            canvasTb.Text = semester.CourseList[courseId].CanvasLink;
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            semester.courseList[courseId].UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, canvasTb.Text);
+            semester.CourseList[courseId].UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, canvasTb.Text);
         }
 
         private void deleteBtn_Click(object sender, EventArgs e)

@@ -28,10 +28,10 @@ namespace Smartloop_Feedback
 
         private void AssessmentForm_Load(object sender, EventArgs e)
         {
-            markTb.Text = assessment.finalMark.ToString() + "/" + assessment.mark.ToString();
-            dateP.Value = assessment.date;
-            descriptionRb.Text = assessment.description;
-            finaliseCb.Checked = assessment.isFinalised;
+            markTb.Text = assessment.FinalMark.ToString() + "/" + assessment.Mark.ToString();
+            dateP.Value = assessment.Date;
+            descriptionRb.Text = assessment.Description;
+            finaliseCb.Checked = assessment.IsFinalised;
             PopulateCheckListBox();
 
             // Set initial visibility of panels
@@ -47,17 +47,17 @@ namespace Smartloop_Feedback
         {
             checklistCb.Items.Clear();
 
-            foreach(var item in assessment.checkList)
+            foreach(var item in assessment.CheckList)
             {
                 // Add item to the CheckedListBox
-                int index = checklistCb.Items.Add(item.name);
+                int index = checklistCb.Items.Add(item.Name);
 
                 // Set the checked state based on isChecked property
-                checklistCb.SetItemChecked(index, item.isChecked);
+                checklistCb.SetItemChecked(index, item.IsChecked);
             }
 
             assessment.CalculateStatus();
-            progressBar.Value = assessment.status;
+            progressBar.Value = assessment.Status;
         }
 
         private void LoadData()
@@ -70,20 +70,20 @@ namespace Smartloop_Feedback
             // Allow the user to add rows
             criteriaDgv.AllowUserToAddRows = true;
 
-            foreach(Rating rating in assessment.criteriaList[0].ratingList)
+            foreach(Rating rating in assessment.CriteriaList[0].RatingList)
             {
-                criteriaDgv.Columns.Add(rating.grade, rating.grade);
+                criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
             }
 
-            for(int i = 0; i < assessment.criteriaList.Count; i++)
+            for(int i = 0; i < assessment.CriteriaList.Count; i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(criteriaDgv);
-                row.Cells[0].Value = assessment.criteriaList[i].description;
+                row.Cells[0].Value = assessment.CriteriaList[i].Description;
 
-                for(int j = 0; j < assessment.criteriaList[i].ratingList.Count; j++)
+                for(int j = 0; j < assessment.CriteriaList[i].RatingList.Count; j++)
                 {
-                    row.Cells[j+1].Value = assessment.criteriaList[i].ratingList[j].description;
+                    row.Cells[j+1].Value = assessment.CriteriaList[i].RatingList[j].Description;
                 }
 
                 criteriaDgv.Rows.Add(row);
@@ -92,7 +92,7 @@ namespace Smartloop_Feedback
 
         private void isFinalised()
         {
-            if(assessment.isFinalised)
+            if(assessment.IsFinalised)
             {
                 markTb.Enabled = false;
                 dateP.Enabled = false;
@@ -105,7 +105,7 @@ namespace Smartloop_Feedback
 
         private void canvasBtn_Click(object sender, EventArgs e)
         {
-            OpenUrl(assessment.canvasLink);
+            OpenUrl(assessment.CanvasLink);
         }
         private void OpenUrl(string url)
         {
@@ -137,7 +137,7 @@ namespace Smartloop_Feedback
                 {
                     string name = addCheckList.name; // Get the new year's name
 
-                    assessment.checkList.Add(new CheckList(name, assessment.studentId, false, assessment.id));
+                    assessment.CheckList.Add(new CheckList(name, assessment.StudentId, false, assessment.Id));
                     
                     PopulateCheckListBox();
                 }
@@ -148,10 +148,10 @@ namespace Smartloop_Feedback
         {
             int index = e.Index;
             bool isChecked = e.NewValue == CheckState.Checked;
-            assessment.checkList[index].UpdateChecked(isChecked);
+            assessment.CheckList[index].UpdateChecked(isChecked);
 
             assessment.CalculateStatus();
-            progressBar.Value = assessment.status;
+            progressBar.Value = assessment.Status;
         }
 
         private void markTb_Leave(object sender, EventArgs e)
@@ -169,8 +169,8 @@ namespace Smartloop_Feedback
                     return;
                 }
 
-                assessment.finalMark = firstNumber;
-                assessment.mark = secondNumber;
+                assessment.FinalMark = firstNumber;
+                assessment.Mark = secondNumber;
             }
             else
             {

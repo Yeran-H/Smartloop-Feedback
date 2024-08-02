@@ -28,15 +28,15 @@ namespace Smartloop_Feedback.Setting
 
         private void EditAssessmentForm_Load(object sender, EventArgs e)
         {
-            titleTb.Text = course.assessmentList[assessmentId].name;
-            descriptionTb.Text = course.assessmentList[assessmentId].description;
-            dateP.Value = course.assessmentList[assessmentId].date;
-            typeCb.Text = course.assessmentList[assessmentId].type;
-            markTb.Text = course.assessmentList[assessmentId].mark.ToString();
-            weightTb.Text = course.assessmentList[assessmentId].weight.ToString();
-            individualRbtn.Checked = course.assessmentList[assessmentId].individual;
-            groupRbtn.Checked = course.assessmentList[assessmentId].group;
-            canvasTb.Text = course.assessmentList[assessmentId].canvasLink;
+            titleTb.Text = course.AssessmentList[assessmentId].Name;
+            descriptionTb.Text = course.AssessmentList[assessmentId].Description;
+            dateP.Value = course.AssessmentList[assessmentId].Date;
+            typeCb.Text = course.AssessmentList[assessmentId].Type;
+            markTb.Text = course.AssessmentList[assessmentId].Mark.ToString();
+            weightTb.Text = course.AssessmentList[assessmentId].Weight.ToString();
+            individualRbtn.Checked = course.AssessmentList[assessmentId].Individual;
+            groupRbtn.Checked = course.AssessmentList[assessmentId].Group;
+            canvasTb.Text = course.AssessmentList[assessmentId].CanvasLink;
 
             PopulateCriteria();
         }
@@ -52,22 +52,22 @@ namespace Smartloop_Feedback.Setting
             criteriaDgv.AllowUserToAddRows = true;
             int columnIndex = 1;
 
-            foreach (Rating rating in course.assessmentList[assessmentId].criteriaList[0].ratingList)
+            foreach (Rating rating in course.AssessmentList[assessmentId].CriteriaList[0].RatingList)
             {
-                criteriaDgv.Columns.Add(rating.grade, rating.grade);
-                AddColumnInputControls(columnIndex, rating.grade);
+                criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
+                AddColumnInputControls(columnIndex, rating.Grade);
                 columnIndex++;
             }
 
-            for (int i = 0; i < course.assessmentList[assessmentId].criteriaList.Count; i++)
+            for (int i = 0; i < course.AssessmentList[assessmentId].CriteriaList.Count; i++)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(criteriaDgv);
-                row.Cells[0].Value = course.assessmentList[assessmentId].criteriaList[i].description;
+                row.Cells[0].Value = course.AssessmentList[assessmentId].CriteriaList[i].Description;
 
-                for (int j = 0; j < course.assessmentList[assessmentId].criteriaList[i].ratingList.Count; j++)
+                for (int j = 0; j < course.AssessmentList[assessmentId].CriteriaList[i].RatingList.Count; j++)
                 {
-                    row.Cells[j + 1].Value = course.assessmentList[assessmentId].criteriaList[i].ratingList[j].description;
+                    row.Cells[j + 1].Value = course.AssessmentList[assessmentId].CriteriaList[i].RatingList[j].Description;
                 }
 
                 criteriaDgv.Rows.Add(row);
@@ -200,7 +200,7 @@ namespace Smartloop_Feedback.Setting
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            course.assessmentList[assessmentId].UpdateAssessmentToDatabase(titleTb.Text, descriptionTb.Text, dateP.Value, typeCb.Text, Double.Parse(markTb.Text), Double.Parse(weightTb.Text), individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text);
+            course.AssessmentList[assessmentId].UpdateAssessmentToDatabase(titleTb.Text, descriptionTb.Text, dateP.Value, typeCb.Text, Double.Parse(markTb.Text), Double.Parse(weightTb.Text), individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text);
 
             List<string> columnNameList = new List<string>();
             foreach (DataGridViewColumn column in criteriaDgv.Columns)
@@ -213,12 +213,12 @@ namespace Smartloop_Feedback.Setting
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessmentId, course.assessmentList[assessmentId].studentId);
-                course.assessmentList[assessmentId].criteriaList.Add(criteria);
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessmentId, course.AssessmentList[assessmentId].StudentId);
+                course.AssessmentList[assessmentId].CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.assessmentList[assessmentId].criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, course.assessmentList[assessmentId].studentId));
+                    course.AssessmentList[assessmentId].CriteriaList.Last().RatingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, course.AssessmentList[assessmentId].StudentId));
                 }
             }
 

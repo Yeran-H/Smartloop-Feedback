@@ -26,7 +26,7 @@ namespace Smartloop_Feedback.Setting.Bar
             Button[] semesterButtons = { summerBtn, autumnBtn, winterBtn, springBtn };
 
             semesterButtons
-                .Where(button => year.semesterList.Keys.Contains(button.Text))
+                .Where(button => year.SemesterList.Keys.Contains(button.Text))
                 .ToList()
                 .ForEach(button => button.Visible = true);
         }

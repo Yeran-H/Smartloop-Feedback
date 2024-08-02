@@ -2,77 +2,74 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using Org.BouncyCastle.Asn1.X509;
-using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
-using System.Xml.Linq;
 
 namespace Smartloop_Feedback.Objects
 {
     public class Course
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for course details
-        public int id { get; set; }
-        public int code { get; set; }
-        public string title { get; set; }
-        public int creditPoint { get; set; }
-        public string description { get; set; }
-        public bool isCompleted { get; set; }
-        public int semesterId { get; set; }
-        public int studentId { get; set; }
-        public string canvasLink { get; set; }
-        public Dictionary<int, Assessment> assessmentList { get; set; } // List of assessments for the course
-        public Dictionary<int, Event> eventList { get; set; }
+        public int Id { get; private set; } // Course ID
+        public int Code { get; set; } // Course code
+        public string Title { get; set; } // Course title
+        public int CreditPoint { get; set; } // Course credit points
+        public string Description { get; set; } // Course description
+        public bool IsCompleted { get; set; } // Completion status of the course
+        public int SemesterId { get; set; } // ID of the semester associated with the course
+        public int StudentId { get; set; } // ID of the student associated with the course
+        public string CanvasLink { get; set; } // Link to the course's Canvas page
+        public Dictionary<int, Assessment> AssessmentList { get; private set; } // List of assessments for the course
+        public Dictionary<int, Event> EventList { get; private set; } // List of events for the course
 
         // Constructor to initialize a Course object and fetch assessments from the database
         public Course(int id, int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
-            this.id = id;
-            this.code = code;
-            this.title = title;
-            this.creditPoint = creditPoint;
-            this.description = description;
-            this.isCompleted = isCompleted;
-            this.canvasLink = canvasLink;
-            this.semesterId = semesterId;
-            this.studentId = studentId;
-            assessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
-            eventList = new Dictionary<int, Event>();
-            GetAssessmentFromDatabase(); // Fetch assessments from the database
+            Id = id;
+            Code = code;
+            Title = title;
+            CreditPoint = creditPoint;
+            Description = description;
+            IsCompleted = isCompleted;
+            CanvasLink = canvasLink;
+            SemesterId = semesterId;
+            StudentId = studentId;
+            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
+            EventList = new Dictionary<int, Event>(); // Initialize the event list
+            LoadAssessmentsFromDatabase(); // Fetch assessments from the database
         }
 
         // Constructor to initialize a Course object and add it to the database
         public Course(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
-            this.code = code;
-            this.title = title;
-            this.creditPoint = creditPoint;
-            this.description = description;
-            this.isCompleted = isCompleted;
-            this.canvasLink = canvasLink;
-            this.semesterId = semesterId;
-            this.studentId = studentId;
-            assessmentList = new Dictionary<int, Assessment>();
-            eventList = new Dictionary<int, Event>();
+            Code = code;
+            Title = title;
+            CreditPoint = creditPoint;
+            Description = description;
+            IsCompleted = isCompleted;
+            CanvasLink = canvasLink;
+            SemesterId = semesterId;
+            StudentId = studentId;
+            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
+            EventList = new Dictionary<int, Event>(); // Initialize the event list
             AddCourseToDatabase(); // Add the course to the database
         }
 
         // Constructor to initialize a Course object without interacting with the database
         public Course(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink)
         {
-            this.code = code;
-            this.title = title;
-            this.creditPoint = creditPoint;
-            this.description = description;
-            this.isCompleted = isCompleted;
-            this.canvasLink = canvasLink;
-            assessmentList = new Dictionary<int, Assessment>();
+            Code = code;
+            Title = title;
+            CreditPoint = creditPoint;
+            Description = description;
+            IsCompleted = isCompleted;
+            CanvasLink = canvasLink;
+            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
         }
 
         // Add the course to the database and get the generated ID
-        public void AddCourseToDatabase()
+        private void AddCourseToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -81,28 +78,28 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@code", code); // Set the code parameter
-                    cmd.Parameters.AddWithValue("@title", title); // Set the title parameter
-                    cmd.Parameters.AddWithValue("@creditPoint", creditPoint); // Set the creditPoint parameter
-                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
-                    cmd.Parameters.AddWithValue("@isCompleted", isCompleted);
-                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink); // Set the canvasLink parameter
-                    cmd.Parameters.AddWithValue("@semesterId", semesterId); // Set the semesterId parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@code", Code); // Set the code parameter
+                    cmd.Parameters.AddWithValue("@title", Title); // Set the title parameter
+                    cmd.Parameters.AddWithValue("@creditPoint", CreditPoint); // Set the creditPoint parameter
+                    cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@isCompleted", IsCompleted); // Set the isCompleted parameter
+                    cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
+                    cmd.Parameters.AddWithValue("@semesterId", SemesterId); // Set the semesterId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
         // Fetch assessments from the database and initialize the assessment list
-        private void GetAssessmentFromDatabase()
+        private void LoadAssessmentsFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
-                cmd.Parameters.AddWithValue("@courseId", id); // Set the courseId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
+                cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -116,26 +113,27 @@ namespace Smartloop_Feedback.Objects
                         int status = reader.GetInt32(5); // Get the assessment status
                         double weight = (double)reader.GetDecimal(6); // Get the assessment weight
                         double mark = (double)reader.GetDecimal(7); // Get the assessment mark
-                        double finalMark = (double)reader.GetDecimal(8);
+                        double finalMark = (double)reader.GetDecimal(8); // Get the final mark
                         bool individual = reader.GetBoolean(9); // Get the individual status
                         bool group = reader.GetBoolean(10); // Get the group status
-                        bool isFinalised = reader.GetBoolean(11);
+                        bool isFinalised = reader.GetBoolean(11); // Get the finalised status
                         string canvasLink = reader.GetString(12); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        assessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, this.id, studentId));
+                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, Id, StudentId));
                     }
                 }
             }
         }
 
+        // Update the course details in the database
         public void UpdateCourseToDatabase(int code, string title, int creditPoint, string description, string canvasLink)
         {
-            this.code = code;
-            this.title = title;
-            this.creditPoint = creditPoint;
-            this.description = description;
-            this.canvasLink = canvasLink;
+            Code = code;
+            Title = title;
+            CreditPoint = creditPoint;
+            Description = description;
+            CanvasLink = canvasLink;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -155,7 +153,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", id);
+                    cmd.Parameters.AddWithValue("@id", Id);
                     cmd.Parameters.AddWithValue("@code", code);
                     cmd.Parameters.AddWithValue("@title", title);
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
@@ -168,18 +166,21 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        // Delete the course and related data from the database
         public void DeleteCourseFromDatabase()
         {
-            GetEventsFromDatabase();
+            LoadEventsFromDatabase();
 
-            foreach (Assessment assessment in assessmentList.Values)
+            // Delete all assessments associated with the course
+            foreach (Assessment assessment in AssessmentList.Values)
             {
                 assessment.DeleteAssessmentFromDatabase();
             }
 
-            foreach (Event events in eventList.Values)
+            // Delete all events associated with the course
+            foreach (Event ev in EventList.Values)
             {
-                events.DeleteEventFromDatabase();
+                ev.DeleteEventFromDatabase();
             }
 
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -192,8 +193,8 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
+                    // Add the parameter for course ID
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -201,20 +202,25 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        // Delete an assessment from the database
         public void DeleteAssessmentFromDatabase(int assessmentId)
         {
-            assessmentList[assessmentId].DeleteAssessmentFromDatabase();
-            assessmentList.Remove(assessmentId);
+            if (AssessmentList.ContainsKey(assessmentId))
+            {
+                AssessmentList[assessmentId].DeleteAssessmentFromDatabase(); // Delete the assessment from the database
+                AssessmentList.Remove(assessmentId); // Remove the assessment from the list
+            }
         }
 
-        public void GetEventsFromDatabase()
+        // Fetch events from the database and initialize the event list
+        public void LoadEventsFromDatabase()
         {
-            eventList.Clear();
+            EventList.Clear();
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
                 SqlCommand cmd = new SqlCommand("SELECT id, name, date, startTime, endTime, category, color FROM event WHERE courseId = @courseId ORDER BY date", conn);
-                cmd.Parameters.AddWithValue("@courseId", this.id);
+                cmd.Parameters.AddWithValue("@courseId", Id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
                 {
@@ -227,50 +233,56 @@ namespace Smartloop_Feedback.Objects
                         TimeSpan endTime = reader.GetTimeSpan(4);
                         string category = reader.GetString(5);
                         int color = reader.GetInt32(6);
-                        eventList.Add(id, new Event(id, name, date, startTime, endTime, studentId, this.id, category, color));
+                        EventList.Add(id, new Event(id, name, date, startTime, endTime, StudentId, Id, category, color));
                     }
                 }
             }
         }
 
+        // Update an event in the database
         public void UpdateEvent(Event selectedEvent)
         {
-            eventList[selectedEvent.id].UpdateEventInDatabase(selectedEvent);
+            if (EventList.ContainsKey(selectedEvent.Id))
+            {
+                EventList[selectedEvent.Id].UpdateEventInDatabase(selectedEvent);
+            }
         }
 
+        // Calculate the current mark for the course
         public double CalculateCurrentMark()
         {
             double totalWeightedMarks = 0.0;
-            double TotalWeight = 0.0;
+            double totalWeight = 0.0;
 
-            foreach(var assessment in assessmentList.Values)
+            foreach (var assessment in AssessmentList.Values)
             {
-                if(assessment.isFinalised)
+                if (assessment.IsFinalised)
                 {
-                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
-                    TotalWeight += assessment.weight;
+                    totalWeightedMarks += (assessment.FinalMark / assessment.Mark) * assessment.Weight;
+                    totalWeight += assessment.Weight;
                 }
             }
 
-            return TotalWeight > 0 ? (totalWeightedMarks / TotalWeight) * 100 : 0.0;
+            return totalWeight > 0 ? (totalWeightedMarks / totalWeight) * 100 : 0.0;
         }
 
+        // Calculate the target mark required for the course
         public double CalculateTargetMark(double targetMark)
         {
             double totalWeightedMarks = 0.0;
             double totalWeight = 0.0;
             double remainingWeight = 0.0;
 
-            foreach (var assessment in assessmentList.Values)
+            foreach (var assessment in AssessmentList.Values)
             {
-                if (assessment.isFinalised)
+                if (assessment.IsFinalised)
                 {
-                    totalWeightedMarks += (assessment.finalMark / assessment.mark) * assessment.weight;
-                    totalWeight += assessment.weight;
+                    totalWeightedMarks += (assessment.FinalMark / assessment.Mark) * assessment.Weight;
+                    totalWeight += assessment.Weight;
                 }
                 else
                 {
-                    remainingWeight += assessment.weight;
+                    remainingWeight += assessment.Weight;
                 }
             }
 
@@ -280,12 +292,12 @@ namespace Smartloop_Feedback.Objects
             {
                 // All assessments are finalized
                 double currentMark = totalWeight > 0 ? totalWeightedMarks / totalWeight : 0.0;
-                isCompleted = true;
+                IsCompleted = true;
                 return currentMark >= targetMark ? 0.0 : double.NaN; // Return NaN if it's not possible to achieve the target
             }
             else
             {
-                isCompleted = false;
+                IsCompleted = false;
             }
 
             double requiredTotalMarks = targetMark * (totalWeight + remainingWeight);

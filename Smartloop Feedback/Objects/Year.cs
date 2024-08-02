@@ -2,42 +2,41 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 
 namespace Smartloop_Feedback
 {
     public class Year
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for year details
-        public string name { get; set; }
-        public int studentId { get; } // Student ID associated with the year
-        public int id { get; set; } // Year ID
-        public Dictionary<string, Semester> semesterList { get; set; } // List of semesters in the year
+        public string Name { get; set; } // Name of the year
+        public int StudentId { get; } // Student ID associated with the year
+        public int Id { get; set; } // Year ID
+        public Dictionary<string, Semester> SemesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
         public Year(string name, int studentId, int id)
         {
-            this.name = name;
-            this.studentId = studentId;
-            this.id = id;
-            semesterList = new Dictionary<string, Semester>(); // Initialize the semester list
-            GetSemesterFromDatabase(); // Fetch semesters from the database
+            Name = name;
+            StudentId = studentId;
+            Id = id;
+            SemesterList = new Dictionary<string, Semester>(); // Initialize the semester list
+            LoadSemestersFromDatabase(); // Fetch semesters from the database
         }
 
         // Constructor to initialize a Year object and add it to the database
         public Year(string name, int studentId, List<string> semesterNames)
         {
-            this.name = name;
-            this.studentId = studentId;
-            semesterList = new Dictionary<string, Semester>(); // Initialize the semester list
+            Name = name;
+            StudentId = studentId;
+            SemesterList = new Dictionary<string, Semester>(); // Initialize the semester list
             AddYearToDatabase(); // Add the year to the database
-            AddSemesterToDatabase(semesterNames); // Add the semesters to the database
+            AddSemestersToDatabase(semesterNames); // Add the semesters to the database
         }
 
         // Add the year to the database and get the generated ID
-        public void AddYearToDatabase()
+        private void AddYearToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -46,103 +45,94 @@ namespace Smartloop_Feedback
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
         // Add the semesters to the database and initialize the semester list
-        public void AddSemesterToDatabase(List<string> semesterNames)
+        private void AddSemestersToDatabase(List<string> semesterNames)
         {
             foreach (string semesterName in semesterNames) // Loop through each semester name
             {
-                Semester semester = new Semester(semesterName, id, studentId);
-                semesterList.Add(semester.name, semester); // Add a new semester to the semester list
+                Semester semester = new Semester(semesterName, Id, StudentId); // Create a new semester
+                SemesterList.Add(semester.Name, semester); // Add the semester to the semester list
             }
         }
 
         // Fetch semesters from the database and initialize the semester list
-        private void GetSemesterFromDatabase()
+        private void LoadSemestersFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT name, id FROM semester WHERE yearId = @yearId AND studentId = @studentId", conn); // SQL query to fetch semesters
-                cmd.Parameters.AddWithValue("@yearId", id); // Set the yearId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-
-                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                string sql = "SELECT name, id FROM semester WHERE yearId = @yearId AND studentId = @studentId"; // SQL query to fetch semesters
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) // Read each row
+                    cmd.Parameters.AddWithValue("@yearId", Id); // Set the yearId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        string name = reader.GetString(0); // Get the semester name
-                        int id = reader.GetInt32(1); // Get the semester ID
-                        semesterList.Add(name, new Semester(name, id, this.id, studentId)); // Add the semester to the semester list
+                        while (reader.Read()) // Read each row
+                        {
+                            string name = reader.GetString(0); // Get the semester name
+                            int id = reader.GetInt32(1); // Get the semester ID
+                            SemesterList.Add(name, new Semester(name, id, Id, StudentId)); // Add the semester to the semester list
+                        }
                     }
                 }
             }
         }
 
-        public void UpdateToDatabase(string yearName)
+        // Update the year name in the database
+        public void UpdateYearInDatabase(string yearName)
         {
-            name = yearName;
+            Name = yearName; // Update the year name
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
+                conn.Open(); // Open the connection
+                string sql = "UPDATE year SET name = @name WHERE id = @id"; // SQL query to update year name
 
-                string updateQuery = @"
-                    UPDATE year
-                    SET 
-                        name = @name
-                    WHERE
-                        id = @id";
-
-                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@name", name);
-
-                    // Execute the update command
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@id", Id); // Set the id parameter
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.ExecuteNonQuery(); // Execute the update command
                 }
             }
         }
 
+        // Delete a semester from the database
         public void DeleteSemesterFromDatabase(string semesterName)
         {
-            if(semesterList.ContainsKey(semesterName))
+            if (SemesterList.ContainsKey(semesterName)) // Check if the semester exists
             {
-                semesterList[semesterName].DeleteSemesterFromDatabase();
-                semesterList.Remove(semesterName);
+                SemesterList[semesterName].DeleteSemesterFromDatabase(); // Delete the semester from the database
+                SemesterList.Remove(semesterName); // Remove the semester from the list
             }
         }
 
+        // Delete the year and all its semesters from the database
         public void DeleteYearFromDatabase()
         {
-            foreach (Semester semester in semesterList.Values)
+            foreach (Semester semester in SemesterList.Values) // Loop through each semester
             {
-                semester.DeleteSemesterFromDatabase();
+                semester.DeleteSemesterFromDatabase(); // Delete the semester from the database
             }
 
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
+                conn.Open(); // Open the connection
+                string sql = "DELETE FROM year WHERE id = @id"; // SQL query to delete the year
 
-                string deleteQuery = @"
-                    DELETE FROM year
-                    WHERE id = @id";
-
-                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
-
-                    // Execute the delete command
-                    cmd.ExecuteNonQuery();
+                    cmd.Parameters.AddWithValue("@id", Id); // Set the id parameter
+                    cmd.ExecuteNonQuery(); // Execute the delete command
                 }
             }
         }
