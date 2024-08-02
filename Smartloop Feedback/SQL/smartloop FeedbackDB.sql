@@ -51,6 +51,7 @@ CREATE TABLE course (
     title VARCHAR(225),
     creditPoint INT,
     description VARCHAR(MAX),
+    isCompleted BIT,
     canvasLink VARCHAR(MAX),
     semesterId INT,
     studentId INT,
@@ -67,10 +68,12 @@ CREATE TABLE assessment (
     type VARCHAR(225),
     date DATE,
     status VARCHAR(225),
-    weight INT,
-    mark INT,
+    weight DECIMAL (18,2),
+    mark DECIMAL (18,2),
+    finalMark DECIMAL (18,2),
     individual BIT,
     [group] BIT,
+    isFinalised BIT,
     canvasLink VARCHAR(MAX),
     courseId INT,
     studentId INT,
@@ -98,6 +101,34 @@ CREATE TABLE rating (
     criteriaId INT,
     studentId INT,
     FOREIGN KEY (criteriaId) REFERENCES criteria(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the event table
+CREATE TABLE event (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    date DATETIME,
+    startTime TIME (7),
+    endTime TIME (7),
+    category VARCHAR(MAX),
+    color INT,
+    courseId INT,
+    studentId INT,
+    FOREIGN KEY (courseId) REFERENCES course(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the checkList table
+CREATE TABLE checkList (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    isChecked BIT,
+    assessmentId INT,
+    studentId INT,
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
     FOREIGN KEY (studentId) REFERENCES student(studentId)
 );
 GO
