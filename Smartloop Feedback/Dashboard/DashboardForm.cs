@@ -1,15 +1,9 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Tab;
 
 namespace Smartloop_Feedback.Dashboard
 {
@@ -17,6 +11,8 @@ namespace Smartloop_Feedback.Dashboard
     {
         public Student student;
         public MainForm mainForm;
+        private bool isHourlyView = false;
+
         public DashboardForm(Student student, MainForm mainForm)
         {
             InitializeComponent();
@@ -37,21 +33,22 @@ namespace Smartloop_Feedback.Dashboard
             courseDgv.Columns.Add("Code", "Code");
             courseDgv.Columns.Add("Title", "Title");
 
-            // Create and add the button column
-            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.Name = "canvasBtn";
-            buttonColumn.HeaderText = "Canvas Button";
-            buttonColumn.Text = "View Canvas";
-            buttonColumn.UseColumnTextForButtonValue = true; // This line is important to display the text on the button
-
+            DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn
+            {
+                Name = "canvasBtn",
+                HeaderText = "Canvas Button",
+                Text = "View Canvas",
+                UseColumnTextForButtonValue = true
+            };
             courseDgv.Columns.Add(buttonColumn);
 
-            buttonColumn = new DataGridViewButtonColumn();
-            buttonColumn.Name = "courseBtn";
-            buttonColumn.HeaderText = "Course Button";
-            buttonColumn.Text = "View Course";
-            buttonColumn.UseColumnTextForButtonValue = true; // This line is important to display the text on the button
-
+            buttonColumn = new DataGridViewButtonColumn
+            {
+                Name = "courseBtn",
+                HeaderText = "Course Button",
+                Text = "View Course",
+                UseColumnTextForButtonValue = true
+            };
             courseDgv.Columns.Add(buttonColumn);
 
             DataGridViewTextBoxColumn tagsColumn = new DataGridViewTextBoxColumn
@@ -80,11 +77,11 @@ namespace Smartloop_Feedback.Dashboard
 
         private void courseDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.RowIndex >= 0)
+            if (e.RowIndex >= 0)
             {
                 var tags = courseDgv.Rows[e.RowIndex].Cells["Tags"].Tag as List<object>;
 
-                if(e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
+                if (e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
                 {
                     string canvasLink = student.yearList[(string)tags[0]].semesterList[(string)tags[1]].courseList[(int)tags[2]].canvasLink;
                     OpenUrl(canvasLink);
@@ -115,6 +112,8 @@ namespace Smartloop_Feedback.Dashboard
 
         private void PopulateEvent()
         {
+            eventDgv.Rows.Clear();
+            eventDgv.Columns.Clear();
             eventDgv.Columns.Add("Name", "Name");
             eventDgv.Columns.Add("Date", "Date");
             eventDgv.Columns.Add("Category", "Category");
@@ -123,9 +122,42 @@ namespace Smartloop_Feedback.Dashboard
 
             foreach (Event events in student.eventList.Values)
             {
-                if(events.date >= today)
+                if (events.date >= today)
                 {
                     eventDgv.Rows.Add(events.name, events.date, events.category);
+                }
+            }
+        }
+
+        private void PopulateHourlyView()
+        {
+            string selectedCourse = filterCb.SelectedItem as string;
+
+            eventDgv.Rows.Clear();
+            eventDgv.Columns.Clear();
+            eventDgv.Columns.Add("Time", "Time");
+            eventDgv.Columns.Add("Event", "Event");
+
+            DateTime today = DateTime.Today;
+
+            for (int i = 0; i < 24; i++)
+            {
+                DateTime hour = today.AddHours(i);
+                eventDgv.Rows.Add(hour.ToString("HH:mm"), "");
+            }
+
+            foreach (Event events in student.eventList.Values)
+            {
+                if (events.date.Date == today)
+                {
+                    if (selectedCourse == "All" || events.category == selectedCourse)
+                    {
+                        for (int i = events.startTime.Hours; i < events.endTime.Hours; i++)
+                        {
+                            eventDgv.Rows[i].Cells["Event"].Value = events.name;
+                            eventDgv.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue; // Highlight the row
+                        }
+                    }
                 }
             }
         }
@@ -139,50 +171,54 @@ namespace Smartloop_Feedback.Dashboard
 
         private void filterCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            string selectedCourse = filterCb.SelectedItem as string;
-
-            eventDgv.Rows.Clear();
-
-            if(selectedCourse != "All")
+            if (isHourlyView)
             {
-                foreach (Event events in student.eventList.Values)
-                {
-                    if (events.category == selectedCourse)
-                    {
-                        eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
-                    }
-                }
+                PopulateHourlyView();
             }
             else
             {
-                DateTime today = DateTime.Today;
+                string selectedCourse = filterCb.SelectedItem as string;
 
-                foreach (Event events in student.eventList.Values)
+                eventDgv.Rows.Clear();
+
+                if (selectedCourse != "All")
                 {
-                    if (events.date >= today)
+                    foreach (Event events in student.eventList.Values)
                     {
-                        eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
+                        if (events.category == selectedCourse)
+                        {
+                            eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
+                        }
+                    }
+                }
+                else
+                {
+                    DateTime today = DateTime.Today;
+
+                    foreach (Event events in student.eventList.Values)
+                    {
+                        if (events.date >= today)
+                        {
+                            eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
+                        }
                     }
                 }
             }
         }
 
-        private void filterBtn_Click(object sender, EventArgs e)
+        private void toggleViewBtn_Click(object sender, EventArgs e)
         {
-            DateTime startDate = fromDp.Value;
-            DateTime endDate = toDp.Value;
-
-            // Clear existing rows
-            eventDgv.Rows.Clear();
-
-            // Filter events based on the selected date range
-            foreach (Event events in student.eventList.Values)
+            if (isHourlyView)
             {
-                if (events.date >= startDate && events.date <= endDate)
-                {
-                    eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
-                }
+                PopulateEvent();
+                toggleViewBtn.Text = "Toggle to Hourly View";
             }
+            else
+            {
+                PopulateHourlyView();
+                toggleViewBtn.Text = "Toggle to Default View";
+            }
+            isHourlyView = !isHourlyView;
         }
     }
 }

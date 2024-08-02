@@ -294,10 +294,12 @@ namespace Smartloop_Feedback.Forms
             if (isWeeklyView)
             {
                 DisplayCurrentWeek();
+                toggleViewBtn.Text = "Toggle to Weekly View";
             }
             else
             {
                 DisplayCurrentMonth();
+                toggleViewBtn.Text = "Toggle to Monthly View";
             }
         }
     }
