@@ -141,7 +141,7 @@ namespace Smartloop_Feedback.Forms
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, course.title, addEventForm.newEvent.color, course.studentId, course.id);
+                    new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.startTime, addEventForm.newEvent.endTime, course.title, addEventForm.newEvent.color, course.studentId, course.id);
                     PopulateEventView();
                 }
             }

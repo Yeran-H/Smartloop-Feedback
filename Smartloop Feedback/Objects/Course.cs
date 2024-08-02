@@ -213,7 +213,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id, name, date, category, color FROM event WHERE courseId = @courseId ORDER BY date", conn);
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, startTime, endTime, category, color FROM event WHERE courseId = @courseId ORDER BY date", conn);
                 cmd.Parameters.AddWithValue("@courseId", this.id);
 
                 using (SqlDataReader reader = cmd.ExecuteReader())
@@ -223,9 +223,11 @@ namespace Smartloop_Feedback.Objects
                         int id = reader.GetInt32(0);
                         string name = reader.GetString(1);
                         DateTime date = reader.GetDateTime(2);
-                        string category = reader.GetString(3);
-                        int color = reader.GetInt32(4);
-                        eventList.Add(id, new Event(id, name, date, studentId, this.id, category, color));
+                        TimeSpan startTime = reader.GetTimeSpan(3);
+                        TimeSpan endTime = reader.GetTimeSpan(4);
+                        string category = reader.GetString(5);
+                        int color = reader.GetInt32(6);
+                        eventList.Add(id, new Event(id, name, date, startTime, endTime, studentId, this.id, category, color));
                     }
                 }
             }
