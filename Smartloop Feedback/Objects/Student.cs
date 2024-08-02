@@ -204,8 +204,30 @@ namespace Smartloop_Feedback
         public bool ValidateStudentId()
         {
             string studentIdStr = StudentId.ToString();
-            return studentIdStr.Length == 8;
+
+            // Check if the length of the studentId is 8 charaters long
+            if (studentIdStr.Length != 8)
+            {
+                return false;
+            }
+
+            bool exists = false;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(1) FROM student WHERE studentId = @studentId"; // SQL query to check if studentId exists
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                {
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    exists = (int)cmd.ExecuteScalar() > 0; // Execute the query and check if any row exists
+                }
+            }
+
+            return exists;
         }
+
 
         // Validate if the email has a valid domain
         public bool ValidateEmail()

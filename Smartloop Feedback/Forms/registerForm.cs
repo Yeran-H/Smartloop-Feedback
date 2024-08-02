@@ -1,15 +1,11 @@
 ﻿using System.Data.SqlClient;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Xml.Linq;
 using System.Configuration;
 using System.Runtime.InteropServices;
 
@@ -52,10 +48,10 @@ namespace Smartloop_Feedback
             // Attach TextChanged and Enter event handlers to all textboxes
             foreach (var control in this.Controls)
             {
-                if (control is TextBox)
+                if (control is TextBox textBox)
                 {
-                    (control as TextBox).TextChanged += new EventHandler(TextBox_TextChanged);
-                    (control as TextBox).Enter += new EventHandler(TextBox_Enter);
+                    textBox.TextChanged += TextBox_TextChanged;
+                    textBox.Enter += TextBox_Enter;
                 }
             }
         }
@@ -82,31 +78,37 @@ namespace Smartloop_Feedback
             }
 
             // Update UI to indicate the textbox is active
-            if (currentTextBox == nameTb)
+            UpdateTextBoxUI(currentTextBox);
+        }
+
+        // Update the UI to indicate the active textbox
+        private void UpdateTextBoxUI(TextBox textBox)
+        {
+            if (textBox == nameTb)
             {
                 namePb.Image = Properties.Resources.person2;
                 namePl.BackColor = Color.FromArgb(254, 0, 57);
                 nameTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
-            else if (currentTextBox == emailTb)
+            else if (textBox == emailTb)
             {
                 emailPb.Image = Properties.Resources.email2;
                 emailPl.BackColor = Color.FromArgb(254, 0, 57);
                 emailTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
-            else if (currentTextBox == studentTb)
+            else if (textBox == studentTb)
             {
                 studentPb.Image = Properties.Resources.person2;
                 studentPl.BackColor = Color.FromArgb(254, 0, 57);
                 studentTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
-            else if (currentTextBox == passwordTb)
+            else if (textBox == passwordTb)
             {
                 passwordPb.Image = Properties.Resources.pass2;
                 passwordPl.BackColor = Color.FromArgb(254, 0, 57);
                 passwordTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
-            else if (currentTextBox == degreeTb)
+            else if (textBox == degreeTb)
             {
                 degreePb.Image = Properties.Resources.degree2;
                 degreePl.BackColor = Color.FromArgb(254, 0, 57);
@@ -175,7 +177,7 @@ namespace Smartloop_Feedback
         }
 
         // Handle the registration button click event
-        private void resgisterBtn_Click(object sender, EventArgs e)
+        private void registerBtn_Click(object sender, EventArgs e)
         {
             string name = nameTb.Text;
             string email = emailTb.Text;
@@ -204,9 +206,9 @@ namespace Smartloop_Feedback
             }
 
             // Validate the student ID
-            if (!newStudent.ValidateStudentId())
+            if (!ValidateStudentId(newStudent.StudentId))
             {
-                MessageBox.Show("Student ID must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Student ID must be 8 characters long and exist in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -231,14 +233,7 @@ namespace Smartloop_Feedback
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@degree", degree);
                     SqlParameter profileImageParam = new SqlParameter("@profileImage", SqlDbType.VarBinary);
-                    if (profileImage != null)
-                    {
-                        profileImageParam.Value = profileImage;
-                    }
-                    else
-                    {
-                        profileImageParam.Value = DBNull.Value;
-                    }
+                    profileImageParam.Value = profileImage != null ? profileImage : (object)DBNull.Value;
                     cmd.Parameters.Add(profileImageParam);
                     cmd.ExecuteNonQuery();
                 }
@@ -248,6 +243,33 @@ namespace Smartloop_Feedback
             MainForm main = new MainForm(newStudent);
             main.Show();
             this.Hide();
+        }
+
+        // Validate student ID by checking length and database existence
+        private bool ValidateStudentId(int studentId)
+        {
+            string studentIdStr = studentId.ToString();
+
+            // Check if the length of the studentId is 8
+            if (studentIdStr.Length != 8)
+            {
+                return false;
+            }
+
+            bool exists = false;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(1) FROM student WHERE studentId = @studentId";
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@studentId", studentId);
+                    exists = (int)cmd.ExecuteScalar() > 0;
+                }
+            }
+
+            return exists;
         }
 
         // Override ProcessCmdKey to detect Enter key presses
