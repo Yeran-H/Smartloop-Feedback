@@ -14,12 +14,16 @@ namespace Smartloop_Feedback.Forms
     public partial class CourseScheduleForm : Form
     {
         private DateTime currentMonth;
+        private DateTime currentWeek;
         public Student student;
+        private bool isWeeklyView = false;
+
         public CourseScheduleForm(Student student)
         {
             InitializeComponent();
             InitializeCalendar();
             currentMonth = DateTime.Now;
+            currentWeek = DateTime.Now;
             this.student = student;
             DisplayCurrentMonth();
         }
@@ -28,19 +32,16 @@ namespace Smartloop_Feedback.Forms
         {
             calendarTable.ColumnCount = 7;
             calendarTable.RowCount = 7;
-
             calendarTable.ColumnStyles.Clear();
             for (int i = 0; i < 7; i++)
             {
                 calendarTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 14.28F));
             }
-
             calendarTable.RowStyles.Clear();
             for (int i = 0; i < 7; i++)
             {
                 calendarTable.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28F));
             }
-
             string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
             for (int i = 0; i < 7; i++)
             {
@@ -50,7 +51,7 @@ namespace Smartloop_Feedback.Forms
                     TextAlign = ContentAlignment.MiddleCenter,
                     Dock = DockStyle.Fill,
                     Font = new Font("Aptos", 12, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(193,193,193)
+                    ForeColor = Color.FromArgb(193, 193, 193)
                 };
                 calendarTable.Controls.Add(lblDay, i, 0);
             }
@@ -61,7 +62,6 @@ namespace Smartloop_Feedback.Forms
             monthLb.Text = currentMonth.ToString("MMMM yyyy");
             calendarTable.Controls.Clear();
             InitializeCalendar();
-
             DateTime firstDayOfMonth = new DateTime(currentMonth.Year, currentMonth.Month, 1);
             int daysInMonth = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
             int startDay = (int)firstDayOfMonth.DayOfWeek;
@@ -95,20 +95,95 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        private void DisplayCurrentWeek()
+        {
+            calendarTable.Controls.Clear();
+            calendarTable.ColumnCount = 8;
+            calendarTable.RowCount = 25;
+            calendarTable.ColumnStyles.Clear();
+            calendarTable.RowStyles.Clear();
+
+            calendarTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
+            for (int i = 1; i <= 7; i++)
+            {
+                calendarTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.57F));
+            }
+
+            for (int i = 0; i < 25; i++)
+            {
+                calendarTable.RowStyles.Add(new RowStyle(SizeType.Percent, 4F));
+            }
+
+            string[] days = { "", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+            for (int i = 0; i < 8; i++)
+            {
+                Label lblDay = new Label()
+                {
+                    Text = days[i],
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill,
+                    Font = new Font("Aptos", 12, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(193, 193, 193)
+                };
+                calendarTable.Controls.Add(lblDay, i, 0);
+            }
+
+            for (int i = 0; i < 24; i++)
+            {
+                Label lblHour = new Label()
+                {
+                    Text = $"{i}:00",
+                    TextAlign = ContentAlignment.MiddleCenter,
+                    Dock = DockStyle.Fill,
+                    Font = new Font("Aptos", 12, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(193, 193, 193)
+                };
+                calendarTable.Controls.Add(lblHour, 0, i + 1);
+            }
+
+            DateTime startOfWeek = currentWeek.AddDays(-(int)currentWeek.DayOfWeek + 1);
+            DateTime endOfWeek = startOfWeek.AddDays(6);
+            monthLb.Text = $"{startOfWeek:dd/MM/yyyy} - {endOfWeek:dd/MM/yyyy}";
+
+            for (int day = 0; day < 7; day++)
+            {
+                DateTime date = startOfWeek.AddDays(day);
+                var dayEvents = student.eventList.Values.Where(e => e.date.Date == date.Date).ToList();
+                foreach (var dayEvent in dayEvents)
+                {
+                    for (int hour = dayEvent.startTime.Hours; hour <= dayEvent.endTime.Hours; hour++)
+                    {
+                        Button eventButton = new Button()
+                        {
+                            Text = dayEvent.name,
+                            Dock = DockStyle.Fill,
+                            BackColor = Color.FromArgb(dayEvent.color),
+                            Font = new Font("Aptos", 12, FontStyle.Bold),
+                            ForeColor = Color.FromArgb(16, 34, 61),
+                            FlatStyle = FlatStyle.Flat
+                        };
+                        eventButton.Click += (sender, e) => DayButton_Click(sender, e, date);
+                        calendarTable.Controls.Add(eventButton, day + 1, hour + 1);
+                    }
+                }
+            }
+        }
+
+
         private Color GetEventColor(DateTime date)
         {
-            var eventForDate = student.eventList.FirstOrDefault(e => e.date.Date == date.Date);
+            var eventForDate = student.eventList.Values.FirstOrDefault(e => e.date.Date == date.Date);
             return eventForDate != null ? Color.FromArgb(eventForDate.color) : SystemColors.Control;
         }
 
         private bool HasEvents(DateTime date)
         {
-            return student.eventList.Any(e => e.date.Date == date.Date);
+            return student.eventList.Values.Any(e => e.date.Date == date.Date);
         }
 
         private void DayButton_Click(object sender, EventArgs e, DateTime date)
         {
-            var dayEvents = student.eventList.Where(ev => ev.date.Date == date.Date).ToList();
+            var dayEvents = student.eventList.Values.Where(ev => ev.date.Date == date.Date).ToList();
             if (dayEvents.Count > 0)
             {
                 using (EventListForm eventListForm = new EventListForm(dayEvents))
@@ -135,14 +210,30 @@ namespace Smartloop_Feedback.Forms
 
         private void previousPb_Click(object sender, EventArgs e)
         {
-            currentMonth = currentMonth.AddMonths(-1);
-            DisplayCurrentMonth();
+            if (isWeeklyView)
+            {
+                currentWeek = currentWeek.AddDays(-7);
+                DisplayCurrentWeek();
+            }
+            else
+            {
+                currentMonth = currentMonth.AddMonths(-1);
+                DisplayCurrentMonth();
+            }
         }
 
         private void nextPb_Click(object sender, EventArgs e)
         {
-            currentMonth = currentMonth.AddMonths(1);
-            DisplayCurrentMonth();
+            if (isWeeklyView)
+            {
+                currentWeek = currentWeek.AddDays(7);
+                DisplayCurrentWeek();
+            }
+            else
+            {
+                currentMonth = currentMonth.AddMonths(1);
+                DisplayCurrentMonth();
+            }
         }
 
         private void addBtn_Click(object sender, EventArgs e)
@@ -151,22 +242,18 @@ namespace Smartloop_Feedback.Forms
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    student.eventList.Add(new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category)));
-                    DisplayCurrentMonth();
+                    Event events = new Event(addEventForm.newEvent.name, addEventForm.newEvent.date, addEventForm.newEvent.startTime, addEventForm.newEvent.endTime, addEventForm.newEvent.category, addEventForm.newEvent.color, student.studentId, student.FindCourseId(addEventForm.newEvent.category));
+                    student.eventList.Add(events.id, events);
+                    if (isWeeklyView)
+                    {
+                        DisplayCurrentWeek();
+                    }
+                    else
+                    {
+                        DisplayCurrentMonth();
+                    }
                 }
             }
-        }
-
-        private Event GetSelectedEvent()
-        {
-            using (EventListForm eventListForm = new EventListForm(student.eventList))
-            {
-                if (eventListForm.ShowDialog() == DialogResult.OK)
-                {
-                    return eventListForm.selectedEvent;
-                }
-            }
-            return null;
         }
 
         private void EditEvent(Event selectedEvent)
@@ -176,7 +263,14 @@ namespace Smartloop_Feedback.Forms
                 if (editEventForm.ShowDialog() == DialogResult.OK)
                 {
                     student.UpdateEvent(editEventForm.newEvent);
-                    DisplayCurrentMonth();
+                    if (isWeeklyView)
+                    {
+                        DisplayCurrentWeek();
+                    }
+                    else
+                    {
+                        DisplayCurrentMonth();
+                    }
                 }
             }
         }
@@ -184,7 +278,29 @@ namespace Smartloop_Feedback.Forms
         private void DeleteEvent(Event selectedEvent)
         {
             student.DeleteEvent(selectedEvent);
-            DisplayCurrentMonth();
+            if (isWeeklyView)
+            {
+                DisplayCurrentWeek();
+            }
+            else
+            {
+                DisplayCurrentMonth();
+            }
+        }
+
+        private void ToggleViewButton_Click(object sender, EventArgs e)
+        {
+            isWeeklyView = !isWeeklyView;
+            if (isWeeklyView)
+            {
+                DisplayCurrentWeek();
+                toggleViewBtn.Text = "Toggle to Weekly View";
+            }
+            else
+            {
+                DisplayCurrentMonth();
+                toggleViewBtn.Text = "Toggle to Monthly View";
+            }
         }
     }
 }

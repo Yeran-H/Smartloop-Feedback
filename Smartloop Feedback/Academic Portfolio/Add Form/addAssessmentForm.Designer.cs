@@ -38,13 +38,13 @@
             this.titleTb = new System.Windows.Forms.TextBox();
             this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelCriteria = new System.Windows.Forms.Panel();
+            this.loadBtn = new System.Windows.Forms.Button();
             this.submitBtn = new System.Windows.Forms.Button();
             this.columnBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.loadBtn = new System.Windows.Forms.Button();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
@@ -329,6 +329,22 @@
             this.panelCriteria.Size = new System.Drawing.Size(736, 432);
             this.panelCriteria.TabIndex = 2;
             // 
+            // loadBtn
+            // 
+            this.loadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.loadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.loadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.loadBtn.Location = new System.Drawing.Point(313, 367);
+            this.loadBtn.Name = "loadBtn";
+            this.loadBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadBtn.TabIndex = 27;
+            this.loadBtn.Text = "Load Data";
+            this.toolTip1.SetToolTip(this.loadBtn, "Click to add more columns to criteria");
+            this.loadBtn.UseVisualStyleBackColor = false;
+            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
+            // 
             // submitBtn
             // 
             this.submitBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
@@ -394,32 +410,16 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(150, 337);
             this.panelColumnInputs.TabIndex = 4;
             // 
-            // loadBtn
-            // 
-            this.loadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.loadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.loadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.loadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.loadBtn.Location = new System.Drawing.Point(313, 367);
-            this.loadBtn.Name = "loadBtn";
-            this.loadBtn.Size = new System.Drawing.Size(141, 52);
-            this.loadBtn.TabIndex = 27;
-            this.loadBtn.Text = "Load Data";
-            this.toolTip1.SetToolTip(this.loadBtn, "Click to add more columns to criteria");
-            this.loadBtn.UseVisualStyleBackColor = false;
-            this.loadBtn.Click += new System.EventHandler(this.loadBtn_Click);
-            // 
-            // addAssessmentForm
+            // AddAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(738, 438);
-            this.Controls.Add(this.panelDetails);
             this.Controls.Add(this.panelCriteria);
+            this.Controls.Add(this.panelDetails);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "addAssessmentForm";
+            this.Name = "AddAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addAssessmentForm";
             this.Load += new System.EventHandler(this.addAssessmentForm_Load);

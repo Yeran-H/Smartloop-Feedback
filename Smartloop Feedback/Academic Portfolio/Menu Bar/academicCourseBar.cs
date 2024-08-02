@@ -32,16 +32,18 @@ namespace Smartloop_Feedback
         // Initialize the course bar with course buttons based on the number of courses
         private void InitializeBar()
         {
-            buttonCount = semester.NumCourse(); // Get the number of courses in the semester
-
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
-            for (int i = 0; i < buttonCount; i++)
+            buttonCount = 0;
+            foreach (Course course in semester.courseList.Values)
             {
-                Button btn = allButtons[i]; // Get the button for the current course
+                Button btn = allButtons[buttonCount]; // Get the button for the current course
                 btn.Visible = true; // Make the button visible
-                btn.Text = semester.courseList[i].code.ToString(); // Set the button text to the course code
-                buttons[i] = btn; // Store the button in the array
+                btn.Text = course.code.ToString(); // Set the button text to the course code
+                buttons[buttonCount] = btn; // Store the button in the array
+                btn.Tag = course.id;
+
+                buttonCount++;
             }
 
             if (buttonCount == 5)
@@ -69,7 +71,7 @@ namespace Smartloop_Feedback
 
             if (semester.courseList == null)
             {
-                semester.courseList = new List<Course>();
+                semester.courseList = new Dictionary<int,Course>();
             }
 
             using (var addCourseForm = new AddCourseForm())
@@ -81,7 +83,8 @@ namespace Smartloop_Feedback
                         Course course = addCourseForm.course;
                         if (course != null)
                         {
-                            semester.courseList.Add(new Course(course.code, course.title, course.creditPoint, course.description, course.canvasLink, semester.id, semester.studentId));
+                            Course temp = new Course(course.code, course.title, course.creditPoint, course.description, false, course.canvasLink, semester.id, semester.studentId);
+                            semester.courseList.Add(temp.id, temp);
                         }
                         else
                         {
@@ -131,12 +134,12 @@ namespace Smartloop_Feedback
         // Common event handler for all course button clicks
         private void CourseBtn_Click(object sender, EventArgs e)
         {
-            Button clickedButton = sender as Button; // Get the clicked button
-            int index = Array.IndexOf(buttons, clickedButton); // Get the index of the clicked button
-            if (index >= 0)
+            Button clickedButton = sender as Button;
+
+            if (clickedButton != null)
             {
-                mainForm.position[2] = index; // Set the main form's position to the selected course
-                mainForm.MainPannel(0); // Navigate to the corresponding course panel
+                mainForm.position[2] = clickedButton.Tag; // Set the main form's position with the button text
+                mainForm.MainPannel(0); // Navigate to the corresponding year's panel
             }
 
             navPl.Height = clickedButton.Height; // Adjust the navigation panel to the clicked button

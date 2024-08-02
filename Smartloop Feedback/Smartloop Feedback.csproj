@@ -124,6 +124,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.5.0\lib\net47\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms.DataVisualization" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -143,6 +144,18 @@
     </Compile>
     <Compile Include="Academic Portfolio\Add Form\AddAssessmentForm.Designer.cs">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.Designer.cs">
+      <DependentUpon>AddCheckListForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\AssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\AssessmentForm.Designer.cs">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
@@ -198,6 +211,12 @@
     <Compile Include="Academic Portfolio\Add Form\AddYearForm.Designer.cs">
       <DependentUpon>AddYearForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Dashboard\DashboardForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Dashboard\DashboardForm.Designer.cs">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -211,7 +230,9 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Assessment.cs" />
+    <Compile Include="Objects\CheckList.cs" />
     <Compile Include="Objects\Course.cs" />
+    <Compile Include="Objects\CourseResult.cs" />
     <Compile Include="Objects\Criteria.cs" />
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
@@ -234,8 +255,68 @@
     <Compile Include="Objects\Semester.cs" />
     <Compile Include="Objects\Student.cs" />
     <Compile Include="Objects\Year.cs" />
+    <Compile Include="Results\ResultForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Results\ResultForm.Designer.cs">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingAssessmentBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingAssessmentBar.Designer.cs">
+      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingCourseBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingCourseBar.Designer.cs">
+      <DependentUpon>SettingCourseBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingSemesterBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingSemesterBar.Designer.cs">
+      <DependentUpon>SettingSemesterBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingYearBar.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Bar\SettingYearBar.Designer.cs">
+      <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditAssessmentForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditAssessmentForm.Designer.cs">
+      <DependentUpon>EditAssessmentForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditCourseForm.Designer.cs">
+      <DependentUpon>EditCourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditYearForms.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditYearForms.Designer.cs">
+      <DependentUpon>EditYearForms.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Setting\Form\EditAccountForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Setting\Form\EditAccountForm.Designer.cs">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\Add Form\AddCheckListForm.resx">
+      <DependentUpon>AddCheckListForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\assessmentForm.resx">
+      <DependentUpon>AssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Course Schedule\AddEventForm.resx">
       <DependentUpon>AddEventForm.cs</DependentUpon>
@@ -264,6 +345,9 @@
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddYearForm.resx">
       <DependentUpon>AddYearForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Dashboard\DashboardForm.resx">
+      <DependentUpon>DashboardForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -277,6 +361,33 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\RegisterForm.resx">
       <DependentUpon>RegisterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Results\ResultForm.resx">
+      <DependentUpon>ResultForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingAssessmentBar.resx">
+      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingCourseBar.resx">
+      <DependentUpon>SettingCourseBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingSemesterBar.resx">
+      <DependentUpon>SettingSemesterBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Bar\SettingYearBar.resx">
+      <DependentUpon>SettingYearBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditAssessmentForm.resx">
+      <DependentUpon>EditAssessmentForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditAccountForm.resx">
+      <DependentUpon>EditAccountForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditCourseForm.resx">
+      <DependentUpon>EditCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Setting\Form\EditYearForms.resx">
+      <DependentUpon>EditYearForms.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -371,6 +482,7 @@
     <None Include="Resources\right arrow.png" />
     <None Include="Resources\back1.png" />
     <None Include="Resources\Event.png" />
+    <None Include="Resources\search.png" />
     <Content Include="SQL\smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

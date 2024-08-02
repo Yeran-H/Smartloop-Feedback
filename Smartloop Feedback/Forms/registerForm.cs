@@ -230,7 +230,16 @@ namespace Smartloop_Feedback
                     cmd.Parameters.AddWithValue("@studentId", studentId);
                     cmd.Parameters.AddWithValue("@password", password);
                     cmd.Parameters.AddWithValue("@degree", degree);
-                    cmd.Parameters.AddWithValue("@profileImage", profileImage);
+                    SqlParameter profileImageParam = new SqlParameter("@profileImage", SqlDbType.VarBinary);
+                    if (profileImage != null)
+                    {
+                        profileImageParam.Value = profileImage;
+                    }
+                    else
+                    {
+                        profileImageParam.Value = DBNull.Value;
+                    }
+                    cmd.Parameters.Add(profileImageParam);
                     cmd.ExecuteNonQuery();
                 }
             }

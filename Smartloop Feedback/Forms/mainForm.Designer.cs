@@ -40,8 +40,8 @@
             this.studentIdLb = new System.Windows.Forms.Label();
             this.nameLb = new System.Windows.Forms.Label();
             this.profilePb = new System.Windows.Forms.PictureBox();
-            this.navPl = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.navPl = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.formLoaderPl = new System.Windows.Forms.Panel();
             this.exitPb = new System.Windows.Forms.PictureBox();
@@ -72,6 +72,7 @@
             // 
             // menuDropPl
             // 
+            this.menuDropPl.AutoScroll = true;
             this.menuDropPl.Location = new System.Drawing.Point(0, 202);
             this.menuDropPl.Name = "menuDropPl";
             this.menuDropPl.Size = new System.Drawing.Size(186, 294);
@@ -178,8 +179,8 @@
             this.panel2.Controls.Add(this.studentIdLb);
             this.panel2.Controls.Add(this.nameLb);
             this.panel2.Controls.Add(this.profilePb);
-            this.panel2.Controls.Add(this.navPl);
             this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Controls.Add(this.navPl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -218,14 +219,6 @@
             this.profilePb.TabIndex = 0;
             this.profilePb.TabStop = false;
             // 
-            // navPl
-            // 
-            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 186);
-            this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
-            this.navPl.TabIndex = 5;
-            // 
             // pictureBox1
             // 
             this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.logo;
@@ -236,6 +229,14 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(0, 186);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 5;
+            // 
             // panel3
             // 
             this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
@@ -243,9 +244,9 @@
             this.panel3.Controls.Add(this.exitPb);
             this.panel3.Controls.Add(this.titleLb);
             this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(189, 0);
+            this.panel3.Location = new System.Drawing.Point(185, 0);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(746, 538);
+            this.panel3.Size = new System.Drawing.Size(750, 538);
             this.panel3.TabIndex = 2;
             // 
             // formLoaderPl
@@ -254,7 +255,7 @@
             this.formLoaderPl.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.formLoaderPl.Location = new System.Drawing.Point(0, 61);
             this.formLoaderPl.Name = "formLoaderPl";
-            this.formLoaderPl.Size = new System.Drawing.Size(746, 477);
+            this.formLoaderPl.Size = new System.Drawing.Size(750, 477);
             this.formLoaderPl.TabIndex = 11;
             // 
             // exitPb
@@ -281,7 +282,7 @@
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "Dashboard";
             // 
-            // mainForm
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -291,7 +292,7 @@
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "mainForm";
+            this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mainForm";
             this.Load += new System.EventHandler(this.mainForm_Load);
