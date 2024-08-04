@@ -86,6 +86,7 @@
             this.descriptionTb.Location = new System.Drawing.Point(133, 94);
             this.descriptionTb.Multiline = true;
             this.descriptionTb.Name = "descriptionTb";
+            this.descriptionTb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.descriptionTb.Size = new System.Drawing.Size(200, 128);
             this.descriptionTb.TabIndex = 29;
             this.descriptionTb.TabStop = false;
@@ -393,6 +394,7 @@
             // 
             // criteriaDgv
             // 
+            this.criteriaDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.criteriaDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.criteriaDgv.Location = new System.Drawing.Point(17, 16);
             this.criteriaDgv.Margin = new System.Windows.Forms.Padding(2);
@@ -416,8 +418,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(738, 438);
-            this.Controls.Add(this.panelCriteria);
             this.Controls.Add(this.panelDetails);
+            this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

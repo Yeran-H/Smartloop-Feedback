@@ -248,6 +248,18 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        public bool WeightTotal(double weight)
+        {
+            double total = weight;
+
+            foreach(Assessment assessment in  AssessmentList.Values)
+            {
+                total += assessment.Weight;
+            }
+
+            return total > 100;
+        }
+
         // Calculate the current mark for the course
         public double CalculateCurrentMark()
         {
