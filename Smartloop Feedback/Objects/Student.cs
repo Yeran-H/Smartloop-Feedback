@@ -19,7 +19,7 @@ namespace Smartloop_Feedback
         public string Password { get; set; } // Student's password
         public string Degree { get; set; } // Student's degree
         public byte[] ProfileImage { get; set; } // Student's profile image
-        public Dictionary<int, Year> YearList { get; set; } // List of years for the student
+        public SortedDictionary<int, Year> YearList { get; set; } // List of years for the student
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
             Password = password;
             Degree = degree;
             ProfileImage = profileImage;
-            YearList = new Dictionary<int, Year>(); // Initialize the year list
+            YearList = new SortedDictionary<int, Year>(); // Initialize the year list
             EventList = new Dictionary<int, Event>(); // Initialize the event list
             LoadYearsFromDatabase(); // Fetch years from the database
             LoadEventsFromDatabase(); // Fetch events from the database
@@ -127,7 +127,7 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT name, id FROM year WHERE studentId = @studentId ORDER BY name desc"; // SQL query to fetch years
+                string sql = "SELECT name, id FROM year WHERE studentId = @studentId ORDER BY name"; // SQL query to fetch years
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter

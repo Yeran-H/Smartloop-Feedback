@@ -96,7 +96,7 @@ namespace Smartloop_Feedback
             navPl.Left = academicBtn.Left;
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            MenuPannel(0);
+            MenuPanel(0);
         }
 
         private void courseBtn_Click(object sender, EventArgs e)
@@ -124,7 +124,7 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Settings";
             MainPannel(4);
-            MenuPannel(4);
+            MenuPanel(4);
         }
 
         private void dashboardBtn_Leave(object sender, EventArgs e)
@@ -163,7 +163,7 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void MenuPannel(int num)
+        public void MenuPanel(int num)
         {
             menuDropPl.Controls.Clear();
 

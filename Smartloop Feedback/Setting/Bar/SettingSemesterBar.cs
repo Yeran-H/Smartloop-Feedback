@@ -33,7 +33,7 @@ namespace Smartloop_Feedback.Setting.Bar
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPannel(4);
+            mainForm.MenuPanel(4);
             mainForm.MainPannel(4);
         }
 
@@ -41,7 +41,7 @@ namespace Smartloop_Feedback.Setting.Bar
         {
             Button clickedButton = sender as Button; 
             mainForm.position[1] = clickedButton.Text; 
-            mainForm.MenuPannel(6);
+            mainForm.MenuPanel(6);
         }
     }
 }

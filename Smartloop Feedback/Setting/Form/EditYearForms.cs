@@ -79,7 +79,7 @@ namespace Smartloop_Feedback.Setting
             if (result == DialogResult.Yes)
             {
                 student.DeleteYearFromDatabase((int)mainForm.position[0]);
-                mainForm.MenuPannel(4);
+                mainForm.MenuPanel(4);
                 mainForm.MainPannel(4);
             }
         }
@@ -92,7 +92,7 @@ namespace Smartloop_Feedback.Setting
             }
 
             PopulateCheckedList();
-            mainForm.MenuPannel(5);
+            mainForm.MenuPanel(5);
         }
 
         private void deleteSemesterBtn_Click(object sender, EventArgs e)
@@ -112,7 +112,7 @@ namespace Smartloop_Feedback.Setting
                 }
 
                 PopulateCheckedList();
-                mainForm.MenuPannel(5);
+                mainForm.MenuPanel(5);
             }
         }
     }

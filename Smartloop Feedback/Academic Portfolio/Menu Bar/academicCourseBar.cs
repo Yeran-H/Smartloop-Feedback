@@ -57,7 +57,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPannel(2); // Navigate to the previous menu panel
+            mainForm.MenuPanel(2); // Navigate to the previous menu panel
         }
 
         // Event handler for the add button click
@@ -71,7 +71,7 @@ namespace Smartloop_Feedback
 
             if (semester.CourseList == null)
             {
-                semester.CourseList = new Dictionary<int,Course>();
+                semester.CourseList = new SortedDictionary<int,Course>();
             }
 
             using (var addCourseForm = new AddCourseForm())

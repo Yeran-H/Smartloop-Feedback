@@ -194,7 +194,7 @@ namespace Smartloop_Feedback.Setting
             {
                 course.DeleteAssessmentFromDatabase(assessmentId);
                 mainForm.MainPannel(8);
-                mainForm.MenuPannel(7);
+                mainForm.MenuPanel(7);
             }
         }
 
@@ -222,7 +222,7 @@ namespace Smartloop_Feedback.Setting
                 }
             }
 
-            mainForm.MenuPannel(7);
+            mainForm.MenuPanel(7);
         }
     }
 }

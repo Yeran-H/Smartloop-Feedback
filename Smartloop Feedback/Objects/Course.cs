@@ -20,8 +20,8 @@ namespace Smartloop_Feedback.Objects
         public int SemesterId { get; set; } // ID of the semester associated with the course
         public int StudentId { get; set; } // ID of the student associated with the course
         public string CanvasLink { get; set; } // Link to the course's Canvas page
-        public Dictionary<int, Assessment> AssessmentList { get; private set; } // List of assessments for the course
-        public Dictionary<int, Event> EventList { get; private set; } // List of events for the course
+        public SortedDictionary<int, Assessment> AssessmentList { get; private set; } // List of assessments for the course
+        public SortedDictionary<int, Event> EventList { get; private set; } // List of events for the course
 
         // Constructor to initialize a Course object and fetch assessments from the database
         public Course(int id, int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
@@ -35,8 +35,8 @@ namespace Smartloop_Feedback.Objects
             CanvasLink = canvasLink;
             SemesterId = semesterId;
             StudentId = studentId;
-            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
-            EventList = new Dictionary<int, Event>(); // Initialize the event list
+            AssessmentList = new SortedDictionary<int, Assessment>(); // Initialize the assessment list
+            EventList = new SortedDictionary<int, Event>(); // Initialize the event list
             LoadAssessmentsFromDatabase(); // Fetch assessments from the database
         }
 
@@ -51,8 +51,8 @@ namespace Smartloop_Feedback.Objects
             CanvasLink = canvasLink;
             SemesterId = semesterId;
             StudentId = studentId;
-            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
-            EventList = new Dictionary<int, Event>(); // Initialize the event list
+            AssessmentList = new SortedDictionary<int, Assessment>(); // Initialize the assessment list
+            EventList = new SortedDictionary<int, Event>(); // Initialize the event list
             AddCourseToDatabase(); // Add the course to the database
         }
 
@@ -65,7 +65,7 @@ namespace Smartloop_Feedback.Objects
             Description = description;
             IsCompleted = isCompleted;
             CanvasLink = canvasLink;
-            AssessmentList = new Dictionary<int, Assessment>(); // Initialize the assessment list
+            AssessmentList = new SortedDictionary<int, Assessment>(); // Initialize the assessment list
         }
 
         // Add the course to the database and get the generated ID

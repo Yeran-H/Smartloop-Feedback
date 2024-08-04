@@ -52,7 +52,7 @@ namespace Smartloop_Feedback.Setting
             {
                 semester.DeleteCourseFromDatabase(courseId);
                 mainForm.MainPannel(7);
-                mainForm.MenuPannel(6);
+                mainForm.MenuPanel(6);
             }
         }
     }

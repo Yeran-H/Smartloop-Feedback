@@ -16,7 +16,7 @@ namespace Smartloop_Feedback.Setting.Bar
         public MainForm mainForm;
         public Student student;
 
-        private Button[] buttons = new Button[4]; // Array to hold the course buttons
+        private Button[] buttons = new Button[5]; // Array to hold the course buttons
         private Button[] allButtons;
 
 
@@ -56,15 +56,15 @@ namespace Smartloop_Feedback.Setting.Bar
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPannel(1);
+            mainForm.MenuPanel(1);
         }
 
         private void YearButton_Click(object sender, EventArgs e)
         {
             if (sender is Button clickedButton)
             {
-                mainForm.position[0] = clickedButton.Text; 
-                mainForm.MenuPannel(5); 
+                mainForm.position[0] = Int32.Parse(clickedButton.Text); 
+                mainForm.MenuPanel(5); 
                 mainForm.MainPannel(7);
             }
         }

@@ -55,14 +55,14 @@ namespace Smartloop_Feedback.Setting.Bar
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPannel(5);
+            mainForm.MenuPanel(5);
         }
 
         private void CourseBtn_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
             mainForm.position[2] = clickedButton.Tag;
-            mainForm.MenuPannel(7);
+            mainForm.MenuPanel(7);
             mainForm.MainPannel(8);
         }
     }

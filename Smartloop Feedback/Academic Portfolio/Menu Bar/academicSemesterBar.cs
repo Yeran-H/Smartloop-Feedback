@@ -34,7 +34,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPannel(0); // Navigate to the main menu panel
+            mainForm.MenuPanel(0); // Navigate to the main menu panel
         }
 
         // Common event handler for all semester button clicks
@@ -42,7 +42,7 @@ namespace Smartloop_Feedback
         {
             Button clickedButton = sender as Button; // Get the clicked button
             mainForm.position[1] = clickedButton.Text; // Get the semester name from the button text
-            mainForm.MenuPannel(3); // Navigate to the corresponding semester panel
+            mainForm.MenuPanel(3); // Navigate to the corresponding semester panel
         }
     }
 }

@@ -13,7 +13,7 @@ namespace Smartloop_Feedback
         public int Name { get; set; } // Name of the year
         public int StudentId { get; } // Student ID associated with the year
         public int Id { get; set; } // Year ID
-        public Dictionary<string, Semester> SemesterList { get; set; } // List of semesters in the year
+        public SortedDictionary<string, Semester> SemesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
         public Year(int name, int studentId, int id)
@@ -21,7 +21,7 @@ namespace Smartloop_Feedback
             Name = name;
             StudentId = studentId;
             Id = id;
-            SemesterList = new Dictionary<string, Semester>(); // Initialize the semester list
+            SemesterList = new SortedDictionary<string, Semester>(); // Initialize the semester list
             LoadSemestersFromDatabase(); // Fetch semesters from the database
         }
 
@@ -30,7 +30,7 @@ namespace Smartloop_Feedback
         {
             Name = name;
             StudentId = studentId;
-            SemesterList = new Dictionary<string, Semester>(); // Initialize the semester list
+            SemesterList = new SortedDictionary<string, Semester>(); // Initialize the semester list
             AddYearToDatabase(); // Add the year to the database
             AddSemestersToDatabase(semesterNames); // Add the semesters to the database
         }
