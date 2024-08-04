@@ -1,22 +1,18 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
     public partial class CourseScheduleForm : Form
     {
-        private DateTime currentMonth;
-        private DateTime currentWeek;
-        public Student student;
-        private bool isWeeklyView = false;
+        private DateTime currentMonth; // Stores the current month being displayed
+        private DateTime currentWeek; // Stores the current week being displayed
+        public Student student; // Reference to the student object
+        private bool isWeeklyView = false; // Flag to indicate whether the weekly view is active
 
         public CourseScheduleForm(Student student)
         {
@@ -28,6 +24,7 @@ namespace Smartloop_Feedback.Forms
             DisplayCurrentMonth();
         }
 
+        // Initialize the calendar structure
         private void InitializeCalendar()
         {
             calendarTable.ColumnCount = 7;
@@ -42,6 +39,8 @@ namespace Smartloop_Feedback.Forms
             {
                 calendarTable.RowStyles.Add(new RowStyle(SizeType.Percent, 14.28F));
             }
+
+            // Add day labels to the calendar header
             string[] days = { "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
             for (int i = 0; i < 7; i++)
             {
@@ -57,6 +56,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Display the current month view
         private void DisplayCurrentMonth()
         {
             monthLb.Text = currentMonth.ToString("MMMM yyyy");
@@ -66,11 +66,13 @@ namespace Smartloop_Feedback.Forms
             int daysInMonth = DateTime.DaysInMonth(currentMonth.Year, currentMonth.Month);
             int startDay = (int)firstDayOfMonth.DayOfWeek;
 
+            // Add empty cells for the days before the first day of the month
             for (int i = 0; i < startDay; i++)
             {
                 calendarTable.Controls.Add(new Label() { Text = "", BorderStyle = BorderStyle.FixedSingle }, i, 1);
             }
 
+            // Add day buttons for each day of the month
             for (int day = 1; day <= daysInMonth; day++)
             {
                 int row = (day + startDay - 1) / 7 + 1;
@@ -83,7 +85,7 @@ namespace Smartloop_Feedback.Forms
                     BackColor = HasEvents(date) ? GetEventColor(date) : Color.FromArgb(16, 34, 61),
                     Font = new Font("Aptos", 12, FontStyle.Bold),
                     ForeColor = date.Date == DateTime.Today ? Color.FromArgb(254, 0, 57) : Color.FromArgb(254, 0, 57),
-                    FlatStyle = date.Date == DateTime.Today ? FlatStyle.Flat : FlatStyle.Flat
+                    FlatStyle = FlatStyle.Flat
                 };
                 if (date.Date == DateTime.Today)
                 {
@@ -95,6 +97,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Display the current week view
         private void DisplayCurrentWeek()
         {
             calendarTable.Controls.Clear();
@@ -103,17 +106,20 @@ namespace Smartloop_Feedback.Forms
             calendarTable.ColumnStyles.Clear();
             calendarTable.RowStyles.Clear();
 
+            // Set up column styles for the weekly view
             calendarTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 5F));
             for (int i = 1; i <= 7; i++)
             {
                 calendarTable.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 13.57F));
             }
 
+            // Set up row styles for the hourly view
             for (int i = 0; i < 25; i++)
             {
                 calendarTable.RowStyles.Add(new RowStyle(SizeType.Percent, 4F));
             }
 
+            // Add day labels to the weekly view header
             string[] days = { "", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
             for (int i = 0; i < 8; i++)
             {
@@ -128,6 +134,7 @@ namespace Smartloop_Feedback.Forms
                 calendarTable.Controls.Add(lblDay, i, 0);
             }
 
+            // Add hour labels to the first column
             for (int i = 0; i < 24; i++)
             {
                 Label lblHour = new Label()
@@ -145,6 +152,7 @@ namespace Smartloop_Feedback.Forms
             DateTime endOfWeek = startOfWeek.AddDays(6);
             monthLb.Text = $"{startOfWeek:dd/MM/yyyy} - {endOfWeek:dd/MM/yyyy}";
 
+            // Add event buttons for each day of the week
             for (int day = 0; day < 7; day++)
             {
                 DateTime date = startOfWeek.AddDays(day);
@@ -169,18 +177,20 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
-
+        // Get the color for an event on a specific date
         private Color GetEventColor(DateTime date)
         {
             var eventForDate = student.EventList.Values.FirstOrDefault(e => e.Date.Date == date.Date);
             return eventForDate != null ? Color.FromArgb(eventForDate.Color) : SystemColors.Control;
         }
 
+        // Check if there are any events on a specific date
         private bool HasEvents(DateTime date)
         {
             return student.EventList.Values.Any(e => e.Date.Date == date.Date);
         }
 
+        // Event handler for day button click
         private void DayButton_Click(object sender, EventArgs e, DateTime date)
         {
             var dayEvents = student.EventList.Values.Where(ev => ev.Date.Date == date.Date).ToList();
@@ -208,6 +218,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Event handler for previous month/week button click
         private void previousPb_Click(object sender, EventArgs e)
         {
             if (isWeeklyView)
@@ -222,6 +233,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Event handler for next month/week button click
         private void nextPb_Click(object sender, EventArgs e)
         {
             if (isWeeklyView)
@@ -236,6 +248,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Event handler for add event button click
         private void addBtn_Click(object sender, EventArgs e)
         {
             using (AddEventForm addEventForm = new AddEventForm(student.GetCourseList(), null))
@@ -256,6 +269,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Edit an existing event
         private void EditEvent(Event selectedEvent)
         {
             using (AddEventForm editEventForm = new AddEventForm(student.GetCourseList(), selectedEvent))
@@ -275,6 +289,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Delete an existing event
         private void DeleteEvent(Event selectedEvent)
         {
             student.DeleteEvent(selectedEvent);
@@ -288,18 +303,19 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Toggle between monthly and weekly view
         private void ToggleViewButton_Click(object sender, EventArgs e)
         {
             isWeeklyView = !isWeeklyView;
             if (isWeeklyView)
             {
                 DisplayCurrentWeek();
-                toggleViewBtn.Text = "Toggle to Weekly View";
+                toggleViewBtn.Text = "Toggle to Monthly View";
             }
             else
             {
                 DisplayCurrentMonth();
-                toggleViewBtn.Text = "Toggle to Monthly View";
+                toggleViewBtn.Text = "Toggle to Weekly View";
             }
         }
     }

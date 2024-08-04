@@ -28,13 +28,15 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.calendarTable = new System.Windows.Forms.TableLayoutPanel();
             this.headerPanel = new System.Windows.Forms.Panel();
+            this.toggleViewBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.previousPb = new System.Windows.Forms.PictureBox();
             this.nextPb = new System.Windows.Forms.PictureBox();
             this.monthLb = new System.Windows.Forms.Label();
-            this.toggleViewBtn = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.previousPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.nextPb)).BeginInit();
@@ -63,55 +65,6 @@
             this.headerPanel.Size = new System.Drawing.Size(730, 56);
             this.headerPanel.TabIndex = 7;
             // 
-            // addBtn
-            // 
-            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.addBtn.Location = new System.Drawing.Point(578, 4);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(140, 49);
-            this.addBtn.TabIndex = 9;
-            this.addBtn.TabStop = false;
-            this.addBtn.Text = "Add Event";
-            this.addBtn.UseVisualStyleBackColor = false;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
-            // previousPb
-            // 
-            this.previousPb.Image = global::Smartloop_Feedback.Properties.Resources.back1;
-            this.previousPb.Location = new System.Drawing.Point(27, 3);
-            this.previousPb.Name = "previousPb";
-            this.previousPb.Size = new System.Drawing.Size(49, 49);
-            this.previousPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.previousPb.TabIndex = 8;
-            this.previousPb.TabStop = false;
-            this.previousPb.Click += new System.EventHandler(this.previousPb_Click);
-            // 
-            // nextPb
-            // 
-            this.nextPb.Image = global::Smartloop_Feedback.Properties.Resources.right_arrow;
-            this.nextPb.Location = new System.Drawing.Point(82, 2);
-            this.nextPb.Name = "nextPb";
-            this.nextPb.Size = new System.Drawing.Size(49, 49);
-            this.nextPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.nextPb.TabIndex = 7;
-            this.nextPb.TabStop = false;
-            this.nextPb.Click += new System.EventHandler(this.nextPb_Click);
-            // 
-            // monthLb
-            // 
-            this.monthLb.AutoSize = true;
-            this.monthLb.Font = new System.Drawing.Font("Aptos", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.monthLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.monthLb.Location = new System.Drawing.Point(162, 9);
-            this.monthLb.Name = "monthLb";
-            this.monthLb.Size = new System.Drawing.Size(104, 27);
-            this.monthLb.TabIndex = 0;
-            this.monthLb.Text = "June 2024";
-            // 
             // toggleViewBtn
             // 
             this.toggleViewBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
@@ -125,9 +78,63 @@
             this.toggleViewBtn.TabIndex = 10;
             this.toggleViewBtn.TabStop = false;
             this.toggleViewBtn.Text = "Toggle to Monthly View";
+            this.toolTip1.SetToolTip(this.toggleViewBtn, "Change between Month and Week");
             this.toggleViewBtn.UseVisualStyleBackColor = false;
             this.toggleViewBtn.Click += new System.EventHandler(this.ToggleViewButton_Click);
             // 
+            // addBtn
+            // 
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.addBtn.Location = new System.Drawing.Point(578, 4);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(140, 49);
+            this.addBtn.TabIndex = 9;
+            this.addBtn.TabStop = false;
+            this.addBtn.Text = "Add Event";
+            this.toolTip1.SetToolTip(this.addBtn, "Add Event");
+            this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
+            // 
+            // previousPb
+            // 
+            this.previousPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.previousPb.Image = global::Smartloop_Feedback.Properties.Resources.back1;
+            this.previousPb.Location = new System.Drawing.Point(27, 3);
+            this.previousPb.Name = "previousPb";
+            this.previousPb.Size = new System.Drawing.Size(49, 49);
+            this.previousPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.previousPb.TabIndex = 8;
+            this.previousPb.TabStop = false;
+            this.toolTip1.SetToolTip(this.previousPb, "Go Back");
+            this.previousPb.Click += new System.EventHandler(this.previousPb_Click);
+            // 
+            // nextPb
+            // 
+            this.nextPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.nextPb.Image = global::Smartloop_Feedback.Properties.Resources.right_arrow;
+            this.nextPb.Location = new System.Drawing.Point(82, 2);
+            this.nextPb.Name = "nextPb";
+            this.nextPb.Size = new System.Drawing.Size(49, 49);
+            this.nextPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.nextPb.TabIndex = 7;
+            this.nextPb.TabStop = false;
+            this.toolTip1.SetToolTip(this.nextPb, "Go Forward");
+            this.nextPb.Click += new System.EventHandler(this.nextPb_Click);
+            // 
+            // monthLb
+            // 
+            this.monthLb.AutoSize = true;
+            this.monthLb.Font = new System.Drawing.Font("Aptos", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.monthLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.monthLb.Location = new System.Drawing.Point(162, 9);
+            this.monthLb.Name = "monthLb";
+            this.monthLb.Size = new System.Drawing.Size(104, 27);
+            this.monthLb.TabIndex = 0;
+            this.monthLb.Text = "June 2024";
             // CourseScheduleForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -157,5 +164,6 @@
         private System.Windows.Forms.PictureBox previousPb;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button toggleViewBtn;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -88,7 +88,51 @@ namespace Smartloop_Feedback
 
                 criteriaDgv.Rows.Add(row);
             }
-        }   
+
+            DataGridColor(criteriaDgv);
+        }
+
+        // Apply custom color formatting to a DataGridView
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
+        }
 
         private void isFinalised()
         {
@@ -107,6 +151,7 @@ namespace Smartloop_Feedback
         {
             OpenUrl(assessment.CanvasLink);
         }
+
         private void OpenUrl(string url)
         {
             try

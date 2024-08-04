@@ -28,12 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.eventLst = new System.Windows.Forms.ListBox();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.editBtn = new System.Windows.Forms.Button();
             this.headerPanel = new System.Windows.Forms.Panel();
             this.formTitle = new System.Windows.Forms.Label();
             this.exitPb = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
@@ -59,6 +61,7 @@
             this.deleteBtn.TabIndex = 20;
             this.deleteBtn.TabStop = false;
             this.deleteBtn.Text = "Delete";
+            this.toolTip1.SetToolTip(this.deleteBtn, "Click to Delete Event");
             this.deleteBtn.UseVisualStyleBackColor = false;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
@@ -74,6 +77,7 @@
             this.editBtn.Size = new System.Drawing.Size(103, 32);
             this.editBtn.TabIndex = 19;
             this.editBtn.Text = "Edit";
+            this.toolTip1.SetToolTip(this.editBtn, "Click to edit event");
             this.editBtn.UseVisualStyleBackColor = false;
             this.editBtn.Click += new System.EventHandler(this.editBtn_Click);
             // 
@@ -111,7 +115,7 @@
             this.exitPb.TabStop = false;
             this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
-            // eventListForm
+            // EventListForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -122,7 +126,7 @@
             this.Controls.Add(this.editBtn);
             this.Controls.Add(this.eventLst);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "eventListForm";
+            this.Name = "EventListForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "eventListForm";
             this.headerPanel.ResumeLayout(false);
@@ -139,5 +143,6 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.PictureBox exitPb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
