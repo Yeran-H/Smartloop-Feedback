@@ -35,22 +35,19 @@
             this.gpaChart = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.filterCb = new System.Windows.Forms.ComboBox();
             this.filterLabel = new System.Windows.Forms.Label();
-            this.searchTextBox = new System.Windows.Forms.TextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.usernamePb = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.resultDgv)).BeginInit();
             this.tabControl.SuspendLayout();
             this.wamTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.wamChart)).BeginInit();
             this.gpaTabPage.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gpaChart)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             this.SuspendLayout();
             // 
             // resultDgv
             // 
             this.resultDgv.AllowUserToAddRows = false;
             this.resultDgv.AllowUserToDeleteRows = false;
+            this.resultDgv.AllowUserToOrderColumns = true;
             this.resultDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.resultDgv.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.resultDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -223,48 +220,15 @@
             this.filterLabel.TabIndex = 37;
             this.filterLabel.Text = "Filter:";
             // 
-            // searchTextBox
-            // 
-            this.searchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.searchTextBox.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.searchTextBox.Font = new System.Drawing.Font("Aptos", 12F);
-            this.searchTextBox.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.searchTextBox.Location = new System.Drawing.Point(303, 15);
-            this.searchTextBox.Name = "searchTextBox";
-            this.searchTextBox.Size = new System.Drawing.Size(123, 20);
-            this.searchTextBox.TabIndex = 33;
-            this.searchTextBox.TextChanged += new System.EventHandler(this.searchTextBox_TextChanged);
-            // 
-            // panel2
-            // 
-            this.panel2.BackColor = System.Drawing.Color.White;
-            this.panel2.Location = new System.Drawing.Point(273, 37);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(153, 1);
-            this.panel2.TabIndex = 29;
-            // 
-            // usernamePb
-            // 
-            this.usernamePb.Image = global::Smartloop_Feedback.Properties.Resources.search;
-            this.usernamePb.Location = new System.Drawing.Point(271, 8);
-            this.usernamePb.Name = "usernamePb";
-            this.usernamePb.Size = new System.Drawing.Size(27, 27);
-            this.usernamePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.usernamePb.TabIndex = 38;
-            this.usernamePb.TabStop = false;
-            // 
             // ResultForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
-            this.Controls.Add(this.usernamePb);
             this.Controls.Add(this.filterLabel);
             this.Controls.Add(this.filterCb);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.searchTextBox);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.gpaTb);
@@ -283,7 +247,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.wamChart)).EndInit();
             this.gpaTabPage.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gpaChart)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -303,8 +266,5 @@
         private System.Windows.Forms.DataVisualization.Charting.Chart gpaChart;
         private System.Windows.Forms.ComboBox filterCb;
         private System.Windows.Forms.Label filterLabel;
-        private System.Windows.Forms.TextBox searchTextBox;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.PictureBox usernamePb;
     }
 }

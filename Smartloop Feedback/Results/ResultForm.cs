@@ -103,6 +103,49 @@ namespace Smartloop_Feedback.Results
             }
 
             resultDgv.DataSource = courseResultList;
+            DataGridColor(resultDgv);
+        }
+
+        // Apply custom color formatting to a DataGridView
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
         }
 
         private void PopulateCharts()
@@ -177,13 +220,6 @@ namespace Smartloop_Feedback.Results
             // Print the total WAM and GPA
             wamTb.Text= totalWAM.ToString();
             gpaTb.Text= totalGPA.ToString();
-        }
-
-
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            (resultDgv.DataSource as DataTable).DefaultView.RowFilter =
-                string.Format("Course LIKE '%{0}%' OR Grade LIKE '%{0}%' OR Score LIKE '%{0}%'", searchTextBox.Text);
         }
 
         private void resultDgv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

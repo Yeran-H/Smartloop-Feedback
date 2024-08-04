@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.canvasPl = new System.Windows.Forms.Panel();
             this.canvasTb = new System.Windows.Forms.TextBox();
             this.descriptionPl = new System.Windows.Forms.Panel();
@@ -45,6 +46,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.descriptionTb = new System.Windows.Forms.RichTextBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // canvasPl
@@ -67,6 +69,7 @@
             this.canvasTb.Size = new System.Drawing.Size(206, 20);
             this.canvasTb.TabIndex = 28;
             this.canvasTb.Text = "Please Enter Canvas Link";
+            this.toolTip1.SetToolTip(this.canvasTb, "Edit Link");
             // 
             // descriptionPl
             // 
@@ -96,6 +99,7 @@
             this.creditTb.Size = new System.Drawing.Size(206, 20);
             this.creditTb.TabIndex = 26;
             this.creditTb.Text = "Credit Point";
+            this.toolTip1.SetToolTip(this.creditTb, "Edit Credit Point");
             // 
             // namePl
             // 
@@ -117,6 +121,7 @@
             this.nameTb.Size = new System.Drawing.Size(206, 20);
             this.nameTb.TabIndex = 25;
             this.nameTb.Text = "Course Name";
+            this.toolTip1.SetToolTip(this.nameTb, "Edit Course Name");
             // 
             // codePl
             // 
@@ -138,6 +143,7 @@
             this.deleteBtn.Size = new System.Drawing.Size(211, 55);
             this.deleteBtn.TabIndex = 30;
             this.deleteBtn.Text = "Delete";
+            this.toolTip1.SetToolTip(this.deleteBtn, "Click to Delete Course");
             this.deleteBtn.UseVisualStyleBackColor = false;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
@@ -154,6 +160,7 @@
             this.updateBtn.Size = new System.Drawing.Size(211, 55);
             this.updateBtn.TabIndex = 29;
             this.updateBtn.Text = "Update";
+            this.toolTip1.SetToolTip(this.updateBtn, "Click to Update Course");
             this.updateBtn.UseVisualStyleBackColor = false;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
             // 
@@ -169,6 +176,7 @@
             this.codeTb.Size = new System.Drawing.Size(206, 20);
             this.codeTb.TabIndex = 24;
             this.codeTb.Text = "Course Code";
+            this.toolTip1.SetToolTip(this.codeTb, "Edit Course Code");
             // 
             // label4
             // 
@@ -237,6 +245,7 @@
             this.descriptionTb.Size = new System.Drawing.Size(206, 97);
             this.descriptionTb.TabIndex = 41;
             this.descriptionTb.Text = "Description";
+            this.toolTip1.SetToolTip(this.descriptionTb, "Edit Description");
             // 
             // EditCourseForm
             // 
@@ -290,5 +299,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.RichTextBox descriptionTb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

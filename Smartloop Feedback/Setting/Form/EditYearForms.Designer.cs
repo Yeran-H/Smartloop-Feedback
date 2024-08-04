@@ -28,19 +28,21 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.deleteSemesterBtn = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
+            this.addSemsterBtn = new System.Windows.Forms.Button();
+            this.addSemesterCb = new System.Windows.Forms.CheckedListBox();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.deleteSemesterCb = new System.Windows.Forms.CheckedListBox();
+            this.deleteSemesterBtn = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.label2 = new System.Windows.Forms.Label();
             this.yearTb = new System.Windows.Forms.TextBox();
             this.yearPl = new System.Windows.Forms.Panel();
             this.deleteBtn = new System.Windows.Forms.Button();
             this.updateBtn = new System.Windows.Forms.Button();
-            this.deleteSemesterCb = new System.Windows.Forms.CheckedListBox();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.addSemsterBtn = new System.Windows.Forms.Button();
-            this.addSemesterCb = new System.Windows.Forms.CheckedListBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panel2.SuspendLayout();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
@@ -59,6 +61,66 @@
             this.panel2.Size = new System.Drawing.Size(403, 384);
             this.panel2.TabIndex = 21;
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.label1.Location = new System.Drawing.Point(145, 13);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(139, 36);
+            this.label1.TabIndex = 16;
+            this.label1.Text = "Semester";
+            // 
+            // addSemsterBtn
+            // 
+            this.addSemsterBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.addSemsterBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addSemsterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addSemsterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addSemsterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.addSemsterBtn.Location = new System.Drawing.Point(28, 260);
+            this.addSemsterBtn.Name = "addSemsterBtn";
+            this.addSemsterBtn.Size = new System.Drawing.Size(146, 56);
+            this.addSemsterBtn.TabIndex = 22;
+            this.addSemsterBtn.Text = "Add";
+            this.toolTip1.SetToolTip(this.addSemsterBtn, "Click to Add Selected Semester");
+            this.addSemsterBtn.UseVisualStyleBackColor = false;
+            this.addSemsterBtn.Click += new System.EventHandler(this.addSemsterBtn_Click);
+            // 
+            // addSemesterCb
+            // 
+            this.addSemesterCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.addSemesterCb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.addSemesterCb.Font = new System.Drawing.Font("Aptos", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addSemesterCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.addSemesterCb.FormattingEnabled = true;
+            this.addSemesterCb.Location = new System.Drawing.Point(28, 112);
+            this.addSemesterCb.Name = "addSemesterCb";
+            this.addSemesterCb.Size = new System.Drawing.Size(146, 104);
+            this.addSemesterCb.TabIndex = 21;
+            // 
+            // splitter1
+            // 
+            this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(198, 382);
+            this.splitter1.TabIndex = 20;
+            this.splitter1.TabStop = false;
+            // 
+            // deleteSemesterCb
+            // 
+            this.deleteSemesterCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.deleteSemesterCb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.deleteSemesterCb.Font = new System.Drawing.Font("Aptos", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.deleteSemesterCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.deleteSemesterCb.FormattingEnabled = true;
+            this.deleteSemesterCb.Location = new System.Drawing.Point(226, 112);
+            this.deleteSemesterCb.Name = "deleteSemesterCb";
+            this.deleteSemesterCb.Size = new System.Drawing.Size(146, 104);
+            this.deleteSemesterCb.TabIndex = 19;
+            // 
             // deleteSemesterBtn
             // 
             this.deleteSemesterBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
@@ -71,19 +133,9 @@
             this.deleteSemesterBtn.Size = new System.Drawing.Size(146, 56);
             this.deleteSemesterBtn.TabIndex = 13;
             this.deleteSemesterBtn.Text = "Delete";
+            this.toolTip1.SetToolTip(this.deleteSemesterBtn, "Click to Delete Selected Semester");
             this.deleteSemesterBtn.UseVisualStyleBackColor = false;
             this.deleteSemesterBtn.Click += new System.EventHandler(this.deleteSemesterBtn_Click);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(145, 13);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(139, 36);
-            this.label1.TabIndex = 16;
-            this.label1.Text = "Semester";
             // 
             // panel1
             // 
@@ -122,6 +174,8 @@
             this.yearTb.TabIndex = 11;
             this.yearTb.TabStop = false;
             this.yearTb.Text = "Eg. 2024";
+            this.toolTip1.SetToolTip(this.yearTb, "Edit Year");
+            this.yearTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.yearTb_KeyPress);
             // 
             // yearPl
             // 
@@ -143,6 +197,7 @@
             this.deleteBtn.Size = new System.Drawing.Size(211, 55);
             this.deleteBtn.TabIndex = 14;
             this.deleteBtn.Text = "Delete";
+            this.toolTip1.SetToolTip(this.deleteBtn, "Click to Delete Year");
             this.deleteBtn.UseVisualStyleBackColor = false;
             this.deleteBtn.Click += new System.EventHandler(this.deleteBtn_Click);
             // 
@@ -158,56 +213,9 @@
             this.updateBtn.Size = new System.Drawing.Size(211, 55);
             this.updateBtn.TabIndex = 13;
             this.updateBtn.Text = "Update";
+            this.toolTip1.SetToolTip(this.updateBtn, "Click to Update Year");
             this.updateBtn.UseVisualStyleBackColor = false;
             this.updateBtn.Click += new System.EventHandler(this.updateBtn_Click);
-            // 
-            // deleteSemesterCb
-            // 
-            this.deleteSemesterCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.deleteSemesterCb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.deleteSemesterCb.Font = new System.Drawing.Font("Aptos", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.deleteSemesterCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.deleteSemesterCb.FormattingEnabled = true;
-            this.deleteSemesterCb.Location = new System.Drawing.Point(226, 112);
-            this.deleteSemesterCb.Name = "deleteSemesterCb";
-            this.deleteSemesterCb.Size = new System.Drawing.Size(146, 104);
-            this.deleteSemesterCb.TabIndex = 19;
-            // 
-            // splitter1
-            // 
-            this.splitter1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(198, 382);
-            this.splitter1.TabIndex = 20;
-            this.splitter1.TabStop = false;
-            // 
-            // addSemsterBtn
-            // 
-            this.addSemsterBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.addSemsterBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addSemsterBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addSemsterBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addSemsterBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.addSemsterBtn.Location = new System.Drawing.Point(28, 260);
-            this.addSemsterBtn.Name = "addSemsterBtn";
-            this.addSemsterBtn.Size = new System.Drawing.Size(146, 56);
-            this.addSemsterBtn.TabIndex = 22;
-            this.addSemsterBtn.Text = "Add";
-            this.addSemsterBtn.UseVisualStyleBackColor = false;
-            this.addSemsterBtn.Click += new System.EventHandler(this.addSemsterBtn_Click);
-            // 
-            // addSemesterCb
-            // 
-            this.addSemesterCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.addSemesterCb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.addSemesterCb.Font = new System.Drawing.Font("Aptos", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addSemesterCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.addSemesterCb.FormattingEnabled = true;
-            this.addSemesterCb.Location = new System.Drawing.Point(28, 112);
-            this.addSemesterCb.Name = "addSemesterCb";
-            this.addSemesterCb.Size = new System.Drawing.Size(146, 104);
-            this.addSemesterCb.TabIndex = 21;
             // 
             // EditYearForms
             // 
@@ -245,5 +253,6 @@
         private System.Windows.Forms.CheckedListBox addSemesterCb;
         private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.CheckedListBox deleteSemesterCb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

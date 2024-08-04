@@ -146,8 +146,9 @@ namespace Smartloop_Feedback
         }
 
         // Fetch events from the database for the student
-        private void LoadEventsFromDatabase()
+        public void LoadEventsFromDatabase()
         {
+            EventList.Clear();
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();

@@ -1,19 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Setting
 {
     public partial class EditYearForms : Form
     {
-        public Student student;
-        public MainForm mainForm;
+        public Student student; // Reference to the student object
+        public MainForm mainForm; // Reference to the main form
+
+        // Constructor for EditYearForms, initializes the form with the student and main form references
         public EditYearForms(Student student, MainForm mainForm)
         {
             InitializeComponent();
@@ -21,35 +18,40 @@ namespace Smartloop_Feedback.Setting
             this.student = student;
         }
 
+        // Event handler for form load
         private void EditYearForms_Load(object sender, EventArgs e)
         {
+            // Set the year TextBox to the selected year's name
             yearTb.Text = student.YearList[(int)mainForm.position[0]].Name.ToString();
-            PopulateCheckedList();
+            PopulateCheckedList(); // Populate the semester checklists
         }
 
+        // Populate the add and delete semester checklists
         private void PopulateCheckedList()
         {
-            addSemesterCb.Items.Clear();
-            deleteSemesterCb.Items.Clear();
+            addSemesterCb.Items.Clear(); // Clear existing items
+            deleteSemesterCb.Items.Clear(); // Clear existing items
             string[] semesters = { "Summer", "Autumn", "Winter", "Spring" };
 
-            foreach (string semster in semesters)
+            // Populate the checklists based on whether the semester exists
+            foreach (string semester in semesters)
             {
-                if (student.YearList[(int)mainForm.position[0]].SemesterList.ContainsKey(semster))
+                if (student.YearList[(int)mainForm.position[0]].SemesterList.ContainsKey(semester))
                 {
-                    deleteSemesterCb.Items.Add(semster);
+                    deleteSemesterCb.Items.Add(semester); // Add to delete checklist if exists
                 }
                 else
                 {
-                    addSemesterCb.Items.Add(semster);
+                    addSemesterCb.Items.Add(semester); // Add to add checklist if not exists
                 }
             }
         }
 
+        // Event handler for update button click
         private void updateBtn_Click(object sender, EventArgs e)
         {
             int yearName = Int32.Parse(yearTb.Text);
-            // Validate that the year name is not empty, unique, and semesters are selected
+            // Validate that the year name is not empty, unique, and within a valid range
             if (yearName >= 2019 && student.UniqueYear(yearName))
             {
                 student.YearList[(int)mainForm.position[0]].UpdateYearInDatabase(yearName);
@@ -67,6 +69,7 @@ namespace Smartloop_Feedback.Setting
             }
         }
 
+        // Event handler for delete button click
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -84,35 +87,50 @@ namespace Smartloop_Feedback.Setting
             }
         }
 
+        // Event handler for add semester button click
         private void addSemsterBtn_Click(object sender, EventArgs e)
         {
+            // Add selected semesters to the year's semester list
             foreach (string item in addSemesterCb.CheckedItems)
             {
                 student.YearList[(int)mainForm.position[0]].SemesterList.Add(item, new Semester(item, student.YearList[(int)mainForm.position[0]].Id, student.StudentId));
             }
 
-            PopulateCheckedList();
-            mainForm.MenuPanel(5);
+            PopulateCheckedList(); // Refresh the checklists
+            mainForm.MenuPanel(5); // Update the menu panel
         }
 
+        // Event handler for delete semester button click
         private void deleteSemesterBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                    "Are you sure you want to delete? The boxes Unselected will be removed and associated objects as well.",
-                    "Confirm Deletion",
-                    MessageBoxButtons.YesNo,
-                    MessageBoxIcon.Warning
-                    );
+                "Are you sure you want to delete? The selected semesters will be removed along with associated objects.",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Warning
+            );
 
             if (result == DialogResult.Yes)
             {
+                // Delete selected semesters from the year's semester list
                 foreach (string item in deleteSemesterCb.CheckedItems)
                 {
                     student.YearList[(int)mainForm.position[0]].DeleteSemesterFromDatabase(item);
                 }
 
-                PopulateCheckedList();
-                mainForm.MenuPanel(5);
+                PopulateCheckedList(); // Refresh the checklists
+                mainForm.MenuPanel(5); // Update the menu panel
+            }
+        }
+
+        private void yearTb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true; // Reject non-digit input
+                }
             }
         }
     }
