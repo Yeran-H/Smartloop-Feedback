@@ -27,7 +27,7 @@ GO
 -- Create the year table
 CREATE TABLE year (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    name VARCHAR(225),
+    name INT,
     studentId INT,
     FOREIGN KEY (studentId) REFERENCES student(studentId)
 );

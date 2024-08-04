@@ -14,7 +14,7 @@ namespace Smartloop_Feedback
     public partial class AddYearForm : Form
     {
         // Public properties to hold the year name and semester names
-        public string yearName { get; set; }
+        public int yearName { get; set; }
         public Student student { get; }
         public List<string> semesterNames { get; set; }
 
@@ -43,9 +43,9 @@ namespace Smartloop_Feedback
         // Event handler for the save button click
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            yearName = yearTb.Text;
+            yearName = Int32.Parse(yearTb.Text);
             // Validate that the year name is not empty, unique, and semesters are selected
-            if (!string.IsNullOrEmpty(yearName) && student.UniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
+            if (yearName >= 2019 && student.UniqueYear(yearName) && semesterCb.CheckedItems.Count > 0)
             {
                 // Add selected semesters to the semesterNames list
                 foreach (string item in semesterCb.CheckedItems)
@@ -92,6 +92,17 @@ namespace Smartloop_Feedback
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close();
+        }
+
+        private void yearTb_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar))
+            {
+                if (!char.IsDigit(e.KeyChar))
+                {
+                    e.Handled = true; // Reject non-digit input
+                }
+            }
         }
     }
 }

@@ -19,7 +19,7 @@ namespace Smartloop_Feedback
         public string Password { get; set; } // Student's password
         public string Degree { get; set; } // Student's degree
         public byte[] ProfileImage { get; set; } // Student's profile image
-        public Dictionary<string, Year> YearList { get; set; } // List of years for the student
+        public Dictionary<int, Year> YearList { get; set; } // List of years for the student
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback
             Password = password;
             Degree = degree;
             ProfileImage = profileImage;
-            YearList = new Dictionary<string, Year>(); // Initialize the year list
+            YearList = new Dictionary<int, Year>(); // Initialize the year list
             EventList = new Dictionary<int, Event>(); // Initialize the event list
             LoadYearsFromDatabase(); // Fetch years from the database
             LoadEventsFromDatabase(); // Fetch events from the database
@@ -112,7 +112,7 @@ namespace Smartloop_Feedback
         }
 
         // Delete a year and related data from the database
-        public void DeleteYearFromDatabase(string yearName)
+        public void DeleteYearFromDatabase(int yearName)
         {
             if (YearList.ContainsKey(yearName))
             {
@@ -127,7 +127,7 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT name, id FROM year WHERE studentId = @studentId"; // SQL query to fetch years
+                string sql = "SELECT name, id FROM year WHERE studentId = @studentId ORDER BY name desc"; // SQL query to fetch years
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
@@ -136,7 +136,7 @@ namespace Smartloop_Feedback
                     {
                         while (reader.Read()) // Read each row
                         {
-                            string name = reader.GetString(0); // Get the year name
+                            int name = reader.GetInt32(0); // Get the year name
                             int id = reader.GetInt32(1); // Get the year ID
                             YearList.Add(name, new Year(name, StudentId, id)); // Add the year to the year list
                         }
@@ -236,7 +236,7 @@ namespace Smartloop_Feedback
         }
 
         // Check if a year name is unique within the student's year list
-        public bool UniqueYear(string name)
+        public bool UniqueYear(int name)
         {
             return !YearList.ContainsKey(name);
         }

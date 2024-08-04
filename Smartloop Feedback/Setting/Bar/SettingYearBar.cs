@@ -36,7 +36,7 @@ namespace Smartloop_Feedback.Setting.Bar
             {
                 Button btn = allButtons[buttonCount]; 
                 btn.Visible = true;
-                btn.Text = year.Name; 
+                btn.Text = year.Name.ToString(); 
                 buttons[buttonCount] = btn; 
                 buttons[buttonCount].Click += YearButton_Click; 
 

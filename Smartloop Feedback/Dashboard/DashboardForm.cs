@@ -83,7 +83,7 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
                 {
-                    string canvasLink = student.YearList[(string)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
+                    string canvasLink = student.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
                     OpenUrl(canvasLink);
                 }
                 else if (e.ColumnIndex == courseDgv.Columns["courseBtn"].Index)

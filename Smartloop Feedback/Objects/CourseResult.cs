@@ -9,7 +9,7 @@ namespace Smartloop_Feedback.Objects
     public class CourseResult
     {
         // Public properties for course result details
-        public string Year { get; set; } // Academic year of the course
+        public int Year { get; set; } // Academic year of the course
         public string Semester { get; set; } // Semester of the course
         public string Course { get; set; } // Name of the course
         public string Grade { get; private set; } // Grade received in the course
@@ -19,7 +19,7 @@ namespace Smartloop_Feedback.Objects
         // Constructor to initialize a CourseResult object with default values
         public CourseResult()
         {
-            Year = string.Empty;
+            Year = 0;
             Semester = string.Empty;
             Course = string.Empty;
             Grade = string.Empty;

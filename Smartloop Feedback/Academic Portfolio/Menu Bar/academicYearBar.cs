@@ -34,7 +34,7 @@ namespace Smartloop_Feedback
             {
                 Button btn = allButtons[buttonCount]; // Get the button for the current year
                 btn.Visible = true; // Make the button visible
-                btn.Text = year.Name; // Set the button text to the year's name
+                btn.Text = year.Name.ToString(); // Set the button text to the year's name
                 buttons[buttonCount] = btn; // Store the button in the array
                 buttons[buttonCount].Click += YearButton_Click; // Attach the event handler to the button
 
@@ -63,7 +63,7 @@ namespace Smartloop_Feedback
             {
                 if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
                 {
-                    string yearName = addYearForm.yearName; // Get the new year's name
+                    int yearName = addYearForm.yearName; // Get the new year's name
 
                     if (buttonCount < 5) // Ensure the button count is less than 5
                     {
@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
                         
                         Button btn = allButtons[buttonCount];
                         btn.Visible = true; // Make the new button visible
-                        btn.Text = yearName; // Set the new button's text
+                        btn.Text = yearName.ToString(); // Set the new button's text
                         btn.Click += YearButton_Click; // Attach the event handler to the button
                         buttons[buttonCount] = btn;
                         buttonCount++; // Increment the button count

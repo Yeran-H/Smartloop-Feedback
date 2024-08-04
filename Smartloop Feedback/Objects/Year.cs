@@ -10,13 +10,13 @@ namespace Smartloop_Feedback
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for year details
-        public string Name { get; set; } // Name of the year
+        public int Name { get; set; } // Name of the year
         public int StudentId { get; } // Student ID associated with the year
         public int Id { get; set; } // Year ID
         public Dictionary<string, Semester> SemesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
-        public Year(string name, int studentId, int id)
+        public Year(int name, int studentId, int id)
         {
             Name = name;
             StudentId = studentId;
@@ -26,7 +26,7 @@ namespace Smartloop_Feedback
         }
 
         // Constructor to initialize a Year object and add it to the database
-        public Year(string name, int studentId, List<string> semesterNames)
+        public Year(int name, int studentId, List<string> semesterNames)
         {
             Name = name;
             StudentId = studentId;
@@ -88,7 +88,7 @@ namespace Smartloop_Feedback
         }
 
         // Update the year name in the database
-        public void UpdateYearInDatabase(string yearName)
+        public void UpdateYearInDatabase(int yearName)
         {
             Name = yearName; // Update the year name
 
