@@ -2,84 +2,81 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
-using System.Drawing;
 using System.Linq;
-using System.Runtime.InteropServices;
-using ZstdSharp.Unsafe;
 
 namespace Smartloop_Feedback.Objects
 {
     public class Assessment
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for assessment details
-        public int id { get; set; }
-        public string name { get; set; }
-        public string description { get; set; }
-        public string type { get; set; }
-        public DateTime date { get; set; }
-        public int status { get; set; }
-        public double weight { get; set; }
-        public double mark { get; set; }
-        public double finalMark { get; set; }
-        public bool individual { get; set; }
-        public bool group { get; set; }
-        public bool isFinalised { get; set; }
-        public string canvasLink { get; set; }
-        public List<Criteria> criteriaList { get; set; } // List of criteria for the assessment
-        public List<CheckList> checkList { get; set; }
-        public int courseId { get; set; }
-        public int studentId { get; set; }
+        public int Id { get; private set; } // Assessment ID
+        public string Name { get; set; } // Assessment name
+        public string Description { get; set; } // Assessment description
+        public string Type { get; set; } // Assessment type
+        public DateTime Date { get; set; } // Assessment date
+        public int Status { get; set; } // Assessment status
+        public double Weight { get; set; } // Assessment weight
+        public double Mark { get; set; } // Assessment mark
+        public double FinalMark { get; set; } // Final mark for the assessment
+        public bool Individual { get; set; } // Is the assessment individual?
+        public bool Group { get; set; } // Is the assessment group-based?
+        public bool IsFinalised { get; set; } // Is the assessment finalised?
+        public string CanvasLink { get; set; } // Link to the assessment's Canvas page
+        public List<Criteria> CriteriaList { get; private set; } // List of criteria for the assessment
+        public List<CheckList> CheckList { get; private set; } // List of checklist items for the assessment
+        public int CourseId { get; set; } // ID of the course associated with the assessment
+        public int StudentId { get; set; } // ID of the student associated with the assessment
 
-        // Constructor to initialize an Assessment object and fetch criteria from the database
+        // Constructor to initialize an Assessment object and fetch criteria and checklist from the database
         public Assessment(int id, string name, string description, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
         {
-            this.id = id;
-            this.name = name;
-            this.description = description;
-            this.type = type;
-            this.date = date;
-            this.status = status;
-            this.weight = weight;
-            this.mark = mark;
-            this.finalMark = finalMark;
-            this.individual = individual;
-            this.group = group;
-            this.isFinalised = isFinalised;
-            this.canvasLink = canvasLink;
-            this.courseId = courseId;
-            this.studentId = studentId;
-            criteriaList = new List<Criteria>(); // Initialize the criteria list
-            checkList = new List<CheckList>();
-            GetCriteriaFromDatabase(); // Fetch criteria from the database
-            GetCheckListFromDatabase();
+            Id = id;
+            Name = name;
+            Description = description;
+            Type = type;
+            Date = date;
+            Status = status;
+            Weight = weight;
+            Mark = mark;
+            FinalMark = finalMark;
+            Individual = individual;
+            Group = group;
+            IsFinalised = isFinalised;
+            CanvasLink = canvasLink;
+            CourseId = courseId;
+            StudentId = studentId;
+            CriteriaList = new List<Criteria>(); // Initialize the criteria list
+            CheckList = new List<CheckList>(); // Initialize the checklist
+            LoadCriteriaFromDatabase(); // Fetch criteria from the database
+            LoadCheckListFromDatabase(); // Fetch checklist from the database
         }
 
         // Constructor to initialize an Assessment object and add it to the database
-        public Assessment(string name, string description, string type, DateTime date, int status, int weight, int mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
+        public Assessment(string name, string description, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
         {
-            this.name = name;
-            this.description = description;
-            this.type = type;
-            this.date = date;
-            this.status = status;
-            this.weight = weight;
-            this.mark = mark;
-            this.finalMark = finalMark;
-            this.individual = individual;
-            this.group = group;
-            this.isFinalised = isFinalised;
-            this.canvasLink = canvasLink;
-            this.courseId = courseId;
-            this.studentId = studentId;
-            criteriaList = new List<Criteria>(); // Initialize the criteria list
-            checkList = new List<CheckList>();
+            Name = name;
+            Description = description;
+            Type = type;
+            Date = date;
+            Status = status;
+            Weight = weight;
+            Mark = mark;
+            FinalMark = finalMark;
+            Individual = individual;
+            Group = group;
+            IsFinalised = isFinalised;
+            CanvasLink = canvasLink;
+            CourseId = courseId;
+            StudentId = studentId;
+            CriteriaList = new List<Criteria>(); // Initialize the criteria list
+            CheckList = new List<CheckList>(); // Initialize the checklist
             AddAssessmentToDatabase(); // Add the assessment to the database
         }
 
         // Add the assessment to the database and get the generated ID
-        public void AddAssessmentToDatabase()
+        private void AddAssessmentToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -88,34 +85,34 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", name); // Set the name parameter
-                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
-                    cmd.Parameters.AddWithValue("@type", type); // Set the type parameter
-                    cmd.Parameters.AddWithValue("@date", date); // Set the date parameter
-                    cmd.Parameters.AddWithValue("@status", status); // Set the status parameter
-                    cmd.Parameters.AddWithValue("@weight", weight); // Set the weight parameter
-                    cmd.Parameters.AddWithValue("@mark", mark); // Set the mark parameter
-                    cmd.Parameters.AddWithValue("@finalMark", finalMark);
-                    cmd.Parameters.AddWithValue("@individual", individual); // Set the individual parameter
-                    cmd.Parameters.AddWithValue("@group", group); // Set the group parameter
-                    cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
-                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink); // Set the canvasLink parameter
-                    cmd.Parameters.AddWithValue("@courseId", courseId); // Set the courseId parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@type", Type); // Set the type parameter
+                    cmd.Parameters.AddWithValue("@date", Date); // Set the date parameter
+                    cmd.Parameters.AddWithValue("@status", Status); // Set the status parameter
+                    cmd.Parameters.AddWithValue("@weight", Weight); // Set the weight parameter
+                    cmd.Parameters.AddWithValue("@mark", Mark); // Set the mark parameter
+                    cmd.Parameters.AddWithValue("@finalMark", FinalMark); // Set the final mark parameter
+                    cmd.Parameters.AddWithValue("@individual", Individual); // Set the individual parameter
+                    cmd.Parameters.AddWithValue("@group", Group); // Set the group parameter
+                    cmd.Parameters.AddWithValue("@isFinalised", IsFinalised); // Set the isFinalised parameter
+                    cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
+                    cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
         // Fetch criteria from the database and initialize the criteria list
-        private void GetCriteriaFromDatabase()
+        private void LoadCriteriaFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT id, description FROM criteria WHERE assessmentId = @assessmentId AND studentId = @studentId", conn); // SQL query to fetch criteria
-                cmd.Parameters.AddWithValue("@assessmentId", id); // Set the assessmentId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                cmd.Parameters.AddWithValue("@assessmentId", Id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -123,44 +120,46 @@ namespace Smartloop_Feedback.Objects
                     {
                         int criteriaId = reader.GetInt32(0); // Get the criteria ID
                         string criteriaDescription = reader.GetString(1); // Get the criteria description
-                        criteriaList.Add(new Criteria(criteriaId, criteriaDescription, this.id, studentId)); // Add the criteria to the criteria list
+                        CriteriaList.Add(new Criteria(criteriaId, criteriaDescription, Id, StudentId)); // Add the criteria to the criteria list
                     }
                 }
             }
         }
 
-        private void GetCheckListFromDatabase()
+        // Fetch checklist items from the database and initialize the checklist
+        private void LoadCheckListFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, isChecked FROM checkList WHERE assessmentId = @assessmentId AND studentId = @studentId", conn); // SQL query to fetch criteria
-                cmd.Parameters.AddWithValue("@assessmentId", id); // Set the assessmentId parameter
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
+                SqlCommand cmd = new SqlCommand("SELECT id, name, isChecked FROM checkList WHERE assessmentId = @assessmentId AND studentId = @studentId", conn); // SQL query to fetch checklist items
+                cmd.Parameters.AddWithValue("@assessmentId", Id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
                     while (reader.Read()) // Read each row
                     {
-                        int checkListId = reader.GetInt32(0);
-                        string checkListName = reader.GetString(1);
-                        bool isChecked = reader.GetBoolean(2);
-                        checkList.Add(new CheckList(checkListId, checkListName, isChecked, id, studentId));
+                        int checkListId = reader.GetInt32(0); // Get the checklist item ID
+                        string checkListName = reader.GetString(1); // Get the checklist item name
+                        bool isChecked = reader.GetBoolean(2); // Get the checklist item status
+                        CheckList.Add(new CheckList(checkListId, checkListName, isChecked, StudentId, Id)); // Add the checklist item to the checklist
                     }
                 }
             }
 
-            CalculateStatus();
+            CalculateStatus(); // Calculate the status of the assessment based on checklist items
         }
 
+        // Delete the assessment and related data from the database
         public void DeleteAssessmentFromDatabase()
         {
-            foreach (CheckList checkList in checkList)
+            foreach (CheckList checkList in CheckList)
             {
                 checkList.DeleteCheckListFromDatabase();
             }
 
-            foreach (Criteria criteria in criteriaList)
+            foreach (Criteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
             }
@@ -175,8 +174,8 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
+                    // Add the parameter for assessment ID
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -184,24 +183,26 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        // Calculate the status of the assessment based on checklist items
         public void CalculateStatus()
         {
-            if (checkList.Count != 0)
+            if (CheckList.Count != 0)
             {
-                int count = checkList.Count(item => item.isChecked);
-                status = (int)((count / (double)checkList.Count) * 100);
+                int count = CheckList.Count(item => item.IsChecked);
+                Status = (int)((count / (double)CheckList.Count) * 100);
             }
             else
             {
-                status = 0;
+                Status = 0;
             }
         }
 
+        // Update the assessment details in the database
         public void UpdateToDatabase(string description, DateTime date, bool isFinalised)
         {
-            this.description = description;
-            this.date = date;
-            this.isFinalised = isFinalised;
+            Description = description;
+            Date = date;
+            IsFinalised = isFinalised;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -221,9 +222,9 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@mark", mark);
-                    cmd.Parameters.AddWithValue("@finalMark", finalMark);
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@mark", Mark);
+                    cmd.Parameters.AddWithValue("@finalMark", FinalMark);
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
@@ -234,23 +235,23 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
+        // Update the assessment details in the database
         public void UpdateAssessmentToDatabase(string title, string description, DateTime date, string type, double mark, double weight, bool individual, bool group, string canvasLink)
         {
-            foreach (Criteria criteria in criteriaList)
+            foreach (Criteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
             }
 
-
-            this.name = title;
-            this.description = description;
-            this.date = date;
-            this.type = type;
-            this.mark = mark;
-            this.weight = weight;
-            this.individual = individual;
-            this.group = group;
-            this.canvasLink = canvasLink;
+            Name = title;
+            Description = description;
+            Date = date;
+            Type = type;
+            Mark = mark;
+            Weight = weight;
+            Individual = individual;
+            Group = group;
+            CanvasLink = canvasLink;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -274,8 +275,8 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", id);
-                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@name", Name);
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@type", type);

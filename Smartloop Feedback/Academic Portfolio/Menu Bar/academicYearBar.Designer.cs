@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.backBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.oneBtn = new System.Windows.Forms.Button();
@@ -35,6 +36,7 @@
             this.thirdBtn = new System.Windows.Forms.Button();
             this.fourthBtn = new System.Windows.Forms.Button();
             this.fifthBtn = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // backBtn
@@ -51,6 +53,7 @@
             this.backBtn.TabIndex = 0;
             this.backBtn.Text = "Back";
             this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.backBtn, "Click to go Back");
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
@@ -68,6 +71,7 @@
             this.addBtn.TabIndex = 1;
             this.addBtn.Text = "Add";
             this.addBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.addBtn, "Click to add Year");
             this.addBtn.UseVisualStyleBackColor = true;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
@@ -83,6 +87,7 @@
             this.oneBtn.Size = new System.Drawing.Size(170, 42);
             this.oneBtn.TabIndex = 2;
             this.oneBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.oneBtn, "Click to view Year");
             this.oneBtn.UseVisualStyleBackColor = true;
             this.oneBtn.Visible = false;
             this.oneBtn.Click += new System.EventHandler(this.YearButton_Click);
@@ -99,6 +104,7 @@
             this.secondBtn.Size = new System.Drawing.Size(170, 42);
             this.secondBtn.TabIndex = 3;
             this.secondBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.secondBtn, "Click to view Year");
             this.secondBtn.UseVisualStyleBackColor = true;
             this.secondBtn.Visible = false;
             this.secondBtn.Click += new System.EventHandler(this.YearButton_Click);
@@ -115,6 +121,7 @@
             this.thirdBtn.Size = new System.Drawing.Size(170, 42);
             this.thirdBtn.TabIndex = 4;
             this.thirdBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.thirdBtn, "Click to view Year");
             this.thirdBtn.UseVisualStyleBackColor = true;
             this.thirdBtn.Visible = false;
             this.thirdBtn.Click += new System.EventHandler(this.YearButton_Click);
@@ -131,6 +138,7 @@
             this.fourthBtn.Size = new System.Drawing.Size(170, 42);
             this.fourthBtn.TabIndex = 5;
             this.fourthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.fourthBtn, "Click to view Year");
             this.fourthBtn.UseVisualStyleBackColor = true;
             this.fourthBtn.Visible = false;
             this.fourthBtn.Click += new System.EventHandler(this.YearButton_Click);
@@ -147,11 +155,12 @@
             this.fifthBtn.Size = new System.Drawing.Size(170, 42);
             this.fifthBtn.TabIndex = 6;
             this.fifthBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.fifthBtn, "Click to view Year");
             this.fifthBtn.UseVisualStyleBackColor = true;
             this.fifthBtn.Visible = false;
             this.fifthBtn.Click += new System.EventHandler(this.YearButton_Click);
             // 
-            // academicYearBar
+            // AcademicYearBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -165,7 +174,7 @@
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.fifthBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "academicYearBar";
+            this.Name = "AcademicYearBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "academicYearForm";
             this.ResumeLayout(false);
@@ -181,5 +190,6 @@
         private System.Windows.Forms.Button thirdBtn;
         private System.Windows.Forms.Button fourthBtn;
         private System.Windows.Forms.Button fifthBtn;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

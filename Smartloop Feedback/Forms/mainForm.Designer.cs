@@ -34,6 +34,7 @@
             this.courseBtn = new System.Windows.Forms.Button();
             this.setttingBtn = new System.Windows.Forms.Button();
             this.academicBtn = new System.Windows.Forms.Button();
+            this.navPl = new System.Windows.Forms.Panel();
             this.resultBtn = new System.Windows.Forms.Button();
             this.dashboardBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -41,7 +42,6 @@
             this.nameLb = new System.Windows.Forms.Label();
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.navPl = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
             this.formLoaderPl = new System.Windows.Forms.Panel();
             this.exitPb = new System.Windows.Forms.PictureBox();
@@ -61,6 +61,7 @@
             this.panel1.Controls.Add(this.courseBtn);
             this.panel1.Controls.Add(this.setttingBtn);
             this.panel1.Controls.Add(this.academicBtn);
+            this.panel1.Controls.Add(this.navPl);
             this.panel1.Controls.Add(this.resultBtn);
             this.panel1.Controls.Add(this.dashboardBtn);
             this.panel1.Controls.Add(this.panel2);
@@ -73,7 +74,7 @@
             // menuDropPl
             // 
             this.menuDropPl.AutoScroll = true;
-            this.menuDropPl.Location = new System.Drawing.Point(0, 202);
+            this.menuDropPl.Location = new System.Drawing.Point(0, 201);
             this.menuDropPl.Name = "menuDropPl";
             this.menuDropPl.Size = new System.Drawing.Size(186, 294);
             this.menuDropPl.TabIndex = 8;
@@ -136,6 +137,14 @@
             this.academicBtn.Click += new System.EventHandler(this.academicBtn_Click);
             this.academicBtn.Leave += new System.EventHandler(this.academicBtn_Leave);
             // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(3, 202);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 5;
+            // 
             // resultBtn
             // 
             this.resultBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -180,7 +189,6 @@
             this.panel2.Controls.Add(this.nameLb);
             this.panel2.Controls.Add(this.profilePb);
             this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Controls.Add(this.navPl);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel2.Location = new System.Drawing.Point(0, 0);
             this.panel2.Name = "panel2";
@@ -228,14 +236,6 @@
             this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
-            // 
-            // navPl
-            // 
-            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 186);
-            this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
-            this.navPl.TabIndex = 5;
             // 
             // panel3
             // 

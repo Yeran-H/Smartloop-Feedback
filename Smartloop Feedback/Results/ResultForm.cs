@@ -43,27 +43,27 @@ namespace Smartloop_Feedback.Results
 
         private void PopulateDgv()
         {
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
                 double wamYear = 0.0;
                 double gpaYear = 0.0;
                 int totalCreditPointsYear = 0;
 
-                foreach (Semester semester in year.semesterList.Values)
+                foreach (Semester semester in year.SemesterList.Values)
                 {
                     double wamSemester = 0.0;
                     double gpaSemester = 0.0;
                     int totalCreditPointsSemester = 0;
 
-                    foreach (Course course in semester.courseList.Values)
+                    foreach (Course course in semester.CourseList.Values)
                     {
                         CourseResult courseResult = new CourseResult
                         {
-                            Year = year.name,
-                            Semester = semester.name,
-                            Course = course.title,
+                            Year = year.Name,
+                            Semester = semester.Name,
+                            Course = course.Title,
                             Score = course.CalculateCurrentMark(),
-                            CreditPoint = course.creditPoint
+                            CreditPoint = course.CreditPoint
                         };
                         courseResult.CalculateGrade();
 
@@ -103,6 +103,49 @@ namespace Smartloop_Feedback.Results
             }
 
             resultDgv.DataSource = courseResultList;
+            DataGridColor(resultDgv);
+        }
+
+        // Apply custom color formatting to a DataGridView
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
         }
 
         private void PopulateCharts()
@@ -145,13 +188,13 @@ namespace Smartloop_Feedback.Results
             int totalCreditPoints = 0;
 
             // Ensure that totalCreditPoint is the sum of all credit points
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
-                foreach (Semester semester in year.semesterList.Values)
+                foreach (Semester semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.courseList.Values)
+                    foreach (Course course in semester.CourseList.Values)
                     {
-                        totalCreditPoints += course.creditPoint;
+                        totalCreditPoints += course.CreditPoint;
                     }
                 }
             }
@@ -159,13 +202,13 @@ namespace Smartloop_Feedback.Results
             // Calculate the total WAM
             for (int i = 0; i < wamYearList.Count; i++)
             {
-                totalWAM += wamYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+                totalWAM += wamYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
             }
 
             // Calculate the total GPA
             for (int i = 0; i < gpaYearList.Count; i++)
             {
-                totalGPA += gpaYearList[i] * student.yearList.Values.ElementAt(i).semesterList.Values.Sum(s => s.courseList.Values.Sum(c => c.creditPoint));
+                totalGPA += gpaYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
             }
 
             if (totalCreditPoints > 0)
@@ -177,13 +220,6 @@ namespace Smartloop_Feedback.Results
             // Print the total WAM and GPA
             wamTb.Text= totalWAM.ToString();
             gpaTb.Text= totalGPA.ToString();
-        }
-
-
-        private void searchTextBox_TextChanged(object sender, EventArgs e)
-        {
-            (resultDgv.DataSource as DataTable).DefaultView.RowFilter =
-                string.Format("Course LIKE '%{0}%' OR Grade LIKE '%{0}%' OR Score LIKE '%{0}%'", searchTextBox.Text);
         }
 
         private void resultDgv_ColumnHeaderMouseClick(object sender, DataGridViewCellMouseEventArgs e)

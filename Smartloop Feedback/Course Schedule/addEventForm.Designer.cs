@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.categoryCb = new System.Windows.Forms.ComboBox();
             this.colorDialog = new System.Windows.Forms.ColorDialog();
             this.passwordPl = new System.Windows.Forms.Panel();
@@ -42,6 +43,7 @@
             this.dateDp = new Smartloop_Feedback.Objects.DatePicker();
             this.startTimeDp = new System.Windows.Forms.DateTimePicker();
             this.endTimeDp = new System.Windows.Forms.DateTimePicker();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -57,6 +59,7 @@
             this.categoryCb.Name = "categoryCb";
             this.categoryCb.Size = new System.Drawing.Size(260, 23);
             this.categoryCb.TabIndex = 8;
+            this.toolTip1.SetToolTip(this.categoryCb, "Pick Category of Event");
             // 
             // passwordPl
             // 
@@ -78,6 +81,7 @@
             this.eventTb.Size = new System.Drawing.Size(219, 20);
             this.eventTb.TabIndex = 14;
             this.eventTb.Text = "Event Name";
+            this.toolTip1.SetToolTip(this.eventTb, "Enter event name");
             this.eventTb.Click += new System.EventHandler(this.eventTb_Click);
             // 
             // passwordPb
@@ -97,7 +101,7 @@
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.cancelBtn.Location = new System.Drawing.Point(144, 283);
+            this.cancelBtn.Location = new System.Drawing.Point(145, 294);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(103, 32);
             this.cancelBtn.TabIndex = 18;
@@ -113,7 +117,7 @@
             this.saveBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.saveBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.saveBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.saveBtn.Location = new System.Drawing.Point(35, 283);
+            this.saveBtn.Location = new System.Drawing.Point(36, 294);
             this.saveBtn.Name = "saveBtn";
             this.saveBtn.Size = new System.Drawing.Size(103, 32);
             this.saveBtn.TabIndex = 17;
@@ -134,6 +138,7 @@
             this.colourBtn.TabIndex = 19;
             this.colourBtn.TabStop = false;
             this.colourBtn.Text = "Pick Colour";
+            this.toolTip1.SetToolTip(this.colourBtn, "Pick the colour of Event");
             this.colourBtn.UseVisualStyleBackColor = false;
             this.colourBtn.Click += new System.EventHandler(this.colourBtn_Click);
             // 
@@ -184,26 +189,29 @@
             this.dateDp.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.dateDp.TabIndex = 10;
             this.dateDp.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.toolTip1.SetToolTip(this.dateDp, "Pick date");
             // 
             // startTimeDp
             // 
             this.startTimeDp.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.startTimeDp.ShowUpDown = true;
             this.startTimeDp.Location = new System.Drawing.Point(12, 170);
             this.startTimeDp.Name = "startTimeDp";
-            this.startTimeDp.Size = new System.Drawing.Size(260, 23);
+            this.startTimeDp.ShowUpDown = true;
+            this.startTimeDp.Size = new System.Drawing.Size(260, 20);
             this.startTimeDp.TabIndex = 23;
+            this.toolTip1.SetToolTip(this.startTimeDp, "Pick Start Time");
             // 
             // endTimeDp
             // 
             this.endTimeDp.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.endTimeDp.ShowUpDown = true;
             this.endTimeDp.Location = new System.Drawing.Point(12, 210);
             this.endTimeDp.Name = "endTimeDp";
-            this.endTimeDp.Size = new System.Drawing.Size(260, 23);
+            this.endTimeDp.ShowUpDown = true;
+            this.endTimeDp.Size = new System.Drawing.Size(260, 20);
             this.endTimeDp.TabIndex = 24;
+            this.toolTip1.SetToolTip(this.endTimeDp, "Pick End Time");
             // 
-            // addEventForm
+            // AddEventForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -221,7 +229,7 @@
             this.Controls.Add(this.eventTb);
             this.Controls.Add(this.categoryCb);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "addEventForm";
+            this.Name = "AddEventForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addEventForm";
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).EndInit();
@@ -230,6 +238,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         #endregion
@@ -247,5 +256,6 @@
         private Smartloop_Feedback.Objects.DatePicker dateDp;
         private System.Windows.Forms.DateTimePicker startTimeDp;
         private System.Windows.Forms.DateTimePicker endTimeDp;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

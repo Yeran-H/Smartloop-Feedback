@@ -59,16 +59,16 @@ namespace Smartloop_Feedback.Dashboard
             };
             courseDgv.Columns.Add(tagsColumn);
 
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
-                foreach (Semester semester in year.semesterList.Values)
+                foreach (Semester semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.courseList.Values)
+                    foreach (Course course in semester.CourseList.Values)
                     {
-                        if (!course.isCompleted)
+                        if (!course.IsCompleted)
                         {
-                            int rowIndex = courseDgv.Rows.Add(course.code, course.title, "", "");
-                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.name, semester.name, course.id };
+                            int rowIndex = courseDgv.Rows.Add(course.Code, course.Title, "", "");
+                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Id };
                         }
                     }
                 }
@@ -83,7 +83,7 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
                 {
-                    string canvasLink = student.yearList[(string)tags[0]].semesterList[(string)tags[1]].courseList[(int)tags[2]].canvasLink;
+                    string canvasLink = student.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
                     OpenUrl(canvasLink);
                 }
                 else if (e.ColumnIndex == courseDgv.Columns["courseBtn"].Index)
@@ -120,11 +120,11 @@ namespace Smartloop_Feedback.Dashboard
 
             DateTime today = DateTime.Today;
 
-            foreach (Event events in student.eventList.Values)
+            foreach (Event events in student.EventList.Values)
             {
-                if (events.date >= today)
+                if (events.Date >= today)
                 {
-                    eventDgv.Rows.Add(events.name, events.date, events.category);
+                    eventDgv.Rows.Add(events.Name, events.Date, events.Category);
                 }
             }
         }
@@ -146,15 +146,15 @@ namespace Smartloop_Feedback.Dashboard
                 eventDgv.Rows.Add(hour.ToString("HH:mm"), "");
             }
 
-            foreach (Event events in student.eventList.Values)
+            foreach (Event events in student.EventList.Values)
             {
-                if (events.date.Date == today)
+                if (events.Date.Date == today)
                 {
-                    if (selectedCourse == "All" || events.category == selectedCourse)
+                    if (selectedCourse == "All" || events.Category == selectedCourse)
                     {
-                        for (int i = events.startTime.Hours; i < events.endTime.Hours; i++)
+                        for (int i = events.StartTime.Hours; i < events.EndTime.Hours; i++)
                         {
-                            eventDgv.Rows[i].Cells["Event"].Value = events.name;
+                            eventDgv.Rows[i].Cells["Event"].Value = events.Name;
                             eventDgv.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue; // Highlight the row
                         }
                     }
@@ -183,11 +183,11 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (selectedCourse != "All")
                 {
-                    foreach (Event events in student.eventList.Values)
+                    foreach (Event events in student.EventList.Values)
                     {
-                        if (events.category == selectedCourse)
+                        if (events.Category == selectedCourse)
                         {
-                            eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
+                            eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
                         }
                     }
                 }
@@ -195,11 +195,11 @@ namespace Smartloop_Feedback.Dashboard
                 {
                     DateTime today = DateTime.Today;
 
-                    foreach (Event events in student.eventList.Values)
+                    foreach (Event events in student.EventList.Values)
                     {
-                        if (events.date >= today)
+                        if (events.Date >= today)
                         {
-                            eventDgv.Rows.Add(events.name, events.date.ToShortDateString(), events.category);
+                            eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
                         }
                     }
                 }

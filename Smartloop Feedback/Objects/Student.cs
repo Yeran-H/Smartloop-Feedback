@@ -4,51 +4,47 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
-using System.Xml.Linq;
-using System.Drawing;
 
 namespace Smartloop_Feedback
 {
     public class Student
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
         // Public properties for student details
-        public string name { get; set; }
-        public string email { get; set; }
-        public int studentId { get; set; }
-        public string password { get; set; }
-        public string degree { get; set; }
-        public byte[] profileImage { get; set; }
-        public Dictionary<string, Year> yearList { get; set; }
-        public Dictionary<int, Event> eventList { get; set; }
+        public string Name { get; set; } // Student's name
+        public string Email { get; set; } // Student's email
+        public int StudentId { get; set; } // Student's ID
+        public string Password { get; set; } // Student's password
+        public string Degree { get; set; } // Student's degree
+        public byte[] ProfileImage { get; set; } // Student's profile image
+        public SortedDictionary<int, Year> YearList { get; set; } // List of years for the student
+        public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
-        // Constructor to initialize a Student object with details and fetch years from the database
+        // Constructor to initialize a Student object with details and fetch years and events from the database
         public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage)
         {
-            this.name = name;
-            this.email = email;
-            this.studentId = studentId;
-            this.password = password;
-            this.degree = degree;
-            this.profileImage = profileImage;
-            yearList = new Dictionary<string, Year>(); // Initialize the year list
-            eventList = new Dictionary<int, Event>();
-            GetYearFromDatabase(); // Fetch years from the database
-            GetEventFromDatabase();
+            Name = name;
+            Email = email;
+            StudentId = studentId;
+            Password = password;
+            Degree = degree;
+            ProfileImage = profileImage;
+            YearList = new SortedDictionary<int, Year>(); // Initialize the year list
+            EventList = new Dictionary<int, Event>(); // Initialize the event list
+            LoadYearsFromDatabase(); // Fetch years from the database
+            LoadEventsFromDatabase(); // Fetch events from the database
         }
 
+        // Update student details in the database
         public void UpdateToDatabase(Student selectedStudent)
         {
-            name = selectedStudent.name;
-            email = selectedStudent.email;
-            password = selectedStudent.password;
-            degree = selectedStudent.degree;
-            profileImage = selectedStudent.profileImage;
+            Name = selectedStudent.Name;
+            Email = selectedStudent.Email;
+            Password = selectedStudent.Password;
+            Degree = selectedStudent.Degree;
+            ProfileImage = selectedStudent.ProfileImage;
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {
@@ -68,12 +64,12 @@ namespace Smartloop_Feedback
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@email", email);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@degree", degree);
-                    cmd.Parameters.AddWithValue("@profileImage", profileImage);
+                    cmd.Parameters.AddWithValue("@studentId", StudentId);
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@email", Email);
+                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@degree", Degree);
+                    cmd.Parameters.AddWithValue("@profileImage", ProfileImage);
 
                     // Execute the update command
                     cmd.ExecuteNonQuery();
@@ -81,16 +77,19 @@ namespace Smartloop_Feedback
             }
         }
 
+        // Delete student and related data from the database
         public void DeleteStudentFromDatabase()
         {
-            foreach(Year year in yearList.Values)
+            // Delete all years associated with the student
+            foreach (Year year in YearList.Values)
             {
                 year.DeleteYearFromDatabase();
             }
 
-            foreach (Event events in eventList.Values)
+            // Delete all events associated with the student
+            foreach (Event ev in EventList.Values)
             {
-                events.DeleteEventFromDatabase();
+                ev.DeleteEventFromDatabase();
             }
 
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -104,7 +103,7 @@ namespace Smartloop_Feedback
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
                     // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
+                    cmd.Parameters.AddWithValue("@studentId", StudentId);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -112,96 +111,138 @@ namespace Smartloop_Feedback
             }
         }
 
-        public void DeleteYearFromDatabase(string yearName)
+        // Delete a year and related data from the database
+        public void DeleteYearFromDatabase(int yearName)
         {
-            yearList[yearName].DeleteYearFromDatabase();
-
-            yearList.Remove(yearName);
+            if (YearList.ContainsKey(yearName))
+            {
+                YearList[yearName].DeleteYearFromDatabase(); // Delete the year from the database
+                YearList.Remove(yearName); // Remove the year from the list
+            }
         }
 
         // Private method to fetch years from the database for the student
-        private void GetYearFromDatabase()
+        private void LoadYearsFromDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT name, id FROM year WHERE studentId = @studentId", conn); // SQL query to fetch years
-                cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-
-                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                string sql = "SELECT name, id FROM year WHERE studentId = @studentId ORDER BY name"; // SQL query to fetch years
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) // Read each row
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        string name = reader.GetString(0); // Get the year name
-                        int id = reader.GetInt32(1); // Get the year ID
-                        yearList.Add(name, new Year(name, studentId, id)); // Add the year to the year list
+                        while (reader.Read()) // Read each row
+                        {
+                            int name = reader.GetInt32(0); // Get the year name
+                            int id = reader.GetInt32(1); // Get the year ID
+                            YearList.Add(name, new Year(name, StudentId, id)); // Add the year to the year list
+                        }
                     }
                 }
             }
         }
 
-        public void GetEventFromDatabase()
+        // Fetch events from the database for the student
+        public void LoadEventsFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr)) 
+            EventList.Clear();
+            using (SqlConnection conn = new SqlConnection(connStr))
             {
-                conn.Open(); 
-                SqlCommand cmd = new SqlCommand("SELECT id, name, date, startTime, endTime, courseId, category, color FROM event WHERE studentId = @studentId ORDER BY date", conn); 
-                cmd.Parameters.AddWithValue("@studentId", studentId); 
-
-                using (SqlDataReader reader = cmd.ExecuteReader()) 
+                conn.Open();
+                string sql = "SELECT id, name, date, startTime, endTime, courseId, category, color FROM event WHERE studentId = @studentId ORDER BY date"; // SQL query to fetch events
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) 
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        int id = reader.GetInt32(0);
-                        string name = reader.GetString(1);
-                        DateTime date = reader.GetDateTime(2);
-                        TimeSpan startTime = reader.GetTimeSpan(3);
-                        TimeSpan endTime = reader.GetTimeSpan(4);
-                        int courseId = reader.GetInt32(5);
-                        string category = reader.GetString(6);
-                        int color = reader.GetInt32(7);
-                        eventList.Add(id, new Event(id, name, date, startTime, endTime, studentId, courseId, category, color)); 
+                        while (reader.Read()) // Read each row
+                        {
+                            int id = reader.GetInt32(0);
+                            string name = reader.GetString(1);
+                            DateTime date = reader.GetDateTime(2);
+                            TimeSpan startTime = reader.GetTimeSpan(3);
+                            TimeSpan endTime = reader.GetTimeSpan(4);
+                            int courseId = reader.GetInt32(5);
+                            string category = reader.GetString(6);
+                            int color = reader.GetInt32(7);
+                            EventList.Add(id, new Event(id, name, date, startTime, endTime, StudentId, courseId, category, color)); // Add the event to the event list
+                        }
                     }
                 }
             }
         }
 
+        // Update event details in the database
         public void UpdateEvent(Event selectedEvent)
         {
-            eventList[selectedEvent.id].UpdateEventInDatabase(selectedEvent);
+            if (EventList.ContainsKey(selectedEvent.Id))
+            {
+                EventList[selectedEvent.Id].UpdateEventInDatabase(selectedEvent);
+            }
         }
 
+        // Delete event from the database
         public void DeleteEvent(Event selectedEvent)
         {
-            eventList[selectedEvent.id].DeleteEventFromDatabase();
-            eventList.Remove(selectedEvent.id);
+            if (EventList.ContainsKey(selectedEvent.Id))
+            {
+                EventList[selectedEvent.Id].DeleteEventFromDatabase();
+                EventList.Remove(selectedEvent.Id);
+            }
         }
 
         // Validate if the password meets the minimum length requirement
         public bool ValidatePassword()
         {
-            return password.Length >= 8;
+            return Password.Length >= 8;
         }
 
         // Validate if the student ID is exactly 8 digits long
         public bool ValidateStudentId()
         {
-            string studentIdStr = studentId.ToString();
-            return studentIdStr.Length == 8;
+            string studentIdStr = StudentId.ToString();
+
+            // Check if the length of the studentId is 8 charaters long
+            if (studentIdStr.Length != 8)
+            {
+                return false;
+            }
+
+            bool exists = false;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(1) FROM student WHERE studentId = @studentId"; // SQL query to check if studentId exists
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                {
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    exists = (int)cmd.ExecuteScalar() > 0; // Execute the query and check if any row exists
+                }
+            }
+
+            return exists;
         }
+
 
         // Validate if the email has a valid domain
         public bool ValidateEmail()
         {
-            return email.EndsWith("@student.uts.edu.au", StringComparison.OrdinalIgnoreCase) || email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase);
+            return Email.EndsWith("@student.uts.edu.au", StringComparison.OrdinalIgnoreCase) || Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase);
         }
 
         // Check if a year name is unique within the student's year list
-        public bool UniqueYear(string name)
+        public bool UniqueYear(int name)
         {
-            return yearList.Values.Any(year => year.name != name);
+            return !YearList.ContainsKey(name);
         }
 
+        // Get the list of courses for the student
         public List<string> GetCourseList()
         {
             List<string> courseList = new List<string>();
@@ -209,39 +250,47 @@ namespace Smartloop_Feedback
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT title FROM course WHERE studentId = @studentId", conn); 
-                cmd.Parameters.AddWithValue("@studentId", studentId); 
-
-                using (SqlDataReader reader = cmd.ExecuteReader()) 
+                string sql = "SELECT title FROM course WHERE studentId = @studentId"; // SQL query to fetch courses
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    while (reader.Read()) 
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        string title = reader.GetString(0);
-                        courseList.Add(title);
+                        while (reader.Read()) // Read each row
+                        {
+                            string title = reader.GetString(0); // Get the course title
+                            courseList.Add(title); // Add the course title to the list
+                        }
                     }
-                    return courseList;
                 }
             }
+
+            return courseList;
         }
 
+        // Find the course ID for a given course name
         public int FindCourseId(string courseName)
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                SqlCommand cmd = new SqlCommand("SELECT id FROM course WHERE studentId = @studentId AND title = @courseName", conn);
-                cmd.Parameters.AddWithValue("@studentId", studentId);
-                cmd.Parameters.AddWithValue("@courseName", courseName);
-
-                using (SqlDataReader reader = cmd.ExecuteReader())
+                string sql = "SELECT id FROM course WHERE studentId = @studentId AND title = @courseName"; // SQL query to find course ID
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    if (reader.Read()) // If a matching record is found
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@courseName", courseName); // Set the courseName parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
-                        return reader.GetInt32(0);
+                        if (reader.Read()) // If a matching record is found
+                        {
+                            return reader.GetInt32(0); // Return the course ID
+                        }
                     }
                 }
             }
-            return -1;
+            return -1; // Return -1 if no matching course is found
         }
     }
 }

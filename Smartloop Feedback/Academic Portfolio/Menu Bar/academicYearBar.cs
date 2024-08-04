@@ -13,9 +13,9 @@ namespace Smartloop_Feedback
 
         private int buttonCount = 0; // Counter for the number of buttons
         private Button[] buttons = new Button[5]; // Array to hold the year buttons
-        private Button[] allButtons;
+        private Button[] allButtons; // Array to hold all possible buttons
 
-        // Constructor for the academicYearBar form
+        // Constructor for the AcademicYearBar form
         public AcademicYearBar(MainForm form, Student student)
         {
             InitializeComponent(); // Initialize form components
@@ -30,11 +30,11 @@ namespace Smartloop_Feedback
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
 
             buttonCount = 0;
-            foreach (Year year in student.yearList.Values)
+            foreach (Year year in student.YearList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button for the current year
                 btn.Visible = true; // Make the button visible
-                btn.Text = year.name; // Set the button text to the year's name
+                btn.Text = year.Name.ToString(); // Set the button text to the year's name
                 buttons[buttonCount] = btn; // Store the button in the array
                 buttons[buttonCount].Click += YearButton_Click; // Attach the event handler to the button
 
@@ -48,44 +48,6 @@ namespace Smartloop_Feedback
             }
 
             UpdatePanel(); // Update the panel to reflect changes
-        }
-
-        // Event handler for the back button click
-        private void backBtn_Click(object sender, EventArgs e)
-        {
-            mainForm.MenuPannel(1); // Navigate to the previous menu panel
-        }
-
-        // Event handler for the add button click
-        private void addBtn_Click(object sender, EventArgs e)
-        {
-            using (var addYearForm = new AddYearForm(student)) // Open the add year form
-            {
-                if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
-                {
-                    string yearName = addYearForm.yearName; // Get the new year's name
-
-                    if (buttonCount < 5) // Ensure the button count is less than 5
-                    {
-                        Year year = new Year(yearName, student.studentId, addYearForm.semesterNames);
-                        student.yearList.Add(year.name, year); // Add the new year to the student's year list
-                        
-                        Button btn = allButtons[buttonCount];
-                        btn.Visible = true; // Make the new button visible
-                        btn.Text = yearName; // Set the new button's text
-                        btn.Click += YearButton_Click; // Attach the event handler to the button
-                        buttons[buttonCount] = btn;
-                        buttonCount++; // Increment the button count
-
-                        if (buttonCount == 5) // Hide the add button if the maximum number of buttons is reached
-                        {
-                            addBtn.Visible = false;
-                        }
-
-                        UpdatePanel(); // Update the panel to reflect changes
-                    }
-                }
-            }
         }
 
         // Update the panel by re-adding controls in the correct order
@@ -106,8 +68,34 @@ namespace Smartloop_Feedback
                 Controls.Add(addBtn);
                 addBtn.Dock = DockStyle.Top;
             }
+
             Controls.Add(backBtn); // Add the back button
             backBtn.Dock = DockStyle.Top;
+        }
+
+        // Event handler for the back button click
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.MenuPanel(1); // Navigate to the previous menu panel
+        }
+
+        // Event handler for the add button click
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            using (var addYearForm = new AddYearForm(student)) // Open the add year form
+            {
+                if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+                {
+                    int yearName = addYearForm.yearName; // Get the new year's name
+
+                    if (buttonCount < 5) // Ensure the button count is less than 5
+                    {
+                        Year year = new Year(yearName, student.StudentId, addYearForm.semesterNames);
+                        student.YearList.Add(year.Name, year); // Add the new year to the student's year list
+                        InitializeBar(); //Refresh the Bar
+                    }
+                }
+            }
         }
 
         // Event handler for any year button click, navigates to the corresponding year's panel
@@ -115,8 +103,8 @@ namespace Smartloop_Feedback
         {
             if (sender is Button clickedButton)
             {
-                mainForm.position[0] = clickedButton.Text; // Set the main form's position with the button text
-                mainForm.MenuPannel(2); // Navigate to the corresponding year's panel
+                mainForm.position[0] = Int32.Parse(clickedButton.Text); // Set the main form's position with the button text
+                mainForm.MenuPanel(2); // Navigate to the corresponding year's panel
             }
         }
     }

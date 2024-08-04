@@ -1,22 +1,18 @@
 ﻿using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
     public partial class AddAssessmentForm : Form
     {
-        private Course course;
-        private MainForm mainForm;
-        private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
+        private Course course; // Reference to the course object
+        private MainForm mainForm; // Reference to the main form
+        private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Track if TextBox has been clicked
 
         public AddAssessmentForm(Course course, MainForm mainForm)
         {
@@ -32,6 +28,7 @@ namespace Smartloop_Feedback.Forms
             textBoxClicked[canvasTb] = false;
         }
 
+        // Event handler for form load
         private void addAssessmentForm_Load(object sender, EventArgs e)
         {
             // Set initial visibility of panels
@@ -40,8 +37,10 @@ namespace Smartloop_Feedback.Forms
 
             // Configure the DataGridView for criteria
             ConfigureDataGridView();
+            DataGridColor(criteriaDgv);
         }
 
+        // Configure the DataGridView for criteria input
         private void ConfigureDataGridView()
         {
             // Set up the initial DataGridView column
@@ -53,12 +52,56 @@ namespace Smartloop_Feedback.Forms
             criteriaDgv.AllowUserToAddRows = true;
         }
 
+        // Apply custom color formatting to a DataGridView
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
+        }
+
+        // Event handler for cancel button click
         private void cancelBtn_Click(object sender, EventArgs e)
         {
             // Go back to the main panel
             mainForm.MainPannel(0);
         }
 
+        // Event handler for next button click
         private void nextBtn_Click(object sender, EventArgs e)
         {
             // Switch to the criteria panel
@@ -66,6 +109,7 @@ namespace Smartloop_Feedback.Forms
             panelCriteria.Visible = true;
         }
 
+        // Event handler for back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
             // Switch back to the details panel
@@ -73,6 +117,7 @@ namespace Smartloop_Feedback.Forms
             panelCriteria.Visible = false;
         }
 
+        // Event handler for adding a new column
         private void columnBtn_Click(object sender, EventArgs e)
         {
             int columnIndex = criteriaDgv.ColumnCount;
@@ -86,6 +131,7 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Add TextBox and Label for column header input
         private void AddColumnInputControls(int columnIndex)
         {
             // Define the size and position of the TextBox
@@ -94,13 +140,15 @@ namespace Smartloop_Feedback.Forms
             int gapBetweenControls = 5;
             int startY = (controlHeight + gapBetweenControls) * columnIndex;
 
-            TextBox txt = new TextBox();
-            txt.Name = "txtColumn" + columnIndex;
-            txt.Text = $"Click to change Column {columnIndex} Rating";
-            txt.Size = new System.Drawing.Size(textBoxWidth, controlHeight);
-            txt.Location = new System.Drawing.Point(10, startY);
-            txt.BackColor = Color.FromArgb(16, 34, 61);
-            txt.ForeColor = Color.FromArgb(193, 193, 193);
+            TextBox txt = new TextBox
+            {
+                Name = "txtColumn" + columnIndex,
+                Text = $"Click to change Column {columnIndex} Rating",
+                Size = new System.Drawing.Size(textBoxWidth, controlHeight),
+                Location = new System.Drawing.Point(10, startY),
+                BackColor = Color.FromArgb(16, 34, 61),
+                ForeColor = Color.FromArgb(193, 193, 193)
+            };
             toolTip1.SetToolTip(txt, "Please enter Rating for the column e.g HD, D, C, P");
             txt.Tag = columnIndex;
             txt.TextChanged += new EventHandler(ColumnTextBox_TextChanged);
@@ -117,9 +165,9 @@ namespace Smartloop_Feedback.Forms
             panelColumnInputs.AutoScroll = true;
         }
 
+        // Update the DataGridView column header text
         private void ColumnTextBox_TextChanged(object sender, EventArgs e)
         {
-            // Update the DataGridView column header text
             TextBox txt = sender as TextBox;
             if (txt != null)
             {
@@ -128,9 +176,9 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Clear the TextBox text on click
         private void ColumnTextBox_Click(object sender, EventArgs e)
         {
-            // Clear the TextBox text on click
             TextBox txt = sender as TextBox;
             if (txt != null)
             {
@@ -138,11 +186,30 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
+        // Event handler for submit button click
         private void submitBtn_Click(object sender, EventArgs e)
         {
+            // Validate before adding assessment
+            if (titleTb.Text == null || titleTb.Text == "Title" || descriptionTb.Text == null || descriptionTb.Text == "Description" || weightTb.Text == null || weightTb.Text == "Weight" || markTb.Text == null || markTb.Text == "Total Mark"|| canvasTb.Text == null || canvasTb.Text == "Canvas Link" || typeCb.Text == "Type of Assessment")
+            {
+                MessageBox.Show("Make sure all fields are filled out.",
+                                "Warning",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+            else if (course.WeightTotal(double.Parse(weightTb.Text)))
+            {
+                MessageBox.Show("Total weight for the course exceeds 100. Please enter a lower number for weight.",
+                                "Warning",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Warning);
+                return;
+            }
+
             // Add a new assessment to the course
-            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, 0, Int32.Parse(weightTb.Text), Int32.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.id, course.studentId);
-            course.assessmentList.Add(assessment.id, assessment);
+            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, typeCb.Text, dateP.Value.Date, 0, double.Parse(weightTb.Text), double.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.Id, course.StudentId);
+            course.AssessmentList.Add(assessment.Id, assessment);
 
             // Prepare column names for ratings
             List<string> columnNameList = new List<string>();
@@ -157,12 +224,12 @@ namespace Smartloop_Feedback.Forms
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.id, assessment.studentId);
-                course.assessmentList[assessment.id].criteriaList.Add(criteria);
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.Id, assessment.StudentId);
+                course.AssessmentList[assessment.Id].CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.assessmentList[assessment.id].criteriaList.Last().ratingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.id, assessment.studentId));
+                    course.AssessmentList[assessment.Id].CriteriaList.Last().RatingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, assessment.StudentId));
                 }
             }
 
@@ -170,9 +237,9 @@ namespace Smartloop_Feedback.Forms
             mainForm.MainPannel(0);
         }
 
+        // Event handler for TextBox enter event
         private void textBox_Enter(object sender, EventArgs e)
         {
-            // Handle the first click on TextBox to clear the text and change color
             TextBox textBox = sender as TextBox;
             if (!textBoxClicked[textBox])
             {
@@ -182,26 +249,30 @@ namespace Smartloop_Feedback.Forms
             textBox.ForeColor = Color.FromArgb(254, 0, 57);
         }
 
+        // Event handler to allow only numbers to be entered in the TextBox
         private void numberOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Allow only numbers to be entered in the TextBox
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }
         }
 
+        // Event handler for load button click
         private void loadBtn_Click(object sender, EventArgs e)
         {
             // Open file dialog to select CSV file
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*";
+            OpenFileDialog openFileDialog = new OpenFileDialog
+            {
+                Filter = "CSV files (*.csv)|*.csv|All files (*.*)|*.*"
+            };
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 LoadData(openFileDialog.FileName);
             }
         }
 
+        // Load data from a CSV file into the DataGridView
         private void LoadData(string filePath)
         {
             // Clear existing data and controls

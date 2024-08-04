@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Objects
@@ -16,7 +12,6 @@ namespace Smartloop_Feedback.Objects
         private Color textColor = Color.FromArgb(193, 193, 193);
         private Color borderColor = Color.FromArgb(254, 0, 57);
         private int borderSize = 0;
-
         private bool droppedDown = false;
         private Image calendarIcon = Properties.Resources.calendar;
         private RectangleF iconButtonArea;
@@ -26,51 +21,51 @@ namespace Smartloop_Feedback.Objects
         // Properties
         public Color SkinColor
         {
-            get { return skinColor; }
+            get => skinColor;
             set
             {
                 skinColor = value;
                 calendarIcon = Properties.Resources.calendar;
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         public Color TextColor
         {
-            get { return textColor; }
+            get => textColor;
             set
             {
                 textColor = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         public Color BorderColor
         {
-            get { return borderColor; }
+            get => borderColor;
             set
             {
                 borderColor = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         public int BorderSize
         {
-            get { return borderSize; }
+            get => borderSize;
             set
             {
                 borderSize = value;
-                this.Invalidate();
+                Invalidate();
             }
         }
 
         // Constructor
         public DatePicker()
         {
-            this.SetStyle(ControlStyles.UserPaint, true);
-            this.MinimumSize = new Size(0, 35);
-            this.Font = new Font(this.Font.Name, 9.5F);
+            SetStyle(ControlStyles.UserPaint, true);
+            MinimumSize = new Size(0, 35);
+            Font = new Font(Font.Name, 9.5F);
         }
 
         // Overridden methods
@@ -89,19 +84,19 @@ namespace Smartloop_Feedback.Objects
         protected override void OnKeyPress(KeyPressEventArgs e)
         {
             base.OnKeyPress(e);
-            e.Handled = true;
+            e.Handled = true; // Disable typing in the DatePicker
         }
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            using (Graphics graphics = this.CreateGraphics())
+            using (Graphics graphics = CreateGraphics())
             using (Pen penBorder = new Pen(borderColor, borderSize))
             using (SolidBrush skinBrush = new SolidBrush(skinColor))
             using (SolidBrush openIconBrush = new SolidBrush(Color.FromArgb(50, 64, 64, 64)))
             using (SolidBrush textBrush = new SolidBrush(textColor))
             using (StringFormat textFormat = new StringFormat())
             {
-                RectangleF clientArea = new RectangleF(0, 0, this.Width - 0.5F, this.Height - 0.5F);
+                RectangleF clientArea = new RectangleF(0, 0, Width - 0.5F, Height - 0.5F);
                 RectangleF iconArea = new RectangleF(clientArea.Width - calendarIconWidth, 0, calendarIconWidth, clientArea.Height);
                 penBorder.Alignment = PenAlignment.Inset;
                 textFormat.LineAlignment = StringAlignment.Center;
@@ -109,16 +104,16 @@ namespace Smartloop_Feedback.Objects
                 // Draw surface
                 graphics.FillRectangle(skinBrush, clientArea);
                 // Draw text
-                graphics.DrawString("   " + this.Text, this.Font, textBrush, clientArea, textFormat);
+                graphics.DrawString("   " + Text, Font, textBrush, clientArea, textFormat);
                 // Draw open calendar icon highlight
-                if (droppedDown == true) graphics.FillRectangle(openIconBrush, iconArea);
-                // Draw border 
+                if (droppedDown) graphics.FillRectangle(openIconBrush, iconArea);
+                // Draw border
                 if (borderSize >= 1) graphics.DrawRectangle(penBorder, clientArea.X, clientArea.Y, clientArea.Width, clientArea.Height);
 
                 // Calculate the rectangle to fit the calendar icon within the icon button area
-                float iconX = this.Width - calendarIconWidth;
-                float iconY = (this.Height - calendarIcon.Height) / 2;
-                RectangleF iconRectangle = new RectangleF(iconX, iconY, calendarIconWidth - 9, this.Height - iconY * 2);
+                float iconX = Width - calendarIconWidth;
+                float iconY = (Height - calendarIcon.Height) / 2;
+                RectangleF iconRectangle = new RectangleF(iconX, iconY, calendarIconWidth - 9, Height - iconY * 2);
 
                 // Draw icon
                 graphics.DrawImage(calendarIcon, iconRectangle);
@@ -129,24 +124,20 @@ namespace Smartloop_Feedback.Objects
         {
             base.OnHandleCreated(e);
             int iconWidth = GetIconButtonWidth();
-            iconButtonArea = new RectangleF(this.Width - iconWidth, 0, iconWidth, this.Height);
+            iconButtonArea = new RectangleF(Width - iconWidth, 0, iconWidth, Height);
         }
 
         protected override void OnMouseMove(MouseEventArgs e)
         {
             base.OnMouseMove(e);
-            if (iconButtonArea.Contains(e.Location))
-                this.Cursor = Cursors.Hand;
-            else this.Cursor = Cursors.Default;
+            Cursor = iconButtonArea.Contains(e.Location) ? Cursors.Hand : Cursors.Default;
         }
 
         // Private methods
         private int GetIconButtonWidth()
         {
-            int textWidh = TextRenderer.MeasureText(this.Text, this.Font).Width;
-            if (textWidh <= this.Width - (calendarIconWidth + 20))
-                return calendarIconWidth;
-            else return arrowIconWidth;
+            int textWidth = TextRenderer.MeasureText(Text, Font).Width;
+            return textWidth <= Width - (calendarIconWidth + 20) ? calendarIconWidth : arrowIconWidth;
         }
     }
 }

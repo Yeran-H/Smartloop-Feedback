@@ -7,44 +7,37 @@ namespace Smartloop_Feedback.Objects
 {
     public class Rating
     {
-        private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
         // Public properties for rating details
-        public int id { get; set; }
-        public string description { get; set; }
-        public string grade { get; set; }
-        public int criteriaId { get; set; }
-        public int studentId { get; set; }
+        public int Id { get; private set; } // Rating ID
+        public string Description { get; set; } // Description of the rating
+        public string Grade { get; set; } // Grade of the rating
+        public int CriteriaId { get; set; } // ID of the criteria associated with the rating
+        public int StudentId { get; set; } // ID of the student associated with the rating
 
         // Constructor to initialize a Rating object
         public Rating(int id, string description, string grade, int criteriaId, int studentId)
         {
-            this.id = id;
-            this.description = description;
-            this.grade = grade;
-            this.criteriaId = criteriaId;
-            this.studentId = studentId;
+            Id = id;
+            Description = description;
+            Grade = grade;
+            CriteriaId = criteriaId;
+            StudentId = studentId;
         }
 
         // Constructor to initialize a Rating object and add it to the database
         public Rating(string description, string grade, int criteriaId, int studentId)
         {
-            this.description = description;
-            this.grade = grade;
-            this.criteriaId = criteriaId;
-            this.studentId = studentId;
+            Description = description;
+            Grade = grade;
+            CriteriaId = criteriaId;
+            StudentId = studentId;
             AddRatingToDatabase(); // Add the rating to the database
         }
 
-        // Constructor to initialize a Rating object without interacting with the database
-        public Rating(string description, string grade)
-        {
-            this.description = description;
-            this.grade = grade;
-        }
-
         // Add the rating to the database and get the generated ID
-        public void AddRatingToDatabase()
+        private void AddRatingToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -53,29 +46,30 @@ namespace Smartloop_Feedback.Objects
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@description", description); // Set the description parameter
-                    cmd.Parameters.AddWithValue("@grade", grade); // Set the grade parameter
-                    cmd.Parameters.AddWithValue("@criteriaId", criteriaId); // Set the criteriaId parameter
-                    cmd.Parameters.AddWithValue("@studentId", studentId); // Set the studentId parameter
-                    id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@grade", Grade); // Set the grade parameter
+                    cmd.Parameters.AddWithValue("@criteriaId", CriteriaId); // Set the criteriaId parameter
+                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
 
+        // Delete the rating from the database
         public void DeleteRatingFromDatabase()
         {
-            using (SqlConnection conn = new SqlConnection(connStr))
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
-                conn.Open();
+                conn.Open(); // Open the connection
 
                 string deleteQuery = @"
                     DELETE FROM rating
                     WHERE id = @id";
 
-                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn)) // Create a command
                 {
-                    // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@id", id);
+                    // Add the parameter for rating ID
+                    cmd.Parameters.AddWithValue("@id", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();

@@ -129,7 +129,7 @@ namespace Smartloop_Feedback
         {
             // Create a new Course object with details from the form
             course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, false, canvasTb.Text);
-            if (!string.IsNullOrEmpty(course.title) || !string.IsNullOrEmpty(course.description) || !string.IsNullOrEmpty(course.canvasLink))
+            if (!string.IsNullOrEmpty(course.Title) || !string.IsNullOrEmpty(course.Description) || !string.IsNullOrEmpty(course.CanvasLink))
             {
                 this.DialogResult = DialogResult.OK;
                 this.Close(); // Close the form if all fields are valid
@@ -194,6 +194,11 @@ namespace Smartloop_Feedback
                 nameTb.Text = data[0];
                 creditTb.Text = data[1];
                 descriptionTb.Text = data[2]; // Populate form fields with fetched data
+
+                textBoxClicked[codeTb] = true;
+                textBoxClicked[nameTb] = true;
+                textBoxClicked[creditTb] = true;
+                textBoxClicked[descriptionTb] = true;
             }
         }
 

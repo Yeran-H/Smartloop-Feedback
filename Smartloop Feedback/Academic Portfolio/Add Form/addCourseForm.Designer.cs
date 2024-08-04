@@ -38,13 +38,13 @@
             this.creditPl = new System.Windows.Forms.Panel();
             this.creditTb = new System.Windows.Forms.TextBox();
             this.descriptionPl = new System.Windows.Forms.Panel();
-            this.descriptionTb = new System.Windows.Forms.TextBox();
             this.canvasPl = new System.Windows.Forms.Panel();
             this.canvasTb = new System.Windows.Forms.TextBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headerPanel = new System.Windows.Forms.Panel();
             this.formTitle = new System.Windows.Forms.Label();
             this.exitPb = new System.Windows.Forms.PictureBox();
+            this.descriptionTb = new System.Windows.Forms.TextBox();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
@@ -157,21 +157,6 @@
             this.descriptionPl.Size = new System.Drawing.Size(206, 1);
             this.descriptionPl.TabIndex = 23;
             // 
-            // descriptionTb
-            // 
-            this.descriptionTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.descriptionTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.descriptionTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.descriptionTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.descriptionTb.HideSelection = false;
-            this.descriptionTb.Location = new System.Drawing.Point(14, 140);
-            this.descriptionTb.Multiline = true;
-            this.descriptionTb.Name = "descriptionTb";
-            this.descriptionTb.Size = new System.Drawing.Size(206, 85);
-            this.descriptionTb.TabIndex = 4;
-            this.descriptionTb.Text = "Description";
-            this.toolTip1.SetToolTip(this.descriptionTb, "Please Enter Course Description");
-            // 
             // canvasPl
             // 
             this.canvasPl.BackColor = System.Drawing.Color.White;
@@ -227,7 +212,23 @@
             this.exitPb.TabStop = false;
             this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
-            // addCourseForm
+            // descriptionTb
+            // 
+            this.descriptionTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.descriptionTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.descriptionTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.descriptionTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.descriptionTb.HideSelection = false;
+            this.descriptionTb.Location = new System.Drawing.Point(14, 140);
+            this.descriptionTb.Multiline = true;
+            this.descriptionTb.Name = "descriptionTb";
+            this.descriptionTb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.descriptionTb.Size = new System.Drawing.Size(206, 85);
+            this.descriptionTb.TabIndex = 4;
+            this.descriptionTb.Text = "Description";
+            this.toolTip1.SetToolTip(this.descriptionTb, "Please Enter Course Description");
+            // 
+            // AddCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -247,7 +248,7 @@
             this.Controls.Add(this.saveBtn);
             this.Controls.Add(this.codeTb);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "addCourseForm";
+            this.Name = "AddCourseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "addSubjectForm";
             this.headerPanel.ResumeLayout(false);
@@ -268,12 +269,12 @@
         private System.Windows.Forms.Panel creditPl;
         private System.Windows.Forms.TextBox creditTb;
         private System.Windows.Forms.Panel descriptionPl;
-        private System.Windows.Forms.TextBox descriptionTb;
         private System.Windows.Forms.Panel canvasPl;
         private System.Windows.Forms.TextBox canvasTb;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.PictureBox exitPb;
+        private System.Windows.Forms.TextBox descriptionTb;
     }
 }

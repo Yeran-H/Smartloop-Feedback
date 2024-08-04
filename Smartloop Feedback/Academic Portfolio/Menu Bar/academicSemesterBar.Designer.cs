@@ -28,11 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.springBtn = new System.Windows.Forms.Button();
             this.winterBtn = new System.Windows.Forms.Button();
             this.autumnBtn = new System.Windows.Forms.Button();
             this.summerBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // springBtn
@@ -49,6 +51,7 @@
             this.springBtn.TabIndex = 8;
             this.springBtn.Text = "Spring";
             this.springBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.springBtn, "Click on Semester");
             this.springBtn.UseVisualStyleBackColor = true;
             this.springBtn.Visible = false;
             this.springBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
@@ -67,6 +70,7 @@
             this.winterBtn.TabIndex = 7;
             this.winterBtn.Text = "Winter";
             this.winterBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.winterBtn, "Click on Semester");
             this.winterBtn.UseVisualStyleBackColor = true;
             this.winterBtn.Visible = false;
             this.winterBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
@@ -85,6 +89,7 @@
             this.autumnBtn.TabIndex = 9;
             this.autumnBtn.Text = "Autumn";
             this.autumnBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.autumnBtn, "Click on Semester");
             this.autumnBtn.UseVisualStyleBackColor = true;
             this.autumnBtn.Visible = false;
             this.autumnBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
@@ -103,6 +108,7 @@
             this.summerBtn.TabIndex = 10;
             this.summerBtn.Text = "Summer";
             this.summerBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.summerBtn, "Click on Semester");
             this.summerBtn.UseVisualStyleBackColor = true;
             this.summerBtn.Visible = false;
             this.summerBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
@@ -121,10 +127,11 @@
             this.backBtn.TabIndex = 6;
             this.backBtn.Text = "Back";
             this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.toolTip1.SetToolTip(this.backBtn, "Go Back");
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
-            // academicSemesterBar
+            // AcademicSemesterBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -136,7 +143,7 @@
             this.Controls.Add(this.summerBtn);
             this.Controls.Add(this.backBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "academicSemesterBar";
+            this.Name = "AcademicSemesterBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "academicSemesterBar";
             this.ResumeLayout(false);
@@ -150,5 +157,6 @@
         private System.Windows.Forms.Button autumnBtn;
         private System.Windows.Forms.Button summerBtn;
         private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }

@@ -1,21 +1,17 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Setting
 {
     public partial class EditAccountForm : Form
     {
-        public Student student;
-        public MainForm mainForm;
+        public Student student; // Reference to the student object
+        public MainForm mainForm; // Reference to the main form
+
+        // Constructor for EditAccountForm, initializes the form with the student and main form references
         public EditAccountForm(Student student, MainForm mainForm)
         {
             InitializeComponent();
@@ -23,21 +19,26 @@ namespace Smartloop_Feedback.Setting
             this.mainForm = mainForm;
         }
 
+        // Event handler for form load
         private void EditAccountForm_Load(object sender, EventArgs e)
         {
-            nameTb.Text = student.name;
-            emailTb.Text = student.email;
-            passwordTb.Text = student.password;
-            degreeTb.Text = student.degree;
-            if (student.profileImage != null)
+            // Populate the form fields with the student's current information
+            nameTb.Text = student.Name;
+            emailTb.Text = student.Email;
+            passwordTb.Text = student.Password;
+            degreeTb.Text = student.Degree;
+
+            // If the student has a profile image, display it
+            if (student.ProfileImage != null)
             {
-                using (var ms = new System.IO.MemoryStream(student.profileImage))
+                using (var ms = new MemoryStream(student.ProfileImage))
                 {
-                    profilePb.Image = System.Drawing.Image.FromStream(ms);
+                    profilePb.Image = Image.FromStream(ms);
                 }
             }
         }
 
+        // Event handler for profile button click to select a new profile image
         private void profileBtn_Click(object sender, EventArgs e)
         {
             using (OpenFileDialog ofd = new OpenFileDialog())
@@ -50,6 +51,7 @@ namespace Smartloop_Feedback.Setting
             }
         }
 
+        // Event handler for update button click to update student information
         private void updateBtn_Click(object sender, EventArgs e)
         {
             string name = nameTb.Text;
@@ -71,7 +73,7 @@ namespace Smartloop_Feedback.Setting
                 }
                 catch (ExternalException)
                 {
-                    profileImage = student.profileImage;
+                    profileImage = student.ProfileImage;
                 }
             }
 
@@ -91,11 +93,14 @@ namespace Smartloop_Feedback.Setting
                 return;
             }
 
+            // Update the student information in the database
             student.UpdateToDatabase(newStudent);
 
+            // Navigate to the main panel
             mainForm.MainPannel(6);
         }
 
+        // Event handler for delete button click to delete the student record
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
@@ -107,9 +112,11 @@ namespace Smartloop_Feedback.Setting
 
             if (result == DialogResult.Yes)
             {
+                // Delete the student record from the database
                 student.DeleteStudentFromDatabase();
             }
 
+            // Navigate to the main panel
             mainForm.MainPannel(3);
         }
     }
