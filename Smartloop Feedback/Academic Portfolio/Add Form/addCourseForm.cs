@@ -194,6 +194,11 @@ namespace Smartloop_Feedback
                 nameTb.Text = data[0];
                 creditTb.Text = data[1];
                 descriptionTb.Text = data[2]; // Populate form fields with fetched data
+
+                textBoxClicked[codeTb] = true;
+                textBoxClicked[nameTb] = true;
+                textBoxClicked[creditTb] = true;
+                textBoxClicked[descriptionTb] = true;
             }
         }
 

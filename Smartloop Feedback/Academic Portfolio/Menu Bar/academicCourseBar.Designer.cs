@@ -117,7 +117,7 @@
             this.addBtn.Image = global::Smartloop_Feedback.Properties.Resources.add;
             this.addBtn.Location = new System.Drawing.Point(0, 42);
             this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(170, 42);
+            this.addBtn.Size = new System.Drawing.Size(186, 42);
             this.addBtn.TabIndex = 8;
             this.addBtn.Text = "Add";
             this.addBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -134,7 +134,7 @@
             this.backBtn.Image = global::Smartloop_Feedback.Properties.Resources.back;
             this.backBtn.Location = new System.Drawing.Point(0, 0);
             this.backBtn.Name = "backBtn";
-            this.backBtn.Size = new System.Drawing.Size(170, 42);
+            this.backBtn.Size = new System.Drawing.Size(186, 42);
             this.backBtn.TabIndex = 7;
             this.backBtn.Text = "Back";
             this.backBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
@@ -161,27 +161,27 @@
             // navPl
             // 
             this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(0, 87);
+            this.navPl.Location = new System.Drawing.Point(12, 0);
             this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.Size = new System.Drawing.Size(1, 248);
             this.navPl.TabIndex = 14;
             // 
-            // academicCourseBar
+            // AcademicCourseBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(170, 255);
+            this.ClientSize = new System.Drawing.Size(186, 294);
             this.Controls.Add(this.navPl);
+            this.Controls.Add(this.addBtn);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.secondBtn);
             this.Controls.Add(this.oneBtn);
             this.Controls.Add(this.thirdBtn);
             this.Controls.Add(this.fourthBtn);
-            this.Controls.Add(this.addBtn);
-            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.fifthBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "academicCourseBar";
+            this.Name = "AcademicCourseBar";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "academicSubjectBar";
             this.ResumeLayout(false);

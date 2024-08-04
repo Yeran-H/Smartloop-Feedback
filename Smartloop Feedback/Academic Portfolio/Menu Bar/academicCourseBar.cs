@@ -20,13 +20,14 @@ namespace Smartloop_Feedback
         public AcademicCourseBar(MainForm form, Semester semester)
         {
             InitializeComponent(); // Initialize form components
-            navPl.Height = backBtn.Height;
-            navPl.Top = backBtn.Top;
-            navPl.Left = backBtn.Left;
 
             mainForm = form; // Set the main form reference
             this.semester = semester; // Set the semester reference
             InitializeBar(); // Initialize the course bar
+
+            navPl.Height = backBtn.Height;
+            navPl.Top = backBtn.Top;
+            navPl.Left = backBtn.Left - navPl.Width; // Adjust the position
         }
 
         // Initialize the course bar with course buttons based on the number of courses
@@ -92,18 +93,7 @@ namespace Smartloop_Feedback
                             return;
                         }
 
-                        Button btn = allButtons[buttonCount];
-                        btn.Visible = true;
-                        btn.Text = course.Code.ToString();
-                        buttons[buttonCount] = btn;
-                        buttonCount++;
-
-                        if (buttonCount == 5)
-                        {
-                            addBtn.Visible = false; // Hide the add button if the maximum number of buttons is reached
-                        }
-
-                        UpdatePanel(); // Update the panel to reflect changes
+                        InitializeBar(); // Update the panel to reflect changes
                     }
                 }
             }
@@ -142,9 +132,9 @@ namespace Smartloop_Feedback
                 mainForm.MainPannel(0); // Navigate to the corresponding year's panel
             }
 
-            navPl.Height = clickedButton.Height; // Adjust the navigation panel to the clicked button
+            navPl.Height = clickedButton.Height;
             navPl.Top = clickedButton.Top;
-            navPl.Left = clickedButton.Left;
+            navPl.Left = clickedButton.Left - navPl.Width;
             clickedButton.BackColor = Color.FromArgb(16, 34, 61); // Change the button color
         }
 

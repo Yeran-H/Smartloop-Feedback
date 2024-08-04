@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddYearForm));
             this.saveBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
@@ -38,6 +39,7 @@
             this.headerPanel = new System.Windows.Forms.Panel();
             this.formTitle = new System.Windows.Forms.Label();
             this.exitPb = new System.Windows.Forms.PictureBox();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
@@ -54,6 +56,7 @@
             this.saveBtn.Size = new System.Drawing.Size(211, 55);
             this.saveBtn.TabIndex = 8;
             this.saveBtn.Text = "Save Year";
+            this.toolTip1.SetToolTip(this.saveBtn, "Save Year");
             this.saveBtn.UseVisualStyleBackColor = false;
             this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
@@ -69,6 +72,7 @@
             this.cancelBtn.Size = new System.Drawing.Size(211, 55);
             this.cancelBtn.TabIndex = 9;
             this.cancelBtn.Text = "Cancel";
+            this.toolTip1.SetToolTip(this.cancelBtn, "Go Back");
             this.cancelBtn.UseVisualStyleBackColor = false;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
             // 
@@ -85,6 +89,7 @@
             this.yearTb.TabIndex = 1;
             this.yearTb.TabStop = false;
             this.yearTb.Text = "Eg. 2024";
+            this.toolTip1.SetToolTip(this.yearTb, "Enter the Year");
             this.yearTb.Click += new System.EventHandler(this.yearTb_Click);
             this.yearTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.yearTb_KeyPress);
             // 
@@ -112,6 +117,7 @@
             this.semesterCb.Name = "semesterCb";
             this.semesterCb.Size = new System.Drawing.Size(146, 104);
             this.semesterCb.TabIndex = 11;
+            this.toolTip1.SetToolTip(this.semesterCb, "Select Semester");
             // 
             // label1
             // 
@@ -156,6 +162,7 @@
             this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.exitPb.TabIndex = 9;
             this.exitPb.TabStop = false;
+            this.toolTip1.SetToolTip(this.exitPb, "Go Back");
             this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
             // AddYearForm
@@ -195,5 +202,6 @@
         private System.Windows.Forms.Panel headerPanel;
         private System.Windows.Forms.Label formTitle;
         private System.Windows.Forms.PictureBox exitPb;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
