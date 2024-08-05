@@ -143,7 +143,7 @@ namespace Smartloop_Feedback
                 descriptionRb.Enabled = false;
                 checklistCb.Enabled = false;
                 itemBtn.Enabled = false;
-                submissionBtn.Enabled = false;
+                attemptBtn.Enabled = false;
             }
         }
 
@@ -243,6 +243,13 @@ namespace Smartloop_Feedback
         {
             panelDetails.Visible = false;
             panelCriteria.Visible = true;
+        }
+
+        private void attemptBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.MainPannel(10);
+
+            //Load DGv
         }
     }
 }

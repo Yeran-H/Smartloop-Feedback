@@ -15,6 +15,7 @@ using Smartloop_Feedback.Results;
 using Smartloop_Feedback.Dashboard;
 using Smartloop_Feedback.Setting;
 using Smartloop_Feedback.Setting.Bar;
+using Smartloop_Feedback.Academic_Portfolio.AI;
 
 namespace Smartloop_Feedback
 {
@@ -306,6 +307,13 @@ namespace Smartloop_Feedback
                     assessmentForm1.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(assessmentForm1);
                     assessmentForm1.Show();
+                    break;
+                case 10:
+                    //this.formLoaderPl.Controls.Clear();
+                    //AIForm aIForm = new AIForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    //aIForm.FormBorderStyle = FormBorderStyle.None;
+                    //this.formLoaderPl.Controls.Add(aIForm);
+                    //aIForm.Show();
                     break;
             }
         }
