@@ -41,7 +41,7 @@
             this.backBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.rubricBtn = new System.Windows.Forms.Button();
-            this.submissionBtn = new System.Windows.Forms.Button();
+            this.attemptBtn = new System.Windows.Forms.Button();
             this.finaliseCb = new System.Windows.Forms.CheckBox();
             this.panelDetails = new System.Windows.Forms.Panel();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
@@ -206,19 +206,20 @@
             this.rubricBtn.UseVisualStyleBackColor = false;
             this.rubricBtn.Click += new System.EventHandler(this.rubricBtn_Click);
             // 
-            // submissionBtn
+            // attemptBtn
             // 
-            this.submissionBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.submissionBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.submissionBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.submissionBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.submissionBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.submissionBtn.Location = new System.Drawing.Point(238, 336);
-            this.submissionBtn.Name = "submissionBtn";
-            this.submissionBtn.Size = new System.Drawing.Size(141, 52);
-            this.submissionBtn.TabIndex = 38;
-            this.submissionBtn.Text = "Add New Attempt";
-            this.submissionBtn.UseVisualStyleBackColor = false;
+            this.attemptBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.attemptBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.attemptBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.attemptBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.attemptBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.attemptBtn.Location = new System.Drawing.Point(238, 336);
+            this.attemptBtn.Name = "attemptBtn";
+            this.attemptBtn.Size = new System.Drawing.Size(141, 52);
+            this.attemptBtn.TabIndex = 38;
+            this.attemptBtn.Text = "Add New Attempt";
+            this.attemptBtn.UseVisualStyleBackColor = false;
+            this.attemptBtn.Click += new System.EventHandler(this.attemptBtn_Click);
             // 
             // finaliseCb
             // 
@@ -237,7 +238,7 @@
             // 
             this.panelDetails.Controls.Add(this.dataGridView1);
             this.panelDetails.Controls.Add(this.finaliseCb);
-            this.panelDetails.Controls.Add(this.submissionBtn);
+            this.panelDetails.Controls.Add(this.attemptBtn);
             this.panelDetails.Controls.Add(this.rubricBtn);
             this.panelDetails.Controls.Add(this.canvasBtn);
             this.panelDetails.Controls.Add(this.backBtn);
@@ -363,7 +364,7 @@
         private System.Windows.Forms.Button backBtn;
         private System.Windows.Forms.Button canvasBtn;
         private System.Windows.Forms.Button rubricBtn;
-        private System.Windows.Forms.Button submissionBtn;
+        private System.Windows.Forms.Button attemptBtn;
         private System.Windows.Forms.CheckBox finaliseCb;
         private System.Windows.Forms.Panel panelDetails;
         private System.Windows.Forms.Panel panelCriteria;
