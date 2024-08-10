@@ -24,15 +24,10 @@
             this.lblRubric = new System.Windows.Forms.Label();
             this.txtGrade = new System.Windows.Forms.TextBox();
             this.txtFeedback = new System.Windows.Forms.TextBox();
-            this.txtTips = new System.Windows.Forms.TextBox();
-            this.txtUserQuestion = new System.Windows.Forms.TextBox();
-            this.txtAIResponse = new System.Windows.Forms.TextBox();
-            this.btnSendQuestion = new System.Windows.Forms.Button();
+            this.txtnextStep = new System.Windows.Forms.TextBox();
             this.lblGrade = new System.Windows.Forms.Label();
             this.lblFeedback = new System.Windows.Forms.Label();
             this.lblTips = new System.Windows.Forms.Label();
-            this.lblUserQuestion = new System.Windows.Forms.Label();
-            this.lblAIResponse = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btnSelectFile
@@ -92,7 +87,7 @@
             this.lblRubric.AutoSize = true;
             this.lblRubric.Location = new System.Drawing.Point(12, 133);
             this.lblRubric.Name = "lblRubric";
-            this.lblRubric.Size = new System.Drawing.Size(37, 13);
+            this.lblRubric.Size = new System.Drawing.Size(38, 13);
             this.lblRubric.TabIndex = 6;
             this.lblRubric.Text = "Rubric";
             // 
@@ -112,39 +107,13 @@
             this.txtFeedback.Size = new System.Drawing.Size(379, 60);
             this.txtFeedback.TabIndex = 8;
             // 
-            // txtTips
+            // txtnextStep
             // 
-            this.txtTips.Location = new System.Drawing.Point(93, 350);
-            this.txtTips.Multiline = true;
-            this.txtTips.Name = "txtTips";
-            this.txtTips.Size = new System.Drawing.Size(379, 60);
-            this.txtTips.TabIndex = 9;
-            // 
-            // txtUserQuestion
-            // 
-            this.txtUserQuestion.Location = new System.Drawing.Point(93, 430);
-            this.txtUserQuestion.Multiline = true;
-            this.txtUserQuestion.Name = "txtUserQuestion";
-            this.txtUserQuestion.Size = new System.Drawing.Size(379, 40);
-            this.txtUserQuestion.TabIndex = 10;
-            // 
-            // txtAIResponse
-            // 
-            this.txtAIResponse.Location = new System.Drawing.Point(93, 490);
-            this.txtAIResponse.Multiline = true;
-            this.txtAIResponse.Name = "txtAIResponse";
-            this.txtAIResponse.Size = new System.Drawing.Size(379, 60);
-            this.txtAIResponse.TabIndex = 11;
-            // 
-            // btnSendQuestion
-            // 
-            this.btnSendQuestion.Location = new System.Drawing.Point(478, 430);
-            this.btnSendQuestion.Name = "btnSendQuestion";
-            this.btnSendQuestion.Size = new System.Drawing.Size(75, 23);
-            this.btnSendQuestion.TabIndex = 12;
-            this.btnSendQuestion.Text = "Send";
-            this.btnSendQuestion.UseVisualStyleBackColor = true;
-            this.btnSendQuestion.Click += new System.EventHandler(this.btnSendQuestion_Click);
+            this.txtnextStep.Location = new System.Drawing.Point(93, 350);
+            this.txtnextStep.Multiline = true;
+            this.txtnextStep.Name = "txtnextStep";
+            this.txtnextStep.Size = new System.Drawing.Size(379, 60);
+            this.txtnextStep.TabIndex = 9;
             // 
             // lblGrade
             // 
@@ -169,42 +138,19 @@
             this.lblTips.AutoSize = true;
             this.lblTips.Location = new System.Drawing.Point(12, 353);
             this.lblTips.Name = "lblTips";
-            this.lblTips.Size = new System.Drawing.Size(26, 13);
+            this.lblTips.Size = new System.Drawing.Size(54, 13);
             this.lblTips.TabIndex = 15;
-            this.lblTips.Text = "Tips";
-            // 
-            // lblUserQuestion
-            // 
-            this.lblUserQuestion.AutoSize = true;
-            this.lblUserQuestion.Location = new System.Drawing.Point(12, 433);
-            this.lblUserQuestion.Name = "lblUserQuestion";
-            this.lblUserQuestion.Size = new System.Drawing.Size(75, 13);
-            this.lblUserQuestion.TabIndex = 16;
-            this.lblUserQuestion.Text = "Your Question";
-            // 
-            // lblAIResponse
-            // 
-            this.lblAIResponse.AutoSize = true;
-            this.lblAIResponse.Location = new System.Drawing.Point(12, 493);
-            this.lblAIResponse.Name = "lblAIResponse";
-            this.lblAIResponse.Size = new System.Drawing.Size(70, 13);
-            this.lblAIResponse.TabIndex = 17;
-            this.lblAIResponse.Text = "AI Response";
+            this.lblTips.Text = "Next Step";
             // 
             // PdfReadeerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(565, 570);
-            this.Controls.Add(this.lblAIResponse);
-            this.Controls.Add(this.lblUserQuestion);
+            this.ClientSize = new System.Drawing.Size(565, 440);
             this.Controls.Add(this.lblTips);
             this.Controls.Add(this.lblFeedback);
             this.Controls.Add(this.lblGrade);
-            this.Controls.Add(this.btnSendQuestion);
-            this.Controls.Add(this.txtAIResponse);
-            this.Controls.Add(this.txtUserQuestion);
-            this.Controls.Add(this.txtTips);
+            this.Controls.Add(this.txtnextStep);
             this.Controls.Add(this.txtFeedback);
             this.Controls.Add(this.txtGrade);
             this.Controls.Add(this.lblRubric);
@@ -218,6 +164,7 @@
             this.Text = "PdfReadeerForm";
             this.ResumeLayout(false);
             this.PerformLayout();
+
         }
 
         private System.Windows.Forms.Button btnUploadFile;
@@ -229,14 +176,9 @@
         private System.Windows.Forms.Label lblRubric;
         private System.Windows.Forms.TextBox txtGrade;
         private System.Windows.Forms.TextBox txtFeedback;
-        private System.Windows.Forms.TextBox txtTips;
-        private System.Windows.Forms.TextBox txtUserQuestion;
-        private System.Windows.Forms.TextBox txtAIResponse;
-        private System.Windows.Forms.Button btnSendQuestion;
+        private System.Windows.Forms.TextBox txtnextStep;
         private System.Windows.Forms.Label lblGrade;
         private System.Windows.Forms.Label lblFeedback;
         private System.Windows.Forms.Label lblTips;
-        private System.Windows.Forms.Label lblUserQuestion;
-        private System.Windows.Forms.Label lblAIResponse;
     }
 }

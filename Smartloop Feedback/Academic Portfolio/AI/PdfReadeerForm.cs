@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Configuration;
 using System.IO;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Newtonsoft.Json.Linq;
+using iTextSharp.text.pdf;
+using iTextSharp.text.pdf.parser;
+using Newtonsoft.Json;
 using OpenAI_API;
 using OpenAI_API.Chat;
 
@@ -29,6 +29,8 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
         private void btnSelectFile_Click(object sender, EventArgs e)
         {
             OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+
             if (openFileDialog.ShowDialog() == DialogResult.OK)
             {
                 txtFilePath.Text = openFileDialog.FileName;
@@ -37,322 +39,115 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private async void btnUploadFile_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txtFilePath.Text))
-            {
-                string fileId = await UploadFile(txtFilePath.Text);
-                if (!string.IsNullOrEmpty(fileId))
-                {
-                    await ProvideFeedback(fileId, txtComments.Text, txtRubric.Text);
-                }
-            }
-            else
-            {
-                MessageBox.Show("Please select a file first.");
-            }
-        }
+            string assessmentDocument = ExtractTextFromPdf(txtFilePath.Text);
+            string teacherComments = txtComments.Text;
+            string rubric = txtRubric.Text;
 
-        private async Task<string> UploadFile(string filePath)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-                MultipartFormDataContent form = new MultipartFormDataContent();
-                ByteArrayContent fileContent = new ByteArrayContent(System.IO.File.ReadAllBytes(filePath));
-                fileContent.Headers.ContentType = MediaTypeHeaderValue.Parse("application/pdf");
-                form.Add(fileContent, "file", Path.GetFileName(filePath));
-                form.Add(new StringContent("fine-tune"), "purpose");
-
-                try
-                {
-                    HttpResponseMessage response = await client.PostAsync("https://api.openai.com/v1/files", form);
-                    string responseContent = await response.Content.ReadAsStringAsync();
-                    if (response.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show("File uploaded successfully.");
-                        var responseJson = JObject.Parse(responseContent);
-                        return responseJson["id"]?.ToString();
-                    }
-                    else
-                    {
-                        MessageBox.Show($"File upload failed. Status code: {response.StatusCode}, Response: {responseContent}");
-                        return null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
-                    return null;
-                }
-            }
-        }
-
-        private async Task<string> RetrieveFileContent(string fileId)
-        {
-            using (HttpClient client = new HttpClient())
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", apiKey);
-
-                try
-                {
-                    HttpResponseMessage response = await client.GetAsync($"https://api.openai.com/v1/files/{fileId}/content");
-                    if (response.IsSuccessStatusCode)
-                    {
-                        string fileContent = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show("File retrieved successfully.");
-                        return fileContent;
-                    }
-                    else
-                    {
-                        string responseContent = await response.Content.ReadAsStringAsync();
-                        MessageBox.Show($"Failed to retrieve file. Status code: {response.StatusCode}, Response: {responseContent}");
-                        return null;
-                    }
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show($"An error occurred: {ex.Message}");
-                    return null;
-                }
-            }
-        }
-
-        private async Task<string> SummarizeContent(string content)
-        {
-            var summarizePrompt = $"Summarize the following content in 200 words: {content}";
-
-            var summarizeRequest = new ChatRequest()
-            {
-                Model = "gpt-3.5-turbo",
-                Messages = new List<ChatMessage>
-                {
-                    new ChatMessage
-                    {
-                        Role = ChatMessageRole.User,
-                        TextContent = summarizePrompt
-                    }
-                },
-                Temperature = 0.3,
-                MaxTokens = 1500
-            };
-
-            var result = await api.Chat.CreateChatCompletionAsync(summarizeRequest);
-            return result.Choices[0].Message.TextContent.Trim();
-        }
-
-        private async Task ProvideFeedback(string fileId, string comments, string rubric)
-        {
             try
             {
-                string fileContent = await RetrieveFileContent(fileId);
+                var feedbackResult = await GetFeedbackFromAI(assessmentDocument, teacherComments, rubric);
 
-                if (string.IsNullOrEmpty(fileContent))
+                if (feedbackResult != null)
                 {
-                    MessageBox.Show("File content is empty. Cannot provide feedback.");
-                    return;
-                }
-
-                string summarizedContent = await SummarizeContent(fileContent);
-
-                var prompt = $@"
-You are an intelligent and empathetic assistant designed to help students improve their academic performance. You will receive an assessment task, previous teacher comments, a rubric, and subject information. Your job is to provide detailed, personalized feedback including a grade, feedback, and tips for improvement. Do not just reword teacher comments; instead, create unique and actionable advice.
-
-Input Data:
-- Assessment Task: {summarizedContent}
-- Previous Teacher Comments: {comments}
-- Rubric: {rubric}
-- Subject Information: [Provide any necessary subject information here]
-
-Output: Personalized Dynamic Feedback
-
----
-
-**Assessment Task:** {Path.GetFileName(txtFilePath.Text)}
-
-**Subject:** [Provide the subject name here]
-
----
-
-### Feedback Overview
-
-**Grade:**
-Provide a grade based on the assessment task and rubric criteria.
-
-**Task Analysis:**
-
-*Quote:* ""Understanding the core of your assessment is crucial for success.""
-
-Based on the given task, you are required to {{brief summary of the task}}. To excel in this task, focus on the following key areas:
-
-1. **{{Key Area 1}}**: {{Detailed explanation on how to approach this area}}.
-2. **{{Key Area 2}}**: {{Detailed explanation on how to approach this area}}.
-3. **{{Key Area 3}}**: {{Detailed explanation on how to approach this area}}.
-
-**Rubric Breakdown:**
-
-*Quote:* ""Aligning your work with the rubric criteria can significantly improve your grades.""
-
-The rubric emphasizes the following aspects:
-
-- **Criterion 1: {{Criterion Title}}**
-  - *What it means:* {{Explanation of the criterion}}.
-  - *How to achieve it:* {{Specific strategies to meet this criterion}}.
-
-- **Criterion 2: {{Criterion Title}}**
-  - *What it means:* {{Explanation of the criterion}}.
-  - *How to achieve it:* {{Specific strategies to meet this criterion}}.
-
-- **Criterion 3: {{Criterion Title}}**
-  - *What it means:* {{Explanation of the criterion}}.
-  - *How to achieve it:* {{Specific strategies to meet this criterion}}.
-
-**Previous Teacher Comments:**
-
-*Quote:* ""Feedback is the bridge between instruction and improvement.""
-
-Your previous teacher mentioned {{summarize key comments}}. Here’s how you can address each point:
-
-- **Comment 1: {{Comment Summary}}**
-  - *Feedback:* {{Personalized advice based on the comment}}.
-
-- **Comment 2: {{Comment Summary}}**
-  - *Feedback:* {{Personalized advice based on the comment}}.
-
-- **Comment 3: {{Comment Summary}}**
-  - *Feedback:* {{Personalized advice based on the comment}}.
-
-### Detailed Feedback
-
-**Introduction:**
-
-*Quote:* ""A strong introduction sets the tone for the entire assessment.""
-
-- **Current Performance:** {{Assessment of the current introduction based on rubric and teacher comments}}.
-- **Improvement Suggestions:** {{Specific steps to improve the introduction}}.
-
-**Body:**
-
-*Quote:* ""Clarity and coherence in the body make your arguments persuasive.""
-
-- **Current Performance:** {{Assessment of the current body based on rubric and teacher comments}}.
-- **Improvement Suggestions:** {{Specific steps to enhance the body of the assessment}}.
-
-**Conclusion:**
-
-*Quote:* ""A compelling conclusion reinforces your main points and leaves a lasting impression.""
-
-- **Current Performance:** {{Assessment of the current conclusion based on rubric and teacher comments}}.
-- **Improvement Suggestions:** {{Specific steps to strengthen the conclusion}}.
-
-### Tips for Improvement
-
-*Quote:* ""Utilizing available resources can elevate the quality of your work.""
-
-- **Tip 1: {{Tip Title}}**
-  - *Description:* {{Brief description of the tip}}.
-  - *How to apply it:* {{Instructions on how to effectively use the tip}}.
-
-- **Tip 2: {{Tip Title}}**
-  - *Description:* {{Brief description of the tip}}.
-  - *How to apply it:* {{Instructions on how to effectively use the tip}}.
-
----
-
-By focusing on these personalized suggestions, you can significantly improve your performance on the {Path.GetFileName(txtFilePath.Text)}. Remember to align your work with the rubric and utilize the feedback provided to address specific areas for improvement. Good luck!
-                ";
-
-                var initialMessage = new ChatMessage
-                {
-                    Role = ChatMessageRole.User,
-                    TextContent = prompt
-                };
-                conversationHistory.Add(initialMessage);
-
-                var chatRequest = new ChatRequest()
-                {
-                    Model = "gpt-3.5-turbo",
-                    Messages = conversationHistory,
-                    Temperature = 0.3,
-                    MaxTokens = 1500
-                };
-
-                var result = await api.Chat.CreateChatCompletionAsync(chatRequest);
-                var response = result.Choices[0].Message.TextContent;
-
-                conversationHistory.Add(result.Choices[0].Message);
-
-                var gradeMarker = "Grade:";
-                var feedbackMarker = "Feedback:";
-                var tipsMarker = "Tips for Improvement:";
-
-                var gradeIndex = response.IndexOf(gradeMarker);
-                var feedbackIndex = response.IndexOf(feedbackMarker);
-                var tipsIndex = response.IndexOf(tipsMarker);
-
-                if (gradeIndex >= 0 && feedbackIndex >= 0 && tipsIndex >= 0)
-                {
-                    var grade = response.Substring(gradeIndex + gradeMarker.Length, feedbackIndex - gradeIndex - gradeMarker.Length).Trim();
-                    var feedback = response.Substring(feedbackIndex + feedbackMarker.Length, tipsIndex - feedbackIndex - feedbackMarker.Length).Trim();
-                    var tips = response.Substring(tipsIndex + tipsMarker.Length).Trim();
-
-                    txtGrade.Text = grade;
-                    txtFeedback.Text = feedback;
-                    txtTips.Text = tips;
+                    // Assign the parsed sections to the corresponding text boxes
+                    txtGrade.Text = feedbackResult.Grade.Trim();
+                    txtFeedback.Text = feedbackResult.Feedback.Trim();
+                    txtnextStep.Text = feedbackResult.NextStep.Trim();
                 }
                 else
                 {
-                    txtGrade.Text = "Could not parse the response.";
-                    txtFeedback.Text = response;
-                    txtTips.Text = "";
+                    MessageBox.Show("No feedback received. Please check the response and try again.");
                 }
-
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show($"An error occurred: {ex.Message}");
             }
         }
 
-        private async void btnSendQuestion_Click(object sender, EventArgs e)
+        private string ExtractTextFromPdf(string filePath)
         {
-            var question = txtUserQuestion.Text;
+            StringBuilder text = new StringBuilder();
 
-            if (string.IsNullOrEmpty(question))
+            using (PdfReader reader = new PdfReader(filePath))
             {
-                MessageBox.Show("Please enter a question.");
-                return;
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
+                }
             }
+
+            return text.ToString();
+        }
+
+        private async Task<FeedbackResult> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric)
+        {
+            var conversation = api.Chat.CreateConversation();
+
+            // Append system message
+            conversation.AppendMessage(ChatMessageRole.System, "You are an intelligent and empathetic educational assistant. Your goal is to help students improve by providing personalized feedback based on their assessment, teacher's comments, and the rubric provided. Your feedback should be constructive, encouraging, and specific, referencing direct quotes from the assessment document where applicable.");
+
+            // Append user messages
+            conversation.AppendMessage(ChatMessageRole.User, $"Please review the following assessment document, teacher's comments, and rubric. Provide a grade, personalized feedback to the student, and suggestions for improvement. Use quotes from the assessment document itself to make your feedback more impactful.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Additionally, please provide detailed next steps for the student on how to improve their work. Specify which sections or parts of the assessment need the most attention, what changes should be made, and any additional resources or strategies that could help enhance their submission.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into three sections titled 'Grade', 'Feedback', and 'Next Steps'.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Assessment Document: {assessmentDocument}, Teacher's Comments: {teacherComments}, Rubric: {rubric}");
+
+            // Get the response from the AI
+            string response = await conversation.GetResponseFromChatbotAsync();
+
+            Console.WriteLine("Raw API Response:");
+            Console.WriteLine(response);
+
+            // Parse the response into sections
+            var feedbackResult = ParseResponseIntoSections(response);
+
+            return feedbackResult;
+        }
+
+        private FeedbackResult ParseResponseIntoSections(string response)
+        {
+            var feedbackResult = new FeedbackResult();
 
             try
             {
-                var prompt = $"Follow-up question based on the feedback provided: {question}";
-
-                var userQuestionMessage = new ChatMessage
-                {
-                    Role = ChatMessageRole.User,
-                    TextContent = prompt
-                };
-                conversationHistory.Add(userQuestionMessage);
-
-                var chatRequest = new ChatRequest()
-                {
-                    Model = "gpt-3.5-turbo",
-                    Messages = conversationHistory,
-                    Temperature = 0.3,
-                    MaxTokens = 500
-                };
-
-                var result = await api.Chat.CreateChatCompletionAsync(chatRequest);
-                var response = result.Choices[0].Message.TextContent;
-
-                conversationHistory.Add(result.Choices[0].Message);
-
-                txtAIResponse.Text = response;
+                // Split the response into sections by looking for the specific section titles
+                feedbackResult.Grade = ExtractSection(response, "Grade:");
+                feedbackResult.Feedback = ExtractSection(response, "Feedback:");
+                feedbackResult.NextStep = ExtractSection(response, "Next Steps:");
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error: " + ex.Message);
+                MessageBox.Show($"Error parsing response into sections: {ex.Message}");
             }
+
+            return feedbackResult;
         }
+
+        private string ExtractSection(string response, string sectionTitle)
+        {
+            var startIndex = response.IndexOf(sectionTitle, StringComparison.OrdinalIgnoreCase);
+
+            if (startIndex == -1)
+            {
+                return $"No {sectionTitle} section found.";
+            }
+
+            startIndex += sectionTitle.Length;
+            var endIndex = response.IndexOf("###", startIndex);
+
+            if (endIndex == -1) endIndex = response.Length;
+
+            var sectionContent = response.Substring(startIndex, endIndex - startIndex).Trim();
+
+            return sectionContent;
+        }
+    }
+
+    public class FeedbackResult
+    {
+        public string Grade { get; set; }
+        public string Feedback { get; set; }
+        public string NextStep { get; set; }
     }
 }
