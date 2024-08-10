@@ -26,7 +26,7 @@ namespace Smartloop_Feedback
                 ExecuteSqlFile();
             }
 
-            Application.Run(new PdfReadeerForm());
+            Application.Run(new LoginForm());
         }
 
         private static bool DatabaseExists()

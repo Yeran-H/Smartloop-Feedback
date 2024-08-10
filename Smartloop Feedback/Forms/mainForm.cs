@@ -309,11 +309,11 @@ namespace Smartloop_Feedback
                     assessmentForm1.Show();
                     break;
                 case 10:
-                    //this.formLoaderPl.Controls.Clear();
-                    //AIForm aIForm = new AIForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                    //aIForm.FormBorderStyle = FormBorderStyle.None;
-                    //this.formLoaderPl.Controls.Add(aIForm);
-                    //aIForm.Show();
+                    this.formLoaderPl.Controls.Clear();
+                    AIForm aIForm = new AIForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    aIForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(aIForm);
+                    aIForm.Show();
                     break;
             }
         }

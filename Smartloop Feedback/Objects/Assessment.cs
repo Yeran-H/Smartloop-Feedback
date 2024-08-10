@@ -14,6 +14,7 @@ namespace Smartloop_Feedback.Objects
         public int Id { get; private set; } // Assessment ID
         public string Name { get; set; } // Assessment name
         public string Description { get; set; } // Assessment description
+        public string SubjectDescription { get; set; }
         public string Type { get; set; } // Assessment type
         public DateTime Date { get; set; } // Assessment date
         public int Status { get; set; } // Assessment status
@@ -30,11 +31,12 @@ namespace Smartloop_Feedback.Objects
         public int StudentId { get; set; } // ID of the student associated with the assessment
 
         // Constructor to initialize an Assessment object and fetch criteria and checklist from the database
-        public Assessment(int id, string name, string description, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
+        public Assessment(int id, string name, string description, string subjectDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
         {
             Id = id;
             Name = name;
             Description = description;
+            SubjectDescription = subjectDescription;
             Type = type;
             Date = date;
             Status = status;
@@ -54,10 +56,11 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize an Assessment object and add it to the database
-        public Assessment(string name, string description, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
+        public Assessment(string name, string description, string subjectDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
         {
             Name = name;
             Description = description;
+            SubjectDescription = subjectDescription;
             Type = type;
             Date = date;
             Status = status;
@@ -81,12 +84,13 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO assessment (name, description, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink, courseId, studentId) VALUES (@name, @description, @type, @date, @status, @weight, @mark, @finalMark, @individual, @group, @isFinalised, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
+                string sql = "INSERT INTO assessment (name, description, subjectDescription, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink, courseId, studentId) VALUES (@name, @description, @subjectDescription, @type, @date, @status, @weight, @mark, @finalMark, @individual, @group, @isFinalised, @canvasLink, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@subjectDescription", SubjectDescription);
                     cmd.Parameters.AddWithValue("@type", Type); // Set the type parameter
                     cmd.Parameters.AddWithValue("@date", Date); // Set the date parameter
                     cmd.Parameters.AddWithValue("@status", Status); // Set the status parameter

@@ -277,6 +277,7 @@
     </Compile>
     <Compile Include="Objects\Assessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
+    <Compile Include="Objects\FeedbackResult.cs" />
     <Compile Include="Objects\Course.cs" />
     <Compile Include="Objects\CourseResult.cs" />
     <Compile Include="Objects\Criteria.cs" />

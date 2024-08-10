@@ -17,13 +17,11 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
     {
         private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
         private OpenAIAPI api;
-        private List<ChatMessage> conversationHistory;
 
         public PdfReadeerForm()
         {
             InitializeComponent();
             api = new OpenAIAPI(apiKey);
-            conversationHistory = new List<ChatMessage>();
         }
 
         private void btnSelectFile_Click(object sender, EventArgs e)
@@ -80,7 +78,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             return text.ToString();
         }
 
-        private async Task<FeedbackResult> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric)
+        private async Task<FeedbackResultTest> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric)
         {
             var conversation = api.Chat.CreateConversation();
 
@@ -105,9 +103,9 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             return feedbackResult;
         }
 
-        private FeedbackResult ParseResponseIntoSections(string response)
+        private FeedbackResultTest ParseResponseIntoSections(string response)
         {
-            var feedbackResult = new FeedbackResult();
+            var feedbackResult = new FeedbackResultTest();
 
             try
             {
@@ -144,7 +142,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
         }
     }
 
-    public class FeedbackResult
+    public class FeedbackResultTest
     {
         public string Grade { get; set; }
         public string Feedback { get; set; }
