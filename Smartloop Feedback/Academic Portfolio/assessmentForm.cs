@@ -39,7 +39,8 @@ namespace Smartloop_Feedback
             panelCriteria.Visible = false;
 
             // Configure the DataGridView for criteria
-            LoadData();
+            LoadCriteriaData();
+            LoadAttemptData();
             isFinalised();
         }
 
@@ -60,7 +61,7 @@ namespace Smartloop_Feedback
             progressBar.Value = assessment.Status;
         }
 
-        private void LoadData()
+        private void LoadCriteriaData()
         {
             // Set up the initial DataGridView column
             criteriaDgv.ColumnCount = 1;
@@ -90,6 +91,32 @@ namespace Smartloop_Feedback
             }
 
             DataGridColor(criteriaDgv);
+        }
+
+        private void LoadAttemptData()
+        {
+            attemptDgv.Rows.Clear(); // Clear existing rows
+            attemptDgv.Columns.Clear(); // Clear existing columns
+
+            DataGridViewButtonColumn attemptColumn = new DataGridViewButtonColumn
+            {
+                Name = "Attempt",
+                HeaderText = "Attempt",
+                UseColumnTextForButtonValue = false,
+                CellTemplate = new StyledButtonCell()
+            };
+            attemptDgv.Columns.Add(attemptColumn);
+
+            attemptDgv.Columns.Add("Grade", "Grade");
+
+            foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
+            {
+                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.Grade);
+                DataGridViewRow row = attemptDgv.Rows[rowIndex];
+                row.Tag = assessment.Id; 
+            }
+
+            DataGridColor(attemptDgv);
         }
 
         // Apply custom color formatting to a DataGridView
@@ -248,8 +275,6 @@ namespace Smartloop_Feedback
         private void attemptBtn_Click(object sender, EventArgs e)
         {
             mainForm.MainPannel(10);
-
-            //Load DGv
         }
     }
 }

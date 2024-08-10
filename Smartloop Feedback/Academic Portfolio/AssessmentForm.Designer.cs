@@ -44,14 +44,14 @@
             this.attemptBtn = new System.Windows.Forms.Button();
             this.finaliseCb = new System.Windows.Forms.CheckBox();
             this.panelDetails = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.attemptDgv = new System.Windows.Forms.DataGridView();
             this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelCriteria = new System.Windows.Forms.Panel();
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.panelDetails.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
             this.SuspendLayout();
@@ -236,7 +236,7 @@
             // 
             // panelDetails
             // 
-            this.panelDetails.Controls.Add(this.dataGridView1);
+            this.panelDetails.Controls.Add(this.attemptDgv);
             this.panelDetails.Controls.Add(this.finaliseCb);
             this.panelDetails.Controls.Add(this.attemptBtn);
             this.panelDetails.Controls.Add(this.rubricBtn);
@@ -257,18 +257,18 @@
             this.panelDetails.Size = new System.Drawing.Size(728, 432);
             this.panelDetails.TabIndex = 42;
             // 
-            // dataGridView1
+            // attemptDgv
             // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.AllowUserToOrderColumns = true;
-            this.dataGridView1.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(173, 179);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.Size = new System.Drawing.Size(271, 151);
-            this.dataGridView1.TabIndex = 42;
+            this.attemptDgv.AllowUserToAddRows = false;
+            this.attemptDgv.AllowUserToDeleteRows = false;
+            this.attemptDgv.AllowUserToOrderColumns = true;
+            this.attemptDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.attemptDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.attemptDgv.Location = new System.Drawing.Point(173, 179);
+            this.attemptDgv.Name = "attemptDgv";
+            this.attemptDgv.ReadOnly = true;
+            this.attemptDgv.Size = new System.Drawing.Size(271, 151);
+            this.attemptDgv.TabIndex = 42;
             // 
             // dateP
             // 
@@ -342,7 +342,7 @@
             this.Load += new System.EventHandler(this.AssessmentForm_Load);
             this.panelDetails.ResumeLayout(false);
             this.panelDetails.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).EndInit();
             this.panelCriteria.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).EndInit();
             this.ResumeLayout(false);
@@ -370,7 +370,7 @@
         private System.Windows.Forms.Panel panelCriteria;
         private System.Windows.Forms.Button bacBtn;
         private System.Windows.Forms.DataGridView criteriaDgv;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView attemptDgv;
         private System.Windows.Forms.ToolTip toolTip1;
     }
 }

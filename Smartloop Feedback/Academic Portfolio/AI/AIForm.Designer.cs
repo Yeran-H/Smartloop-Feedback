@@ -30,9 +30,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.markTb = new System.Windows.Forms.TextBox();
-            this.criteriaRatingDgv = new System.Windows.Forms.DataGridView();
             this.nextRb = new System.Windows.Forms.RichTextBox();
             this.backBtn = new System.Windows.Forms.Button();
+            this.criteriaRatingDgv = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaRatingDgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -190,15 +190,6 @@
             this.markTb.TabIndex = 53;
             this.markTb.TabStop = false;
             // 
-            // criteriaRatingDgv
-            // 
-            this.criteriaRatingDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.criteriaRatingDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.criteriaRatingDgv.Location = new System.Drawing.Point(489, 310);
-            this.criteriaRatingDgv.Name = "criteriaRatingDgv";
-            this.criteriaRatingDgv.Size = new System.Drawing.Size(248, 154);
-            this.criteriaRatingDgv.TabIndex = 56;
-            // 
             // nextRb
             // 
             this.nextRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
@@ -227,12 +218,21 @@
             this.backBtn.UseVisualStyleBackColor = false;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // criteriaRatingDgv
+            // 
+            this.criteriaRatingDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.criteriaRatingDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.criteriaRatingDgv.Location = new System.Drawing.Point(482, 304);
+            this.criteriaRatingDgv.Name = "criteriaRatingDgv";
+            this.criteriaRatingDgv.Size = new System.Drawing.Size(258, 160);
+            this.criteriaRatingDgv.TabIndex = 58;
+            // 
             // AIForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
-            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.criteriaRatingDgv);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.markTb);
@@ -273,8 +273,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox markTb;
-        private System.Windows.Forms.DataGridView criteriaRatingDgv;
         private System.Windows.Forms.RichTextBox nextRb;
         private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.DataGridView criteriaRatingDgv;
     }
 }

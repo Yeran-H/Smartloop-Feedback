@@ -175,17 +175,18 @@ namespace Smartloop_Feedback.Objects
                     {
                         int feedbackId = reader.GetInt32(0);
                         int attempt = reader.GetInt32(1);
-                        string teacherFeedback = reader.GetString(2); 
+                        string teacherFeedback = reader.IsDBNull(2) ? null : reader.GetString(2);
                         string fileName = reader.GetString(3); 
                         byte[] fileData = (byte[])reader["fileData"]; 
-                        string notes = reader.GetString(5); 
+                        string notes = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string grade = reader.GetString(6); 
                         string feedbackText = reader.GetString(7); 
-                        string nextStep = reader.GetString(8); 
-                        string criteriaRatingsJson = reader.GetString(9); 
+                        string nextStep = reader.GetString(8);
+                        string criteriaRatingsJson = reader.IsDBNull(9) ? null : reader.GetString(9);
 
-                        Dictionary<string, string> criteriaRatings = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(criteriaRatingsJson);
-
+                        Dictionary<string, string> criteriaRatings = criteriaRatingsJson != null
+                            ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(criteriaRatingsJson)
+                            : new Dictionary<string, string>();
 
                         FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, grade, feedbackText, nextStep, criteriaRatings, StudentId, Id));
                     }

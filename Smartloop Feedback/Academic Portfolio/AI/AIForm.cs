@@ -10,6 +10,7 @@ using iTextSharp.text.pdf.parser;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using Smartloop_Feedback.Objects;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
@@ -72,6 +73,8 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
                     // Display the ratings for each criterion in the DataGridView
                     PopulateDataGridView(feedbackResult);
+                    feedbackResult.AddFeedbackToDatabase();
+                    assessment.FeedbackList.Add(feedbackResult.Id, feedbackResult);
                 }
                 else
                 {
@@ -142,7 +145,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             conversation.AppendMessage(ChatMessageRole.User, $"Please review the following assessment document, teacher's comments, and rubric. Provide a grade as a mark out of {totalMarks}, personalized feedback to the student, and suggestions for improvement. For each criterion, specify the rating from the rubric the student received. Use quotes from the assessment document itself to make your feedback more impactful.");
             conversation.AppendMessage(ChatMessageRole.User, $"Additionally, please provide detailed next steps for the student on how to improve their work. Specify which sections or parts of the assessment need the most attention, what changes should be made, and any additional resources or strategies that could help enhance their submission.");
             conversation.AppendMessage(ChatMessageRole.User, $"Please use these notes from the student to provide guided feedback: {note}");
-            conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into three sections titled 'Grade', 'Feedback', and 'Next Steps'.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into four sections titled 'Grade', 'Feedback', 'Next Steps' and 'Criterion', specify the rating based on the rating the student received.");
             conversation.AppendMessage(ChatMessageRole.User, $"Assessment Document: {assessmentDocument}, Teacher's Comments: {teacherComments}, Rubric: {rubric}");
 
             if(previousCb.CheckedItems != null)
@@ -200,17 +203,10 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private string ExtractGradeFromResponse(string response, double totalMarks)
         {
-            string gradeSection = ExtractSection(response, "Grade:");
+            int gradeIndex = response.IndexOf("### Grade:") + "### Grade:".Length;
+            int feedbackIndex = response.IndexOf("### Feedback:");
 
-            // Try to extract the numerical grade from the response
-            if (int.TryParse(gradeSection, out int obtainedMarks))
-            {
-                // Return the grade in the format "XX/XX"
-                return $"{obtainedMarks}/{totalMarks}";
-            }
-
-            // If the grade is not in a numerical format, return the original text
-            return gradeSection.Trim();
+            return response.Substring(gradeIndex, feedbackIndex - gradeIndex).Trim();
         }
 
         private string ExtractSection(string response, string sectionTitle)

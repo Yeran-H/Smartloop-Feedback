@@ -47,7 +47,7 @@ namespace Smartloop_Feedback.Objects
             CriteriaRatings = criteriaRatings;
         }
 
-        private void AddFeedbackToDatabase()
+        public void AddFeedbackToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
@@ -57,11 +57,12 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
                     cmd.Parameters.AddWithValue("@attempt", Attempt);
-                    cmd.Parameters.AddWithValue("@teacherFeedback", TeacherFeedback); 
+                    cmd.Parameters.AddWithValue("@teacherFeedback", (object)TeacherFeedback ?? DBNull.Value); 
                     cmd.Parameters.AddWithValue("@fileName", FileName); 
                     cmd.Parameters.AddWithValue("@fileData", FileData);
-                    cmd.Parameters.AddWithValue("@notes", Notes); 
-                    cmd.Parameters.AddWithValue("@grade", Grade); 
+                    cmd.Parameters.AddWithValue("@notes", (object)Notes ?? DBNull.Value); 
+                    cmd.Parameters.AddWithValue("@grade", Grade);
+                    cmd.Parameters.AddWithValue("@nextStep", NextStep);
                     cmd.Parameters.AddWithValue("@feedback", Feedback); 
                     cmd.Parameters.AddWithValue("@studentId", StudentId); 
                     cmd.Parameters.AddWithValue("@assessmentId", AssessmentId);
