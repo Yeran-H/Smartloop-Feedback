@@ -170,7 +170,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            assessment.UpdateToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
+            assessment.UpdateAssessmentToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
             mainForm.MainPannel(0);
         }
 

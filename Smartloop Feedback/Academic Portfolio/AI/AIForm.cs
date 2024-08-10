@@ -129,7 +129,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
             // Append system message
             conversation.AppendMessage(ChatMessageRole.System, "You are an intelligent and empathetic educational assistant. Your goal is to help students improve by providing personalized feedback based on their assessment, teacher's comments, and the rubric provided. Your feedback should be constructive, encouraging, and specific, referencing direct quotes from the assessment document where applicable.");
-            conversation.AppendMessage(ChatMessageRole.System, $"Here is the Subject Information: {assessment.SubjectInformation} and Assessment Information: {assessment.Description}");
+            conversation.AppendMessage(ChatMessageRole.System, $"Here is the Subject Information: {assessment.CourseDescription} and Assessment Information: {assessment.Description}");
 
             // Append user messages
             conversation.AppendMessage(ChatMessageRole.User, $"Please review the following assessment document, teacher's comments, and rubric. Provide a grade as a mark out of {totalMarks}, personalized feedback to the student, and suggestions for improvement. For each criterion, specify the rating (e.g., Excellent, Good, etc.) the student received. Use quotes from the assessment document itself to make your feedback more impactful.");
