@@ -24,7 +24,7 @@
             this.fileTb = new System.Windows.Forms.TextBox();
             this.feedbackBtn = new System.Windows.Forms.Button();
             this.feedbackRb = new System.Windows.Forms.RichTextBox();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
+            this.previousCb = new System.Windows.Forms.CheckedListBox();
             this.label3 = new System.Windows.Forms.Label();
             this.noteRb = new System.Windows.Forms.RichTextBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -32,6 +32,7 @@
             this.markTb = new System.Windows.Forms.TextBox();
             this.criteriaRatingDgv = new System.Windows.Forms.DataGridView();
             this.nextRb = new System.Windows.Forms.RichTextBox();
+            this.backBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaRatingDgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -124,13 +125,13 @@
             this.feedbackRb.TabIndex = 46;
             this.feedbackRb.Text = "";
             // 
-            // checkedListBox1
+            // previousCb
             // 
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(34, 186);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(168, 94);
-            this.checkedListBox1.TabIndex = 50;
+            this.previousCb.FormattingEnabled = true;
+            this.previousCb.Location = new System.Drawing.Point(34, 186);
+            this.previousCb.Name = "previousCb";
+            this.previousCb.Size = new System.Drawing.Size(168, 94);
+            this.previousCb.TabIndex = 50;
             // 
             // label3
             // 
@@ -211,17 +212,33 @@
             this.nextRb.TabIndex = 48;
             this.nextRb.Text = "";
             // 
+            // backBtn
+            // 
+            this.backBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.backBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.backBtn.Location = new System.Drawing.Point(567, 159);
+            this.backBtn.Name = "backBtn";
+            this.backBtn.Size = new System.Drawing.Size(141, 52);
+            this.backBtn.TabIndex = 57;
+            this.backBtn.Text = "Back";
+            this.backBtn.UseVisualStyleBackColor = false;
+            this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
+            // 
             // AIForm
             // 
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
+            this.Controls.Add(this.backBtn);
             this.Controls.Add(this.criteriaRatingDgv);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.markTb);
             this.Controls.Add(this.noteRb);
             this.Controls.Add(this.label3);
-            this.Controls.Add(this.checkedListBox1);
+            this.Controls.Add(this.previousCb);
             this.Controls.Add(this.nextRb);
             this.Controls.Add(this.feedbackRb);
             this.Controls.Add(this.feedbackBtn);
@@ -234,6 +251,7 @@
             this.Name = "AIForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AIForm";
+            this.Load += new System.EventHandler(this.AIForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.criteriaRatingDgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -249,7 +267,7 @@
         private System.Windows.Forms.TextBox fileTb;
         private System.Windows.Forms.Button feedbackBtn;
         private System.Windows.Forms.RichTextBox feedbackRb;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
+        private System.Windows.Forms.CheckedListBox previousCb;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.RichTextBox noteRb;
         private System.Windows.Forms.Label label1;
@@ -257,5 +275,6 @@
         private System.Windows.Forms.TextBox markTb;
         private System.Windows.Forms.DataGridView criteriaRatingDgv;
         private System.Windows.Forms.RichTextBox nextRb;
+        private System.Windows.Forms.Button backBtn;
     }
 }

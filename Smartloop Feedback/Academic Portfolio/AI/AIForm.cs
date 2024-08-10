@@ -26,9 +26,15 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             api = new OpenAIAPI(apiKey);
             this.mainForm = mainForm;
             this.assessment = assessment;
+        }
 
-            // Initialize DataGridView
-            InitializeDataGridView();
+
+        private void AIForm_Load(object sender, EventArgs e)
+        {
+            foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
+            {
+                previousCb.Items.Add(feedbackResult.Attempt + " Mark: " + feedbackResult.Grade);
+            }
         }
 
         private void loadAssessmentBtn_Click(object sender, EventArgs e)
@@ -47,11 +53,12 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             string assessmentDocument = ExtractTextFromPdf(fileTb.Text);
             string teacherComments = teacherRb.Text;
             string rubric = ExtractTextFromRubric().ToString();
+            string note = noteRb.Text;
             double totalMarks = assessment.Mark;
 
             try
             {
-                FeedbackResult feedbackResult = await GetFeedbackFromAI(assessmentDocument, teacherComments, rubric, totalMarks);
+                FeedbackResult feedbackResult = await GetFeedbackFromAI(assessmentDocument, teacherComments, rubric, note, totalMarks);
 
                 if (feedbackResult != null)
                 {
@@ -61,7 +68,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     nextRb.Text = feedbackResult.NextStep;
 
                     feedbackResult.FileName = fileTb.Text;
-                    feedbackResult.FileData = assessmentDocument;
+                    feedbackResult.FileData = Encoding.UTF8.GetBytes(assessmentDocument);
 
                     // Display the ratings for each criterion in the DataGridView
                     PopulateDataGridView(feedbackResult);
@@ -123,7 +130,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             return rubricString;
         }
 
-        private async Task<FeedbackResult> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric, double totalMarks)
+        private async Task<FeedbackResult> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric, string note, double totalMarks)
         {
             var conversation = api.Chat.CreateConversation();
 
@@ -132,10 +139,22 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             conversation.AppendMessage(ChatMessageRole.System, $"Here is the Subject Information: {assessment.CourseDescription} and Assessment Information: {assessment.Description}");
 
             // Append user messages
-            conversation.AppendMessage(ChatMessageRole.User, $"Please review the following assessment document, teacher's comments, and rubric. Provide a grade as a mark out of {totalMarks}, personalized feedback to the student, and suggestions for improvement. For each criterion, specify the rating (e.g., Excellent, Good, etc.) the student received. Use quotes from the assessment document itself to make your feedback more impactful.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Please review the following assessment document, teacher's comments, and rubric. Provide a grade as a mark out of {totalMarks}, personalized feedback to the student, and suggestions for improvement. For each criterion, specify the rating from the rubric the student received. Use quotes from the assessment document itself to make your feedback more impactful.");
             conversation.AppendMessage(ChatMessageRole.User, $"Additionally, please provide detailed next steps for the student on how to improve their work. Specify which sections or parts of the assessment need the most attention, what changes should be made, and any additional resources or strategies that could help enhance their submission.");
+            conversation.AppendMessage(ChatMessageRole.User, $"Please use these notes from the student to provide guided feedback: {note}");
             conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into three sections titled 'Grade', 'Feedback', and 'Next Steps'.");
             conversation.AppendMessage(ChatMessageRole.User, $"Assessment Document: {assessmentDocument}, Teacher's Comments: {teacherComments}, Rubric: {rubric}");
+
+            if(previousCb.CheckedItems != null)
+            {
+                conversation.AppendMessage(ChatMessageRole.User, "Listed below is past attempt of getting feedback under same assessment and course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
+               
+                foreach (string item in previousCb.CheckedItems)
+                {
+                    int attempt = Int32.Parse(item.Substring(0, item.IndexOf("Mark:")).Trim());
+                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past attempt Grade: {assessment.FeedbackList[attempt].Grade} Feedback: {assessment.FeedbackList[attempt].Feedback} Next Step {assessment.FeedbackList[attempt].NextStep}");
+                }
+            }
 
             // Get the response from the AI
             string response = await conversation.GetResponseFromChatbotAsync();
@@ -151,7 +170,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private FeedbackResult ParseResponseIntoSections(string response, double totalMarks)
         {
-            FeedbackResult feedbackResult = new FeedbackResult(teacherRb.Text, assessment.StudentId, assessment.Id);
+            FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, assessment.StudentId, assessment.Id);
 
             try
             {
@@ -226,6 +245,8 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private void PopulateDataGridView(FeedbackResult feedbackResult)
         {
+            InitializeDataGridView();
+
             // Clear existing rows
             criteriaRatingDgv.Rows.Clear();
 
@@ -238,6 +259,11 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     criteriaRatingDgv.Rows.Add(criteria.Description, rating);
                 }
             }
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.MainPannel(2);
         }
     }
 }

@@ -25,8 +25,9 @@ namespace Smartloop_Feedback.Objects
         public bool Group { get; set; } // Is the assessment group-based?
         public bool IsFinalised { get; set; } // Is the assessment finalised?
         public string CanvasLink { get; set; } // Link to the assessment's Canvas page
-        public List<Criteria> CriteriaList { get; private set; } // List of criteria for the assessment
-        public List<CheckList> CheckList { get; private set; } // List of checklist items for the assessment
+        public List<Criteria> CriteriaList { get; set; } // List of criteria for the assessment
+        public List<CheckList> CheckList { get; set; } // List of checklist items for the assessment
+        public SortedDictionary<int, FeedbackResult> FeedbackList { get; set; }
         public int CourseId { get; set; } // ID of the course associated with the assessment
         public int StudentId { get; set; } // ID of the student associated with the assessment
 
@@ -51,8 +52,10 @@ namespace Smartloop_Feedback.Objects
             StudentId = studentId;
             CriteriaList = new List<Criteria>(); // Initialize the criteria list
             CheckList = new List<CheckList>(); // Initialize the checklist
+            FeedbackList = new SortedDictionary<int, FeedbackResult>();
             LoadCriteriaFromDatabase(); // Fetch criteria from the database
             LoadCheckListFromDatabase(); // Fetch checklist from the database
+            LoadFeedbackListFromDatabase();
         }
 
         // Constructor to initialize an Assessment object and add it to the database
@@ -75,6 +78,7 @@ namespace Smartloop_Feedback.Objects
             StudentId = studentId;
             CriteriaList = new List<Criteria>(); // Initialize the criteria list
             CheckList = new List<CheckList>(); // Initialize the checklist
+            FeedbackList = new SortedDictionary<int, FeedbackResult>();
             AddAssessmentToDatabase(); // Add the assessment to the database
         }
 
@@ -154,6 +158,41 @@ namespace Smartloop_Feedback.Objects
 
             CalculateStatus(); // Calculate the status of the assessment based on checklist items
         }
+
+        private void LoadFeedbackListFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) 
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, grade, feedback, nextStep, CriteriaRatings FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
+
+                cmd.Parameters.AddWithValue("@assessmentId", Id); 
+                cmd.Parameters.AddWithValue("@studentId", StudentId); 
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) 
+                {
+                    while (reader.Read()) 
+                    {
+                        int feedbackId = reader.GetInt32(0);
+                        int attempt = reader.GetInt32(1);
+                        string teacherFeedback = reader.GetString(2); 
+                        string fileName = reader.GetString(3); 
+                        byte[] fileData = (byte[])reader["fileData"]; 
+                        string notes = reader.GetString(5); 
+                        string grade = reader.GetString(6); 
+                        string feedbackText = reader.GetString(7); 
+                        string nextStep = reader.GetString(8); 
+                        string criteriaRatingsJson = reader.GetString(9); 
+
+                        Dictionary<string, string> criteriaRatings = System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(criteriaRatingsJson);
+
+
+                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, grade, feedbackText, nextStep, criteriaRatings, StudentId, Id));
+                    }
+                }
+            }
+        }
+
 
         // Delete the assessment and related data from the database
         public void DeleteAssessmentFromDatabase()

@@ -65,6 +65,7 @@ CREATE TABLE assessment (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(225),
     description VARCHAR(MAX),
+    courseDescription VARCHAR(MAX),
     type VARCHAR(225),
     date DATE,
     status VARCHAR(225),
