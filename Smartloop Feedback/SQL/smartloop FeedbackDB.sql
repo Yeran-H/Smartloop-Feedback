@@ -65,6 +65,7 @@ CREATE TABLE assessment (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(225),
     description VARCHAR(MAX),
+    courseDescription VARCHAR(MAX),
     type VARCHAR(225),
     date DATE,
     status VARCHAR(225),
@@ -126,6 +127,23 @@ CREATE TABLE checkList (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(MAX),
     isChecked BIT,
+    assessmentId INT,
+    studentId INT,
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the feedbackResult table
+CREATE TABLE feedbackResult (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    attempt INT,
+    teacherFeedback VARCHAR(MAX),
+    fileName VARCHAR(MAX),
+    fileData VARBINARY(MAX),
+    notes VARCHAR(MAX),
+    feedback VARCHAR(MAX),
+    previousAttemptId VARCHAR(MAX),
     assessmentId INT,
     studentId INT,
     FOREIGN KEY (assessmentId) REFERENCES assessment(id),

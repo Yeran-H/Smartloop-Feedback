@@ -97,7 +97,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
 
@@ -108,19 +108,20 @@ namespace Smartloop_Feedback.Objects
                         int assessmentId = reader.GetInt32(0); // Get the assessment ID
                         string name = reader.GetString(1); // Get the assessment name
                         string description = reader.GetString(2); // Get the assessment description
-                        string type = reader.GetString(3); // Get the assessment type
-                        DateTime date = reader.GetDateTime(4); // Get the assessment date
-                        int status = reader.GetInt32(5); // Get the assessment status
-                        double weight = (double)reader.GetDecimal(6); // Get the assessment weight
-                        double mark = (double)reader.GetDecimal(7); // Get the assessment mark
-                        double finalMark = (double)reader.GetDecimal(8); // Get the final mark
-                        bool individual = reader.GetBoolean(9); // Get the individual status
-                        bool group = reader.GetBoolean(10); // Get the group status
-                        bool isFinalised = reader.GetBoolean(11); // Get the finalised status
-                        string canvasLink = reader.GetString(12); // Get the assessment canvas link
+                        string courseDescription = reader.GetString(3);
+                        string type = reader.GetString(4); // Get the assessment type
+                        DateTime date = reader.GetDateTime(5); // Get the assessment date
+                        int status = reader.GetInt32(6); // Get the assessment status
+                        double weight = (double)reader.GetDecimal(7); // Get the assessment weight
+                        double mark = (double)reader.GetDecimal(8); // Get the assessment mark
+                        double finalMark = (double)reader.GetDecimal(9); // Get the final mark
+                        bool individual = reader.GetBoolean(10); // Get the individual status
+                        bool group = reader.GetBoolean(11); // Get the group status
+                        bool isFinalised = reader.GetBoolean(12); // Get the finalised status
+                        string canvasLink = reader.GetString(13); // Get the assessment canvas link
 
                         // Add the assessment to the assessment list
-                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, Id, StudentId));
+                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, Id, StudentId));
                     }
                 }
             }
@@ -134,6 +135,11 @@ namespace Smartloop_Feedback.Objects
             CreditPoint = creditPoint;
             Description = description;
             CanvasLink = canvasLink;
+
+            foreach(Assessment assessment in AssessmentList.Values)
+            {
+                assessment.UpdateAssessmentToDatabase(Description);
+            }
 
             using (SqlConnection conn = new SqlConnection(connStr))
             {

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback
@@ -39,7 +40,8 @@ namespace Smartloop_Feedback
             panelCriteria.Visible = false;
 
             // Configure the DataGridView for criteria
-            LoadData();
+            LoadCriteriaData();
+            LoadAttemptData();
             isFinalised();
         }
 
@@ -60,7 +62,7 @@ namespace Smartloop_Feedback
             progressBar.Value = assessment.Status;
         }
 
-        private void LoadData()
+        private void LoadCriteriaData()
         {
             // Set up the initial DataGridView column
             criteriaDgv.ColumnCount = 1;
@@ -90,6 +92,31 @@ namespace Smartloop_Feedback
             }
 
             DataGridColor(criteriaDgv);
+        }
+
+        private void LoadAttemptData()
+        {
+            attemptDgv.Rows.Clear(); // Clear existing rows
+            attemptDgv.Columns.Clear(); // Clear existing columns
+
+            DataGridViewButtonColumn attemptColumn = new DataGridViewButtonColumn
+            {
+                Name = "Attempt",
+                HeaderText = "Attempt",
+                UseColumnTextForButtonValue = false,
+                CellTemplate = new StyledButtonCell()
+            };
+            attemptDgv.Columns.Add(attemptColumn);
+            attemptDgv.Columns.Add("File", "File");
+
+            foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
+            {
+                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
+                DataGridViewRow row = attemptDgv.Rows[rowIndex];
+                row.Tag = feedbackResult.Attempt; 
+            }
+
+            DataGridColor(attemptDgv);
         }
 
         // Apply custom color formatting to a DataGridView
@@ -143,7 +170,7 @@ namespace Smartloop_Feedback
                 descriptionRb.Enabled = false;
                 checklistCb.Enabled = false;
                 itemBtn.Enabled = false;
-                submissionBtn.Enabled = false;
+                attemptBtn.Enabled = false;
             }
         }
 
@@ -170,7 +197,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            assessment.UpdateToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
+            assessment.UpdateAssessmentToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
             mainForm.MainPannel(0);
         }
 
@@ -243,6 +270,21 @@ namespace Smartloop_Feedback
         {
             panelDetails.Visible = false;
             panelCriteria.Visible = true;
+        }
+
+        private void attemptBtn_Click(object sender, EventArgs e)
+        {
+            mainForm.MainPannel(10);
+        }
+
+        private void attemptDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.attemptDgv.Rows[e.RowIndex];
+                mainForm.position[4] = (int)row.Tag;
+                mainForm.MainPannel(10); // Navigate to the main panel
+            }
         }
     }
 }
