@@ -164,7 +164,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, grade, feedback, nextStep, CriteriaRatings FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
+                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
 
                 cmd.Parameters.AddWithValue("@assessmentId", Id); 
                 cmd.Parameters.AddWithValue("@studentId", StudentId); 
@@ -179,16 +179,26 @@ namespace Smartloop_Feedback.Objects
                         string fileName = reader.GetString(3); 
                         byte[] fileData = (byte[])reader["fileData"]; 
                         string notes = reader.IsDBNull(5) ? null : reader.GetString(5);
-                        string grade = reader.GetString(6); 
-                        string feedbackText = reader.GetString(7); 
-                        string nextStep = reader.GetString(8);
-                        string criteriaRatingsJson = reader.IsDBNull(9) ? null : reader.GetString(9);
+                        string feedbackText = reader.GetString(6);
+                        string previousAttemptId = reader.IsDBNull(7) ? null : reader.GetString(7);
 
-                        Dictionary<string, string> criteriaRatings = criteriaRatingsJson != null
-                            ? System.Text.Json.JsonSerializer.Deserialize<Dictionary<string, string>>(criteriaRatingsJson)
-                            : new Dictionary<string, string>();
+                        int[] intArray;
 
-                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, grade, feedbackText, nextStep, criteriaRatings, StudentId, Id));
+                        if (!string.IsNullOrEmpty(previousAttemptId))
+                        {
+                            intArray = previousAttemptId
+                                .Split(',')
+                                .Where(s => !string.IsNullOrWhiteSpace(s))
+                                .Select(int.Parse) 
+                                .ToArray();
+                        }
+                        else
+                        {
+                            intArray = new int[0];
+                        }
+
+
+                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, feedbackText, intArray, StudentId, Id));
                     }
                 }
             }

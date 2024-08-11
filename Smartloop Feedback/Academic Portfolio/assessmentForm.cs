@@ -10,6 +10,7 @@ using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback
@@ -106,14 +107,13 @@ namespace Smartloop_Feedback
                 CellTemplate = new StyledButtonCell()
             };
             attemptDgv.Columns.Add(attemptColumn);
-
-            attemptDgv.Columns.Add("Grade", "Grade");
+            attemptDgv.Columns.Add("File", "File");
 
             foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
             {
-                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.Grade);
+                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
                 DataGridViewRow row = attemptDgv.Rows[rowIndex];
-                row.Tag = assessment.Id; 
+                row.Tag = feedbackResult.Attempt; 
             }
 
             DataGridColor(attemptDgv);
@@ -275,6 +275,16 @@ namespace Smartloop_Feedback
         private void attemptBtn_Click(object sender, EventArgs e)
         {
             mainForm.MainPannel(10);
+        }
+
+        private void attemptDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.attemptDgv.Rows[e.RowIndex];
+                mainForm.position[4] = (int)row.Tag;
+                mainForm.MainPannel(10); // Navigate to the main panel
+            }
         }
     }
 }

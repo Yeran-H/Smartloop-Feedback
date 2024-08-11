@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -16,43 +17,52 @@ namespace Smartloop_Feedback.Objects
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public string Notes { get; set; }
-        public string Grade {  get; set; }
         public string Feedback { get; set; }
-        public string NextStep { get; set; }
+        public int[] PreviousAttemptId { get; set; }
         public int StudentId { get; set; }
         public int AssessmentId { get; set; }
-        public Dictionary<string, string> CriteriaRatings { get; set; }
 
-        public FeedbackResult(int Attempt, string TeacherFeedback, int StudentId, int AssessmentId) {
-            this.Attempt = Attempt;
-            this.TeacherFeedback = TeacherFeedback;
-            this.StudentId = StudentId;
-            this.AssessmentId = AssessmentId;
-            CriteriaRatings = new Dictionary<string, string>();
-        } 
+        public FeedbackResult(int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, int studentId, int assessmentId)
+        {
+            Attempt = attempt;
+            TeacherFeedback = teacherFeedback;
+            FileName = fileName;
+            FileData = fileData;
+            Notes = notes;
+            Feedback = feedback;
+            StudentId = studentId;
+            AssessmentId = assessmentId;
+            PreviousAttemptId = previousAttemptId;
+            AddFeedbackToDatabase();
+        }
 
-        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string grade, string feedback, string nextStep, Dictionary<string, string> criteriaRatings, int studentId, int assessmentId)
+        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, int studentId, int assessmentId)
         {
             Id = id;
             Attempt = attempt;
             TeacherFeedback = teacherFeedback;
             FileName = fileName;
             FileData = fileData;
-            this.Notes = notes;
-            Grade = grade;
+            Notes = notes;
             Feedback = feedback;
-            NextStep = nextStep;
+            PreviousAttemptId = previousAttemptId;
             StudentId = studentId;
             AssessmentId = assessmentId;
-            CriteriaRatings = criteriaRatings;
         }
 
-        public void AddFeedbackToDatabase()
+        private void AddFeedbackToDatabase()
         {
+            string previousAttemptId = null;
+
+            foreach(int attempt in PreviousAttemptId)
+            {
+                previousAttemptId += attempt + ",";
+            }
+
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); 
-                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, grade, feedback, nextStep, studentId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @grade, @feedback, @nextStep, @studentId, @assessmentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert assessment and get the generated ID
+                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, studentId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @feedback, @previousAttemptId, @studentId, @assessmentId); SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -61,9 +71,8 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@fileName", FileName); 
                     cmd.Parameters.AddWithValue("@fileData", FileData);
                     cmd.Parameters.AddWithValue("@notes", (object)Notes ?? DBNull.Value); 
-                    cmd.Parameters.AddWithValue("@grade", Grade);
-                    cmd.Parameters.AddWithValue("@nextStep", NextStep);
                     cmd.Parameters.AddWithValue("@feedback", Feedback); 
+                    cmd.Parameters.AddWithValue("@previousAttemptId", (object)previousAttemptId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@studentId", StudentId); 
                     cmd.Parameters.AddWithValue("@assessmentId", AssessmentId);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); 

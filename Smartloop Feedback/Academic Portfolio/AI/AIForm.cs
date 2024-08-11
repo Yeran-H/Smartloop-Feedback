@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
 using System.Text;
@@ -10,7 +9,7 @@ using iTextSharp.text.pdf.parser;
 using OpenAI_API;
 using OpenAI_API.Chat;
 using Smartloop_Feedback.Objects;
-using static System.Net.Mime.MediaTypeNames;
+using System.IO;
 
 namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
@@ -34,18 +33,57 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
         {
             foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
             {
-                previousCb.Items.Add(feedbackResult.Attempt + " Mark: " + feedbackResult.Grade);
+                previousCb.Items.Add(feedbackResult.Attempt);
+            }
+
+            if (mainForm.position[4] != null)
+            {
+                teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].TeacherFeedback;
+                noteRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].Notes;
+                fileTb.Text = assessment.FeedbackList[(int)mainForm.position[4]].FileName;
+                feedbackRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].Feedback;
+                feedbackBtn.Visible = false;
+                loadAssessmentBtn.Text = "Download Assessment";
+
+                foreach(int attempt in assessment.FeedbackList[(int)mainForm.position[4]].PreviousAttemptId)
+                {
+                    for(int i = 0; i < previousCb.Items.Count; i++)
+                    {
+                        if ((int)previousCb.Items[i] == attempt)
+                        {
+                            previousCb.SetItemChecked(i, true);
+                            break;
+                        }
+                    }
+                }
             }
         }
 
         private void loadAssessmentBtn_Click(object sender, EventArgs e)
         {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
-
-            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            if(loadAssessmentBtn.Text == "Load Assessment") 
             {
-                fileTb.Text = openFileDialog.FileName;
+                OpenFileDialog openFileDialog = new OpenFileDialog();
+                openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    fileTb.Text = openFileDialog.FileName;
+                }
+            }
+            else
+            {
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+                saveFileDialog.Title = "Save PDF File";
+                saveFileDialog.FileName = assessment.FeedbackList[(int)mainForm.position[4]].FileName; 
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    File.WriteAllBytes(saveFileDialog.FileName, assessment.FeedbackList[(int)mainForm.position[4]].FileData);
+                    MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
             }
         }
 
@@ -59,21 +97,24 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
             try
             {
-                FeedbackResult feedbackResult = await GetFeedbackFromAI(assessmentDocument, teacherComments, rubric, note, totalMarks);
+                string feedback = await GetFeedbackFromAI(assessmentDocument, teacherComments, rubric, note, totalMarks);
 
-                if (feedbackResult != null)
+                if (feedback != null)
                 {
-                    // Assign the parsed sections to the corresponding text boxes
-                    markTb.Text = feedbackResult.Grade;
-                    feedbackRb.Text = feedbackResult.Feedback;
-                    nextRb.Text = feedbackResult.NextStep;
+                    feedbackRb.Text = feedback;
+                    fileTb.Text = System.IO.Path.GetFileName(fileTb.Text);
 
-                    feedbackResult.FileName = fileTb.Text;
-                    feedbackResult.FileData = Encoding.UTF8.GetBytes(assessmentDocument);
+                    int[] previousList = new int[previousCb.CheckedItems.Count];
 
-                    // Display the ratings for each criterion in the DataGridView
-                    PopulateDataGridView(feedbackResult);
-                    feedbackResult.AddFeedbackToDatabase();
+                    if (previousCb.CheckedItems != null)
+                    {
+                        foreach (int item in previousCb.CheckedItems)
+                        {
+                            previousList = new int[item];
+                        }
+                    }
+
+                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousList, assessment.StudentId, assessment.Id);
                     assessment.FeedbackList.Add(feedbackResult.Id, feedbackResult);
                 }
                 else
@@ -133,7 +174,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             return rubricString;
         }
 
-        private async Task<FeedbackResult> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric, string note, double totalMarks)
+        private async Task<string> GetFeedbackFromAI(string assessmentDocument, string teacherComments, string rubric, string note, double totalMarks)
         {
             var conversation = api.Chat.CreateConversation();
 
@@ -152,10 +193,9 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             {
                 conversation.AppendMessage(ChatMessageRole.User, "Listed below is past attempt of getting feedback under same assessment and course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
                
-                foreach (string item in previousCb.CheckedItems)
+                foreach (int item in previousCb.CheckedItems)
                 {
-                    int attempt = Int32.Parse(item.Substring(0, item.IndexOf("Mark:")).Trim());
-                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past attempt Grade: {assessment.FeedbackList[attempt].Grade} Feedback: {assessment.FeedbackList[attempt].Feedback} Next Step {assessment.FeedbackList[attempt].NextStep}");
+                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past Feedback: {assessment.FeedbackList[item].Feedback}");
                 }
             }
 
@@ -165,100 +205,12 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             Console.WriteLine("Raw API Response:");
             Console.WriteLine(response);
 
-            // Parse the response into sections
-            FeedbackResult feedbackResult = ParseResponseIntoSections(response, totalMarks);
-
-            return feedbackResult;
-        }
-
-        private FeedbackResult ParseResponseIntoSections(string response, double totalMarks)
-        {
-            FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, assessment.StudentId, assessment.Id);
-
-            try
-            {
-                // Extract and format the grade as "XX/XX"
-                feedbackResult.Grade = ExtractGradeFromResponse(response, totalMarks);
-                feedbackResult.Feedback = ExtractSection(response, "Feedback:").Trim();
-                feedbackResult.NextStep = ExtractSection(response, "Next Steps:").Trim();
-
-                // Parse criteria ratings
-                foreach (var criteria in assessment.CriteriaList)
-                {
-                    // Assuming the AI responds with ratings in a format like "CriteriaName: Rating"
-                    string criteriaRating = ExtractSection(response, criteria.Description + ":").Trim();
-                    if (!string.IsNullOrEmpty(criteriaRating))
-                    {
-                        feedbackResult.CriteriaRatings[criteria.Description] = criteriaRating;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Error parsing response into sections: {ex.Message}");
-            }
-
-            return feedbackResult;
-        }
-
-        private string ExtractGradeFromResponse(string response, double totalMarks)
-        {
-            int gradeIndex = response.IndexOf("### Grade:") + "### Grade:".Length;
-            int feedbackIndex = response.IndexOf("### Feedback:");
-
-            return response.Substring(gradeIndex, feedbackIndex - gradeIndex).Trim();
-        }
-
-        private string ExtractSection(string response, string sectionTitle)
-        {
-            var startIndex = response.IndexOf(sectionTitle, StringComparison.OrdinalIgnoreCase);
-
-            if (startIndex == -1)
-            {
-                return $"No {sectionTitle} section found.";
-            }
-
-            startIndex += sectionTitle.Length;
-            var endIndex = response.IndexOf("###", startIndex);
-
-            if (endIndex == -1) endIndex = response.Length;
-
-            var sectionContent = response.Substring(startIndex, endIndex - startIndex).Trim();
-
-            return sectionContent;
-        }
-
-        private void InitializeDataGridView()
-        {
-            criteriaRatingDgv.Columns.Clear();
-
-            // Add a column for Criteria
-            criteriaRatingDgv.Columns.Add("Criteria", "Criteria");
-
-            // Add a column for Rating
-            criteriaRatingDgv.Columns.Add("Rating", "Rating");
-        }
-
-        private void PopulateDataGridView(FeedbackResult feedbackResult)
-        {
-            InitializeDataGridView();
-
-            // Clear existing rows
-            criteriaRatingDgv.Rows.Clear();
-
-            // Populate the DataGridView with criteria and their ratings
-            foreach (var criteria in assessment.CriteriaList)
-            {
-                if (feedbackResult.CriteriaRatings.TryGetValue(criteria.Description, out string rating))
-                {
-                    // Add the criteria and rating to the DataGridView
-                    criteriaRatingDgv.Rows.Add(criteria.Description, rating);
-                }
-            }
+            return response;
         }
 
         private void backBtn_Click(object sender, EventArgs e)
         {
+            mainForm.position[4] = null;
             mainForm.MainPannel(2);
         }
     }

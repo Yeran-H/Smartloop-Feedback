@@ -269,6 +269,7 @@
             this.attemptDgv.ReadOnly = true;
             this.attemptDgv.Size = new System.Drawing.Size(271, 151);
             this.attemptDgv.TabIndex = 42;
+            this.attemptDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.attemptDgv_CellClick);
             // 
             // dateP
             // 
