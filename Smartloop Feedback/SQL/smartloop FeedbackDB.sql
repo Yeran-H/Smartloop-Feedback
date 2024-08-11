@@ -133,3 +133,20 @@ CREATE TABLE checkList (
     FOREIGN KEY (studentId) REFERENCES student(studentId)
 );
 GO
+
+-- Create the feedbackResult table
+CREATE TABLE feedbackResult (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    attempt INT,
+    teacherFeedback VARCHAR(MAX),
+    fileName VARCHAR(MAX),
+    fileData VARBINARY(MAX),
+    notes VARCHAR(MAX),
+    feedback VARCHAR(MAX),
+    previousAttemptId VARCHAR(MAX),
+    assessmentId INT,
+    studentId INT,
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (studentId) REFERENCES student(studentId)
+);
+GO
