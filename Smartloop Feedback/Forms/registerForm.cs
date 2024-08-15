@@ -206,9 +206,9 @@ namespace Smartloop_Feedback
             }
 
             // Validate the student ID
-            if (!ValidateStudentId(newStudent.StudentId))
+            if (ValidateStudentId(newStudent.StudentId))
             {
-                MessageBox.Show("Student ID must be 8 characters long and exist in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Student ID must be 8 characters long and unique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
