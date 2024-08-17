@@ -119,9 +119,10 @@ namespace Smartloop_Feedback.Objects
                         bool group = reader.GetBoolean(11); // Get the group status
                         bool isFinalised = reader.GetBoolean(12); // Get the finalised status
                         string canvasLink = reader.GetString(13); // Get the assessment canvas link
+                        string finalFeedback = reader.GetString(14);
 
                         // Add the assessment to the assessment list
-                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, Id, StudentId));
+                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, finalFeedback, Id, StudentId));
                     }
                 }
             }

@@ -33,7 +33,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
         {
             foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
             {
-                previousCb.Items.Add(feedbackResult.Attempt);
+                previousAttemptCb.Items.Add(feedbackResult.Attempt);
             }
 
             if (mainForm.position[4] != null)
@@ -47,11 +47,11 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
                 foreach(int attempt in assessment.FeedbackList[(int)mainForm.position[4]].PreviousAttemptId)
                 {
-                    for(int i = 0; i < previousCb.Items.Count; i++)
+                    for(int i = 0; i < previousAttemptCb.Items.Count; i++)
                     {
-                        if ((int)previousCb.Items[i] == attempt)
+                        if ((int)previousAttemptCb.Items[i] == attempt)
                         {
-                            previousCb.SetItemChecked(i, true);
+                            previousAttemptCb.SetItemChecked(i, true);
                             break;
                         }
                     }
@@ -104,11 +104,11 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     feedbackRb.Text = feedback;
                     fileTb.Text = System.IO.Path.GetFileName(fileTb.Text);
 
-                    int[] previousList = new int[previousCb.CheckedItems.Count];
+                    int[] previousList = new int[previousAttemptCb.CheckedItems.Count];
 
-                    if (previousCb.CheckedItems != null)
+                    if (previousAttemptCb.CheckedItems != null)
                     {
-                        foreach (int item in previousCb.CheckedItems)
+                        foreach (int item in previousAttemptCb.CheckedItems)
                         {
                             previousList = new int[item];
                         }
@@ -189,11 +189,11 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into four sections titled 'Grade', 'Feedback', 'Next Steps' and 'Criterion', specify the rating based on the rating the student received.");
             conversation.AppendMessage(ChatMessageRole.User, $"Assessment Document: {assessmentDocument}, Teacher's Comments: {teacherComments}, Rubric: {rubric}");
 
-            if(previousCb.CheckedItems != null)
+            if(previousAttemptCb.CheckedItems != null)
             {
                 conversation.AppendMessage(ChatMessageRole.User, "Listed below is past attempt of getting feedback under same assessment and course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
                
-                foreach (int item in previousCb.CheckedItems)
+                foreach (int item in previousAttemptCb.CheckedItems)
                 {
                     conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past Feedback: {assessment.FeedbackList[item].Feedback}");
                 }

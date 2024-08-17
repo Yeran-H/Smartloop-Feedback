@@ -33,6 +33,8 @@ namespace Smartloop_Feedback
             dateP.Value = assessment.Date;
             descriptionRb.Text = assessment.Description;
             finaliseCb.Checked = assessment.IsFinalised;
+            feedbackRb.Text = assessment.FinalFeedback;
+
             PopulateCheckListBox();
 
             // Set initial visibility of panels
