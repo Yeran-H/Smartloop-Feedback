@@ -36,6 +36,13 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 previousAttemptCb.Items.Add(feedbackResult.Attempt);
             }
 
+            assessment.GeneratePastAssessment();
+
+            foreach(Tuple<String, string> past in assessment.PastAssessment)
+            {
+                previousAssessmentCb.Items.Add(past.Item1);
+            }
+
             if (mainForm.position[4] != null)
             {
                 teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].TeacherFeedback;
@@ -52,6 +59,18 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                         if ((int)previousAttemptCb.Items[i] == attempt)
                         {
                             previousAttemptCb.SetItemChecked(i, true);
+                            break;
+                        }
+                    }
+                }
+
+                foreach (string pastAssessment in assessment.FeedbackList[(int)mainForm.position[4]].PreviousAssessmentId)
+                {
+                    for (int i = 0; i < previousAssessmentCb.Items.Count; i++)
+                    {
+                        if ((string)previousAssessmentCb.Items[i] == pastAssessment)
+                        {
+                            previousAssessmentCb.SetItemChecked(i, true);
                             break;
                         }
                     }
@@ -104,17 +123,28 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     feedbackRb.Text = feedback;
                     fileTb.Text = System.IO.Path.GetFileName(fileTb.Text);
 
-                    int[] previousList = new int[previousAttemptCb.CheckedItems.Count];
+                    int[] previousAttemptList = new int[previousAttemptCb.CheckedItems.Count];
+                    string[] previousAssessmentList = new string[previousAssessmentCb.CheckedItems.Count];
 
                     if (previousAttemptCb.CheckedItems != null)
                     {
-                        foreach (int item in previousAttemptCb.CheckedItems)
+                        foreach (int attempt in previousAttemptCb.CheckedItems)
                         {
-                            previousList = new int[item];
+                            previousAttemptList = new int[attempt];
                         }
                     }
 
-                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousList, assessment.StudentId, assessment.Id);
+                    if (previousAssessmentCb.CheckedItems != null)
+                    {
+                        int index = 0;
+                        foreach (string item in previousAssessmentCb.CheckedItems)
+                        {
+                            previousAssessmentList[index] = item;
+                            index++;
+                        }
+                    }
+
+                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousAttemptList, previousAssessmentList, assessment.StudentId, assessment.Id);
                     assessment.FeedbackList.Add(feedbackResult.Id, feedbackResult);
                 }
                 else
@@ -196,6 +226,16 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 foreach (int item in previousAttemptCb.CheckedItems)
                 {
                     conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past Feedback: {assessment.FeedbackList[item].Feedback}");
+                }
+            }
+
+            if (previousAssessmentCb.CheckedItems != null)
+            {
+                conversation.AppendMessage(ChatMessageRole.User, "Listed below is past assessment from same course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
+
+                foreach (int item in previousAttemptCb.CheckedItems)
+                {
+                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past general feedback: {assessment.PastAssessment[item].Item2}");
                 }
             }
 

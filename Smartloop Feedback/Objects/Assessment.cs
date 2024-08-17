@@ -6,6 +6,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -34,6 +35,7 @@ namespace Smartloop_Feedback.Objects
         public List<Criteria> CriteriaList { get; set; } // List of criteria for the assessment
         public List<CheckList> CheckList { get; set; } // List of checklist items for the assessment
         public SortedDictionary<int, FeedbackResult> FeedbackList { get; set; }
+        public List<Tuple<string, string>> PastAssessment {  get; set; }
         public int CourseId { get; set; } // ID of the course associated with the assessment
         public int StudentId { get; set; } // ID of the student associated with the assessment
 
@@ -171,7 +173,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
+                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, previousAssessmentId FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
 
                 cmd.Parameters.AddWithValue("@assessmentId", Id); 
                 cmd.Parameters.AddWithValue("@studentId", StudentId); 
@@ -188,6 +190,7 @@ namespace Smartloop_Feedback.Objects
                         string notes = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string feedbackText = reader.GetString(6);
                         string previousAttemptId = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string previousAssessmentId = reader.IsDBNull(8) ? null : reader.GetString(8);
 
                         int[] intArray;
 
@@ -204,8 +207,23 @@ namespace Smartloop_Feedback.Objects
                             intArray = new int[0];
                         }
 
+                        string[] stringArray;
 
-                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, feedbackText, intArray, StudentId, Id));
+                        if (!string.IsNullOrEmpty(previousAssessmentId))
+                        {
+                            stringArray = previousAssessmentId
+                                .Split(',')
+                                .Where(s => !string.IsNullOrWhiteSpace(s))
+                                .ToArray();
+                        }
+                        else
+                        {
+                            stringArray = new string[0];
+                        }
+
+
+
+                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, feedbackText, intArray, stringArray, StudentId, Id));
                     }
                 }
             }
@@ -223,6 +241,11 @@ namespace Smartloop_Feedback.Objects
             foreach (Criteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
+            }
+
+            foreach (FeedbackResult feedbackResult in FeedbackList.Values)
+            {
+                feedbackResult.DeleteFeedbackFromDatabase();
             }
 
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -306,6 +329,7 @@ namespace Smartloop_Feedback.Objects
 
         private async void GenerateFinalFeedback()
         {
+            api = new OpenAIAPI(apiKey);
             var conversation = api.Chat.CreateConversation();
 
             // Append system message
@@ -415,5 +439,29 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void GeneratePastAssessment()
+        {
+            PastAssessment = new List<Tuple<string, string>>();
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, finalFeedback FROM assessment WHERE studentId = @studentId AND courseId = @courseId AND isFinalised = TRUE", conn); // SQL query to fetch criteria
+                cmd.Parameters.AddWithValue("@courseId", CourseId);
+                cmd.Parameters.AddWithValue("@studentId", StudentId); 
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        string name = reader.GetString(0);
+                        string finalFeedback = reader.GetString(1);
+                        PastAssessment.Add(Tuple.Create(name, finalFeedback)); // Add the pair to the list
+                    }
+                }
+            }
+        }
+
     }
 }

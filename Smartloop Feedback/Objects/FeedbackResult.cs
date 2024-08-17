@@ -19,10 +19,11 @@ namespace Smartloop_Feedback.Objects
         public string Notes { get; set; }
         public string Feedback { get; set; }
         public int[] PreviousAttemptId { get; set; }
+        public string[] PreviousAssessmentId { get; set; }
         public int StudentId { get; set; }
         public int AssessmentId { get; set; }
 
-        public FeedbackResult(int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, int studentId, int assessmentId)
+        public FeedbackResult(int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int studentId, int assessmentId)
         {
             Attempt = attempt;
             TeacherFeedback = teacherFeedback;
@@ -33,10 +34,11 @@ namespace Smartloop_Feedback.Objects
             StudentId = studentId;
             AssessmentId = assessmentId;
             PreviousAttemptId = previousAttemptId;
+            PreviousAssessmentId = previousAssessmentId;
             AddFeedbackToDatabase();
         }
 
-        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, int studentId, int assessmentId)
+        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int studentId, int assessmentId)
         {
             Id = id;
             Attempt = attempt;
@@ -46,6 +48,7 @@ namespace Smartloop_Feedback.Objects
             Notes = notes;
             Feedback = feedback;
             PreviousAttemptId = previousAttemptId;
+            PreviousAssessmentId= previousAssessmentId;
             StudentId = studentId;
             AssessmentId = assessmentId;
         }
@@ -53,16 +56,22 @@ namespace Smartloop_Feedback.Objects
         private void AddFeedbackToDatabase()
         {
             string previousAttemptId = null;
+            string previousAssessmentId = null;
 
-            foreach(int attempt in PreviousAttemptId)
+            foreach (int attempt in PreviousAttemptId)
             {
                 previousAttemptId += attempt + ",";
+            }
+
+            foreach (string past in PreviousAssessmentId)
+            {
+                previousAssessmentId += past + ",";
             }
 
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); 
-                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, studentId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @feedback, @previousAttemptId, @studentId, @assessmentId); SELECT SCOPE_IDENTITY();";
+                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, previousAssessmentId, studentId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @feedback, @previousAttemptId, @previousAssessmentId, @studentId, @assessmentId); SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -73,9 +82,31 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@notes", (object)Notes ?? DBNull.Value); 
                     cmd.Parameters.AddWithValue("@feedback", Feedback); 
                     cmd.Parameters.AddWithValue("@previousAttemptId", (object)previousAttemptId ?? DBNull.Value);
+                    cmd.Parameters.AddWithValue("@previousAssessmentId", (object)previousAssessmentId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@studentId", StudentId); 
                     cmd.Parameters.AddWithValue("@assessmentId", AssessmentId);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); 
+                }
+            }
+        }
+
+        public void DeleteFeedbackFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM feedbackResult
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for feedbackResult ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

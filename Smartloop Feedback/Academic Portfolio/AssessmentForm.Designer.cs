@@ -50,6 +50,7 @@
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.feedbackRb = new System.Windows.Forms.RichTextBox();
             this.panelDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
@@ -129,7 +130,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(459, 330);
+            this.progressBar.Location = new System.Drawing.Point(521, 329);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 23);
             this.progressBar.TabIndex = 29;
@@ -138,7 +139,7 @@
             // checklistCb
             // 
             this.checklistCb.FormattingEnabled = true;
-            this.checklistCb.Location = new System.Drawing.Point(459, 170);
+            this.checklistCb.Location = new System.Drawing.Point(521, 169);
             this.checklistCb.Name = "checklistCb";
             this.checklistCb.Size = new System.Drawing.Size(200, 154);
             this.checklistCb.TabIndex = 30;
@@ -152,7 +153,7 @@
             this.itemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.itemBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.itemBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.itemBtn.Location = new System.Drawing.Point(489, 359);
+            this.itemBtn.Location = new System.Drawing.Point(551, 358);
             this.itemBtn.Name = "itemBtn";
             this.itemBtn.Size = new System.Drawing.Size(141, 52);
             this.itemBtn.TabIndex = 31;
@@ -213,7 +214,7 @@
             this.attemptBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.attemptBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.attemptBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.attemptBtn.Location = new System.Drawing.Point(238, 336);
+            this.attemptBtn.Location = new System.Drawing.Point(340, 335);
             this.attemptBtn.Name = "attemptBtn";
             this.attemptBtn.Size = new System.Drawing.Size(141, 52);
             this.attemptBtn.TabIndex = 38;
@@ -236,6 +237,7 @@
             // 
             // panelDetails
             // 
+            this.panelDetails.Controls.Add(this.feedbackRb);
             this.panelDetails.Controls.Add(this.attemptDgv);
             this.panelDetails.Controls.Add(this.finaliseCb);
             this.panelDetails.Controls.Add(this.attemptBtn);
@@ -264,10 +266,10 @@
             this.attemptDgv.AllowUserToOrderColumns = true;
             this.attemptDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.attemptDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.attemptDgv.Location = new System.Drawing.Point(173, 179);
+            this.attemptDgv.Location = new System.Drawing.Point(300, 178);
             this.attemptDgv.Name = "attemptDgv";
             this.attemptDgv.ReadOnly = true;
-            this.attemptDgv.Size = new System.Drawing.Size(271, 151);
+            this.attemptDgv.Size = new System.Drawing.Size(206, 151);
             this.attemptDgv.TabIndex = 42;
             this.attemptDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.attemptDgv_CellClick);
             // 
@@ -328,6 +330,21 @@
             this.criteriaDgv.TabIndex = 0;
             this.toolTip1.SetToolTip(this.criteriaDgv, "Rubric of Assessment");
             // 
+            // feedbackRb
+            // 
+            this.feedbackRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.feedbackRb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.feedbackRb.Enabled = false;
+            this.feedbackRb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.feedbackRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.feedbackRb.Location = new System.Drawing.Point(31, 142);
+            this.feedbackRb.Name = "feedbackRb";
+            this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.feedbackRb.Size = new System.Drawing.Size(217, 219);
+            this.feedbackRb.TabIndex = 43;
+            this.feedbackRb.Text = "Feedback";
+            this.toolTip1.SetToolTip(this.feedbackRb, "General Feedback on Assessment");
+            // 
             // AssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -373,5 +390,6 @@
         private System.Windows.Forms.DataGridView criteriaDgv;
         private System.Windows.Forms.DataGridView attemptDgv;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.RichTextBox feedbackRb;
     }
 }
