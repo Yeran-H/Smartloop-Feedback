@@ -31,6 +31,11 @@ namespace Smartloop_Feedback
             int nHeightEllipse
         );
 
+        // Fields to track dragging
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
         public RegisterForm()
         {
             InitializeComponent();
@@ -206,9 +211,9 @@ namespace Smartloop_Feedback
             }
 
             // Validate the student ID
-            if (!ValidateStudentId(newStudent.StudentId))
+            if (ValidateStudentId(newStudent.StudentId))
             {
-                MessageBox.Show("Student ID must be 8 characters long and exist in the database.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Student ID must be 8 characters long and unique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
@@ -281,6 +286,27 @@ namespace Smartloop_Feedback
                 return true; // Indicate that the key press has been handled
             }
             return base.ProcessCmdKey(ref msg, keyData); // Call the base method for other key presses
+        }
+
+        private void headerPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        private void headerPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(diff));
+            }
+        }
+
+        private void headerPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
         }
     }
 }

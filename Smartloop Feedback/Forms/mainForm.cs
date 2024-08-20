@@ -36,6 +36,11 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
+        // Fields to track dragging
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
         public MainForm(Student student)
         {
             InitializeComponent();
@@ -316,6 +321,27 @@ namespace Smartloop_Feedback
                     aIForm.Show();
                     break;
             }
+        }
+
+        private void centrePannel_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        private void centrePannel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(diff));
+            }
+        }
+
+        private void centrePannel_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
         }
     }
 }

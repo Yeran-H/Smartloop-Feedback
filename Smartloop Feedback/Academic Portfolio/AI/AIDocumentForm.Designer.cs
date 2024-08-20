@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
-    partial class AIForm
+    partial class AIDocumentForm
     {
         private System.ComponentModel.IContainer components = null;
 

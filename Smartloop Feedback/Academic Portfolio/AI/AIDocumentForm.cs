@@ -13,14 +13,14 @@ using System.IO;
 
 namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
-    public partial class AIForm : Form
+    public partial class AIDocumentForm : Form
     {
         private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
         private OpenAIAPI api;
         public Assessment assessment;
         public MainForm mainForm;
 
-        public AIForm(Assessment assessment, MainForm mainForm)
+        public AIDocumentForm(Assessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             api = new OpenAIAPI(apiKey);

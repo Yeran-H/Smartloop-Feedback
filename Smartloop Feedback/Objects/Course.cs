@@ -97,7 +97,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, [group], isFinalised, canvasLink, finalFeedback FROM assessment WHERE courseId = @courseId AND studentId = @studentId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
 
@@ -119,9 +119,10 @@ namespace Smartloop_Feedback.Objects
                         bool group = reader.GetBoolean(11); // Get the group status
                         bool isFinalised = reader.GetBoolean(12); // Get the finalised status
                         string canvasLink = reader.GetString(13); // Get the assessment canvas link
+                        string finalFeedback = reader.IsDBNull(14) ? string.Empty : reader.GetString(14);
 
                         // Add the assessment to the assessment list
-                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, Id, StudentId));
+                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, finalFeedback, Id, StudentId));
                     }
                 }
             }

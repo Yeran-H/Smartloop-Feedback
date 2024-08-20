@@ -42,7 +42,7 @@
             this.nameLb = new System.Windows.Forms.Label();
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
+            this.centrePannel = new System.Windows.Forms.Panel();
             this.formLoaderPl = new System.Windows.Forms.Panel();
             this.exitPb = new System.Windows.Forms.PictureBox();
             this.titleLb = new System.Windows.Forms.Label();
@@ -50,7 +50,7 @@
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.centrePannel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
             // 
@@ -237,17 +237,20 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
-            // panel3
+            // centrePannel
             // 
-            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
-            this.panel3.Controls.Add(this.formLoaderPl);
-            this.panel3.Controls.Add(this.exitPb);
-            this.panel3.Controls.Add(this.titleLb);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.panel3.Location = new System.Drawing.Point(185, 0);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(750, 538);
-            this.panel3.TabIndex = 2;
+            this.centrePannel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.centrePannel.Controls.Add(this.formLoaderPl);
+            this.centrePannel.Controls.Add(this.exitPb);
+            this.centrePannel.Controls.Add(this.titleLb);
+            this.centrePannel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.centrePannel.Location = new System.Drawing.Point(185, 0);
+            this.centrePannel.Name = "centrePannel";
+            this.centrePannel.Size = new System.Drawing.Size(750, 538);
+            this.centrePannel.TabIndex = 2;
+            this.centrePannel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseDown);
+            this.centrePannel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseMove);
+            this.centrePannel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseUp);
             // 
             // formLoaderPl
             // 
@@ -288,7 +291,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(935, 538);
-            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.centrePannel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -301,8 +304,8 @@
             this.panel2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.centrePannel.ResumeLayout(false);
+            this.centrePannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
             this.ResumeLayout(false);
 
@@ -320,7 +323,7 @@
         private System.Windows.Forms.Button academicBtn;
         private System.Windows.Forms.Button resultBtn;
         private System.Windows.Forms.Panel navPl;
-        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel centrePannel;
         private System.Windows.Forms.Label titleLb;
         private System.Windows.Forms.PictureBox exitPb;
         private System.Windows.Forms.PictureBox pictureBox1;

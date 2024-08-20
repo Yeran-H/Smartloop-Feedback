@@ -1,14 +1,20 @@
-﻿using System;
+﻿using OpenAI_API;
+using OpenAI_API.Chat;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
+using System.Web.UI;
 
 namespace Smartloop_Feedback.Objects
 {
     public class Assessment
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
+        private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
+        private OpenAIAPI api;
 
         // Public properties for assessment details
         public int Id { get; private set; } // Assessment ID
@@ -25,14 +31,16 @@ namespace Smartloop_Feedback.Objects
         public bool Group { get; set; } // Is the assessment group-based?
         public bool IsFinalised { get; set; } // Is the assessment finalised?
         public string CanvasLink { get; set; } // Link to the assessment's Canvas page
+        public string FinalFeedback {  get; set; }
         public List<Criteria> CriteriaList { get; set; } // List of criteria for the assessment
         public List<CheckList> CheckList { get; set; } // List of checklist items for the assessment
         public SortedDictionary<int, FeedbackResult> FeedbackList { get; set; }
+        public List<Tuple<string, string>> PastAssessment {  get; set; }
         public int CourseId { get; set; } // ID of the course associated with the assessment
         public int StudentId { get; set; } // ID of the student associated with the assessment
 
         // Constructor to initialize an Assessment object and fetch criteria and checklist from the database
-        public Assessment(int id, string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
+        public Assessment(int id, string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, string finalFeedback, int courseId, int studentId)
         {
             Id = id;
             Name = name;
@@ -48,6 +56,7 @@ namespace Smartloop_Feedback.Objects
             Group = group;
             IsFinalised = isFinalised;
             CanvasLink = canvasLink;
+            FinalFeedback = finalFeedback;
             CourseId = courseId;
             StudentId = studentId;
             CriteriaList = new List<Criteria>(); // Initialize the criteria list
@@ -164,7 +173,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
+                SqlCommand cmd = new SqlCommand("SELECT id, attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, previousAssessmentId FROM feedbackResult WHERE assessmentId = @assessmentId AND studentId = @studentId",conn); 
 
                 cmd.Parameters.AddWithValue("@assessmentId", Id); 
                 cmd.Parameters.AddWithValue("@studentId", StudentId); 
@@ -181,6 +190,7 @@ namespace Smartloop_Feedback.Objects
                         string notes = reader.IsDBNull(5) ? null : reader.GetString(5);
                         string feedbackText = reader.GetString(6);
                         string previousAttemptId = reader.IsDBNull(7) ? null : reader.GetString(7);
+                        string previousAssessmentId = reader.IsDBNull(8) ? null : reader.GetString(8);
 
                         int[] intArray;
 
@@ -197,8 +207,23 @@ namespace Smartloop_Feedback.Objects
                             intArray = new int[0];
                         }
 
+                        string[] stringArray;
 
-                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, feedbackText, intArray, StudentId, Id));
+                        if (!string.IsNullOrEmpty(previousAssessmentId))
+                        {
+                            stringArray = previousAssessmentId
+                                .Split(',')
+                                .Where(s => !string.IsNullOrWhiteSpace(s))
+                                .ToArray();
+                        }
+                        else
+                        {
+                            stringArray = new string[0];
+                        }
+
+
+
+                        FeedbackList.Add(attempt, new FeedbackResult(feedbackId, attempt, teacherFeedback, fileName, fileData, notes, feedbackText, intArray, stringArray, StudentId, Id));
                     }
                 }
             }
@@ -216,6 +241,11 @@ namespace Smartloop_Feedback.Objects
             foreach (Criteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
+            }
+
+            foreach (FeedbackResult feedbackResult in FeedbackList.Values)
+            {
+                feedbackResult.DeleteFeedbackFromDatabase();
             }
 
             using (SqlConnection conn = new SqlConnection(connStr))
@@ -254,6 +284,12 @@ namespace Smartloop_Feedback.Objects
         // Update the assessment details in the database
         public void UpdateAssessmentToDatabase(string description, DateTime date, bool isFinalised)
         {
+            if (isFinalised && IsFinalised != isFinalised)
+            {
+                GenerateFinalFeedback();
+            }
+
+
             Description = description;
             Date = date;
             IsFinalised = isFinalised;
@@ -270,6 +306,7 @@ namespace Smartloop_Feedback.Objects
                         description = @description,
                         date = @date,
                         isFinalised = @isFinalised
+                        FinalFeedback = @FinalFeedback
                     WHERE
                         id = @id";
 
@@ -282,12 +319,42 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
+                    cmd.Parameters.AddWithValue("@FinalFeedback", FinalFeedback);
 
                     // Execute the update command
                     cmd.ExecuteNonQuery();
                 }
             }
         }
+
+        private async void GenerateFinalFeedback()
+        {
+            api = new OpenAIAPI(apiKey);
+            var conversation = api.Chat.CreateConversation();
+
+            // Append system message
+            conversation.AppendMessage(ChatMessageRole.System, "You are an intelligent and empathetic educational assistant. Your goal is to analyze the improvements the student has made across multiple attempts and provide a summary of their progress, along with suggestions for further improvement.");
+
+            // Append user messages
+            conversation.AppendMessage(ChatMessageRole.User, $"Please provide a general summary of the student's progress based on their previous feedback, highlighting areas of improvement and areas that still need attention.");
+
+            // Loop through previous feedback and append to conversation
+            if (FeedbackList.Count > 0)
+            {
+                conversation.AppendMessage(ChatMessageRole.User, "Here are the previous attemps:");
+                foreach (FeedbackResult feedbackResult in FeedbackList.Values)
+                {
+                    conversation.AppendMessage(ChatMessageRole.User, feedbackResult.Feedback);
+                }
+            }
+
+            // Request a general progress summary from the AI
+            conversation.AppendMessage(ChatMessageRole.User, "Based on the provided previous feedbacks, please provide a general summary of the student's progress, including specific improvements made and areas that still require attention. Include actionable suggestions for further improvement.");
+
+            // Get the response from the AI
+            FinalFeedback = await conversation.GetResponseFromChatbotAsync();
+        }
+
 
         // Update the assessment details in the database
         public void UpdateAssessmentToDatabase(string title, string description, DateTime date, string type, double mark, double weight, bool individual, bool group, string canvasLink)
@@ -372,5 +439,29 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void GeneratePastAssessment()
+        {
+            PastAssessment = new List<Tuple<string, string>>();
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, finalFeedback FROM assessment WHERE studentId = @studentId AND courseId = @courseId AND isFinalised = TRUE", conn); // SQL query to fetch criteria
+                cmd.Parameters.AddWithValue("@courseId", CourseId);
+                cmd.Parameters.AddWithValue("@studentId", StudentId); 
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        string name = reader.GetString(0);
+                        string finalFeedback = reader.GetString(1);
+                        PastAssessment.Add(Tuple.Create(name, finalFeedback)); // Add the pair to the list
+                    }
+                }
+            }
+        }
+
     }
 }

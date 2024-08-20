@@ -1,14 +1,9 @@
-﻿using System.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System;
 using System.Configuration;
-using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
-using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -31,6 +26,11 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
+        // Fields to track dragging
+        private bool dragging = false;
+        private Point dragCursorPoint;
+        private Point dragFormPoint;
+
         // Constructor for the login form
         public LoginForm()
         {
@@ -45,7 +45,7 @@ namespace Smartloop_Feedback
                 if (control is TextBox)
                 {
                     (control as TextBox).TextChanged += new EventHandler(TextBox_TextChanged);
-                    (control as TextBox).Enter += new EventHandler(TextBox_Enter); 
+                    (control as TextBox).Enter += new EventHandler(TextBox_Enter);
                 }
             }
 
@@ -158,7 +158,14 @@ namespace Smartloop_Feedback
                         if (reader.Read()) // If a matching record is found
                         {
                             // Create a new Student object from the database record
-                            Student student = new Student(reader.GetInt32(0), reader.GetString(1), reader.GetString(2), reader.GetString(3), reader.GetString(4), reader.GetFieldValue<byte[]>(5));
+                            Student student = new Student(
+                                reader.GetInt32(0),
+                                reader.IsDBNull(1) ? null : reader.GetString(1),
+                                reader.IsDBNull(2) ? null : reader.GetString(2),
+                                reader.IsDBNull(3) ? null : reader.GetString(3),
+                                reader.IsDBNull(4) ? null : reader.GetString(4),
+                                reader.IsDBNull(5) ? null : reader.GetFieldValue<byte[]>(5)
+                            );
 
                             // Invoke to update UI thread
                             this.Invoke(new Action(() =>
@@ -226,6 +233,27 @@ namespace Smartloop_Feedback
             passwordTb.Text = Properties.Settings.Default.Password;
             passwordTb.PasswordChar = '*';
             rememberMeCb.Checked = !string.IsNullOrEmpty(Properties.Settings.Default.Username);
+        }
+
+        private void headerPanel_MouseDown(object sender, MouseEventArgs e)
+        {
+            dragging = true;
+            dragCursorPoint = Cursor.Position;
+            dragFormPoint = this.Location;
+        }
+
+        private void headerPanel_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (dragging)
+            {
+                Point diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                this.Location = Point.Add(dragFormPoint, new Size(diff));
+            }
+        }
+
+        private void headerPanel_MouseUp(object sender, MouseEventArgs e)
+        {
+            dragging = false;
         }
     }
 }
