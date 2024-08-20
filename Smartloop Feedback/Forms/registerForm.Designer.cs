@@ -309,6 +309,9 @@ namespace Smartloop_Feedback
             this.headerPanel.Name = "headerPanel";
             this.headerPanel.Size = new System.Drawing.Size(314, 40);
             this.headerPanel.TabIndex = 33;
+            this.headerPanel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseDown);
+            this.headerPanel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseMove);
+            this.headerPanel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.headerPanel_MouseUp);
             // 
             // formTitle
             // 
