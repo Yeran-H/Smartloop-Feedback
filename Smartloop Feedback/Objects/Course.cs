@@ -275,7 +275,7 @@ namespace Smartloop_Feedback.Objects
 
             foreach (var assessment in AssessmentList.Values)
             {
-                if (assessment.IsFinalised)
+                if (assessment.IsFinalised && assessment.Weight > 0)
                 {
                     totalWeightedMarks += (assessment.FinalMark / assessment.Mark) * assessment.Weight;
                     totalWeight += assessment.Weight;
@@ -294,7 +294,7 @@ namespace Smartloop_Feedback.Objects
 
             foreach (var assessment in AssessmentList.Values)
             {
-                if (assessment.IsFinalised)
+                if (assessment.IsFinalised && assessment.Weight > 0)
                 {
                     totalWeightedMarks += (assessment.FinalMark / assessment.Mark) * assessment.Weight;
                     totalWeight += assessment.Weight;

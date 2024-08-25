@@ -42,8 +42,14 @@ namespace Smartloop_Feedback
             panelCriteria.Visible = false;
 
             // Configure the DataGridView for criteria
-            LoadCriteriaData();
-            LoadAttemptData();
+            if(assessment.CriteriaList.Count != 0)
+            {
+                LoadCriteriaData();
+            }
+            if(assessment.FeedbackList.Count != 0)
+            {
+                LoadAttemptData();
+            }
             isFinalised();
         }
 
@@ -254,12 +260,13 @@ namespace Smartloop_Feedback
 
         private void markTb_KeyPress(object sender, KeyPressEventArgs e)
         {
-            // Check if the key pressed is not a digit or '/'
-            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '/' && !char.IsControl(e.KeyChar))
+            // Check if the key pressed is not a digit, '/', or another allowed character like '.'
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '/' && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
             {
-                // If it's not, then handle the event and prevent the character from being entered
+                // If it's not an allowed character, then handle the event and prevent the character from being entered
                 e.Handled = true;
             }
+
         }
 
         private void bacBtn_Click(object sender, EventArgs e)

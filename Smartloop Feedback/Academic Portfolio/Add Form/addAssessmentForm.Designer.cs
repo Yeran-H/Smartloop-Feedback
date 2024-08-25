@@ -418,8 +418,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(738, 438);
-            this.Controls.Add(this.panelCriteria);
             this.Controls.Add(this.panelDetails);
+            this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "AddAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

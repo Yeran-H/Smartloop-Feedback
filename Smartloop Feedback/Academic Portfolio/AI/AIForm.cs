@@ -235,7 +235,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
                 foreach (int item in previousAttemptCb.CheckedItems)
                 {
-                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past general feedback: {assessment.PastAssessment[item].Item2}");
+                    conversation.AppendMessage(ChatMessageRole.User, $"Previous History of past general feedback: {assessment.PastAssessment[item - 1].Item2}");
                 }
             }
 

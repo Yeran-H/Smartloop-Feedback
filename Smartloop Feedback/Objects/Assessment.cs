@@ -284,7 +284,7 @@ namespace Smartloop_Feedback.Objects
         // Update the assessment details in the database
         public void UpdateAssessmentToDatabase(string description, DateTime date, bool isFinalised)
         {
-            if (isFinalised && IsFinalised != isFinalised)
+            if (isFinalised && FinalFeedback == "")
             {
                 GenerateFinalFeedback();
             }
@@ -305,8 +305,8 @@ namespace Smartloop_Feedback.Objects
                         finalMark = @finalMark,
                         description = @description,
                         date = @date,
-                        isFinalised = @isFinalised
-                        FinalFeedback = @FinalFeedback
+                        isFinalised = @isFinalised,
+                        finalFeedback = @finalFeedback
                     WHERE
                         id = @id";
 
@@ -319,7 +319,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
                     cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
-                    cmd.Parameters.AddWithValue("@FinalFeedback", FinalFeedback);
+                    cmd.Parameters.AddWithValue("@finalFeedback", FinalFeedback ?? (object)DBNull.Value);
 
                     // Execute the update command
                     cmd.ExecuteNonQuery();
@@ -447,7 +447,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT name, finalFeedback FROM assessment WHERE studentId = @studentId AND courseId = @courseId AND isFinalised = TRUE", conn); // SQL query to fetch criteria
+                SqlCommand cmd = new SqlCommand("SELECT name, finalFeedback, isFinalised FROM assessment WHERE studentId = @studentId AND courseId = @courseId AND isFinalised = 1", conn); // SQL query to fetch criteria
                 cmd.Parameters.AddWithValue("@courseId", CourseId);
                 cmd.Parameters.AddWithValue("@studentId", StudentId); 
 

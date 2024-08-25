@@ -252,7 +252,8 @@ namespace Smartloop_Feedback.Forms
         // Event handler to allow only numbers to be entered in the TextBox
         private void numberOnly_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            // Check if the key pressed is not a digit, '/', or another allowed character like '.'
+            if (!char.IsDigit(e.KeyChar) && e.KeyChar != '/' && e.KeyChar != '.' && !char.IsControl(e.KeyChar))
             {
                 e.Handled = true;
             }

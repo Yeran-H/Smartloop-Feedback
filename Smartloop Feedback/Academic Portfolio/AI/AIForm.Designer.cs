@@ -173,7 +173,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Aptos", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(262, 254);
+            this.label1.Location = new System.Drawing.Point(251, 254);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(237, 24);
             this.label1.TabIndex = 59;
