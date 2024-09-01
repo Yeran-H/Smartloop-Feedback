@@ -75,7 +75,7 @@ namespace Smartloop_Feedback
                 semester.CourseList = new SortedDictionary<int,Course>();
             }
 
-            using (var addCourseForm = new AddCourseForm())
+            using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString()))
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK)
                 {

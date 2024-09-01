@@ -10,7 +10,7 @@ namespace Smartloop_Feedback
     {
         private static string connectionString = "Server=(localdb)\\MSSQLLocalDB;Integrated Security=true;";
         private static string databaseName = "smartloop_feedbackdb";
-        private static string sqlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SQL\smartloop FeedbackDB.sql");
+        private static string sqlFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"\Smartloop Feedback\SQL\smartloop FeedbackDB.sql");
 
         /// <summary>
         /// The main entry point for the application.

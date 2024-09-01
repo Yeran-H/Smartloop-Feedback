@@ -219,7 +219,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             conversation.AppendMessage(ChatMessageRole.User, $"Please divide your response into four sections titled 'Grade', 'Feedback', 'Next Steps' and 'Criterion', specify the rating based on the rating the student received.");
             conversation.AppendMessage(ChatMessageRole.User, $"Assessment Document: {assessmentDocument}, Teacher's Comments: {teacherComments}, Rubric: {rubric}");
 
-            if(previousAttemptCb.CheckedItems != null)
+            if(previousAttemptCb.CheckedItems.Count != 0)
             {
                 conversation.AppendMessage(ChatMessageRole.User, "Listed below is past attempt of getting feedback under same assessment and course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
                
@@ -229,7 +229,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 }
             }
 
-            if (previousAssessmentCb.CheckedItems != null)
+            if (previousAssessmentCb.CheckedItems.Count != 0)
             {
                 conversation.AppendMessage(ChatMessageRole.User, "Listed below is past assessment from same course, use this as a guide to continously improve and provide helpful personalise dynamic feedback");
 

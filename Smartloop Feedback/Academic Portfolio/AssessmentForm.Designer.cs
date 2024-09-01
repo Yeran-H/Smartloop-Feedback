@@ -44,13 +44,13 @@
             this.attemptBtn = new System.Windows.Forms.Button();
             this.finaliseCb = new System.Windows.Forms.CheckBox();
             this.panelDetails = new System.Windows.Forms.Panel();
+            this.feedbackRb = new System.Windows.Forms.RichTextBox();
             this.attemptDgv = new System.Windows.Forms.DataGridView();
             this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelCriteria = new System.Windows.Forms.Panel();
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.feedbackRb = new System.Windows.Forms.RichTextBox();
             this.panelDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
@@ -259,6 +259,20 @@
             this.panelDetails.Size = new System.Drawing.Size(728, 432);
             this.panelDetails.TabIndex = 42;
             // 
+            // feedbackRb
+            // 
+            this.feedbackRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.feedbackRb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.feedbackRb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.feedbackRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.feedbackRb.Location = new System.Drawing.Point(31, 142);
+            this.feedbackRb.Name = "feedbackRb";
+            this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.feedbackRb.Size = new System.Drawing.Size(217, 219);
+            this.feedbackRb.TabIndex = 43;
+            this.feedbackRb.Text = "Feedback";
+            this.toolTip1.SetToolTip(this.feedbackRb, "General Feedback on Assessment");
+            // 
             // attemptDgv
             // 
             this.attemptDgv.AllowUserToAddRows = false;
@@ -329,21 +343,6 @@
             this.criteriaDgv.Size = new System.Drawing.Size(696, 337);
             this.criteriaDgv.TabIndex = 0;
             this.toolTip1.SetToolTip(this.criteriaDgv, "Rubric of Assessment");
-            // 
-            // feedbackRb
-            // 
-            this.feedbackRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.feedbackRb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.feedbackRb.Enabled = false;
-            this.feedbackRb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.feedbackRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.feedbackRb.Location = new System.Drawing.Point(31, 142);
-            this.feedbackRb.Name = "feedbackRb";
-            this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.feedbackRb.Size = new System.Drawing.Size(217, 219);
-            this.feedbackRb.TabIndex = 43;
-            this.feedbackRb.Text = "Feedback";
-            this.toolTip1.SetToolTip(this.feedbackRb, "General Feedback on Assessment");
             // 
             // AssessmentForm
             // 

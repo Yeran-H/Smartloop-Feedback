@@ -456,7 +456,7 @@ namespace Smartloop_Feedback.Objects
                     while (reader.Read()) // Read each row
                     {
                         string name = reader.GetString(0);
-                        string finalFeedback = reader.GetString(1);
+                        string finalFeedback = reader.IsDBNull(1) ? null : reader.GetString(1);
                         PastAssessment.Add(Tuple.Create(name, finalFeedback)); // Add the pair to the list
                     }
                 }

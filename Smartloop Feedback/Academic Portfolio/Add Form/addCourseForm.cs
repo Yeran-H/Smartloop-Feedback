@@ -18,6 +18,7 @@ namespace Smartloop_Feedback
     {
         public Course course; // Public Course object to store course details
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Dictionary to track if a TextBox has been clicked
+        private String year;
 
         // Import the CreateRoundRectRgn function from Gdi32.dll to create rounded rectangles
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -31,7 +32,7 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
-        public AddCourseForm()
+        public AddCourseForm(string year)
         {
             InitializeComponent(); // Initialize form components
 
@@ -54,6 +55,8 @@ namespace Smartloop_Feedback
                     (control as TextBox).Enter += new EventHandler(TextBox_Enter);
                 }
             }
+
+            this.year = year;
         }
 
         // Event handler to enable the save button if all TextBoxes are filled
@@ -186,7 +189,7 @@ namespace Smartloop_Feedback
         private async void codeTb_Leave(object sender, EventArgs e)
         {
             string courseCode = codeTb.Text;
-            string url = $"https://handbook.uts.edu.au/subjects/{courseCode}.html"; // URL to fetch course data
+            string url = $"https://handbook.uts.edu.au/{year}/subjects/{courseCode}.html"; // URL to fetch course data
             var data = await GetCourseDataAsync(url); // Fetch course data
 
             if (data != null && data.Count == 3)
