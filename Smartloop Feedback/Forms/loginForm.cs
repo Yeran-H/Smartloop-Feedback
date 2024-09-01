@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects;
+using System;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Drawing;
@@ -116,33 +117,47 @@ namespace Smartloop_Feedback
         }
 
         // Event handler for the register button click event to open the registration form
-        private void registerBtn_Click(object sender, EventArgs e)
+        private void registerStudentBtn_Click(object sender, EventArgs e)
         {
-            RegisterForm register = new RegisterForm(); // Create a new registration form
+            RegisterForm register = new RegisterForm(true); // Create a new registration form
             register.Show(); // Show the registration form
             this.Hide(); // Hide the current form
         }
 
         // Event handler for the sign-in button click event to authenticate the user
-        private async void signBtn_Click(object sender, EventArgs e)
+        private void signBtn_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(usernameTb.Text) || usernameTb.Text == "Student ID")
+            int Id = Convert.ToInt32(usernameTb.Text); // Get ID from username textbox
+            string password = passwordTb.Text; // Get password from password textbox
+
+            if (string.IsNullOrEmpty(usernameTb.Text) || usernameTb.Text == "Student ID" || usernameTb.Text == "Tutor ID")
             {
-                MessageBox.Show("Please enter your Student ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please enter your ID.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (string.IsNullOrEmpty(passwordTb.Text) || passwordTb.Text == "Password")
+            if (string.IsNullOrEmpty(password) || password == "Password")
             {
                 MessageBox.Show("Please enter your password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
+            if(studetnRb.Checked)
+            {
+                ValidateStudent(Id, password);
+            }
+            else
+            {
+                ValidateTutor(Id, password);
+            }
+
+            SaveCredentials(); // Save credentials if Remember Me is checked
+        }
+
+        public async void ValidateStudent(int studentId, string password)
+        {
             await Task.Run(() =>
             {
-                int studentId = Convert.ToInt32(usernameTb.Text); // Get student ID from username textbox
-                string password = passwordTb.Text; // Get password from password textbox
-
                 // Create a new SQL connection using the connection string
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
@@ -188,8 +203,56 @@ namespace Smartloop_Feedback
                     }
                 }
             });
+        }
 
-            SaveCredentials(); // Save credentials if Remember Me is checked
+        public async void ValidateTutor(int tutorId, string password)
+        {
+            await Task.Run(() =>
+            {
+                // Create a new SQL connection using the connection string
+                using (SqlConnection conn = new SqlConnection(connStr))
+                {
+                    conn.Open(); // Open the connection
+                    // Create a SQL command to select student details
+                    SqlCommand cmd = new SqlCommand("SELECT tutorID, name, email, password, profileImage FROM Tutor WHERE tutorID = @tutorID AND password = @password", conn);
+                    cmd.Parameters.AddWithValue("@tutorId", tutorId); // Add student ID parameter
+                    cmd.Parameters.AddWithValue("@password", password); // Add password parameter
+
+                    // Execute the command and read the results
+                    using (SqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        if (reader.Read()) // If a matching record is found
+                        {
+                            // Create a new Student object from the database record
+                            Tutor tutor = new Tutor(
+                                reader.GetInt32(0),
+                                reader.IsDBNull(1) ? null : reader.GetString(1),
+                                reader.IsDBNull(2) ? null : reader.GetString(2),
+                                reader.IsDBNull(3) ? null : reader.GetString(3),
+                                reader.IsDBNull(5) ? null : reader.GetFieldValue<byte[]>(5)
+                            );
+
+                            // Invoke to update UI thread
+                            this.Invoke(new Action(() =>
+                            {
+                                // Create and show the main form, passing the student object
+                                //MainForm main = new MainForm(tutor);
+                                //main.Show();
+                                //this.Hide(); // Hide the login form
+                            }));
+                        }
+                        else
+                        {
+                            // Invoke to update UI thread
+                            this.Invoke(new Action(() =>
+                            {
+                                // Show an error message if login fails
+                                MessageBox.Show("Incorrect Login", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            }));
+                        }
+                    }
+                }
+            });
         }
 
         // Override ProcessCmdKey to detect Enter key presses
@@ -254,6 +317,13 @@ namespace Smartloop_Feedback
         private void headerPanel_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+        }
+
+        private void registerTutorBtn_Click(object sender, EventArgs e)
+        {
+            RegisterForm register = new RegisterForm(false); // Create a new registration form
+            register.Show(); // Show the registration form
+            this.Hide(); // Hide the current form
         }
     }
 }
