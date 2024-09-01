@@ -152,3 +152,13 @@ CREATE TABLE feedbackResult (
     FOREIGN KEY (studentId) REFERENCES student(studentId)
 );
 GO
+
+-- Create the tutor table
+CREATE TABLE tutor (
+    tutorId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    profileImage VARBINARY(MAX)
+);
+GO
