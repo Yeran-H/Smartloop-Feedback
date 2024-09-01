@@ -116,9 +116,9 @@ namespace Smartloop_Feedback
         }
 
         // Event handler for the register button click event to open the registration form
-        private void registerBtn_Click(object sender, EventArgs e)
+        private void registerStudentBtn_Click(object sender, EventArgs e)
         {
-            RegisterForm register = new RegisterForm(); // Create a new registration form
+            RegisterForm register = new RegisterForm(true); // Create a new registration form
             register.Show(); // Show the registration form
             this.Hide(); // Hide the current form
         }
@@ -254,6 +254,13 @@ namespace Smartloop_Feedback
         private void headerPanel_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+        }
+
+        private void registerTutorBtn_Click(object sender, EventArgs e)
+        {
+            RegisterForm register = new RegisterForm(false); // Create a new registration form
+            register.Show(); // Show the registration form
+            this.Hide(); // Hide the current form
         }
     }
 }

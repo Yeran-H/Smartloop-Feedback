@@ -87,7 +87,7 @@ namespace Smartloop_Feedback
             this.studentTb.Size = new System.Drawing.Size(219, 20);
             this.studentTb.TabIndex = 3;
             this.studentTb.Text = "Student ID";
-            this.toolTip1.SetToolTip(this.studentTb, "Please enter your student ID.");
+            this.toolTip1.SetToolTip(this.studentTb, "Please enter your ID.");
             this.studentTb.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MoveNextOnEnter);
             this.studentTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.studentTb_KeyPress);
             // 

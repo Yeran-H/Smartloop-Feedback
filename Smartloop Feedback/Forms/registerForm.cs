@@ -8,6 +8,9 @@ using System.Linq;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Runtime.InteropServices;
+using Org.BouncyCastle.Tls;
+using System.Windows.Forms.DataVisualization.Charting;
+using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback
 {
@@ -15,6 +18,7 @@ namespace Smartloop_Feedback
     {
         // Connection string for the database
         private string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
+        private bool isStudent;
 
         // Dictionary to track if a textbox has been clicked
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>();
@@ -36,7 +40,7 @@ namespace Smartloop_Feedback
         private Point dragCursorPoint;
         private Point dragFormPoint;
 
-        public RegisterForm()
+        public RegisterForm(bool isStudent)
         {
             InitializeComponent();
 
@@ -58,6 +62,16 @@ namespace Smartloop_Feedback
                     textBox.TextChanged += TextBox_TextChanged;
                     textBox.Enter += TextBox_Enter;
                 }
+            }
+
+            this.isStudent = isStudent;
+            
+            if (isStudent)
+            {
+                studentTb.Text = "Teacher ID";
+                degreeTb.Visible = false;
+                degreePl.Visible = false;
+                degreePb.Visible = false;
             }
         }
 
@@ -186,10 +200,10 @@ namespace Smartloop_Feedback
         {
             string name = nameTb.Text;
             string email = emailTb.Text;
-            int studentId = Convert.ToInt32(studentTb.Text);
+            int userId = Convert.ToInt32(studentTb.Text);
             string password = passwordTb.Text;
-            string degree = degreeTb.Text;
             byte[] profileImage = null;
+            string degree = isStudent ? degreeTb.Text : null;
 
             // Convert the profile image to a byte array
             if (profilePb.Image != null)
@@ -201,80 +215,10 @@ namespace Smartloop_Feedback
                 }
             }
 
-            Student newStudent = new Student(studentId, name, email, password, degree, profileImage);
-
-            // Validate the password
-            if (!newStudent.ValidatePassword())
-            {
-                MessageBox.Show("Password must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Validate the student ID
-            if (ValidateStudentId(newStudent.StudentId))
-            {
-                MessageBox.Show("Student ID must be 8 characters long and unique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Validate the email address
-            if (!newStudent.ValidateEmail())
-            {
-                MessageBox.Show("Email must end with @student.uts.edu.au or @gmail.com.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Insert the new student record into the database
-            using (SqlConnection conn = new SqlConnection(connStr))
-            {
-                conn.Open();
-                string sql = "INSERT INTO student (name, email, studentId, password, degree, profileImage) VALUES (@name, @mail, @studentId, @password, @degree, @profileImage)";
-
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@name", name);
-                    cmd.Parameters.AddWithValue("@mail", email);
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    cmd.Parameters.AddWithValue("@password", password);
-                    cmd.Parameters.AddWithValue("@degree", degree);
-                    SqlParameter profileImageParam = new SqlParameter("@profileImage", SqlDbType.VarBinary);
-                    profileImageParam.Value = profileImage != null ? profileImage : (object)DBNull.Value;
-                    cmd.Parameters.Add(profileImageParam);
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            // Show the main form and hide the current form
-            MainForm main = new MainForm(newStudent);
-            main.Show();
-            this.Hide();
-        }
-
-        // Validate student ID by checking length and database existence
-        private bool ValidateStudentId(int studentId)
-        {
-            string studentIdStr = studentId.ToString();
-
-            // Check if the length of the studentId is 8
-            if (studentIdStr.Length != 8)
-            {
-                return false;
-            }
-
-            bool exists = false;
-
-            using (SqlConnection conn = new SqlConnection(connStr))
-            {
-                conn.Open();
-                string sql = "SELECT COUNT(1) FROM student WHERE studentId = @studentId";
-                using (SqlCommand cmd = new SqlCommand(sql, conn))
-                {
-                    cmd.Parameters.AddWithValue("@studentId", studentId);
-                    exists = (int)cmd.ExecuteScalar() > 0;
-                }
-            }
-
-            return exists;
+            User newUser = new User(userId, email, password, isStudent);
+            
+            // Validate user input
+            if (!newUser.ValidateUserInput()) return;
         }
 
         // Override ProcessCmdKey to detect Enter key presses
@@ -291,7 +235,7 @@ namespace Smartloop_Feedback
         private void headerPanel_MouseDown(object sender, MouseEventArgs e)
         {
             dragging = true;
-            dragCursorPoint = Cursor.Position;
+            dragCursorPoint = System.Windows.Forms.Cursor.Position;
             dragFormPoint = this.Location;
         }
 
@@ -299,7 +243,7 @@ namespace Smartloop_Feedback
         {
             if (dragging)
             {
-                Point diff = Point.Subtract(Cursor.Position, new Size(dragCursorPoint));
+                Point diff = Point.Subtract(System.Windows.Forms.Cursor.Position, new Size(dragCursorPoint));
                 this.Location = Point.Add(dragFormPoint, new Size(diff));
             }
         }
