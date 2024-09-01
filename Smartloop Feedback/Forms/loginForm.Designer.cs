@@ -46,6 +46,8 @@
             this.rememberMeCb = new System.Windows.Forms.CheckBox();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.registerTutorBtn = new System.Windows.Forms.Button();
+            this.studetnRb = new System.Windows.Forms.RadioButton();
+            this.tutorTb = new System.Windows.Forms.RadioButton();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -200,7 +202,7 @@
             this.showPasswordCb.AutoSize = true;
             this.showPasswordCb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.showPasswordCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.showPasswordCb.Location = new System.Drawing.Point(99, 275);
+            this.showPasswordCb.Location = new System.Drawing.Point(152, 273);
             this.showPasswordCb.Name = "showPasswordCb";
             this.showPasswordCb.Size = new System.Drawing.Size(137, 23);
             this.showPasswordCb.TabIndex = 13;
@@ -214,7 +216,7 @@
             this.rememberMeCb.AutoSize = true;
             this.rememberMeCb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rememberMeCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.rememberMeCb.Location = new System.Drawing.Point(99, 300);
+            this.rememberMeCb.Location = new System.Drawing.Point(152, 294);
             this.rememberMeCb.Name = "rememberMeCb";
             this.rememberMeCb.Size = new System.Drawing.Size(126, 23);
             this.rememberMeCb.TabIndex = 14;
@@ -238,12 +240,40 @@
             this.registerTutorBtn.UseVisualStyleBackColor = false;
             this.registerTutorBtn.Click += new System.EventHandler(this.registerTutorBtn_Click);
             // 
+            // studetnRb
+            // 
+            this.studetnRb.AutoSize = true;
+            this.studetnRb.Checked = true;
+            this.studetnRb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold);
+            this.studetnRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.studetnRb.Location = new System.Drawing.Point(37, 272);
+            this.studetnRb.Name = "studetnRb";
+            this.studetnRb.Size = new System.Drawing.Size(81, 23);
+            this.studetnRb.TabIndex = 16;
+            this.studetnRb.TabStop = true;
+            this.studetnRb.Text = "Student";
+            this.studetnRb.UseVisualStyleBackColor = true;
+            // 
+            // tutorTb
+            // 
+            this.tutorTb.AutoSize = true;
+            this.tutorTb.Font = new System.Drawing.Font("Aptos", 11.25F, System.Drawing.FontStyle.Bold);
+            this.tutorTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.tutorTb.Location = new System.Drawing.Point(37, 294);
+            this.tutorTb.Name = "tutorTb";
+            this.tutorTb.Size = new System.Drawing.Size(63, 23);
+            this.tutorTb.TabIndex = 17;
+            this.tutorTb.Text = "Tutor";
+            this.tutorTb.UseVisualStyleBackColor = true;
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(314, 536);
+            this.Controls.Add(this.tutorTb);
+            this.Controls.Add(this.studetnRb);
             this.Controls.Add(this.registerTutorBtn);
             this.Controls.Add(this.rememberMeCb);
             this.Controls.Add(this.showPasswordCb);
@@ -294,5 +324,7 @@
         private System.Windows.Forms.CheckBox rememberMeCb;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button registerTutorBtn;
+        private System.Windows.Forms.RadioButton studetnRb;
+        private System.Windows.Forms.RadioButton tutorTb;
     }
 }

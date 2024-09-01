@@ -13,6 +13,11 @@ namespace Smartloop_Feedback.Objects
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
+        public Tutor(int studentId, string name, string email, string password, byte[] profileImage)
+            : base(studentId, name, email, password, profileImage, false)
+        {
+        }
+
         public Tutor(int tutorId, string name, string email, string password, byte[] profileImage, bool x)
             : base(tutorId, name, email, password, profileImage, false)
         {

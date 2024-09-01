@@ -223,6 +223,7 @@ namespace Smartloop_Feedback
             if(isStudent)
             {
                 Student student = new Student(userId, name, email, password, degree, profileImage, true);
+                
                 MainForm main = new MainForm(student);
                 main.Show();
                 this.Hide();
@@ -230,6 +231,10 @@ namespace Smartloop_Feedback
             else
             {
                 Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
+
+                /*MainForm main = new MainForm(tutor);
+                main.Show();
+                this.Hide(); */
             }
         }
 
