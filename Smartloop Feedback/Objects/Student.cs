@@ -2,39 +2,63 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public class Student
+    public class Student : User
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
         // Public properties for student details
-        public string Name { get; set; } // Student's name
-        public string Email { get; set; } // Student's email
-        public int StudentId { get; set; } // Student's ID
-        public string Password { get; set; } // Student's password
         public string Degree { get; set; } // Student's degree
-        public byte[] ProfileImage { get; set; } // Student's profile image
         public SortedDictionary<int, Year> YearList { get; set; } // List of years for the student
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
         public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage)
+            : base(studentId, name, email, password, profileImage, true)
         {
-            Name = name;
-            Email = email;
-            StudentId = studentId;
-            Password = password;
             Degree = degree;
             ProfileImage = profileImage;
-            YearList = new SortedDictionary<int, Year>(); // Initialize the year list
-            EventList = new Dictionary<int, Event>(); // Initialize the event list
-            LoadYearsFromDatabase(); // Fetch years from the database
-            LoadEventsFromDatabase(); // Fetch events from the database
+            YearList = new SortedDictionary<int, Year>();
+            EventList = new Dictionary<int, Event>();
+            LoadYearsFromDatabase();
+            LoadEventsFromDatabase();
+        }
+
+        public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage, bool x)
+        : base(studentId, name, email, password, profileImage, true)
+        {
+            Degree = degree;
+            ProfileImage = profileImage;
+            YearList = new SortedDictionary<int, Year>();
+            EventList = new Dictionary<int, Event>();
+            AddStudentToDatabase();
+        }
+
+        private void AddStudentToDatabase()
+        {
+            // Insert the new student record into the database
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                string sql = "INSERT INTO student (name, email, studentId, password, degree, profileImage) VALUES (@name, @mail, @studentId, @password, @degree, @profileImage)";
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn))
+                {
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@mail", Email);
+                    cmd.Parameters.AddWithValue("@studentId", Id);
+                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@degree", Degree);
+                    SqlParameter profileImageParam = new SqlParameter("@profileImage", SqlDbType.VarBinary);
+                    profileImageParam.Value = ProfileImage != null ? ProfileImage : (object)DBNull.Value;
+                    cmd.Parameters.Add(profileImageParam);
+                    cmd.ExecuteNonQuery();
+                }
+            }
         }
 
         // Update student details in the database
@@ -64,7 +88,7 @@ namespace Smartloop_Feedback
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@studentId", StudentId);
+                    cmd.Parameters.AddWithValue("@studentId", Id);
                     cmd.Parameters.AddWithValue("@name", Name);
                     cmd.Parameters.AddWithValue("@email", Email);
                     cmd.Parameters.AddWithValue("@password", Password);
@@ -103,7 +127,7 @@ namespace Smartloop_Feedback
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
                     // Add the parameter for studentId
-                    cmd.Parameters.AddWithValue("@studentId", StudentId);
+                    cmd.Parameters.AddWithValue("@studentId", Id);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -130,7 +154,7 @@ namespace Smartloop_Feedback
                 string sql = "SELECT name, id FROM year WHERE studentId = @studentId ORDER BY name"; // SQL query to fetch years
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", Id); // Set the studentId parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
@@ -138,7 +162,7 @@ namespace Smartloop_Feedback
                         {
                             int name = reader.GetInt32(0); // Get the year name
                             int id = reader.GetInt32(1); // Get the year ID
-                            YearList.Add(name, new Year(name, StudentId, id)); // Add the year to the year list
+                            YearList.Add(name, new Year(name, Id, id)); // Add the year to the year list
                         }
                     }
                 }
@@ -155,7 +179,7 @@ namespace Smartloop_Feedback
                 string sql = "SELECT id, name, date, startTime, endTime, courseId, category, color FROM event WHERE studentId = @studentId ORDER BY date"; // SQL query to fetch events
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", Id); // Set the studentId parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
@@ -169,7 +193,7 @@ namespace Smartloop_Feedback
                             int courseId = reader.GetInt32(5);
                             string category = reader.GetString(6);
                             int color = reader.GetInt32(7);
-                            EventList.Add(id, new Event(id, name, date, startTime, endTime, StudentId, courseId, category, color)); // Add the event to the event list
+                            EventList.Add(id, new Event(id, name, date, startTime, endTime, Id, courseId, category, color)); // Add the event to the event list
                         }
                     }
                 }
@@ -212,7 +236,7 @@ namespace Smartloop_Feedback
                 string sql = "SELECT title FROM course WHERE studentId = @studentId"; // SQL query to fetch courses
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", Id); // Set the studentId parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {
@@ -237,7 +261,7 @@ namespace Smartloop_Feedback
                 string sql = "SELECT id FROM course WHERE studentId = @studentId AND title = @courseName"; // SQL query to find course ID
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", Id); // Set the studentId parameter
                     cmd.Parameters.AddWithValue("@courseName", courseName); // Set the courseName parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader

@@ -215,10 +215,22 @@ namespace Smartloop_Feedback
                 }
             }
 
-            User newUser = new User(userId, email, password, isStudent);
+            User newUser = new User(userId, name, email, password, profileImage, isStudent);
             
             // Validate user input
             if (!newUser.ValidateUserInput()) return;
+
+            if(isStudent)
+            {
+                Student student = new Student(userId, name, email, password, degree, profileImage, true);
+                MainForm main = new MainForm(student);
+                main.Show();
+                this.Hide();
+            }
+            else
+            {
+                Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
+            }
         }
 
         // Override ProcessCmdKey to detect Enter key presses

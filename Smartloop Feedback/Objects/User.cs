@@ -13,16 +13,20 @@ namespace Smartloop_Feedback.Objects
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
+        public int Id { get; set; }
+        public string Name { get; set; }
         public string Email {  get; set; }
         public string Password { get; set; }
-        public int Id { get; set; }
+        public byte[] ProfileImage { get; set; }
         public bool IsStudent { get; set; }
 
-        public User(int id, string email, string password, bool isStudent)
+        public User(int id, string name, string email, string password, byte[] profileImage, bool isStudent)
         {
             Email = email;
             Password = password;
             Id = id;
+            Name = name;
+            ProfileImage = profileImage;
             IsStudent = isStudent;
         }
 
