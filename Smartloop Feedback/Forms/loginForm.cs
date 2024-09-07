@@ -236,9 +236,9 @@ namespace Smartloop_Feedback
                             this.Invoke(new Action(() =>
                             {
                                 // Create and show the main form, passing the student object
-                                //MainForm main = new MainForm(tutor);
-                                //main.Show();
-                                //this.Hide(); // Hide the login form
+                                MainForm main = new MainForm(tutor);
+                                main.Show();
+                                this.Hide(); // Hide the login form
                             }));
                         }
                         else
