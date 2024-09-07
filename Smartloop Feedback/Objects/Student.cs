@@ -216,12 +216,6 @@ namespace Smartloop_Feedback
             }
         }
 
-        // Check if a year name is unique within the student's year list
-        public bool UniqueYear(int name)
-        {
-            return !YearList.ContainsKey(name);
-        }
-
         // Get the list of courses for the student
         public List<string> GetCourseList()
         {

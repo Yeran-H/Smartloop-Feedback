@@ -64,18 +64,15 @@ namespace Smartloop_Feedback
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addYearForm = new AddYearForm(student)) // Open the add year form
+            using (var addYearForm = new AddYearForm(user)) // Open the add year form
             {
                 if (addYearForm.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
                 {
                     int yearName = addYearForm.yearName; // Get the new year's name
 
-                    if (buttonCount < 5) // Ensure the button count is less than 5
-                    {
-                        Year year = new Year(yearName, student.Id, addYearForm.semesterNames);
-                        student.YearList.Add(year.Name, year); // Add the new year to the student's year list
-                        InitializeBar(); //Refresh the Bar
-                    }
+                    Year year = new Year(yearName, user.Id, addYearForm.semesterNames);
+                    user.YearList.Add(year.Name, year); // Add the new year to the student's year list
+                    InitializeBar(); //Refresh the Bar
                 }
             }
         }
