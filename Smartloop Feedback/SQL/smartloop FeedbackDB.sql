@@ -58,17 +58,30 @@ GO
 CREATE TABLE course (
     id INT IDENTITY(1,1) PRIMARY KEY,
     code INT,
-    title VARCHAR(225),
+    name VARCHAR(MAX),
     creditPoint INT,
     description VARCHAR(MAX),
-    isCompleted BIT,
-    canvasLink VARCHAR(MAX),
-    semesterId INT,
-    studentId INT,
-    FOREIGN KEY (semesterId) REFERENCES semester(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    year VARCHAR(MAX),
+    semester VARCHAR(MAX),
+    canvasLink VARCHAR(MAX)
 );
 GO
+
+-- Create the course table
+--CREATE TABLE course (
+--    id INT IDENTITY(1,1) PRIMARY KEY,
+--    code INT,
+--    title VARCHAR(225),
+--    creditPoint INT,
+--    description VARCHAR(MAX),
+--    isCompleted BIT,
+--    canvasLink VARCHAR(MAX),
+--    semesterId INT,
+--    studentId INT,
+--    FOREIGN KEY (semesterId) REFERENCES semester(id),
+--    FOREIGN KEY (studentId) REFERENCES student(studentId)
+--);
+--GO
 
 -- Create the assessment table
 CREATE TABLE assessment (

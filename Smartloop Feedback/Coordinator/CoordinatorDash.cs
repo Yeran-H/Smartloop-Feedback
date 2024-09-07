@@ -26,7 +26,7 @@ namespace Smartloop_Feedback.Coordinator
 
         private void CoordinatorDash_Load(object sender, EventArgs e)
         {
-            if (coordinator.courseList != null)
+            if (coordinator.CourseList != null)
             {
                 courseDgv.Rows.Clear(); // Clear existing rows
                 courseDgv.Columns.Clear(); // Clear existing columns
@@ -66,7 +66,7 @@ namespace Smartloop_Feedback.Coordinator
 
 
                 // Add rows to the DataGridView
-                foreach (Course course in coordinator.courseList.Values)
+                foreach (Course course in coordinator.CourseList.Values)
                 {
                     int rowIndex = courseDgv.Rows.Add(course.Year, course.Semester, course.Code, course.Name);
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
