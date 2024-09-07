@@ -205,11 +205,12 @@ namespace Smartloop_Feedback
         public void MenuPanel(int num)
         {
             menuDropPl.Controls.Clear();
+            User user = student != null ? student : (User)tutor;
 
             switch (num)
             {
                 case 0:
-                    AcademicYearBar year = new AcademicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    AcademicYearBar year = new AcademicYearBar(this, user) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     year.FormBorderStyle = FormBorderStyle.None;
                     menuDropPl.Visible = true;
                     this.menuDropPl.Controls.Add(year);

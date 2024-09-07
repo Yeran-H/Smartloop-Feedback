@@ -13,7 +13,6 @@ namespace Smartloop_Feedback
 
         // Public properties for student details
         public string Degree { get; set; } // Student's degree
-        public SortedDictionary<int, Year> YearList { get; set; } // List of years for the student
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
@@ -22,7 +21,6 @@ namespace Smartloop_Feedback
         {
             Degree = degree;
             ProfileImage = profileImage;
-            YearList = new SortedDictionary<int, Year>();
             EventList = new Dictionary<int, Event>();
             LoadYearsFromDatabase();
             LoadEventsFromDatabase();
@@ -33,7 +31,6 @@ namespace Smartloop_Feedback
         {
             Degree = degree;
             ProfileImage = profileImage;
-            YearList = new SortedDictionary<int, Year>();
             EventList = new Dictionary<int, Event>();
             AddStudentToDatabase();
         }

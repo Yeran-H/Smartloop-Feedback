@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -9,68 +10,49 @@ namespace Smartloop_Feedback
     public partial class AcademicYearBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private Student student; // Reference to the student object
-
-        private int buttonCount = 0; // Counter for the number of buttons
-        private Button[] buttons = new Button[5]; // Array to hold the year buttons
-        private Button[] allButtons; // Array to hold all possible buttons
+        private User user;
 
         // Constructor for the AcademicYearBar form
-        public AcademicYearBar(MainForm form, Student student)
+        public AcademicYearBar(MainForm form, User user)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
-            this.student = student; // Set the student reference
+            this.user = user;
             InitializeBar(); // Initialize the year bar with buttons
         }
 
         // Initialize the bar with year buttons based on the student's number of years
         private void InitializeBar()
         {
-            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn }; // Array of all possible buttons
+            Image buttonImage = Properties.Resources.calendar;
+            int buttonCount = 0;
 
-            buttonCount = 0;
-            foreach (Year year in student.YearList.Values)
+            foreach(Year year in user.YearList.Values)
             {
-                Button btn = allButtons[buttonCount]; // Get the button for the current year
-                btn.Visible = true; // Make the button visible
-                btn.Text = year.Name.ToString(); // Set the button text to the year's name
-                buttons[buttonCount] = btn; // Store the button in the array
-                buttons[buttonCount].Click += YearButton_Click; // Attach the event handler to the button
-
+                Button btn = new Button
+                {
+                    Text = year.Name.ToString(),
+                    Dock = DockStyle.Top,
+                    Height = 42,
+                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Aptos", 11F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(193, 193, 193),
+                    FlatAppearance = { BorderSize = 0 },
+                    Image = buttonImage,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+                btn.Click += new EventHandler(YearButton_Click);
+                Controls.Add(btn);
                 buttonCount++;
             }
 
-            // Hide the add button if the maximum number of buttons (5) is reached
-            if (buttonCount == 5)
-            {
-                addBtn.Visible = false;
-            }
-
-            UpdatePanel(); // Update the panel to reflect changes
-        }
-
-        // Update the panel by re-adding controls in the correct order
-        private void UpdatePanel()
-        {
-            Controls.Clear(); // Clear all controls
-
-            // Add the year buttons in reverse order to dock them at the top
-            for (int i = buttonCount - 1; i >= 0; i--)
-            {
-                Controls.Add(buttons[i]);
-                buttons[i].Dock = DockStyle.Top;
-            }
-
-            // Add the add button if there are less than 5 buttons
-            if (buttonCount < 5)
-            {
-                Controls.Add(addBtn);
-                addBtn.Dock = DockStyle.Top;
-            }
-
-            Controls.Add(backBtn); // Add the back button
+            addBtn.Dock = DockStyle.Top;
+            Controls.Add(addBtn);
             backBtn.Dock = DockStyle.Top;
+            Controls.Add(backBtn);
+
+            int totalHeight = backBtn.Height + addBtn.Height + 42 * buttonCount;
+            this.ClientSize = new Size(170, totalHeight);
         }
 
         // Event handler for the back button click
