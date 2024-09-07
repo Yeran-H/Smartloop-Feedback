@@ -62,6 +62,7 @@
             this.courseDgv.ReadOnly = true;
             this.courseDgv.Size = new System.Drawing.Size(715, 383);
             this.courseDgv.TabIndex = 50;
+            this.courseDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.courseDgv_CellClick);
             // 
             // CoordinatorDash
             // 

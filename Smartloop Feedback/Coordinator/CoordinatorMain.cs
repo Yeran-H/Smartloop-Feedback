@@ -33,6 +33,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
         private Point dragFormPoint;
 
         private Smartloop_Feedback.Objects.Coordinator coordinator;
+        public int[] position;
 
         public CoordinatorMain(Smartloop_Feedback.Objects.Coordinator coordinator)
         {
@@ -44,6 +45,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
 
             this.coordinator = coordinator;
+            position = new int[5];
             MainPannel(0);
         }
 
@@ -59,6 +61,15 @@ namespace Smartloop_Feedback.Coordinator_Folder
                     dashboard.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(dashboard);
                     dashboard.Show();
+                    break;
+                case 1:
+                    titleLb.Text = coordinator.CourseList[position[0]].Name;
+                    this.formLoaderPl.Controls.Clear();
+
+                    CoordinatorCourse course = new CoordinatorCourse(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    course.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(course);
+                    course.Show();
                     break;
             }
 

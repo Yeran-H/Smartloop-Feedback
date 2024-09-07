@@ -66,5 +66,50 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void UpdateCourseToDatabase(int code, string name, int creditPoint, string description, string year, string semester, string canvasLink)
+        {
+            Code = code;
+            Name = name;
+            CreditPoint = creditPoint;
+            Description = description;
+            Year = year;
+            Semester = semester;
+            CanvasLink = canvasLink;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE course
+                    SET 
+                        code = @code,
+                        name = @name,
+                        creditPoint = @creditPoint,
+                        description = @description,
+                        year = @year,
+                        semester = @semester,
+                        canvasLink = @canvasLink
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@code", code);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@year", year);
+                    cmd.Parameters.AddWithValue("@semester", semester);
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

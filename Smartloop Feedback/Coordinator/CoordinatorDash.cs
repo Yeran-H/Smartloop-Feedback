@@ -48,15 +48,6 @@ namespace Smartloop_Feedback.Coordinator
                 };
                 courseDgv.Columns.Add(viewColumn);
 
-                DataGridViewButtonColumn editColumn = new DataGridViewButtonColumn
-                {
-                    Name = "Edit",
-                    HeaderText = "Edit",
-                    UseColumnTextForButtonValue = false,
-                    CellTemplate = new StyledButtonCell()
-                };
-                courseDgv.Columns.Add(editColumn);
-
                 DataGridViewButtonColumn deleteColumn = new DataGridViewButtonColumn
                 {
                     Name = "Delete",
@@ -66,13 +57,12 @@ namespace Smartloop_Feedback.Coordinator
                 };
                 courseDgv.Columns.Add(deleteColumn);
 
-
                 // Add rows to the DataGridView
                 foreach (Course course in coordinator.CourseList.Values)
                 {
-                    int rowIndex = courseDgv.Rows.Add(course.Year, course.Semester, course.Code, course.Name, "View", "Edit", "Delete");
+                    int rowIndex = courseDgv.Rows.Add(course.Year, course.Semester, course.Code, course.Name, "View", "Delete");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
-                    row.Tag = course.Id; // Tag the row with the assessment ID
+                    row.Tag = course.Id;
                 }
 
                 DataGridColor(courseDgv); // Apply color formatting to the DataGridView
@@ -138,6 +128,16 @@ namespace Smartloop_Feedback.Coordinator
                         return;
                     }
                 }
+            }
+        }
+
+        private void courseDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if(e.RowIndex >= 0)
+            {
+                DataGridViewRow row = courseDgv.Rows[e.RowIndex];
+                mainForm.position[0] = (int)row.Tag;
+                mainForm.MainPannel(1);
             }
         }
     }

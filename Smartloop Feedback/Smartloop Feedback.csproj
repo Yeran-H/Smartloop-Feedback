@@ -394,6 +394,9 @@
     <EmbeddedResource Include="Academic Portfolio\assessmentForm.resx">
       <DependentUpon>AssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Coordinator\CoordinatorCourse.resx">
+      <DependentUpon>CoordinatorCourse.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Coordinator\CoordinatorDash.resx">
       <DependentUpon>CoordinatorDash.cs</DependentUpon>
     </EmbeddedResource>
