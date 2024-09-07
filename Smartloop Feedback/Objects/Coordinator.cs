@@ -8,9 +8,9 @@ namespace Smartloop_Feedback.Objects
 {
     public class Coordinator
     {
-        public List<Course> courseList {  get; set; }
+        public List<Course> courseList { get; set; }
 
-        public Coordinator() 
+        public Coordinator()
         {
             courseList = new List<Course>();
             LoadCourseList();

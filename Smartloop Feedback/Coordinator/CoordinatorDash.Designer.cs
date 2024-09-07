@@ -68,6 +68,7 @@
             this.Name = "CoordinatorDash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoordinatorDash";
+            this.Load += new System.EventHandler(this.CoordinatorDash_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

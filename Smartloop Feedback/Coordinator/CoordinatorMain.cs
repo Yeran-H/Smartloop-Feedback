@@ -1,4 +1,5 @@
-﻿using Smartloop_Feedback.Dashboard;
+﻿using Smartloop_Feedback.Coordinator;
+using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Smartloop_Feedback.Coordinator
+namespace Smartloop_Feedback.Coordinator_Folder
 {
     public partial class CoordinatorMain : Form
     {
@@ -31,7 +32,9 @@ namespace Smartloop_Feedback.Coordinator
         private Point dragCursorPoint;
         private Point dragFormPoint;
 
-        public CoordinatorMain()
+        private Smartloop_Feedback.Objects.Coordinator coordinator;
+
+        public CoordinatorMain(Smartloop_Feedback.Objects.Coordinator coordinator)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -39,6 +42,8 @@ namespace Smartloop_Feedback.Coordinator
             navPl.Top = dashboardBtn.Top;
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
+
+            this.coordinator = coordinator;
             MainPannel(0);
         }
 
@@ -50,7 +55,7 @@ namespace Smartloop_Feedback.Coordinator
                     titleLb.Text = "Dashboard";
                     this.formLoaderPl.Controls.Clear();
 
-                    DashboardForm dashboard = new DashboardForm(coordinator, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CoordinatorDash dashboard = new CoordinatorDash(coordinator, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     dashboard.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(dashboard);
                     dashboard.Show();
@@ -61,7 +66,12 @@ namespace Smartloop_Feedback.Coordinator
 
         private void dashboardBtn_Click(object sender, EventArgs e)
         {
+            navPl.Height = dashboardBtn.Height;
+            navPl.Top = dashboardBtn.Top;
+            navPl.Left = dashboardBtn.Left;
+            dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
 
+            MainPannel(0);
         }
     }
 }

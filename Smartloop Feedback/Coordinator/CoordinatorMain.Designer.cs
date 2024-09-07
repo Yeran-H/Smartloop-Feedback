@@ -1,4 +1,4 @@
-﻿namespace Smartloop_Feedback.Coordinator
+﻿namespace Smartloop_Feedback.Coordinator_Folder
 {
     partial class CoordinatorMain
     {
@@ -29,23 +29,23 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.setttingBtn = new System.Windows.Forms.Button();
             this.navPl = new System.Windows.Forms.Panel();
+            this.dashboardBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.nameLb = new System.Windows.Forms.Label();
-            this.centrePannel = new System.Windows.Forms.Panel();
-            this.formLoaderPl = new System.Windows.Forms.Panel();
-            this.titleLb = new System.Windows.Forms.Label();
-            this.exitPb = new System.Windows.Forms.PictureBox();
-            this.setttingBtn = new System.Windows.Forms.Button();
-            this.dashboardBtn = new System.Windows.Forms.Button();
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.centrePannel = new System.Windows.Forms.Panel();
+            this.formLoaderPl = new System.Windows.Forms.Panel();
+            this.exitPb = new System.Windows.Forms.PictureBox();
+            this.titleLb = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.centrePannel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.centrePannel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -61,6 +61,23 @@
             this.panel1.Size = new System.Drawing.Size(186, 538);
             this.panel1.TabIndex = 0;
             // 
+            // setttingBtn
+            // 
+            this.setttingBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.setttingBtn.FlatAppearance.BorderSize = 0;
+            this.setttingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.setttingBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
+            this.setttingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.setttingBtn.Image = global::Smartloop_Feedback.Properties.Resources.setting;
+            this.setttingBtn.Location = new System.Drawing.Point(0, 244);
+            this.setttingBtn.Name = "setttingBtn";
+            this.setttingBtn.Size = new System.Drawing.Size(186, 42);
+            this.setttingBtn.TabIndex = 4;
+            this.setttingBtn.Text = " Settings";
+            this.setttingBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.setttingBtn.UseVisualStyleBackColor = true;
+            // 
             // navPl
             // 
             this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
@@ -68,6 +85,24 @@
             this.navPl.Name = "navPl";
             this.navPl.Size = new System.Drawing.Size(3, 100);
             this.navPl.TabIndex = 5;
+            // 
+            // dashboardBtn
+            // 
+            this.dashboardBtn.Dock = System.Windows.Forms.DockStyle.Top;
+            this.dashboardBtn.FlatAppearance.BorderSize = 0;
+            this.dashboardBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.dashboardBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
+            this.dashboardBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.dashboardBtn.Image = global::Smartloop_Feedback.Properties.Resources.home;
+            this.dashboardBtn.Location = new System.Drawing.Point(0, 202);
+            this.dashboardBtn.Name = "dashboardBtn";
+            this.dashboardBtn.Size = new System.Drawing.Size(186, 42);
+            this.dashboardBtn.TabIndex = 1;
+            this.dashboardBtn.Text = "Dashboard";
+            this.dashboardBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
+            this.dashboardBtn.UseVisualStyleBackColor = true;
+            this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
             // 
             // panel2
             // 
@@ -91,6 +126,26 @@
             this.nameLb.TabIndex = 1;
             this.nameLb.Text = "Subject Coordinator";
             // 
+            // profilePb
+            // 
+            this.profilePb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
+            this.profilePb.Location = new System.Drawing.Point(60, 87);
+            this.profilePb.Name = "profilePb";
+            this.profilePb.Size = new System.Drawing.Size(63, 63);
+            this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.profilePb.TabIndex = 0;
+            this.profilePb.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.logo;
+            this.pictureBox1.Location = new System.Drawing.Point(-23, -32);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(233, 165);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // centrePannel
             // 
             this.centrePannel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
@@ -112,18 +167,6 @@
             this.formLoaderPl.Size = new System.Drawing.Size(750, 477);
             this.formLoaderPl.TabIndex = 11;
             // 
-            // titleLb
-            // 
-            this.titleLb.AutoSize = true;
-            this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.titleLb.Location = new System.Drawing.Point(20, 17);
-            this.titleLb.MaximumSize = new System.Drawing.Size(700, 0);
-            this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(153, 36);
-            this.titleLb.TabIndex = 0;
-            this.titleLb.Text = "Dashboard";
-            // 
             // exitPb
             // 
             this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -135,60 +178,17 @@
             this.exitPb.TabIndex = 10;
             this.exitPb.TabStop = false;
             // 
-            // setttingBtn
+            // titleLb
             // 
-            this.setttingBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.setttingBtn.FlatAppearance.BorderSize = 0;
-            this.setttingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.setttingBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.setttingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.setttingBtn.Image = global::Smartloop_Feedback.Properties.Resources.setting;
-            this.setttingBtn.Location = new System.Drawing.Point(0, 244);
-            this.setttingBtn.Name = "setttingBtn";
-            this.setttingBtn.Size = new System.Drawing.Size(186, 42);
-            this.setttingBtn.TabIndex = 4;
-            this.setttingBtn.Text = " Settings";
-            this.setttingBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.setttingBtn.UseVisualStyleBackColor = true;
-            // 
-            // dashboardBtn
-            // 
-            this.dashboardBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.dashboardBtn.FlatAppearance.BorderSize = 0;
-            this.dashboardBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.dashboardBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.dashboardBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.dashboardBtn.Image = global::Smartloop_Feedback.Properties.Resources.home;
-            this.dashboardBtn.Location = new System.Drawing.Point(0, 202);
-            this.dashboardBtn.Name = "dashboardBtn";
-            this.dashboardBtn.Size = new System.Drawing.Size(186, 42);
-            this.dashboardBtn.TabIndex = 1;
-            this.dashboardBtn.Text = "Dashboard";
-            this.dashboardBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.dashboardBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.dashboardBtn.UseVisualStyleBackColor = true;
-            this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
-            // 
-            // profilePb
-            // 
-            this.profilePb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
-            this.profilePb.Location = new System.Drawing.Point(60, 87);
-            this.profilePb.Name = "profilePb";
-            this.profilePb.Size = new System.Drawing.Size(63, 63);
-            this.profilePb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.profilePb.TabIndex = 0;
-            this.profilePb.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::Smartloop_Feedback.Properties.Resources.logo;
-            this.pictureBox1.Location = new System.Drawing.Point(-23, -32);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(233, 165);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 3;
-            this.pictureBox1.TabStop = false;
+            this.titleLb.AutoSize = true;
+            this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.titleLb.Location = new System.Drawing.Point(20, 17);
+            this.titleLb.MaximumSize = new System.Drawing.Size(700, 0);
+            this.titleLb.Name = "titleLb";
+            this.titleLb.Size = new System.Drawing.Size(153, 36);
+            this.titleLb.TabIndex = 0;
+            this.titleLb.Text = "Dashboard";
             // 
             // CoordinatorMain
             // 
@@ -205,11 +205,11 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.centrePannel.ResumeLayout(false);
             this.centrePannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Coordinator;
+using Smartloop_Feedback.Coordinator_Folder;
 using Smartloop_Feedback.Objects;
 using System;
 using System.Configuration;
@@ -329,8 +330,8 @@ namespace Smartloop_Feedback
 
         private void coordinatorBtn_Click(object sender, EventArgs e)
         {
-            Coordinator
-            CoordinatorMain coordintaorMain = new CoordinatorMain();
+            Smartloop_Feedback.Objects.Coordinator coordinator = new Smartloop_Feedback.Objects.Coordinator();
+            CoordinatorMain coordintaorMain = new CoordinatorMain(coordinator);
             coordintaorMain.Show();
             this.Hide();
         }
