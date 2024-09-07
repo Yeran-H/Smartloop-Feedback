@@ -273,7 +273,7 @@ namespace Smartloop_Feedback
                 case 0:
                     titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].Title;
                     this.formLoaderPl.Controls.Clear();
-                    CourseForm course = new CourseForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    StudentCourseForm course = new StudentCourseForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     course.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(course);
                     course.Show();

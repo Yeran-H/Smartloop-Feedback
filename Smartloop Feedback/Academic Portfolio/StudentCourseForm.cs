@@ -8,12 +8,12 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class CourseForm : Form
+    public partial class StudentCourseForm : Form
     {
         private StudentCourse course; // The course object associated with this form
         private MainForm mainForm; // Reference to the main form
 
-        public CourseForm(StudentCourse course, MainForm mainForm)
+        public StudentCourseForm(StudentCourse course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;

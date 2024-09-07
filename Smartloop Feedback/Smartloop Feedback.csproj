@@ -203,6 +203,12 @@
     <Compile Include="Academic Portfolio\AssessmentForm.Designer.cs">
       <DependentUpon>AssessmentForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Coordinator\CoordinatorCourse.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Coordinator\CoordinatorCourse.Designer.cs">
+      <DependentUpon>CoordinatorCourse.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coordinator\CoordinatorDash.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -221,11 +227,11 @@
     <Compile Include="Course Schedule\AddEventForm.Designer.cs">
       <DependentUpon>AddEventForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academic Portfolio\CourseForm.cs">
+    <Compile Include="Academic Portfolio\StudentCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academic Portfolio\CourseForm.Designer.cs">
-      <DependentUpon>CourseForm.cs</DependentUpon>
+    <Compile Include="Academic Portfolio\StudentCourseForm.Designer.cs">
+      <DependentUpon>StudentCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Course Schedule\CourseScheduleForm.cs">
       <SubType>Form</SubType>
@@ -397,8 +403,8 @@
     <EmbeddedResource Include="Course Schedule\AddEventForm.resx">
       <DependentUpon>AddEventForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academic Portfolio\CourseForm.resx">
-      <DependentUpon>CourseForm.cs</DependentUpon>
+    <EmbeddedResource Include="Academic Portfolio\StudentCourseForm.resx">
+      <DependentUpon>StudentCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Course Schedule\CourseScheduleForm.resx">
       <DependentUpon>CourseScheduleForm.cs</DependentUpon>
