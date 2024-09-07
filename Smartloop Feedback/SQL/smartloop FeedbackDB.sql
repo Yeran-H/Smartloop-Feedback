@@ -24,6 +24,16 @@ CREATE TABLE student (
 );
 GO
 
+-- Create the tutor table
+CREATE TABLE tutor (
+    tutorId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    profileImage VARBINARY(MAX)
+);
+GO
+
 -- Create the year table
 CREATE TABLE year (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -150,15 +160,5 @@ CREATE TABLE feedbackResult (
     studentId INT,
     FOREIGN KEY (assessmentId) REFERENCES assessment(id),
     FOREIGN KEY (studentId) REFERENCES student(studentId)
-);
-GO
-
--- Create the tutor table
-CREATE TABLE tutor (
-    tutorId INT PRIMARY KEY,
-    name VARCHAR(225) NOT NULL,
-    email VARCHAR(225) NOT NULL,
-    password VARCHAR(225) NOT NULL,
-    profileImage VARBINARY(MAX)
 );
 GO

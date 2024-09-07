@@ -28,18 +28,10 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.coordinatorBtn = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.courseDgv = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).BeginInit();
             this.SuspendLayout();
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 12);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(704, 383);
-            this.dataGridView1.TabIndex = 0;
             // 
             // coordinatorBtn
             // 
@@ -56,27 +48,40 @@
             this.coordinatorBtn.Text = "Add Course";
             this.coordinatorBtn.UseVisualStyleBackColor = false;
             // 
+            // courseDgv
+            // 
+            this.courseDgv.AllowUserToAddRows = false;
+            this.courseDgv.AllowUserToDeleteRows = false;
+            this.courseDgv.AllowUserToOrderColumns = true;
+            this.courseDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.courseDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.courseDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.courseDgv.Location = new System.Drawing.Point(12, 12);
+            this.courseDgv.Name = "courseDgv";
+            this.courseDgv.ReadOnly = true;
+            this.courseDgv.Size = new System.Drawing.Size(715, 383);
+            this.courseDgv.TabIndex = 50;
+            // 
             // CoordinatorDash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
+            this.Controls.Add(this.courseDgv);
             this.Controls.Add(this.coordinatorBtn);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CoordinatorDash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoordinatorDash";
             this.Load += new System.EventHandler(this.CoordinatorDash_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button coordinatorBtn;
+        private System.Windows.Forms.DataGridView courseDgv;
     }
 }

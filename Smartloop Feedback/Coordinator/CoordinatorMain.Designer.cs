@@ -157,6 +157,9 @@
             this.centrePannel.Name = "centrePannel";
             this.centrePannel.Size = new System.Drawing.Size(750, 538);
             this.centrePannel.TabIndex = 2;
+            this.centrePannel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseDown);
+            this.centrePannel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseMove);
+            this.centrePannel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseUp);
             // 
             // formLoaderPl
             // 

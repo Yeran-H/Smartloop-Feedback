@@ -8,11 +8,11 @@ namespace Smartloop_Feedback.Objects
 {
     public class Coordinator
     {
-        public List<Course> courseList { get; set; }
+        public Dictionary<int, Course> courseList { get; set; }
 
         public Coordinator()
         {
-            courseList = new List<Course>();
+            courseList = new Dictionary<int, Course>();
             LoadCourseList();
         }
 

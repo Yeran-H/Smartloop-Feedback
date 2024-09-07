@@ -51,8 +51,8 @@
             this.handbookBtn = new System.Windows.Forms.Button();
             this.eventBtn = new System.Windows.Forms.Button();
             this.eventDgv = new System.Windows.Forms.DataGridView();
-            this.assessmentDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.assessmentDgv = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.eventDgv)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.assessmentDgv)).BeginInit();
             this.SuspendLayout();
@@ -360,7 +360,7 @@
         private System.Windows.Forms.Button handbookBtn;
         private System.Windows.Forms.Button eventBtn;
         private System.Windows.Forms.DataGridView eventDgv;
-        private System.Windows.Forms.DataGridView assessmentDgv;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.DataGridView assessmentDgv;
     }
 }
