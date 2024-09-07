@@ -255,7 +255,7 @@ namespace Smartloop_Feedback.Forms
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    Event events = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, addEventForm.newEvent.Category, addEventForm.newEvent.Color, student.StudentId, student.FindCourseId(addEventForm.newEvent.Category));
+                    Event events = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, addEventForm.newEvent.Category, addEventForm.newEvent.Color, student.Id, student.FindCourseId(addEventForm.newEvent.Category));
                     student.EventList.Add(events.Id, events);
                     if (isWeeklyView)
                     {

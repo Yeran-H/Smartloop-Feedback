@@ -90,7 +90,7 @@ namespace Smartloop_Feedback
 
                     if (buttonCount < 5) // Ensure the button count is less than 5
                     {
-                        Year year = new Year(yearName, student.StudentId, addYearForm.semesterNames);
+                        Year year = new Year(yearName, student.Id, addYearForm.semesterNames);
                         student.YearList.Add(year.Name, year); // Add the new year to the student's year list
                         InitializeBar(); //Refresh the Bar
                     }

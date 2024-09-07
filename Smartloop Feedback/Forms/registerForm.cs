@@ -66,7 +66,7 @@ namespace Smartloop_Feedback
 
             this.isStudent = isStudent;
             
-            if (isStudent)
+            if (!isStudent)
             {
                 studentTb.Text = "Teacher ID";
                 degreeTb.Visible = false;
@@ -232,9 +232,9 @@ namespace Smartloop_Feedback
             {
                 Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
 
-                /*MainForm main = new MainForm(tutor);
+                MainForm main = new MainForm(tutor);
                 main.Show();
-                this.Hide(); */
+                this.Hide(); 
             }
         }
 

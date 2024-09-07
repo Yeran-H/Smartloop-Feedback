@@ -16,12 +16,14 @@ using Smartloop_Feedback.Dashboard;
 using Smartloop_Feedback.Setting;
 using Smartloop_Feedback.Setting.Bar;
 using Smartloop_Feedback.Academic_Portfolio.AI;
+using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback
 {
     public partial class MainForm : Form
     {
         private Student student;
+        private Tutor tutor;
         public List<object> position;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -56,15 +58,46 @@ namespace Smartloop_Feedback
             MainPannel(5);
         }
 
+        public MainForm(Tutor tutor)
+        {
+            InitializeComponent();
+            Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
+            navPl.Height = dashboardBtn.Height;
+            navPl.Top = dashboardBtn.Top;
+            navPl.Left = dashboardBtn.Left;
+            dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
+            resultBtn.Visible = false;
+
+            this.tutor = tutor;
+            position = new List<object>(new object[5]);
+
+            //MainPannel(5);
+        }
+
         private void mainForm_Load(object sender, EventArgs e)
         {
-            nameLb.Text = student.Name;
-            studentIdLb.Text = student.StudentId.ToString();
-            if (student.ProfileImage != null)
+            if(student != null)
             {
-                using (MemoryStream ms = new MemoryStream(student.ProfileImage))
+                nameLb.Text = student.Name;
+                studentIdLb.Text = student.Id.ToString();
+                if (student.ProfileImage != null)
                 {
-                    profilePb.Image = Image.FromStream(ms);
+                    using (MemoryStream ms = new MemoryStream(student.ProfileImage))
+                    {
+                        profilePb.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+            else
+            {
+                nameLb.Text = tutor.Name;
+                studentIdLb.Text = tutor.Id.ToString();
+                if (tutor.ProfileImage != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(tutor.ProfileImage))
+                    {
+                        profilePb.Image = Image.FromStream(ms);
+                    }
                 }
             }
         }
@@ -283,7 +316,7 @@ namespace Smartloop_Feedback
                     break;
                 case 6:
                     nameLb.Text = student.Name;
-                    studentIdLb.Text = student.StudentId.ToString();
+                    studentIdLb.Text = student.Id.ToString();
                     if (student.ProfileImage != null)
                     {
                         using (MemoryStream ms = new MemoryStream(student.ProfileImage))

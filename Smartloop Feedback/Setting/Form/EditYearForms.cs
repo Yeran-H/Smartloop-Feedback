@@ -93,7 +93,7 @@ namespace Smartloop_Feedback.Setting
             // Add selected semesters to the year's semester list
             foreach (string item in addSemesterCb.CheckedItems)
             {
-                student.YearList[(int)mainForm.position[0]].SemesterList.Add(item, new Semester(item, student.YearList[(int)mainForm.position[0]].Id, student.StudentId));
+                student.YearList[(int)mainForm.position[0]].SemesterList.Add(item, new Semester(item, student.YearList[(int)mainForm.position[0]].Id, student.Id));
             }
 
             PopulateCheckedList(); // Refresh the checklists
