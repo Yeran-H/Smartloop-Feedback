@@ -257,10 +257,10 @@
     <Compile Include="Academic Portfolio\Menu Bar\AcademicYearBar.Designer.cs">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academic Portfolio\Add Form\AddCourseForm.cs">
+    <Compile Include="Coordinator\AddCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academic Portfolio\Add Form\AddCourseForm.Designer.cs">
+    <Compile Include="Coordinator\AddCourseForm.Designer.cs">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Academic Portfolio\Add Form\AddYearForm.cs">
@@ -415,7 +415,7 @@
     <EmbeddedResource Include="Academic Portfolio\Menu Bar\AcademicYearBar.resx">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academic Portfolio\Add Form\AddCourseForm.resx">
+    <EmbeddedResource Include="Coordinator\AddCourseForm.resx">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddYearForm.resx">

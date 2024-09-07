@@ -16,9 +16,8 @@ namespace Smartloop_Feedback
 {
     public partial class AddCourseForm : Form
     {
-        public StudentCourse course; // Public Course object to store course details
+        public Course course; // Public Course object to store course details
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Dictionary to track if a TextBox has been clicked
-        private String year;
 
         // Import the CreateRoundRectRgn function from Gdi32.dll to create rounded rectangles
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -32,7 +31,7 @@ namespace Smartloop_Feedback
             int nHieghtEllipse
         );
 
-        public AddCourseForm(string year)
+        public AddCourseForm()
         {
             InitializeComponent(); // Initialize form components
 
@@ -42,21 +41,11 @@ namespace Smartloop_Feedback
             textBoxClicked[creditTb] = false;
             textBoxClicked[descriptionTb] = false;
             textBoxClicked[canvasTb] = false;
+            textBoxClicked[yearTb] = false;
 
             // Set the form's region to a rounded rectangle
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
-
-            // Attach TextChanged and Enter event handlers to all TextBoxes on the form
-            foreach (var control in this.Controls)
-            {
-                if (control is TextBox)
-                {
-                    (control as TextBox).TextChanged += new EventHandler(TextBox_TextChanged);
-                    (control as TextBox).Enter += new EventHandler(TextBox_Enter);
-                }
-            }
-
-            this.year = year;
+            this.Size = new System.Drawing.Size(237, 437);
         }
 
         // Event handler to enable the save button if all TextBoxes are filled
@@ -130,10 +119,14 @@ namespace Smartloop_Feedback
         // Event handler for save button click
         private void saveBtn_Click(object sender, EventArgs e)
         {
-            // Create a new Course object with details from the form
-            course = new StudentCourse(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, false, canvasTb.Text);
-            if (!string.IsNullOrEmpty(course.Title) || !string.IsNullOrEmpty(course.Description) || !string.IsNullOrEmpty(course.CanvasLink))
+            string semester = autumnRb.Checked ? "Autumn" :
+                                summerRb.Checked ? "Summer" :
+                                springRb.Checked ? "Spring" :
+                                winterRb.Checked ? "Winter" : null;
+
+            if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text))
             {
+                course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
                 this.DialogResult = DialogResult.OK;
                 this.Close(); // Close the form if all fields are valid
             }
@@ -151,19 +144,7 @@ namespace Smartloop_Feedback
         }
 
         // Event handler to allow only digits in the code TextBox
-        private void codeTb_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar))
-            {
-                if (!char.IsDigit(e.KeyChar))
-                {
-                    e.Handled = true; // Ignore non-digit input
-                }
-            }
-        }
-
-        // Event handler to allow only digits in the credit TextBox
-        private void creditTb_KeyPress(object sender, KeyPressEventArgs e)
+        private void Number_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (!char.IsControl(e.KeyChar))
             {
@@ -189,7 +170,7 @@ namespace Smartloop_Feedback
         private async void codeTb_Leave(object sender, EventArgs e)
         {
             string courseCode = codeTb.Text;
-            string url = $"https://handbook.uts.edu.au/{year}/subjects/{courseCode}.html"; // URL to fetch course data
+            string url = $"https://handbook.uts.edu.au/{yearTb.Text}/subjects/{courseCode}.html"; // URL to fetch course data
             var data = await GetCourseDataAsync(url); // Fetch course data
 
             if (data != null && data.Count == 3)
@@ -247,6 +228,18 @@ namespace Smartloop_Feedback
         {
             this.DialogResult = DialogResult.Cancel;
             this.Close(); // Close the form without saving
+        }
+
+        private void nextBtn_Click(object sender, EventArgs e)
+        {
+            pannelYear.Location = new Point(267, 3);
+            pannelCourse.Location = new Point(0, 0);
+        }
+
+        private void backBtn_Click(object sender, EventArgs e)
+        {
+            pannelCourse.Location = new Point(267, 3);
+            pannelYear.Location = new Point(0, 0);
         }
     }
 }

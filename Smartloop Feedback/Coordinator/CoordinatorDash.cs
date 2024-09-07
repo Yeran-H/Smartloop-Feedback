@@ -22,9 +22,11 @@ namespace Smartloop_Feedback.Coordinator
             InitializeComponent();
             this.coordinator = coordinator;
             this.mainForm = mainForm;
+
+            LoadCourseDGV();
         }
 
-        private void CoordinatorDash_Load(object sender, EventArgs e)
+        private void LoadCourseDGV()
         {
             if (coordinator.CourseList != null)
             {
@@ -115,6 +117,26 @@ namespace Smartloop_Feedback.Coordinator
                     col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
                     col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
                     col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            using (var addCourseForm = new AddCourseForm())
+            {
+                if (addCourseForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (addCourseForm.course != null)
+                    {
+                        coordinator.CourseList.Add(addCourseForm.course.Id, addCourseForm.course);
+                        LoadCourseDGV();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
                 }
             }
         }

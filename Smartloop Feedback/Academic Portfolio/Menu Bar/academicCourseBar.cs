@@ -75,28 +75,28 @@ namespace Smartloop_Feedback
                 semester.CourseList = new SortedDictionary<int,StudentCourse>();
             }
 
-            using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString()))
-            {
-                if (addCourseForm.ShowDialog() == DialogResult.OK)
-                {
-                    if (buttonCount < 5)
-                    {
-                        StudentCourse course = addCourseForm.course;
-                        if (course != null)
-                        {
-                            StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
-                            semester.CourseList.Add(temp.Id, temp);
-                        }
-                        else
-                        {
-                            MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            return;
-                        }
+            //using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString()))
+            //{
+            //    if (addCourseForm.ShowDialog() == DialogResult.OK)
+            //    {
+            //        if (buttonCount < 5)
+            //        {
+            //            StudentCourse course = addCourseForm.course;
+            //            if (course != null)
+            //            {
+            //                StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
+            //                semester.CourseList.Add(temp.Id, temp);
+            //            }
+            //            else
+            //            {
+            //                MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            //                return;
+            //            }
 
-                        InitializeBar(); // Update the panel to reflect changes
-                    }
-                }
-            }
+            //            InitializeBar(); // Update the panel to reflect changes
+            //        }
+            //    }
+            //}
         }
 
         // Update the panel by re-adding controls in the correct order

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
+using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback.Objects
@@ -30,6 +31,40 @@ namespace Smartloop_Feedback.Objects
             this.Year = Year;
             this.Semester = Semester;
             this.CanvasLink = CanvasLink;
+        }
+
+        public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink)
+        {
+            this.Code = code;
+            this.Name = name;
+            this.CreditPoint = creditPoint;
+            this.Description = description;
+            this.Year = Year;
+            this.Semester = Semester;
+            this.CanvasLink = CanvasLink;
+            AddCourseToDatabase();
+        }
+
+        // Add the course to the database and get the generated ID
+        private void AddCourseToDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                string sql = "INSERT INTO course (code, name, creditPoint, description, year, semester, canvasLink) VALUES (@code, @name, @creditPoint, @description, @year, @semester, @canvasLink); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                {
+                    cmd.Parameters.AddWithValue("@code", Code); // Set the code parameter
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@creditPoint", CreditPoint); // Set the creditPoint parameter
+                    cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
+                    cmd.Parameters.AddWithValue("@year", Year);
+                    cmd.Parameters.AddWithValue("@semester", Semester);
+                    cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
+                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                }
+            }
         }
     }
 }

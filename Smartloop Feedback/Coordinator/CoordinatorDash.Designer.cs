@@ -28,25 +28,26 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.coordinatorBtn = new System.Windows.Forms.Button();
+            this.addBtn = new System.Windows.Forms.Button();
             this.courseDgv = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).BeginInit();
             this.SuspendLayout();
             // 
-            // coordinatorBtn
+            // addBtn
             // 
-            this.coordinatorBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.coordinatorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.coordinatorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.coordinatorBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.coordinatorBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.coordinatorBtn.Location = new System.Drawing.Point(252, 401);
-            this.coordinatorBtn.Name = "coordinatorBtn";
-            this.coordinatorBtn.Size = new System.Drawing.Size(252, 52);
-            this.coordinatorBtn.TabIndex = 19;
-            this.coordinatorBtn.TabStop = false;
-            this.coordinatorBtn.Text = "Add Course";
-            this.coordinatorBtn.UseVisualStyleBackColor = false;
+            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.addBtn.Location = new System.Drawing.Point(252, 401);
+            this.addBtn.Name = "addBtn";
+            this.addBtn.Size = new System.Drawing.Size(252, 52);
+            this.addBtn.TabIndex = 19;
+            this.addBtn.TabStop = false;
+            this.addBtn.Text = "Add Course";
+            this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // courseDgv
             // 
@@ -69,19 +70,18 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
             this.Controls.Add(this.courseDgv);
-            this.Controls.Add(this.coordinatorBtn);
+            this.Controls.Add(this.addBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "CoordinatorDash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoordinatorDash";
-            this.Load += new System.EventHandler(this.CoordinatorDash_Load);
             ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.Button coordinatorBtn;
+        private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.DataGridView courseDgv;
     }
 }
