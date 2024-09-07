@@ -36,7 +36,7 @@ namespace Smartloop_Feedback
             allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
 
             buttonCount = 0;
-            foreach (Course course in semester.CourseList.Values)
+            foreach (StudentCourse course in semester.CourseList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button for the current course
                 btn.Visible = true; // Make the button visible
@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
 
             if (semester.CourseList == null)
             {
-                semester.CourseList = new SortedDictionary<int,Course>();
+                semester.CourseList = new SortedDictionary<int,StudentCourse>();
             }
 
             using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString()))
@@ -81,10 +81,10 @@ namespace Smartloop_Feedback
                 {
                     if (buttonCount < 5)
                     {
-                        Course course = addCourseForm.course;
+                        StudentCourse course = addCourseForm.course;
                         if (course != null)
                         {
-                            Course temp = new Course(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
+                            StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
                             semester.CourseList.Add(temp.Id, temp);
                         }
                         else

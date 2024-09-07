@@ -63,7 +63,7 @@ namespace Smartloop_Feedback.Dashboard
             {
                 foreach (Semester semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.CourseList.Values)
+                    foreach (StudentCourse course in semester.CourseList.Values)
                     {
                         if (!course.IsCompleted)
                         {

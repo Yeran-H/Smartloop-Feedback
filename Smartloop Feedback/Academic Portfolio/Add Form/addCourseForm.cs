@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
 {
     public partial class AddCourseForm : Form
     {
-        public Course course; // Public Course object to store course details
+        public StudentCourse course; // Public Course object to store course details
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Dictionary to track if a TextBox has been clicked
         private String year;
 
@@ -131,7 +131,7 @@ namespace Smartloop_Feedback
         private void saveBtn_Click(object sender, EventArgs e)
         {
             // Create a new Course object with details from the form
-            course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, false, canvasTb.Text);
+            course = new StudentCourse(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, false, canvasTb.Text);
             if (!string.IsNullOrEmpty(course.Title) || !string.IsNullOrEmpty(course.Description) || !string.IsNullOrEmpty(course.CanvasLink))
             {
                 this.DialogResult = DialogResult.OK;

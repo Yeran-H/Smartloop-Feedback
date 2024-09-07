@@ -48,6 +48,7 @@
             this.registerTutorBtn = new System.Windows.Forms.Button();
             this.studetnRb = new System.Windows.Forms.RadioButton();
             this.tutorTb = new System.Windows.Forms.RadioButton();
+            this.coordinatorBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.passwordPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.usernamePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -266,12 +267,29 @@
             this.tutorTb.Text = "Tutor";
             this.tutorTb.UseVisualStyleBackColor = true;
             // 
+            // coordinatorBtn
+            // 
+            this.coordinatorBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.coordinatorBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.coordinatorBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.coordinatorBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.coordinatorBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.coordinatorBtn.Location = new System.Drawing.Point(37, 514);
+            this.coordinatorBtn.Name = "coordinatorBtn";
+            this.coordinatorBtn.Size = new System.Drawing.Size(252, 52);
+            this.coordinatorBtn.TabIndex = 18;
+            this.coordinatorBtn.TabStop = false;
+            this.coordinatorBtn.Text = "Course Coordinator";
+            this.coordinatorBtn.UseVisualStyleBackColor = false;
+            this.coordinatorBtn.Click += new System.EventHandler(this.coordinatorBtn_Click);
+            // 
             // LoginForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.ClientSize = new System.Drawing.Size(314, 536);
+            this.ClientSize = new System.Drawing.Size(314, 587);
+            this.Controls.Add(this.coordinatorBtn);
             this.Controls.Add(this.tutorTb);
             this.Controls.Add(this.studetnRb);
             this.Controls.Add(this.registerTutorBtn);
@@ -326,5 +344,6 @@
         private System.Windows.Forms.Button registerTutorBtn;
         private System.Windows.Forms.RadioButton studetnRb;
         private System.Windows.Forms.RadioButton tutorTb;
+        private System.Windows.Forms.Button coordinatorBtn;
     }
 }

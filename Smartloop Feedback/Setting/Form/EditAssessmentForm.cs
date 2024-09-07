@@ -10,12 +10,12 @@ namespace Smartloop_Feedback.Setting
 {
     public partial class EditAssessmentForm : Form
     {
-        public Course course; // Reference to the course object
+        public StudentCourse course; // Reference to the course object
         public MainForm mainForm; // Reference to the main form
         public int assessmentId; // ID of the assessment being edited
 
         // Constructor for EditAssessmentForm, initializes the form with the course, main form, and assessment ID
-        public EditAssessmentForm(Course course, MainForm mainForm, int assessmentId)
+        public EditAssessmentForm(StudentCourse course, MainForm mainForm, int assessmentId)
         {
             InitializeComponent();
             this.course = course;

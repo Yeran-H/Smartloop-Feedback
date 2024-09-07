@@ -15,7 +15,7 @@ namespace Smartloop_Feedback
         public int Id { get; set; } // ID of the semester
         public int YearId { get; set; } // ID of the year this semester belongs to
         public int StudentId { get; set; } // ID of the student
-        public SortedDictionary<int, Course> CourseList { get; set; } // List of courses in the semester
+        public SortedDictionary<int, StudentCourse> CourseList { get; set; } // List of courses in the semester
 
         // Constructor to initialize a Semester object and fetch courses from the database
         public Semester(string name, int id, int yearId, int studentId)
@@ -24,7 +24,7 @@ namespace Smartloop_Feedback
             Id = id;
             YearId = yearId;
             StudentId = studentId;
-            CourseList = new SortedDictionary<int, Course>(); // Initialize the course list
+            CourseList = new SortedDictionary<int, StudentCourse>(); // Initialize the course list
             LoadCoursesFromDatabase(); // Fetch courses from the database
         }
 
@@ -34,7 +34,7 @@ namespace Smartloop_Feedback
             Name = name;
             YearId = yearId;
             StudentId = studentId;
-            CourseList = new SortedDictionary<int, Course>(); // Initialize the course list
+            CourseList = new SortedDictionary<int, StudentCourse>(); // Initialize the course list
             AddSemesterToDatabase(); // Add the semester to the database
         }
 
@@ -80,7 +80,7 @@ namespace Smartloop_Feedback
                             string description = reader.GetString(4); // Get the course description
                             bool isCompleted = reader.GetBoolean(5); // Get the course completion status
                             string canvasLink = reader.GetString(6); // Get the course canvas link
-                            CourseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, isCompleted, canvasLink, Id, StudentId)); // Add the course to the course list
+                            CourseList.Add(courseId, new StudentCourse(courseId, code, title, creditPoint, description, isCompleted, canvasLink, Id, StudentId)); // Add the course to the course list
                         }
                     }
                 }
@@ -91,7 +91,7 @@ namespace Smartloop_Feedback
         public void DeleteSemesterFromDatabase()
         {
             // Delete all courses associated with the semester
-            foreach (Course course in CourseList.Values)
+            foreach (StudentCourse course in CourseList.Values)
             {
                 course.DeleteCourseFromDatabase();
             }

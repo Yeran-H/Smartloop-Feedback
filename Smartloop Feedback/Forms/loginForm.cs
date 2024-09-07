@@ -1,4 +1,5 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using Smartloop_Feedback.Coordinator;
+using Smartloop_Feedback.Objects;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -324,6 +325,14 @@ namespace Smartloop_Feedback
             RegisterForm register = new RegisterForm(false); // Create a new registration form
             register.Show(); // Show the registration form
             this.Hide(); // Hide the current form
+        }
+
+        private void coordinatorBtn_Click(object sender, EventArgs e)
+        {
+            Coordinator
+            CoordinatorMain coordintaorMain = new CoordinatorMain();
+            coordintaorMain.Show();
+            this.Hide();
         }
     }
 }

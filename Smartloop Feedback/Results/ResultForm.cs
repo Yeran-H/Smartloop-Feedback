@@ -55,7 +55,7 @@ namespace Smartloop_Feedback.Results
                     double gpaSemester = 0.0;
                     int totalCreditPointsSemester = 0;
 
-                    foreach (Course course in semester.CourseList.Values)
+                    foreach (StudentCourse course in semester.CourseList.Values)
                     {
                         CourseResult courseResult = new CourseResult
                         {
@@ -192,7 +192,7 @@ namespace Smartloop_Feedback.Results
             {
                 foreach (Semester semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.CourseList.Values)
+                    foreach (StudentCourse course in semester.CourseList.Values)
                     {
                         totalCreditPoints += course.CreditPoint;
                     }
