@@ -32,7 +32,7 @@ namespace Smartloop_Feedback.Objects
 
         public bool ValidateUserInput()
         {
-            return ValidateEmail() || ValidatePassword() || !ValidateId();
+            return ValidateEmail() && ValidatePassword() && !ValidateId();
         }
 
         public bool ValidatePassword()
@@ -100,7 +100,7 @@ namespace Smartloop_Feedback.Objects
 
         public bool ValidateEmail()
         {
-            if(Email.EndsWith("@student.uts.edu.au", StringComparison.OrdinalIgnoreCase) || Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase) || Email.EndsWith("@uts.edu.au", StringComparison.OrdinalIgnoreCase))
+            if (!Email.EndsWith("@student.uts.edu.au", StringComparison.OrdinalIgnoreCase) && !Email.EndsWith("@gmail.com", StringComparison.OrdinalIgnoreCase) && !Email.EndsWith("@uts.edu.au", StringComparison.OrdinalIgnoreCase))
             {
                 string domainError = IsStudent ? "@student.uts.edu.au or @gmail.com" : "@uts.edu.au or @gmail.com";
                 MessageBox.Show($"Email must end with {domainError}.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);

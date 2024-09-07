@@ -66,22 +66,38 @@ namespace Smartloop_Feedback
             navPl.Top = dashboardBtn.Top;
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
+            resultBtn.Visible = false;
 
             this.tutor = tutor;
             position = new List<object>(new object[5]);
 
-            MainPannel(5);
+            //MainPannel(5);
         }
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            nameLb.Text = student.Name;
-            studentIdLb.Text = student.Id.ToString();
-            if (student.ProfileImage != null)
+            if(student != null)
             {
-                using (MemoryStream ms = new MemoryStream(student.ProfileImage))
+                nameLb.Text = student.Name;
+                studentIdLb.Text = student.Id.ToString();
+                if (student.ProfileImage != null)
                 {
-                    profilePb.Image = Image.FromStream(ms);
+                    using (MemoryStream ms = new MemoryStream(student.ProfileImage))
+                    {
+                        profilePb.Image = Image.FromStream(ms);
+                    }
+                }
+            }
+            else
+            {
+                nameLb.Text = tutor.Name;
+                studentIdLb.Text = tutor.Id.ToString();
+                if (tutor.ProfileImage != null)
+                {
+                    using (MemoryStream ms = new MemoryStream(tutor.ProfileImage))
+                    {
+                        profilePb.Image = Image.FromStream(ms);
+                    }
                 }
             }
         }

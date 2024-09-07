@@ -229,7 +229,7 @@ namespace Smartloop_Feedback
                                 reader.IsDBNull(1) ? null : reader.GetString(1),
                                 reader.IsDBNull(2) ? null : reader.GetString(2),
                                 reader.IsDBNull(3) ? null : reader.GetString(3),
-                                reader.IsDBNull(5) ? null : reader.GetFieldValue<byte[]>(5)
+                                reader.IsDBNull(4) ? null : reader.GetFieldValue<byte[]>(4)
                             );
 
                             // Invoke to update UI thread
