@@ -231,11 +231,11 @@ namespace Smartloop_Feedback
             }
             else
             {
-                Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
+                //Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
 
-                MainForm main = new MainForm(tutor);
-                main.Show();
-                this.Hide(); 
+                //MainForm main = new MainForm(tutor);
+                //main.Show();
+                //this.Hide(); 
             }
         }
 
