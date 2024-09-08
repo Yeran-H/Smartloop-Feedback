@@ -8,11 +8,11 @@ namespace Smartloop_Feedback.Setting
 {
     public partial class EditAccountForm : Form
     {
-        public Student student; // Reference to the student object
+        public OLDStudent student; // Reference to the student object
         public MainForm mainForm; // Reference to the main form
 
         // Constructor for EditAccountForm, initializes the form with the student and main form references
-        public EditAccountForm(Student student, MainForm mainForm)
+        public EditAccountForm(OLDStudent student, MainForm mainForm)
         {
             InitializeComponent();
             this.student = student;
@@ -77,7 +77,7 @@ namespace Smartloop_Feedback.Setting
                 }
             }
 
-            Student newStudent = new Student(0, name, email, password, degree, profileImage);
+            OLDStudent newStudent = new OLDStudent(0, name, email, password, degree, profileImage);
 
             // Validate the password
             if (!newStudent.ValidatePassword())

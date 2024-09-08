@@ -8,13 +8,13 @@ namespace Smartloop_Feedback.Setting.Bar
     public partial class SettingYearBar : Form
     {
         public MainForm mainForm; // Reference to the main form
-        public Student student; // Reference to the student object
+        public OLDStudent student; // Reference to the student object
 
         private Button[] buttons = new Button[5]; // Array to hold the year buttons
         private Button[] allButtons; // Array to hold all predefined buttons
 
         // Constructor for SettingYearBar, initializes the form with the student and main form references
-        public SettingYearBar(Student student, MainForm mainForm)
+        public SettingYearBar(OLDStudent student, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;

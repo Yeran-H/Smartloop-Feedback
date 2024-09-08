@@ -11,6 +11,7 @@ using System.Runtime.InteropServices;
 using Org.BouncyCastle.Tls;
 using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback
 {
@@ -68,7 +69,7 @@ namespace Smartloop_Feedback
             
             if (!isStudent)
             {
-                studentTb.Text = "Teacher ID";
+                studentTb.Text = "Tutor ID";
                 degreeTb.Visible = false;
                 degreePl.Visible = false;
                 degreePb.Visible = false;
@@ -223,18 +224,18 @@ namespace Smartloop_Feedback
             if(isStudent)
             {
                 Student student = new Student(userId, name, email, password, degree, profileImage, true);
-                
+
                 MainForm main = new MainForm(student);
                 main.Show();
                 this.Hide();
             }
             else
             {
-                Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
+                //Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
 
-                MainForm main = new MainForm(tutor);
-                main.Show();
-                this.Hide(); 
+                //MainForm main = new MainForm(tutor);
+                //main.Show();
+                //this.Hide(); 
             }
         }
 

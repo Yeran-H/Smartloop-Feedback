@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback
 {
-    public class Student : User
+    public class OLDStudent : OLDUser
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
-        public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage)
+        public OLDStudent(int studentId, string name, string email, string password, string degree, byte[] profileImage)
             : base(studentId, name, email, password, profileImage, true)
         {
             Degree = degree;
@@ -26,7 +26,7 @@ namespace Smartloop_Feedback
             LoadEventsFromDatabase();
         }
 
-        public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage, bool x)
+        public OLDStudent(int studentId, string name, string email, string password, string degree, byte[] profileImage, bool x)
         : base(studentId, name, email, password, profileImage, true)
         {
             Degree = degree;
@@ -59,7 +59,7 @@ namespace Smartloop_Feedback
         }
 
         // Update student details in the database
-        public void UpdateToDatabase(Student selectedStudent)
+        public void UpdateToDatabase(OLDStudent selectedStudent)
         {
             Name = selectedStudent.Name;
             Email = selectedStudent.Email;

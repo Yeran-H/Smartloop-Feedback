@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class User
+    public class OLDUser
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
@@ -19,9 +19,9 @@ namespace Smartloop_Feedback.Objects
         public string Password { get; set; }
         public byte[] ProfileImage { get; set; }
         public bool IsStudent { get; set; }
-        public SortedDictionary<int, StudentYear> YearList { get; set; }
+        public SortedDictionary<int, Year> YearList { get; set; }
 
-        public User(int id, string name, string email, string password, byte[] profileImage, bool isStudent)
+        public OLDUser(int id, string name, string email, string password, byte[] profileImage, bool isStudent)
         {
             Email = email;
             Password = password;
@@ -29,7 +29,7 @@ namespace Smartloop_Feedback.Objects
             Name = name;
             ProfileImage = profileImage;
             IsStudent = isStudent;
-            YearList = new SortedDictionary<int, StudentYear>();
+            YearList = new SortedDictionary<int, Year>();
         }
 
         public bool ValidateUserInput()

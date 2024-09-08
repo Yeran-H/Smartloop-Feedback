@@ -14,14 +14,14 @@ namespace Smartloop_Feedback.Results
 {
     public partial class ResultForm : Form
     {
-        public Student student;
+        public OLDStudent student;
         public List<CourseResult> courseResultList;
         public List<double> wamYearList;
         public List<double> wamSemesterList;
         public List<double> gpaYearList;
         public List<double> gpaSemesterList;
 
-        public ResultForm(Student student)
+        public ResultForm(OLDStudent student)
         {
             InitializeComponent();
             this.student = student;
