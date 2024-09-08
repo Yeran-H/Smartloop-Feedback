@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Coordinator
 {
-    partial class CoordinatorCourse
+    partial class CoordinatorCourseForm
     {
         /// <summary>
         /// Required designer variable.
@@ -251,6 +251,7 @@
             this.assessmentDgv.ReadOnly = true;
             this.assessmentDgv.Size = new System.Drawing.Size(377, 291);
             this.assessmentDgv.TabIndex = 58;
+            this.assessmentDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assessmentDgv_CellClick);
             // 
             // addBtn
             // 

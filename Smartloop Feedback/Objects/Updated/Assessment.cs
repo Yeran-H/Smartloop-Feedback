@@ -138,5 +138,61 @@ namespace Smartloop_Feedback.Objects
                 }
             }
         }
+
+        public void UpdateAssessmentToDatabase(string name, string description, DateTime date, string type, double mark, double weight, string fileName, byte[] fileData, string canvasLink)
+        {
+            foreach (Criteria criteria in CriteriaList)
+            {
+                criteria.DeleteCriteriaFromDatabase();
+            }
+
+            Name = name;
+            Description = description;
+            Date = date;
+            Type = type;
+            Mark = mark;
+            Weight = weight;
+            FileName = fileName;
+            FileData = fileData;
+            CanvasLink = canvasLink;
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE assessment
+                    SET 
+                        name = @name,
+                        description = @description,
+                        date = @date,
+                        type = @type,
+                        mark = @mark,
+                        weight = @weight,
+                        fileName = @fileName,
+                        fileData = @fileData,
+                        canvasLink = @canvasLink
+                    WHERE
+                        id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@name", name);
+                    cmd.Parameters.AddWithValue("@description", description);
+                    cmd.Parameters.AddWithValue("@date", date);
+                    cmd.Parameters.AddWithValue("@type", type);
+                    cmd.Parameters.AddWithValue("@mark", mark);
+                    cmd.Parameters.AddWithValue("@weight", weight);
+                    cmd.Parameters.AddWithValue("@fileName", fileName);
+                    cmd.Parameters.AddWithValue("@fileData", fileData);
+                    cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Coordinator
 {
-    partial class CoordinatorDash
+    partial class CoordinatorDashForm
     {
         /// <summary>
         /// Required designer variable.

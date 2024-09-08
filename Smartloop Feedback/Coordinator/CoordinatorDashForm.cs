@@ -12,12 +12,12 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Coordinator
 {
-    public partial class CoordinatorDash : Form
+    public partial class CoordinatorDashForm : Form
     {
         private Smartloop_Feedback.Objects.Coordinator coordinator;
-        private CoordinatorMain mainForm;
+        private CoordinatorMainForm mainForm;
 
-        public CoordinatorDash(Smartloop_Feedback.Objects.Coordinator coordinator, CoordinatorMain mainForm)
+        public CoordinatorDashForm(Smartloop_Feedback.Objects.Coordinator coordinator, CoordinatorMainForm mainForm)
         {
             InitializeComponent();
             this.coordinator = coordinator;

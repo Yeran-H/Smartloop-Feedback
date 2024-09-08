@@ -13,11 +13,11 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Coordinator
 {
-    public partial class CoordinatorCourse : Form
+    public partial class CoordinatorCourseForm : Form
     {
         private Course course;
-        private CoordinatorMain mainForm;
-        public CoordinatorCourse(Course course, CoordinatorMain mainForm)
+        private CoordinatorMainForm mainForm;
+        public CoordinatorCourseForm(Course course, CoordinatorMainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -223,6 +223,16 @@ namespace Smartloop_Feedback.Coordinator
         private void addBtn_Click(object sender, EventArgs e)
         {
             mainForm.MainPannel(2);
+        }
+
+        private void assessmentDgv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = assessmentDgv.Rows[e.RowIndex];
+                mainForm.position[1] = (int)row.Tag;
+                mainForm.MainPannel(3);
+            }
         }
     }
 }

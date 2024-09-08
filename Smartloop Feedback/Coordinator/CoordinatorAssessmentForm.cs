@@ -1,26 +1,29 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using iTextSharp.text.pdf.parser;
+using iTextSharp.text.pdf;
+using Smartloop_Feedback.Coordinator_Folder;
+using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Setting
 {
-    public partial class EditAssessmentForm : Form
+    public partial class CoordinatorAssessmentForm : Form
     {
-        public StudentCourse course; // Reference to the course object
-        public MainForm mainForm; // Reference to the main form
-        public int assessmentId; // ID of the assessment being edited
+        public Assessment assessment; // Reference to the course object
+        public CoordinatorMainForm mainForm; // Reference to the main form
 
         // Constructor for EditAssessmentForm, initializes the form with the course, main form, and assessment ID
-        public EditAssessmentForm(StudentCourse course, MainForm mainForm, int assessmentId)
+        public CoordinatorAssessmentForm(Assessment assessment, CoordinatorMainForm mainForm)
         {
             InitializeComponent();
-            this.course = course;
+            this.assessment = assessment;
             this.mainForm = mainForm;
-            this.assessmentId = assessmentId;
 
             this.Size = new System.Drawing.Size(750, 477); // Set the form size
         }
@@ -29,15 +32,14 @@ namespace Smartloop_Feedback.Setting
         private void EditAssessmentForm_Load(object sender, EventArgs e)
         {
             // Populate the form fields with the assessment's current information
-            titleTb.Text = course.AssessmentList[assessmentId].Name;
-            descriptionTb.Text = course.AssessmentList[assessmentId].Description;
-            dateP.Value = course.AssessmentList[assessmentId].Date;
-            typeCb.Text = course.AssessmentList[assessmentId].Type;
-            markTb.Text = course.AssessmentList[assessmentId].Mark.ToString();
-            weightTb.Text = course.AssessmentList[assessmentId].Weight.ToString();
-            individualRbtn.Checked = course.AssessmentList[assessmentId].Individual;
-            groupRbtn.Checked = course.AssessmentList[assessmentId].Group;
-            canvasTb.Text = course.AssessmentList[assessmentId].CanvasLink;
+            titleTb.Text = assessment.Name;
+            descriptionTb.Text = assessment.Description;
+            dateP.Value = assessment.Date;
+            typeTb.Text = assessment.Type;
+            markTb.Text = assessment.Mark.ToString();
+            weightTb.Text = assessment.Weight.ToString();
+            canvasTb.Text = assessment.CanvasLink;
+            fileTb.Text = assessment.FileName;
 
             PopulateCriteria(); // Populate the criteria DataGridView
         }
@@ -55,7 +57,7 @@ namespace Smartloop_Feedback.Setting
             int columnIndex = 1;
 
             // Add columns for each rating
-            foreach (StudentRating rating in course.AssessmentList[assessmentId].CriteriaList[0].RatingList)
+            foreach (Rating rating in assessment.CriteriaList[0].RatingList)
             {
                 criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
                 AddColumnInputControls(columnIndex, rating.Grade);
@@ -63,7 +65,7 @@ namespace Smartloop_Feedback.Setting
             }
 
             // Add rows for each criteria and its ratings
-            foreach (StudentCriteria criteria in course.AssessmentList[assessmentId].CriteriaList)
+            foreach (Criteria criteria in assessment.CriteriaList)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(criteriaDgv);
@@ -285,31 +287,22 @@ namespace Smartloop_Feedback.Setting
             }
         }
 
-        // Event handler for delete button click to delete the assessment record
-        private void deletebtn_Click(object sender, EventArgs e)
-        {
-            DialogResult result = MessageBox.Show(
-                "Are you sure you want to delete the Assessment record? This will result in removing all associated objects as well.",
-                "Confirm Deletion",
-                MessageBoxButtons.YesNo,
-                MessageBoxIcon.Warning
-            );
-
-            if (result == DialogResult.Yes)
-            {
-                course.DeleteAssessmentFromDatabase(assessmentId);
-                mainForm.MainPannel(8);
-                mainForm.MenuPanel(7);
-            }
-        }
-
         // Event handler for update button click to update the assessment information
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            course.AssessmentList[assessmentId].UpdateAssessmentToDatabase(
-                titleTb.Text, descriptionTb.Text, dateP.Value, typeCb.Text,
-                double.Parse(markTb.Text), double.Parse(weightTb.Text),
-                individualRbtn.Checked, groupRbtn.Checked, canvasTb.Text
+            string fileName = assessment.FileName;
+            byte[] fileData = assessment.FileData;
+
+            if(uploadTb.Text != "")
+            {
+                fileName = System.IO.Path.GetFileName(uploadTb.Text);
+                fileData = Encoding.UTF8.GetBytes(ExtractTextFromPdf(uploadTb.Text));
+            }
+
+            assessment.UpdateAssessmentToDatabase(
+                titleTb.Text, descriptionTb.Text, dateP.Value, typeTb.Text,
+                double.Parse(markTb.Text), double.Parse(weightTb.Text), fileName, fileData,
+                canvasTb.Text
             );
 
             List<string> columnNameList = new List<string>();
@@ -323,18 +316,63 @@ namespace Smartloop_Feedback.Setting
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new StudentCriteria(row.Cells[0].Value.ToString(), assessmentId, course.AssessmentList[assessmentId].StudentId);
-                course.AssessmentList[assessmentId].CriteriaList.Add(criteria);
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.Id);
+                assessment.CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.AssessmentList[assessmentId].CriteriaList.Last().RatingList.Add(
-                        new StudentRating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, course.AssessmentList[assessmentId].StudentId)
+                    assessment.CriteriaList.Last().RatingList.Add(
+                        new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id)
                     );
                 }
             }
 
-            mainForm.MenuPanel(7);
+            mainForm.MainPannel(1);
+        }
+
+        private void downloadAssessmentBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Save PDF File";
+            saveFileDialog.FileName = assessment.FileName;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog.FileName, assessment.FileData);
+                MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void loadAssessmentBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileTb.Text = openFileDialog.FileName;
+            }
+        }
+
+        private string ExtractTextFromPdf(string filePath)
+        {
+            StringBuilder text = new StringBuilder();
+
+            using (PdfReader reader = new PdfReader(filePath))
+            {
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
+                }
+            }
+
+            return text.ToString();
+        }
+
+        private void back1Btn_Click(object sender, EventArgs e)
+        {
+            mainForm.MainPannel(1);
         }
     }
 }

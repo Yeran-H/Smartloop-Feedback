@@ -16,10 +16,10 @@ namespace Smartloop_Feedback.Forms
     public partial class AddAssessmentForm : Form
     {
         private Course course; // Reference to the course object
-        private CoordinatorMain mainForm; // Reference to the main form
+        private CoordinatorMainForm mainForm; // Reference to the main form
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Track if TextBox has been clicked
 
-        public AddAssessmentForm(Course course, CoordinatorMain mainForm)
+        public AddAssessmentForm(Course course, CoordinatorMainForm mainForm)
         {
             InitializeComponent();
             this.course = course;

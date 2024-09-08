@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Coordinator_Folder
 {
-    partial class CoordinatorMain
+    partial class CoordinatorMainForm
     {
         /// <summary>
         /// Required designer variable.

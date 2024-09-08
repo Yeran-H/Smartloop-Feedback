@@ -331,7 +331,7 @@ namespace Smartloop_Feedback
         private void coordinatorBtn_Click(object sender, EventArgs e)
         {
             Smartloop_Feedback.Objects.Coordinator coordinator = new Smartloop_Feedback.Objects.Coordinator();
-            CoordinatorMain coordintaorMain = new CoordinatorMain(coordinator);
+            CoordinatorMainForm coordintaorMain = new CoordinatorMainForm(coordinator);
             coordintaorMain.Show();
             this.Hide();
         }

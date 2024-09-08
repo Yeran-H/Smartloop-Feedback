@@ -1,6 +1,7 @@
 ﻿using Smartloop_Feedback.Coordinator;
 using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Setting;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,7 +15,7 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Coordinator_Folder
 {
-    public partial class CoordinatorMain : Form
+    public partial class CoordinatorMainForm : Form
     {
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
 
@@ -36,7 +37,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
         private Smartloop_Feedback.Objects.Coordinator coordinator;
         public int[] position;
 
-        public CoordinatorMain(Smartloop_Feedback.Objects.Coordinator coordinator)
+        public CoordinatorMainForm(Smartloop_Feedback.Objects.Coordinator coordinator)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -58,7 +59,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
                     titleLb.Text = "Dashboard";
                     this.formLoaderPl.Controls.Clear();
 
-                    CoordinatorDash dashboard = new CoordinatorDash(coordinator, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CoordinatorDashForm dashboard = new CoordinatorDashForm(coordinator, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     dashboard.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(dashboard);
                     dashboard.Show();
@@ -67,7 +68,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
                     titleLb.Text = coordinator.CourseList[position[0]].Name;
                     this.formLoaderPl.Controls.Clear();
 
-                    CoordinatorCourse course = new CoordinatorCourse(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CoordinatorCourseForm course = new CoordinatorCourseForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     course.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(course);
                     course.Show();
@@ -79,6 +80,15 @@ namespace Smartloop_Feedback.Coordinator_Folder
                     addAssessment.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(addAssessment);
                     addAssessment.Show();
+                    break;
+                case 3:
+                    titleLb.Text = coordinator.CourseList[position[0]].AssessmentList[position[1]].Name;
+                    this.formLoaderPl.Controls.Clear();
+
+                    CoordinatorAssessmentForm assessment = new CoordinatorAssessmentForm(coordinator.CourseList[position[0]].AssessmentList[position[1]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    assessment.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(assessment);
+                    assessment.Show();
                     break;
             }
 

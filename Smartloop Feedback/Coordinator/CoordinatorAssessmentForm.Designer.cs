@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback.Setting
 {
-    partial class EditAssessmentForm
+    partial class CoordinatorAssessmentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,13 @@
         {
             this.components = new System.ComponentModel.Container();
             this.panelDetails = new System.Windows.Forms.Panel();
-            this.button3 = new System.Windows.Forms.Button();
+            this.back1Btn = new System.Windows.Forms.Button();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.fileTb = new System.Windows.Forms.TextBox();
+            this.downloadAssessmentBtn = new System.Windows.Forms.Button();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.typeTb = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -43,16 +49,12 @@
             this.weightTb = new System.Windows.Forms.TextBox();
             this.markPl = new System.Windows.Forms.Panel();
             this.markTb = new System.Windows.Forms.TextBox();
-            this.groupRbtn = new System.Windows.Forms.RadioButton();
-            this.individualRbtn = new System.Windows.Forms.RadioButton();
             this.nextBtn = new System.Windows.Forms.Button();
-            this.typeCb = new System.Windows.Forms.ComboBox();
             this.datePl = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.descriptionPl = new System.Windows.Forms.Panel();
             this.titlePl = new System.Windows.Forms.Panel();
             this.titleTb = new System.Windows.Forms.TextBox();
-            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.descriptionTb = new System.Windows.Forms.RichTextBox();
             this.panelCriteria = new System.Windows.Forms.Panel();
@@ -62,8 +64,12 @@
             this.backBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
-            this.button1 = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.uploadTb = new System.Windows.Forms.TextBox();
+            this.loadAssessmentBtn = new System.Windows.Forms.Button();
+            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
@@ -72,7 +78,17 @@
             // panelDetails
             // 
             this.panelDetails.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.panelDetails.Controls.Add(this.button3);
+            this.panelDetails.Controls.Add(this.label9);
+            this.panelDetails.Controls.Add(this.panel3);
+            this.panelDetails.Controls.Add(this.uploadTb);
+            this.panelDetails.Controls.Add(this.loadAssessmentBtn);
+            this.panelDetails.Controls.Add(this.back1Btn);
+            this.panelDetails.Controls.Add(this.label8);
+            this.panelDetails.Controls.Add(this.panel2);
+            this.panelDetails.Controls.Add(this.fileTb);
+            this.panelDetails.Controls.Add(this.downloadAssessmentBtn);
+            this.panelDetails.Controls.Add(this.panel1);
+            this.panelDetails.Controls.Add(this.typeTb);
             this.panelDetails.Controls.Add(this.button2);
             this.panelDetails.Controls.Add(this.label6);
             this.panelDetails.Controls.Add(this.label5);
@@ -85,10 +101,7 @@
             this.panelDetails.Controls.Add(this.weightTb);
             this.panelDetails.Controls.Add(this.markPl);
             this.panelDetails.Controls.Add(this.markTb);
-            this.panelDetails.Controls.Add(this.groupRbtn);
-            this.panelDetails.Controls.Add(this.individualRbtn);
             this.panelDetails.Controls.Add(this.nextBtn);
-            this.panelDetails.Controls.Add(this.typeCb);
             this.panelDetails.Controls.Add(this.datePl);
             this.panelDetails.Controls.Add(this.label1);
             this.panelDetails.Controls.Add(this.descriptionPl);
@@ -103,21 +116,92 @@
             this.panelDetails.Size = new System.Drawing.Size(750, 477);
             this.panelDetails.TabIndex = 3;
             // 
-            // button3
+            // back1Btn
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.button3.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.button3.Location = new System.Drawing.Point(12, 401);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(163, 64);
-            this.button3.TabIndex = 38;
-            this.button3.Text = "Delete";
-            this.toolTip1.SetToolTip(this.button3, "Click to Delete Assessment");
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.deletebtn_Click);
+            this.back1Btn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.back1Btn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.back1Btn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.back1Btn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.back1Btn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.back1Btn.Location = new System.Drawing.Point(12, 405);
+            this.back1Btn.Name = "back1Btn";
+            this.back1Btn.Size = new System.Drawing.Size(163, 64);
+            this.back1Btn.TabIndex = 53;
+            this.back1Btn.Text = "Back";
+            this.toolTip1.SetToolTip(this.back1Btn, "Click to Update Assessment");
+            this.back1Btn.UseVisualStyleBackColor = false;
+            this.back1Btn.Click += new System.EventHandler(this.back1Btn_Click);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Aptos", 12F);
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.label8.Location = new System.Drawing.Point(306, 267);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(33, 20);
+            this.label8.TabIndex = 52;
+            this.label8.Text = "File";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Location = new System.Drawing.Point(310, 290);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 1);
+            this.panel2.TabIndex = 51;
+            // 
+            // fileTb
+            // 
+            this.fileTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.fileTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fileTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.fileTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.fileTb.HideSelection = false;
+            this.fileTb.Location = new System.Drawing.Point(344, 267);
+            this.fileTb.Name = "fileTb";
+            this.fileTb.Size = new System.Drawing.Size(166, 20);
+            this.fileTb.TabIndex = 50;
+            this.fileTb.TabStop = false;
+            // 
+            // downloadAssessmentBtn
+            // 
+            this.downloadAssessmentBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.downloadAssessmentBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadAssessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadAssessmentBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.downloadAssessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.downloadAssessmentBtn.Location = new System.Drawing.Point(347, 302);
+            this.downloadAssessmentBtn.Name = "downloadAssessmentBtn";
+            this.downloadAssessmentBtn.Size = new System.Drawing.Size(141, 52);
+            this.downloadAssessmentBtn.TabIndex = 49;
+            this.downloadAssessmentBtn.Text = "Download Assessment";
+            this.downloadAssessmentBtn.UseVisualStyleBackColor = false;
+            this.downloadAssessmentBtn.Click += new System.EventHandler(this.downloadAssessmentBtn_Click);
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(501, 116);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(200, 1);
+            this.panel1.TabIndex = 22;
+            // 
+            // typeTb
+            // 
+            this.typeTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.typeTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.typeTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.typeTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.typeTb.HideSelection = false;
+            this.typeTb.Location = new System.Drawing.Point(501, 97);
+            this.typeTb.Name = "typeTb";
+            this.typeTb.Size = new System.Drawing.Size(200, 20);
+            this.typeTb.TabIndex = 21;
+            this.typeTb.TabStop = false;
+            this.typeTb.Text = "Type";
+            this.toolTip1.SetToolTip(this.typeTb, "Edit Mark");
             // 
             // button2
             // 
@@ -140,7 +224,7 @@
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label6.Location = new System.Drawing.Point(390, 257);
+            this.label6.Location = new System.Drawing.Point(391, 207);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(104, 20);
             this.label6.TabIndex = 34;
@@ -193,7 +277,7 @@
             // canvasPl
             // 
             this.canvasPl.BackColor = System.Drawing.Color.White;
-            this.canvasPl.Location = new System.Drawing.Point(500, 276);
+            this.canvasPl.Location = new System.Drawing.Point(501, 226);
             this.canvasPl.Name = "canvasPl";
             this.canvasPl.Size = new System.Drawing.Size(200, 1);
             this.canvasPl.TabIndex = 20;
@@ -205,7 +289,7 @@
             this.canvasTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.canvasTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.canvasTb.HideSelection = false;
-            this.canvasTb.Location = new System.Drawing.Point(500, 257);
+            this.canvasTb.Location = new System.Drawing.Point(501, 207);
             this.canvasTb.Name = "canvasTb";
             this.canvasTb.Size = new System.Drawing.Size(200, 20);
             this.canvasTb.TabIndex = 19;
@@ -259,32 +343,6 @@
             this.markTb.Text = "Total Mark";
             this.toolTip1.SetToolTip(this.markTb, "Edit Mark");
             // 
-            // groupRbtn
-            // 
-            this.groupRbtn.AutoSize = true;
-            this.groupRbtn.Font = new System.Drawing.Font("Aptos", 12F);
-            this.groupRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.groupRbtn.Location = new System.Drawing.Point(542, 218);
-            this.groupRbtn.Name = "groupRbtn";
-            this.groupRbtn.Size = new System.Drawing.Size(109, 24);
-            this.groupRbtn.TabIndex = 26;
-            this.groupRbtn.Text = "Group Work";
-            this.groupRbtn.UseVisualStyleBackColor = true;
-            // 
-            // individualRbtn
-            // 
-            this.individualRbtn.AutoSize = true;
-            this.individualRbtn.Checked = true;
-            this.individualRbtn.Font = new System.Drawing.Font("Aptos", 12F);
-            this.individualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.individualRbtn.Location = new System.Drawing.Point(542, 195);
-            this.individualRbtn.Name = "individualRbtn";
-            this.individualRbtn.Size = new System.Drawing.Size(95, 24);
-            this.individualRbtn.TabIndex = 25;
-            this.individualRbtn.TabStop = true;
-            this.individualRbtn.Text = "Individual";
-            this.individualRbtn.UseVisualStyleBackColor = true;
-            // 
             // nextBtn
             // 
             this.nextBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
@@ -301,33 +359,10 @@
             this.nextBtn.UseVisualStyleBackColor = false;
             this.nextBtn.Click += new System.EventHandler(this.nextBtn_Click);
             // 
-            // typeCb
-            // 
-            this.typeCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.typeCb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.typeCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.typeCb.FormattingEnabled = true;
-            this.typeCb.Items.AddRange(new object[] {
-            "Reflection",
-            "Report",
-            "Coding",
-            "Project",
-            "Quiz",
-            "Test",
-            "Presentation",
-            "Essay",
-            "Peer Review"});
-            this.typeCb.Location = new System.Drawing.Point(500, 95);
-            this.typeCb.Name = "typeCb";
-            this.typeCb.Size = new System.Drawing.Size(201, 28);
-            this.typeCb.TabIndex = 21;
-            this.typeCb.Text = "Type of Assessment";
-            this.toolTip1.SetToolTip(this.typeCb, "Select Type");
-            // 
             // datePl
             // 
             this.datePl.BackColor = System.Drawing.Color.White;
-            this.datePl.Location = new System.Drawing.Point(118, 304);
+            this.datePl.Location = new System.Drawing.Point(49, 302);
             this.datePl.Name = "datePl";
             this.datePl.Size = new System.Drawing.Size(200, 1);
             this.datePl.TabIndex = 19;
@@ -337,7 +372,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Aptos", 12F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label1.Location = new System.Drawing.Point(114, 271);
+            this.label1.Location = new System.Drawing.Point(45, 269);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
@@ -375,21 +410,6 @@
             this.titleTb.Text = "Title";
             this.toolTip1.SetToolTip(this.titleTb, "Edit Title");
             // 
-            // dateP
-            // 
-            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.dateP.BorderSize = 0;
-            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateP.Location = new System.Drawing.Point(188, 263);
-            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateP.Name = "dateP";
-            this.dateP.Size = new System.Drawing.Size(130, 35);
-            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.dateP.TabIndex = 9;
-            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.toolTip1.SetToolTip(this.dateP, "Edit Date");
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -424,7 +444,6 @@
             this.panelCriteria.Controls.Add(this.backBtn);
             this.panelCriteria.Controls.Add(this.criteriaDgv);
             this.panelCriteria.Controls.Add(this.panelColumnInputs);
-            this.panelCriteria.Controls.Add(this.button1);
             this.panelCriteria.Location = new System.Drawing.Point(875, 4);
             this.panelCriteria.Margin = new System.Windows.Forms.Padding(2);
             this.panelCriteria.Name = "panelCriteria";
@@ -454,9 +473,9 @@
             this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.updateBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.updateBtn.Location = new System.Drawing.Point(498, 405);
+            this.updateBtn.Location = new System.Drawing.Point(552, 405);
             this.updateBtn.Name = "updateBtn";
-            this.updateBtn.Size = new System.Drawing.Size(109, 52);
+            this.updateBtn.Size = new System.Drawing.Size(172, 52);
             this.updateBtn.TabIndex = 26;
             this.updateBtn.Text = "Update";
             this.toolTip1.SetToolTip(this.updateBtn, "Click to Update Assessment");
@@ -515,23 +534,70 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(222, 366);
             this.panelColumnInputs.TabIndex = 4;
             // 
-            // button1
+            // label9
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.button1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.button1.Location = new System.Drawing.Point(613, 405);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(109, 52);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Delete";
-            this.toolTip1.SetToolTip(this.button1, "Click to Delete Assessment");
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.deletebtn_Click);
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Aptos", 12F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.label9.Location = new System.Drawing.Point(532, 267);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 20);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "File";
             // 
-            // EditAssessmentForm
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Location = new System.Drawing.Point(536, 290);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 1);
+            this.panel3.TabIndex = 56;
+            // 
+            // uploadTb
+            // 
+            this.uploadTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.uploadTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.uploadTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.uploadTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.uploadTb.HideSelection = false;
+            this.uploadTb.Location = new System.Drawing.Point(570, 267);
+            this.uploadTb.Name = "uploadTb";
+            this.uploadTb.Size = new System.Drawing.Size(166, 20);
+            this.uploadTb.TabIndex = 55;
+            this.uploadTb.TabStop = false;
+            // 
+            // loadAssessmentBtn
+            // 
+            this.loadAssessmentBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.loadAssessmentBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loadAssessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadAssessmentBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.loadAssessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.loadAssessmentBtn.Location = new System.Drawing.Point(573, 302);
+            this.loadAssessmentBtn.Name = "loadAssessmentBtn";
+            this.loadAssessmentBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadAssessmentBtn.TabIndex = 54;
+            this.loadAssessmentBtn.Text = "Upload Assessment";
+            this.loadAssessmentBtn.UseVisualStyleBackColor = false;
+            this.loadAssessmentBtn.Click += new System.EventHandler(this.loadAssessmentBtn_Click);
+            // 
+            // dateP
+            // 
+            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dateP.BorderSize = 0;
+            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateP.Location = new System.Drawing.Point(119, 261);
+            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
+            this.dateP.Name = "dateP";
+            this.dateP.Size = new System.Drawing.Size(130, 35);
+            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.dateP.TabIndex = 9;
+            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.toolTip1.SetToolTip(this.dateP, "Edit Date");
+            // 
+            // CoordinatorAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -540,7 +606,7 @@
             this.Controls.Add(this.panelDetails);
             this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "EditAssessmentForm";
+            this.Name = "CoordinatorAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditAssessmentForm";
             this.Load += new System.EventHandler(this.EditAssessmentForm_Load);
@@ -566,10 +632,7 @@
         private System.Windows.Forms.TextBox weightTb;
         private System.Windows.Forms.Panel markPl;
         private System.Windows.Forms.TextBox markTb;
-        private System.Windows.Forms.RadioButton groupRbtn;
-        private System.Windows.Forms.RadioButton individualRbtn;
         private System.Windows.Forms.Button nextBtn;
-        private System.Windows.Forms.ComboBox typeCb;
         private System.Windows.Forms.Panel datePl;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel descriptionPl;
@@ -578,7 +641,6 @@
         private Objects.DatePicker dateP;
         private System.Windows.Forms.RichTextBox descriptionTb;
         private System.Windows.Forms.Panel panelCriteria;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.Button columnBtn;
         private System.Windows.Forms.Button backBtn;
@@ -586,8 +648,18 @@
         private System.Windows.Forms.Panel panelColumnInputs;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button loadBtn;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox typeTb;
+        private System.Windows.Forms.Button back1Btn;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox fileTb;
+        private System.Windows.Forms.Button downloadAssessmentBtn;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.TextBox uploadTb;
+        private System.Windows.Forms.Button loadAssessmentBtn;
     }
 }
