@@ -7,10 +7,10 @@ namespace Smartloop_Feedback
     public partial class AcademicSemesterBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private Year year; // Reference to the current year
+        private StudentYear year; // Reference to the current year
 
         // Constructor for academicSemesterBar
-        public AcademicSemesterBar(MainForm form, Year year)
+        public AcademicSemesterBar(MainForm form, StudentYear year)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference

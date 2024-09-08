@@ -7,12 +7,12 @@ namespace Smartloop_Feedback.Setting
 {
     public partial class EditCourseForm : Form
     {
-        public Semester semester; // Reference to the semester object
+        public StudentSemester semester; // Reference to the semester object
         public MainForm mainForm; // Reference to the main form
         public int courseId; // ID of the course being edited
 
         // Constructor for EditCourseForm, initializes the form with the semester, main form, and course ID
-        public EditCourseForm(Semester semester, MainForm mainForm, int courseId)
+        public EditCourseForm(StudentSemester semester, MainForm mainForm, int courseId)
         {
             InitializeComponent();
             this.semester = semester;

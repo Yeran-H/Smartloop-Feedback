@@ -102,7 +102,7 @@ namespace Smartloop_Feedback
         public void DeleteStudentFromDatabase()
         {
             // Delete all years associated with the student
-            foreach (Year year in YearList.Values)
+            foreach (StudentYear year in YearList.Values)
             {
                 year.DeleteYearFromDatabase();
             }
@@ -159,7 +159,7 @@ namespace Smartloop_Feedback
                         {
                             int name = reader.GetInt32(0); // Get the year name
                             int id = reader.GetInt32(1); // Get the year ID
-                            YearList.Add(name, new Year(name, Id, id)); // Add the year to the year list
+                            YearList.Add(name, new StudentYear(name, Id, id)); // Add the year to the year list
                         }
                     }
                 }

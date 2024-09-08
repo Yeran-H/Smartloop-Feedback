@@ -10,14 +10,14 @@ namespace Smartloop_Feedback
     public partial class AcademicCourseBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private Semester semester; // Reference to the current semester
+        private StudentSemester semester; // Reference to the current semester
 
         private int buttonCount = 0; // Counter for the number of buttons
         private Button[] buttons = new Button[5]; // Array to hold the course buttons
         private Button[] allButtons;
 
         // Constructor for academicCourseBar
-        public AcademicCourseBar(MainForm form, Semester semester)
+        public AcademicCourseBar(MainForm form, StudentSemester semester)
         {
             InitializeComponent(); // Initialize form components
 

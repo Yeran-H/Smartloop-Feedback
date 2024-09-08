@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback
 {
-    public class Year
+    public class StudentYear
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
@@ -13,24 +13,24 @@ namespace Smartloop_Feedback
         public int Name { get; set; } // Name of the year
         public int StudentId { get; } // Student ID associated with the year
         public int Id { get; set; } // Year ID
-        public SortedDictionary<string, Semester> SemesterList { get; set; } // List of semesters in the year
+        public SortedDictionary<string, StudentSemester> SemesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
-        public Year(int name, int studentId, int id)
+        public StudentYear(int name, int studentId, int id)
         {
             Name = name;
             StudentId = studentId;
             Id = id;
-            SemesterList = new SortedDictionary<string, Semester>(); // Initialize the semester list
+            SemesterList = new SortedDictionary<string, StudentSemester>(); // Initialize the semester list
             LoadSemestersFromDatabase(); // Fetch semesters from the database
         }
 
         // Constructor to initialize a Year object and add it to the database
-        public Year(int name, int studentId, List<string> semesterNames)
+        public StudentYear(int name, int studentId, List<string> semesterNames)
         {
             Name = name;
             StudentId = studentId;
-            SemesterList = new SortedDictionary<string, Semester>(); // Initialize the semester list
+            SemesterList = new SortedDictionary<string, StudentSemester>(); // Initialize the semester list
             AddYearToDatabase(); // Add the year to the database
             AddSemestersToDatabase(semesterNames); // Add the semesters to the database
         }
@@ -57,7 +57,7 @@ namespace Smartloop_Feedback
         {
             foreach (string semesterName in semesterNames) // Loop through each semester name
             {
-                Semester semester = new Semester(semesterName, Id, StudentId); // Create a new semester
+                StudentSemester semester = new StudentSemester(semesterName, Id, StudentId); // Create a new semester
                 SemesterList.Add(semester.Name, semester); // Add the semester to the semester list
             }
         }
@@ -80,7 +80,7 @@ namespace Smartloop_Feedback
                         {
                             string name = reader.GetString(0); // Get the semester name
                             int id = reader.GetInt32(1); // Get the semester ID
-                            SemesterList.Add(name, new Semester(name, id, Id, StudentId)); // Add the semester to the semester list
+                            SemesterList.Add(name, new StudentSemester(name, id, Id, StudentId)); // Add the semester to the semester list
                         }
                     }
                 }
@@ -119,7 +119,7 @@ namespace Smartloop_Feedback
         // Delete the year and all its semesters from the database
         public void DeleteYearFromDatabase()
         {
-            foreach (Semester semester in SemesterList.Values) // Loop through each semester
+            foreach (StudentSemester semester in SemesterList.Values) // Loop through each semester
             {
                 semester.DeleteSemesterFromDatabase(); // Delete the semester from the database
             }

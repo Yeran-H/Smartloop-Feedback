@@ -43,13 +43,13 @@ namespace Smartloop_Feedback.Results
 
         private void PopulateDgv()
         {
-            foreach (Year year in student.YearList.Values)
+            foreach (StudentYear year in student.YearList.Values)
             {
                 double wamYear = 0.0;
                 double gpaYear = 0.0;
                 int totalCreditPointsYear = 0;
 
-                foreach (Semester semester in year.SemesterList.Values)
+                foreach (StudentSemester semester in year.SemesterList.Values)
                 {
                     double wamSemester = 0.0;
                     double gpaSemester = 0.0;
@@ -188,9 +188,9 @@ namespace Smartloop_Feedback.Results
             int totalCreditPoints = 0;
 
             // Ensure that totalCreditPoint is the sum of all credit points
-            foreach (Year year in student.YearList.Values)
+            foreach (StudentYear year in student.YearList.Values)
             {
-                foreach (Semester semester in year.SemesterList.Values)
+                foreach (StudentSemester semester in year.SemesterList.Values)
                 {
                     foreach (StudentCourse course in semester.CourseList.Values)
                     {

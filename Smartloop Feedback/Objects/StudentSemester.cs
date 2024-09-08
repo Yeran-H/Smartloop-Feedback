@@ -6,7 +6,7 @@ using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback
 {
-    public class Semester
+    public class StudentSemester
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
@@ -18,7 +18,7 @@ namespace Smartloop_Feedback
         public SortedDictionary<int, StudentCourse> CourseList { get; set; } // List of courses in the semester
 
         // Constructor to initialize a Semester object and fetch courses from the database
-        public Semester(string name, int id, int yearId, int studentId)
+        public StudentSemester(string name, int id, int yearId, int studentId)
         {
             Name = name;
             Id = id;
@@ -29,7 +29,7 @@ namespace Smartloop_Feedback
         }
 
         // Constructor to initialize a Semester object and add it to the database
-        public Semester(string name, int yearId, int studentId)
+        public StudentSemester(string name, int yearId, int studentId)
         {
             Name = name;
             YearId = yearId;

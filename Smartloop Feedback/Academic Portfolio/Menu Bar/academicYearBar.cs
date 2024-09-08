@@ -27,7 +27,7 @@ namespace Smartloop_Feedback
             Image buttonImage = Properties.Resources.calendar;
             int buttonCount = 0;
 
-            foreach(Year year in user.YearList.Values)
+            foreach(StudentYear year in user.YearList.Values)
             {
                 Button btn = new Button
                 {
@@ -70,7 +70,7 @@ namespace Smartloop_Feedback
                 {
                     int yearName = addYearForm.yearName; // Get the new year's name
 
-                    Year year = new Year(yearName, user.Id, addYearForm.semesterNames);
+                    StudentYear year = new StudentYear(yearName, user.Id, addYearForm.semesterNames);
                     user.YearList.Add(year.Name, year); // Add the new year to the student's year list
                     InitializeBar(); //Refresh the Bar
                 }

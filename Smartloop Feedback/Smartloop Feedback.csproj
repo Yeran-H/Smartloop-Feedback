@@ -311,7 +311,9 @@
     <Compile Include="Objects\Tutor.cs" />
     <Compile Include="Objects\Updated\Criteria.cs" />
     <Compile Include="Objects\Updated\Rating.cs" />
+    <Compile Include="Objects\Updated\Semester.cs" />
     <Compile Include="Objects\Updated\Tutorial.cs" />
+    <Compile Include="Objects\Updated\Year.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -326,9 +328,9 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Semester.cs" />
+    <Compile Include="Objects\StudentSemester.cs" />
     <Compile Include="Objects\Student.cs" />
-    <Compile Include="Objects\Year.cs" />
+    <Compile Include="Objects\StudentYear.cs" />
     <Compile Include="Results\ResultForm.cs">
       <SubType>Form</SubType>
     </Compile>

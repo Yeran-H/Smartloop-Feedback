@@ -59,9 +59,9 @@ namespace Smartloop_Feedback.Dashboard
             };
             courseDgv.Columns.Add(tagsColumn);
 
-            foreach (Year year in student.YearList.Values)
+            foreach (StudentYear year in student.YearList.Values)
             {
-                foreach (Semester semester in year.SemesterList.Values)
+                foreach (StudentSemester semester in year.SemesterList.Values)
                 {
                     foreach (StudentCourse course in semester.CourseList.Values)
                     {

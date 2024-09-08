@@ -7,11 +7,11 @@ namespace Smartloop_Feedback.Setting.Bar
 {
     public partial class SettingSemesterBar : Form
     {
-        public Year year; // Reference to the year object
+        public StudentYear year; // Reference to the year object
         public MainForm mainForm; // Reference to the main form
 
         // Constructor for SettingSemesterBar, initializes the form with the year and main form references
-        public SettingSemesterBar(Year year, MainForm mainForm)
+        public SettingSemesterBar(StudentYear year, MainForm mainForm)
         {
             InitializeComponent();
             this.year = year;

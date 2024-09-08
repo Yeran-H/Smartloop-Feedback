@@ -30,7 +30,7 @@ namespace Smartloop_Feedback.Setting.Bar
             int buttonCount = 0; // Counter for the number of buttons
 
             // Create a button for each year in the student's year list
-            foreach (Year year in student.YearList.Values)
+            foreach (StudentYear year in student.YearList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button from the predefined array
                 btn.Visible = true; // Make the button visible
