@@ -55,7 +55,7 @@ namespace Smartloop_Feedback.Setting
             int columnIndex = 1;
 
             // Add columns for each rating
-            foreach (Rating rating in course.AssessmentList[assessmentId].CriteriaList[0].RatingList)
+            foreach (StudentRating rating in course.AssessmentList[assessmentId].CriteriaList[0].RatingList)
             {
                 criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
                 AddColumnInputControls(columnIndex, rating.Grade);
@@ -63,7 +63,7 @@ namespace Smartloop_Feedback.Setting
             }
 
             // Add rows for each criteria and its ratings
-            foreach (Criteria criteria in course.AssessmentList[assessmentId].CriteriaList)
+            foreach (StudentCriteria criteria in course.AssessmentList[assessmentId].CriteriaList)
             {
                 DataGridViewRow row = new DataGridViewRow();
                 row.CreateCells(criteriaDgv);
@@ -323,13 +323,13 @@ namespace Smartloop_Feedback.Setting
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessmentId, course.AssessmentList[assessmentId].StudentId);
+                var criteria = new StudentCriteria(row.Cells[0].Value.ToString(), assessmentId, course.AssessmentList[assessmentId].StudentId);
                 course.AssessmentList[assessmentId].CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
                     course.AssessmentList[assessmentId].CriteriaList.Last().RatingList.Add(
-                        new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, course.AssessmentList[assessmentId].StudentId)
+                        new StudentRating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, course.AssessmentList[assessmentId].StudentId)
                     );
                 }
             }

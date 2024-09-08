@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class Rating
+    public class StudentRating
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
@@ -17,7 +17,7 @@ namespace Smartloop_Feedback.Objects
         public int StudentId { get; set; } // ID of the student associated with the rating
 
         // Constructor to initialize a Rating object
-        public Rating(int id, string description, string grade, int criteriaId, int studentId)
+        public StudentRating(int id, string description, string grade, int criteriaId, int studentId)
         {
             Id = id;
             Description = description;
@@ -27,7 +27,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize a Rating object and add it to the database
-        public Rating(string description, string grade, int criteriaId, int studentId)
+        public StudentRating(string description, string grade, int criteriaId, int studentId)
         {
             Description = description;
             Grade = grade;

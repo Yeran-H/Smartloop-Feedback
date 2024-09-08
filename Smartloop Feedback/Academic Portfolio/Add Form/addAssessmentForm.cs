@@ -224,12 +224,12 @@ namespace Smartloop_Feedback.Forms
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.Id, assessment.StudentId);
+                var criteria = new StudentCriteria(row.Cells[0].Value.ToString(), assessment.Id, assessment.StudentId);
                 course.AssessmentList[assessment.Id].CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.AssessmentList[assessment.Id].CriteriaList.Last().RatingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, assessment.StudentId));
+                    course.AssessmentList[assessment.Id].CriteriaList.Last().RatingList.Add(new StudentRating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, assessment.StudentId));
                 }
             }
 

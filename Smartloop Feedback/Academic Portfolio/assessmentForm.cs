@@ -80,7 +80,7 @@ namespace Smartloop_Feedback
             // Allow the user to add rows
             criteriaDgv.AllowUserToAddRows = true;
 
-            foreach(Rating rating in assessment.CriteriaList[0].RatingList)
+            foreach(StudentRating rating in assessment.CriteriaList[0].RatingList)
             {
                 criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
             }

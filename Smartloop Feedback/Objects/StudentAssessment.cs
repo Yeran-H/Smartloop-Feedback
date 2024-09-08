@@ -32,7 +32,7 @@ namespace Smartloop_Feedback.Objects
         public bool IsFinalised { get; set; } // Is the assessment finalised?
         public string CanvasLink { get; set; } // Link to the assessment's Canvas page
         public string FinalFeedback {  get; set; }
-        public List<Criteria> CriteriaList { get; set; } // List of criteria for the assessment
+        public List<StudentCriteria> CriteriaList { get; set; } // List of criteria for the assessment
         public List<CheckList> CheckList { get; set; } // List of checklist items for the assessment
         public SortedDictionary<int, FeedbackResult> FeedbackList { get; set; }
         public List<Tuple<string, string>> PastAssessment {  get; set; }
@@ -59,7 +59,7 @@ namespace Smartloop_Feedback.Objects
             FinalFeedback = finalFeedback;
             CourseId = courseId;
             StudentId = studentId;
-            CriteriaList = new List<Criteria>(); // Initialize the criteria list
+            CriteriaList = new List<StudentCriteria>(); // Initialize the criteria list
             CheckList = new List<CheckList>(); // Initialize the checklist
             FeedbackList = new SortedDictionary<int, FeedbackResult>();
             LoadCriteriaFromDatabase(); // Fetch criteria from the database
@@ -85,7 +85,7 @@ namespace Smartloop_Feedback.Objects
             CanvasLink = canvasLink;
             CourseId = courseId;
             StudentId = studentId;
-            CriteriaList = new List<Criteria>(); // Initialize the criteria list
+            CriteriaList = new List<StudentCriteria>(); // Initialize the criteria list
             CheckList = new List<CheckList>(); // Initialize the checklist
             FeedbackList = new SortedDictionary<int, FeedbackResult>();
             AddAssessmentToDatabase(); // Add the assessment to the database
@@ -137,7 +137,7 @@ namespace Smartloop_Feedback.Objects
                     {
                         int criteriaId = reader.GetInt32(0); // Get the criteria ID
                         string criteriaDescription = reader.GetString(1); // Get the criteria description
-                        CriteriaList.Add(new Criteria(criteriaId, criteriaDescription, Id, StudentId)); // Add the criteria to the criteria list
+                        CriteriaList.Add(new StudentCriteria(criteriaId, criteriaDescription, Id, StudentId)); // Add the criteria to the criteria list
                     }
                 }
             }
@@ -238,7 +238,7 @@ namespace Smartloop_Feedback.Objects
                 checkList.DeleteCheckListFromDatabase();
             }
 
-            foreach (Criteria criteria in CriteriaList)
+            foreach (StudentCriteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
             }
@@ -359,7 +359,7 @@ namespace Smartloop_Feedback.Objects
         // Update the assessment details in the database
         public void UpdateAssessmentToDatabase(string title, string description, DateTime date, string type, double mark, double weight, bool individual, bool group, string canvasLink)
         {
-            foreach (Criteria criteria in CriteriaList)
+            foreach (StudentCriteria criteria in CriteriaList)
             {
                 criteria.DeleteCriteriaFromDatabase();
             }

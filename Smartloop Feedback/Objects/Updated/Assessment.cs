@@ -22,7 +22,7 @@ namespace Smartloop_Feedback.Objects
         public double Weight { get; set; }
         public double Mark {  get; set; }
         public string CanvasLink { get; set; }
-        public List<Criteria> CriteriaList { get; set; }
+        public List<StudentCriteria> CriteriaList { get; set; }
         public string FileName { get; set; }
         public byte[] FileData { get; set; }
         public int CourseId { get; set; }
@@ -40,7 +40,7 @@ namespace Smartloop_Feedback.Objects
             FileName = fileName;
             FileData = fileData;
             CourseId = courseId;
-            CriteriaList = new List<Criteria>();
+            CriteriaList = new List<StudentCriteria>();
         }
 
         public Assessment(string name, string description, string type, DateTime date, double weight, double mark, string canvasLink, string fileName, byte[] fileData, int courseId)

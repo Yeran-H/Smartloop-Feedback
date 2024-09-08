@@ -293,22 +293,24 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Assessment.cs" />
+    <Compile Include="Objects\Updated\Assessment.cs" />
     <Compile Include="Objects\StudentAssessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
-    <Compile Include="Objects\Coordinator.cs" />
-    <Compile Include="Objects\Course.cs" />
+    <Compile Include="Objects\Updated\Coordinator.cs" />
+    <Compile Include="Objects\Updated\Course.cs" />
     <Compile Include="Objects\FeedbackResult.cs" />
     <Compile Include="Objects\StudentCourse.cs" />
     <Compile Include="Objects\CourseResult.cs" />
-    <Compile Include="Objects\Criteria.cs" />
+    <Compile Include="Objects\StudentCriteria.cs" />
     <Compile Include="Objects\DataGridView.cs" />
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Objects\Event.cs" />
-    <Compile Include="Objects\Rating.cs" />
+    <Compile Include="Objects\StudentRating.cs" />
     <Compile Include="Objects\Tutor.cs" />
+    <Compile Include="Objects\Updated\Criteria.cs" />
+    <Compile Include="Objects\Updated\Rating.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

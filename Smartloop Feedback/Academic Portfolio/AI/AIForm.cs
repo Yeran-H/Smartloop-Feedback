@@ -191,7 +191,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             rubricString.AppendLine(new string('-', separatorLength));
 
             // Append each criteria and its ratings
-            foreach (Criteria criteria in assessment.CriteriaList)
+            foreach (StudentCriteria criteria in assessment.CriteriaList)
             {
                 // Append the criteria description
                 rubricString.Append(criteria.Description + " | ");
