@@ -1,6 +1,7 @@
 ﻿using Smartloop_Feedback.Coordinator;
 using Smartloop_Feedback.Coordinator_Folder;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;

@@ -22,7 +22,7 @@ namespace Smartloop_Feedback
 {
     public partial class MainForm : Form
     {
-        private Student student;
+        private OLDStudent student;
         private Tutor tutor;
         public List<object> position;
 
@@ -43,7 +43,7 @@ namespace Smartloop_Feedback
         private Point dragCursorPoint;
         private Point dragFormPoint;
 
-        public MainForm(Student student)
+        public MainForm(OLDStudent student)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -205,7 +205,7 @@ namespace Smartloop_Feedback
         public void MenuPanel(int num)
         {
             menuDropPl.Controls.Clear();
-            User user = student != null ? student : (User)tutor;
+            OLDUser user = student != null ? student : (OLDUser)tutor;
 
             switch (num)
             {

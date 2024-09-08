@@ -11,10 +11,10 @@ namespace Smartloop_Feedback.Forms
     {
         private DateTime currentMonth; // Stores the current month being displayed
         private DateTime currentWeek; // Stores the current week being displayed
-        public Student student; // Reference to the student object
+        public OLDStudent student; // Reference to the student object
         private bool isWeeklyView = false; // Flag to indicate whether the weekly view is active
 
-        public CourseScheduleForm(Student student)
+        public CourseScheduleForm(OLDStudent student)
         {
             InitializeComponent();
             InitializeCalendar();

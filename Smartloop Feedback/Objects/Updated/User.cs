@@ -7,19 +7,17 @@ using System.Threading.Tasks;
 using System.Configuration;
 using System.Windows.Forms;
 
-namespace Smartloop_Feedback.Objects
+namespace Smartloop_Feedback.Objects.Updated
 {
     public class User
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
-
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Email {  get; set; }
+        public string Email { get; set; }
         public string Password { get; set; }
         public byte[] ProfileImage { get; set; }
         public bool IsStudent { get; set; }
-        public SortedDictionary<int, Year> YearList { get; set; }
 
         public User(int id, string name, string email, string password, byte[] profileImage, bool isStudent)
         {
@@ -29,7 +27,7 @@ namespace Smartloop_Feedback.Objects
             Name = name;
             ProfileImage = profileImage;
             IsStudent = isStudent;
-            YearList = new SortedDictionary<int, Year>();
+            //YearList = new SortedDictionary<int, Year>();
         }
 
         public bool ValidateUserInput()
@@ -43,7 +41,7 @@ namespace Smartloop_Feedback.Objects
             {
                 return true;
             }
-            else 
+            else
             {
                 MessageBox.Show("Password must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return false;
@@ -63,7 +61,7 @@ namespace Smartloop_Feedback.Objects
 
             bool exists = false;
 
-            if(IsStudent)
+            if (IsStudent)
             {
                 using (SqlConnection conn = new SqlConnection(connStr))
                 {
@@ -92,7 +90,7 @@ namespace Smartloop_Feedback.Objects
                 }
             }
 
-            if(exists)
+            if (exists)
             {
                 MessageBox.Show("Id must be unique.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return true;
@@ -109,12 +107,6 @@ namespace Smartloop_Feedback.Objects
                 return false;
             }
             return true;
-        }
-
-        // Check if a year name is unique within the student's year list
-        public bool UniqueYear(int name)
-        {
-            return !YearList.ContainsKey(name);
         }
     }
 }

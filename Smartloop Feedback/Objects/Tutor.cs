@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class Tutor : User
+    public class Tutor : OLDUser
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 

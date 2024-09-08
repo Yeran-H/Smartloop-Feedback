@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
     {
         // Public properties to hold the year name and semester names
         public int yearName { get; set; }
-        public User user { get; set; }
+        public OLDUser user { get; set; }
         public List<string> semesterNames { get; set; }
 
         // P/Invoke to create a rounded rectangle region for the form
@@ -32,7 +32,7 @@ namespace Smartloop_Feedback
         );
 
         // Constructor to initialize the form with a student object
-        public AddYearForm(User user)
+        public AddYearForm(OLDUser user)
         {
             InitializeComponent();
             this.user = user;

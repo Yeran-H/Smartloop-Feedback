@@ -73,16 +73,16 @@ CREATE TABLE rating (
 );
 GO
 
----- Create the student table
---CREATE TABLE student (
---    studentId INT PRIMARY KEY,
---    name VARCHAR(225) NOT NULL,
---    email VARCHAR(225) NOT NULL,
---    password VARCHAR(225) NOT NULL,
---    degree VARCHAR(225),
---    profileImage VARBINARY(MAX)
---);
---GO
+-- Create the student table
+CREATE TABLE student (
+    studentId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    degree VARCHAR(225),
+    profileImage VARBINARY(MAX)
+);
+GO
 
 ---- Create the tutor table
 --CREATE TABLE tutor (
