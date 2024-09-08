@@ -29,13 +29,35 @@ namespace Smartloop_Feedback.Objects.Updated
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO course (name, courseId) VALUES (@name, @courseId); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                string sql = "INSERT INTO tutorial (name, courseId) VALUES (@name, @courseId); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@courseId", CourseId);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                }
+            }
+        }
+
+        // Delete the assessment and related data from the database
+        public void DeleteTutorialFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM tutorial
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for assessment ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

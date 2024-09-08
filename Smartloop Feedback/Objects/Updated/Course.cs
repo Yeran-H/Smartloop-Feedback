@@ -40,6 +40,7 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
             LoadAssessmentsFromDatabase();
+            LoadTutorialFromDatabase();
         }
 
         public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink, int tutorNum)
@@ -157,6 +158,12 @@ namespace Smartloop_Feedback.Objects
                 assessment.DeleteAssessmentFromDatabase();
             }
 
+            // Delete all assessments associated with the course
+            foreach (Tutorial tutorial in TutorialList.Values)
+            {
+                tutorial.DeleteTutorialFromDatabase();
+            }
+
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
@@ -204,6 +211,29 @@ namespace Smartloop_Feedback.Objects
 
                         // Add the assessment to the assessment list
                         AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData, Id));
+                    }
+                }
+            }
+        }
+
+        // Fetch assessments from the database and initialize the assessment list
+        private void LoadTutorialFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, name FROM tutorial WHERE courseId = @courseId", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        int tutorialId = reader.GetInt32(0); // Get the tutorial id
+                        string name = reader.GetString(1); // Get the assessment name
+
+                        // Add the assessment to the assessment list
+                        TutorialList.Add(tutorialId, new Tutorial(tutorialId, name, Id));
                     }
                 }
             }
