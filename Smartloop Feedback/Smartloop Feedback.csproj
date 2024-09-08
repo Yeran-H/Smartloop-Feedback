@@ -173,10 +173,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Coordinator\AddAssessmentForm.cs">
+    <Compile Include="Coordinator\Add\AddAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Coordinator\AddAssessmentForm.Designer.cs">
+    <Compile Include="Coordinator\Add\AddAssessmentForm.Designer.cs">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.cs">
@@ -263,10 +263,10 @@
     <Compile Include="Academic Portfolio\Menu Bar\AcademicYearBar.Designer.cs">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Coordinator\AddCourseForm.cs">
+    <Compile Include="Coordinator\Add\AddCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Coordinator\AddCourseForm.Designer.cs">
+    <Compile Include="Coordinator\Add\AddCourseForm.Designer.cs">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Academic Portfolio\Add Form\AddYearForm.cs">
@@ -383,7 +383,7 @@
     <Compile Include="Setting\Form\EditAccountForm.Designer.cs">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Coordinator\AddAssessmentForm.resx">
+    <EmbeddedResource Include="Coordinator\Add\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddCheckListForm.resx">
@@ -428,7 +428,7 @@
     <EmbeddedResource Include="Academic Portfolio\Menu Bar\AcademicYearBar.resx">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Coordinator\AddCourseForm.resx">
+    <EmbeddedResource Include="Coordinator\Add\AddCourseForm.resx">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddYearForm.resx">
