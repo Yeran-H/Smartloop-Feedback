@@ -13,6 +13,22 @@ GO
 USE smartloop_feedbackdb;
 GO
 
+-- Create the year table
+CREATE TABLE year (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name INT
+);
+GO
+
+-- Create the semester table
+CREATE TABLE semester (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    yearId INT,
+    FOREIGN KEY (yearId) REFERENCES year(id)
+);
+GO
+
 -- Create the course table
 CREATE TABLE course (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -20,10 +36,12 @@ CREATE TABLE course (
     name VARCHAR(MAX),
     creditPoint INT,
     description VARCHAR(MAX),
-    year VARCHAR(MAX),
-    semester VARCHAR(MAX),
+    yearId INT,
+    semesterId INT,
     canvasLink VARCHAR(MAX),
-    tutorNum INT
+    tutorNum INT,
+    FOREIGN KEY (yearId) REFERENCES year(id),
+    FOREIGN KEY (semesterId) REFERENCES semester(id)
 );
 GO
 

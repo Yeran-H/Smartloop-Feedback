@@ -19,43 +19,43 @@ namespace Smartloop_Feedback.Objects
         public string Name { get; set; } // Course name
         public int CreditPoint { get; set; } // Course credit points
         public string Description { get; set; } // Course description
-        public string Year { get; set; }
-        public string Semester { get; set; }
+        public Year Year { get; set; }
+        public Semester Semester { get; set; }
         public string CanvasLink { get; set; }
         public int TutorNum { get; set; }
         public Dictionary<int, Assessment> AssessmentList { get; set; }
         public Dictionary<int, Tutorial> TutorialList { get; set; }
 
-        public Course(int id, int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink, int tutorNum)
+        public Course(int id, int code, string name, int creditPoint, string description, int yearId, int semesterId, string CanvasLink, int tutorNum)
         {
             this.Id = id;
             this.Code = code;
             this.Name = name;
             this.CreditPoint = creditPoint;
             this.Description = description;
-            this.Year = Year;
-            this.Semester = Semester;
             this.CanvasLink = CanvasLink;
             this.TutorNum = tutorNum;
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
+            LoadYearFromDatabase(yearId);
+            LoadSemesterFromDatabase(semesterId);
             LoadAssessmentsFromDatabase();
             LoadTutorialFromDatabase();
         }
 
-        public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink, int tutorNum)
+        public Course(int code, string name, int creditPoint, string description, int year, string semester, string CanvasLink, int tutorNum)
         {
             this.Code = code;
             this.Name = name;
             this.CreditPoint = creditPoint;
             this.Description = description;
-            this.Year = Year;
-            this.Semester = Semester;
             this.CanvasLink = CanvasLink;
             AssessmentList = new Dictionary<int, Assessment>();
             this.TutorNum = tutorNum;
             TutorialList = new Dictionary<int, Tutorial>();
             AddCourseToDatabase();
+            AddYearToCourse(year);
+            AddSemesterToCourse(semester);
             AddTutorialFromDatabase(false);
         }
 
@@ -65,7 +65,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO course (code, name, creditPoint, description, year, semester, canvasLink) VALUES (@code, @name, @creditPoint, @description, @year, @semester, @canvasLink); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                string sql = "INSERT INTO course (code, name, creditPoint, description, yearId, semesterId, canvasLink) VALUES (@code, @name, @creditPoint, @description, @yearId, @semesterId, @canvasLink); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -73,8 +73,8 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@creditPoint", CreditPoint); // Set the creditPoint parameter
                     cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
-                    cmd.Parameters.AddWithValue("@year", Year);
-                    cmd.Parameters.AddWithValue("@semester", Semester);
+                    cmd.Parameters.AddWithValue("@yearId", Year.Id);
+                    cmd.Parameters.AddWithValue("@semesterId", Semester.Id);
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
@@ -97,14 +97,14 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
-        public void UpdateCourseToDatabase(int code, string name, int creditPoint, string description, string year, string semester, string canvasLink)
+        public void UpdateCourseToDatabase(int code, string name, int creditPoint, string description, int year, string semester, string canvasLink)
         {
             Code = code;
             Name = name;
             CreditPoint = creditPoint;
             Description = description;
-            Year = year;
-            Semester = semester;
+            AddYearToCourse(year);
+            AddSemesterToCourse(semester);
             CanvasLink = canvasLink;
 
             foreach (Assessment assessment in AssessmentList.Values)
@@ -123,8 +123,8 @@ namespace Smartloop_Feedback.Objects
                         name = @name,
                         creditPoint = @creditPoint,
                         description = @description,
-                        year = @year,
-                        semester = @semester,
+                        yearId = @yearId,
+                        semesterId = @semesterId,
                         canvasLink = @canvasLink,
                         tutorNum = @tutorNum,
                     WHERE
@@ -138,8 +138,8 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
                     cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@year", year);
-                    cmd.Parameters.AddWithValue("@semester", semester);
+                    cmd.Parameters.AddWithValue("@yearId", Year.Id);
+                    cmd.Parameters.AddWithValue("@semesterId", Semester.Id);
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
                     cmd.Parameters.AddWithValue("@tutorNum", TutorNum);
 
@@ -179,6 +179,101 @@ namespace Smartloop_Feedback.Objects
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        private void AddYearToCourse(int year)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+
+                // Check if the year with the given name exists
+                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 id FROM year WHERE name = @yearName", conn);
+                checkCmd.Parameters.AddWithValue("@yearName", year); // Set the year parameter
+
+                using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Check if a row is returned
+                    {
+                        // Year exists, retrieve its details
+                        int yearId = reader.GetInt32(0); 
+                        Year = new Year(yearId, year); 
+                    }
+                    else
+                    {
+                        Year = new Year(year); 
+                    }
+                }
+            }
+        }
+
+        private void LoadYearFromDatabase(int yearId)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name FROM year WHERE id = @yearId", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@yearId", Id); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Read each row
+                    {
+                        int name = reader.GetInt32(1);
+                        Year = new Year(yearId, name);
+                    }
+                }
+            }
+        }
+
+        private void AddSemesterToCourse(string semester)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+
+                // Check if the semester with the given name and yearId exists
+                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 id, Name, yearId FROM semester WHERE Name = @semesterName AND yearId = @yearId", conn);
+                checkCmd.Parameters.AddWithValue("@semesterName", semester); // Set the semester name parameter
+                checkCmd.Parameters.AddWithValue("@yearId", Year.Id); // Set the yearId parameter
+
+                using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Check if a row is returned
+                    {
+                        // Semester exists, retrieve its details
+                        int semesterId = reader.GetInt32(0); 
+                        string name = reader.GetString(1); 
+
+                        Semester = new Semester(semesterId, name, Year.Id);
+                    }
+                    else
+                    {
+                        Semester = new Semester(semester, Year.Id);
+                    }
+                }
+            }
+
+        }
+
+        private void LoadSemesterFromDatabase(int semesterId)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, yearId FROM semester WHERE id = @semesterId", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@semesterId", Id); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Read each row
+                    {
+                        string name = reader.GetString(1);
+                        int yearId = reader.GetInt32(2);
+                        Semester = new Semester(semesterId, name, yearId);
+                    }
                 }
             }
         }
