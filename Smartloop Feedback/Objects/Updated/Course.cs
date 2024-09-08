@@ -6,6 +6,7 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
 using Org.BouncyCastle.Crypto.Paddings;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -21,9 +22,11 @@ namespace Smartloop_Feedback.Objects
         public string Year { get; set; }
         public string Semester { get; set; }
         public string CanvasLink { get; set; }
+        public int TutorNum { get; set; }
         public Dictionary<int, Assessment> AssessmentList { get; set; }
+        public Dictionary<int, Tutorial> TutorialList { get; set; }
 
-        public Course(int id, int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink)
+        public Course(int id, int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink, int tutorNum)
         {
             this.Id = id;
             this.Code = code;
@@ -33,11 +36,13 @@ namespace Smartloop_Feedback.Objects
             this.Year = Year;
             this.Semester = Semester;
             this.CanvasLink = CanvasLink;
+            this.TutorNum = tutorNum;
             AssessmentList = new Dictionary<int, Assessment>();
+            TutorialList = new Dictionary<int, Tutorial>();
             LoadAssessmentsFromDatabase();
         }
 
-        public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink)
+        public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink, int tutorNum)
         {
             this.Code = code;
             this.Name = name;
@@ -47,7 +52,10 @@ namespace Smartloop_Feedback.Objects
             this.Semester = Semester;
             this.CanvasLink = CanvasLink;
             AssessmentList = new Dictionary<int, Assessment>();
+            this.TutorNum = tutorNum;
+            TutorialList = new Dictionary<int, Tutorial>();
             AddCourseToDatabase();
+            AddTutorialFromDatabase(false);
         }
 
         // Add the course to the database and get the generated ID
@@ -69,6 +77,22 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
+            }
+        }
+
+        public void AddTutorialFromDatabase(bool flag)
+        {
+            if(TutorNum == 0 || flag)
+            {
+                Tutorial tutorial = new Tutorial("0", Id);
+                TutorialList.Add(tutorial.Id, tutorial);
+                return;
+            }
+
+            for (int i = 1; i <= TutorNum; i++)
+            {
+                Tutorial tutorial = new Tutorial(i.ToString(), Id);
+                TutorialList.Add(tutorial.Id, tutorial);
             }
         }
 
@@ -100,7 +124,8 @@ namespace Smartloop_Feedback.Objects
                         description = @description,
                         year = @year,
                         semester = @semester,
-                        canvasLink = @canvasLink
+                        canvasLink = @canvasLink,
+                        tutorNum = @tutorNum,
                     WHERE
                         id = @id";
 
@@ -115,8 +140,37 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@year", year);
                     cmd.Parameters.AddWithValue("@semester", semester);
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
+                    cmd.Parameters.AddWithValue("@tutorNum", TutorNum);
 
                     // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // Delete the course and related data from the database
+        public void DeleteCourseFromDatabase()
+        {
+            // Delete all assessments associated with the course
+            foreach (Assessment assessment in AssessmentList.Values)
+            {
+                assessment.DeleteAssessmentFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM course
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for course ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
                     cmd.ExecuteNonQuery();
                 }
             }
@@ -152,6 +206,16 @@ namespace Smartloop_Feedback.Objects
                         AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData, Id));
                     }
                 }
+            }
+        }
+
+        // Delete an assessment from the database
+        public void DeleteAssessmentFromDatabase(int assessmentId)
+        {
+            if (AssessmentList.ContainsKey(assessmentId))
+            {
+                AssessmentList[assessmentId].DeleteAssessmentFromDatabase(); // Delete the assessment from the database
+                AssessmentList.Remove(assessmentId); // Remove the assessment from the list
             }
         }
 

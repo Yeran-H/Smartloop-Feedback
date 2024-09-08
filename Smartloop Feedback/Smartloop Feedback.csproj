@@ -311,6 +311,7 @@
     <Compile Include="Objects\Tutor.cs" />
     <Compile Include="Objects\Updated\Criteria.cs" />
     <Compile Include="Objects\Updated\Rating.cs" />
+    <Compile Include="Objects\Updated\Tutorial.cs" />
     <Compile Include="Objects\User.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

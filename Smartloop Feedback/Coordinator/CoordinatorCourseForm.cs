@@ -32,6 +32,7 @@ namespace Smartloop_Feedback.Coordinator
             descriptionTb.Text = course.Description;
             canvasTb.Text = course.CanvasLink;
             yearTb.Text = course.Year.ToString();
+            tutorialTb.Text = course.TutorNum.ToString();
 
             switch (course.Semester)
             {
@@ -230,9 +231,34 @@ namespace Smartloop_Feedback.Coordinator
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = assessmentDgv.Rows[e.RowIndex];
-                mainForm.position[1] = (int)row.Tag;
-                mainForm.MainPannel(3);
+
+                if (assessmentDgv.Columns[e.ColumnIndex].Name == "View")
+                {
+                    mainForm.position[1] = (int)row.Tag;
+                    mainForm.MainPannel(3);
+                }
+                else if (assessmentDgv.Columns[e.ColumnIndex].Name == "Delete")
+                {
+                    DialogResult result = MessageBox.Show(
+                        "Are you sure you want to delete the assessment record? This will result in removing all associated objects as well.",
+                        "Confirm Deletion",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (result == DialogResult.Yes)
+                    {
+                        course.DeleteAssessmentFromDatabase((int)row.Tag);
+                        mainForm.MainPannel(1);
+                    }
+                }
             }
+        }
+
+        private void tutorialBtn_Click(object sender, EventArgs e)
+        {
+            course.TutorNum++;
+            course.AddTutorialFromDatabase(true);
         }
     }
 }

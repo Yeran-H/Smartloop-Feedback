@@ -23,7 +23,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT id, code, name, creditPoint, description, year, semester, canvasLink FROM course"; // SQL query to fetch courses
+                string sql = "SELECT id, code, name, creditPoint, description, year, semester, canvasLink, tutorNum FROM course"; // SQL query to fetch courses
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -39,10 +39,21 @@ namespace Smartloop_Feedback.Objects
                             string year = reader.GetString(5); // Get the course year
                             string semester = reader.GetString(6);
                             string canvasLink = reader.GetString(7); // Get the course canvas link
-                            CourseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, year, semester, canvasLink)); // Add the course to the course list
+                            int tutorNum = reader.GetInt32(8);
+                            CourseList.Add(courseId, new Course(courseId, code, title, creditPoint, description, year, semester, canvasLink, tutorNum)); // Add the course to the course list
                         }
                     }
                 }
+            }
+        }
+
+        // Delete a course from the database
+        public void DeleteCourseFromDatabase(int courseId)
+        {
+            if (CourseList.ContainsKey(courseId))
+            {
+                CourseList[courseId].DeleteCourseFromDatabase(); // Delete the course from the database
+                CourseList.Remove(courseId); // Remove the course from the list
             }
         }
     }

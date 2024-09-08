@@ -54,6 +54,10 @@
             this.springRb = new System.Windows.Forms.RadioButton();
             this.summerRb = new System.Windows.Forms.RadioButton();
             this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.tutorialTb = new System.Windows.Forms.TextBox();
+            this.tutorialBtn = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.assessmentDgv)).BeginInit();
             this.SuspendLayout();
             // 
@@ -246,7 +250,7 @@
             this.assessmentDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.assessmentDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.assessmentDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.assessmentDgv.Location = new System.Drawing.Point(356, 47);
+            this.assessmentDgv.Location = new System.Drawing.Point(361, 95);
             this.assessmentDgv.Name = "assessmentDgv";
             this.assessmentDgv.ReadOnly = true;
             this.assessmentDgv.Size = new System.Drawing.Size(377, 291);
@@ -260,7 +264,7 @@
             this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.addBtn.Location = new System.Drawing.Point(420, 359);
+            this.addBtn.Location = new System.Drawing.Point(425, 407);
             this.addBtn.Name = "addBtn";
             this.addBtn.Size = new System.Drawing.Size(252, 52);
             this.addBtn.TabIndex = 59;
@@ -364,12 +368,65 @@
             this.label7.TabIndex = 67;
             this.label7.Text = "Semester";
             // 
-            // CoordinatorCourse
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.label8.Location = new System.Drawing.Point(356, 31);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(148, 20);
+            this.label8.TabIndex = 70;
+            this.label8.Text = "Number of Tutorial:";
+            // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.Location = new System.Drawing.Point(510, 50);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(100, 1);
+            this.panel1.TabIndex = 69;
+            // 
+            // tutorialTb
+            // 
+            this.tutorialTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.tutorialTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tutorialTb.Enabled = false;
+            this.tutorialTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.tutorialTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.tutorialTb.HideSelection = false;
+            this.tutorialTb.Location = new System.Drawing.Point(510, 32);
+            this.tutorialTb.Name = "tutorialTb";
+            this.tutorialTb.Size = new System.Drawing.Size(100, 20);
+            this.tutorialTb.TabIndex = 68;
+            this.tutorialTb.Text = "Year";
+            // 
+            // tutorialBtn
+            // 
+            this.tutorialBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.tutorialBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.tutorialBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.tutorialBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tutorialBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.tutorialBtn.Location = new System.Drawing.Point(616, 18);
+            this.tutorialBtn.Name = "tutorialBtn";
+            this.tutorialBtn.Size = new System.Drawing.Size(116, 48);
+            this.tutorialBtn.TabIndex = 71;
+            this.tutorialBtn.TabStop = false;
+            this.tutorialBtn.Text = "Add Tutorial";
+            this.tutorialBtn.UseVisualStyleBackColor = false;
+            this.tutorialBtn.Click += new System.EventHandler(this.tutorialBtn_Click);
+            // 
+            // CoordinatorCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
+            this.Controls.Add(this.tutorialBtn);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.tutorialTb);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.autumnRb);
             this.Controls.Add(this.winterRb);
@@ -397,7 +454,7 @@
             this.Controls.Add(this.codePl);
             this.Controls.Add(this.codeTb);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CoordinatorCourse";
+            this.Name = "CoordinatorCourseForm";
             this.ShowInTaskbar = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoordinatorCourse";
@@ -436,5 +493,9 @@
         private System.Windows.Forms.RadioButton springRb;
         private System.Windows.Forms.RadioButton summerRb;
         private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.TextBox tutorialTb;
+        private System.Windows.Forms.Button tutorialBtn;
     }
 }

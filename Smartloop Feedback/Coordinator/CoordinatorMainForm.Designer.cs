@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
-            this.setttingBtn = new System.Windows.Forms.Button();
             this.navPl = new System.Windows.Forms.Panel();
             this.dashboardBtn = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -51,7 +50,6 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
-            this.panel1.Controls.Add(this.setttingBtn);
             this.panel1.Controls.Add(this.navPl);
             this.panel1.Controls.Add(this.dashboardBtn);
             this.panel1.Controls.Add(this.panel2);
@@ -60,23 +58,6 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(186, 538);
             this.panel1.TabIndex = 0;
-            // 
-            // setttingBtn
-            // 
-            this.setttingBtn.Dock = System.Windows.Forms.DockStyle.Top;
-            this.setttingBtn.FlatAppearance.BorderSize = 0;
-            this.setttingBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.setttingBtn.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.setttingBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.setttingBtn.Image = global::Smartloop_Feedback.Properties.Resources.setting;
-            this.setttingBtn.Location = new System.Drawing.Point(0, 244);
-            this.setttingBtn.Name = "setttingBtn";
-            this.setttingBtn.Size = new System.Drawing.Size(186, 42);
-            this.setttingBtn.TabIndex = 4;
-            this.setttingBtn.Text = " Settings";
-            this.setttingBtn.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.setttingBtn.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.setttingBtn.UseVisualStyleBackColor = true;
             // 
             // navPl
             // 
@@ -193,7 +174,7 @@
             this.titleLb.TabIndex = 0;
             this.titleLb.Text = "Dashboard";
             // 
-            // CoordinatorMain
+            // CoordinatorMainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -202,7 +183,7 @@
             this.Controls.Add(this.centrePannel);
             this.Controls.Add(this.panel1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CoordinatorMain";
+            this.Name = "CoordinatorMainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "mainForm";
             this.panel1.ResumeLayout(false);
@@ -224,7 +205,6 @@
         private System.Windows.Forms.PictureBox profilePb;
         private System.Windows.Forms.Label nameLb;
         private System.Windows.Forms.Button dashboardBtn;
-        private System.Windows.Forms.Button setttingBtn;
         private System.Windows.Forms.Panel navPl;
         private System.Windows.Forms.Panel centrePannel;
         private System.Windows.Forms.Label titleLb;

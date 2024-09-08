@@ -136,8 +136,27 @@ namespace Smartloop_Feedback.Coordinator
             if(e.RowIndex >= 0)
             {
                 DataGridViewRow row = courseDgv.Rows[e.RowIndex];
-                mainForm.position[0] = (int)row.Tag;
-                mainForm.MainPannel(1);
+
+                if (courseDgv.Columns[e.ColumnIndex].Name == "View")
+                {
+                    mainForm.position[0] = (int)row.Tag;
+                    mainForm.MainPannel(1);
+                }
+                else if (courseDgv.Columns[e.ColumnIndex].Name == "Delete")
+                {
+                    DialogResult result = MessageBox.Show(
+                        "Are you sure you want to delete the course record? This will result in removing all associated objects as well.",
+                        "Confirm Deletion",
+                        MessageBoxButtons.YesNo,
+                        MessageBoxIcon.Warning
+                    );
+
+                    if (result == DialogResult.Yes)
+                    {
+                        coordinator.DeleteCourseFromDatabase((int)row.Tag);
+                        mainForm.MainPannel(0);
+                    }
+                }
             }
         }
     }

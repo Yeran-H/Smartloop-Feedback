@@ -60,6 +60,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.yearPl = new System.Windows.Forms.Panel();
+            this.tutorPl = new System.Windows.Forms.Panel();
+            this.tutorialTb = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.exit1Pb)).BeginInit();
             this.headerPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
@@ -71,7 +73,7 @@
             // codePl
             // 
             this.codePl.BackColor = System.Drawing.Color.White;
-            this.codePl.Location = new System.Drawing.Point(17, 79);
+            this.codePl.Location = new System.Drawing.Point(18, 67);
             this.codePl.Name = "codePl";
             this.codePl.Size = new System.Drawing.Size(206, 1);
             this.codePl.TabIndex = 17;
@@ -113,7 +115,7 @@
             this.codeTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.codeTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.codeTb.HideSelection = false;
-            this.codeTb.Location = new System.Drawing.Point(17, 57);
+            this.codeTb.Location = new System.Drawing.Point(18, 45);
             this.codeTb.Name = "codeTb";
             this.codeTb.Size = new System.Drawing.Size(206, 20);
             this.codeTb.TabIndex = 1;
@@ -127,7 +129,7 @@
             // namePl
             // 
             this.namePl.BackColor = System.Drawing.Color.White;
-            this.namePl.Location = new System.Drawing.Point(17, 106);
+            this.namePl.Location = new System.Drawing.Point(18, 94);
             this.namePl.Name = "namePl";
             this.namePl.Size = new System.Drawing.Size(206, 1);
             this.namePl.TabIndex = 19;
@@ -139,7 +141,7 @@
             this.nameTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.nameTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.nameTb.HideSelection = false;
-            this.nameTb.Location = new System.Drawing.Point(17, 84);
+            this.nameTb.Location = new System.Drawing.Point(18, 72);
             this.nameTb.Name = "nameTb";
             this.nameTb.Size = new System.Drawing.Size(206, 20);
             this.nameTb.TabIndex = 2;
@@ -151,7 +153,7 @@
             // creditPl
             // 
             this.creditPl.BackColor = System.Drawing.Color.White;
-            this.creditPl.Location = new System.Drawing.Point(16, 133);
+            this.creditPl.Location = new System.Drawing.Point(17, 121);
             this.creditPl.Name = "creditPl";
             this.creditPl.Size = new System.Drawing.Size(206, 1);
             this.creditPl.TabIndex = 21;
@@ -163,7 +165,7 @@
             this.creditTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.creditTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.creditTb.HideSelection = false;
-            this.creditTb.Location = new System.Drawing.Point(16, 114);
+            this.creditTb.Location = new System.Drawing.Point(17, 102);
             this.creditTb.Name = "creditTb";
             this.creditTb.Size = new System.Drawing.Size(206, 20);
             this.creditTb.TabIndex = 3;
@@ -176,7 +178,7 @@
             // descriptionPl
             // 
             this.descriptionPl.BackColor = System.Drawing.Color.White;
-            this.descriptionPl.Location = new System.Drawing.Point(18, 231);
+            this.descriptionPl.Location = new System.Drawing.Point(19, 219);
             this.descriptionPl.Name = "descriptionPl";
             this.descriptionPl.Size = new System.Drawing.Size(206, 1);
             this.descriptionPl.TabIndex = 23;
@@ -184,7 +186,7 @@
             // canvasPl
             // 
             this.canvasPl.BackColor = System.Drawing.Color.White;
-            this.canvasPl.Location = new System.Drawing.Point(17, 257);
+            this.canvasPl.Location = new System.Drawing.Point(18, 245);
             this.canvasPl.Name = "canvasPl";
             this.canvasPl.Size = new System.Drawing.Size(206, 1);
             this.canvasPl.TabIndex = 19;
@@ -196,7 +198,7 @@
             this.canvasTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.canvasTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.canvasTb.HideSelection = false;
-            this.canvasTb.Location = new System.Drawing.Point(17, 235);
+            this.canvasTb.Location = new System.Drawing.Point(18, 223);
             this.canvasTb.Name = "canvasTb";
             this.canvasTb.Size = new System.Drawing.Size(206, 20);
             this.canvasTb.TabIndex = 5;
@@ -211,7 +213,7 @@
             this.descriptionTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.descriptionTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.descriptionTb.HideSelection = false;
-            this.descriptionTb.Location = new System.Drawing.Point(14, 140);
+            this.descriptionTb.Location = new System.Drawing.Point(15, 128);
             this.descriptionTb.Multiline = true;
             this.descriptionTb.Name = "descriptionTb";
             this.descriptionTb.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -321,6 +323,8 @@
             // 
             // pannelCourse
             // 
+            this.pannelCourse.Controls.Add(this.tutorPl);
+            this.pannelCourse.Controls.Add(this.tutorialTb);
             this.pannelCourse.Controls.Add(this.canvasPl);
             this.pannelCourse.Controls.Add(this.headerPanel);
             this.pannelCourse.Controls.Add(this.canvasTb);
@@ -459,6 +463,30 @@
             this.yearPl.Size = new System.Drawing.Size(206, 1);
             this.yearPl.TabIndex = 26;
             // 
+            // tutorPl
+            // 
+            this.tutorPl.BackColor = System.Drawing.Color.White;
+            this.tutorPl.Location = new System.Drawing.Point(17, 277);
+            this.tutorPl.Name = "tutorPl";
+            this.tutorPl.Size = new System.Drawing.Size(206, 1);
+            this.tutorPl.TabIndex = 21;
+            // 
+            // tutorialTb
+            // 
+            this.tutorialTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
+            this.tutorialTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.tutorialTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.tutorialTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.tutorialTb.HideSelection = false;
+            this.tutorialTb.Location = new System.Drawing.Point(17, 255);
+            this.tutorialTb.Name = "tutorialTb";
+            this.tutorialTb.Size = new System.Drawing.Size(206, 20);
+            this.tutorialTb.TabIndex = 20;
+            this.tutorialTb.Text = "Number of Tutorial Class";
+            this.tutorialTb.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
+            this.tutorialTb.Enter += new System.EventHandler(this.TextBox_Enter);
+            this.tutorialTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Number_KeyPress);
+            // 
             // AddCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -517,5 +545,7 @@
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button nextBtn;
         private System.Windows.Forms.TextBox yearTb;
+        private System.Windows.Forms.Panel tutorPl;
+        private System.Windows.Forms.TextBox tutorialTb;
     }
 }

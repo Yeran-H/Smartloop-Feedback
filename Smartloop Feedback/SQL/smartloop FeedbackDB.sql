@@ -22,7 +22,17 @@ CREATE TABLE course (
     description VARCHAR(MAX),
     year VARCHAR(MAX),
     semester VARCHAR(MAX),
-    canvasLink VARCHAR(MAX)
+    canvasLink VARCHAR(MAX),
+    tutorNum INT
+);
+GO
+
+-- Create the tutorial table
+CREATE TABLE tutorial (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    courseId INT,
+    FOREIGN KEY (courseId) REFERENCES course(id)
 );
 GO
 

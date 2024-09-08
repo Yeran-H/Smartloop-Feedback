@@ -42,6 +42,7 @@ namespace Smartloop_Feedback
             textBoxClicked[descriptionTb] = false;
             textBoxClicked[canvasTb] = false;
             textBoxClicked[yearTb] = false;
+            textBoxClicked[tutorialTb] = false;
 
             // Set the form's region to a rounded rectangle
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -90,6 +91,11 @@ namespace Smartloop_Feedback
                 descriptionPl.BackColor = Color.FromArgb(254, 0, 57);
                 descriptionTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
+            else if (currentTextBox == tutorialTb)
+            {
+                tutorPl.BackColor = Color.FromArgb(254, 0, 57);
+                tutorialTb.ForeColor = Color.FromArgb(254, 0, 57);
+            }
             else if (currentTextBox == canvasTb)
             {
                 canvasPl.BackColor = Color.FromArgb(254, 0, 57);
@@ -114,6 +120,9 @@ namespace Smartloop_Feedback
 
             canvasPl.BackColor = Color.FromArgb(193, 193, 193);
             canvasTb.ForeColor = Color.FromArgb(193, 193, 193);
+
+            tutorPl.BackColor = Color.FromArgb(193, 193, 193);
+            tutorialTb.ForeColor = Color.FromArgb(193, 193, 193);
         }
 
         // Event handler for save button click
@@ -126,7 +135,7 @@ namespace Smartloop_Feedback
 
             if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text))
             {
-                course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
+                course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text, Int32.Parse(tutorialTb.Text));
                 this.DialogResult = DialogResult.OK;
                 this.Close(); // Close the form if all fields are valid
             }
