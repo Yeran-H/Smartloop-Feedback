@@ -12,7 +12,7 @@ namespace Smartloop_Feedback.Objects
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
-        public int Id { get; private set; } // Course ID
+        public int Id { get; set; } // Course ID
         public int Code { get; set; } // Course code
         public string Name { get; set; } // Course name
         public int CreditPoint { get; set; } // Course credit points
@@ -20,6 +20,7 @@ namespace Smartloop_Feedback.Objects
         public string Year { get; set; }
         public string Semester { get; set; }
         public string CanvasLink { get; set; }
+        public Dictionary<int, Assessment> AssessmentList { get; set; }
 
         public Course(int id, int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink)
         {
@@ -31,6 +32,7 @@ namespace Smartloop_Feedback.Objects
             this.Year = Year;
             this.Semester = Semester;
             this.CanvasLink = CanvasLink;
+            AssessmentList = new Dictionary<int, Assessment>();
         }
 
         public Course(int code, string name, int creditPoint, string description, string Year, string Semester, string CanvasLink)
@@ -42,6 +44,7 @@ namespace Smartloop_Feedback.Objects
             this.Year = Year;
             this.Semester = Semester;
             this.CanvasLink = CanvasLink;
+            AssessmentList = new Dictionary<int, Assessment>();
             AddCourseToDatabase();
         }
 

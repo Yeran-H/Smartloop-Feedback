@@ -47,6 +47,92 @@ namespace Smartloop_Feedback.Coordinator
                     springRb.Checked = true;
                     break;
             }
+
+            LoadAssessmentData();
+        }
+
+        private void LoadAssessmentData()
+        {
+            if (course.AssessmentList != null)
+            {
+                assessmentDgv.Rows.Clear(); // Clear existing rows
+                assessmentDgv.Columns.Clear(); // Clear existing columns
+
+                // Add columns to the DataGridView
+                assessmentDgv.Columns.Add("Nam", "Name");
+                assessmentDgv.Columns.Add("Date", "Date");
+                assessmentDgv.Columns.Add("Weight", "Weight");
+                assessmentDgv.Columns.Add("Mark", "Mark");
+
+                DataGridViewButtonColumn viewColumn = new DataGridViewButtonColumn
+                {
+                    Name = "View",
+                    HeaderText = "View",
+                    UseColumnTextForButtonValue = false,
+                    CellTemplate = new StyledButtonCell()
+                };
+                assessmentDgv.Columns.Add(viewColumn);
+
+                DataGridViewButtonColumn deleteColumn = new DataGridViewButtonColumn
+                {
+                    Name = "Delete",
+                    HeaderText = "Delete",
+                    UseColumnTextForButtonValue = false,
+                    CellTemplate = new StyledButtonCell()
+                };
+                assessmentDgv.Columns.Add(deleteColumn);
+
+                // Add rows to the DataGridView
+                foreach (Assessment assessment in course.AssessmentList.Values)
+                {
+                    int rowIndex = assessmentDgv.Rows.Add(assessment.Name, assessment.Date, assessment.Weight, assessment.Mark, "View", "Delete");
+                    DataGridViewRow row = assessmentDgv.Rows[rowIndex];
+                    row.Tag = assessment.Id;
+                }
+
+                DataGridColor(assessmentDgv); // Apply color formatting to the DataGridView
+            }
+        }
+
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
         }
 
         // Event handler to allow only digits in the code TextBox
@@ -125,10 +211,31 @@ namespace Smartloop_Feedback.Coordinator
             if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text) || !string.IsNullOrEmpty(yearTb.Text))
             {
                 course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
+                mainForm.MainPannel(0);
             }
             else
             {
                 MessageBox.Show("Please fill out all boxes", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error); // Show error message if any field is empty
+            }
+        }
+
+        private void addBtn_Click(object sender, EventArgs e)
+        {
+            using (var addCourseForm = new AddCourseForm())
+            {
+                if (addCourseForm.ShowDialog() == DialogResult.OK)
+                {
+                    if (addCourseForm.course != null)
+                    {
+                        coordinator.CourseList.Add(addCourseForm.course.Id, addCourseForm.course);
+                        LoadCourseDGV();
+                    }
+                    else
+                    {
+                        MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
             }
         }
     }

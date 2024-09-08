@@ -208,7 +208,7 @@ namespace Smartloop_Feedback.Forms
             }
 
             // Add a new assessment to the course
-            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, course.Description, typeCb.Text, dateP.Value.Date, 0, double.Parse(weightTb.Text), double.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.Id, course.StudentId);
+            StudentAssessment assessment = new StudentAssessment(titleTb.Text, descriptionTb.Text, course.Description, typeCb.Text, dateP.Value.Date, 0, double.Parse(weightTb.Text), double.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.Id, course.StudentId);
             course.AssessmentList.Add(assessment.Id, assessment);
 
             // Prepare column names for ratings

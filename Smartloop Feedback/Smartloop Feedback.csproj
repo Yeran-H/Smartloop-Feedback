@@ -294,6 +294,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Assessment.cs" />
+    <Compile Include="Objects\StudentAssessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
     <Compile Include="Objects\Coordinator.cs" />
     <Compile Include="Objects\Course.cs" />

@@ -101,7 +101,7 @@ namespace Smartloop_Feedback.Forms
                 assessmentDgv.Columns.Add("Weight", "Weight");
 
                 // Add rows to the DataGridView
-                foreach (Assessment assessment in course.AssessmentList.Values)
+                foreach (StudentAssessment assessment in course.AssessmentList.Values)
                 {
                     double percentage = (assessment.FinalMark / assessment.Mark) * 100;
                     int rowIndex = assessmentDgv.Rows.Add(assessment.Name, assessment.Type, assessment.Date, (int)assessment.Status, percentage.ToString("F2") + "%", assessment.Weight);

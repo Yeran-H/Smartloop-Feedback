@@ -17,10 +17,10 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
     {
         private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
         private OpenAIAPI api;
-        public Assessment assessment;
+        public StudentAssessment assessment;
         public MainForm mainForm;
 
-        public AIForm(Assessment assessment, MainForm mainForm)
+        public AIForm(StudentAssessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             api = new OpenAIAPI(apiKey);

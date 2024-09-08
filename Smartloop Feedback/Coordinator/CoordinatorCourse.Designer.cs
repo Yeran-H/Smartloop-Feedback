@@ -266,6 +266,7 @@
             this.addBtn.TabStop = false;
             this.addBtn.Text = "Add Assessment";
             this.addBtn.UseVisualStyleBackColor = false;
+            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // label6
             // 
