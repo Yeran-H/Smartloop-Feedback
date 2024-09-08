@@ -34,21 +34,21 @@ namespace Smartloop_Feedback.Coordinator
             yearTb.Text = course.Year.ToString();
             tutorialTb.Text = course.TutorNum.ToString();
 
-            switch (course.Semester)
-            {
-                case "Summer":
-                    summerRb.Checked = true;
-                    break;
-                case "Autumn":
-                    autumnRb.Checked = true;
-                    break;
-                case "Winter":
-                    winterRb.Checked = true;
-                    break;
-                case "Spring":
-                    springRb.Checked = true;
-                    break;
-            }
+            //switch (course.Semester)
+            //{
+            //    case "Summer":
+            //        summerRb.Checked = true;
+            //        break;
+            //    case "Autumn":
+            //        autumnRb.Checked = true;
+            //        break;
+            //    case "Winter":
+            //        winterRb.Checked = true;
+            //        break;
+            //    case "Spring":
+            //        springRb.Checked = true;
+            //        break;
+            //}
 
             LoadAssessmentData();
         }
@@ -212,7 +212,7 @@ namespace Smartloop_Feedback.Coordinator
 
             if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text) || !string.IsNullOrEmpty(yearTb.Text))
             {
-                course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
+                //course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
                 mainForm.MainPannel(0);
             }
             else

@@ -27,24 +27,24 @@ namespace Smartloop_Feedback
             Image buttonImage = Properties.Resources.calendar;
             int buttonCount = 0;
 
-            foreach(StudentYear year in user.YearList.Values)
-            {
-                Button btn = new Button
-                {
-                    Text = year.Name.ToString(),
-                    Dock = DockStyle.Top,
-                    Height = 42,
-                    FlatStyle = FlatStyle.Flat,
-                    Font = new Font("Aptos", 11F, FontStyle.Bold),
-                    ForeColor = Color.FromArgb(193, 193, 193),
-                    FlatAppearance = { BorderSize = 0 },
-                    Image = buttonImage,
-                    TextImageRelation = TextImageRelation.ImageBeforeText
-                };
-                btn.Click += new EventHandler(YearButton_Click);
-                Controls.Add(btn);
-                buttonCount++;
-            }
+            //foreach(StudentYear year in user.YearList.Values)
+            //{
+            //    Button btn = new Button
+            //    {
+            //        Text = year.Name.ToString(),
+            //        Dock = DockStyle.Top,
+            //        Height = 42,
+            //        FlatStyle = FlatStyle.Flat,
+            //        Font = new Font("Aptos", 11F, FontStyle.Bold),
+            //        ForeColor = Color.FromArgb(193, 193, 193),
+            //        FlatAppearance = { BorderSize = 0 },
+            //        Image = buttonImage,
+            //        TextImageRelation = TextImageRelation.ImageBeforeText
+            //    };
+            //    btn.Click += new EventHandler(YearButton_Click);
+            //    Controls.Add(btn);
+            //    buttonCount++;
+            //}
 
             addBtn.Dock = DockStyle.Top;
             Controls.Add(addBtn);
@@ -71,7 +71,7 @@ namespace Smartloop_Feedback
                     int yearName = addYearForm.yearName; // Get the new year's name
 
                     StudentYear year = new StudentYear(yearName, user.Id, addYearForm.semesterNames);
-                    user.YearList.Add(year.Name, year); // Add the new year to the student's year list
+                    //user.YearList.Add(year.Name, year); // Add the new year to the student's year list
                     InitializeBar(); //Refresh the Bar
                 }
             }

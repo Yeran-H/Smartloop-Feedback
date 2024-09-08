@@ -19,7 +19,7 @@ namespace Smartloop_Feedback.Objects
         public string Password { get; set; }
         public byte[] ProfileImage { get; set; }
         public bool IsStudent { get; set; }
-        public SortedDictionary<int, Year> YearList { get; set; }
+        //public SortedDictionary<int, Year> YearList { get; set; }
 
         public OLDUser(int id, string name, string email, string password, byte[] profileImage, bool isStudent)
         {
@@ -29,7 +29,7 @@ namespace Smartloop_Feedback.Objects
             Name = name;
             ProfileImage = profileImage;
             IsStudent = isStudent;
-            YearList = new SortedDictionary<int, Year>();
+            //YearList = new SortedDictionary<int, Year>();
         }
 
         public bool ValidateUserInput()
@@ -114,7 +114,8 @@ namespace Smartloop_Feedback.Objects
         // Check if a year name is unique within the student's year list
         public bool UniqueYear(int name)
         {
-            return !YearList.ContainsKey(name);
+            return true;
+            //return !YearList.ContainsKey(name);
         }
     }
 }

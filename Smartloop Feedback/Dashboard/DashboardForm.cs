@@ -59,20 +59,20 @@ namespace Smartloop_Feedback.Dashboard
             };
             courseDgv.Columns.Add(tagsColumn);
 
-            foreach (StudentYear year in student.YearList.Values)
-            {
-                foreach (StudentSemester semester in year.SemesterList.Values)
-                {
-                    foreach (StudentCourse course in semester.CourseList.Values)
-                    {
-                        if (!course.IsCompleted)
-                        {
-                            int rowIndex = courseDgv.Rows.Add(course.Code, course.Title, "", "");
-                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Id };
-                        }
-                    }
-                }
-            }
+            //foreach (StudentYear year in student.YearList.Values)
+            //{
+            //    foreach (StudentSemester semester in year.SemesterList.Values)
+            //    {
+            //        foreach (StudentCourse course in semester.CourseList.Values)
+            //        {
+            //            if (!course.IsCompleted)
+            //            {
+            //                int rowIndex = courseDgv.Rows.Add(course.Code, course.Title, "", "");
+            //                courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Id };
+            //            }
+            //        }
+            //    }
+            //}
         }
 
         private void courseDgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -83,8 +83,8 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
                 {
-                    string canvasLink = student.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
-                    OpenUrl(canvasLink);
+                   // string canvasLink = student.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
+                    //OpenUrl(canvasLink);
                 }
                 else if (e.ColumnIndex == courseDgv.Columns["courseBtn"].Index)
                 {
