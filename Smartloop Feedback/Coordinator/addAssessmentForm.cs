@@ -1,20 +1,25 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using iTextSharp.text.pdf.parser;
+using iTextSharp.text.pdf;
+using Smartloop_Feedback.Coordinator_Folder;
+using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
+using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback.Forms
 {
     public partial class AddAssessmentForm : Form
     {
-        private StudentCourse course; // Reference to the course object
-        private MainForm mainForm; // Reference to the main form
+        private Course course; // Reference to the course object
+        private CoordinatorMain mainForm; // Reference to the main form
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Track if TextBox has been clicked
 
-        public AddAssessmentForm(StudentCourse course, MainForm mainForm)
+        public AddAssessmentForm(Course course, CoordinatorMain mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -26,6 +31,7 @@ namespace Smartloop_Feedback.Forms
             textBoxClicked[markTb] = false;
             textBoxClicked[weightTb] = false;
             textBoxClicked[canvasTb] = false;
+            textBoxClicked[typeTb] = false;
         }
 
         // Event handler for form load
@@ -99,6 +105,17 @@ namespace Smartloop_Feedback.Forms
         {
             // Go back to the main panel
             mainForm.MainPannel(0);
+        }
+
+        private void loadAssessmentBtn_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "PDF files (*.pdf)|*.pdf|All files (*.*)|*.*";
+
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                fileTb.Text = openFileDialog.FileName;
+            }
         }
 
         // Event handler for next button click
@@ -190,7 +207,7 @@ namespace Smartloop_Feedback.Forms
         private void submitBtn_Click(object sender, EventArgs e)
         {
             // Validate before adding assessment
-            if (titleTb.Text == null || titleTb.Text == "Title" || descriptionTb.Text == null || descriptionTb.Text == "Description" || weightTb.Text == null || weightTb.Text == "Weight" || markTb.Text == null || markTb.Text == "Total Mark"|| canvasTb.Text == null || canvasTb.Text == "Canvas Link" || typeCb.Text == "Type of Assessment")
+            if (titleTb.Text == null || titleTb.Text == "Title" || descriptionTb.Text == null || descriptionTb.Text == "Description" || weightTb.Text == null || weightTb.Text == "Weight" || markTb.Text == null || markTb.Text == "Total Mark"|| canvasTb.Text == null || canvasTb.Text == "Canvas Link")
             {
                 MessageBox.Show("Make sure all fields are filled out.",
                                 "Warning",
@@ -208,7 +225,7 @@ namespace Smartloop_Feedback.Forms
             }
 
             // Add a new assessment to the course
-            StudentAssessment assessment = new StudentAssessment(titleTb.Text, descriptionTb.Text, course.Description, typeCb.Text, dateP.Value.Date, 0, double.Parse(weightTb.Text), double.Parse(markTb.Text), 0, individualRbtn.Checked, groupRbtn.Checked, false, canvasTb.Text, course.Id, course.StudentId);
+            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, course.Description, typeTb.Text, dateP.Value.Date, double.Parse(weightTb.Text), double.Parse(markTb.Text), canvasTb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(ExtractTextFromPdf(fileTb.Text)),course.Id);
             course.AssessmentList.Add(assessment.Id, assessment);
 
             // Prepare column names for ratings
@@ -224,17 +241,32 @@ namespace Smartloop_Feedback.Forms
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new StudentCriteria(row.Cells[0].Value.ToString(), assessment.Id, assessment.StudentId);
+                Criteria criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.Id);
                 course.AssessmentList[assessment.Id].CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)
                 {
-                    course.AssessmentList[assessment.Id].CriteriaList.Last().RatingList.Add(new StudentRating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id, assessment.StudentId));
+                    course.AssessmentList[assessment.Id].CriteriaList.Last().RatingList.Add(new Rating(row.Cells[i + 1].Value.ToString(), columnNameList[i], criteria.Id));
                 }
             }
 
             // Go back to the main panel
-            mainForm.MainPannel(0);
+            mainForm.MainPannel(1);
+        }
+
+        private string ExtractTextFromPdf(string filePath)
+        {
+            StringBuilder text = new StringBuilder();
+
+            using (PdfReader reader = new PdfReader(filePath))
+            {
+                for (int i = 1; i <= reader.NumberOfPages; i++)
+                {
+                    text.Append(PdfTextExtractor.GetTextFromPage(reader, i));
+                }
+            }
+
+            return text.ToString();
         }
 
         // Event handler for TextBox enter event

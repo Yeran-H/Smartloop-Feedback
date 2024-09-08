@@ -14,7 +14,7 @@ namespace Smartloop_Feedback.Objects.Updated
         public int Id { get; private set; } // Criteria ID
         public string Description { get; set; } // Criteria description
         public int AssessmentId { get; set; } // ID of the assessment associated with the criteria
-        public List<StudentRating> RatingList { get; private set; } // List of ratings for the criteria
+        public List<Rating> RatingList { get; private set; } // List of ratings for the criteria
 
         // Constructor to initialize a Criteria object and fetch ratings from the database
         public Criteria(int id, string description, int assessmentId)
@@ -22,7 +22,7 @@ namespace Smartloop_Feedback.Objects.Updated
             Id = id;
             Description = description;
             AssessmentId = assessmentId;
-            RatingList = new List<StudentRating>(); // Initialize the rating list
+            RatingList = new List<Rating>(); // Initialize the rating list
             LoadRatingsFromDatabase(); // Fetch ratings from the database
         }
 
@@ -31,7 +31,7 @@ namespace Smartloop_Feedback.Objects.Updated
         {
             Description = description;
             AssessmentId = assessmentId;
-            RatingList = new List<StudentRating>(); // Initialize the rating list
+            RatingList = new List<Rating>(); // Initialize the rating list
             AddCriteriaToDatabase(); // Add the criteria to the database
         }
 
@@ -82,7 +82,7 @@ namespace Smartloop_Feedback.Objects.Updated
         public void DeleteCriteriaFromDatabase()
         {
             // Delete all ratings associated with the criteria
-            foreach (StudentRating rating in RatingList)
+            foreach (Rating rating in RatingList)
             {
                 rating.DeleteRatingFromDatabase();
             }

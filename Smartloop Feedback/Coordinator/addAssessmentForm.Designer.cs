@@ -26,11 +26,8 @@
             this.weightTb = new System.Windows.Forms.TextBox();
             this.markPl = new System.Windows.Forms.Panel();
             this.markTb = new System.Windows.Forms.TextBox();
-            this.groupRbtn = new System.Windows.Forms.RadioButton();
-            this.individualRbtn = new System.Windows.Forms.RadioButton();
             this.nextBtn = new System.Windows.Forms.Button();
             this.cancelBtn = new System.Windows.Forms.Button();
-            this.typeCb = new System.Windows.Forms.ComboBox();
             this.datePl = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.descriptionPl = new System.Windows.Forms.Panel();
@@ -45,6 +42,12 @@
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.typePl = new System.Windows.Forms.Panel();
+            this.typeTb = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.fileTb = new System.Windows.Forms.TextBox();
+            this.loadAssessmentBtn = new System.Windows.Forms.Button();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
@@ -52,6 +55,12 @@
             // 
             // panelDetails
             // 
+            this.panelDetails.Controls.Add(this.label2);
+            this.panelDetails.Controls.Add(this.panel2);
+            this.panelDetails.Controls.Add(this.fileTb);
+            this.panelDetails.Controls.Add(this.loadAssessmentBtn);
+            this.panelDetails.Controls.Add(this.typePl);
+            this.panelDetails.Controls.Add(this.typeTb);
             this.panelDetails.Controls.Add(this.descriptionTb);
             this.panelDetails.Controls.Add(this.canvasPl);
             this.panelDetails.Controls.Add(this.canvasTb);
@@ -59,11 +68,8 @@
             this.panelDetails.Controls.Add(this.weightTb);
             this.panelDetails.Controls.Add(this.markPl);
             this.panelDetails.Controls.Add(this.markTb);
-            this.panelDetails.Controls.Add(this.groupRbtn);
-            this.panelDetails.Controls.Add(this.individualRbtn);
             this.panelDetails.Controls.Add(this.nextBtn);
             this.panelDetails.Controls.Add(this.cancelBtn);
-            this.panelDetails.Controls.Add(this.typeCb);
             this.panelDetails.Controls.Add(this.datePl);
             this.panelDetails.Controls.Add(this.label1);
             this.panelDetails.Controls.Add(this.descriptionPl);
@@ -97,7 +103,7 @@
             // canvasPl
             // 
             this.canvasPl.BackColor = System.Drawing.Color.White;
-            this.canvasPl.Location = new System.Drawing.Point(386, 282);
+            this.canvasPl.Location = new System.Drawing.Point(386, 192);
             this.canvasPl.Name = "canvasPl";
             this.canvasPl.Size = new System.Drawing.Size(200, 1);
             this.canvasPl.TabIndex = 20;
@@ -109,7 +115,7 @@
             this.canvasTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.canvasTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.canvasTb.HideSelection = false;
-            this.canvasTb.Location = new System.Drawing.Point(386, 263);
+            this.canvasTb.Location = new System.Drawing.Point(386, 173);
             this.canvasTb.Name = "canvasTb";
             this.canvasTb.Size = new System.Drawing.Size(200, 20);
             this.canvasTb.TabIndex = 19;
@@ -121,7 +127,7 @@
             // weightPl
             // 
             this.weightPl.BackColor = System.Drawing.Color.White;
-            this.weightPl.Location = new System.Drawing.Point(387, 193);
+            this.weightPl.Location = new System.Drawing.Point(386, 154);
             this.weightPl.Name = "weightPl";
             this.weightPl.Size = new System.Drawing.Size(200, 1);
             this.weightPl.TabIndex = 28;
@@ -133,7 +139,7 @@
             this.weightTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.weightTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.weightTb.HideSelection = false;
-            this.weightTb.Location = new System.Drawing.Point(387, 174);
+            this.weightTb.Location = new System.Drawing.Point(386, 135);
             this.weightTb.Name = "weightTb";
             this.weightTb.Size = new System.Drawing.Size(200, 20);
             this.weightTb.TabIndex = 27;
@@ -146,7 +152,7 @@
             // markPl
             // 
             this.markPl.BackColor = System.Drawing.Color.White;
-            this.markPl.Location = new System.Drawing.Point(387, 159);
+            this.markPl.Location = new System.Drawing.Point(386, 120);
             this.markPl.Name = "markPl";
             this.markPl.Size = new System.Drawing.Size(200, 1);
             this.markPl.TabIndex = 20;
@@ -158,7 +164,7 @@
             this.markTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.markTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.markTb.HideSelection = false;
-            this.markTb.Location = new System.Drawing.Point(387, 140);
+            this.markTb.Location = new System.Drawing.Point(386, 101);
             this.markTb.Name = "markTb";
             this.markTb.Size = new System.Drawing.Size(200, 20);
             this.markTb.TabIndex = 19;
@@ -168,34 +174,6 @@
             this.markTb.Enter += new System.EventHandler(this.textBox_Enter);
             this.markTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.numberOnly_KeyPress);
             // 
-            // groupRbtn
-            // 
-            this.groupRbtn.AutoSize = true;
-            this.groupRbtn.Font = new System.Drawing.Font("Aptos", 12F);
-            this.groupRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.groupRbtn.Location = new System.Drawing.Point(428, 224);
-            this.groupRbtn.Name = "groupRbtn";
-            this.groupRbtn.Size = new System.Drawing.Size(109, 24);
-            this.groupRbtn.TabIndex = 26;
-            this.groupRbtn.Text = "Group Work";
-            this.toolTip1.SetToolTip(this.groupRbtn, "Select if assessment is group");
-            this.groupRbtn.UseVisualStyleBackColor = true;
-            // 
-            // individualRbtn
-            // 
-            this.individualRbtn.AutoSize = true;
-            this.individualRbtn.Checked = true;
-            this.individualRbtn.Font = new System.Drawing.Font("Aptos", 12F);
-            this.individualRbtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.individualRbtn.Location = new System.Drawing.Point(428, 201);
-            this.individualRbtn.Name = "individualRbtn";
-            this.individualRbtn.Size = new System.Drawing.Size(95, 24);
-            this.individualRbtn.TabIndex = 25;
-            this.individualRbtn.TabStop = true;
-            this.individualRbtn.Text = "Individual";
-            this.toolTip1.SetToolTip(this.individualRbtn, "Select if assessment is individual");
-            this.individualRbtn.UseVisualStyleBackColor = true;
-            // 
             // nextBtn
             // 
             this.nextBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
@@ -203,7 +181,7 @@
             this.nextBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nextBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.nextBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.nextBtn.Location = new System.Drawing.Point(367, 316);
+            this.nextBtn.Location = new System.Drawing.Point(366, 330);
             this.nextBtn.Name = "nextBtn";
             this.nextBtn.Size = new System.Drawing.Size(141, 52);
             this.nextBtn.TabIndex = 24;
@@ -218,36 +196,13 @@
             this.cancelBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.cancelBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.cancelBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.cancelBtn.Location = new System.Drawing.Point(220, 316);
+            this.cancelBtn.Location = new System.Drawing.Point(219, 330);
             this.cancelBtn.Name = "cancelBtn";
             this.cancelBtn.Size = new System.Drawing.Size(141, 52);
             this.cancelBtn.TabIndex = 23;
             this.cancelBtn.Text = "Cancel";
             this.cancelBtn.UseVisualStyleBackColor = false;
             this.cancelBtn.Click += new System.EventHandler(this.cancelBtn_Click);
-            // 
-            // typeCb
-            // 
-            this.typeCb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.typeCb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.typeCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.typeCb.FormattingEnabled = true;
-            this.typeCb.Items.AddRange(new object[] {
-            "Reflection",
-            "Report",
-            "Coding",
-            "Project",
-            "Quiz",
-            "Test",
-            "Presentation",
-            "Essay",
-            "Peer Review"});
-            this.typeCb.Location = new System.Drawing.Point(386, 101);
-            this.typeCb.Name = "typeCb";
-            this.typeCb.Size = new System.Drawing.Size(201, 28);
-            this.typeCb.TabIndex = 21;
-            this.typeCb.Text = "Type of Assessment";
-            this.toolTip1.SetToolTip(this.typeCb, "Type or Select the type of assessment");
             // 
             // datePl
             // 
@@ -412,6 +367,77 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(150, 337);
             this.panelColumnInputs.TabIndex = 4;
             // 
+            // typePl
+            // 
+            this.typePl.BackColor = System.Drawing.Color.White;
+            this.typePl.Location = new System.Drawing.Point(386, 87);
+            this.typePl.Name = "typePl";
+            this.typePl.Size = new System.Drawing.Size(200, 1);
+            this.typePl.TabIndex = 31;
+            // 
+            // typeTb
+            // 
+            this.typeTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.typeTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.typeTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.typeTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.typeTb.HideSelection = false;
+            this.typeTb.Location = new System.Drawing.Point(386, 61);
+            this.typeTb.Name = "typeTb";
+            this.typeTb.Size = new System.Drawing.Size(200, 20);
+            this.typeTb.TabIndex = 30;
+            this.typeTb.TabStop = false;
+            this.typeTb.Text = "Type of Assessment";
+            this.toolTip1.SetToolTip(this.typeTb, "Please enter Total marks of assessment ");
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Aptos", 12F);
+            this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.label2.Location = new System.Drawing.Point(382, 214);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(33, 20);
+            this.label2.TabIndex = 48;
+            this.label2.Text = "File";
+            // 
+            // panel2
+            // 
+            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.Location = new System.Drawing.Point(386, 237);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(200, 1);
+            this.panel2.TabIndex = 47;
+            // 
+            // fileTb
+            // 
+            this.fileTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.fileTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.fileTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.fileTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.fileTb.HideSelection = false;
+            this.fileTb.Location = new System.Drawing.Point(420, 214);
+            this.fileTb.Name = "fileTb";
+            this.fileTb.Size = new System.Drawing.Size(166, 20);
+            this.fileTb.TabIndex = 46;
+            this.fileTb.TabStop = false;
+            // 
+            // loadAssessmentBtn
+            // 
+            this.loadAssessmentBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.loadAssessmentBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loadAssessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadAssessmentBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.loadAssessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.loadAssessmentBtn.Location = new System.Drawing.Point(423, 249);
+            this.loadAssessmentBtn.Name = "loadAssessmentBtn";
+            this.loadAssessmentBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadAssessmentBtn.TabIndex = 45;
+            this.loadAssessmentBtn.Text = "Load Assessment";
+            this.loadAssessmentBtn.UseVisualStyleBackColor = false;
+            this.loadAssessmentBtn.Click += new System.EventHandler(this.loadAssessmentBtn_Click);
+            // 
             // AddAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -441,12 +467,9 @@
         private System.Windows.Forms.TextBox titleTb;
         private System.Windows.Forms.Panel descriptionPl;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.ComboBox typeCb;
         private System.Windows.Forms.Panel datePl;
         private System.Windows.Forms.Button cancelBtn;
         private System.Windows.Forms.Button nextBtn;
-        private System.Windows.Forms.RadioButton groupRbtn;
-        private System.Windows.Forms.RadioButton individualRbtn;
         private System.Windows.Forms.Panel canvasPl;
         private System.Windows.Forms.TextBox canvasTb;
         private System.Windows.Forms.Panel weightPl;
@@ -462,5 +485,11 @@
         private System.Windows.Forms.TextBox descriptionTb;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.Button loadBtn;
+        private System.Windows.Forms.Panel typePl;
+        private System.Windows.Forms.TextBox typeTb;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.TextBox fileTb;
+        private System.Windows.Forms.Button loadAssessmentBtn;
     }
 }

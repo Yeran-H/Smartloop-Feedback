@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Coordinator;
+using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
@@ -70,6 +71,14 @@ namespace Smartloop_Feedback.Coordinator_Folder
                     course.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(course);
                     course.Show();
+                    break;
+                case 2:
+                    this.formLoaderPl.Controls.Clear();
+
+                    AddAssessmentForm addAssessment = new AddAssessmentForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    addAssessment.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(addAssessment);
+                    addAssessment.Show();
                     break;
             }
 

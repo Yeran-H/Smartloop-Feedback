@@ -279,12 +279,12 @@ namespace Smartloop_Feedback
                     course.Show();
                     break;
                 case 1:
-                    titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].Title;
-                    this.formLoaderPl.Controls.Clear();
-                    AddAssessmentForm addAssessmentForm = new AddAssessmentForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                    addAssessmentForm.FormBorderStyle = FormBorderStyle.None;
-                    this.formLoaderPl.Controls.Add(addAssessmentForm);
-                    addAssessmentForm.Show();
+                    //titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].Title;
+                    //this.formLoaderPl.Controls.Clear();
+                    //AddAssessmentForm addAssessmentForm = new AddAssessmentForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    //addAssessmentForm.FormBorderStyle = FormBorderStyle.None;
+                    //this.formLoaderPl.Controls.Add(addAssessmentForm);
+                    //addAssessmentForm.Show();
                     break;
                 case 2:
                     titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]].Name;

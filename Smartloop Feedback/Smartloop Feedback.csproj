@@ -173,10 +173,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Academic Portfolio\Add Form\AddAssessmentForm.cs">
+    <Compile Include="Coordinator\AddAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academic Portfolio\Add Form\AddAssessmentForm.Designer.cs">
+    <Compile Include="Coordinator\AddAssessmentForm.Designer.cs">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.cs">
@@ -382,7 +382,7 @@
     <Compile Include="Setting\Form\EditAccountForm.Designer.cs">
       <DependentUpon>EditAccountForm.cs</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="Academic Portfolio\Add Form\AddAssessmentForm.resx">
+    <EmbeddedResource Include="Coordinator\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddCheckListForm.resx">

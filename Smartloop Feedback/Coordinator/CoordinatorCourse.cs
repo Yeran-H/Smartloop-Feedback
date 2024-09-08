@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Coordinator_Folder;
+using Smartloop_Feedback.Forms;
 using Smartloop_Feedback.Objects;
 using System;
 using System.Collections.Generic;
@@ -221,22 +222,7 @@ namespace Smartloop_Feedback.Coordinator
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addCourseForm = new AddCourseForm())
-            {
-                if (addCourseForm.ShowDialog() == DialogResult.OK)
-                {
-                    if (addCourseForm.course != null)
-                    {
-                        coordinator.CourseList.Add(addCourseForm.course.Id, addCourseForm.course);
-                        LoadCourseDGV();
-                    }
-                    else
-                    {
-                        MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
-                    }
-                }
-            }
+            mainForm.MainPannel(2);
         }
     }
 }
