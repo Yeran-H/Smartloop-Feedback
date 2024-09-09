@@ -85,8 +85,8 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                     {
                         while (reader.Read()) // Read each row
                         {
-                            string name = reader.GetString(0); // Get the semester name
-                            int semesterId = reader.GetInt32(1); // Get the semester ID
+                            int semesterId = reader.GetInt32(0); // Get the semester ID
+                            string name = reader.GetString(1); // Get the semester name
                             SemesterList.Add(name, new SemesterAssociation(semesterId, name, Id, Year.Name, UserId, IsStudent)); // Add the semester to the semester list
                         }
                     }

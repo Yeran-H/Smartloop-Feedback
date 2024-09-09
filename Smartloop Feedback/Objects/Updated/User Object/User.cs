@@ -116,10 +116,10 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT id, name FROM yearAssociation WHERE id = @id ORDER BY name"; // SQL query to fetch years
+                string sql = "SELECT id, name FROM yearAssociation WHERE userId = @userId ORDER BY name"; // SQL query to fetch years
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@id", Id); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@userId", Id); // Set the studentId parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {

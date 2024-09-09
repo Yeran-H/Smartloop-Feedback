@@ -105,7 +105,7 @@ namespace Smartloop_Feedback
             navPl.Left = academicBtn.Left;
             academicBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            MenuPanel(0);
+            MenuPanel(1);
         }
 
         private void courseBtn_Click(object sender, EventArgs e)
@@ -178,11 +178,22 @@ namespace Smartloop_Feedback
             switch (num) 
             {
                 case 0:
+                    menuDropPl.Visible = false;
+                    dashboardBtn_Click(this, EventArgs.Empty);
+                    break;
+                case 1:
                     AcademicYearBar year = new AcademicYearBar(this, user) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     year.FormBorderStyle = FormBorderStyle.None;
                     menuDropPl.Visible = true;
                     this.menuDropPl.Controls.Add(year);
                     year.Show();
+                    break;
+                case 2:
+                    AcademicSemesterBar semester = new AcademicSemesterBar(this, user.YearList[(int)position[0]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    semester.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(semester);
+                    semester.Show();
                     break;
             }
 

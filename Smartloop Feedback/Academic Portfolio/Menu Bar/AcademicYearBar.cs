@@ -60,7 +60,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPanel(1); // Navigate to the previous menu panel
+            mainForm.MenuPanel(0); // Navigate to the previous menu panel
         }
 
         // Event handler for the add button click
