@@ -21,9 +21,9 @@ using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback
 {
-    public partial class StudentMainForm : Form
+    public partial class MainForm : Form
     {
-        private Student student;
+        private User user;
         public List<object> position;
 
         [DllImport("Gdi32.dll", EntryPoint = "CreateRoundRectRgn")]
@@ -43,7 +43,7 @@ namespace Smartloop_Feedback
         private Point dragCursorPoint;
         private Point dragFormPoint;
 
-        public StudentMainForm(Student student)
+        public MainForm(User user)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));
@@ -52,7 +52,7 @@ namespace Smartloop_Feedback
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
             
-            this.student = student;
+            this.user = user;
             position = new List<object>(new object[5]);
 
             MainPannel(0);
@@ -60,11 +60,11 @@ namespace Smartloop_Feedback
 
         private void mainForm_Load(object sender, EventArgs e)
         {
-            nameLb.Text = student.Name;
-            studentIdLb.Text = student.Id.ToString();
-            if (student.ProfileImage != null)
+            nameLb.Text = user.Name;
+            studentIdLb.Text = user.Id.ToString();
+            if (user.ProfileImage != null)
             {
-                using (MemoryStream ms = new MemoryStream(student.ProfileImage))
+                using (MemoryStream ms = new MemoryStream(user.ProfileImage))
                 {
                     profilePb.Image = Image.FromStream(ms);
                 }
@@ -173,7 +173,18 @@ namespace Smartloop_Feedback
 
         public void MenuPanel(int num)
         {
-            return;
+            menuDropPl.Controls.Clear();
+            switch (num) 
+            {
+                case 0:
+                    AcademicYearBar year = new AcademicYearBar(this, user) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    year.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(year);
+                    year.Show();
+                    break;
+            }
+
         }
 
         //public void MenuPanel(int num)
@@ -183,7 +194,7 @@ namespace Smartloop_Feedback
         //    {
         //        case 0:
         //            AcademicYearBar year = new AcademicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            year.FormBorderStyle = FormBorderStyle.None;
+        //year.FormBorderStyle = FormBorderStyle.None;
         //            menuDropPl.Visible = true;
         //            this.menuDropPl.Controls.Add(year);
         //            year.Show();

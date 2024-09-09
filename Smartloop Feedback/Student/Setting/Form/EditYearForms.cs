@@ -8,10 +8,10 @@ namespace Smartloop_Feedback.Setting
     public partial class EditYearForms : Form
     {
         public OLDStudent student; // Reference to the student object
-        public StudentMainForm mainForm; // Reference to the main form
+        public MainForm mainForm; // Reference to the main form
 
         // Constructor for EditYearForms, initializes the form with the student and main form references
-        public EditYearForms(OLDStudent student, StudentMainForm mainForm)
+        public EditYearForms(OLDStudent student, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;

@@ -10,10 +10,10 @@ namespace Smartloop_Feedback.Dashboard
     public partial class DashboardForm : Form
     {
         public OLDStudent student;
-        public StudentMainForm mainForm;
+        public MainForm mainForm;
         private bool isHourlyView = false;
 
-        public DashboardForm(OLDStudent student, StudentMainForm mainForm)
+        public DashboardForm(OLDStudent student, MainForm mainForm)
         {
             InitializeComponent();
             this.student = student;

@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback
 {
-    partial class StudentMainForm
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StudentMainForm));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuDropPl = new System.Windows.Forms.Panel();
             this.navPl = new System.Windows.Forms.Panel();

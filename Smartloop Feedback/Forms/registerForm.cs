@@ -225,7 +225,7 @@ namespace Smartloop_Feedback
             {
                 Student student = new Student(userId, name, email, password, degree, profileImage, true);
 
-                StudentMainForm main = new StudentMainForm(student);
+                MainForm main = new MainForm(student);
                 main.Show();
                 this.Hide();
             }
