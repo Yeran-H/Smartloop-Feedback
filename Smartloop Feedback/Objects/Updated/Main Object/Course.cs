@@ -26,7 +26,7 @@ namespace Smartloop_Feedback.Objects
         public Dictionary<int, Assessment> AssessmentList { get; set; }
         public Dictionary<int, Tutorial> TutorialList { get; set; }
 
-        public Course(int id, int code, string name, int creditPoint, string description, int yearName, string semesterName, string CanvasLink, int tutorNum)
+        public Course(int id, int code, string name, int creditPoint, string description, int yearName, int semesterId, string CanvasLink, int tutorNum)
         {
             this.Id = id;
             this.Code = code;
@@ -38,7 +38,7 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
             Year = new Year(yearName);
-            Semester = new Semester(semesterName, Year.Name);
+            Semester = new Semester(semesterId);
             LoadAssessmentsFromDatabase();
             LoadTutorialFromDatabase();
         }

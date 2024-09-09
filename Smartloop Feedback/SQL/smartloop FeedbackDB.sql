@@ -116,12 +116,10 @@ GO
 CREATE TABLE semesterAssociation (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(MAX),
-    yearName INT,
     isStudent BIT,
     yearId INT,
 	semesterId INT,
     userId INT,
-    FOREIGN KEY (yearName) REFERENCES year(name),
 	FOREIGN KEY (semesterId) REFERENCES semester(id),
     FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
     FOREIGN KEY (userId) REFERENCES student(studentId)

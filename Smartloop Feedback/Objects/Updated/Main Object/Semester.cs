@@ -28,6 +28,11 @@ namespace Smartloop_Feedback.Objects.Updated
             AddSemesterToDatabase();
         }
 
+        public Semester(int semesterId)
+        {
+            AddSemesterToDatabase(semesterId);
+        }
+
         private void AddSemesterToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
@@ -57,6 +62,30 @@ namespace Smartloop_Feedback.Objects.Updated
                             cmd.Parameters.AddWithValue("@yearName", Year.Name);
                             Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                         }
+                    }
+                }
+            }
+        }
+
+        private void AddSemesterToDatabase(int semesterId)
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+
+                // Check if the semester with the given name and yearId exists
+                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 name, yearName FROM semester WHERE id = @id", conn);
+                checkCmd.Parameters.AddWithValue("@id", semesterId); 
+
+                using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Check if a row is returned
+                    {
+                        // Semester exists, retrieve its details
+                        Id = semesterId;
+                        Name = reader.GetString(0);
+                        Year = new Year(reader.GetInt32(0));
+
                     }
                 }
             }

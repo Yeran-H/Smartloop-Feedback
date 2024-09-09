@@ -25,7 +25,7 @@ namespace Smartloop_Feedback.Objects.Updated
                 conn.Open(); // Open the connection
 
                 // Check if the year with the given name exists
-                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 id FROM year WHERE name = @name", conn);
+                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 name FROM year WHERE name = @name", conn);
                 checkCmd.Parameters.AddWithValue("@name", Name); // Set the year parameter
 
                 using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader

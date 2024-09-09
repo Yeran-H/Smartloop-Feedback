@@ -12,6 +12,8 @@ using Org.BouncyCastle.Tls;
 using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 
 namespace Smartloop_Feedback
 {

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
@@ -77,7 +78,7 @@ namespace Smartloop_Feedback.Setting
                 }
             }
 
-            OLDStudent newStudent = new OLDStudent(0, name, email, password, degree, profileImage);
+            Student newStudent = new Student(0, name, email, password, degree, profileImage);
 
             // Validate the password
             if (!newStudent.ValidatePassword())
@@ -94,7 +95,7 @@ namespace Smartloop_Feedback.Setting
             }
 
             // Update the student information in the database
-            student.UpdateToDatabase(newStudent);
+            //student.UpdateToDatabase(newStudent);
 
             // Navigate to the main panel
             mainForm.MainPannel(6);
