@@ -179,28 +179,28 @@
     <Compile Include="Coordinator\Add\AddAssessmentForm.Designer.cs">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Add Form\AddCheckListForm.cs">
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Add Form\AddCheckListForm.Designer.cs">
+    <Compile Include="Academic Portfolio\Add Form\AddCheckListForm.Designer.cs">
       <DependentUpon>AddCheckListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AI\AIForm.cs">
+    <Compile Include="Academic Portfolio\AI\AIForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AI\AIForm.Designer.cs">
+    <Compile Include="Academic Portfolio\AI\AIForm.Designer.cs">
       <DependentUpon>AIForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AI\PdfReadeerForm.cs">
+    <Compile Include="Academic Portfolio\AI\PdfReadeerForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AI\PdfReadeerForm.Designer.cs">
+    <Compile Include="Academic Portfolio\AI\PdfReadeerForm.Designer.cs">
       <DependentUpon>PdfReadeerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AssessmentForm.cs">
+    <Compile Include="Academic Portfolio\AssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\AssessmentForm.Designer.cs">
+    <Compile Include="Academic Portfolio\AssessmentForm.Designer.cs">
       <DependentUpon>AssessmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Coordinator\CoordinatorCourseForm.cs">
@@ -227,10 +227,10 @@
     <Compile Include="Student\Course Schedule\AddEventForm.Designer.cs">
       <DependentUpon>AddEventForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\StudentCourseForm.cs">
+    <Compile Include="Academic Portfolio\StudentCourseForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\StudentCourseForm.Designer.cs">
+    <Compile Include="Academic Portfolio\StudentCourseForm.Designer.cs">
       <DependentUpon>StudentCourseForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\Course Schedule\CourseScheduleForm.cs">
@@ -245,22 +245,22 @@
     <Compile Include="Student\Course Schedule\EventListForm.Designer.cs">
       <DependentUpon>EventListForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicSemesterBar.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicSemesterBar.Designer.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicSemesterBar.Designer.cs">
       <DependentUpon>AcademicSemesterBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicCourseBar.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicCourseBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicCourseBar.Designer.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicCourseBar.Designer.cs">
       <DependentUpon>AcademicCourseBar.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicYearBar.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicYearBar.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Menu Bar\AcademicYearBar.Designer.cs">
+    <Compile Include="Academic Portfolio\Menu Bar\AcademicYearBar.Designer.cs">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </Compile>
     <Compile Include="Coordinator\Add\AddCourseForm.cs">
@@ -269,10 +269,10 @@
     <Compile Include="Coordinator\Add\AddCourseForm.Designer.cs">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Add Form\AddYearForm.cs">
+    <Compile Include="Academic Portfolio\Add Form\AddYearForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Student\Academic Portfolio\Add Form\AddYearForm.Designer.cs">
+    <Compile Include="Academic Portfolio\Add Form\AddYearForm.Designer.cs">
       <DependentUpon>AddYearForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Student\Dashboard\DashboardForm.cs">
@@ -314,7 +314,6 @@
     <Compile Include="Objects\Updated\Semester.cs" />
     <Compile Include="Objects\Updated\Student.cs" />
     <Compile Include="Objects\Updated\Tutorial.cs" />
-    <Compile Include="Objects\OLDUser.cs" />
     <Compile Include="Objects\Updated\User.cs" />
     <Compile Include="Objects\Updated\Year.cs" />
     <Compile Include="Program.cs" />
@@ -390,16 +389,16 @@
     <EmbeddedResource Include="Coordinator\Add\AddAssessmentForm.resx">
       <DependentUpon>AddAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\Add Form\AddCheckListForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\Add Form\AddCheckListForm.resx">
       <DependentUpon>AddCheckListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\AI\AIForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\AI\AIForm.resx">
       <DependentUpon>AIForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\AI\PdfReadeerForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\AI\PdfReadeerForm.resx">
       <DependentUpon>PdfReadeerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\assessmentForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\assessmentForm.resx">
       <DependentUpon>AssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Coordinator\CoordinatorCourseForm.resx">
@@ -414,7 +413,7 @@
     <EmbeddedResource Include="Student\Course Schedule\AddEventForm.resx">
       <DependentUpon>AddEventForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\StudentCourseForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\StudentCourseForm.resx">
       <DependentUpon>StudentCourseForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\Course Schedule\CourseScheduleForm.resx">
@@ -423,19 +422,19 @@
     <EmbeddedResource Include="Student\Course Schedule\EventListForm.resx">
       <DependentUpon>EventListForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\Menu Bar\AcademicSemesterBar.resx">
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\AcademicSemesterBar.resx">
       <DependentUpon>AcademicSemesterBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\Menu Bar\AcademicCourseBar.resx">
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\AcademicCourseBar.resx">
       <DependentUpon>AcademicCourseBar.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\Menu Bar\AcademicYearBar.resx">
+    <EmbeddedResource Include="Academic Portfolio\Menu Bar\AcademicYearBar.resx">
       <DependentUpon>AcademicYearBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Coordinator\Add\AddCourseForm.resx">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Student\Academic Portfolio\Add Form\AddYearForm.resx">
+    <EmbeddedResource Include="Academic Portfolio\Add Form\AddYearForm.resx">
       <DependentUpon>AddYearForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Student\Dashboard\DashboardForm.resx">

@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,10 +11,10 @@ namespace Smartloop_Feedback
     public partial class AcademicYearBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private Student student;
+        private User user;
 
         // Constructor for the AcademicYearBar form
-        public AcademicYearBar(MainForm form, OLDUser user)
+        public AcademicYearBar(MainForm form, User user)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
