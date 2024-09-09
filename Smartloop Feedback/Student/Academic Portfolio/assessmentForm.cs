@@ -18,9 +18,9 @@ namespace Smartloop_Feedback
     public partial class AssessmentForm : Form
     {
         public StudentAssessment assessment;
-        public MainForm mainForm;
+        public StudentMainForm mainForm;
 
-        public AssessmentForm(StudentAssessment assessment, MainForm mainForm)
+        public AssessmentForm(StudentAssessment assessment, StudentMainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;

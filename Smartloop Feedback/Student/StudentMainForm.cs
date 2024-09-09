@@ -21,7 +21,7 @@ using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback
 {
-    public partial class MainForm : Form
+    public partial class StudentMainForm : Form
     {
         private Student student;
         public List<object> position;
@@ -43,7 +43,7 @@ namespace Smartloop_Feedback
         private Point dragCursorPoint;
         private Point dragFormPoint;
 
-        public MainForm(Student student)
+        public StudentMainForm(Student student)
         {
             InitializeComponent();
             Region = System.Drawing.Region.FromHrgn(CreateRoundRectRgn(0, 0, Width, Height, 25, 25));

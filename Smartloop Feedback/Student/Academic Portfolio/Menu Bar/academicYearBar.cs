@@ -9,11 +9,11 @@ namespace Smartloop_Feedback
 {
     public partial class AcademicYearBar : Form
     {
-        private MainForm mainForm; // Reference to the main form
+        private StudentMainForm mainForm; // Reference to the main form
         private OLDUser user;
 
         // Constructor for the AcademicYearBar form
-        public AcademicYearBar(MainForm form, OLDUser user)
+        public AcademicYearBar(StudentMainForm form, OLDUser user)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference

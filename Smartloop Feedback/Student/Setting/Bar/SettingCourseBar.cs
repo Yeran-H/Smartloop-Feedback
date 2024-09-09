@@ -8,12 +8,12 @@ namespace Smartloop_Feedback.Setting.Bar
     public partial class SettingCourseBar : Form
     {
         public StudentSemester semester; // Reference to the semester object
-        public MainForm mainForm; // Reference to the main form
+        public StudentMainForm mainForm; // Reference to the main form
         private Button[] buttons = new Button[5]; // Array to hold course buttons
         private Button[] allButtons; // Array to hold all buttons for the form
 
         // Constructor for SettingCourseBar, initializes the form with the semester and main form references
-        public SettingCourseBar(StudentSemester semester, MainForm mainForm)
+        public SettingCourseBar(StudentSemester semester, StudentMainForm mainForm)
         {
             InitializeComponent();
             this.semester = semester;

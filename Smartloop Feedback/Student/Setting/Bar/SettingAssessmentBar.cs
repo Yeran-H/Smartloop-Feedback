@@ -8,10 +8,10 @@ namespace Smartloop_Feedback.Setting.Bar
     public partial class SettingAssessmentBar : Form
     {
         public StudentCourse course; // Reference to the course object
-        public MainForm mainForm; // Reference to the main form
+        public StudentMainForm mainForm; // Reference to the main form
 
         // Constructor for SettingAssessmentBar, initializes the form with the course and main form references
-        public SettingAssessmentBar(StudentCourse course, MainForm mainForm)
+        public SettingAssessmentBar(StudentCourse course, StudentMainForm mainForm)
         {
             InitializeComponent();
             navPl.Height = backBtn.Height; // Set the navigation panel height to match the back button height
