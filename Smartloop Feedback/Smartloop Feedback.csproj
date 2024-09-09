@@ -221,6 +221,7 @@
     <Compile Include="Coordinator\CoordinatorMainForm.Designer.cs">
       <DependentUpon>CoordinatorMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\OldUser.cs" />
     <Compile Include="Student\Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
