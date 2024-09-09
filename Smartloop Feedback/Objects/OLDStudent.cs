@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
@@ -7,18 +8,28 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback
 {
-    public class OLDStudent : OLDUser
+    public class OLDStudent
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 
         // Public properties for student details
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Email { get; set; }
+        public string Password { get; set; }
+        public byte[] ProfileImage { get; set; }
+        public bool IsStudent { get; set; }
         public string Degree { get; set; } // Student's degree
         public Dictionary<int, Event> EventList { get; set; } // List of events for the student
 
         // Constructor to initialize a Student object with details and fetch years and events from the database
         public OLDStudent(int studentId, string name, string email, string password, string degree, byte[] profileImage)
-            : base(studentId, name, email, password, profileImage, true)
         {
+            Email = email;
+            Password = password;
+            Id = studentId;
+            Name = name;
+            ProfileImage = profileImage;
             Degree = degree;
             ProfileImage = profileImage;
             EventList = new Dictionary<int, Event>();
@@ -27,8 +38,12 @@ namespace Smartloop_Feedback
         }
 
         public OLDStudent(int studentId, string name, string email, string password, string degree, byte[] profileImage, bool x)
-        : base(studentId, name, email, password, profileImage, true)
         {
+            Email = email;
+            Password = password;
+            Id = studentId;
+            Name = name;
+            ProfileImage = profileImage;
             Degree = degree;
             ProfileImage = profileImage;
             EventList = new Dictionary<int, Event>();

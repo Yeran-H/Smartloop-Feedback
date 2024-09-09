@@ -18,6 +18,7 @@ using Smartloop_Feedback.Setting.Bar;
 using Smartloop_Feedback.Academic_Portfolio.AI;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object;
 
 namespace Smartloop_Feedback
 {

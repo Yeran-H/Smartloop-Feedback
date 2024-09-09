@@ -221,10 +221,9 @@
     <Compile Include="Coordinator\CoordinatorMainForm.Designer.cs">
       <DependentUpon>CoordinatorMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\OldUser.cs" />
     <Compile Include="Objects\Updated\User Object\Student\Student.cs" />
     <Compile Include="Objects\Updated\User Object\User.cs" />
-    <Compile Include="Objects\Updated\User Object\UserYearAssociation.cs" />
+    <Compile Include="Objects\Updated\User Object\YearAssociation.cs" />
     <Compile Include="Student\Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -312,7 +311,6 @@
     </Compile>
     <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\StudentRating.cs" />
-    <Compile Include="Objects\Tutor.cs" />
     <Compile Include="Objects\Updated\Main Object\Criteria.cs" />
     <Compile Include="Objects\Updated\Main Object\Rating.cs" />
     <Compile Include="Objects\Updated\Main Object\Semester.cs" />
