@@ -1,15 +1,13 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Configuration;
-using System.Windows.Forms;
+using System.Data;
+using System.Data.SqlClient;
 
-namespace Smartloop_Feedback.Objects.Updated
+namespace Smartloop_Feedback.Objects.Updated.User_Object
 {
-    public class User
+    internal class User
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
         public int Id { get; set; }

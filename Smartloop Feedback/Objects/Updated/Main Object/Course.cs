@@ -53,7 +53,7 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             this.TutorNum = tutorNum;
             TutorialList = new Dictionary<int, Tutorial>();
-            AddYearToCourse(year);
+            Year = new Year(year);
             AddSemesterToCourse(semester);
             AddCourseToDatabase();
             AddTutorialFromDatabase(false);
@@ -103,7 +103,7 @@ namespace Smartloop_Feedback.Objects
             Name = name;
             CreditPoint = creditPoint;
             Description = description;
-            AddYearToCourse(year);
+            Year = new Year(year);
             AddSemesterToCourse(semester);
             CanvasLink = canvasLink;
 
@@ -179,32 +179,6 @@ namespace Smartloop_Feedback.Objects
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
-                }
-            }
-        }
-
-        private void AddYearToCourse(int year)
-        {
-            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
-            {
-                conn.Open(); // Open the connection
-
-                // Check if the year with the given name exists
-                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 id FROM year WHERE name = @yearName", conn);
-                checkCmd.Parameters.AddWithValue("@yearName", year); // Set the year parameter
-
-                using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader
-                {
-                    if (reader.Read()) // Check if a row is returned
-                    {
-                        // Year exists, retrieve its details
-                        int yearId = reader.GetInt32(0); 
-                        Year = new Year(yearId, year); 
-                    }
-                    else
-                    {
-                        Year = new Year(year); 
-                    }
                 }
             }
         }

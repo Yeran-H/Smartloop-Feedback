@@ -5,9 +5,9 @@ using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace Smartloop_Feedback.Objects.Updated
+namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
 {
-    public class Student : User
+    internal class Student : User
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
 

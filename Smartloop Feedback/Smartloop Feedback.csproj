@@ -222,6 +222,9 @@
       <DependentUpon>CoordinatorMainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\OldUser.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\Student.cs" />
+    <Compile Include="Objects\Updated\User Object\User.cs" />
+    <Compile Include="Objects\Updated\User Object\UserYearAssociation.cs" />
     <Compile Include="Student\Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -294,11 +297,11 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Updated\Assessment.cs" />
+    <Compile Include="Objects\Updated\Main Object\Assessment.cs" />
     <Compile Include="Objects\StudentAssessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
-    <Compile Include="Objects\Updated\Coordinator.cs" />
-    <Compile Include="Objects\Updated\Course.cs" />
+    <Compile Include="Objects\Updated\Main Object\Coordinator.cs" />
+    <Compile Include="Objects\Updated\Main Object\Course.cs" />
     <Compile Include="Objects\FeedbackResult.cs" />
     <Compile Include="Objects\StudentCourse.cs" />
     <Compile Include="Objects\CourseResult.cs" />
@@ -310,13 +313,11 @@
     <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\StudentRating.cs" />
     <Compile Include="Objects\Tutor.cs" />
-    <Compile Include="Objects\Updated\Criteria.cs" />
-    <Compile Include="Objects\Updated\Rating.cs" />
-    <Compile Include="Objects\Updated\Semester.cs" />
-    <Compile Include="Objects\Updated\Student.cs" />
-    <Compile Include="Objects\Updated\Tutorial.cs" />
-    <Compile Include="Objects\Updated\User.cs" />
-    <Compile Include="Objects\Updated\Year.cs" />
+    <Compile Include="Objects\Updated\Main Object\Criteria.cs" />
+    <Compile Include="Objects\Updated\Main Object\Rating.cs" />
+    <Compile Include="Objects\Updated\Main Object\Semester.cs" />
+    <Compile Include="Objects\Updated\Main Object\Tutorial.cs" />
+    <Compile Include="Objects\Updated\Main Object\Year.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
