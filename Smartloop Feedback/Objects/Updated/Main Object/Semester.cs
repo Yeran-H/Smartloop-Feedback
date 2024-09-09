@@ -12,19 +12,19 @@ namespace Smartloop_Feedback.Objects.Updated
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
         public int Id { get; set; }
         public string Name { get; set; }
-        public int YearId { get; set; }
+        public Year Year { get; set; }
 
-        public Semester(int id, string name, int yearId)
+        public Semester(int id, string name, int yearName)
         {
             Id = id;
             Name = name;
-            YearId = yearId;
+            Year = new Year(yearName);
         }
 
-        public Semester(string name, int yearId)
+        public Semester(string name, int yearName)
         {
             Name = name;
-            YearId = yearId;
+            Year = new Year(yearName);
             AddSemesterToDatabase();
         }
 
@@ -33,13 +33,31 @@ namespace Smartloop_Feedback.Objects.Updated
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO semester (name, yearId) VALUES (@name, @yearId); SELECT SCOPE_IDENTITY();"; // SQL query to insert year and get the generated ID
 
-                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                // Check if the semester with the given name and yearId exists
+                SqlCommand checkCmd = new SqlCommand("SELECT TOP 1 id FROM semester WHERE name = @name AND yearName = @yearName", conn);
+                checkCmd.Parameters.AddWithValue("@name", Name); // Set the semester name parameter
+                checkCmd.Parameters.AddWithValue("@yearName", Year.Name); // Set the yearId parameter
+
+                using (SqlDataReader reader = checkCmd.ExecuteReader()) // Execute the query and get a reader
                 {
-                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
-                    cmd.Parameters.AddWithValue("@yearId", YearId);
-                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    if (reader.Read()) // Check if a row is returned
+                    {
+                        // Semester exists, retrieve its details
+                        Id = reader.GetInt32(0);
+                    }
+                    else
+                    {
+                        conn.Open(); // Open the connection
+                        string sql = "INSERT INTO semester (name, yearId) VALUES (@name, @yearName); SELECT SCOPE_IDENTITY();"; // SQL query to insert year and get the generated ID
+
+                        using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                        {
+                            cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                            cmd.Parameters.AddWithValue("@yearName", Year.Name);
+                            Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                        }
+                    }
                 }
             }
         }

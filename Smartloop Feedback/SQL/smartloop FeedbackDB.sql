@@ -15,8 +15,7 @@ GO
 
 -- Create the year table
 CREATE TABLE year (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    name INT
+    name INT PRIMARY KEY,
 );
 GO
 
@@ -24,8 +23,8 @@ GO
 CREATE TABLE semester (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(MAX),
-    yearId INT,
-    FOREIGN KEY (yearId) REFERENCES year(id)
+    yearName INT,
+    FOREIGN KEY (yearName) REFERENCES year(name)
 );
 GO
 
@@ -99,6 +98,33 @@ CREATE TABLE student (
     password VARCHAR(225) NOT NULL,
     degree VARCHAR(225),
     profileImage VARBINARY(MAX)
+);
+GO
+
+-- Create the yearAssociation table
+CREATE TABLE yearAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name INT,
+    isStudent BIT,
+    userId INT,
+	FOREIGN KEY (name) REFERENCES year(name),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the semesterAssociation table
+CREATE TABLE semesterAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    yearName INT,
+    isStudent BIT,
+    yearId INT,
+	semesterId INT,
+    userId INT,
+    FOREIGN KEY (yearName) REFERENCES year(name),
+	FOREIGN KEY (semesterId) REFERENCES semester(id),
+    FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
 );
 GO
 

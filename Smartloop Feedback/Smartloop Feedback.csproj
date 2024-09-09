@@ -221,6 +221,7 @@
     <Compile Include="Coordinator\CoordinatorMainForm.Designer.cs">
       <DependentUpon>CoordinatorMainForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Objects\Updated\User Object\SemesterAssociation.cs" />
     <Compile Include="Objects\Updated\User Object\Student\Student.cs" />
     <Compile Include="Objects\Updated\User Object\User.cs" />
     <Compile Include="Objects\Updated\User Object\YearAssociation.cs" />
