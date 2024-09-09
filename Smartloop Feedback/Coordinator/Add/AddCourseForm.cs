@@ -135,7 +135,7 @@ namespace Smartloop_Feedback
 
             if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text))
             {
-                //course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text, Int32.Parse(tutorialTb.Text));
+                course = new Course(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, Int32.Parse(yearTb.Text), semester, canvasTb.Text, Int32.Parse(tutorialTb.Text));
                 this.DialogResult = DialogResult.OK;
                 this.Close(); // Close the form if all fields are valid
             }

@@ -53,9 +53,9 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             this.TutorNum = tutorNum;
             TutorialList = new Dictionary<int, Tutorial>();
-            AddCourseToDatabase();
             AddYearToCourse(year);
             AddSemesterToCourse(semester);
+            AddCourseToDatabase();
             AddTutorialFromDatabase(false);
         }
 

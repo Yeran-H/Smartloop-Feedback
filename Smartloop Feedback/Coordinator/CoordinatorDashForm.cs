@@ -60,7 +60,7 @@ namespace Smartloop_Feedback.Coordinator
                 // Add rows to the DataGridView
                 foreach (Course course in coordinator.CourseList.Values)
                 {
-                    int rowIndex = courseDgv.Rows.Add(course.Year, course.Semester, course.Code, course.Name, "View", "Delete");
+                    int rowIndex = courseDgv.Rows.Add(course.Year.Name.ToString(), course.Semester.Name, course.Code, course.Name, "View", "Delete");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
                     row.Tag = course.Id;
                 }
