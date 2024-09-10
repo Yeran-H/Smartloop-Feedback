@@ -13,7 +13,7 @@ namespace Smartloop_Feedback.Objects
         public int Id { get; private set; } // Checklist ID
         public string Name { get; set; } // Checklist name
         public bool IsChecked { get; set; } // Checklist status
-        public int StudentId { get; set; } // ID of the student associated with the checklist
+        public int UserId { get; set; } // ID of the student associated with the checklist
         public int AssessmentId { get; set; } // ID of the assessment associated with the checklist
 
         // Constructor to initialize a CheckList object
@@ -22,16 +22,16 @@ namespace Smartloop_Feedback.Objects
             Id = id;
             Name = name;
             IsChecked = isChecked;
-            StudentId = studentId;
+            UserId = studentId;
             AssessmentId = assessmentId;
         }
 
         // Constructor to initialize a CheckList object and add it to the database
-        public CheckList(string name, int studentId, bool isChecked, int assessmentId)
+        public CheckList(string name, int userId, bool isChecked, int assessmentId)
         {
             Name = name;
             IsChecked = isChecked;
-            StudentId = studentId;
+            UserId = userId;
             AssessmentId = assessmentId;
             AddToDatabase(); // Add the checklist to the database
         }
@@ -42,14 +42,14 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO checkList (name, isChecked, assessmentId, studentId) VALUES (@name, @isChecked, @assessmentId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert checklist and get the generated ID
+                string sql = "INSERT INTO checkList (name, isChecked, assessmentId, userId) VALUES (@name, @isChecked, @assessmentId, @userId); SELECT SCOPE_IDENTITY();"; // SQL query to insert checklist and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@isChecked", IsChecked); // Set the isChecked parameter
                     cmd.Parameters.AddWithValue("@assessmentId", AssessmentId); // Set the assessmentId parameter
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }

@@ -23,6 +23,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
         public string Feedback {  get; set; }
         public int StudentCourseId { get; set; }
         public int UserId { get; set; }
+        public List<CheckList> CheckList { get; set; }
 
         public StudentAssessment(int id, int assessmentId, int status, double mark, bool isFinalised, string feedback, int courseId, int userId)
             : base(assessmentId)
@@ -34,6 +35,8 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             this.Feedback = feedback;
             this.StudentCourseId = courseId;
             this.UserId = userId;
+            CheckList = new List<CheckList>();
+            LoadCheckListFromDatabase();
         }
 
         public StudentAssessment(int assessmentId, int courseId, int userId)
@@ -45,6 +48,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             this.Feedback = "";
             this.StudentCourseId = courseId;
             this.UserId = userId;
+            CheckList = new List<CheckList>();
             AddAssessmentToDatabase();
         }
 
@@ -67,6 +71,45 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                     cmd.Parameters.AddWithValue("@userId", UserId);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
+            }
+        }
+
+        // Fetch checklist items from the database and initialize the checklist
+        private void LoadCheckListFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, name, isChecked FROM checkList WHERE assessmentId = @assessmentId AND userId = @userId", conn); // SQL query to fetch checklist items
+                cmd.Parameters.AddWithValue("@assessmentId", Id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        int checkListId = reader.GetInt32(0); // Get the checklist item ID
+                        string checkListName = reader.GetString(1); // Get the checklist item name
+                        bool isChecked = reader.GetBoolean(2); // Get the checklist item status
+                        CheckList.Add(new CheckList(checkListId, checkListName, isChecked, UserId, Id)); // Add the checklist item to the checklist
+                    }
+                }
+            }
+
+            CalculateStatus(); // Calculate the status of the assessment based on checklist items
+        }
+
+        // Calculate the status of the assessment based on checklist items
+        public void CalculateStatus()
+        {
+            if (CheckList.Count != 0)
+            {
+                int count = CheckList.Count(item => item.IsChecked);
+                Status = (int)((count / (double)CheckList.Count) * 100);
+            }
+            else
+            {
+                Status = 0;
             }
         }
     }

@@ -308,7 +308,7 @@
     </Compile>
     <Compile Include="Objects\Updated\Main Object\Assessment.cs" />
     <Compile Include="Objects\OLDStudentAssessment.cs" />
-    <Compile Include="Objects\CheckList.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\CheckList.cs" />
     <Compile Include="Objects\Updated\Main Object\Coordinator.cs" />
     <Compile Include="Objects\Updated\Main Object\Course.cs" />
     <Compile Include="Objects\FeedbackResult.cs" />

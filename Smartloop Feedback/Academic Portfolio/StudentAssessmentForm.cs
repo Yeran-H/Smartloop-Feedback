@@ -58,19 +58,19 @@ namespace Smartloop_Feedback
 
         private void PopulateCheckListBox()
         {
-            //checklistCb.Items.Clear();
+            checklistCb.Items.Clear();
 
-            //foreach(var item in assessment.CheckList)
-            //{
-            //    // Add item to the CheckedListBox
-            //    int index = checklistCb.Items.Add(item.Name);
+            foreach (var item in assessment.CheckList)
+            {
+                // Add item to the CheckedListBox
+                int index = checklistCb.Items.Add(item.Name);
 
-            //    // Set the checked state based on isChecked property
-            //    checklistCb.SetItemChecked(index, item.IsChecked);
-            //}
+                // Set the checked state based on isChecked property
+                checklistCb.SetItemChecked(index, item.IsChecked);
+            }
 
-            //assessment.CalculateStatus();
-            //progressBar.Value = assessment.Status;
+            assessment.CalculateStatus();
+            progressBar.Value = assessment.Status;
         }
 
         private void LoadCriteriaData()
@@ -214,27 +214,27 @@ namespace Smartloop_Feedback
 
         private void itemBtn_Click(object sender, EventArgs e)
         {
-            //using (var addCheckList = new AddCheckListForm()) // Open the add year form
-            //{
-            //    if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
-            //    {
-            //        string name = addCheckList.name; // Get the new year's name
+            using (var addCheckList = new AddCheckListForm()) // Open the add year form
+            {
+                if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+                {
+                    string name = addCheckList.name; // Get the new year's name
 
-            //        assessment.CheckList.Add(new CheckList(name, assessment.StudentId, false, assessment.Id));
-                    
-            //        PopulateCheckListBox();
-            //    }
-            //}
+                    assessment.CheckList.Add(new CheckList(name, assessment.UserId, false, assessment.Id));
+
+                    PopulateCheckListBox();
+                }
+            }
         }
 
         private void checklistCb_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            //int index = e.Index;
-            //bool isChecked = e.NewValue == CheckState.Checked;
-            //assessment.CheckList[index].UpdateChecked(isChecked);
+            int index = e.Index;
+            bool isChecked = e.NewValue == CheckState.Checked;
+            assessment.CheckList[index].UpdateChecked(isChecked);
 
-            //assessment.CalculateStatus();
-            //progressBar.Value = assessment.Status;
+            assessment.CalculateStatus();
+            progressBar.Value = assessment.Status;
         }
 
         private void markTb_Leave(object sender, EventArgs e)

@@ -169,6 +169,18 @@ CREATE TABLE studentAssessment (
 );
 GO
 
+-- Create the checkList table
+CREATE TABLE checkList (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    isChecked BIT,
+    assessmentId INT,
+    userId INT,
+    FOREIGN KEY (assessmentId) REFERENCES studentAssessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
 ---- Create the tutor table
 --CREATE TABLE tutor (
 --    tutorId INT PRIMARY KEY,
