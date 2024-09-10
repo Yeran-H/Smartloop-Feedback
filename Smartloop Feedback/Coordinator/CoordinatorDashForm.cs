@@ -62,7 +62,7 @@ namespace Smartloop_Feedback.Coordinator
                 {
                     int rowIndex = courseDgv.Rows.Add(course.Year.Name.ToString(), course.Semester.Name, course.Code, course.Name, "View", "Delete");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
-                    row.Tag = course.Id;
+                    row.Tag = course.CourseId;
                 }
 
                 DataGridColor(courseDgv); // Apply color formatting to the DataGridView
@@ -119,7 +119,7 @@ namespace Smartloop_Feedback.Coordinator
                 {
                     if (addCourseForm.course != null)
                     {
-                        coordinator.CourseList.Add(addCourseForm.course.Id, addCourseForm.course);
+                        coordinator.CourseList.Add(addCourseForm.course.CourseId, addCourseForm.course);
                         LoadCourseDGV();
                     }
                     else

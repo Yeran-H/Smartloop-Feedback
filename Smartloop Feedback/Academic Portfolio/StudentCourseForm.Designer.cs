@@ -46,7 +46,6 @@
             this.dTb = new System.Windows.Forms.TextBox();
             this.hdPl = new System.Windows.Forms.Panel();
             this.hdTb = new System.Windows.Forms.TextBox();
-            this.addBtn = new System.Windows.Forms.Button();
             this.canvasBtn = new System.Windows.Forms.Button();
             this.handbookBtn = new System.Windows.Forms.Button();
             this.eventBtn = new System.Windows.Forms.Button();
@@ -62,7 +61,7 @@
             this.titleLb.AutoSize = true;
             this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.titleLb.Location = new System.Drawing.Point(81, 70);
+            this.titleLb.Location = new System.Drawing.Point(130, 70);
             this.titleLb.Name = "titleLb";
             this.titleLb.Size = new System.Drawing.Size(156, 36);
             this.titleLb.TabIndex = 2;
@@ -207,29 +206,13 @@
             this.hdTb.TabStop = false;
             this.toolTip1.SetToolTip(this.hdTb, "Marks needed for High Distinction");
             // 
-            // addBtn
-            // 
-            this.addBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.addBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.addBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.addBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.addBtn.Location = new System.Drawing.Point(68, 388);
-            this.addBtn.Name = "addBtn";
-            this.addBtn.Size = new System.Drawing.Size(252, 52);
-            this.addBtn.TabIndex = 21;
-            this.addBtn.Text = "Add Assessment";
-            this.toolTip1.SetToolTip(this.addBtn, "Click to Add Assessment");
-            this.addBtn.UseVisualStyleBackColor = false;
-            this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
-            // 
             // canvasBtn
             // 
             this.canvasBtn.Cursor = System.Windows.Forms.Cursors.Hand;
             this.canvasBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canvasBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.canvasBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.canvasBtn.Location = new System.Drawing.Point(445, 193);
+            this.canvasBtn.Location = new System.Drawing.Point(62, 413);
             this.canvasBtn.Name = "canvasBtn";
             this.canvasBtn.Size = new System.Drawing.Size(135, 52);
             this.canvasBtn.TabIndex = 22;
@@ -244,7 +227,7 @@
             this.handbookBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.handbookBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.handbookBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.handbookBtn.Location = new System.Drawing.Point(586, 193);
+            this.handbookBtn.Location = new System.Drawing.Point(203, 413);
             this.handbookBtn.Name = "handbookBtn";
             this.handbookBtn.Size = new System.Drawing.Size(135, 52);
             this.handbookBtn.TabIndex = 24;
@@ -260,7 +243,7 @@
             this.eventBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.eventBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.eventBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.eventBtn.Location = new System.Drawing.Point(511, 421);
+            this.eventBtn.Location = new System.Drawing.Point(510, 397);
             this.eventBtn.Name = "eventBtn";
             this.eventBtn.Size = new System.Drawing.Size(141, 52);
             this.eventBtn.TabIndex = 40;
@@ -276,7 +259,7 @@
             this.eventDgv.AllowUserToOrderColumns = true;
             this.eventDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.eventDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.eventDgv.Location = new System.Drawing.Point(445, 251);
+            this.eventDgv.Location = new System.Drawing.Point(444, 227);
             this.eventDgv.Name = "eventDgv";
             this.eventDgv.ReadOnly = true;
             this.eventDgv.Size = new System.Drawing.Size(276, 164);
@@ -292,7 +275,7 @@
             this.assessmentDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.assessmentDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.assessmentDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.assessmentDgv.Location = new System.Drawing.Point(12, 109);
+            this.assessmentDgv.Location = new System.Drawing.Point(9, 109);
             this.assessmentDgv.Name = "assessmentDgv";
             this.assessmentDgv.ReadOnly = true;
             this.assessmentDgv.Size = new System.Drawing.Size(400, 262);
@@ -300,7 +283,7 @@
             this.toolTip1.SetToolTip(this.assessmentDgv, "Click on Name to Edit Assessment");
             this.assessmentDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.assessmentDgv_CellClick);
             // 
-            // CourseForm
+            // StudentCourseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -311,7 +294,6 @@
             this.Controls.Add(this.eventBtn);
             this.Controls.Add(this.handbookBtn);
             this.Controls.Add(this.canvasBtn);
-            this.Controls.Add(this.addBtn);
             this.Controls.Add(this.hdPl);
             this.Controls.Add(this.hdTb);
             this.Controls.Add(this.dPl);
@@ -326,7 +308,7 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.titleLb);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CourseForm";
+            this.Name = "StudentCourseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "courseForm";
             this.Load += new System.EventHandler(this.CourseForm_Load);
@@ -355,7 +337,6 @@
         private System.Windows.Forms.TextBox dTb;
         private System.Windows.Forms.Panel hdPl;
         private System.Windows.Forms.TextBox hdTb;
-        private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Button canvasBtn;
         private System.Windows.Forms.Button handbookBtn;
         private System.Windows.Forms.Button eventBtn;

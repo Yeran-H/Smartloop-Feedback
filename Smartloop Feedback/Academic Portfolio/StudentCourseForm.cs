@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -10,10 +12,10 @@ namespace Smartloop_Feedback.Forms
 {
     public partial class StudentCourseForm : Form
     {
-        private StudentCourseDEMO course; // The course object associated with this form
+        private StudentCourse course; // The course object associated with this form
         private MainForm mainForm; // Reference to the main form
 
-        public StudentCourseForm(StudentCourseDEMO course, MainForm mainForm)
+        public StudentCourseForm(StudentCourse course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;
@@ -23,9 +25,9 @@ namespace Smartloop_Feedback.Forms
         // Event handler for form load
         private void CourseForm_Load(object sender, EventArgs e)
         {
-            course.LoadEventsFromDatabase(); // Load events from the database
+            //course.LoadEventsFromDatabase(); // Load events from the database
             PopulateAssessmentView(); // Populate the assessment DataGridView
-            PopulateEventView(); // Populate the event DataGridView
+            //PopulateEventView(); // Populate the event DataGridView
 
             // Display calculated marks in the text boxes
             currentTb.Text = course.CalculateCurrentMark().ToString("F2") + "%";
@@ -63,16 +65,10 @@ namespace Smartloop_Feedback.Forms
             }
         }
 
-        // Event handler for Add button click
-        private void addBtn_Click(object sender, EventArgs e)
-        {
-            mainForm.MainPannel(1); // Navigate to the main panel
-        }
-
         // Populate the assessment DataGridView
         private void PopulateAssessmentView()
         {
-            if (course.AssessmentList != null)
+            if (course.StudentAssessmentList != null)
             {
                 assessmentDgv.Rows.Clear(); // Clear existing rows
                 assessmentDgv.Columns.Clear(); // Clear existing columns
@@ -101,9 +97,9 @@ namespace Smartloop_Feedback.Forms
                 assessmentDgv.Columns.Add("Weight", "Weight");
 
                 // Add rows to the DataGridView
-                foreach (StudentAssessment assessment in course.AssessmentList.Values)
+                foreach (StudentAssessment assessment in course.StudentAssessmentList.Values)
                 {
-                    double percentage = (assessment.FinalMark / assessment.Mark) * 100;
+                    double percentage = (assessment.StudentMark / assessment.Mark) * 100;
                     int rowIndex = assessmentDgv.Rows.Add(assessment.Name, assessment.Type, assessment.Date, (int)assessment.Status, percentage.ToString("F2") + "%", assessment.Weight);
                     DataGridViewRow row = assessmentDgv.Rows[rowIndex];
                     row.Tag = assessment.Id; // Tag the row with the assessment ID
@@ -116,39 +112,39 @@ namespace Smartloop_Feedback.Forms
         // Populate the event DataGridView
         private void PopulateEventView()
         {
-            if (course.EventList != null)
-            {
-                eventDgv.Rows.Clear(); // Clear existing rows
-                eventDgv.Columns.Clear(); // Clear existing columns
+            //if (course.EventList != null)
+            //{
+            //    eventDgv.Rows.Clear(); // Clear existing rows
+            //    eventDgv.Columns.Clear(); // Clear existing columns
 
-                // Add columns to the DataGridView
-                DataGridViewButtonColumn nameColumn = new DataGridViewButtonColumn
-                {
-                    Name = "Name",
-                    HeaderText = "Name",
-                    UseColumnTextForButtonValue = false,
-                    CellTemplate = new StyledButtonCell()
-                };
-                eventDgv.Columns.Add(nameColumn);
+            //    // Add columns to the DataGridView
+            //    DataGridViewButtonColumn nameColumn = new DataGridViewButtonColumn
+            //    {
+            //        Name = "Name",
+            //        HeaderText = "Name",
+            //        UseColumnTextForButtonValue = false,
+            //        CellTemplate = new StyledButtonCell()
+            //    };
+            //    eventDgv.Columns.Add(nameColumn);
 
-                eventDgv.Columns.Add("Date", "Date");
-                eventDgv.Columns.Add("Time", "Time");
+            //    eventDgv.Columns.Add("Date", "Date");
+            //    eventDgv.Columns.Add("Time", "Time");
 
-                DateTime today = DateTime.Today;
+            //    DateTime today = DateTime.Today;
 
-                // Add rows to the DataGridView
-                foreach (Event events in course.EventList.Values)
-                {
-                    if (events.Date >= today)
-                    {
-                        int rowIndex = eventDgv.Rows.Add(events.Name, events.Date, events.StartTime);
-                        DataGridViewRow row = eventDgv.Rows[rowIndex];
-                        row.Tag = events; // Tag the row with the event object
-                    }
-                }
+            //    // Add rows to the DataGridView
+            //    foreach (Event events in course.EventList.Values)
+            //    {
+            //        if (events.Date >= today)
+            //        {
+            //            int rowIndex = eventDgv.Rows.Add(events.Name, events.Date, events.StartTime);
+            //            DataGridViewRow row = eventDgv.Rows[rowIndex];
+            //            row.Tag = events; // Tag the row with the event object
+            //        }
+            //    }
 
-                DataGridColor(eventDgv); // Apply color formatting to the DataGridView
-            }
+            //    DataGridColor(eventDgv); // Apply color formatting to the DataGridView
+            //}
         }
 
         // Apply custom color formatting to a DataGridView
@@ -207,39 +203,39 @@ namespace Smartloop_Feedback.Forms
         // Event handler for Event button click
         private void eventBtn_Click(object sender, EventArgs e)
         {
-            List<string> courseName = new List<string> { course.Title };
+            //List<string> courseName = new List<string> { course.Title };
 
-            // Open AddEventForm to add a new event
-            using (AddEventForm addEventForm = new AddEventForm(courseName, null))
-            {
-                if (addEventForm.ShowDialog() == DialogResult.OK)
-                {
-                    // Create and add new event to the course
-                    Event newEvent = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, course.Title, addEventForm.newEvent.Color, course.StudentId, course.Id);
-                    course.EventList.Add(newEvent.Id, newEvent);
-                    PopulateEventView(); // Refresh event DataGridView
-                }
-            }
+            //// Open AddEventForm to add a new event
+            //using (AddEventForm addEventForm = new AddEventForm(courseName, null))
+            //{
+            //    if (addEventForm.ShowDialog() == DialogResult.OK)
+            //    {
+            //        // Create and add new event to the course
+            //        Event newEvent = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, course.Title, addEventForm.newEvent.Color, course.StudentId, course.Id);
+            //        course.EventList.Add(newEvent.Id, newEvent);
+            //        PopulateEventView(); // Refresh event DataGridView
+            //    }
+            //}
         }
 
         // Event handler for event DataGridView cell click
         private void eventDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
-            {
-                DataGridViewRow row = this.eventDgv.Rows[e.RowIndex];
-                List<string> courseName = new List<string> { course.Title };
+            //if (e.RowIndex >= 0)
+            //{
+            //    DataGridViewRow row = this.eventDgv.Rows[e.RowIndex];
+            //    List<string> courseName = new List<string> { course.Title };
 
-                // Open AddEventForm to edit the event
-                using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)row.Tag))
-                {
-                    if (editEventForm.ShowDialog() == DialogResult.OK)
-                    {
-                        course.UpdateEvent(editEventForm.newEvent); // Update the event in the course
-                        PopulateEventView(); // Refresh event DataGridView
-                    }
-                }
-            }
+            //    // Open AddEventForm to edit the event
+            //    using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)row.Tag))
+            //    {
+            //        if (editEventForm.ShowDialog() == DialogResult.OK)
+            //        {
+            //            course.UpdateEvent(editEventForm.newEvent); // Update the event in the course
+            //            PopulateEventView(); // Refresh event DataGridView
+            //        }
+            //    }
+            //}
         }
     }
 }

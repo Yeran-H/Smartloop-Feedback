@@ -316,7 +316,7 @@ namespace Smartloop_Feedback.Setting
             {
                 if (row.IsNewRow) continue;
 
-                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.Id);
+                var criteria = new Criteria(row.Cells[0].Value.ToString(), assessment.AssessmentId);
                 assessment.CriteriaList.Add(criteria);
 
                 for (int i = 0; i < columnNameList.Count(); i++)

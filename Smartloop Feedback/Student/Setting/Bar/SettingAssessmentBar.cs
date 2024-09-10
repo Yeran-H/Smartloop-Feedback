@@ -30,7 +30,7 @@ namespace Smartloop_Feedback.Setting.Bar
             int buttonCount = 0; // Counter for the number of buttons
 
             // Create a button for each assessment in the course
-            foreach (StudentAssessment assessment in course.AssessmentList.Values)
+            foreach (OLDStudentAssessment assessment in course.AssessmentList.Values)
             {
                 Button btn = new Button
                 {

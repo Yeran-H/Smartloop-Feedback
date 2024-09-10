@@ -78,7 +78,7 @@ namespace Smartloop_Feedback
                 {
                     if(semester.IsStudent)
                     {
-                        semester.CourseList.Add(addCourseForm.course.Code, new StudentCourse(addCourseForm.course, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId));
+                        semester.CourseList.Add(addCourseForm.course.Code, new StudentCourse(addCourseForm.course.CourseId, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId));
                     }
 
                     InitializeBar();
@@ -93,8 +93,8 @@ namespace Smartloop_Feedback
 
             if (clickedButton != null)
             {
-                mainForm.position[2] = clickedButton.Tag; // Set the main form's position with the button text
-                mainForm.MainPannel(0); // Navigate to the corresponding year's panel
+                mainForm.position[2] = Int32.Parse(clickedButton.Text); // Set the main form's position with the button text
+                mainForm.MainPannel(1); 
             }
 
             navPl.Height = clickedButton.Height;

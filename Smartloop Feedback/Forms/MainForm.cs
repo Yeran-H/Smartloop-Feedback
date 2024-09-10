@@ -19,6 +19,7 @@ using Smartloop_Feedback.Academic_Portfolio.AI;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
 using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 
 namespace Smartloop_Feedback
 {
@@ -280,6 +281,19 @@ namespace Smartloop_Feedback
                     //dashboard.FormBorderStyle = FormBorderStyle.None;
                     //this.formLoaderPl.Controls.Add(dashboard);
                     //dashboard.Show();
+                    break;
+                case 1:
+                    var list =  user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
+
+                    if ((list != null && list is StudentCourse studentCourse))
+                    {
+                        titleLb.Text = studentCourse.Name;
+                        this.formLoaderPl.Controls.Clear();
+                        StudentCourseForm course = new StudentCourseForm(studentCourse, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        course.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(course);
+                        course.Show();
+                    }
                     break;
             }
         }

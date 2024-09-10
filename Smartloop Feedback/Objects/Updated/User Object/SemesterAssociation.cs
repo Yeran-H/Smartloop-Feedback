@@ -77,12 +77,12 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                         while (reader.Read()) // Read each row
                         {
                             int courseAssociationId = reader.GetInt32(0);
-                            Course course = new Course(reader.GetInt32(1));
+                            int courseId = reader.GetInt32(1);
 
                             if(IsStudent)
                             {
-                                StudentCourse studentCourse = new StudentCourse(courseAssociationId, course, UserId, Id, IsStudent);
-                                CourseList.Add(studentCourse.Course.Code, studentCourse);
+                                StudentCourse studentCourse = new StudentCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
+                                CourseList.Add(studentCourse.Code, studentCourse);
                             }
                         }
                     }

@@ -10,7 +10,7 @@ using System.Web.UI;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class StudentAssessment
+    public class OLDStudentAssessment
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
         private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
@@ -40,7 +40,7 @@ namespace Smartloop_Feedback.Objects
         public int StudentId { get; set; } // ID of the student associated with the assessment
 
         // Constructor to initialize an Assessment object and fetch criteria and checklist from the database
-        public StudentAssessment(int id, string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, string finalFeedback, int courseId, int studentId)
+        public OLDStudentAssessment(int id, string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, string finalFeedback, int courseId, int studentId)
         {
             Id = id;
             Name = name;
@@ -68,7 +68,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize an Assessment object and add it to the database
-        public StudentAssessment(string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
+        public OLDStudentAssessment(string name, string description, string courseDescription, string type, DateTime date, int status, double weight, double mark, double finalMark, bool individual, bool group, bool isFinalised, string canvasLink, int courseId, int studentId)
         {
             Name = name;
             Description = description;

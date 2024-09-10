@@ -89,7 +89,7 @@ namespace Smartloop_Feedback.Coordinator
                 {
                     int rowIndex = assessmentDgv.Rows.Add(assessment.Name, assessment.Date, assessment.Weight, assessment.Mark, "View", "Delete");
                     DataGridViewRow row = assessmentDgv.Rows[rowIndex];
-                    row.Tag = assessment.Id;
+                    row.Tag = assessment.AssessmentId;
                 }
 
                 DataGridColor(assessmentDgv); // Apply color formatting to the DataGridView

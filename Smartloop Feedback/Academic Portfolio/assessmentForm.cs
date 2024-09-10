@@ -17,10 +17,10 @@ namespace Smartloop_Feedback
 {
     public partial class AssessmentForm : Form
     {
-        public StudentAssessment assessment;
+        public OLDStudentAssessment assessment;
         public MainForm mainForm;
 
-        public AssessmentForm(StudentAssessment assessment, MainForm mainForm)
+        public AssessmentForm(OLDStudentAssessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;

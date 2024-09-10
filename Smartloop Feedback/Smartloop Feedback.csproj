@@ -230,6 +230,7 @@
     <Compile Include="Objects\Updated\User Object\CourseAssociation.cs" />
     <Compile Include="Objects\Updated\User Object\SemesterAssociation.cs" />
     <Compile Include="Objects\Updated\User Object\Student\Student.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\StudentAssessment.cs" />
     <Compile Include="Objects\Updated\User Object\Student\StudentCourse.cs" />
     <Compile Include="Objects\Updated\User Object\User.cs" />
     <Compile Include="Objects\Updated\User Object\YearAssociation.cs" />
@@ -306,7 +307,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\Updated\Main Object\Assessment.cs" />
-    <Compile Include="Objects\StudentAssessment.cs" />
+    <Compile Include="Objects\OLDStudentAssessment.cs" />
     <Compile Include="Objects\CheckList.cs" />
     <Compile Include="Objects\Updated\Main Object\Coordinator.cs" />
     <Compile Include="Objects\Updated\Main Object\Course.cs" />

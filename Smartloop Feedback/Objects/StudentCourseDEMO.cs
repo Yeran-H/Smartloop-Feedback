@@ -20,7 +20,7 @@ namespace Smartloop_Feedback.Objects
         public int SemesterId { get; set; } // ID of the semester associated with the course
         public int StudentId { get; set; } // ID of the student associated with the course
         public string CanvasLink { get; set; } // Link to the course's Canvas page
-        public SortedDictionary<int, StudentAssessment> AssessmentList { get; private set; } // List of assessments for the course
+        public SortedDictionary<int, OLDStudentAssessment> AssessmentList { get; private set; } // List of assessments for the course
         public SortedDictionary<int, Event> EventList { get; private set; } // List of events for the course
 
         // Constructor to initialize a Course object and fetch assessments from the database
@@ -35,7 +35,7 @@ namespace Smartloop_Feedback.Objects
             CanvasLink = canvasLink;
             SemesterId = semesterId;
             StudentId = studentId;
-            AssessmentList = new SortedDictionary<int, StudentAssessment>(); // Initialize the assessment list
+            AssessmentList = new SortedDictionary<int, OLDStudentAssessment>(); // Initialize the assessment list
             EventList = new SortedDictionary<int, Event>(); // Initialize the event list
             LoadAssessmentsFromDatabase(); // Fetch assessments from the database
         }
@@ -51,7 +51,7 @@ namespace Smartloop_Feedback.Objects
             CanvasLink = canvasLink;
             SemesterId = semesterId;
             StudentId = studentId;
-            AssessmentList = new SortedDictionary<int, StudentAssessment>(); // Initialize the assessment list
+            AssessmentList = new SortedDictionary<int, OLDStudentAssessment>(); // Initialize the assessment list
             EventList = new SortedDictionary<int, Event>(); // Initialize the event list
             AddCourseToDatabase(); // Add the course to the database
         }
@@ -65,7 +65,7 @@ namespace Smartloop_Feedback.Objects
             Description = description;
             IsCompleted = isCompleted;
             CanvasLink = canvasLink;
-            AssessmentList = new SortedDictionary<int, StudentAssessment>(); // Initialize the assessment list
+            AssessmentList = new SortedDictionary<int, OLDStudentAssessment>(); // Initialize the assessment list
         }
 
         // Add the course to the database and get the generated ID
@@ -122,7 +122,7 @@ namespace Smartloop_Feedback.Objects
                         string finalFeedback = reader.IsDBNull(14) ? string.Empty : reader.GetString(14);
 
                         // Add the assessment to the assessment list
-                        AssessmentList.Add(assessmentId, new StudentAssessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, finalFeedback, Id, StudentId));
+                        AssessmentList.Add(assessmentId, new OLDStudentAssessment(assessmentId, name, description, courseDescription, type, date, status, weight, mark, finalMark, individual, group, isFinalised, canvasLink, finalFeedback, Id, StudentId));
                     }
                 }
             }
@@ -137,7 +137,7 @@ namespace Smartloop_Feedback.Objects
             Description = description;
             CanvasLink = canvasLink;
 
-            foreach(StudentAssessment assessment in AssessmentList.Values)
+            foreach(OLDStudentAssessment assessment in AssessmentList.Values)
             {
                 assessment.UpdateAssessmentToDatabase(Description);
             }
@@ -179,7 +179,7 @@ namespace Smartloop_Feedback.Objects
             LoadEventsFromDatabase();
 
             // Delete all assessments associated with the course
-            foreach (StudentAssessment assessment in AssessmentList.Values)
+            foreach (OLDStudentAssessment assessment in AssessmentList.Values)
             {
                 assessment.DeleteAssessmentFromDatabase();
             }
@@ -259,7 +259,7 @@ namespace Smartloop_Feedback.Objects
         {
             double total = weight;
 
-            foreach(StudentAssessment assessment in  AssessmentList.Values)
+            foreach(OLDStudentAssessment assessment in  AssessmentList.Values)
             {
                 total += assessment.Weight;
             }

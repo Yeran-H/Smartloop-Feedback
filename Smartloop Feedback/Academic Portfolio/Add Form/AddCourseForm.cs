@@ -51,7 +51,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
                 {
                     int rowIndex = courseDgv.Rows.Add(course.Code, course.Name, "Select");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
-                    row.Tag = course.Id;
+                    row.Tag = course.CourseId;
                 }
 
                 DataGridColor(courseDgv);
@@ -115,7 +115,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
                 {
                     int rowIndex = courseDgv.Rows.Add(course.Code, course.Name, "Select");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
-                    row.Tag = course.Id;
+                    row.Tag = course.CourseId;
                 }
             }
         }
@@ -150,7 +150,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
                     {
                         int rowIndex = tutorialDgv.Rows.Add(tutorial.Name, false);
                         DataGridViewRow line = tutorialDgv.Rows[rowIndex];
-                        line.Tag = course.Id;
+                        line.Tag = course.CourseId;
                     }
 
                     DataGridColor(tutorialDgv);

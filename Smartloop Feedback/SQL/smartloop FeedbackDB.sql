@@ -145,10 +145,26 @@ CREATE TABLE studentCourse (
     courseAssociationId INT,
     isCompleted BIT,
     courseMark DECIMAL (18,2),
-    courseGPA DECIMAL (18,2),
     tutorialId INT,
+    userId INT,
 	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
-    FOREIGN KEY (tutorialId) REFERENCES tutorial(id)
+    FOREIGN KEY (tutorialId) REFERENCES tutorial(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the studentAssessment table
+CREATE TABLE studentAssessment (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    assessmentId INT,
+    status BIT,
+    studentMark DECIMAL (18,2),
+    isFinalised BIT,
+    courseId INT,
+    userId INT,
+	FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId),
+    FOREIGN KEY (courseId) REFERENCES courseAssociation(id)
 );
 GO
 

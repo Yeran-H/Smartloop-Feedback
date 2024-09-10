@@ -16,7 +16,7 @@ namespace Smartloop_Feedback.Objects
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString;
 
-        public int Id { get; set; }
+        public int AssessmentId { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string CourseDescription { get; set; }
@@ -32,7 +32,7 @@ namespace Smartloop_Feedback.Objects
 
         public Assessment(int id, string name, string description, string courseDescription, string type, DateTime date, double weight, double mark, string canvasLink, string fileName, byte[] fileData, int courseId)
         {
-            Id = id;
+            AssessmentId = id;
             Name = name;
             Description = description;
             CourseDescription = courseDescription;
@@ -65,6 +65,12 @@ namespace Smartloop_Feedback.Objects
             AddAssessmentToDatabase();
         }
 
+        public Assessment(int id)
+        {
+            AssessmentId = id;
+            LoadAssessmentsFromDatabase();
+        }
+
         // Add the assessment to the database and get the generated ID
         private void AddAssessmentToDatabase()
         {
@@ -86,7 +92,35 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@fileName", (object)FileName ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@fileData", (object)FileData ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
-                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    AssessmentId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                }
+            }
+        }
+
+        // Fetch assessments from the database and initialize the assessment list
+        private void LoadAssessmentsFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData, courseId FROM assessment WHERE id = @id", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@id", AssessmentId); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        Name = reader.GetString(0); // Get the assessment name
+                        Description = reader.GetString(1); // Get the assessment description
+                        CourseDescription = reader.GetString(2);
+                        Type = reader.GetString(3); // Get the assessment type
+                        Date = reader.GetDateTime(4); // Get the assessment date
+                        Weight = (double)reader.GetDecimal(5); // Get the assessment weight
+                        Mark = (double)reader.GetDecimal(6); // Get the assessment mark
+                        CanvasLink = reader.GetString(7); // Get the assessment canvas link
+                        FileName = reader.IsDBNull(8) ? null : reader.GetString(8);
+                        FileData = reader["fileData"] == DBNull.Value ? null : (byte[])reader["fileData"];
+                    }
                 }
             }
         }
@@ -98,7 +132,7 @@ namespace Smartloop_Feedback.Objects
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT id, description FROM criteria WHERE assessmentId = @assessmentId", conn); // SQL query to fetch criteria
-                cmd.Parameters.AddWithValue("@assessmentId", Id); // Set the assessmentId parameter
+                cmd.Parameters.AddWithValue("@assessmentId", AssessmentId); // Set the assessmentId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -106,7 +140,7 @@ namespace Smartloop_Feedback.Objects
                     {
                         int criteriaId = reader.GetInt32(0); // Get the criteria ID
                         string criteriaDescription = reader.GetString(1); // Get the criteria description
-                        CriteriaList.Add(new Criteria(criteriaId, criteriaDescription, Id)); // Add the criteria to the criteria list
+                        CriteriaList.Add(new Criteria(criteriaId, criteriaDescription, AssessmentId)); // Add the criteria to the criteria list
                     }
                 }
             }
@@ -130,7 +164,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@id", AssessmentId);
                     cmd.Parameters.AddWithValue("@courseDescription", CourseDescription);
 
                     // Execute the update command
@@ -178,7 +212,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@id", AssessmentId);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@date", date);
@@ -214,7 +248,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
                     // Add the parameter for assessment ID
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@id", AssessmentId);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();

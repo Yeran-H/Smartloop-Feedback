@@ -14,7 +14,7 @@ namespace Smartloop_Feedback.Objects
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
-        public int Id { get; set; } // Course ID
+        public int CourseId { get; set; } // Course ID
         public int Code { get; set; } // Course code
         public string Name { get; set; } // Course name
         public int CreditPoint { get; set; } // Course credit points
@@ -28,7 +28,7 @@ namespace Smartloop_Feedback.Objects
 
         public Course(int id, int code, string name, int creditPoint, string description, int yearName, int semesterId, string CanvasLink, int tutorNum)
         {
-            this.Id = id;
+            this.CourseId = id;
             this.Code = code;
             this.Name = name;
             this.CreditPoint = creditPoint;
@@ -61,7 +61,7 @@ namespace Smartloop_Feedback.Objects
 
         public Course(int id)
         {
-            this.Id = id;
+            this.CourseId = id;
             LoadCourseFromDatabase();
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
@@ -76,7 +76,7 @@ namespace Smartloop_Feedback.Objects
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT code, name, creditPoint, description, yearName, semesterId, canvasLink, tutorNum FROM course WHERE id = @id", conn); // SQL query to fetch courses
-                cmd.Parameters.AddWithValue("@id", Id); // Set the courseId parameter
+                cmd.Parameters.AddWithValue("@id", CourseId); // Set the courseId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -112,7 +112,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@yearName", Year.Name);
                     cmd.Parameters.AddWithValue("@semesterId", Semester.Id);
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
-                    Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                    CourseId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
         }
@@ -121,14 +121,14 @@ namespace Smartloop_Feedback.Objects
         {
             if(TutorNum == 0 || flag)
             {
-                Tutorial tutorial = new Tutorial("0", Id);
+                Tutorial tutorial = new Tutorial("0", CourseId);
                 TutorialList.Add(tutorial.Id, tutorial);
                 return;
             }
 
             for (int i = 1; i <= TutorNum; i++)
             {
-                Tutorial tutorial = new Tutorial(i.ToString(), Id);
+                Tutorial tutorial = new Tutorial(i.ToString(), CourseId);
                 TutorialList.Add(tutorial.Id, tutorial);
             }
         }
@@ -169,7 +169,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@id", CourseId);
                     cmd.Parameters.AddWithValue("@code", code);
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
@@ -211,7 +211,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {
                     // Add the parameter for course ID
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@id", CourseId);
 
                     // Execute the delete command
                     cmd.ExecuteNonQuery();
@@ -226,7 +226,7 @@ namespace Smartloop_Feedback.Objects
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT id, name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData FROM assessment WHERE courseId = @courseId", conn); // SQL query to fetch assessments
-                cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
+                cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -246,7 +246,7 @@ namespace Smartloop_Feedback.Objects
 
 
                         // Add the assessment to the assessment list
-                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData, Id));
+                        AssessmentList.Add(assessmentId, new Assessment(assessmentId, name, description, courseDescription, type, date, weight, mark, canvasLink, fileName, fileData, CourseId));
                     }
                 }
             }
@@ -259,7 +259,7 @@ namespace Smartloop_Feedback.Objects
             {
                 conn.Open(); // Open the connection
                 SqlCommand cmd = new SqlCommand("SELECT id, name FROM tutorial WHERE courseId = @courseId", conn); // SQL query to fetch assessments
-                cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
+                cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
 
                 using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                 {
@@ -269,7 +269,7 @@ namespace Smartloop_Feedback.Objects
                         string name = reader.GetString(1); // Get the assessment name
 
                         // Add the assessment to the assessment list
-                        TutorialList.Add(tutorialId, new Tutorial(tutorialId, name, Id));
+                        TutorialList.Add(tutorialId, new Tutorial(tutorialId, name, CourseId));
                     }
                 }
             }
