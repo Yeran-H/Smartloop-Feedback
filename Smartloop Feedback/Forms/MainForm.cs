@@ -80,7 +80,7 @@ namespace Smartloop_Feedback
             navPl.Left = dashboardBtn.Left;
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
 
-            MainPannel(5);
+            MainPannel(0);
         }
 
         private void resultBtn_Click(object sender, EventArgs e)
@@ -274,13 +274,16 @@ namespace Smartloop_Feedback
             switch(num)
             {
                 case 0:
-                    titleLb.Text = "Dashboard";
-                    this.formLoaderPl.Controls.Clear();
+                    if (user.IsStudent)
+                    {
+                        titleLb.Text = "Dashboard";
+                        this.formLoaderPl.Controls.Clear();
 
-                    //DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                    //dashboard.FormBorderStyle = FormBorderStyle.None;
-                    //this.formLoaderPl.Controls.Add(dashboard);
-                    //dashboard.Show();
+                        DashboardForm dashboard = new DashboardForm(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        dashboard.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(dashboard);
+                        dashboard.Show();
+                    }
                     break;
                 case 1:
                     var list = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
