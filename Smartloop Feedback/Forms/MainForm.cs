@@ -308,6 +308,18 @@ namespace Smartloop_Feedback
                         assessmentForm.Show();
                     }
                     break;
+                case 4:
+                    var list2 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
+
+                    if (list2 != null && list2 is StudentCourse studentFeedback)
+                    {
+                        this.formLoaderPl.Controls.Clear();
+                        AIForm aIForm = new AIForm(studentFeedback.StudentAssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        aIForm.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(aIForm);
+                        aIForm.Show();
+                    }
+                    break;
             }
         }
 

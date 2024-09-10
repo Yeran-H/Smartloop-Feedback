@@ -49,10 +49,10 @@ namespace Smartloop_Feedback
             {
                 LoadCriteriaData();
             }
-            //if(assessment.FeedbackList.Count != 0)
-            //{
-            //    LoadAttemptData();
-            //}
+            if (assessment.FeedbackList.Count != 0)
+            {
+                LoadAttemptData();
+            }
             isFinalised();
         }
 
@@ -120,12 +120,12 @@ namespace Smartloop_Feedback
             attemptDgv.Columns.Add(attemptColumn);
             attemptDgv.Columns.Add("File", "File");
 
-            //foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
-            //{
-            //    int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
-            //    DataGridViewRow row = attemptDgv.Rows[rowIndex];
-            //    row.Tag = feedbackResult.Attempt; 
-            //}
+            foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
+            {
+                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
+                DataGridViewRow row = attemptDgv.Rows[rowIndex];
+                row.Tag = feedbackResult.Attempt;
+            }
 
             DataGridColor(attemptDgv);
         }
@@ -208,7 +208,7 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-           // assessment.UpdateAssessmentToDatabase(finaliseCb.Checked);
+            assessment.UpdateAssessmentToDatabase(finaliseCb.Checked);
             mainForm.MainPannel(1);
         }
 

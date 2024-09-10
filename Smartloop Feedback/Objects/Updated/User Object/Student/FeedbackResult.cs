@@ -20,10 +20,10 @@ namespace Smartloop_Feedback.Objects
         public string Feedback { get; set; }
         public int[] PreviousAttemptId { get; set; }
         public string[] PreviousAssessmentId { get; set; }
-        public int StudentId { get; set; }
+        public int UserId { get; set; }
         public int AssessmentId { get; set; }
 
-        public FeedbackResult(int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int studentId, int assessmentId)
+        public FeedbackResult(int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int userId, int assessmentId)
         {
             Attempt = attempt;
             TeacherFeedback = teacherFeedback;
@@ -31,14 +31,14 @@ namespace Smartloop_Feedback.Objects
             FileData = fileData;
             Notes = notes;
             Feedback = feedback;
-            StudentId = studentId;
+            UserId = userId;
             AssessmentId = assessmentId;
             PreviousAttemptId = previousAttemptId;
             PreviousAssessmentId = previousAssessmentId;
             AddFeedbackToDatabase();
         }
 
-        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int studentId, int assessmentId)
+        public FeedbackResult(int id, int attempt, string teacherFeedback, string fileName, byte[] fileData, string notes, string feedback, int[] previousAttemptId, string[] previousAssessmentId, int userId, int assessmentId)
         {
             Id = id;
             Attempt = attempt;
@@ -49,7 +49,7 @@ namespace Smartloop_Feedback.Objects
             Feedback = feedback;
             PreviousAttemptId = previousAttemptId;
             PreviousAssessmentId= previousAssessmentId;
-            StudentId = studentId;
+            UserId = userId;
             AssessmentId = assessmentId;
         }
 
@@ -71,7 +71,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) 
             {
                 conn.Open(); 
-                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, previousAssessmentId, studentId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @feedback, @previousAttemptId, @previousAssessmentId, @studentId, @assessmentId); SELECT SCOPE_IDENTITY();";
+                string sql = "INSERT INTO feedbackResult (attempt, teacherFeedback, fileName, fileData, notes, feedback, previousAttemptId, previousAssessmentId, userId, assessmentId) VALUES (@attempt, @teacherFeedback, @fileName, @fileData, @notes, @feedback, @previousAttemptId, @previousAssessmentId, @userId, @assessmentId); SELECT SCOPE_IDENTITY();";
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
@@ -83,7 +83,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@feedback", Feedback); 
                     cmd.Parameters.AddWithValue("@previousAttemptId", (object)previousAttemptId ?? DBNull.Value);
                     cmd.Parameters.AddWithValue("@previousAssessmentId", (object)previousAssessmentId ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); 
+                    cmd.Parameters.AddWithValue("@userId", UserId); 
                     cmd.Parameters.AddWithValue("@assessmentId", AssessmentId);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); 
                 }

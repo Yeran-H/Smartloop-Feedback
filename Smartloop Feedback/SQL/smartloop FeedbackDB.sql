@@ -181,6 +181,24 @@ CREATE TABLE checkList (
 );
 GO
 
+-- Create the feedbackResult table
+CREATE TABLE feedbackResult (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    attempt INT,
+    teacherFeedback VARCHAR(MAX),
+    fileName VARCHAR(MAX),
+    fileData VARBINARY(MAX),
+    notes VARCHAR(MAX),
+    feedback VARCHAR(MAX),
+    previousAttemptId VARCHAR(MAX),
+    previousAssessmentId VARCHAR(MAX),
+    assessmentId INT,
+    userId INT,
+    FOREIGN KEY (assessmentId) REFERENCES studentAssessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
 ---- Create the tutor table
 --CREATE TABLE tutor (
 --    tutorId INT PRIMARY KEY,

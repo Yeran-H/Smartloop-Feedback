@@ -311,7 +311,7 @@
     <Compile Include="Objects\Updated\User Object\Student\CheckList.cs" />
     <Compile Include="Objects\Updated\Main Object\Coordinator.cs" />
     <Compile Include="Objects\Updated\Main Object\Course.cs" />
-    <Compile Include="Objects\FeedbackResult.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\FeedbackResult.cs" />
     <Compile Include="Objects\StudentCourseDEMO.cs" />
     <Compile Include="Objects\CourseResult.cs" />
     <Compile Include="Objects\StudentCriteria.cs" />
