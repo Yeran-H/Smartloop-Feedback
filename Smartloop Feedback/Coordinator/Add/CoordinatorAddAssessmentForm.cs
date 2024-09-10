@@ -13,13 +13,13 @@ using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback.Forms
 {
-    public partial class AddAssessmentForm : Form
+    public partial class CoordinatorAddAssessmentForm : Form
     {
         private Course course; // Reference to the course object
         private CoordinatorMainForm mainForm; // Reference to the main form
         private Dictionary<TextBox, bool> textBoxClicked = new Dictionary<TextBox, bool>(); // Track if TextBox has been clicked
 
-        public AddAssessmentForm(Course course, CoordinatorMainForm mainForm)
+        public CoordinatorAddAssessmentForm(Course course, CoordinatorMainForm mainForm)
         {
             InitializeComponent();
             this.course = course;

@@ -84,7 +84,7 @@ namespace Smartloop_Feedback.Objects.Updated
                         // Semester exists, retrieve its details
                         Id = semesterId;
                         Name = reader.GetString(0);
-                        Year = new Year(reader.GetInt32(0));
+                        Year = new Year(reader.GetInt32(1));
 
                     }
                 }

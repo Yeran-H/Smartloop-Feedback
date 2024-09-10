@@ -35,11 +35,11 @@ CREATE TABLE course (
     name VARCHAR(MAX),
     creditPoint INT,
     description VARCHAR(MAX),
-    yearId INT,
+    yearName INT,
     semesterId INT,
     canvasLink VARCHAR(MAX),
     tutorNum INT,
-    FOREIGN KEY (yearId) REFERENCES year(id),
+    FOREIGN KEY (yearName) REFERENCES year(name),
     FOREIGN KEY (semesterId) REFERENCES semester(id)
 );
 GO
@@ -123,6 +123,32 @@ CREATE TABLE semesterAssociation (
 	FOREIGN KEY (semesterId) REFERENCES semester(id),
     FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
     FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the courseAssociation table
+CREATE TABLE courseAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    isStudent BIT,
+    courseId INT,
+	semesterId INT,
+    userId INT,
+	FOREIGN KEY (semesterId) REFERENCES semesterAssociation(id),
+    FOREIGN KEY (courseId) REFERENCES course(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the studentCourse table
+CREATE TABLE studentCourse (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    courseAssociationId INT,
+    isCompleted BIT,
+    courseMark DECIMAL (18,2),
+    courseGPA DECIMAL (18,2),
+    tutorialId INT,
+	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (tutorialId) REFERENCES tutorial(id)
 );
 GO
 

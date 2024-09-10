@@ -113,7 +113,7 @@ namespace Smartloop_Feedback.Coordinator
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addCourseForm = new AddCourseForm())
+            using (var addCourseForm = new CoordinatorAddCourseForm())
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK)
                 {

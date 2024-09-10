@@ -59,6 +59,42 @@ namespace Smartloop_Feedback.Objects
             AddTutorialFromDatabase(false);
         }
 
+        public Course(int id)
+        {
+            this.Id = id;
+            LoadCourseFromDatabase();
+            AssessmentList = new Dictionary<int, Assessment>();
+            TutorialList = new Dictionary<int, Tutorial>();
+            LoadAssessmentsFromDatabase();
+            LoadTutorialFromDatabase();
+        }
+
+
+        private void LoadCourseFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT code, name, creditPoint, description, yearName, semesterId, canvasLink, tutorNum FROM course WHERE id = @id", conn); // SQL query to fetch courses
+                cmd.Parameters.AddWithValue("@id", Id); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) 
+                    {
+                        Code = reader.GetInt32(0); // Get the course code
+                        Name = reader.GetString(1); // Get the course title
+                        CreditPoint = reader.GetInt32(2); // Get the course credit points
+                        Description = reader.GetString(3); // Get the course description
+                        Year = new Year(reader.GetInt32(4)); // Get the course year
+                        Semester = new Semester(reader.GetInt32(5));
+                        CanvasLink = reader.GetString(6); // Get the course canvas link
+                        TutorNum = reader.GetInt32(7);
+                    }        
+                }
+            }
+        }
+
         // Add the course to the database and get the generated ID
         private void AddCourseToDatabase()
         {

@@ -10,10 +10,10 @@ namespace Smartloop_Feedback.Forms
 {
     public partial class StudentCourseForm : Form
     {
-        private StudentCourse course; // The course object associated with this form
+        private StudentCourseDEMO course; // The course object associated with this form
         private MainForm mainForm; // Reference to the main form
 
-        public StudentCourseForm(StudentCourse course, MainForm mainForm)
+        public StudentCourseForm(StudentCourseDEMO course, MainForm mainForm)
         {
             InitializeComponent();
             this.course = course;

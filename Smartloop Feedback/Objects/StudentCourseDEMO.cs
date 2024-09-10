@@ -6,7 +6,7 @@ using Smartloop_Feedback.Objects;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class StudentCourse
+    public class StudentCourseDEMO
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
@@ -24,7 +24,7 @@ namespace Smartloop_Feedback.Objects
         public SortedDictionary<int, Event> EventList { get; private set; } // List of events for the course
 
         // Constructor to initialize a Course object and fetch assessments from the database
-        public StudentCourse(int id, int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
+        public StudentCourseDEMO(int id, int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
             Id = id;
             Code = code;
@@ -41,7 +41,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize a Course object and add it to the database
-        public StudentCourse(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
+        public StudentCourseDEMO(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink, int semesterId, int studentId)
         {
             Code = code;
             Title = title;
@@ -57,7 +57,7 @@ namespace Smartloop_Feedback.Objects
         }
 
         // Constructor to initialize a Course object without interacting with the database
-        public StudentCourse(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink)
+        public StudentCourseDEMO(int code, string title, int creditPoint, string description, bool isCompleted, string canvasLink)
         {
             Code = code;
             Title = title;

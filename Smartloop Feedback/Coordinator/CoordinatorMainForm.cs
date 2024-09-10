@@ -76,7 +76,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
                 case 2:
                     this.formLoaderPl.Controls.Clear();
 
-                    AddAssessmentForm addAssessment = new AddAssessmentForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CoordinatorAddAssessmentForm addAssessment = new CoordinatorAddAssessmentForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     addAssessment.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(addAssessment);
                     addAssessment.Show();

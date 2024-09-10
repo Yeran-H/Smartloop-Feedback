@@ -1,5 +1,7 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using Smartloop_Feedback.Academic_Portfolio.Add_Form;
+using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -70,20 +72,13 @@ namespace Smartloop_Feedback
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString())) 
+            using (var addCourseForm = new AddCourseForm(semester.Semester, semester.IsStudent)) 
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK) 
                 {
-                    StudentCourse course = addCourseForm.course;
-                    if (course != null)
+                    if(semester.IsStudent)
                     {
-                        StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
-                        semester.CourseList.Add(temp.Id, temp);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        return;
+                        semester.CourseList.Add(addCourseForm.course.Code, new StudentCourse(addCourseForm.course, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId));
                     }
 
                     InitializeBar();

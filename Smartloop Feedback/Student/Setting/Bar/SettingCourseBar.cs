@@ -29,7 +29,7 @@ namespace Smartloop_Feedback.Setting.Bar
             int buttonCount = 0; // Counter for the number of buttons
 
             // Create a button for each course in the semester
-            foreach (StudentCourse course in semester.CourseList.Values)
+            foreach (StudentCourseDEMO course in semester.CourseList.Values)
             {
                 Button btn = allButtons[buttonCount]; // Get the button from the predefined array
                 btn.Visible = true; // Make the button visible

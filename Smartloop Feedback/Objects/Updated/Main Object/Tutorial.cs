@@ -23,6 +23,31 @@ namespace Smartloop_Feedback.Objects.Updated
             this.CourseId = courseId;
             AddTutorialFromDatabase();
         }
+        public Tutorial(int id)
+        {
+            this.Id = id;
+            LoadTutorialFromDatabase();
+        }
+
+        // Fetch assessments from the database and initialize the assessment list
+        private void LoadTutorialFromDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT name, courseId FROM tutorial WHERE Id = @Id", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@Id", Id); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    if (reader.Read()) // Read each row
+                    {
+                        Name = reader.GetString(0); 
+                        CourseId = reader.GetInt32(1); 
+                    }
+                }
+            }
+        }
 
         private void AddTutorialFromDatabase()
         {
