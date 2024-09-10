@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Smartloop_Feedback.Objects
 {
-    public class CourseResult
+    public class StudentCourseResult
     {
         // Public properties for course result details
         public int Year { get; set; } // Academic year of the course
@@ -17,7 +17,7 @@ namespace Smartloop_Feedback.Objects
         public int CreditPoint { get; set; } // Credit points of the course
 
         // Constructor to initialize a CourseResult object with default values
-        public CourseResult()
+        public StudentCourseResult()
         {
             Year = 0;
             Semester = string.Empty;

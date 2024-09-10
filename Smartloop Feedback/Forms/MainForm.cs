@@ -92,11 +92,11 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Results";
             this.formLoaderPl.Controls.Clear();
-            
-            //ResultForm result = new ResultForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            //result.FormBorderStyle = FormBorderStyle.None;
-            //this.formLoaderPl.Controls.Add(result);
-            //result.Show();           
+
+            ResultForm result = new ResultForm(user) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            result.FormBorderStyle = FormBorderStyle.None;
+            this.formLoaderPl.Controls.Add(result);
+            result.Show();
         }
 
         private void academicBtn_Click(object sender, EventArgs e)
@@ -118,11 +118,11 @@ namespace Smartloop_Feedback
 
             titleLb.Text = "Course Schedule";
             this.formLoaderPl.Controls.Clear();
-            
-            //CourseScheduleForm course = new CourseScheduleForm(student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-            //course.FormBorderStyle = FormBorderStyle.None;
-            //this.formLoaderPl.Controls.Add(course);
-            //course.Show();            
+
+            CourseScheduleForm course = new CourseScheduleForm(user) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+            course.FormBorderStyle = FormBorderStyle.None;
+            this.formLoaderPl.Controls.Add(course);
+            course.Show();
         }
 
         private void setttingBtn_Click(object sender, EventArgs e)

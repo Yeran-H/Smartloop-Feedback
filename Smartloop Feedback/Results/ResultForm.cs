@@ -1,4 +1,6 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,18 +16,18 @@ namespace Smartloop_Feedback.Results
 {
     public partial class ResultForm : Form
     {
-        public OLDStudent student;
-        public List<CourseResult> courseResultList;
+        public User user;
+        public List<StudentCourseResult> courseResultList;
         public List<double> wamYearList;
         public List<double> wamSemesterList;
         public List<double> gpaYearList;
         public List<double> gpaSemesterList;
 
-        public ResultForm(OLDStudent student)
+        public ResultForm(User user)
         {
             InitializeComponent();
-            this.student = student;
-            this.courseResultList = new List<CourseResult>();
+            this.user = user;
+            this.courseResultList = new List<StudentCourseResult>();
             this.wamYearList = new List<double>();
             this.wamSemesterList = new List<double>();
             this.gpaYearList = new List<double>();
@@ -43,64 +45,67 @@ namespace Smartloop_Feedback.Results
 
         private void PopulateDgv()
         {
-            //foreach (StudentYear year in student.YearList.Values)
-            //{
-            //    double wamYear = 0.0;
-            //    double gpaYear = 0.0;
-            //    int totalCreditPointsYear = 0;
+            foreach (YearAssociation year in user.YearList.Values)
+            {
+                double wamYear = 0.0;
+                double gpaYear = 0.0;
+                int totalCreditPointsYear = 0;
 
-            //    foreach (StudentSemester semester in year.SemesterList.Values)
-            //    {
-            //        double wamSemester = 0.0;
-            //        double gpaSemester = 0.0;
-            //        int totalCreditPointsSemester = 0;
+                foreach (SemesterAssociation semester in year.SemesterList.Values)
+                {
+                    double wamSemester = 0.0;
+                    double gpaSemester = 0.0;
+                    int totalCreditPointsSemester = 0;
 
-            //        foreach (StudentCourse course in semester.CourseList.Values)
-            //        {
-            //            CourseResult courseResult = new CourseResult
-            //            {
-            //                Year = year.Name,
-            //                Semester = semester.Name,
-            //                Course = course.Title,
-            //                Score = course.CalculateCurrentMark(),
-            //                CreditPoint = course.CreditPoint
-            //            };
-            //            courseResult.CalculateGrade();
+                    foreach (CourseAssociation course in semester.CourseList.Values)
+                    {
+                        if(course is StudentCourse studentCourse)
+                        {
+                            StudentCourseResult courseResult = new StudentCourseResult
+                            {
+                                Year = year.Year.Name,
+                                Semester = semester.Semester.Name,
+                                Course = studentCourse.Name,
+                                Score = studentCourse.CalculateCurrentMark(),
+                                CreditPoint = studentCourse.CreditPoint
+                            };
+                            courseResult.CalculateGrade();
 
-            //            courseResultList.Add(courseResult);
+                            courseResultList.Add(courseResult);
 
-            //            // Update semester aggregates
-            //            wamSemester += courseResult.Score * courseResult.CreditPoint;
-            //            gpaSemester += courseResult.GetGradePoint() * courseResult.CreditPoint;
-            //            totalCreditPointsSemester += courseResult.CreditPoint;
-            //        }
+                            // Update semester aggregates
+                            wamSemester += courseResult.Score * courseResult.CreditPoint;
+                            gpaSemester += courseResult.GetGradePoint() * courseResult.CreditPoint;
+                            totalCreditPointsSemester += courseResult.CreditPoint;
+                        }
+                    }
 
-            //        // Calculate WAM and GPA for the semester
-            //        if (totalCreditPointsSemester > 0)
-            //        {
-            //            wamSemester /= totalCreditPointsSemester;
-            //            gpaSemester /= totalCreditPointsSemester;
-            //        }
+                    // Calculate WAM and GPA for the semester
+                    if (totalCreditPointsSemester > 0)
+                    {
+                        wamSemester /= totalCreditPointsSemester;
+                        gpaSemester /= totalCreditPointsSemester;
+                    }
 
-            //        // Update year aggregates
-            //        wamYear += wamSemester * totalCreditPointsSemester;
-            //        gpaYear += gpaSemester * totalCreditPointsSemester;
-            //        totalCreditPointsYear += totalCreditPointsSemester;
+                    // Update year aggregates
+                    wamYear += wamSemester * totalCreditPointsSemester;
+                    gpaYear += gpaSemester * totalCreditPointsSemester;
+                    totalCreditPointsYear += totalCreditPointsSemester;
 
-            //        wamSemesterList.Add(wamSemester);
-            //        gpaSemesterList.Add(gpaSemester);
-            //    }
+                    wamSemesterList.Add(wamSemester);
+                    gpaSemesterList.Add(gpaSemester);
+                }
 
-            //    // Calculate WAM and GPA for the year
-            //    if (totalCreditPointsYear > 0)
-            //    {
-            //        wamYear /= totalCreditPointsYear;
-            //        gpaYear /= totalCreditPointsYear;
+                // Calculate WAM and GPA for the year
+                if (totalCreditPointsYear > 0)
+                {
+                    wamYear /= totalCreditPointsYear;
+                    gpaYear /= totalCreditPointsYear;
 
-            //        wamYearList.Add(wamYear);
-            //        gpaYearList.Add(gpaYear);
-            //    }
-            //}
+                    wamYearList.Add(wamYear);
+                    gpaYearList.Add(gpaYear);
+                }
+            }
 
             resultDgv.DataSource = courseResultList;
             DataGridColor(resultDgv);
@@ -188,28 +193,28 @@ namespace Smartloop_Feedback.Results
             int totalCreditPoints = 0;
 
             // Ensure that totalCreditPoint is the sum of all credit points
-            //foreach (StudentYear year in student.YearList.Values)
-            //{
-            //    foreach (StudentSemester semester in year.SemesterList.Values)
-            //    {
-            //        foreach (StudentCourse course in semester.CourseList.Values)
-            //        {
-            //            totalCreditPoints += course.CreditPoint;
-            //        }
-            //    }
-            //}
+            foreach (YearAssociation year in user.YearList.Values)
+            {
+                foreach (SemesterAssociation semester in year.SemesterList.Values)
+                {
+                    foreach (CourseAssociation course in semester.CourseList.Values)
+                    {
+                        totalCreditPoints += course.CreditPoint;
+                    }
+                }
+            }
 
-            //// Calculate the total WAM
-            //for (int i = 0; i < wamYearList.Count; i++)
-            //{
-            //    totalWAM += wamYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
-            //}
+            // Calculate the total WAM
+            for (int i = 0; i < wamYearList.Count; i++)
+            {
+                totalWAM += wamYearList[i] * user.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
+            }
 
             // Calculate the total GPA
-            //for (int i = 0; i < gpaYearList.Count; i++)
-            //{
-            //    totalGPA += gpaYearList[i] * student.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
-            //}
+            for (int i = 0; i < gpaYearList.Count; i++)
+            {
+                totalGPA += gpaYearList[i] * user.YearList.Values.ElementAt(i).SemesterList.Values.Sum(s => s.CourseList.Values.Sum(c => c.CreditPoint));
+            }
 
             if (totalCreditPoints > 0)
             {

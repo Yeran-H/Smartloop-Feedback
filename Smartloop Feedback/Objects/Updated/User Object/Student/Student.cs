@@ -19,16 +19,12 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             : base(studentId, name, email, password, profileImage, true)
         {
             Degree = degree;
-            //EventList = new Dictionary<int, Event>();
-            //LoadYearsFromDatabase();
-            //LoadEventsFromDatabase();
         }
 
         public Student(int studentId, string name, string email, string password, string degree, byte[] profileImage, bool x)
         : base(studentId, name, email, password, profileImage, true)
         {
             Degree = degree;
-            //EventList = new Dictionary<int, Event>();
             AddStudentToDatabase();
         }
 

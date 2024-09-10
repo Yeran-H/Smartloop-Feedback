@@ -114,98 +114,98 @@ namespace Smartloop_Feedback.Dashboard
 
         private void PopulateEvent()
         {
-            //eventDgv.Rows.Clear();
-            //eventDgv.Columns.Clear();
-            //eventDgv.Columns.Add("Name", "Name");
-            //eventDgv.Columns.Add("Date", "Date");
-            //eventDgv.Columns.Add("Category", "Category");
+            eventDgv.Rows.Clear();
+            eventDgv.Columns.Clear();
+            eventDgv.Columns.Add("Name", "Name");
+            eventDgv.Columns.Add("Date", "Date");
+            eventDgv.Columns.Add("Category", "Category");
 
-            //DateTime today = DateTime.Today;
+            DateTime today = DateTime.Today;
 
-            //foreach (Event events in student.EventList.Values)
-            //{
-            //    if (events.Date >= today)
-            //    {
-            //        eventDgv.Rows.Add(events.Name, events.Date, events.Category);
-            //    }
-            //}
+            foreach (Event events in user.EventList.Values)
+            {
+                if (events.Date >= today)
+                {
+                    eventDgv.Rows.Add(events.Name, events.Date, events.Category);
+                }
+            }
         }
 
         private void PopulateHourlyView()
         {
-            //string selectedCourse = filterCb.SelectedItem as string;
+            string selectedCourse = filterCb.SelectedItem as string;
 
-            //eventDgv.Rows.Clear();
-            //eventDgv.Columns.Clear();
-            //eventDgv.Columns.Add("Time", "Time");
-            //eventDgv.Columns.Add("Event", "Event");
+            eventDgv.Rows.Clear();
+            eventDgv.Columns.Clear();
+            eventDgv.Columns.Add("Time", "Time");
+            eventDgv.Columns.Add("Event", "Event");
 
-            //DateTime today = DateTime.Today;
+            DateTime today = DateTime.Today;
 
-            //for (int i = 0; i < 24; i++)
-            //{
-            //    DateTime hour = today.AddHours(i);
-            //    eventDgv.Rows.Add(hour.ToString("HH:mm"), "");
-            //}
+            for (int i = 0; i < 24; i++)
+            {
+                DateTime hour = today.AddHours(i);
+                eventDgv.Rows.Add(hour.ToString("HH:mm"), "");
+            }
 
-            //foreach (Event events in student.EventList.Values)
-            //{
-            //    if (events.Date.Date == today)
-            //    {
-            //        if (selectedCourse == "All" || events.Category == selectedCourse)
-            //        {
-            //            for (int i = events.StartTime.Hours; i < events.EndTime.Hours; i++)
-            //            {
-            //                eventDgv.Rows[i].Cells["Event"].Value = events.Name;
-            //                eventDgv.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue; // Highlight the row
-            //            }
-            //        }
-            //    }
-            //}
+            foreach (Event events in user.EventList.Values)
+            {
+                if (events.Date.Date == today)
+                {
+                    if (selectedCourse == "All" || events.Category == selectedCourse)
+                    {
+                        for (int i = events.StartTime.Hours; i < events.EndTime.Hours; i++)
+                        {
+                            eventDgv.Rows[i].Cells["Event"].Value = events.Name;
+                            eventDgv.Rows[i].DefaultCellStyle.BackColor = Color.LightBlue; // Highlight the row
+                        }
+                    }
+                }
+            }
         }
 
         private void PopulateComboBox()
         {
-            //filterCb.Items.Clear();
-            //filterCb.Items.Add("All");
-            //filterCb.Items.AddRange(student.GetCourseList().ToArray());
+            filterCb.Items.Clear();
+            filterCb.Items.Add("All");
+            filterCb.Items.AddRange(user.GetCourseList().ToArray());
         }
 
         private void filterCb_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //if (isHourlyView)
-            //{
-            //    PopulateHourlyView();
-            //}
-            //else
-            //{
-            //    string selectedCourse = filterCb.SelectedItem as string;
+            if (isHourlyView)
+            {
+                PopulateHourlyView();
+            }
+            else
+            {
+                string selectedCourse = filterCb.SelectedItem as string;
 
-            //    eventDgv.Rows.Clear();
+                eventDgv.Rows.Clear();
 
-            //    if (selectedCourse != "All")
-            //    {
-            //        foreach (Event events in student.EventList.Values)
-            //        {
-            //            if (events.Category == selectedCourse)
-            //            {
-            //                eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
-            //            }
-            //        }
-            //    }
-            //    else
-            //    {
-            //        DateTime today = DateTime.Today;
+                if (selectedCourse != "All")
+                {
+                    foreach (Event events in user.EventList.Values)
+                    {
+                        if (events.Category == selectedCourse)
+                        {
+                            eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
+                        }
+                    }
+                }
+                else
+                {
+                    DateTime today = DateTime.Today;
 
-            //        foreach (Event events in student.EventList.Values)
-            //        {
-            //            if (events.Date >= today)
-            //            {
-            //                eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
-            //            }
-            //        }
-            //    }
-            //}
+                    foreach (Event events in user.EventList.Values)
+                    {
+                        if (events.Date >= today)
+                        {
+                            eventDgv.Rows.Add(events.Name, events.Date.ToShortDateString(), events.Category);
+                        }
+                    }
+                }
+            }
         }
 
         private void toggleViewBtn_Click(object sender, EventArgs e)

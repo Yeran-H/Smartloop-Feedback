@@ -17,6 +17,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
         public double CourseMark { get; set; }
         public Tutorial Tutorial { get; set; }
         public SortedDictionary<int, StudentAssessment> StudentAssessmentList { get; set; }
+        public SortedDictionary<int, Event> EventList { get; private set; }
 
         public StudentCourse(int id, int courseId, int userId, int semesterId, bool isStudent)
             : base(id, courseId, userId, semesterId, isStudent)
@@ -24,6 +25,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             LoadStudentCourseFromDatabase();
 
             StudentAssessmentList = new SortedDictionary<int, StudentAssessment>();
+            EventList = new SortedDictionary<int, Event>();
             LoadAssessmentFromDatabase();
         }
 
@@ -36,6 +38,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             AddStudentCourseToDatabase();
 
             StudentAssessmentList = new SortedDictionary<int, StudentAssessment>();
+            EventList = new SortedDictionary<int, Event>();
             AddAssessmentToDatabase();
         }
 
@@ -223,6 +226,42 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             double requiredAdditionalMarks = requiredTotalMarks - totalWeightedMarks;
 
             return (requiredAdditionalMarks / remainingWeight) * 100;
+        }
+
+        // Fetch events from the database and initialize the event list
+        public void LoadEventsFromDatabase()
+        {
+            EventList.Clear();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, startTime, endTime, category, color FROM event WHERE courseId = @courseId ORDER BY date", conn);
+                cmd.Parameters.AddWithValue("@courseId", Id);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        DateTime date = reader.GetDateTime(2);
+                        TimeSpan startTime = reader.GetTimeSpan(3);
+                        TimeSpan endTime = reader.GetTimeSpan(4);
+                        string category = reader.GetString(5);
+                        int color = reader.GetInt32(6);
+                        EventList.Add(id, new Event(id, name, date, startTime, endTime, UserId, Id, category, color));
+                    }
+                }
+            }
+        }
+
+        // Update an event in the database
+        public void UpdateEvent(Event selectedEvent)
+        {
+            if (EventList.ContainsKey(selectedEvent.Id))
+            {
+                EventList[selectedEvent.Id].UpdateEventInDatabase(selectedEvent);
+            }
         }
     }
 }

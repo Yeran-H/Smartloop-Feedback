@@ -25,9 +25,9 @@ namespace Smartloop_Feedback.Forms
         // Event handler for form load
         private void CourseForm_Load(object sender, EventArgs e)
         {
-            //course.LoadEventsFromDatabase(); // Load events from the database
+            course.LoadEventsFromDatabase(); // Load events from the database
             PopulateAssessmentView(); // Populate the assessment DataGridView
-            //PopulateEventView(); // Populate the event DataGridView
+            PopulateEventView(); // Populate the event DataGridView
 
             // Display calculated marks in the text boxes
             currentTb.Text = course.CalculateCurrentMark().ToString("F2") + "%";
@@ -112,39 +112,39 @@ namespace Smartloop_Feedback.Forms
         // Populate the event DataGridView
         private void PopulateEventView()
         {
-            //if (course.EventList != null)
-            //{
-            //    eventDgv.Rows.Clear(); // Clear existing rows
-            //    eventDgv.Columns.Clear(); // Clear existing columns
+            if (course.EventList != null)
+            {
+                eventDgv.Rows.Clear(); // Clear existing rows
+                eventDgv.Columns.Clear(); // Clear existing columns
 
-            //    // Add columns to the DataGridView
-            //    DataGridViewButtonColumn nameColumn = new DataGridViewButtonColumn
-            //    {
-            //        Name = "Name",
-            //        HeaderText = "Name",
-            //        UseColumnTextForButtonValue = false,
-            //        CellTemplate = new StyledButtonCell()
-            //    };
-            //    eventDgv.Columns.Add(nameColumn);
+                // Add columns to the DataGridView
+                DataGridViewButtonColumn nameColumn = new DataGridViewButtonColumn
+                {
+                    Name = "Name",
+                    HeaderText = "Name",
+                    UseColumnTextForButtonValue = false,
+                    CellTemplate = new StyledButtonCell()
+                };
+                eventDgv.Columns.Add(nameColumn);
 
-            //    eventDgv.Columns.Add("Date", "Date");
-            //    eventDgv.Columns.Add("Time", "Time");
+                eventDgv.Columns.Add("Date", "Date");
+                eventDgv.Columns.Add("Time", "Time");
 
-            //    DateTime today = DateTime.Today;
+                DateTime today = DateTime.Today;
 
-            //    // Add rows to the DataGridView
-            //    foreach (Event events in course.EventList.Values)
-            //    {
-            //        if (events.Date >= today)
-            //        {
-            //            int rowIndex = eventDgv.Rows.Add(events.Name, events.Date, events.StartTime);
-            //            DataGridViewRow row = eventDgv.Rows[rowIndex];
-            //            row.Tag = events; // Tag the row with the event object
-            //        }
-            //    }
+                // Add rows to the DataGridView
+                foreach (Event events in course.EventList.Values)
+                {
+                    if (events.Date >= today)
+                    {
+                        int rowIndex = eventDgv.Rows.Add(events.Name, events.Date, events.StartTime);
+                        DataGridViewRow row = eventDgv.Rows[rowIndex];
+                        row.Tag = events; // Tag the row with the event object
+                    }
+                }
 
-            //    DataGridColor(eventDgv); // Apply color formatting to the DataGridView
-            //}
+                DataGridColor(eventDgv); // Apply color formatting to the DataGridView
+            }
         }
 
         // Apply custom color formatting to a DataGridView
@@ -203,39 +203,39 @@ namespace Smartloop_Feedback.Forms
         // Event handler for Event button click
         private void eventBtn_Click(object sender, EventArgs e)
         {
-            //List<string> courseName = new List<string> { course.Title };
+            List<string> courseName = new List<string> { course.Name };
 
-            //// Open AddEventForm to add a new event
-            //using (AddEventForm addEventForm = new AddEventForm(courseName, null))
-            //{
-            //    if (addEventForm.ShowDialog() == DialogResult.OK)
-            //    {
-            //        // Create and add new event to the course
-            //        Event newEvent = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, course.Title, addEventForm.newEvent.Color, course.StudentId, course.Id);
-            //        course.EventList.Add(newEvent.Id, newEvent);
-            //        PopulateEventView(); // Refresh event DataGridView
-            //    }
-            //}
+            // Open AddEventForm to add a new event
+            using (AddEventForm addEventForm = new AddEventForm(courseName, null))
+            {
+                if (addEventForm.ShowDialog() == DialogResult.OK)
+                {
+                    // Create and add new event to the course
+                    Event newEvent = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, course.Name, addEventForm.newEvent.Color, course.UserId, course.Id);
+                    course.EventList.Add(newEvent.Id, newEvent);
+                    PopulateEventView(); // Refresh event DataGridView
+                }
+            }
         }
 
         // Event handler for event DataGridView cell click
         private void eventDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            //if (e.RowIndex >= 0)
-            //{
-            //    DataGridViewRow row = this.eventDgv.Rows[e.RowIndex];
-            //    List<string> courseName = new List<string> { course.Title };
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.eventDgv.Rows[e.RowIndex];
+                List<string> courseName = new List<string> { course.Name };
 
-            //    // Open AddEventForm to edit the event
-            //    using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)row.Tag))
-            //    {
-            //        if (editEventForm.ShowDialog() == DialogResult.OK)
-            //        {
-            //            course.UpdateEvent(editEventForm.newEvent); // Update the event in the course
-            //            PopulateEventView(); // Refresh event DataGridView
-            //        }
-            //    }
-            //}
+                // Open AddEventForm to edit the event
+                using (AddEventForm editEventForm = new AddEventForm(courseName, (Event)row.Tag))
+                {
+                    if (editEventForm.ShowDialog() == DialogResult.OK)
+                    {
+                        course.UpdateEvent(editEventForm.newEvent); // Update the event in the course
+                        PopulateEventView(); // Refresh event DataGridView
+                    }
+                }
+            }
         }
     }
 }

@@ -313,13 +313,13 @@
     <Compile Include="Objects\Updated\Main Object\Course.cs" />
     <Compile Include="Objects\Updated\User Object\Student\FeedbackResult.cs" />
     <Compile Include="Objects\StudentCourseDEMO.cs" />
-    <Compile Include="Objects\CourseResult.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\StudentCourseResult.cs" />
     <Compile Include="Objects\StudentCriteria.cs" />
     <Compile Include="Objects\DataGridView.cs" />
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Objects\Event.cs" />
+    <Compile Include="Objects\Updated\User Object\Student\Event.cs" />
     <Compile Include="Objects\StudentRating.cs" />
     <Compile Include="Objects\Updated\Main Object\Criteria.cs" />
     <Compile Include="Objects\Updated\Main Object\Rating.cs" />
