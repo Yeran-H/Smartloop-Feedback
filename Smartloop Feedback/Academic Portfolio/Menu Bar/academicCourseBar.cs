@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -10,14 +11,10 @@ namespace Smartloop_Feedback
     public partial class AcademicCourseBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private StudentSemester semester; // Reference to the current semester
-
-        private int buttonCount = 0; // Counter for the number of buttons
-        private Button[] buttons = new Button[5]; // Array to hold the course buttons
-        private Button[] allButtons;
+        private SemesterAssociation semester; // Reference to the current semester
 
         // Constructor for academicCourseBar
-        public AcademicCourseBar(MainForm form, StudentSemester semester)
+        public AcademicCourseBar(MainForm form, SemesterAssociation semester)
         {
             InitializeComponent(); // Initialize form components
 
@@ -33,26 +30,35 @@ namespace Smartloop_Feedback
         // Initialize the course bar with course buttons based on the number of courses
         private void InitializeBar()
         {
-            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
+            Image buttonImage = Properties.Resources.School;
+            int buttonCount = 0;
 
-            buttonCount = 0;
-            foreach (StudentCourse course in semester.CourseList.Values)
+            foreach (int code in semester.CourseList.Keys)
             {
-                Button btn = allButtons[buttonCount]; // Get the button for the current course
-                btn.Visible = true; // Make the button visible
-                btn.Text = course.Code.ToString(); // Set the button text to the course code
-                buttons[buttonCount] = btn; // Store the button in the array
-                btn.Tag = course.Id;
-
+                Button btn = new Button
+                {
+                    Text = code.ToString(),
+                    Dock = DockStyle.Top,
+                    Height = 42,
+                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Aptos", 11F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(193, 193, 193),
+                    FlatAppearance = { BorderSize = 0 },
+                    Image = buttonImage,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+                btn.Click += new EventHandler(CourseBtn_Click);
+                Controls.Add(btn);
                 buttonCount++;
             }
 
-            if (buttonCount == 5)
-            {
-                addBtn.Visible = false; // Hide the add button if the maximum number of buttons is reached
-            }
+            addBtn.Dock = DockStyle.Top;
+            Controls.Add(addBtn);
+            backBtn.Dock = DockStyle.Top;
+            Controls.Add(backBtn);
 
-            UpdatePanel(); // Update the panel to reflect changes
+            int totalHeight = backBtn.Height + addBtn.Height + 42 * buttonCount;
+            this.ClientSize = new Size(170, totalHeight);
         }
 
         // Event handler for the back button click
@@ -64,61 +70,25 @@ namespace Smartloop_Feedback
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            if (semester == null)
+            using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString())) 
             {
-                MessageBox.Show("Semester object is not initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
+                if (addCourseForm.ShowDialog() == DialogResult.OK) 
+                {
+                    StudentCourse course = addCourseForm.course;
+                    if (course != null)
+                    {
+                        StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
+                        semester.CourseList.Add(temp.Id, temp);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+
+                    InitializeBar();
+                }
             }
-
-            if (semester.CourseList == null)
-            {
-                semester.CourseList = new SortedDictionary<int,StudentCourse>();
-            }
-
-            //using (var addCourseForm = new AddCourseForm(mainForm.position[0].ToString()))
-            //{
-            //    if (addCourseForm.ShowDialog() == DialogResult.OK)
-            //    {
-            //        if (buttonCount < 5)
-            //        {
-            //            StudentCourse course = addCourseForm.course;
-            //            if (course != null)
-            //            {
-            //                StudentCourse temp = new StudentCourse(course.Code, course.Title, course.CreditPoint, course.Description, false, course.CanvasLink, semester.Id, semester.StudentId);
-            //                semester.CourseList.Add(temp.Id, temp);
-            //            }
-            //            else
-            //            {
-            //                MessageBox.Show("Course is not properly initialized.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //                return;
-            //            }
-
-            //            InitializeBar(); // Update the panel to reflect changes
-            //        }
-            //    }
-            //}
-        }
-
-        // Update the panel by re-adding controls in the correct order
-        private void UpdatePanel()
-        {
-            Controls.Clear(); // Clear all controls
-
-            // Add the year buttons in reverse order to dock them at the top
-            for (int i = buttonCount - 1; i >= 0; i--)
-            {
-                Controls.Add(buttons[i]);
-                buttons[i].Dock = DockStyle.Top;
-            }
-
-            // Add the add button if there are less than 5 buttons
-            if (buttonCount < 5)
-            {
-                Controls.Add(addBtn);
-                addBtn.Dock = DockStyle.Top;
-            }
-            Controls.Add(backBtn); // Add the back button
-            backBtn.Dock = DockStyle.Top;
         }
 
         // Common event handler for all course button clicks

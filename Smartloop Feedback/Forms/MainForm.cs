@@ -195,6 +195,13 @@ namespace Smartloop_Feedback
                     this.menuDropPl.Controls.Add(semester);
                     semester.Show();
                     break;
+                case 3:
+                    AcademicCourseBar subject = new AcademicCourseBar(this, user.YearList[(int)position[0]].SemesterList[(string)position[1]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    subject.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(subject);
+                    subject.Show();
+                    break;
             }
 
         }
