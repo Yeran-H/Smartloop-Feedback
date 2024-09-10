@@ -157,7 +157,7 @@ GO
 CREATE TABLE studentAssessment (
     id INT IDENTITY(1,1) PRIMARY KEY,
     assessmentId INT,
-    status BIT,
+    status INT,
     studentMark DECIMAL (18,2),
     isFinalised BIT,
     courseId INT,

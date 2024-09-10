@@ -102,7 +102,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                         int studentAssessmentId = reader.GetInt32(0);
                         int assessmentId = reader.GetInt32(1);
                         int status = reader.GetInt32(2);
-                        double mark = reader.GetDouble(3);
+                        double mark = (double)reader.GetDecimal(3);
                         bool isFinalised = reader.GetBoolean(4);
 
                         // Add the assessment to the assessment list

@@ -203,11 +203,11 @@
     <Compile Include="Academic Portfolio\AI\PdfReadeerForm.Designer.cs">
       <DependentUpon>PdfReadeerForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academic Portfolio\AssessmentForm.cs">
+    <Compile Include="Academic Portfolio\StudentAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Academic Portfolio\AssessmentForm.Designer.cs">
-      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    <Compile Include="Academic Portfolio\StudentAssessmentForm.Designer.cs">
+      <DependentUpon>StudentAssessmentForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Coordinator\CoordinatorCourseForm.cs">
       <SubType>Form</SubType>
@@ -411,8 +411,8 @@
     <EmbeddedResource Include="Academic Portfolio\AI\PdfReadeerForm.resx">
       <DependentUpon>PdfReadeerForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Academic Portfolio\assessmentForm.resx">
-      <DependentUpon>AssessmentForm.cs</DependentUpon>
+    <EmbeddedResource Include="Academic Portfolio\StudentAssessmentForm.resx">
+      <DependentUpon>StudentAssessmentForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Coordinator\CoordinatorCourseForm.resx">
       <DependentUpon>CoordinatorCourseForm.cs</DependentUpon>

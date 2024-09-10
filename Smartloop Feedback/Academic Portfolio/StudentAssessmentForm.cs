@@ -15,12 +15,12 @@ using System.Windows.Forms;
 
 namespace Smartloop_Feedback
 {
-    public partial class AssessmentForm : Form
+    public partial class StudentAssessmentForm : Form
     {
         public OLDStudentAssessment assessment;
         public MainForm mainForm;
 
-        public AssessmentForm(OLDStudentAssessment assessment, MainForm mainForm)
+        public StudentAssessmentForm(OLDStudentAssessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;

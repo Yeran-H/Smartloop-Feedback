@@ -1,6 +1,6 @@
 ﻿namespace Smartloop_Feedback
 {
-    partial class AssessmentForm
+    partial class StudentAssessmentForm
     {
         /// <summary>
         /// Required designer variable.
@@ -51,6 +51,7 @@
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.downloadBtn = new System.Windows.Forms.Button();
             this.panelDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
@@ -184,7 +185,7 @@
             this.canvasBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canvasBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.canvasBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.canvasBtn.Location = new System.Drawing.Point(340, 66);
+            this.canvasBtn.Location = new System.Drawing.Point(283, 66);
             this.canvasBtn.Name = "canvasBtn";
             this.canvasBtn.Size = new System.Drawing.Size(141, 52);
             this.canvasBtn.TabIndex = 35;
@@ -199,7 +200,7 @@
             this.rubricBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rubricBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.rubricBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.rubricBtn.Location = new System.Drawing.Point(487, 66);
+            this.rubricBtn.Location = new System.Drawing.Point(430, 66);
             this.rubricBtn.Name = "rubricBtn";
             this.rubricBtn.Size = new System.Drawing.Size(141, 52);
             this.rubricBtn.TabIndex = 36;
@@ -237,6 +238,7 @@
             // 
             // panelDetails
             // 
+            this.panelDetails.Controls.Add(this.downloadBtn);
             this.panelDetails.Controls.Add(this.feedbackRb);
             this.panelDetails.Controls.Add(this.attemptDgv);
             this.panelDetails.Controls.Add(this.finaliseCb);
@@ -344,7 +346,21 @@
             this.criteriaDgv.TabIndex = 0;
             this.toolTip1.SetToolTip(this.criteriaDgv, "Rubric of Assessment");
             // 
-            // AssessmentForm
+            // downloadBtn
+            // 
+            this.downloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.downloadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.downloadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.downloadBtn.Location = new System.Drawing.Point(576, 66);
+            this.downloadBtn.Name = "downloadBtn";
+            this.downloadBtn.Size = new System.Drawing.Size(141, 52);
+            this.downloadBtn.TabIndex = 44;
+            this.downloadBtn.Text = "Download PDF";
+            this.downloadBtn.UseVisualStyleBackColor = false;
+            // 
+            // StudentAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -353,7 +369,7 @@
             this.Controls.Add(this.panelDetails);
             this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "AssessmentForm";
+            this.Name = "StudentAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "AssessmentForm";
             this.Load += new System.EventHandler(this.AssessmentForm_Load);
@@ -390,5 +406,6 @@
         private System.Windows.Forms.DataGridView attemptDgv;
         private System.Windows.Forms.ToolTip toolTip1;
         private System.Windows.Forms.RichTextBox feedbackRb;
+        private System.Windows.Forms.Button downloadBtn;
     }
 }
