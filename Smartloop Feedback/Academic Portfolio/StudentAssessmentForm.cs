@@ -1,11 +1,14 @@
 ﻿using Smartloop_Feedback.Academic_Portfolio.Add_Form;
 using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -17,10 +20,10 @@ namespace Smartloop_Feedback
 {
     public partial class StudentAssessmentForm : Form
     {
-        public OLDStudentAssessment assessment;
+        public StudentAssessment assessment;
         public MainForm mainForm;
 
-        public StudentAssessmentForm(OLDStudentAssessment assessment, MainForm mainForm)
+        public StudentAssessmentForm(StudentAssessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
@@ -29,11 +32,11 @@ namespace Smartloop_Feedback
 
         private void AssessmentForm_Load(object sender, EventArgs e)
         {
-            markTb.Text = assessment.FinalMark.ToString() + "/" + assessment.Mark.ToString();
+            markTb.Text = assessment.StudentMark.ToString() + "/" + assessment.Mark.ToString();
             dateP.Value = assessment.Date;
             descriptionRb.Text = assessment.Description;
             finaliseCb.Checked = assessment.IsFinalised;
-            feedbackRb.Text = assessment.FinalFeedback;
+            feedbackRb.Text = assessment.Feedback;
 
             PopulateCheckListBox();
 
@@ -42,32 +45,32 @@ namespace Smartloop_Feedback
             panelCriteria.Visible = false;
 
             // Configure the DataGridView for criteria
-            if(assessment.CriteriaList.Count != 0)
+            if (assessment.CriteriaList.Count != 0)
             {
                 LoadCriteriaData();
             }
-            if(assessment.FeedbackList.Count != 0)
-            {
-                LoadAttemptData();
-            }
+            //if(assessment.FeedbackList.Count != 0)
+            //{
+            //    LoadAttemptData();
+            //}
             isFinalised();
         }
 
         private void PopulateCheckListBox()
         {
-            checklistCb.Items.Clear();
+            //checklistCb.Items.Clear();
 
-            foreach(var item in assessment.CheckList)
-            {
-                // Add item to the CheckedListBox
-                int index = checklistCb.Items.Add(item.Name);
+            //foreach(var item in assessment.CheckList)
+            //{
+            //    // Add item to the CheckedListBox
+            //    int index = checklistCb.Items.Add(item.Name);
 
-                // Set the checked state based on isChecked property
-                checklistCb.SetItemChecked(index, item.IsChecked);
-            }
+            //    // Set the checked state based on isChecked property
+            //    checklistCb.SetItemChecked(index, item.IsChecked);
+            //}
 
-            assessment.CalculateStatus();
-            progressBar.Value = assessment.Status;
+            //assessment.CalculateStatus();
+            //progressBar.Value = assessment.Status;
         }
 
         private void LoadCriteriaData()
@@ -80,7 +83,7 @@ namespace Smartloop_Feedback
             // Allow the user to add rows
             criteriaDgv.AllowUserToAddRows = true;
 
-            foreach(StudentRating rating in assessment.CriteriaList[0].RatingList)
+            foreach(Rating rating in assessment.CriteriaList[0].RatingList)
             {
                 criteriaDgv.Columns.Add(rating.Grade, rating.Grade);
             }
@@ -117,12 +120,12 @@ namespace Smartloop_Feedback
             attemptDgv.Columns.Add(attemptColumn);
             attemptDgv.Columns.Add("File", "File");
 
-            foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
-            {
-                int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
-                DataGridViewRow row = attemptDgv.Rows[rowIndex];
-                row.Tag = feedbackResult.Attempt; 
-            }
+            //foreach (FeedbackResult feedbackResult in assessment.FeedbackList.Values)
+            //{
+            //    int rowIndex = attemptDgv.Rows.Add(feedbackResult.Attempt.ToString(), feedbackResult.FileName);
+            //    DataGridViewRow row = attemptDgv.Rows[rowIndex];
+            //    row.Tag = feedbackResult.Attempt; 
+            //}
 
             DataGridColor(attemptDgv);
         }
@@ -205,33 +208,33 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            assessment.UpdateAssessmentToDatabase(descriptionRb.Text, dateP.Value, finaliseCb.Checked);
-            mainForm.MainPannel(0);
+           // assessment.UpdateAssessmentToDatabase(finaliseCb.Checked);
+            mainForm.MainPannel(1);
         }
 
         private void itemBtn_Click(object sender, EventArgs e)
         {
-            using (var addCheckList = new AddCheckListForm()) // Open the add year form
-            {
-                if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
-                {
-                    string name = addCheckList.name; // Get the new year's name
+            //using (var addCheckList = new AddCheckListForm()) // Open the add year form
+            //{
+            //    if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+            //    {
+            //        string name = addCheckList.name; // Get the new year's name
 
-                    assessment.CheckList.Add(new CheckList(name, assessment.StudentId, false, assessment.Id));
+            //        assessment.CheckList.Add(new CheckList(name, assessment.StudentId, false, assessment.Id));
                     
-                    PopulateCheckListBox();
-                }
-            }
+            //        PopulateCheckListBox();
+            //    }
+            //}
         }
 
         private void checklistCb_ItemCheck(object sender, ItemCheckEventArgs e)
         {
-            int index = e.Index;
-            bool isChecked = e.NewValue == CheckState.Checked;
-            assessment.CheckList[index].UpdateChecked(isChecked);
+            //int index = e.Index;
+            //bool isChecked = e.NewValue == CheckState.Checked;
+            //assessment.CheckList[index].UpdateChecked(isChecked);
 
-            assessment.CalculateStatus();
-            progressBar.Value = assessment.Status;
+            //assessment.CalculateStatus();
+            //progressBar.Value = assessment.Status;
         }
 
         private void markTb_Leave(object sender, EventArgs e)
@@ -249,7 +252,7 @@ namespace Smartloop_Feedback
                     return;
                 }
 
-                assessment.FinalMark = firstNumber;
+                assessment.StudentMark = firstNumber;
                 assessment.Mark = secondNumber;
             }
             else
@@ -293,6 +296,20 @@ namespace Smartloop_Feedback
                 DataGridViewRow row = this.attemptDgv.Rows[e.RowIndex];
                 mainForm.position[4] = (int)row.Tag;
                 mainForm.MainPannel(10); // Navigate to the main panel
+            }
+        }
+
+        private void downloadBtn_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.Filter = "PDF files (*.pdf)|*.pdf";
+            saveFileDialog.Title = "Save PDF File";
+            saveFileDialog.FileName = assessment.FileName;
+
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                File.WriteAllBytes(saveFileDialog.FileName, assessment.FileData);
+                MessageBox.Show("File saved successfully.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

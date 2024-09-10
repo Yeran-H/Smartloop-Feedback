@@ -69,6 +69,9 @@ namespace Smartloop_Feedback.Objects
         {
             AssessmentId = id;
             LoadAssessmentsFromDatabase();
+
+            CriteriaList = new List<Criteria>();
+            LoadCriteriaFromDatabase();
         }
 
         // Add the assessment to the database and get the generated ID

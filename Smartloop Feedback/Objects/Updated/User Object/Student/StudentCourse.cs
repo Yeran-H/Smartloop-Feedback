@@ -91,7 +91,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, assessmentId, status, studentMark, isFinalised FROM studentAssessment WHERE courseId = @courseId AND userId = @userId", conn); // SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, assessmentId, status, studentMark, isFinalised, feedback FROM studentAssessment WHERE courseId = @courseId AND userId = @userId", conn); // SQL query to fetch assessments
                 cmd.Parameters.AddWithValue("@courseId", Id); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
 
@@ -104,9 +104,10 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                         int status = reader.GetInt32(2);
                         double mark = (double)reader.GetDecimal(3);
                         bool isFinalised = reader.GetBoolean(4);
+                        string feedback = reader.GetString(5);
 
                         // Add the assessment to the assessment list
-                        StudentAssessmentList.Add(studentAssessmentId, new StudentAssessment(studentAssessmentId, assessmentId, status, mark, isFinalised, Id, UserId));
+                        StudentAssessmentList.Add(studentAssessmentId, new StudentAssessment(studentAssessmentId, assessmentId, status, mark, isFinalised, feedback, Id, UserId));
                     }
                 }
             }

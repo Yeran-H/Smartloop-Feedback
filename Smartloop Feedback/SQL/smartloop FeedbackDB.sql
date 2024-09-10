@@ -160,6 +160,7 @@ CREATE TABLE studentAssessment (
     status INT,
     studentMark DECIMAL (18,2),
     isFinalised BIT,
+    feedback VARCHAR(MAX),
     courseId INT,
     userId INT,
 	FOREIGN KEY (assessmentId) REFERENCES assessment(id),

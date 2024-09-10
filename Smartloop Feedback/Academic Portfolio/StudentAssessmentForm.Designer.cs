@@ -44,6 +44,7 @@
             this.attemptBtn = new System.Windows.Forms.Button();
             this.finaliseCb = new System.Windows.Forms.CheckBox();
             this.panelDetails = new System.Windows.Forms.Panel();
+            this.downloadBtn = new System.Windows.Forms.Button();
             this.feedbackRb = new System.Windows.Forms.RichTextBox();
             this.attemptDgv = new System.Windows.Forms.DataGridView();
             this.dateP = new Smartloop_Feedback.Objects.DatePicker();
@@ -51,7 +52,6 @@
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.downloadBtn = new System.Windows.Forms.Button();
             this.panelDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
@@ -261,6 +261,21 @@
             this.panelDetails.Size = new System.Drawing.Size(728, 432);
             this.panelDetails.TabIndex = 42;
             // 
+            // downloadBtn
+            // 
+            this.downloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.downloadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.downloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.downloadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.downloadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.downloadBtn.Location = new System.Drawing.Point(576, 66);
+            this.downloadBtn.Name = "downloadBtn";
+            this.downloadBtn.Size = new System.Drawing.Size(141, 52);
+            this.downloadBtn.TabIndex = 44;
+            this.downloadBtn.Text = "Download PDF";
+            this.downloadBtn.UseVisualStyleBackColor = false;
+            this.downloadBtn.Click += new System.EventHandler(this.downloadBtn_Click);
+            // 
             // feedbackRb
             // 
             this.feedbackRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
@@ -345,20 +360,6 @@
             this.criteriaDgv.Size = new System.Drawing.Size(696, 337);
             this.criteriaDgv.TabIndex = 0;
             this.toolTip1.SetToolTip(this.criteriaDgv, "Rubric of Assessment");
-            // 
-            // downloadBtn
-            // 
-            this.downloadBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.downloadBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.downloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.downloadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.downloadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.downloadBtn.Location = new System.Drawing.Point(576, 66);
-            this.downloadBtn.Name = "downloadBtn";
-            this.downloadBtn.Size = new System.Drawing.Size(141, 52);
-            this.downloadBtn.TabIndex = 44;
-            this.downloadBtn.Text = "Download PDF";
-            this.downloadBtn.UseVisualStyleBackColor = false;
             // 
             // StudentAssessmentForm
             // 

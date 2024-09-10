@@ -296,13 +296,13 @@ namespace Smartloop_Feedback
                     }
                     break;
                 case 2:
-                    var list1 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]];
+                    var list1 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
 
-                    if (list1 != null && list1 is StudentAssessment studentAssessment)
+                    if (list1 != null && list1 is StudentCourse studentAssessment)
                     {
-                        titleLb.Text = list1.Name;
+                        titleLb.Text = studentAssessment.StudentAssessmentList[(int)position[3]].Name;
                         this.formLoaderPl.Controls.Clear();
-                        StudentAssessmentForm assessmentForm = new StudentAssessmentForm(list1, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        StudentAssessmentForm assessmentForm = new StudentAssessmentForm(studentAssessment.StudentAssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                         assessmentForm.FormBorderStyle = FormBorderStyle.None;
                         this.formLoaderPl.Controls.Add(assessmentForm);
                         assessmentForm.Show();
