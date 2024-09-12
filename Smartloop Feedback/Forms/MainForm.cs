@@ -133,7 +133,7 @@ namespace Smartloop_Feedback
             setttingBtn.BackColor = Color.FromArgb(16, 34, 61);
 
             titleLb.Text = "Settings";
-            MainPannel(4);
+            MainPannel(5);
             MenuPanel(4);
         }
 
@@ -203,6 +203,20 @@ namespace Smartloop_Feedback
                     this.menuDropPl.Controls.Add(subject);
                     subject.Show();
                     break;
+                case 4:
+                    SettingYearBar yearBar = new SettingYearBar(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    yearBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(yearBar);
+                    yearBar.Show();
+                    break;
+                case 5:
+                    SettingSemesterBar semesterBar = new SettingSemesterBar(user.YearList[(int)position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    semesterBar.FormBorderStyle = FormBorderStyle.None;
+                    menuDropPl.Visible = true;
+                    this.menuDropPl.Controls.Add(semesterBar);
+                    semesterBar.Show();
+                    break;
             }
 
         }
@@ -212,38 +226,6 @@ namespace Smartloop_Feedback
         //    menuDropPl.Controls.Clear();
         //    switch (num)
         //    {
-        //        case 0:
-        //            AcademicYearBar year = new AcademicYearBar(this, student) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //year.FormBorderStyle = FormBorderStyle.None;
-        //            menuDropPl.Visible = true;
-        //            this.menuDropPl.Controls.Add(year);
-        //            year.Show();
-        //            break;
-        //        case 1:
-        //            menuDropPl.Visible = false;
-        //            dashboardBtn_Click(this, EventArgs.Empty);
-        //            break;
-        //        case 2:
-        //            AcademicSemesterBar semester = new AcademicSemesterBar(this, student.YearList[(int)position[0]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            semester.FormBorderStyle = FormBorderStyle.None;
-        //            menuDropPl.Visible = true;
-        //            this.menuDropPl.Controls.Add(semester);
-        //            semester.Show();
-        //            break;
-        //        case 3:
-        //            AcademicCourseBar subject = new AcademicCourseBar(this, student.YearList[(int)position[0]].SemesterList[(string)position[1]]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            subject.FormBorderStyle = FormBorderStyle.None;
-        //            menuDropPl.Visible = true;
-        //            this.menuDropPl.Controls.Add(subject);
-        //            subject.Show();
-        //            break;
-        //        case 4:
-        //            SettingYearBar yearBar = new SettingYearBar(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            yearBar.FormBorderStyle = FormBorderStyle.None;
-        //            menuDropPl.Visible = true;
-        //            this.menuDropPl.Controls.Add(yearBar);
-        //            yearBar.Show();
-        //            break;
         //        case 5:
         //            SettingSemesterBar semesterBar = new SettingSemesterBar(student.YearList[(int)position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
         //            semesterBar.FormBorderStyle = FormBorderStyle.None;
@@ -323,6 +305,31 @@ namespace Smartloop_Feedback
                         aIForm.Show();
                     }
                     break;
+                case 5:
+                    this.formLoaderPl.Controls.Clear();
+                    EditAccountForm accountForm = new EditAccountForm(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    accountForm.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(accountForm);
+                    accountForm.Show();
+                    break;
+                case 6:
+                    nameLb.Text = user.Name;
+                    studentIdLb.Text = user.Id.ToString();
+                    if (user.ProfileImage != null)
+                    {
+                        using (MemoryStream ms = new MemoryStream(user.ProfileImage))
+                        {
+                            profilePb.Image = Image.FromStream(ms);
+                        }
+                    }
+                    break;
+                case 7:
+                    this.formLoaderPl.Controls.Clear();
+                    EditYearForms yearForms = new EditYearForms(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    yearForms.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(yearForms);
+                    yearForms.Show();
+                    break;
             }
         }
 
@@ -330,62 +337,7 @@ namespace Smartloop_Feedback
         //{
         //    switch (num)
         //    {
-        //        case 0:
-        //            titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].Title;
-        //            this.formLoaderPl.Controls.Clear();
-        //            StudentCourseForm course = new StudentCourseForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            course.FormBorderStyle = FormBorderStyle.None;
-        //            this.formLoaderPl.Controls.Add(course);
-        //            course.Show();
-        //            break;
-        //        case 1:
-        //            //titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].Title;
-        //            //this.formLoaderPl.Controls.Clear();
-        //            //AddAssessmentForm addAssessmentForm = new AddAssessmentForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            //addAssessmentForm.FormBorderStyle = FormBorderStyle.None;
-        //            //this.formLoaderPl.Controls.Add(addAssessmentForm);
-        //            //addAssessmentForm.Show();
-        //            break;
-        //        case 2:
-        //            titleLb.Text = student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]].Name;
-        //            this.formLoaderPl.Controls.Clear();
-        //            AssessmentForm assessmentForm = new AssessmentForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            assessmentForm.FormBorderStyle = FormBorderStyle.None;
-        //            this.formLoaderPl.Controls.Add(assessmentForm);
-        //            assessmentForm.Show();
-        //            break;
-        //        case 3:
-        //            LoginForm login = new LoginForm();
-        //            login.Show();
-        //            this.Hide();
-        //            break;
-        //        case 4:
-        //            this.formLoaderPl.Controls.Clear();
-        //            EditAccountForm accountForm = new EditAccountForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            accountForm.FormBorderStyle = FormBorderStyle.None;
-        //            this.formLoaderPl.Controls.Add(accountForm);
-        //            accountForm.Show();
-        //            break;
-        //        case 5:
-        //            titleLb.Text = "Dashboard";
-        //            this.formLoaderPl.Controls.Clear();
-
-        //            DashboardForm dashboard = new DashboardForm(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            dashboard.FormBorderStyle = FormBorderStyle.None;
-        //            this.formLoaderPl.Controls.Add(dashboard);
-        //            dashboard.Show();
-        //            break;
-        //        case 6:
-        //            nameLb.Text = student.Name;
-        //            studentIdLb.Text = student.Id.ToString();
-        //            if (student.ProfileImage != null)
-        //            {
-        //                using (MemoryStream ms = new MemoryStream(student.ProfileImage))
-        //                {
-        //                    profilePb.Image = Image.FromStream(ms);
-        //                }
-        //            }
-        //            break;
+        //     
         //        case 7:
         //            this.formLoaderPl.Controls.Clear();
         //            EditYearForms yearForms = new EditYearForms(student, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
@@ -399,20 +351,6 @@ namespace Smartloop_Feedback
         //            courseForm.FormBorderStyle = FormBorderStyle.None;
         //            this.formLoaderPl.Controls.Add(courseForm);
         //            courseForm.Show();
-        //            break;
-        //        case 9:
-        //            //this.formLoaderPl.Controls.Clear();
-        //            //CoordinatorAssessmentForm assessmentForm1 = new CoordinatorAssessmentForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]], this, (int)position[3]) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            //assessmentForm1.FormBorderStyle = FormBorderStyle.None;
-        //            //this.formLoaderPl.Controls.Add(assessmentForm1);
-        //            //assessmentForm1.Show();
-        //            //break;
-        //        case 10:
-        //            this.formLoaderPl.Controls.Clear();
-        //            AIForm aIForm = new AIForm(student.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]].AssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-        //            aIForm.FormBorderStyle = FormBorderStyle.None;
-        //            this.formLoaderPl.Controls.Add(aIForm);
-        //            aIForm.Show();
         //            break;
         //    }
         //}

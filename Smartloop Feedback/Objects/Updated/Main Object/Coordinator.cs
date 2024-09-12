@@ -64,7 +64,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@yearName", semester.Year.Name);
-                    cmd.Parameters.AddWithValue("@semesterId", semester.Id);
+                    cmd.Parameters.AddWithValue("@semesterId", semester.SemesterId);
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
                     {

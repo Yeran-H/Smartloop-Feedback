@@ -19,7 +19,7 @@ namespace Smartloop_Feedback.Objects
         public string Name { get; set; } // Course name
         public int CreditPoint { get; set; } // Course credit points
         public string Description { get; set; } // Course description
-        public Year Year { get; set; }
+        public Updated.Year Year { get; set; }
         public Semester Semester { get; set; }
         public string CanvasLink { get; set; }
         public int TutorNum { get; set; }
@@ -37,7 +37,7 @@ namespace Smartloop_Feedback.Objects
             this.TutorNum = tutorNum;
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
-            Year = new Year(yearName);
+            Year = new Updated.Year(yearName);
             Semester = new Semester(semesterId);
             LoadAssessmentsFromDatabase();
             LoadTutorialFromDatabase();
@@ -53,7 +53,7 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             this.TutorNum = tutorNum;
             TutorialList = new Dictionary<int, Tutorial>();
-            Year = new Year(yearName);
+            Year = new Updated.Year(yearName);
             Semester = new Semester(semesterName, Year.Name);
             AddCourseToDatabase();
             AddTutorialFromDatabase(false);
@@ -86,7 +86,7 @@ namespace Smartloop_Feedback.Objects
                         Name = reader.GetString(1); // Get the course title
                         CreditPoint = reader.GetInt32(2); // Get the course credit points
                         Description = reader.GetString(3); // Get the course description
-                        Year = new Year(reader.GetInt32(4)); // Get the course year
+                        Year = new Updated.Year(reader.GetInt32(4)); // Get the course year
                         Semester = new Semester(reader.GetInt32(5));
                         CanvasLink = reader.GetString(6); // Get the course canvas link
                         TutorNum = reader.GetInt32(7);
@@ -110,7 +110,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@creditPoint", CreditPoint); // Set the creditPoint parameter
                     cmd.Parameters.AddWithValue("@description", Description); // Set the description parameter
                     cmd.Parameters.AddWithValue("@yearName", Year.Name);
-                    cmd.Parameters.AddWithValue("@semesterId", Semester.Id);
+                    cmd.Parameters.AddWithValue("@semesterId", Semester.SemesterId);
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
                     CourseId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
@@ -139,7 +139,7 @@ namespace Smartloop_Feedback.Objects
             Name = name;
             CreditPoint = creditPoint;
             Description = description;
-            Year = new Year(year);
+            Year = new Updated.Year(year);
             Semester = new Semester(semester, Year.Name);
             CanvasLink = canvasLink;
 
@@ -175,7 +175,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
                     cmd.Parameters.AddWithValue("@description", description);
                     cmd.Parameters.AddWithValue("@yearName", Year.Name);
-                    cmd.Parameters.AddWithValue("@semesterId", Semester.Id);
+                    cmd.Parameters.AddWithValue("@semesterId", Semester.SemesterId);
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
                     cmd.Parameters.AddWithValue("@tutorNum", TutorNum);
 

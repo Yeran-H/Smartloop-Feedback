@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace Smartloop_Feedback
 {
-    public class StudentYear
+    public class OLDYearAssociation
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
 
@@ -16,7 +16,7 @@ namespace Smartloop_Feedback
         public SortedDictionary<string, StudentSemester> SemesterList { get; set; } // List of semesters in the year
 
         // Constructor to initialize a Year object and fetch semesters from the database
-        public StudentYear(int name, int studentId, int id)
+        public OLDYearAssociation(int name, int studentId, int id)
         {
             Name = name;
             StudentId = studentId;
@@ -26,7 +26,7 @@ namespace Smartloop_Feedback
         }
 
         // Constructor to initialize a Year object and add it to the database
-        public StudentYear(int name, int studentId, List<string> semesterNames)
+        public OLDYearAssociation(int name, int studentId, List<string> semesterNames)
         {
             Name = name;
             StudentId = studentId;

@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
                 {
                     int yearName = addYearForm.yearName; // Get the new year's name
 
-                    user.YearList.Add(yearName, new YearAssociation(yearName, user.Id, user.IsStudent, addYearForm.semesterNames)); // Add the new year to the student's year list
+                    user.YearList.Add(yearName, new Objects.Updated.User_Object.YearAssociation(yearName, user.Id, user.IsStudent, addYearForm.semesterNames)); // Add the new year to the student's year list
                     InitializeBar(); //Refresh the Bar
                 }
             }

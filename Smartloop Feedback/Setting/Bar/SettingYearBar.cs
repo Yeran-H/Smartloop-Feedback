@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -8,56 +9,54 @@ namespace Smartloop_Feedback.Setting.Bar
     public partial class SettingYearBar : Form
     {
         public MainForm mainForm; // Reference to the main form
-        public OLDStudent student; // Reference to the student object
-
-        private Button[] buttons = new Button[5]; // Array to hold the year buttons
-        private Button[] allButtons; // Array to hold all predefined buttons
+        public User user; // Reference to the student object
 
         // Constructor for SettingYearBar, initializes the form with the student and main form references
-        public SettingYearBar(OLDStudent student, MainForm mainForm)
+        public SettingYearBar(User user, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            this.student = student;
+            this.user = user;
         }
 
         // Event handler for form load
         private void SettingYearBar_Load(object sender, EventArgs e)
         {
-            // Initialize the array with predefined buttons
-            allButtons = new Button[] { oneBtn, secondBtn, thirdBtn, fourthBtn, fifthBtn };
-
-            int buttonCount = 0; // Counter for the number of buttons
+            Image buttonImage = Properties.Resources.calendar;
+            int buttonCount = 0;
 
             // Create a button for each year in the student's year list
-            //foreach (StudentYear year in student.YearList.Values)
-            //{
-            //    Button btn = allButtons[buttonCount]; // Get the button from the predefined array
-            //    btn.Visible = true; // Make the button visible
-            //    btn.Text = year.Name.ToString(); // Set the button text to the year name
-            //    buttons[buttonCount] = btn; // Add the button to the buttons array
-            //    buttons[buttonCount].Click += YearButton_Click; // Add event handler for button click
-
-            //    buttonCount++;
-            //}
-
-            Controls.Clear(); // Clear existing controls
-
-            // Add buttons to the form in reverse order
-            for (int i = buttonCount - 1; i >= 0; i--)
+            foreach (int yearName in user.YearList.Keys)
             {
-                Controls.Add(buttons[i]);
-                buttons[i].Dock = DockStyle.Top; // Dock the button to the top
+                Button btn = new Button
+                {
+                    Text = yearName.ToString(),
+                    Dock = DockStyle.Top,
+                    Height = 42,
+                    FlatStyle = FlatStyle.Flat,
+                    Font = new Font("Aptos", 11F, FontStyle.Bold),
+                    ForeColor = Color.FromArgb(193, 193, 193),
+                    FlatAppearance = { BorderSize = 0 },
+                    Image = buttonImage,
+                    TextImageRelation = TextImageRelation.ImageBeforeText
+                };
+                btn.Click += new EventHandler(YearButton_Click);
+                Controls.Add(btn);
+                buttonCount++;
             }
-            Controls.Add(backBtn); // Add the back button to the form
-            backBtn.Dock = DockStyle.Top; // Dock the back button to the top
+
+            backBtn.Dock = DockStyle.Top;
+            Controls.Add(backBtn);
+
+            int totalHeight = backBtn.Height + 42 * buttonCount;
+            this.ClientSize = new Size(170, totalHeight);
         }
 
         // Event handler for back button click to navigate back to the previous panel
         private void backBtn_Click(object sender, EventArgs e)
         {
-            student.LoadEventsFromDatabase(); // Load events from the database
-            mainForm.MenuPanel(1); // Navigate to the menu panel
+            user.LoadEventsFromDatabase(); // Load events from the database
+            mainForm.MenuPanel(0); // Navigate to the menu panel
         }
 
         // Event handler for year button click to navigate to the year details panel

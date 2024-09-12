@@ -286,7 +286,7 @@ namespace Smartloop_Feedback
 
         private void attemptBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MainPannel(10);
+            mainForm.MainPannel(4);
         }
 
         private void attemptDgv_CellClick(object sender, DataGridViewCellEventArgs e)

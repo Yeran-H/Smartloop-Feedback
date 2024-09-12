@@ -50,5 +50,39 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                 }
             }
         }
+
+        // Update student details in the database
+        public void UpdateToDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE student
+                    SET 
+                        name = @name,
+                        email = @email,
+                        password = @password,
+                        degree = @degree,
+                        profileImage = @profileImage
+                    WHERE
+                        studentId = @studentId";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@studentId", Id);
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@email", Email);
+                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@degree", Degree);
+                    cmd.Parameters.AddWithValue("@profileImage", ProfileImage);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

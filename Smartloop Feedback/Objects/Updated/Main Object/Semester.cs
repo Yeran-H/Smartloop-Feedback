@@ -10,13 +10,13 @@ namespace Smartloop_Feedback.Objects.Updated
     public class Semester
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
-        public int Id { get; set; }
+        public int SemesterId { get; set; }
         public string Name { get; set; }
         public Year Year { get; set; }
 
         public Semester(int id, string name, int yearName)
         {
-            Id = id;
+            SemesterId = id;
             Name = name;
             Year = new Year(yearName);
         }
@@ -49,7 +49,7 @@ namespace Smartloop_Feedback.Objects.Updated
                     if (reader.Read()) // Check if a row is returned
                     {
                         // Semester exists, retrieve its details
-                        Id = reader.GetInt32(0);
+                        SemesterId = reader.GetInt32(0);
                     }
                     else
                     {
@@ -60,7 +60,7 @@ namespace Smartloop_Feedback.Objects.Updated
                         {
                             cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                             cmd.Parameters.AddWithValue("@yearName", Year.Name);
-                            Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
+                            SemesterId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                         }
                     }
                 }
@@ -82,7 +82,7 @@ namespace Smartloop_Feedback.Objects.Updated
                     if (reader.Read()) // Check if a row is returned
                     {
                         // Semester exists, retrieve its details
-                        Id = semesterId;
+                        SemesterId = semesterId;
                         Name = reader.GetString(0);
                         Year = new Year(reader.GetInt32(1));
 

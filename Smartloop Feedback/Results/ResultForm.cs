@@ -45,7 +45,7 @@ namespace Smartloop_Feedback.Results
 
         private void PopulateDgv()
         {
-            foreach (YearAssociation year in user.YearList.Values)
+            foreach (Objects.Updated.User_Object.YearAssociation year in user.YearList.Values)
             {
                 double wamYear = 0.0;
                 double gpaYear = 0.0;
@@ -193,7 +193,7 @@ namespace Smartloop_Feedback.Results
             int totalCreditPoints = 0;
 
             // Ensure that totalCreditPoint is the sum of all credit points
-            foreach (YearAssociation year in user.YearList.Values)
+            foreach (Objects.Updated.User_Object.YearAssociation year in user.YearList.Values)
             {
                 foreach (SemesterAssociation semester in year.SemesterList.Values)
                 {

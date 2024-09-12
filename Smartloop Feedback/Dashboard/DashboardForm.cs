@@ -61,7 +61,7 @@ namespace Smartloop_Feedback.Dashboard
             };
             courseDgv.Columns.Add(tagsColumn);
 
-            foreach (YearAssociation year in user.YearList.Values)
+            foreach (Objects.Updated.User_Object.YearAssociation year in user.YearList.Values)
             {
                 foreach (SemesterAssociation semester in year.SemesterList.Values)
                 {
@@ -70,7 +70,7 @@ namespace Smartloop_Feedback.Dashboard
                         if (!course.IsCompleted)
                         {
                             int rowIndex = courseDgv.Rows.Add(course.Code, course.Name, "", "");
-                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Year.Name, semester.Semester.Name, course.Code };
+                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Year.Name, semester.Semester.Name, course.Code, 0, 0 };
                         }
                     }
                 }

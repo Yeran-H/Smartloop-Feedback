@@ -340,7 +340,7 @@
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Objects\StudentSemester.cs" />
-    <Compile Include="Objects\StudentYear.cs" />
+    <Compile Include="Objects\OLDYearAssociation.cs" />
     <Compile Include="Objects\OLDStudent.cs" />
     <Compile Include="Results\ResultForm.cs">
       <SubType>Form</SubType>

@@ -186,7 +186,15 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT name, finalFeedback, isFinalised FROM assessment WHERE userId = @userId AND courseId = @courseId AND isFinalised = 1", conn); // SQL query to fetch criteria
+
+                // Updated SQL query with a JOIN to get the 'name' from the 'assessment' table
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT a.name, sa.feedback, sa.isFinalised " +
+                    "FROM studentAssessment sa " +
+                    "INNER JOIN assessment a ON sa.assessmentId = a.id " +
+                    "WHERE sa.userId = @userId AND sa.courseId = @courseId AND sa.isFinalised = 1",
+                    conn);
+
                 cmd.Parameters.AddWithValue("@courseId", CourseId);
                 cmd.Parameters.AddWithValue("@userId", UserId);
 
@@ -194,13 +202,14 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                 {
                     while (reader.Read()) // Read each row
                     {
-                        string name = reader.GetString(0);
-                        string finalFeedback = reader.IsDBNull(1) ? null : reader.GetString(1);
+                        string name = reader.GetString(0); // 'name' from 'assessment' table
+                        string finalFeedback = reader.IsDBNull(1) ? null : reader.GetString(1); // 'feedback' from 'studentAssessment' table
                         PastAssessment.Add(Tuple.Create(name, finalFeedback)); // Add the pair to the list
                     }
                 }
             }
         }
+
 
         public void UpdateAssessmentToDatabase(bool isFinalised)
         {
@@ -216,11 +225,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                 conn.Open();
 
                 string updateQuery = @"
-                    UPDATE assessment
+                    UPDATE studentAssessment
                     SET 
                         StudentMark = @studentMark,
                         isFinalised = @isFinalised,
-                        finalFeedback = @finalFeedback
+                        feedback = @feedback
                     WHERE
                         id = @id";
 
@@ -230,7 +239,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                     cmd.Parameters.AddWithValue("@id", Id);
                     cmd.Parameters.AddWithValue("@studentMark", StudentMark);
                     cmd.Parameters.AddWithValue("@isFinalised", isFinalised);
-                    cmd.Parameters.AddWithValue("@finalFeedback", Feedback ?? (object)DBNull.Value);
+                    cmd.Parameters.AddWithValue("@feedback", Feedback ?? (object)DBNull.Value);
 
                     // Execute the update command
                     cmd.ExecuteNonQuery();

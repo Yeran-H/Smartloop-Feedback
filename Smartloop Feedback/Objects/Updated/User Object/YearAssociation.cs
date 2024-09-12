@@ -11,39 +11,38 @@ using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 
 namespace Smartloop_Feedback.Objects.Updated.User_Object
 {
-    public class YearAssociation
+    public class YearAssociation : Year
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Database connection string
         public int Id { get; set; }
-        public Year Year { get; set; }
         public int UserId { get; set; }
         public bool IsStudent { get; set; }
         public SortedDictionary<string, SemesterAssociation> SemesterList { get; set; }
 
         public YearAssociation(int id, int yearName, int userId, bool isStudent)
+            : base(yearName)
         {
             this.Id = id;
             this.UserId = userId;
             this.IsStudent = isStudent;
-            Year = new Year(yearName);
 
             SemesterList = new SortedDictionary<string, SemesterAssociation>();
             LoadSemestersFromDatabase();
         }
 
         public YearAssociation(int yearName, int userId, bool isStudent, List<string> semesterNames)
+            : base(yearName)
         {
             this.UserId = userId;
             this.IsStudent = isStudent;
-            Year = new Year(yearName);
-            AddYearToDatabase();
+            AddYearAssociationToDatabase();
 
             SemesterList = new SortedDictionary<string, SemesterAssociation>();
-            AddSemestersToDatabase(semesterNames);
+            AddSemestersAssociationToDatabase(semesterNames);
         }
 
         // Add the year to the database and get the generated ID
-        private void AddYearToDatabase()
+        private void AddYearAssociationToDatabase()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
@@ -52,7 +51,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
-                    cmd.Parameters.AddWithValue("@name", Year.Name); // Set the name parameter
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
                     cmd.Parameters.AddWithValue("@isStudent", IsStudent);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
@@ -60,12 +59,31 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             }
         }
 
+        // Update the year name in the database
+        public void UpdateYearInDatabase(int yearName)
+        {
+            Name = yearName; // Update the year name
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                string sql = "UPDATE yearAssociation SET name = @name WHERE id = @id"; // SQL query to update year name
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                {
+                    cmd.Parameters.AddWithValue("@id", Id); // Set the id parameter
+                    cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                    cmd.ExecuteNonQuery(); // Execute the update command
+                }
+            }
+        }
+
         // Add the semesters to the database and initialize the semester list
-        private void AddSemestersToDatabase(List<string> semesterNames)
+        private void AddSemestersAssociationToDatabase(List<string> semesterNames)
         {
             foreach (string semesterName in semesterNames) // Loop through each semester name
             {
-                SemesterList.Add(semesterName, new SemesterAssociation(semesterName, Id, Year.Name, UserId, IsStudent)); // Add the semester to the semester list
+                SemesterList.Add(semesterName, new SemesterAssociation(semesterName, Id, Name, UserId, IsStudent)); // Add the semester to the semester list
             }
         }
 
@@ -87,7 +105,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                         {
                             int semesterId = reader.GetInt32(0); // Get the semester ID
                             string name = reader.GetString(1); // Get the semester name
-                            SemesterList.Add(name, new SemesterAssociation(semesterId, name, Id, Year.Name, UserId, IsStudent)); // Add the semester to the semester list
+                            SemesterList.Add(name, new SemesterAssociation(semesterId, name, Id, Name, UserId, IsStudent)); // Add the semester to the semester list
                         }
                     }
                 }

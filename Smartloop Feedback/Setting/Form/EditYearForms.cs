@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
@@ -7,22 +9,22 @@ namespace Smartloop_Feedback.Setting
 {
     public partial class EditYearForms : Form
     {
-        public OLDStudent student; // Reference to the student object
+        public User user; // Reference to the student object
         public MainForm mainForm; // Reference to the main form
 
         // Constructor for EditYearForms, initializes the form with the student and main form references
-        public EditYearForms(OLDStudent student, MainForm mainForm)
+        public EditYearForms(User user, MainForm mainForm)
         {
             InitializeComponent();
             this.mainForm = mainForm;
-            this.student = student;
+            this.user = user;
         }
 
         // Event handler for form load
         private void EditYearForms_Load(object sender, EventArgs e)
         {
             // Set the year TextBox to the selected year's name
-            //yearTb.Text = student.YearList[(int)mainForm.position[0]].Name.ToString();
+            yearTb.Text = user.YearList[(int)mainForm.position[0]].Name.ToString();
             PopulateCheckedList(); // Populate the semester checklists
         }
 
@@ -34,39 +36,41 @@ namespace Smartloop_Feedback.Setting
             string[] semesters = { "Summer", "Autumn", "Winter", "Spring" };
 
             // Populate the checklists based on whether the semester exists
-            //foreach (string semester in semesters)
-            //{
-            //    if (student.YearList[(int)mainForm.position[0]].SemesterList.ContainsKey(semester))
-            //    {
-            //        deleteSemesterCb.Items.Add(semester); // Add to delete checklist if exists
-            //    }
-            //    else
-            //    {
-            //        addSemesterCb.Items.Add(semester); // Add to add checklist if not exists
-            //    }
-            //}
+            foreach (string semester in semesters)
+            {
+                if (user.YearList[(int)mainForm.position[0]].SemesterList.ContainsKey(semester))
+                {
+                    deleteSemesterCb.Items.Add(semester); // Add to delete checklist if exists
+                }
+                else
+                {
+                    addSemesterCb.Items.Add(semester); // Add to add checklist if not exists
+                }
+            }
         }
 
         // Event handler for update button click
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            //int yearName = Int32.Parse(yearTb.Text);
-            //// Validate that the year name is not empty, unique, and within a valid range
-            //if (yearName >= 2019 && student.UniqueYear(yearName))
-            //{
-            //    student.YearList[(int)mainForm.position[0]].UpdateYearInDatabase(yearName);
+            int yearName = Int32.Parse(yearTb.Text);
+            // Validate that the year name is not empty, unique, and within a valid range
+            if (user.UniqueYear(yearName))
+            {
+                user.YearList[(int)mainForm.position[0]].UpdateYearInDatabase(yearName);
 
-            //    StudentYear year = student.YearList[(int)mainForm.position[0]];
+                YearAssociation year = user.YearList[(int)mainForm.position[0]];
 
-            //    student.YearList.Remove((int)mainForm.position[0]);
-            //    student.YearList[yearName] = year;
+                user.YearList.Remove((int)mainForm.position[0]);
+                user.YearList[yearName] = year;
 
-            //    mainForm.position[0] = yearName;
-            //}
-            //else
-            //{
-            //    MessageBox.Show("Please enter a unique name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //}
+                mainForm.position[0] = yearName;
+
+                Year year2 = new Year(yearName);
+            }
+            else
+            {
+                MessageBox.Show("Please enter a unique name.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         // Event handler for delete button click
@@ -81,7 +85,7 @@ namespace Smartloop_Feedback.Setting
 
             if (result == DialogResult.Yes)
             {
-                student.DeleteYearFromDatabase((int)mainForm.position[0]);
+                //student.DeleteYearFromDatabase((int)mainForm.position[0]);
                 mainForm.MenuPanel(4);
                 mainForm.MainPannel(4);
             }
@@ -93,7 +97,7 @@ namespace Smartloop_Feedback.Setting
             // Add selected semesters to the year's semester list
             foreach (string item in addSemesterCb.CheckedItems)
             {
-              //  student.YearList[(int)mainForm.position[0]].SemesterList.Add(item, new StudentSemester(item, student.YearList[(int)mainForm.position[0]].Id, student.Id));
+                user.YearList[(int)mainForm.position[0]].SemesterList.Add(item, new SemesterAssociation(item, user.YearList[(int)mainForm.position[0]].Id,user.YearList[(int)mainForm.position[0]].Name, user.Id, user.IsStudent));
             }
 
             PopulateCheckedList(); // Refresh the checklists
