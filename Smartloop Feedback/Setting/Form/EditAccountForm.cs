@@ -117,7 +117,7 @@ namespace Smartloop_Feedback.Setting
             }
 
             // Navigate to the main panel
-            mainForm.MainPannel(6);
+            mainForm.MainPannel(5);
         }
 
         // Event handler for delete button click to delete the student record

@@ -17,6 +17,10 @@ namespace Smartloop_Feedback.Setting.Bar
             InitializeComponent();
             this.year = year;
             this.mainForm = mainForm;
+
+            navPl.Height = backBtn.Height; // Set the navigation panel height to match the back button height
+            navPl.Top = backBtn.Top; // Align the navigation panel with the back button
+            navPl.Left = backBtn.Left; // Align the navigation panel with the back button
         }
 
         // Event handler for form load
@@ -45,8 +49,22 @@ namespace Smartloop_Feedback.Setting.Bar
             Button clickedButton = sender as Button;
             if (clickedButton != null)
             {
+                navPl.Height = clickedButton.Height; // Adjust the navigation panel height
+                navPl.Top = clickedButton.Top; // Move the navigation panel to the clicked button's position
+                navPl.Left = clickedButton.Left; // Align the navigation panel with the clicked button
+                clickedButton.BackColor = Color.FromArgb(16, 34, 61); // Change the clicked button's background color
+
                 mainForm.position[1] = clickedButton.Text; // Set the main form's position to the semester
-                mainForm.MenuPanel(6); // Navigate to the menu panel
+                mainForm.MainPannel(7); // Navigate to the menu panel
+            }
+        }
+
+        private void ResetButtonColor(object sender, EventArgs e)
+        {
+            Button btn = sender as Button;
+            if (btn != null)
+            {
+                btn.BackColor = Color.FromArgb(10, 22, 39); // Reset the button's background color
             }
         }
     }

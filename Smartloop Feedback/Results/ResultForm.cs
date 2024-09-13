@@ -63,8 +63,8 @@ namespace Smartloop_Feedback.Results
                         {
                             StudentCourseResult courseResult = new StudentCourseResult
                             {
-                                Year = year.Year.Name,
-                                Semester = semester.Semester.Name,
+                                Year = year.Name,
+                                Semester = semester.Name,
                                 Course = studentCourse.Name,
                                 Score = studentCourse.CalculateCurrentMark(),
                                 CreditPoint = studentCourse.CreditPoint

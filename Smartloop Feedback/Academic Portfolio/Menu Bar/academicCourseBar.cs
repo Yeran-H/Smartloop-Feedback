@@ -72,7 +72,7 @@ namespace Smartloop_Feedback
         // Event handler for the add button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addCourseForm = new AddCourseForm(semester.Semester, semester.IsStudent)) 
+            using (var addCourseForm = new AddCourseForm(semester, semester.IsStudent)) 
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK) 
                 {

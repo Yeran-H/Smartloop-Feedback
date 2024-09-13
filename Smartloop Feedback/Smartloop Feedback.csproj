@@ -348,18 +348,6 @@
     <Compile Include="Results\ResultForm.Designer.cs">
       <DependentUpon>ResultForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Setting\Bar\SettingAssessmentBar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Setting\Bar\SettingAssessmentBar.Designer.cs">
-      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Setting\Bar\SettingCourseBar.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Setting\Bar\SettingCourseBar.Designer.cs">
-      <DependentUpon>SettingCourseBar.cs</DependentUpon>
-    </Compile>
     <Compile Include="Setting\Bar\SettingSemesterBar.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -469,12 +457,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Results\ResultForm.resx">
       <DependentUpon>ResultForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Setting\Bar\SettingAssessmentBar.resx">
-      <DependentUpon>SettingAssessmentBar.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Setting\Bar\SettingCourseBar.resx">
-      <DependentUpon>SettingCourseBar.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Setting\Bar\SettingSemesterBar.resx">
       <DependentUpon>SettingSemesterBar.cs</DependentUpon>

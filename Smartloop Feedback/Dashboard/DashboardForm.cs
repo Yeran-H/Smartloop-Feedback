@@ -70,7 +70,7 @@ namespace Smartloop_Feedback.Dashboard
                         if (!course.IsCompleted)
                         {
                             int rowIndex = courseDgv.Rows.Add(course.Code, course.Name, "", "");
-                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Year.Name, semester.Semester.Name, course.Code, 0, 0 };
+                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Code, 0, 0 };
                         }
                     }
                 }

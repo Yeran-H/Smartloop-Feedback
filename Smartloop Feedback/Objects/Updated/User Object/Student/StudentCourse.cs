@@ -174,12 +174,12 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                     SET 
                         courseMark = @courseMark
                     WHERE
-                        id = @id";
+                        courseAssociationId = @courseAssociationId";
 
                 using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
                 {
                     // Add parameters with values
-                    cmd.Parameters.AddWithValue("@id", Id);
+                    cmd.Parameters.AddWithValue("@courseAssociationId", Id);
                     cmd.Parameters.AddWithValue("@courseMark", CourseMark);
 
                     // Execute the update command
@@ -261,6 +261,33 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             if (EventList.ContainsKey(selectedEvent.Id))
             {
                 EventList[selectedEvent.Id].UpdateEventInDatabase(selectedEvent);
+            }
+        }
+
+        public void UpdateTutorialToDatabase(int tutorialId)
+        {
+            Tutorial = new Tutorial(tutorialId);
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE studentCourse
+                    SET 
+                        tutorialId = @tutorialId,
+                    WHERE
+                        courseAssociationId = @courseAssociationId";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@courseAssociationId", Id);
+                    cmd.Parameters.AddWithValue("@tutorialId", Tutorial.Id);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
             }
         }
     }

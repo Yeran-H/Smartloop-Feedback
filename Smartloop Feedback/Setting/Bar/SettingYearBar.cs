@@ -66,7 +66,7 @@ namespace Smartloop_Feedback.Setting.Bar
             {
                 mainForm.position[0] = Int32.Parse(clickedButton.Text); // Set the main form's position to the year
                 mainForm.MenuPanel(5); // Navigate to the menu panel
-                mainForm.MainPannel(7); // Navigate to the year details panel
+                mainForm.MainPannel(6); // Navigate to the year details panel
             }
         }
     }
