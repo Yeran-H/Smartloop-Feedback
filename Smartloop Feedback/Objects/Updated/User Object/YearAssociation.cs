@@ -111,5 +111,36 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                 }
             }
         }
+
+        // Delete a semester from the database
+        public void DeleteSemesterFromDatabase(string semesterName)
+        {
+            if (SemesterList.ContainsKey(semesterName)) // Check if the semester exists
+            {
+                SemesterList[semesterName].DeleteSemesterFromDatabase(); // Delete the semester from the database
+                SemesterList.Remove(semesterName); // Remove the semester from the list
+            }
+        }
+
+        // Delete the year and all its semesters from the database
+        public void DeleteYearFromDatabase()
+        {
+            foreach (SemesterAssociation semester in SemesterList.Values) // Loop through each semester
+            {
+                semester.DeleteSemesterFromDatabase(); // Delete the semester from the database
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                string sql = "DELETE FROM yearAssociation WHERE id = @id"; // SQL query to delete the year
+
+                using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
+                {
+                    cmd.Parameters.AddWithValue("@id", Id); // Set the id parameter
+                    cmd.ExecuteNonQuery(); // Execute the delete command
+                }
+            }
+        }
     }
 }

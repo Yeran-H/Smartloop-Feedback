@@ -307,6 +307,11 @@ namespace Smartloop_Feedback
                     this.formLoaderPl.Controls.Add(courseForm);
                     courseForm.Show();
                     break;
+                case 8:
+                    LoginForm login = new LoginForm();
+                    login.Show();
+                    this.Hide();
+                    break;
             }
         }
 

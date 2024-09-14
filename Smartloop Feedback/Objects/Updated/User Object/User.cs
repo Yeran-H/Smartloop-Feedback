@@ -255,5 +255,51 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                 EventList.Remove(selectedEvent.Id);
             }
         }
+
+        public void DeleteUserFromDatabase()
+        {
+            // Delete all years associated with the student
+            foreach (YearAssociation year in YearList.Values)
+            {
+                year.DeleteYearFromDatabase();
+            }
+
+            // Delete all events associated with the student
+            foreach (Event ev in EventList.Values)
+            {
+                ev.DeleteEventFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                if(IsStudent)
+                {
+                    string deleteQuery = @"
+                    DELETE FROM student
+                    WHERE studentId = @studentId";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        // Add the parameter for studentId
+                        cmd.Parameters.AddWithValue("@studentId", Id);
+
+                        // Execute the delete command
+                        cmd.ExecuteNonQuery();
+                    }
+                }
+            }
+        }
+
+        // Delete a year and related data from the database
+        public void DeleteYearFromDatabase(int yearName)
+        {
+            if (YearList.ContainsKey(yearName))
+            {
+                YearList[yearName].DeleteYearFromDatabase(); // Delete the year from the database
+                YearList.Remove(yearName); // Remove the year from the list
+            }
+        }
     }
 }

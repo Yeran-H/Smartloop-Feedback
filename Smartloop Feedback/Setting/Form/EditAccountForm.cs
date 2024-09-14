@@ -124,7 +124,7 @@ namespace Smartloop_Feedback.Setting
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                "Are you sure you want to delete the student record? This will result in removing all associated objects as well.",
+                "Are you sure you want to delete the user record? This will result in removing all associated objects as well.",
                 "Confirm Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
@@ -133,11 +133,11 @@ namespace Smartloop_Feedback.Setting
             if (result == DialogResult.Yes)
             {
                 // Delete the student record from the database
-                //student.DeleteStudentFromDatabase();
-            }
+                user.DeleteUserFromDatabase();
 
-            // Navigate to the main panel
-            mainForm.MainPannel(3);
+                // Navigate to the main panel
+                mainForm.MainPannel(8);
+            }
         }
     }
 }

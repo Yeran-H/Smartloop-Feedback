@@ -117,10 +117,10 @@ namespace Smartloop_Feedback
         public void DeleteStudentFromDatabase()
         {
             // Delete all years associated with the student
-            //foreach (StudentYear year in YearList.Values)
-            //{
-            //    year.DeleteYearFromDatabase();
-            //}
+            foreach (StudentYear year in YearList.Values)
+            {
+                year.DeleteYearFromDatabase();
+            }
 
             // Delete all events associated with the student
             foreach (Event ev in EventList.Values)
@@ -150,11 +150,11 @@ namespace Smartloop_Feedback
         // Delete a year and related data from the database
         public void DeleteYearFromDatabase(int yearName)
         {
-            //if (YearList.ContainsKey(yearName))
-            //{
-            //    YearList[yearName].DeleteYearFromDatabase(); // Delete the year from the database
-            //    YearList.Remove(yearName); // Remove the year from the list
-            //}
+            if (YearList.ContainsKey(yearName))
+            {
+                YearList[yearName].DeleteYearFromDatabase(); // Delete the year from the database
+                YearList.Remove(yearName); // Remove the year from the list
+            }
         }
 
         // Private method to fetch years from the database for the student

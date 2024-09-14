@@ -88,5 +88,46 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                 }
             }
         }
+
+        // Delete the semester and related courses from the database
+        public void DeleteSemesterFromDatabase()
+        {
+            // Delete all courses associated with the semester
+            foreach (CourseAssociation course in CourseList.Values)
+            {
+                if(IsStudent && course is StudentCourse studentCourse)
+                {
+                    studentCourse.DeleteStudentCourseFromDatabase();
+                }
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM semesterAssociation
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for semester ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // Delete a course from the database
+        public void DeleteCourseFromDatabase(int courseCode)
+        {
+            if (CourseList.ContainsKey(courseCode) && IsStudent && CourseList[courseCode] is StudentCourse studentCourse) 
+            {
+                studentCourse.DeleteStudentCourseFromDatabase(); // Delete the course from the database
+                CourseList.Remove(courseCode); // Remove the course from the list
+            }
+        }
     }
 }

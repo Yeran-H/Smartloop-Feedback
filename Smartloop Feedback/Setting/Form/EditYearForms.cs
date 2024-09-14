@@ -85,7 +85,7 @@ namespace Smartloop_Feedback.Setting
 
             if (result == DialogResult.Yes)
             {
-                //student.DeleteYearFromDatabase((int)mainForm.position[0]);
+                user.DeleteYearFromDatabase((int)mainForm.position[0]);
                 mainForm.MenuPanel(4);
                 mainForm.MainPannel(4);
             }
@@ -119,7 +119,7 @@ namespace Smartloop_Feedback.Setting
                 // Delete selected semesters from the year's semester list
                 foreach (string item in deleteSemesterCb.CheckedItems)
                 {
-                   // student.YearList[(int)mainForm.position[0]].DeleteSemesterFromDatabase(item);
+                    user.YearList[(int)mainForm.position[0]].DeleteSemesterFromDatabase(item);
                 }
 
                 PopulateCheckedList(); // Refresh the checklists

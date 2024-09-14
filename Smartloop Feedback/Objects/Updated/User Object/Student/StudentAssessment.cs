@@ -274,5 +274,37 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             // Get the response from the AI
             Feedback = await conversation.GetResponseFromChatbotAsync();
         }
+
+        // Delete the assessment and related data from the database
+        public void DeleteStudentAssessmentFromDatabase()
+        {
+            foreach (CheckList checkList in CheckList)
+            {
+                checkList.DeleteCheckListFromDatabase();
+            }
+
+            foreach (FeedbackResult feedbackResult in FeedbackList.Values)
+            {
+                feedbackResult.DeleteFeedbackFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM studentAssessment
+                    WHERE id = @id";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for assessment ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

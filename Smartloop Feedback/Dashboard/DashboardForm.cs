@@ -75,6 +75,8 @@ namespace Smartloop_Feedback.Dashboard
                     }
                 }
             }
+
+            DataGridColor(courseDgv);
         }
 
         private void courseDgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -129,6 +131,8 @@ namespace Smartloop_Feedback.Dashboard
                     eventDgv.Rows.Add(events.Name, events.Date, events.Category);
                 }
             }
+
+            DataGridColor(eventDgv);
         }
 
         private void PopulateHourlyView()
@@ -162,6 +166,8 @@ namespace Smartloop_Feedback.Dashboard
                     }
                 }
             }
+
+            DataGridColor(eventDgv);
         }
 
         private void PopulateComboBox()
@@ -221,6 +227,47 @@ namespace Smartloop_Feedback.Dashboard
                 toggleViewBtn.Text = "Toggle to Default View";
             }
             isHourlyView = !isHourlyView;
+        }
+
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
         }
     }
 }

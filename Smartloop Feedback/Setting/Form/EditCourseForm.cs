@@ -128,9 +128,9 @@ namespace Smartloop_Feedback.Setting
 
             if (result == DialogResult.Yes)
             {
-                //semester.DeleteCourseFromDatabase(courseId);
+                semester.DeleteCourseFromDatabase(courseCode);
                 mainForm.MainPannel(7);
-                mainForm.MenuPanel(6);
+                mainForm.MenuPanel(5);
             }
         }
 

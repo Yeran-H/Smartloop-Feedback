@@ -18,6 +18,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
         public int UserId { get; set; }
         public int SemesterId { get; set; }
         public bool IsStudent { get; set; }
+        public SortedDictionary<int, Event> EventList { get; private set; }
 
         public CourseAssociation (int id, int courseId, int userId, int semesterId, bool isStudent)
             :base(courseId)
@@ -26,6 +27,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             this.UserId = userId;
             this.SemesterId = semesterId;
             this.IsStudent = isStudent;
+            EventList = new SortedDictionary<int, Event>();
         }
 
         public CourseAssociation(int courseId, int userId, int semesterId, bool isStudent)
@@ -34,6 +36,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             this.UserId = userId;
             this.SemesterId = semesterId;
             this.IsStudent = isStudent;
+            EventList = new SortedDictionary<int, Event>();
             AddCourseToDatabase();
         }
 
@@ -53,6 +56,42 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                     cmd.Parameters.AddWithValue("@isStudent", IsStudent); // Set the description parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
+            }
+        }
+
+        // Fetch events from the database and initialize the event list
+        public void LoadEventsFromDatabase()
+        {
+            EventList.Clear();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+                SqlCommand cmd = new SqlCommand("SELECT id, name, date, startTime, endTime, category, color FROM event WHERE courseId = @courseId ORDER BY date", conn);
+                cmd.Parameters.AddWithValue("@courseId", Id);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32(0);
+                        string name = reader.GetString(1);
+                        DateTime date = reader.GetDateTime(2);
+                        TimeSpan startTime = reader.GetTimeSpan(3);
+                        TimeSpan endTime = reader.GetTimeSpan(4);
+                        string category = reader.GetString(5);
+                        int color = reader.GetInt32(6);
+                        EventList.Add(id, new Event(id, name, date, startTime, endTime, UserId, Id, category, color));
+                    }
+                }
+            }
+        }
+
+        // Update an event in the database
+        public void UpdateEvent(Event selectedEvent)
+        {
+            if (EventList.ContainsKey(selectedEvent.Id))
+            {
+                EventList[selectedEvent.Id].UpdateEventInDatabase(selectedEvent);
             }
         }
     }
