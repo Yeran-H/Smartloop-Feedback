@@ -227,13 +227,13 @@
     <Compile Include="Coordinator\CoordinatorMainForm.Designer.cs">
       <DependentUpon>CoordinatorMainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Updated\User Object\CourseAssociation.cs" />
-    <Compile Include="Objects\Updated\User Object\SemesterAssociation.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\Student.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\StudentAssessment.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\StudentCourse.cs" />
-    <Compile Include="Objects\Updated\User Object\User.cs" />
-    <Compile Include="Objects\Updated\User Object\YearAssociation.cs" />
+    <Compile Include="Objects\User Object\CourseAssociation.cs" />
+    <Compile Include="Objects\User Object\SemesterAssociation.cs" />
+    <Compile Include="Objects\User Object\Student\Student.cs" />
+    <Compile Include="Objects\User Object\Student\StudentAssessment.cs" />
+    <Compile Include="Objects\User Object\Student\StudentCourse.cs" />
+    <Compile Include="Objects\User Object\User.cs" />
+    <Compile Include="Objects\User Object\YearAssociation.cs" />
     <Compile Include="Course Schedule\AddEventForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -306,26 +306,22 @@
     <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\Updated\Main Object\Assessment.cs" />
-    <Compile Include="Objects\OLDStudentAssessment.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\CheckList.cs" />
-    <Compile Include="Objects\Updated\Main Object\Coordinator.cs" />
-    <Compile Include="Objects\Updated\Main Object\Course.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\FeedbackResult.cs" />
-    <Compile Include="Objects\StudentCourseDEMO.cs" />
-    <Compile Include="Objects\Updated\User Object\Student\StudentCourseResult.cs" />
-    <Compile Include="Objects\StudentCriteria.cs" />
+    <Compile Include="Objects\Main Object\Assessment.cs" />
+    <Compile Include="Objects\User Object\Student\CheckList.cs" />
+    <Compile Include="Objects\Main Object\Coordinator.cs" />
+    <Compile Include="Objects\Main Object\Course.cs" />
+    <Compile Include="Objects\User Object\Student\FeedbackResult.cs" />
+    <Compile Include="Objects\User Object\Student\StudentCourseResult.cs" />
     <Compile Include="Objects\DataGridView.cs" />
     <Compile Include="Objects\DataPicker.cs">
       <SubType>Component</SubType>
     </Compile>
-    <Compile Include="Objects\Updated\User Object\Student\Event.cs" />
-    <Compile Include="Objects\StudentRating.cs" />
-    <Compile Include="Objects\Updated\Main Object\Criteria.cs" />
-    <Compile Include="Objects\Updated\Main Object\Rating.cs" />
-    <Compile Include="Objects\Updated\Main Object\Semester.cs" />
-    <Compile Include="Objects\Updated\Main Object\Tutorial.cs" />
-    <Compile Include="Objects\Updated\Main Object\Year.cs" />
+    <Compile Include="Objects\User Object\Student\Event.cs" />
+    <Compile Include="Objects\Main Object\Criteria.cs" />
+    <Compile Include="Objects\Main Object\Rating.cs" />
+    <Compile Include="Objects\Main Object\Semester.cs" />
+    <Compile Include="Objects\Main Object\Tutorial.cs" />
+    <Compile Include="Objects\Main Object\Year.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Resources.Designer.cs">
@@ -339,9 +335,6 @@
     <Compile Include="Forms\RegisterForm.Designer.cs">
       <DependentUpon>RegisterForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Objects\StudentSemester.cs" />
-    <Compile Include="Objects\OLDYearAssociation.cs" />
-    <Compile Include="Objects\OLDStudent.cs" />
     <Compile Include="Results\ResultForm.cs">
       <SubType>Form</SubType>
     </Compile>
