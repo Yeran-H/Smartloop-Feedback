@@ -116,11 +116,34 @@ CREATE TABLE yearAssociation (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name INT,
     isStudent BIT,
-    userId INT,
+    studentId INT,
+    tutorId INT,
 	FOREIGN KEY (name) REFERENCES year(name),
-    FOREIGN KEY (userId) REFERENCES student(studentId)
+    FOREIGN KEY (studentId) REFERENCES student(studentId),
+    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId),
 );
 GO
+
+-- Create a trigger to enforce that only one of studentId or tutorId is populated for Year
+CREATE TRIGGER TRG_Check_UserAssociation_Year
+ON yearAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Check the condition for each inserted or updated row
+    IF EXISTS (
+        SELECT 1
+        FROM yearAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        -- If the condition is violated, raise an error
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
 
 -- Create the semesterAssociation table
 CREATE TABLE semesterAssociation (
@@ -129,12 +152,35 @@ CREATE TABLE semesterAssociation (
     isStudent BIT,
     yearId INT,
 	semesterId INT,
-    userId INT,
+    studentId INT,
+    tutorId INT,
 	FOREIGN KEY (semesterId) REFERENCES semester(id),
     FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
-    FOREIGN KEY (userId) REFERENCES student(studentId)
+    FOREIGN KEY (studentId) REFERENCES student(studentId),
+    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId),
 );
 GO
+
+-- Create a trigger to enforce that only one of studentId or tutorId is populated for Semester
+CREATE TRIGGER TRG_Check_UserAssociation_Semester
+ON semesterAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Check the condition for each inserted or updated row
+    IF EXISTS (
+        SELECT 1
+        FROM semesterAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        -- If the condition is violated, raise an error
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
 
 -- Create the courseAssociation table
 CREATE TABLE courseAssociation (

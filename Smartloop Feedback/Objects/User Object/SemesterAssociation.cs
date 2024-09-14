@@ -44,14 +44,24 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO semesterAssociation (name, yearId, userId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                string sql;
+                
+                if(IsStudent)
+                {
+                    sql = "INSERT INTO semesterAssociation (name, yearId, studentId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                }
+                else
+                {
+                    sql = "INSERT INTO semesterAssociation (name, yearId, tutorId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                }
+
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@yearId", YearId); // Set the yearId parameter
                     cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
-                    cmd.Parameters.AddWithValue("@semesterId", Id);
+                    cmd.Parameters.AddWithValue("@semesterId", SemesterId);
                     cmd.Parameters.AddWithValue("@isStudent", IsStudent);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
