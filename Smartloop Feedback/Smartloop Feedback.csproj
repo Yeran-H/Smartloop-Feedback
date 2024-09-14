@@ -232,6 +232,7 @@
     <Compile Include="Objects\User Object\Student\Student.cs" />
     <Compile Include="Objects\User Object\Student\StudentAssessment.cs" />
     <Compile Include="Objects\User Object\Student\StudentCourse.cs" />
+    <Compile Include="Objects\User Object\Tutor\Tutor.cs" />
     <Compile Include="Objects\User Object\User.cs" />
     <Compile Include="Objects\User Object\YearAssociation.cs" />
     <Compile Include="Course Schedule\AddEventForm.cs">
