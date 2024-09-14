@@ -31,27 +31,27 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.panel1 = new System.Windows.Forms.Panel();
             this.menuDropPl = new System.Windows.Forms.Panel();
-            this.navPl = new System.Windows.Forms.Panel();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.studentIdLb = new System.Windows.Forms.Label();
-            this.nameLb = new System.Windows.Forms.Label();
-            this.centrePannel = new System.Windows.Forms.Panel();
-            this.formLoaderPl = new System.Windows.Forms.Panel();
-            this.titleLb = new System.Windows.Forms.Label();
-            this.exitPb = new System.Windows.Forms.PictureBox();
             this.courseBtn = new System.Windows.Forms.Button();
             this.setttingBtn = new System.Windows.Forms.Button();
             this.academicBtn = new System.Windows.Forms.Button();
+            this.navPl = new System.Windows.Forms.Panel();
             this.resultBtn = new System.Windows.Forms.Button();
             this.dashboardBtn = new System.Windows.Forms.Button();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.studentIdLb = new System.Windows.Forms.Label();
+            this.nameLb = new System.Windows.Forms.Label();
             this.profilePb = new System.Windows.Forms.PictureBox();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.centrePannel = new System.Windows.Forms.Panel();
+            this.formLoaderPl = new System.Windows.Forms.Panel();
+            this.exitPb = new System.Windows.Forms.PictureBox();
+            this.titleLb = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            this.centrePannel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.profilePb)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.centrePannel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.exitPb)).BeginInit();
             this.SuspendLayout();
             // 
             // panel1
@@ -79,96 +79,6 @@
             this.menuDropPl.Size = new System.Drawing.Size(186, 294);
             this.menuDropPl.TabIndex = 8;
             this.menuDropPl.Visible = false;
-            // 
-            // navPl
-            // 
-            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.navPl.Location = new System.Drawing.Point(3, 202);
-            this.navPl.Name = "navPl";
-            this.navPl.Size = new System.Drawing.Size(3, 100);
-            this.navPl.TabIndex = 5;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.studentIdLb);
-            this.panel2.Controls.Add(this.nameLb);
-            this.panel2.Controls.Add(this.profilePb);
-            this.panel2.Controls.Add(this.pictureBox1);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(186, 202);
-            this.panel2.TabIndex = 0;
-            // 
-            // studentIdLb
-            // 
-            this.studentIdLb.AutoSize = true;
-            this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
-            this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.studentIdLb.Location = new System.Drawing.Point(61, 181);
-            this.studentIdLb.Name = "studentIdLb";
-            this.studentIdLb.Size = new System.Drawing.Size(64, 15);
-            this.studentIdLb.TabIndex = 2;
-            this.studentIdLb.Text = "Student ID";
-            // 
-            // nameLb
-            // 
-            this.nameLb.AutoSize = true;
-            this.nameLb.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
-            this.nameLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.nameLb.Location = new System.Drawing.Point(63, 162);
-            this.nameLb.Name = "nameLb";
-            this.nameLb.Size = new System.Drawing.Size(49, 19);
-            this.nameLb.TabIndex = 1;
-            this.nameLb.Text = "Name";
-            // 
-            // centrePannel
-            // 
-            this.centrePannel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
-            this.centrePannel.Controls.Add(this.formLoaderPl);
-            this.centrePannel.Controls.Add(this.exitPb);
-            this.centrePannel.Controls.Add(this.titleLb);
-            this.centrePannel.Dock = System.Windows.Forms.DockStyle.Right;
-            this.centrePannel.Location = new System.Drawing.Point(185, 0);
-            this.centrePannel.Name = "centrePannel";
-            this.centrePannel.Size = new System.Drawing.Size(750, 538);
-            this.centrePannel.TabIndex = 2;
-            this.centrePannel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseDown);
-            this.centrePannel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseMove);
-            this.centrePannel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseUp);
-            // 
-            // formLoaderPl
-            // 
-            this.formLoaderPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.formLoaderPl.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.formLoaderPl.Location = new System.Drawing.Point(0, 61);
-            this.formLoaderPl.Name = "formLoaderPl";
-            this.formLoaderPl.Size = new System.Drawing.Size(750, 477);
-            this.formLoaderPl.TabIndex = 11;
-            // 
-            // titleLb
-            // 
-            this.titleLb.AutoSize = true;
-            this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.titleLb.Location = new System.Drawing.Point(20, 17);
-            this.titleLb.MaximumSize = new System.Drawing.Size(700, 0);
-            this.titleLb.Name = "titleLb";
-            this.titleLb.Size = new System.Drawing.Size(153, 36);
-            this.titleLb.TabIndex = 0;
-            this.titleLb.Text = "Dashboard";
-            // 
-            // exitPb
-            // 
-            this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.exitPb.Image = ((System.Drawing.Image)(resources.GetObject("exitPb.Image")));
-            this.exitPb.Location = new System.Drawing.Point(718, 7);
-            this.exitPb.Name = "exitPb";
-            this.exitPb.Size = new System.Drawing.Size(21, 21);
-            this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.exitPb.TabIndex = 10;
-            this.exitPb.TabStop = false;
-            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
             // courseBtn
             // 
@@ -227,6 +137,14 @@
             this.academicBtn.Click += new System.EventHandler(this.academicBtn_Click);
             this.academicBtn.Leave += new System.EventHandler(this.academicBtn_Leave);
             // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(3, 202);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 5;
+            // 
             // resultBtn
             // 
             this.resultBtn.Dock = System.Windows.Forms.DockStyle.Top;
@@ -265,6 +183,42 @@
             this.dashboardBtn.Click += new System.EventHandler(this.dashboardBtn_Click);
             this.dashboardBtn.Leave += new System.EventHandler(this.dashboardBtn_Leave);
             // 
+            // panel2
+            // 
+            this.panel2.Controls.Add(this.studentIdLb);
+            this.panel2.Controls.Add(this.nameLb);
+            this.panel2.Controls.Add(this.profilePb);
+            this.panel2.Controls.Add(this.pictureBox1);
+            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel2.Location = new System.Drawing.Point(0, 0);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(186, 202);
+            this.panel2.TabIndex = 0;
+            // 
+            // studentIdLb
+            // 
+            this.studentIdLb.AutoSize = true;
+            this.studentIdLb.Font = new System.Drawing.Font("Aptos", 9F, System.Drawing.FontStyle.Bold);
+            this.studentIdLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.studentIdLb.Location = new System.Drawing.Point(61, 181);
+            this.studentIdLb.Name = "studentIdLb";
+            this.studentIdLb.Size = new System.Drawing.Size(64, 15);
+            this.studentIdLb.TabIndex = 2;
+            this.studentIdLb.Text = "Student ID";
+            this.studentIdLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // nameLb
+            // 
+            this.nameLb.AutoSize = true;
+            this.nameLb.Font = new System.Drawing.Font("Aptos", 11F, System.Drawing.FontStyle.Bold);
+            this.nameLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.nameLb.Location = new System.Drawing.Point(63, 162);
+            this.nameLb.Name = "nameLb";
+            this.nameLb.Size = new System.Drawing.Size(49, 19);
+            this.nameLb.TabIndex = 1;
+            this.nameLb.Text = "Name";
+            this.nameLb.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // profilePb
             // 
             this.profilePb.Image = global::Smartloop_Feedback.Properties.Resources.person1;
@@ -285,6 +239,54 @@
             this.pictureBox1.TabIndex = 3;
             this.pictureBox1.TabStop = false;
             // 
+            // centrePannel
+            // 
+            this.centrePannel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(10)))), ((int)(((byte)(20)))));
+            this.centrePannel.Controls.Add(this.formLoaderPl);
+            this.centrePannel.Controls.Add(this.exitPb);
+            this.centrePannel.Controls.Add(this.titleLb);
+            this.centrePannel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.centrePannel.Location = new System.Drawing.Point(185, 0);
+            this.centrePannel.Name = "centrePannel";
+            this.centrePannel.Size = new System.Drawing.Size(750, 538);
+            this.centrePannel.TabIndex = 2;
+            this.centrePannel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseDown);
+            this.centrePannel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseMove);
+            this.centrePannel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.centrePannel_MouseUp);
+            // 
+            // formLoaderPl
+            // 
+            this.formLoaderPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.formLoaderPl.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.formLoaderPl.Location = new System.Drawing.Point(0, 61);
+            this.formLoaderPl.Name = "formLoaderPl";
+            this.formLoaderPl.Size = new System.Drawing.Size(750, 477);
+            this.formLoaderPl.TabIndex = 11;
+            // 
+            // exitPb
+            // 
+            this.exitPb.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.exitPb.Image = ((System.Drawing.Image)(resources.GetObject("exitPb.Image")));
+            this.exitPb.Location = new System.Drawing.Point(718, 7);
+            this.exitPb.Name = "exitPb";
+            this.exitPb.Size = new System.Drawing.Size(21, 21);
+            this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.exitPb.TabIndex = 10;
+            this.exitPb.TabStop = false;
+            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
+            // 
+            // titleLb
+            // 
+            this.titleLb.AutoSize = true;
+            this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.titleLb.Location = new System.Drawing.Point(20, 17);
+            this.titleLb.MaximumSize = new System.Drawing.Size(700, 0);
+            this.titleLb.Name = "titleLb";
+            this.titleLb.Size = new System.Drawing.Size(153, 36);
+            this.titleLb.TabIndex = 0;
+            this.titleLb.Text = "Dashboard";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -302,11 +304,11 @@
             this.panel1.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.centrePannel.ResumeLayout(false);
             this.centrePannel.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.exitPb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.profilePb)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }

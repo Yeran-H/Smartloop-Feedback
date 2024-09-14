@@ -63,12 +63,35 @@ namespace Smartloop_Feedback
         private void mainForm_Load(object sender, EventArgs e)
         {
             nameLb.Text = user.Name;
+            AdjustLabelPosition(nameLb, 200);
             studentIdLb.Text = user.Id.ToString();
             if (user.ProfileImage != null)
             {
                 using (MemoryStream ms = new MemoryStream(user.ProfileImage))
                 {
                     profilePb.Image = Image.FromStream(ms);
+                }
+            }
+
+            if(!user.IsStudent)
+            {
+                resultBtn.Visible = false;
+            }
+        }
+
+        private void AdjustLabelPosition(Label label, int maxRightPosition)
+        {
+            // Measure the width of the text in the label
+            using (Graphics g = label.CreateGraphics())
+            {
+                SizeF textSize = g.MeasureString(label.Text, label.Font);
+
+                // Check if the text width exceeds the maximum allowed right position
+                if (label.Left + textSize.Width > maxRightPosition)
+                {
+                    // Shift the label to the left
+                    int newLeft = maxRightPosition - (int)textSize.Width;
+                    label.Left = newLeft > 0 ? newLeft : 0; // Ensure the label doesn't go beyond the left edge
                 }
             }
         }

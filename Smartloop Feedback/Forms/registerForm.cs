@@ -236,9 +236,9 @@ namespace Smartloop_Feedback
             {
                 Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
 
-                //MainForm main = new MainForm(tutor);
-                //main.Show();
-                //this.Hide(); 
+                MainForm main = new MainForm(tutor);
+                main.Show();
+                this.Hide();
             }
         }
 
