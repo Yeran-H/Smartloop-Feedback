@@ -1,4 +1,8 @@
-﻿using Smartloop_Feedback.Objects;
+﻿using Smartloop_Feedback.Coordinator;
+using Smartloop_Feedback.Coordinator_Folder;
+using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -209,49 +213,50 @@ namespace Smartloop_Feedback
         {
             await Task.Run(() =>
             {
-                // Create a new SQL connection using the connection string
-                using (SqlConnection conn = new SqlConnection(connStr))
-                {
-                    conn.Open(); // Open the connection
-                    // Create a SQL command to select student details
-                    SqlCommand cmd = new SqlCommand("SELECT tutorID, name, email, password, profileImage FROM Tutor WHERE tutorID = @tutorID AND password = @password", conn);
-                    cmd.Parameters.AddWithValue("@tutorId", tutorId); // Add student ID parameter
-                    cmd.Parameters.AddWithValue("@password", password); // Add password parameter
+                return;
+                //// Create a new SQL connection using the connection string
+                //using (SqlConnection conn = new SqlConnection(connStr))
+                //{
+                //    conn.Open(); // Open the connection
+                //    // Create a SQL command to select student details
+                //    SqlCommand cmd = new SqlCommand("SELECT tutorID, name, email, password, profileImage FROM Tutor WHERE tutorID = @tutorID AND password = @password", conn);
+                //    cmd.Parameters.AddWithValue("@tutorId", tutorId); // Add student ID parameter
+                //    cmd.Parameters.AddWithValue("@password", password); // Add password parameter
 
-                    // Execute the command and read the results
-                    using (SqlDataReader reader = cmd.ExecuteReader())
-                    {
-                        if (reader.Read()) // If a matching record is found
-                        {
-                            // Create a new Student object from the database record
-                            Tutor tutor = new Tutor(
-                                reader.GetInt32(0),
-                                reader.IsDBNull(1) ? null : reader.GetString(1),
-                                reader.IsDBNull(2) ? null : reader.GetString(2),
-                                reader.IsDBNull(3) ? null : reader.GetString(3),
-                                reader.IsDBNull(4) ? null : reader.GetFieldValue<byte[]>(4)
-                            );
+                //    // Execute the command and read the results
+                //    using (SqlDataReader reader = cmd.ExecuteReader())
+                //    {
+                //        if (reader.Read()) // If a matching record is found
+                //        {
+                //            // Create a new Student object from the database record
+                //            Tutor tutor = new Tutor(
+                //                reader.GetInt32(0),
+                //                reader.IsDBNull(1) ? null : reader.GetString(1),
+                //                reader.IsDBNull(2) ? null : reader.GetString(2),
+                //                reader.IsDBNull(3) ? null : reader.GetString(3),
+                //                reader.IsDBNull(4) ? null : reader.GetFieldValue<byte[]>(4)
+                //            );
 
-                            // Invoke to update UI thread
-                            this.Invoke(new Action(() =>
-                            {
-                                // Create and show the main form, passing the student object
-                                MainForm main = new MainForm(tutor);
-                                main.Show();
-                                this.Hide(); // Hide the login form
-                            }));
-                        }
-                        else
-                        {
-                            // Invoke to update UI thread
-                            this.Invoke(new Action(() =>
-                            {
-                                // Show an error message if login fails
-                                MessageBox.Show("Incorrect Login", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            }));
-                        }
-                    }
-                }
+                //            // Invoke to update UI thread
+                //            this.Invoke(new Action(() =>
+                //            {
+                //                // Create and show the main form, passing the student object
+                //                //MainForm main = new MainForm(tutor);
+                //                //main.Show();
+                //                //this.Hide(); // Hide the login form
+                //            }));
+                //        }
+                //        else
+                //        {
+                //            // Invoke to update UI thread
+                //            this.Invoke(new Action(() =>
+                //            {
+                //                // Show an error message if login fails
+                //                MessageBox.Show("Incorrect Login", "Failure", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                //            }));
+                //        }
+                //    }
+                //}
             });
         }
 
@@ -324,6 +329,14 @@ namespace Smartloop_Feedback
             RegisterForm register = new RegisterForm(false); // Create a new registration form
             register.Show(); // Show the registration form
             this.Hide(); // Hide the current form
+        }
+
+        private void coordinatorBtn_Click(object sender, EventArgs e)
+        {
+            Smartloop_Feedback.Objects.Coordinator coordinator = new Smartloop_Feedback.Objects.Coordinator();
+            CoordinatorMainForm coordintaorMain = new CoordinatorMainForm(coordinator);
+            coordintaorMain.Show();
+            this.Hide();
         }
     }
 }

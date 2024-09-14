@@ -10,6 +10,8 @@ using OpenAI_API;
 using OpenAI_API.Chat;
 using Smartloop_Feedback.Objects;
 using System.IO;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
@@ -17,10 +19,10 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
     {
         private readonly string apiKey = ConfigurationManager.AppSettings["OpenAi_Apikey"];
         private OpenAIAPI api;
-        public Assessment assessment;
+        public StudentAssessment assessment;
         public MainForm mainForm;
 
-        public AIForm(Assessment assessment, MainForm mainForm)
+        public AIForm(StudentAssessment assessment, MainForm mainForm)
         {
             InitializeComponent();
             api = new OpenAIAPI(apiKey);
@@ -144,7 +146,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                         }
                     }
 
-                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousAttemptList, previousAssessmentList, assessment.StudentId, assessment.Id);
+                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousAttemptList, previousAssessmentList, assessment.UserId, assessment.Id);
                     assessment.FeedbackList.Add(feedbackResult.Id, feedbackResult);
                 }
                 else

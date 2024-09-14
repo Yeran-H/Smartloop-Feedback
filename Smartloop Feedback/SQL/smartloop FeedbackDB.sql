@@ -13,34 +13,18 @@ GO
 USE smartloop_feedbackdb;
 GO
 
--- Create the student table
-CREATE TABLE student (
-    studentId INT PRIMARY KEY,
-    name VARCHAR(225) NOT NULL,
-    email VARCHAR(225) NOT NULL,
-    password VARCHAR(225) NOT NULL,
-    degree VARCHAR(225),
-    profileImage VARBINARY(MAX)
-);
-GO
-
 -- Create the year table
 CREATE TABLE year (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    name INT,
-    studentId INT,
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    name INT PRIMARY KEY,
 );
 GO
 
 -- Create the semester table
 CREATE TABLE semester (
     id INT IDENTITY(1,1) PRIMARY KEY,
-    name VARCHAR(225),
-    yearId INT,
-    studentId INT,
-    FOREIGN KEY (yearId) REFERENCES year(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    name VARCHAR(MAX),
+    yearName INT,
+    FOREIGN KEY (yearName) REFERENCES year(name)
 );
 GO
 
@@ -48,15 +32,24 @@ GO
 CREATE TABLE course (
     id INT IDENTITY(1,1) PRIMARY KEY,
     code INT,
-    title VARCHAR(225),
+    name VARCHAR(MAX),
     creditPoint INT,
     description VARCHAR(MAX),
-    isCompleted BIT,
-    canvasLink VARCHAR(MAX),
+    yearName INT,
     semesterId INT,
-    studentId INT,
-    FOREIGN KEY (semesterId) REFERENCES semester(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    canvasLink VARCHAR(MAX),
+    tutorNum INT,
+    FOREIGN KEY (yearName) REFERENCES year(name),
+    FOREIGN KEY (semesterId) REFERENCES semester(id)
+);
+GO
+
+-- Create the tutorial table
+CREATE TABLE tutorial (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    courseId INT,
+    FOREIGN KEY (courseId) REFERENCES course(id)
 );
 GO
 
@@ -68,19 +61,13 @@ CREATE TABLE assessment (
     courseDescription VARCHAR(MAX),
     type VARCHAR(225),
     date DATE,
-    status INT,
     weight DECIMAL (18,2),
     mark DECIMAL (18,2),
-    finalMark DECIMAL (18,2),
-    individual BIT,
-    [group] BIT,
-    isFinalised BIT,
-    finalFeedback VARCHAR(MAX),
     canvasLink VARCHAR(MAX),
+    fileName VARCHAR(MAX),
+    fileData VARBINARY(MAX),
     courseId INT,
-    studentId INT,
-    FOREIGN KEY (courseId) REFERENCES course(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    FOREIGN KEY (courseId) REFERENCES course(id)
 );
 GO
 
@@ -88,10 +75,8 @@ GO
 CREATE TABLE criteria (
     id INT IDENTITY(1,1) PRIMARY KEY,
     description VARCHAR(MAX),
-    assessmentId INT,
-    studentId INT,
-    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    assessmentId INT
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id)
 );
 GO
 
@@ -100,26 +85,87 @@ CREATE TABLE rating (
     id INT IDENTITY(1,1) PRIMARY KEY,
     description VARCHAR(MAX),
     grade VARCHAR(225),
-    criteriaId INT,
-    studentId INT,
-    FOREIGN KEY (criteriaId) REFERENCES criteria(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    criteriaId INT
+    FOREIGN KEY (criteriaId) REFERENCES criteria(id)
 );
 GO
 
--- Create the event table
-CREATE TABLE event (
+-- Create the student table
+CREATE TABLE student (
+    studentId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    degree VARCHAR(225),
+    profileImage VARBINARY(MAX)
+);
+GO
+
+-- Create the yearAssociation table
+CREATE TABLE yearAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name INT,
+    isStudent BIT,
+    userId INT,
+	FOREIGN KEY (name) REFERENCES year(name),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the semesterAssociation table
+CREATE TABLE semesterAssociation (
     id INT IDENTITY(1,1) PRIMARY KEY,
     name VARCHAR(MAX),
-    date DATETIME,
-    startTime TIME (7),
-    endTime TIME (7),
-    category VARCHAR(MAX),
-    color INT,
+    isStudent BIT,
+    yearId INT,
+	semesterId INT,
+    userId INT,
+	FOREIGN KEY (semesterId) REFERENCES semester(id),
+    FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the courseAssociation table
+CREATE TABLE courseAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    isStudent BIT,
     courseId INT,
-    studentId INT,
+	semesterId INT,
+    userId INT,
+	FOREIGN KEY (semesterId) REFERENCES semesterAssociation(id),
     FOREIGN KEY (courseId) REFERENCES course(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the studentCourse table
+CREATE TABLE studentCourse (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    courseAssociationId INT,
+    isCompleted BIT,
+    courseMark DECIMAL (18,2),
+    tutorialId INT,
+    userId INT,
+	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (tutorialId) REFERENCES tutorial(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the studentAssessment table
+CREATE TABLE studentAssessment (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    assessmentId INT,
+    status INT,
+    studentMark DECIMAL (18,2),
+    isFinalised BIT,
+    feedback VARCHAR(MAX),
+    courseId INT,
+    userId INT,
+	FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId),
+    FOREIGN KEY (courseId) REFERENCES courseAssociation(id)
 );
 GO
 
@@ -129,9 +175,9 @@ CREATE TABLE checkList (
     name VARCHAR(MAX),
     isChecked BIT,
     assessmentId INT,
-    studentId INT,
-    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    userId INT,
+    FOREIGN KEY (assessmentId) REFERENCES studentAssessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
 );
 GO
 
@@ -147,18 +193,34 @@ CREATE TABLE feedbackResult (
     previousAttemptId VARCHAR(MAX),
     previousAssessmentId VARCHAR(MAX),
     assessmentId INT,
-    studentId INT,
-    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
-    FOREIGN KEY (studentId) REFERENCES student(studentId)
+    userId INT,
+    FOREIGN KEY (assessmentId) REFERENCES studentAssessment(id),
+    FOREIGN KEY (userId) REFERENCES student(studentId)
 );
 GO
 
--- Create the tutor table
-CREATE TABLE tutor (
-    tutorId INT PRIMARY KEY,
-    name VARCHAR(225) NOT NULL,
-    email VARCHAR(225) NOT NULL,
-    password VARCHAR(225) NOT NULL,
-    profileImage VARBINARY(MAX)
+-- Create the event table
+CREATE TABLE event (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(MAX),
+    date DATETIME,
+    startTime TIME (7),
+    endTime TIME (7),
+    category VARCHAR(MAX),
+    color INT,
+    courseId INT,
+    userId INT,
+    FOREIGN KEY (courseId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (userId) REFERENCES student(userId)
 );
 GO
+
+---- Create the tutor table
+--CREATE TABLE tutor (
+--    tutorId INT PRIMARY KEY,
+--    name VARCHAR(225) NOT NULL,
+--    email VARCHAR(225) NOT NULL,
+--    password VARCHAR(225) NOT NULL,
+--    profileImage VARBINARY(MAX)
+--);
+--GO

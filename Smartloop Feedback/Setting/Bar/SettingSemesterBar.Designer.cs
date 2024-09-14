@@ -33,6 +33,7 @@
             this.autumnBtn = new System.Windows.Forms.Button();
             this.summerBtn = new System.Windows.Forms.Button();
             this.backBtn = new System.Windows.Forms.Button();
+            this.navPl = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // springBtn
@@ -52,6 +53,7 @@
             this.springBtn.UseVisualStyleBackColor = true;
             this.springBtn.Visible = false;
             this.springBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
+            this.springBtn.Leave += new System.EventHandler(this.ResetButtonColor);
             // 
             // winterBtn
             // 
@@ -70,6 +72,7 @@
             this.winterBtn.UseVisualStyleBackColor = true;
             this.winterBtn.Visible = false;
             this.winterBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
+            this.winterBtn.Leave += new System.EventHandler(this.ResetButtonColor);
             // 
             // autumnBtn
             // 
@@ -88,6 +91,7 @@
             this.autumnBtn.UseVisualStyleBackColor = true;
             this.autumnBtn.Visible = false;
             this.autumnBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
+            this.autumnBtn.Leave += new System.EventHandler(this.ResetButtonColor);
             // 
             // summerBtn
             // 
@@ -106,6 +110,7 @@
             this.summerBtn.UseVisualStyleBackColor = true;
             this.summerBtn.Visible = false;
             this.summerBtn.Click += new System.EventHandler(this.SemesterBtn_Click);
+            this.summerBtn.Leave += new System.EventHandler(this.ResetButtonColor);
             // 
             // backBtn
             // 
@@ -124,12 +129,21 @@
             this.backBtn.UseVisualStyleBackColor = true;
             this.backBtn.Click += new System.EventHandler(this.backBtn_Click);
             // 
+            // navPl
+            // 
+            this.navPl.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.navPl.Location = new System.Drawing.Point(0, 48);
+            this.navPl.Name = "navPl";
+            this.navPl.Size = new System.Drawing.Size(3, 100);
+            this.navPl.TabIndex = 21;
+            // 
             // SettingSemesterBar
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(10)))), ((int)(((byte)(22)))), ((int)(((byte)(39)))));
             this.ClientSize = new System.Drawing.Size(154, 216);
+            this.Controls.Add(this.navPl);
             this.Controls.Add(this.springBtn);
             this.Controls.Add(this.winterBtn);
             this.Controls.Add(this.autumnBtn);
@@ -151,5 +165,6 @@
         private System.Windows.Forms.Button autumnBtn;
         private System.Windows.Forms.Button summerBtn;
         private System.Windows.Forms.Button backBtn;
+        private System.Windows.Forms.Panel navPl;
     }
 }

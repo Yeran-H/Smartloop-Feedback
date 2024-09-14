@@ -1,4 +1,6 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -9,14 +11,14 @@ namespace Smartloop_Feedback.Dashboard
 {
     public partial class DashboardForm : Form
     {
-        public Student student;
+        public User user;
         public MainForm mainForm;
         private bool isHourlyView = false;
 
-        public DashboardForm(Student student, MainForm mainForm)
+        public DashboardForm(User user, MainForm mainForm)
         {
             InitializeComponent();
-            this.student = student;
+            this.user = user;
             this.mainForm = mainForm;
         }
 
@@ -59,20 +61,22 @@ namespace Smartloop_Feedback.Dashboard
             };
             courseDgv.Columns.Add(tagsColumn);
 
-            foreach (Year year in student.YearList.Values)
+            foreach (Objects.Updated.User_Object.YearAssociation year in user.YearList.Values)
             {
-                foreach (Semester semester in year.SemesterList.Values)
+                foreach (SemesterAssociation semester in year.SemesterList.Values)
                 {
-                    foreach (Course course in semester.CourseList.Values)
+                    foreach (StudentCourse course in semester.CourseList.Values)
                     {
                         if (!course.IsCompleted)
                         {
-                            int rowIndex = courseDgv.Rows.Add(course.Code, course.Title, "", "");
-                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Id };
+                            int rowIndex = courseDgv.Rows.Add(course.Code, course.Name, "", "");
+                            courseDgv.Rows[rowIndex].Cells["Tags"].Tag = new List<object> { year.Name, semester.Name, course.Code, 0, 0 };
                         }
                     }
                 }
             }
+
+            DataGridColor(courseDgv);
         }
 
         private void courseDgv_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -83,13 +87,13 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (e.ColumnIndex == courseDgv.Columns["canvasBtn"].Index)
                 {
-                    string canvasLink = student.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
-                    OpenUrl(canvasLink);
+                   string canvasLink = user.YearList[(int)tags[0]].SemesterList[(string)tags[1]].CourseList[(int)tags[2]].CanvasLink;
+                   OpenUrl(canvasLink);
                 }
                 else if (e.ColumnIndex == courseDgv.Columns["courseBtn"].Index)
                 {
                     mainForm.position = tags;
-                    mainForm.MainPannel(0);
+                    mainForm.MainPannel(1);
                 }
             }
         }
@@ -120,13 +124,15 @@ namespace Smartloop_Feedback.Dashboard
 
             DateTime today = DateTime.Today;
 
-            foreach (Event events in student.EventList.Values)
+            foreach (Event events in user.EventList.Values)
             {
                 if (events.Date >= today)
                 {
                     eventDgv.Rows.Add(events.Name, events.Date, events.Category);
                 }
             }
+
+            DataGridColor(eventDgv);
         }
 
         private void PopulateHourlyView()
@@ -146,7 +152,7 @@ namespace Smartloop_Feedback.Dashboard
                 eventDgv.Rows.Add(hour.ToString("HH:mm"), "");
             }
 
-            foreach (Event events in student.EventList.Values)
+            foreach (Event events in user.EventList.Values)
             {
                 if (events.Date.Date == today)
                 {
@@ -160,13 +166,15 @@ namespace Smartloop_Feedback.Dashboard
                     }
                 }
             }
+
+            DataGridColor(eventDgv);
         }
 
         private void PopulateComboBox()
         {
             filterCb.Items.Clear();
             filterCb.Items.Add("All");
-            filterCb.Items.AddRange(student.GetCourseList().ToArray());
+            filterCb.Items.AddRange(user.GetCourseList().ToArray());
         }
 
         private void filterCb_SelectedIndexChanged(object sender, EventArgs e)
@@ -183,7 +191,7 @@ namespace Smartloop_Feedback.Dashboard
 
                 if (selectedCourse != "All")
                 {
-                    foreach (Event events in student.EventList.Values)
+                    foreach (Event events in user.EventList.Values)
                     {
                         if (events.Category == selectedCourse)
                         {
@@ -195,7 +203,7 @@ namespace Smartloop_Feedback.Dashboard
                 {
                     DateTime today = DateTime.Today;
 
-                    foreach (Event events in student.EventList.Values)
+                    foreach (Event events in user.EventList.Values)
                     {
                         if (events.Date >= today)
                         {
@@ -219,6 +227,47 @@ namespace Smartloop_Feedback.Dashboard
                 toggleViewBtn.Text = "Toggle to Default View";
             }
             isHourlyView = !isHourlyView;
+        }
+
+        private void DataGridColor(System.Windows.Forms.DataGridView grid)
+        {
+            // Set DataGridView properties
+            grid.BackgroundColor = Color.FromArgb(16, 34, 61);
+            grid.GridColor = Color.FromArgb(254, 0, 57);
+            grid.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set column header style
+            grid.ColumnHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.ColumnHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.ColumnHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set row header style
+            grid.RowHeadersDefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+            grid.RowHeadersDefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.RowHeadersDefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set cell border style
+            grid.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            grid.AdvancedCellBorderStyle.All = DataGridViewAdvancedCellBorderStyle.Single;
+            grid.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+            grid.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+
+            // Set button cell style specifically
+            foreach (DataGridViewColumn col in grid.Columns)
+            {
+                if (col.CellTemplate is StyledButtonCell)
+                {
+                    col.DefaultCellStyle.BackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.ForeColor = Color.FromArgb(193, 193, 193);
+                    col.DefaultCellStyle.SelectionBackColor = Color.FromArgb(16, 34, 61);
+                    col.DefaultCellStyle.SelectionForeColor = Color.FromArgb(193, 193, 193);
+                }
+            }
         }
     }
 }

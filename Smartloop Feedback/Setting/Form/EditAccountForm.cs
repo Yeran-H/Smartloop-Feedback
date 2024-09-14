@@ -1,21 +1,24 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Web.Hosting;
 using System.Windows.Forms;
 
 namespace Smartloop_Feedback.Setting
 {
     public partial class EditAccountForm : Form
     {
-        public Student student; // Reference to the student object
+        public User user; // Reference to the student object
         public MainForm mainForm; // Reference to the main form
 
         // Constructor for EditAccountForm, initializes the form with the student and main form references
-        public EditAccountForm(Student student, MainForm mainForm)
+        public EditAccountForm(User user, MainForm mainForm)
         {
             InitializeComponent();
-            this.student = student;
+            this.user = user;
             this.mainForm = mainForm;
         }
 
@@ -23,15 +26,24 @@ namespace Smartloop_Feedback.Setting
         private void EditAccountForm_Load(object sender, EventArgs e)
         {
             // Populate the form fields with the student's current information
-            nameTb.Text = student.Name;
-            emailTb.Text = student.Email;
-            passwordTb.Text = student.Password;
-            degreeTb.Text = student.Degree;
+            nameTb.Text = user.Name;
+            emailTb.Text = user.Email;
+            passwordTb.Text = user.Password;
+            if(user is Student student)
+            {
+                degreeTb.Text = student.Degree;
+            }
+            else
+            {
+                degreeTb.Visible = false;
+                degreePl.Visible = false;
+                degreePb.Visible = false;
+            }
 
             // If the student has a profile image, display it
-            if (student.ProfileImage != null)
+            if (user.ProfileImage != null)
             {
-                using (var ms = new MemoryStream(student.ProfileImage))
+                using (var ms = new MemoryStream(user.ProfileImage))
                 {
                     profilePb.Image = Image.FromStream(ms);
                 }
@@ -73,38 +85,46 @@ namespace Smartloop_Feedback.Setting
                 }
                 catch (ExternalException)
                 {
-                    profileImage = student.ProfileImage;
+                    profileImage = user.ProfileImage;
                 }
             }
 
-            Student newStudent = new Student(0, name, email, password, degree, profileImage);
+            User newUser = new User(0, name, email, password, profileImage, user.IsStudent);
 
             // Validate the password
-            if (!newStudent.ValidatePassword())
+            if (!newUser.ValidatePassword())
             {
                 MessageBox.Show("Password must be at least 8 characters long.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             // Validate the email address
-            if (!newStudent.ValidateEmail())
+            if (!newUser.ValidateEmail())
             {
                 MessageBox.Show("Email must end with @student.uts.edu.au or @gmail.com.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            // Update the student information in the database
-            student.UpdateToDatabase(newStudent);
+            // Update the user information in the database
+            if(user is Student student)
+            {
+                student.Name = name;
+                student.Email = email;
+                student.Password = password;
+                student.Degree = degree;
+                student.ProfileImage = profileImage;
+                student.UpdateToDatabase();
+            }
 
             // Navigate to the main panel
-            mainForm.MainPannel(6);
+            mainForm.MainPannel(5);
         }
 
         // Event handler for delete button click to delete the student record
         private void deleteBtn_Click(object sender, EventArgs e)
         {
             DialogResult result = MessageBox.Show(
-                "Are you sure you want to delete the student record? This will result in removing all associated objects as well.",
+                "Are you sure you want to delete the user record? This will result in removing all associated objects as well.",
                 "Confirm Deletion",
                 MessageBoxButtons.YesNo,
                 MessageBoxIcon.Warning
@@ -113,11 +133,11 @@ namespace Smartloop_Feedback.Setting
             if (result == DialogResult.Yes)
             {
                 // Delete the student record from the database
-                student.DeleteStudentFromDatabase();
-            }
+                user.DeleteUserFromDatabase();
 
-            // Navigate to the main panel
-            mainForm.MainPannel(3);
+                // Navigate to the main panel
+                mainForm.MainPannel(8);
+            }
         }
     }
 }
