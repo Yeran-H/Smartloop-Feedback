@@ -179,6 +179,18 @@
     <Compile Include="Academic Portfolio\Add Form\AddCourseForm.Designer.cs">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Academic Portfolio\TutorCourseForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\TutorCourseForm.Designer.cs">
+      <DependentUpon>TutorCourseForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Academic Portfolio\TutorialClassForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Academic Portfolio\TutorialClassForm.Designer.cs">
+      <DependentUpon>TutorialClassForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Coordinator\Add\CoordinatorAddAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -382,6 +394,12 @@
     </Compile>
     <EmbeddedResource Include="Academic Portfolio\Add Form\AddCourseForm.resx">
       <DependentUpon>AddCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\TutorCourseForm.resx">
+      <DependentUpon>TutorCourseForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Academic Portfolio\TutorialClassForm.resx">
+      <DependentUpon>TutorialClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Coordinator\Add\CoordinatorAddAssessmentForm.resx">
       <DependentUpon>CoordinatorAddAssessmentForm.cs</DependentUpon>

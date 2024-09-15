@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 
 namespace Smartloop_Feedback.Objects.Updated.User_Object
 {
@@ -101,6 +102,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                             {
                                 StudentCourse studentCourse = new StudentCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
                                 CourseList.Add(studentCourse.Code, studentCourse);
+                            }
+                            else
+                            {
+                                TutorCourse tutorCourse = new TutorCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
+                                CourseList.Add(tutorCourse.Code, tutorCourse);
                             }
                         }
                     }

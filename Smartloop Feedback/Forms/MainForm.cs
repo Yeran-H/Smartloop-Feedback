@@ -20,6 +20,8 @@ using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
 using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
+using Smartloop_Feedback.Academic_Portfolio;
 
 namespace Smartloop_Feedback
 {
@@ -268,6 +270,15 @@ namespace Smartloop_Feedback
                         titleLb.Text = studentCourse.Name;
                         this.formLoaderPl.Controls.Clear();
                         StudentCourseForm course = new StudentCourseForm(studentCourse, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        course.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(course);
+                        course.Show();
+                    }
+                    else if(list != null && list is TutorCourse tutorCourse)
+                    {
+                        titleLb.Text = tutorCourse.Name;
+                        this.formLoaderPl.Controls.Clear();
+                        TutorCourseForm course = new TutorCourseForm(tutorCourse, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                         course.FormBorderStyle = FormBorderStyle.None;
                         this.formLoaderPl.Controls.Add(course);
                         course.Show();
