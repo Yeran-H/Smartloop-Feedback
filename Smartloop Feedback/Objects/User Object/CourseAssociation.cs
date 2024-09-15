@@ -46,7 +46,16 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO courseAssociation (courseId, userId, semesterId, isStudent) VALUES (@courseId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                string sql;
+
+                if (IsStudent)
+                {
+                    sql = "INSERT INTO courseAssociation (courseId, studentId, semesterId, isStudent) VALUES (@courseId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();";
+                }
+                else
+                {
+                    sql = "INSERT INTO courseAssociation (courseId, tutorId, semesterId, isStudent) VALUES (@courseId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                }
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {

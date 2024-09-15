@@ -17,7 +17,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
         private Semester Semester;
         private Smartloop_Feedback.Objects.Coordinator Coordinator;
         public Course course;
-        public int tutorialId;
+        public List<int> tutorialId;
         private bool IsStudent;
 
         public AddCourseForm(Semester semester, bool IsStudent)
@@ -25,6 +25,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
             InitializeComponent();
             this.Semester = semester;
             this.IsStudent = IsStudent;
+            tutorialId = new List<int>();
             Coordinator = new Smartloop_Feedback.Objects.Coordinator(semester);
         }
 
@@ -181,7 +182,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
                         {
                             if (Convert.ToBoolean(row.Cells["Select"].Value))
                             {
-                                tutorialId = (int)row.Tag;
+                                tutorialId.Add((int)row.Tag);
                                 this.DialogResult = DialogResult.OK;
                                 this.Close();
                             }
@@ -191,6 +192,19 @@ namespace Smartloop_Feedback.Academic_Portfolio.Add_Form
                     {
                         MessageBox.Show("Must pick one tutorial class only.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                else
+                {
+                    foreach (DataGridViewRow row in tutorialDgv.Rows)
+                    {
+                        if (Convert.ToBoolean(row.Cells["Select"].Value))
+                        {
+                            tutorialId.Add((int)row.Tag);
+                            this.DialogResult = DialogResult.OK;
+                        }
+                    }
+
+                    this.Close();
                 }
             }
             else

@@ -74,7 +74,16 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND userId = @userId"; // SQL query to fetch courses
+                string sql;
+
+                if (IsStudent)
+                {
+                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND studentId = @userId"; // SQL query to fetch courses
+                }
+                else
+                {
+                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND tutorId = @userId"; // SQL query to fetch courses
+                }
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {

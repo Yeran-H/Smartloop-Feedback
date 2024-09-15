@@ -2,6 +2,7 @@
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -78,7 +79,11 @@ namespace Smartloop_Feedback
                 {
                     if(semester.IsStudent)
                     {
-                        semester.CourseList.Add(addCourseForm.course.Code, new StudentCourse(addCourseForm.course.CourseId, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId));
+                        semester.CourseList.Add(addCourseForm.course.Code, new StudentCourse(addCourseForm.course.CourseId, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId[0]));
+                    }
+                    else
+                    {
+                        semester.CourseList.Add(addCourseForm.course.Code, new TutorCourse(addCourseForm.course.CourseId, semester.UserId, semester.Id, semester.IsStudent, addCourseForm.tutorialId));
                     }
 
                     InitializeBar();

@@ -53,6 +53,16 @@ CREATE TABLE tutorial (
 );
 GO
 
+-- Create the tutorialAssociation table
+CREATE TABLE tutorialAssociation (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    tutorialId INT NULL,
+    generalFeedback VARCHAR(MAX),
+    isCompleted BIT,
+    FOREIGN KEY (tutorialId) REFERENCES tutorial(id)
+);
+GO
+
 -- Create the assessment table
 CREATE TABLE assessment (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -188,12 +198,35 @@ CREATE TABLE courseAssociation (
     isStudent BIT,
     courseId INT,
 	semesterId INT,
-    userId INT,
+    studentId INT,
+    tutorId INT,
 	FOREIGN KEY (semesterId) REFERENCES semesterAssociation(id),
     FOREIGN KEY (courseId) REFERENCES course(id),
-    FOREIGN KEY (userId) REFERENCES student(studentId)
+    FOREIGN KEY (studentId) REFERENCES student(studentId),
+    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId)
 );
 GO
+
+-- Create a trigger to enforce that only one of studentId or tutorId is populated for Course
+CREATE TRIGGER TRG_Check_UserAssociation_CourseAssociation
+ON courseAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    -- Check the condition for each inserted or updated row
+    IF EXISTS (
+        SELECT 1
+        FROM courseAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        -- If the condition is violated, raise an error
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
 
 -- Create the studentCourse table
 CREATE TABLE studentCourse (
@@ -206,6 +239,17 @@ CREATE TABLE studentCourse (
 	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
     FOREIGN KEY (tutorialId) REFERENCES tutorial(id),
     FOREIGN KEY (userId) REFERENCES student(studentId)
+);
+GO
+
+-- Create the tutorCourse table
+CREATE TABLE tutorCourse (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    courseAssociationId INT,
+    tutorialId VARCHAR(MAX),
+    userId INT,
+	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (userId) REFERENCES tutor(tutorId)
 );
 GO
 
