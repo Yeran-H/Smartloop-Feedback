@@ -57,7 +57,7 @@ namespace Smartloop_Feedback
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
             
             this.user = user;
-            position = new List<object>(new object[5]);
+            position = new List<object>(new object[7]);
 
             MainPannel(0);
         }
@@ -308,6 +308,14 @@ namespace Smartloop_Feedback
                         this.formLoaderPl.Controls.Add(aIForm);
                         aIForm.Show();
                     }
+                    else if (list2 != null && list2 is TutorCourse tutorFeedback)
+                    {
+                        this.formLoaderPl.Controls.Clear();
+                        AIForm aIForm = new AIForm(tutorFeedback.TutorTutorialList[(int)position[3]].StudentList[(int)position[4]].StudentAssessmentList[(int)position[5]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        aIForm.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(aIForm);
+                        aIForm.Show();
+                    }
                     break;
                 case 4:
                     this.formLoaderPl.Controls.Clear();
@@ -353,6 +361,18 @@ namespace Smartloop_Feedback
                     {
                         this.formLoaderPl.Controls.Clear();
                         TutorialClassForm course = new TutorialClassForm(tutorClass.TutorTutorialList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        course.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(course);
+                        course.Show();
+                    }
+                    break;
+                case 10:
+                    var list4 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
+
+                    if (list4 != null && list4 is TutorCourse tutorialStudentAssessment)
+                    {
+                        this.formLoaderPl.Controls.Clear();
+                        TutorialStudentAssessmentForm course = new TutorialStudentAssessmentForm(tutorialStudentAssessment.TutorTutorialList[(int)position[3]].StudentList[(int)position[4]].StudentAssessmentList[(int)position[5]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                         course.FormBorderStyle = FormBorderStyle.None;
                         this.formLoaderPl.Controls.Add(course);
                         course.Show();

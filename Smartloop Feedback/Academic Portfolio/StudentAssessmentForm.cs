@@ -295,7 +295,7 @@ namespace Smartloop_Feedback
             {
                 DataGridViewRow row = this.attemptDgv.Rows[e.RowIndex];
                 mainForm.position[4] = (int)row.Tag;
-                mainForm.MainPannel(10); // Navigate to the main panel
+                mainForm.MainPannel(3); // Navigate to the main panel
             }
         }
 

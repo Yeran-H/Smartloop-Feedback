@@ -19,7 +19,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
         {
             StudentList = new Dictionary<int, StudentCourse>();
             LoadTutorialAssociationFromDatabase();
-            LoadStudentAssessment();
+            LoadStudentCourse();
         }
 
         public TutorialAssociation(int id, bool x)
@@ -29,7 +29,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             IsCompleted = false;
             StudentList = new Dictionary<int, StudentCourse>();
             AddTutorialAssociationToDatabase();
-            LoadStudentAssessment();
+            LoadStudentCourse();
         }
 
         private void AddTutorialAssociationToDatabase()
@@ -67,7 +67,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             }
         }
 
-        private void LoadStudentAssessment()
+        private void LoadStudentCourse()
         {
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {

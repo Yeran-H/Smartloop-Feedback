@@ -47,7 +47,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
                     count++;
                     DataGridViewButtonColumn assessmentColumn = new DataGridViewButtonColumn
                     {
-                        Name = "assessment-" + count,
+                        Name = assessment.Name,
                         HeaderText = assessment.Name,
                         UseColumnTextForButtonValue = true, // Ensure text is used on the button
                         Text = "View", // Set the text to display on the button
@@ -66,9 +66,9 @@ namespace Smartloop_Feedback.Academic_Portfolio
                     row.Tag = studentCourse.Id; // Store the student ID in the row's tag
 
                     // Populate cells for each assessment with the "View" button
-                    for (int i = 1; i <= count; i++)
+                    foreach (Assessment assessment in studentCourse.StudentAssessmentList.Values)
                     {
-                        row.Cells["assessment-" + i].Value = "View";
+                        row.Cells[assessment.Name].Value = "View"; // Use assessment.Name to reference the correct column
                     }
                 }
 
@@ -122,7 +122,21 @@ namespace Smartloop_Feedback.Academic_Portfolio
 
         private void studentDgv_CellClick(object sender, DataGridViewCellEventArgs e)
         {
+            if (e.RowIndex >= 0)
+            {
+                DataGridViewRow row = this.studentDgv.Rows[e.RowIndex];
+                StudentCourse studentCourse = tutorialAssociation.StudentList[(int)row.Tag];
 
+                foreach(StudentAssessment assessment in studentCourse.StudentAssessmentList.Values)
+                {
+                    if(assessment.Name == studentDgv.Columns[e.ColumnIndex].Name)
+                    {
+                        mainForm.position[4] = studentCourse.Id;
+                        mainForm.position[5] = assessment.Id;
+                        mainForm.MainPannel(10);
+                    }
+                }
+            }
         }
     }
 }
