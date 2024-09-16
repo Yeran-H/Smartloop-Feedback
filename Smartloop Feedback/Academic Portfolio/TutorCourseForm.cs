@@ -102,7 +102,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
             {
                 DataGridViewRow row = this.tutorialDgv.Rows[e.RowIndex];
                 mainForm.position[3] = (int)row.Tag; // Set position for navigation
-                mainForm.MainPannel(2); // Navigate to the main panel
+                mainForm.MainPannel(9); // Navigate to the main panel
             }
         }
     }

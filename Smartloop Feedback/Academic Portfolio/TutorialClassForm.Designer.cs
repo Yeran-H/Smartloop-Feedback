@@ -39,11 +39,11 @@
             this.tutorialLb.AutoSize = true;
             this.tutorialLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tutorialLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.tutorialLb.Location = new System.Drawing.Point(304, 29);
+            this.tutorialLb.Location = new System.Drawing.Point(242, 29);
             this.tutorialLb.Name = "tutorialLb";
-            this.tutorialLb.Size = new System.Drawing.Size(169, 36);
+            this.tutorialLb.Size = new System.Drawing.Size(310, 36);
             this.tutorialLb.TabIndex = 55;
-            this.tutorialLb.Text = "Assessment";
+            this.tutorialLb.Text = "Tutorial XX Student List";
             // 
             // studentDgv
             // 
@@ -56,13 +56,13 @@
             this.studentDgv.Location = new System.Drawing.Point(12, 68);
             this.studentDgv.Name = "studentDgv";
             this.studentDgv.ReadOnly = true;
-            this.studentDgv.Size = new System.Drawing.Size(776, 225);
+            this.studentDgv.Size = new System.Drawing.Size(726, 225);
             this.studentDgv.TabIndex = 54;
             this.studentDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentDgv_CellClick);
             // 
             // generalTb
             // 
-            this.generalTb.Location = new System.Drawing.Point(61, 313);
+            this.generalTb.Location = new System.Drawing.Point(36, 313);
             this.generalTb.Name = "generalTb";
             this.generalTb.Size = new System.Drawing.Size(669, 110);
             this.generalTb.TabIndex = 56;
@@ -73,7 +73,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(750, 477);
             this.Controls.Add(this.generalTb);
             this.Controls.Add(this.tutorialLb);
             this.Controls.Add(this.studentDgv);
