@@ -130,6 +130,7 @@
             this.saveBtn.TabIndex = 62;
             this.saveBtn.Text = "Save Marks";
             this.saveBtn.UseVisualStyleBackColor = false;
+            this.saveBtn.Click += new System.EventHandler(this.saveBtn_Click);
             // 
             // tutorialLb
             // 

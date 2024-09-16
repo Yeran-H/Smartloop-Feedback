@@ -112,5 +112,29 @@ namespace Smartloop_Feedback.Academic_Portfolio
                 mainForm.MainPannel(3); 
             }
         }
+
+        private void saveBtn_Click(object sender, EventArgs e)
+        {
+            string[] parts = markTb.Text.Split('/');
+
+            if (parts.Length == 2)
+            {
+                double firstNumber = double.Parse(parts[0]);
+                double secondNumber = double.Parse(parts[1]);
+
+                if (firstNumber > secondNumber)
+                {
+                    MessageBox.Show("Please ensure that the total mark is not more then 100%", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
+                assessment.StudentMark = firstNumber;
+                assessment.UpdateAssessmentToDatabase(true);
+            }
+            else
+            {
+                MessageBox.Show("Please enter marks as xx/xx", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

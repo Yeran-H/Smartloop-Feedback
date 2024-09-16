@@ -35,7 +35,6 @@ namespace Smartloop_Feedback
             markTb.Text = assessment.StudentMark.ToString() + "/" + assessment.Mark.ToString();
             dateP.Value = assessment.Date;
             descriptionRb.Text = assessment.Description;
-            finaliseCb.Checked = assessment.IsFinalised;
             feedbackRb.Text = assessment.Feedback;
 
             PopulateCheckListBox();
@@ -53,6 +52,7 @@ namespace Smartloop_Feedback
             {
                 LoadAttemptData();
             }
+
             isFinalised();
         }
 
@@ -208,7 +208,6 @@ namespace Smartloop_Feedback
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            assessment.UpdateAssessmentToDatabase(finaliseCb.Checked);
             mainForm.MainPannel(1);
         }
 
