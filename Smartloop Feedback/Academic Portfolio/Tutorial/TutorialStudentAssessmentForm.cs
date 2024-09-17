@@ -100,7 +100,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MainPannel(9);
+            mainForm.MainPannel(1);
         }
 
         private void attemptDgv_CellClick(object sender, DataGridViewCellEventArgs e)

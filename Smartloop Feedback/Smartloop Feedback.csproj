@@ -185,12 +185,6 @@
     <Compile Include="Academic Portfolio\Tutorial\TutorCourseForm.Designer.cs">
       <DependentUpon>TutorCourseForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="Academic Portfolio\Tutorial\TutorialClassForm.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Academic Portfolio\Tutorial\TutorialClassForm.Designer.cs">
-      <DependentUpon>TutorialClassForm.cs</DependentUpon>
-    </Compile>
     <Compile Include="Academic Portfolio\Tutorial\TutorialStudentAssessmentForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +246,7 @@
     <Compile Include="Objects\User Object\Student\StudentCourse.cs" />
     <Compile Include="Objects\User Object\Tutor\Tutor.cs" />
     <Compile Include="Objects\User Object\Tutor\TutorCourse.cs" />
+    <Compile Include="Objects\User Object\Tutor\TutorialAssessment.cs" />
     <Compile Include="Objects\User Object\Tutor\TutorialAssociation.cs" />
     <Compile Include="Objects\User Object\User.cs" />
     <Compile Include="Objects\User Object\YearAssociation.cs" />
@@ -403,9 +398,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Tutorial\TutorCourseForm.resx">
       <DependentUpon>TutorCourseForm.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Academic Portfolio\Tutorial\TutorialClassForm.resx">
-      <DependentUpon>TutorialClassForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Academic Portfolio\Tutorial\TutorialStudentAssessmentForm.resx">
       <DependentUpon>TutorialStudentAssessmentForm.cs</DependentUpon>

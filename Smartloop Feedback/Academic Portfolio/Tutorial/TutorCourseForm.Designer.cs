@@ -29,11 +29,15 @@
         private void InitializeComponent()
         {
             this.tutorialDgv = new System.Windows.Forms.DataGridView();
-            this.assessmentDgv = new System.Windows.Forms.DataGridView();
             this.titleLb = new System.Windows.Forms.Label();
-            this.label1 = new System.Windows.Forms.Label();
+            this.tutorialLb = new System.Windows.Forms.Label();
+            this.studentDgv = new System.Windows.Forms.DataGridView();
+            this.feedbackRb = new System.Windows.Forms.RichTextBox();
+            this.feedbackLb = new System.Windows.Forms.Label();
+            this.assessmentCb = new System.Windows.Forms.CheckedListBox();
+            this.feedbackCb = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.tutorialDgv)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assessmentDgv)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentDgv)).BeginInit();
             this.SuspendLayout();
             // 
             // tutorialDgv
@@ -44,48 +48,95 @@
             this.tutorialDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.tutorialDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.tutorialDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.tutorialDgv.Location = new System.Drawing.Point(53, 92);
+            this.tutorialDgv.Location = new System.Drawing.Point(35, 92);
             this.tutorialDgv.Name = "tutorialDgv";
             this.tutorialDgv.ReadOnly = true;
-            this.tutorialDgv.Size = new System.Drawing.Size(148, 262);
+            this.tutorialDgv.Size = new System.Drawing.Size(123, 262);
             this.tutorialDgv.TabIndex = 50;
             this.tutorialDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.tutorialDgv_CellClick);
-            // 
-            // assessmentDgv
-            // 
-            this.assessmentDgv.AllowUserToAddRows = false;
-            this.assessmentDgv.AllowUserToDeleteRows = false;
-            this.assessmentDgv.AllowUserToOrderColumns = true;
-            this.assessmentDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.assessmentDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.assessmentDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.assessmentDgv.Location = new System.Drawing.Point(338, 92);
-            this.assessmentDgv.Name = "assessmentDgv";
-            this.assessmentDgv.ReadOnly = true;
-            this.assessmentDgv.Size = new System.Drawing.Size(400, 262);
-            this.assessmentDgv.TabIndex = 51;
             // 
             // titleLb
             // 
             this.titleLb.AutoSize = true;
             this.titleLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.titleLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.titleLb.Location = new System.Drawing.Point(18, 53);
+            this.titleLb.Location = new System.Drawing.Point(3, 53);
             this.titleLb.Name = "titleLb";
             this.titleLb.Size = new System.Drawing.Size(217, 36);
             this.titleLb.TabIndex = 52;
             this.titleLb.Text = "Tutorial Classes";
             // 
-            // label1
+            // tutorialLb
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.label1.Location = new System.Drawing.Point(438, 53);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(169, 36);
-            this.label1.TabIndex = 53;
-            this.label1.Text = "Assessment";
+            this.tutorialLb.AutoSize = true;
+            this.tutorialLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tutorialLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.tutorialLb.Location = new System.Drawing.Point(320, 53);
+            this.tutorialLb.Name = "tutorialLb";
+            this.tutorialLb.Size = new System.Drawing.Size(310, 36);
+            this.tutorialLb.TabIndex = 57;
+            this.tutorialLb.Text = "Tutorial XX Student List";
+            this.tutorialLb.Visible = false;
+            // 
+            // studentDgv
+            // 
+            this.studentDgv.AllowUserToAddRows = false;
+            this.studentDgv.AllowUserToDeleteRows = false;
+            this.studentDgv.AllowUserToOrderColumns = true;
+            this.studentDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.studentDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.studentDgv.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.studentDgv.Location = new System.Drawing.Point(251, 92);
+            this.studentDgv.Name = "studentDgv";
+            this.studentDgv.ReadOnly = true;
+            this.studentDgv.Size = new System.Drawing.Size(458, 137);
+            this.studentDgv.TabIndex = 56;
+            this.studentDgv.Visible = false;
+            this.studentDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studentDgv_CellClick);
+            // 
+            // feedbackRb
+            // 
+            this.feedbackRb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.feedbackRb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.feedbackRb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.feedbackRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.feedbackRb.Location = new System.Drawing.Point(428, 322);
+            this.feedbackRb.Name = "feedbackRb";
+            this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
+            this.feedbackRb.Size = new System.Drawing.Size(281, 117);
+            this.feedbackRb.TabIndex = 66;
+            this.feedbackRb.Text = "";
+            this.feedbackRb.Visible = false;
+            // 
+            // feedbackLb
+            // 
+            this.feedbackLb.AutoSize = true;
+            this.feedbackLb.Font = new System.Drawing.Font("Aptos", 21F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.feedbackLb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.feedbackLb.Location = new System.Drawing.Point(465, 256);
+            this.feedbackLb.Name = "feedbackLb";
+            this.feedbackLb.Size = new System.Drawing.Size(229, 36);
+            this.feedbackLb.TabIndex = 64;
+            this.feedbackLb.Text = "General Feeback";
+            this.feedbackLb.Visible = false;
+            // 
+            // assessmentCb
+            // 
+            this.assessmentCb.FormattingEnabled = true;
+            this.assessmentCb.Location = new System.Drawing.Point(251, 283);
+            this.assessmentCb.Name = "assessmentCb";
+            this.assessmentCb.Size = new System.Drawing.Size(165, 169);
+            this.assessmentCb.TabIndex = 67;
+            this.assessmentCb.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.assessmentCb_ItemCheck);
+            // 
+            // feedbackCb
+            // 
+            this.feedbackCb.FormattingEnabled = true;
+            this.feedbackCb.Location = new System.Drawing.Point(471, 295);
+            this.feedbackCb.Name = "feedbackCb";
+            this.feedbackCb.Size = new System.Drawing.Size(223, 21);
+            this.feedbackCb.TabIndex = 68;
+            this.feedbackCb.SelectedIndexChanged += new System.EventHandler(this.feedbackCb_SelectedIndexChanged);
             // 
             // TutorCourseForm
             // 
@@ -93,16 +144,20 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.ClientSize = new System.Drawing.Size(750, 477);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.feedbackCb);
+            this.Controls.Add(this.assessmentCb);
+            this.Controls.Add(this.feedbackRb);
+            this.Controls.Add(this.feedbackLb);
+            this.Controls.Add(this.tutorialLb);
+            this.Controls.Add(this.studentDgv);
             this.Controls.Add(this.titleLb);
-            this.Controls.Add(this.assessmentDgv);
             this.Controls.Add(this.tutorialDgv);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "TutorCourseForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "TutorCourseForm";
             ((System.ComponentModel.ISupportInitialize)(this.tutorialDgv)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.assessmentDgv)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.studentDgv)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -111,8 +166,12 @@
         #endregion
 
         private System.Windows.Forms.DataGridView tutorialDgv;
-        private System.Windows.Forms.DataGridView assessmentDgv;
         private System.Windows.Forms.Label titleLb;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label tutorialLb;
+        private System.Windows.Forms.DataGridView studentDgv;
+        private System.Windows.Forms.RichTextBox feedbackRb;
+        private System.Windows.Forms.Label feedbackLb;
+        private System.Windows.Forms.CheckedListBox assessmentCb;
+        private System.Windows.Forms.ComboBox feedbackCb;
     }
 }

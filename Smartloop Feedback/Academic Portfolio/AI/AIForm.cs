@@ -287,7 +287,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
         {
             if (mainForm.position[6] != null)
             {
-                mainForm.MainPannel(10);
+                mainForm.MainPannel(1);
             }
             else
             {

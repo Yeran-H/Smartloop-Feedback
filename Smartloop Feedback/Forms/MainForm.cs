@@ -355,18 +355,6 @@ namespace Smartloop_Feedback
                     this.Hide();
                     break;
                 case 9:
-                    var list3 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
-                    
-                    if (list3 != null && list3 is TutorCourse tutorClass)
-                    {
-                        this.formLoaderPl.Controls.Clear();
-                        TutorialClassForm course = new TutorialClassForm(tutorClass.TutorTutorialList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                        course.FormBorderStyle = FormBorderStyle.None;
-                        this.formLoaderPl.Controls.Add(course);
-                        course.Show();
-                    }
-                    break;
-                case 10:
                     var list4 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
 
                     if (list4 != null && list4 is TutorCourse tutorialStudentAssessment)

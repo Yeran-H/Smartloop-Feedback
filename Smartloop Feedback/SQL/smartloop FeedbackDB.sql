@@ -63,6 +63,18 @@ CREATE TABLE tutorialAssociation (
 );
 GO
 
+-- Create the tutorialAssessment table
+CREATE TABLE tutorialAssessment (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    tutorialId INT NULL,
+    generalFeedback VARCHAR(MAX),
+    isCompleted BIT,
+    assessmentId INT NULL,
+    FOREIGN KEY (tutorialId) REFERENCES tutorialAssociation(id),
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id)
+);
+GO
+
 -- Create the assessment table
 CREATE TABLE assessment (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -314,13 +326,3 @@ CREATE TABLE event (
     FOREIGN KEY (userId) REFERENCES student(userId)
 );
 GO
-
----- Create the tutor table
---CREATE TABLE tutor (
---    tutorId INT PRIMARY KEY,
---    name VARCHAR(225) NOT NULL,
---    email VARCHAR(225) NOT NULL,
---    password VARCHAR(225) NOT NULL,
---    profileImage VARBINARY(MAX)
---);
---GO
