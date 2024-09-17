@@ -289,6 +289,21 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                         cmd.ExecuteNonQuery();
                     }
                 }
+                else
+                {
+                    string deleteQuery = @"
+                    DELETE FROM tutor
+                    WHERE tutorId = @tutorId";
+
+                    using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                    {
+                        // Add the parameter for studentId
+                        cmd.Parameters.AddWithValue("@tutorId", Id);
+
+                        // Execute the delete command
+                        cmd.ExecuteNonQuery();
+                    }
+                }
             }
         }
 

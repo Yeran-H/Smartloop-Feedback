@@ -45,5 +45,37 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
                 }
             }
         }
+
+        // Update tutor details in the database
+        public void UpdateToDatabase()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string updateQuery = @"
+                    UPDATE tutor
+                    SET 
+                        name = @name,
+                        email = @email,
+                        password = @password,
+                        profileImage = @profileImage
+                    WHERE
+                        tutorId = @tutorId";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@tutorId", Id);
+                    cmd.Parameters.AddWithValue("@name", Name);
+                    cmd.Parameters.AddWithValue("@email", Email);
+                    cmd.Parameters.AddWithValue("@password", Password);
+                    cmd.Parameters.AddWithValue("@profileImage", ProfileImage);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }
