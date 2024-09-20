@@ -245,6 +245,9 @@ namespace Smartloop_Feedback.Objects
                 conn.Open();
 
                 string deleteQuery = @"
+                    DELETE FROM TutorialAssessment
+                    WHERE assessmentId = @id;
+
                     DELETE FROM assessment
                     WHERE id = @id;";
 

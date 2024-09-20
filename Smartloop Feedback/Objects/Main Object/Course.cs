@@ -314,6 +314,22 @@ namespace Smartloop_Feedback.Objects
         {
             if (AssessmentList.ContainsKey(assessmentId))
             {
+                using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+                {
+                    conn.Open(); // Open the connection
+                    SqlCommand cmd = new SqlCommand("SELECT id, courseId, studentId FROM studentAssessment WHERE courseId = @courseId AND studentID IS NOT NULL", conn); // SQL query to fetch assessments
+                    cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                    {
+                        while (reader.Read()) // Read each row
+                        {
+                            var temp = new StudentAssessment(reader.GetInt32(0), assessmentId, reader.GetInt32(1), reader.GetInt32(2));
+                            temp.DeleteStudentAssessmentFromDatabase();
+                        }
+                    }
+                }
+
                 AssessmentList[assessmentId].DeleteAssessmentFromDatabase(); // Delete the assessment from the database
                 AssessmentList.Remove(assessmentId); // Remove the assessment from the list
             }

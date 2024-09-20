@@ -43,6 +43,18 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             LoadFeedbackListFromDatabase();
         }
 
+        public StudentAssessment(int id, int assessmentId, int courseId, int userId)
+            : base(assessmentId)
+        {
+            this.Id = id;
+            this.StudentCourseId = courseId;
+            this.UserId = userId;
+            CheckList = new List<CheckList>();
+            FeedbackList = new SortedDictionary<int, FeedbackResult>();
+            LoadCheckListFromDatabase();
+            LoadFeedbackListFromDatabase();
+        }
+
         public StudentAssessment(int assessmentId, int courseId, int userId)
             : base(assessmentId)
         {
