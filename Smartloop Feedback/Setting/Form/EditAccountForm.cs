@@ -1,5 +1,6 @@
 ﻿using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 using System;
 using System.Drawing;
 using System.IO;
@@ -114,6 +115,14 @@ namespace Smartloop_Feedback.Setting
                 student.Degree = degree;
                 student.ProfileImage = profileImage;
                 student.UpdateToDatabase();
+            }
+            else if (user is Tutor tutor)
+            {
+                tutor.Name = name;
+                tutor.Email = email;
+                tutor.Password = password;
+                tutor.ProfileImage = profileImage;
+                tutor.UpdateToDatabase();
             }
 
             // Navigate to the main panel

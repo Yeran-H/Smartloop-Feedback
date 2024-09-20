@@ -42,16 +42,15 @@
             this.canvasBtn = new System.Windows.Forms.Button();
             this.rubricBtn = new System.Windows.Forms.Button();
             this.attemptBtn = new System.Windows.Forms.Button();
-            this.finaliseCb = new System.Windows.Forms.CheckBox();
             this.panelDetails = new System.Windows.Forms.Panel();
             this.downloadBtn = new System.Windows.Forms.Button();
             this.feedbackRb = new System.Windows.Forms.RichTextBox();
             this.attemptDgv = new System.Windows.Forms.DataGridView();
-            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelCriteria = new System.Windows.Forms.Panel();
             this.bacBtn = new System.Windows.Forms.Button();
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelDetails.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.attemptDgv)).BeginInit();
             this.panelCriteria.SuspendLayout();
@@ -90,6 +89,7 @@
             // 
             this.markTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.markTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.markTb.Enabled = false;
             this.markTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.markTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.markTb.HideSelection = false;
@@ -223,25 +223,11 @@
             this.attemptBtn.UseVisualStyleBackColor = false;
             this.attemptBtn.Click += new System.EventHandler(this.attemptBtn_Click);
             // 
-            // finaliseCb
-            // 
-            this.finaliseCb.AutoSize = true;
-            this.finaliseCb.Font = new System.Drawing.Font("Aptos", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.finaliseCb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.finaliseCb.Location = new System.Drawing.Point(349, 124);
-            this.finaliseCb.Name = "finaliseCb";
-            this.finaliseCb.Size = new System.Drawing.Size(242, 31);
-            this.finaliseCb.TabIndex = 41;
-            this.finaliseCb.Text = "Assessment Finalised";
-            this.toolTip1.SetToolTip(this.finaliseCb, "Check when Assessment is marked and completed");
-            this.finaliseCb.UseVisualStyleBackColor = true;
-            // 
             // panelDetails
             // 
             this.panelDetails.Controls.Add(this.downloadBtn);
             this.panelDetails.Controls.Add(this.feedbackRb);
             this.panelDetails.Controls.Add(this.attemptDgv);
-            this.panelDetails.Controls.Add(this.finaliseCb);
             this.panelDetails.Controls.Add(this.attemptBtn);
             this.panelDetails.Controls.Add(this.rubricBtn);
             this.panelDetails.Controls.Add(this.canvasBtn);
@@ -304,21 +290,6 @@
             this.attemptDgv.TabIndex = 42;
             this.attemptDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.attemptDgv_CellClick);
             // 
-            // dateP
-            // 
-            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.dateP.BorderSize = 0;
-            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateP.Location = new System.Drawing.Point(587, 9);
-            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateP.Name = "dateP";
-            this.dateP.Size = new System.Drawing.Size(130, 35);
-            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.dateP.TabIndex = 21;
-            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.toolTip1.SetToolTip(this.dateP, "Due Date of Assessment");
-            // 
             // panelCriteria
             // 
             this.panelCriteria.Controls.Add(this.bacBtn);
@@ -361,6 +332,21 @@
             this.criteriaDgv.TabIndex = 0;
             this.toolTip1.SetToolTip(this.criteriaDgv, "Rubric of Assessment");
             // 
+            // dateP
+            // 
+            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dateP.BorderSize = 0;
+            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateP.Location = new System.Drawing.Point(587, 9);
+            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
+            this.dateP.Name = "dateP";
+            this.dateP.Size = new System.Drawing.Size(130, 35);
+            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.dateP.TabIndex = 21;
+            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.toolTip1.SetToolTip(this.dateP, "Due Date of Assessment");
+            // 
             // StudentAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -399,7 +385,6 @@
         private System.Windows.Forms.Button canvasBtn;
         private System.Windows.Forms.Button rubricBtn;
         private System.Windows.Forms.Button attemptBtn;
-        private System.Windows.Forms.CheckBox finaliseCb;
         private System.Windows.Forms.Panel panelDetails;
         private System.Windows.Forms.Panel panelCriteria;
         private System.Windows.Forms.Button bacBtn;

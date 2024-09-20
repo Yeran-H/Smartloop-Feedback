@@ -4,6 +4,7 @@ using System.Configuration;
 using System.Data.SqlClient;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 
 namespace Smartloop_Feedback.Objects.Updated.User_Object
 {
@@ -44,14 +45,24 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO semesterAssociation (name, yearId, userId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                string sql;
+                
+                if(IsStudent)
+                {
+                    sql = "INSERT INTO semesterAssociation (name, yearId, studentId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                }
+                else
+                {
+                    sql = "INSERT INTO semesterAssociation (name, yearId, tutorId, semesterId, isStudent) VALUES (@name, @yearId, @userId, @semesterId, @isStudent); SELECT SCOPE_IDENTITY();"; // SQL query to insert semester and get the generated ID
+                }
+
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
                     cmd.Parameters.AddWithValue("@yearId", YearId); // Set the yearId parameter
                     cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
-                    cmd.Parameters.AddWithValue("@semesterId", Id);
+                    cmd.Parameters.AddWithValue("@semesterId", SemesterId);
                     cmd.Parameters.AddWithValue("@isStudent", IsStudent);
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
@@ -64,7 +75,16 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND userId = @userId"; // SQL query to fetch courses
+                string sql;
+
+                if (IsStudent)
+                {
+                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND studentId = @userId"; // SQL query to fetch courses
+                }
+                else
+                {
+                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND tutorId = @userId"; // SQL query to fetch courses
+                }
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -82,6 +102,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                             {
                                 StudentCourse studentCourse = new StudentCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
                                 CourseList.Add(studentCourse.Code, studentCourse);
+                            }
+                            else
+                            {
+                                TutorCourse tutorCourse = new TutorCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
+                                CourseList.Add(tutorCourse.Code, tutorCourse);
                             }
                         }
                     }
@@ -126,6 +151,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             if (CourseList.ContainsKey(courseCode) && IsStudent && CourseList[courseCode] is StudentCourse studentCourse) 
             {
                 studentCourse.DeleteStudentCourseFromDatabase(); // Delete the course from the database
+                CourseList.Remove(courseCode); // Remove the course from the list
+            }
+            else if (CourseList.ContainsKey(courseCode) && IsStudent && CourseList[courseCode] is TutorCourse tutorCourse)
+            {
+                tutorCourse.DeleteTutorCourseFromDatabase(); // Delete the course from the database
                 CourseList.Remove(courseCode); // Remove the course from the list
             }
         }

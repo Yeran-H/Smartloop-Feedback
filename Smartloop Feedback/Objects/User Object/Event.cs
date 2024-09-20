@@ -16,33 +16,33 @@ namespace Smartloop_Feedback.Objects
         public DateTime Date { get; set; } // Event date
         public TimeSpan StartTime { get; set; } // Event start time
         public TimeSpan EndTime { get; set; } // Event end time
-        public int StudentId { get; set; } // ID of the student associated with the event
+        public int UserId { get; set; } // ID of the student associated with the event
         public int CourseId { get; set; } // ID of the course associated with the event
         public string Category { get; set; } // Event category
         public int Color { get; set; } // Event color
 
         // Constructor to initialize an Event object with all details
-        public Event(int id, string name, DateTime date, TimeSpan startTime, TimeSpan endTime, int studentId, int courseId, string category, int color)
+        public Event(int id, string name, DateTime date, TimeSpan startTime, TimeSpan endTime, int userId, int courseId, string category, int color)
         {
             Id = id;
             Name = name;
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
-            StudentId = studentId;
+            UserId = userId;
             CourseId = courseId;
             Category = category;
             Color = color;
         }
 
         // Constructor to initialize an Event object and add it to the database
-        public Event(string name, DateTime date, TimeSpan startTime, TimeSpan endTime, string category, int color, int studentId, int courseId)
+        public Event(string name, DateTime date, TimeSpan startTime, TimeSpan endTime, string category, int color, int userId, int courseId)
         {
             Name = name;
             Date = date;
             StartTime = startTime;
             EndTime = endTime;
-            StudentId = studentId;
+            UserId = userId;
             CourseId = courseId;
             Category = category;
             Color = color;
@@ -82,7 +82,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@category", Category); // Set the category parameter
                     cmd.Parameters.AddWithValue("@color", Color); // Set the color parameter
                     cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
-                    cmd.Parameters.AddWithValue("@studentId", StudentId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@studentId", UserId); // Set the studentId parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }

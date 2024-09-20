@@ -20,6 +20,8 @@ using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
 using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
+using Smartloop_Feedback.Academic_Portfolio;
 
 namespace Smartloop_Feedback
 {
@@ -55,7 +57,7 @@ namespace Smartloop_Feedback
             dashboardBtn.BackColor = Color.FromArgb(16, 34, 61);
             
             this.user = user;
-            position = new List<object>(new object[5]);
+            position = new List<object>(new object[7]);
 
             MainPannel(0);
         }
@@ -63,12 +65,35 @@ namespace Smartloop_Feedback
         private void mainForm_Load(object sender, EventArgs e)
         {
             nameLb.Text = user.Name;
+            AdjustLabelPosition(nameLb, 200);
             studentIdLb.Text = user.Id.ToString();
             if (user.ProfileImage != null)
             {
                 using (MemoryStream ms = new MemoryStream(user.ProfileImage))
                 {
                     profilePb.Image = Image.FromStream(ms);
+                }
+            }
+
+            if(!user.IsStudent)
+            {
+                resultBtn.Visible = false;
+            }
+        }
+
+        private void AdjustLabelPosition(Label label, int maxRightPosition)
+        {
+            // Measure the width of the text in the label
+            using (Graphics g = label.CreateGraphics())
+            {
+                SizeF textSize = g.MeasureString(label.Text, label.Font);
+
+                // Check if the text width exceeds the maximum allowed right position
+                if (label.Left + textSize.Width > maxRightPosition)
+                {
+                    // Shift the label to the left
+                    int newLeft = maxRightPosition - (int)textSize.Width;
+                    label.Left = newLeft > 0 ? newLeft : 0; // Ensure the label doesn't go beyond the left edge
                 }
             }
         }
@@ -249,6 +274,15 @@ namespace Smartloop_Feedback
                         this.formLoaderPl.Controls.Add(course);
                         course.Show();
                     }
+                    else if(list != null && list is TutorCourse tutorCourse)
+                    {
+                        titleLb.Text = tutorCourse.Name;
+                        this.formLoaderPl.Controls.Clear();
+                        TutorCourseForm course = new TutorCourseForm(tutorCourse, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        course.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(course);
+                        course.Show();
+                    }
                     break;
                 case 2:
                     var list1 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
@@ -270,6 +304,14 @@ namespace Smartloop_Feedback
                     {
                         this.formLoaderPl.Controls.Clear();
                         AIForm aIForm = new AIForm(studentFeedback.StudentAssessmentList[(int)position[3]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        aIForm.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(aIForm);
+                        aIForm.Show();
+                    }
+                    else if (list2 != null && list2 is TutorCourse tutorFeedback)
+                    {
+                        this.formLoaderPl.Controls.Clear();
+                        AIForm aIForm = new AIForm(tutorFeedback.TutorTutorialList[(int)position[3]].StudentList[(int)position[4]].StudentAssessmentList[(int)position[5]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                         aIForm.FormBorderStyle = FormBorderStyle.None;
                         this.formLoaderPl.Controls.Add(aIForm);
                         aIForm.Show();
@@ -311,6 +353,18 @@ namespace Smartloop_Feedback
                     LoginForm login = new LoginForm();
                     login.Show();
                     this.Hide();
+                    break;
+                case 9:
+                    var list4 = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
+
+                    if (list4 != null && list4 is TutorCourse tutorialStudentAssessment)
+                    {
+                        this.formLoaderPl.Controls.Clear();
+                        TutorialStudentAssessmentForm course = new TutorialStudentAssessmentForm(tutorialStudentAssessment.TutorTutorialList[(int)position[3]].StudentList[(int)position[4]].StudentAssessmentList[(int)position[5]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                        course.FormBorderStyle = FormBorderStyle.None;
+                        this.formLoaderPl.Controls.Add(course);
+                        course.Show();
+                    }
                     break;
             }
         }
