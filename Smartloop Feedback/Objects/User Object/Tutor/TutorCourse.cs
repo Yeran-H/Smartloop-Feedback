@@ -104,5 +104,70 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
                 }
             }
         }
+
+        public void UpdateTutorialToDatabase(List<int> tutorialId)
+        {
+            string tutorialList = null;
+            TutorTutorialList.Clear();
+
+            foreach (int num in tutorialId)
+            {
+                TutorTutorialList.Add(num, new TutorialAssociation(num));
+                tutorialList += num + ",";
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                string updateQuery = @"
+                    UPDATE tutorCourse
+                    SET 
+                        tutorialId = @tutorialId,
+                    WHERE
+                        courseAssociationId = @courseAssociationId";
+
+                using (SqlCommand cmd = new SqlCommand(updateQuery, conn))
+                {
+                    // Add parameters with values
+                    cmd.Parameters.AddWithValue("@courseAssociationId", Id);
+                    cmd.Parameters.AddWithValue("@tutorialId", tutorialList);
+
+                    // Execute the update command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        // Delete the course and related data from the database
+        public void DeleteTutorCourseFromDatabase()
+        {
+            LoadEventsFromDatabase();
+
+            // Delete all events associated with the course
+            foreach (Event ev in EventList.Values)
+            {
+                ev.DeleteEventFromDatabase();
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                conn.Open();
+
+                string deleteQuery = @"
+                    DELETE FROM courseAssociation
+                    WHERE id = @id;
+                    DELETE FROM tutorCourse
+                    WHERE courseAssociationId = @id;";
+
+                using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
+                {
+                    // Add the parameter for course ID
+                    cmd.Parameters.AddWithValue("@id", Id);
+
+                    // Execute the delete command
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
     }
 }

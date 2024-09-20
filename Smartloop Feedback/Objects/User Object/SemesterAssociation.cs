@@ -153,6 +153,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                 studentCourse.DeleteStudentCourseFromDatabase(); // Delete the course from the database
                 CourseList.Remove(courseCode); // Remove the course from the list
             }
+            else if (CourseList.ContainsKey(courseCode) && IsStudent && CourseList[courseCode] is TutorCourse tutorCourse)
+            {
+                tutorCourse.DeleteTutorCourseFromDatabase(); // Delete the course from the database
+                CourseList.Remove(courseCode); // Remove the course from the list
+            }
         }
     }
 }

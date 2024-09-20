@@ -2,7 +2,9 @@
 using Smartloop_Feedback.Objects.Updated;
 using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -105,11 +107,26 @@ namespace Smartloop_Feedback.Setting
 
                 // Check if the checkbox is checked
                 if (checkBoxCell.Value != null && (bool)checkBoxCell.Value == true)
-                {
-
+                { 
                     if (semester.CourseList[courseCode] is StudentCourse studentCourse)
                     {
                         studentCourse.UpdateTutorialToDatabase((int)row.Tag);
+                        return;
+                    }
+                    else if (semester.CourseList[courseCode] is TutorCourse tutorCourse)
+                    {
+                        List<int> tutorialId = new List<int>();
+
+                        foreach (DataGridViewRow row1 in tutorialDgv.Rows)
+                        {
+                            if (Convert.ToBoolean(row1.Cells["Select"].Value))
+                            {
+                                tutorialId.Add((int)row1.Tag);
+                                this.DialogResult = DialogResult.OK;
+                            }
+                        }
+
+                        tutorCourse.UpdateTutorialToDatabase(tutorialId);
                         return;
                     }
                 }
@@ -190,6 +207,22 @@ namespace Smartloop_Feedback.Setting
                             int rowIndex;
 
                             if(tutorial.Name == studentCourse.Tutorial.Name)
+                            {
+                                rowIndex = tutorialDgv.Rows.Add(tutorial.Name, true);
+                            }
+                            else
+                            {
+                                rowIndex = tutorialDgv.Rows.Add(tutorial.Name, false);
+                            }
+
+                            DataGridViewRow line = tutorialDgv.Rows[rowIndex];
+                            line.Tag = tutorial.Id;
+                        }
+                        else if (course is TutorCourse tutorCourse)
+                        {
+                            int rowIndex;
+
+                            if (tutorial.Name == tutorCourse.Name)
                             {
                                 rowIndex = tutorialDgv.Rows.Add(tutorial.Name, true);
                             }
