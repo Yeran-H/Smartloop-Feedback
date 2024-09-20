@@ -577,7 +577,9 @@
   <ItemGroup>
     <None Include="Resources\School.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="SQL\" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="Resources\close.png" />
     <None Include="Resources\smartloop-feedback-high-resolution-logo.png" />
@@ -585,7 +587,7 @@
     <None Include="Resources\back1.png" />
     <None Include="Resources\Event.png" />
     <None Include="Resources\search.png" />
-    <Content Include="SQL\smartloop FeedbackDB.sql" />
+    <Content Include="smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

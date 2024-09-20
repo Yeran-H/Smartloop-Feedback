@@ -226,7 +226,7 @@ namespace Smartloop_Feedback.Forms
 
             // Add a new assessment to the course
             Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, course.Description, typeTb.Text, dateP.Value.Date, double.Parse(weightTb.Text), double.Parse(markTb.Text), canvasTb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(ExtractTextFromPdf(fileTb.Text)),course.CourseId);
-            course.AssessmentList.Add(assessment.AssessmentId, assessment);
+            course.AddAssessment(assessment);
 
             // Prepare column names for ratings
             List<string> columnNameList = new List<string>();
