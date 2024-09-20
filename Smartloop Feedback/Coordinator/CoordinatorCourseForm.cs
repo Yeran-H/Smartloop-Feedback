@@ -31,24 +31,7 @@ namespace Smartloop_Feedback.Coordinator
             creditTb.Text = course.CreditPoint.ToString();
             descriptionTb.Text = course.Description;
             canvasTb.Text = course.CanvasLink;
-            yearTb.Text = course.Year.Name.ToString();
             tutorialTb.Text = course.TutorNum.ToString();
-
-            switch (course.Semester.Name)
-            {
-                case "Summer":
-                    summerRb.Checked = true;
-                    break;
-                case "Autumn":
-                    autumnRb.Checked = true;
-                    break;
-                case "Winter":
-                    winterRb.Checked = true;
-                    break;
-                case "Spring":
-                    springRb.Checked = true;
-                    break;
-            }
 
             LoadAssessmentData();
         }
@@ -172,11 +155,6 @@ namespace Smartloop_Feedback.Coordinator
                 creditPl.BackColor = Color.FromArgb(254, 0, 57);
                 creditTb.ForeColor = Color.FromArgb(254, 0, 57);
             }
-            else if (currentTextBox == yearTb)
-            {
-                yearPl.BackColor = Color.FromArgb(254, 0, 57);
-                yearTb.ForeColor = Color.FromArgb(254, 0, 57);
-            }
             else if (currentTextBox == canvasTb)
             {
                 canvasPl.BackColor = Color.FromArgb(254, 0, 57);
@@ -196,23 +174,15 @@ namespace Smartloop_Feedback.Coordinator
             creditPl.BackColor = Color.FromArgb(193, 193, 193);
             creditTb.ForeColor = Color.FromArgb(193, 193, 193);
 
-            yearPl.BackColor = Color.FromArgb(193, 193, 193);
-            yearTb.ForeColor = Color.FromArgb(193, 193, 193);
-
             canvasPl.BackColor = Color.FromArgb(193, 193, 193);
             canvasTb.ForeColor = Color.FromArgb(193, 193, 193);
         }
 
         private void updateBtn_Click(object sender, EventArgs e)
         {
-            string semester = autumnRb.Checked ? "Autumn" :
-                                summerRb.Checked ? "Summer" :
-                                springRb.Checked ? "Spring" :
-                                winterRb.Checked ? "Winter" : null;
-
-            if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text) || !string.IsNullOrEmpty(yearTb.Text))
+            if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text))
             {
-                course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, Int32.Parse(yearTb.Text), semester, canvasTb.Text);
+                course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, canvasTb.Text);
                 mainForm.MainPannel(0);
             }
             else

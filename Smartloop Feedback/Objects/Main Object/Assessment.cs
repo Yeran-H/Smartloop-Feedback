@@ -246,7 +246,8 @@ namespace Smartloop_Feedback.Objects
 
                 string deleteQuery = @"
                     DELETE FROM assessment
-                    WHERE id = @id";
+                    WHERE id = @id;";
+
 
                 using (SqlCommand cmd = new SqlCommand(deleteQuery, conn))
                 {

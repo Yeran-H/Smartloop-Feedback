@@ -7,6 +7,8 @@ using System.Windows.Forms.DataVisualization.Charting;
 using Org.BouncyCastle.Crypto.Paddings;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 
 namespace Smartloop_Feedback.Objects
 {
@@ -133,14 +135,12 @@ namespace Smartloop_Feedback.Objects
             }
         }
 
-        public void UpdateCourseToDatabase(int code, string name, int creditPoint, string description, int year, string semester, string canvasLink)
+        public void UpdateCourseToDatabase(int code, string name, int creditPoint, string description, string canvasLink)
         {
             Code = code;
             Name = name;
             CreditPoint = creditPoint;
             Description = description;
-            Year = new Updated.Year(year);
-            Semester = new Semester(semester, Year.Name);
             CanvasLink = canvasLink;
 
             foreach (Assessment assessment in AssessmentList.Values)
@@ -159,8 +159,6 @@ namespace Smartloop_Feedback.Objects
                         name = @name,
                         creditPoint = @creditPoint,
                         description = @description,
-                        yearName = @yearName,
-                        semesterId = @semesterId,
                         canvasLink = @canvasLink,
                         tutorNum = @tutorNum,
                     WHERE
@@ -174,8 +172,6 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@name", name);
                     cmd.Parameters.AddWithValue("@creditPoint", creditPoint);
                     cmd.Parameters.AddWithValue("@description", description);
-                    cmd.Parameters.AddWithValue("@yearName", Year.Name);
-                    cmd.Parameters.AddWithValue("@semesterId", Semester.SemesterId);
                     cmd.Parameters.AddWithValue("@canvasLink", canvasLink);
                     cmd.Parameters.AddWithValue("@tutorNum", TutorNum);
 
@@ -217,6 +213,44 @@ namespace Smartloop_Feedback.Objects
                     cmd.ExecuteNonQuery();
                 }
             }
+        }
+
+        public void AddAssessment(Assessment assessment)
+        {
+            foreach(int id in TutorialList.Keys)
+            {
+                using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+                {
+                    conn.Open(); // Open the connection
+                    SqlCommand cmd = new SqlCommand("SELECT id FROM tutorialAssociation WHERE tutorialId = @tutorialId", conn); // SQL query to fetch assessments
+                    cmd.Parameters.AddWithValue("@tutorialId", id); // Set the courseId parameter
+
+                    using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                    {
+                        while (reader.Read()) // Read each row
+                        {
+                            var temp = new TutorialAssessment(assessment.AssessmentId, reader.GetInt32(0));
+                        }
+                    }
+                }
+            }
+
+            using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
+            {
+                conn.Open(); // Open the connection
+                SqlCommand cmd = new SqlCommand("SELECT id, studentId FROM courseAssociation WHERE courseId = @courseId AND studentID IS NOT NULL", conn); // SQL query to fetch assessments
+                cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
+
+                using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
+                {
+                    while (reader.Read()) // Read each row
+                    {
+                        var temp = new StudentAssessment(assessment.AssessmentId, reader.GetInt32(0), reader.GetInt32(1));
+                    }
+                }
+            }
+
+            AssessmentList.Add(assessment.AssessmentId, assessment);
         }
 
         // Fetch assessments from the database and initialize the assessment list

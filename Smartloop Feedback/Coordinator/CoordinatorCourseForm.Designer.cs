@@ -46,14 +46,6 @@
             this.updateBtn = new System.Windows.Forms.Button();
             this.assessmentDgv = new System.Windows.Forms.DataGridView();
             this.addBtn = new System.Windows.Forms.Button();
-            this.label6 = new System.Windows.Forms.Label();
-            this.yearPl = new System.Windows.Forms.Panel();
-            this.yearTb = new System.Windows.Forms.TextBox();
-            this.autumnRb = new System.Windows.Forms.RadioButton();
-            this.winterRb = new System.Windows.Forms.RadioButton();
-            this.springRb = new System.Windows.Forms.RadioButton();
-            this.summerRb = new System.Windows.Forms.RadioButton();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.tutorialTb = new System.Windows.Forms.TextBox();
@@ -234,7 +226,7 @@
             this.updateBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.updateBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.updateBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.updateBtn.Location = new System.Drawing.Point(82, 418);
+            this.updateBtn.Location = new System.Drawing.Point(66, 404);
             this.updateBtn.Name = "updateBtn";
             this.updateBtn.Size = new System.Drawing.Size(211, 55);
             this.updateBtn.TabIndex = 57;
@@ -273,107 +265,12 @@
             this.addBtn.UseVisualStyleBackColor = false;
             this.addBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label6.Location = new System.Drawing.Point(60, 288);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(49, 20);
-            this.label6.TabIndex = 62;
-            this.label6.Text = "Year: ";
-            // 
-            // yearPl
-            // 
-            this.yearPl.BackColor = System.Drawing.Color.White;
-            this.yearPl.Location = new System.Drawing.Point(129, 307);
-            this.yearPl.Name = "yearPl";
-            this.yearPl.Size = new System.Drawing.Size(206, 1);
-            this.yearPl.TabIndex = 61;
-            // 
-            // yearTb
-            // 
-            this.yearTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.yearTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.yearTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.yearTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.yearTb.HideSelection = false;
-            this.yearTb.Location = new System.Drawing.Point(129, 285);
-            this.yearTb.Name = "yearTb";
-            this.yearTb.Size = new System.Drawing.Size(206, 20);
-            this.yearTb.TabIndex = 60;
-            this.yearTb.Text = "Year";
-            this.yearTb.Enter += new System.EventHandler(this.TextBox_Enter);
-            this.yearTb.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Number_KeyPress);
-            // 
-            // autumnRb
-            // 
-            this.autumnRb.AutoSize = true;
-            this.autumnRb.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.autumnRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.autumnRb.Location = new System.Drawing.Point(200, 350);
-            this.autumnRb.Name = "autumnRb";
-            this.autumnRb.Size = new System.Drawing.Size(84, 24);
-            this.autumnRb.TabIndex = 66;
-            this.autumnRb.Text = "Autumn";
-            this.autumnRb.UseVisualStyleBackColor = true;
-            // 
-            // winterRb
-            // 
-            this.winterRb.AutoSize = true;
-            this.winterRb.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.winterRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.winterRb.Location = new System.Drawing.Point(105, 380);
-            this.winterRb.Name = "winterRb";
-            this.winterRb.Size = new System.Drawing.Size(76, 24);
-            this.winterRb.TabIndex = 65;
-            this.winterRb.Text = "Winter";
-            this.winterRb.UseVisualStyleBackColor = true;
-            // 
-            // springRb
-            // 
-            this.springRb.AutoSize = true;
-            this.springRb.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.springRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.springRb.Location = new System.Drawing.Point(200, 380);
-            this.springRb.Name = "springRb";
-            this.springRb.Size = new System.Drawing.Size(73, 24);
-            this.springRb.TabIndex = 64;
-            this.springRb.Text = "Spring";
-            this.springRb.UseVisualStyleBackColor = true;
-            // 
-            // summerRb
-            // 
-            this.summerRb.AutoSize = true;
-            this.summerRb.Checked = true;
-            this.summerRb.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.summerRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(199)))), ((int)(((byte)(199)))), ((int)(((byte)(199)))));
-            this.summerRb.Location = new System.Drawing.Point(105, 350);
-            this.summerRb.Name = "summerRb";
-            this.summerRb.Size = new System.Drawing.Size(89, 24);
-            this.summerRb.TabIndex = 63;
-            this.summerRb.TabStop = true;
-            this.summerRb.Text = "Summer";
-            this.summerRb.UseVisualStyleBackColor = true;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label7.Location = new System.Drawing.Point(154, 327);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(80, 20);
-            this.label7.TabIndex = 67;
-            this.label7.Text = "Semester";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Aptos", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label8.Location = new System.Drawing.Point(356, 31);
+            this.label8.Location = new System.Drawing.Point(23, 307);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(148, 20);
             this.label8.TabIndex = 70;
@@ -382,7 +279,7 @@
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.White;
-            this.panel1.Location = new System.Drawing.Point(510, 50);
+            this.panel1.Location = new System.Drawing.Point(177, 326);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(100, 1);
             this.panel1.TabIndex = 69;
@@ -395,11 +292,11 @@
             this.tutorialTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.tutorialTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.tutorialTb.HideSelection = false;
-            this.tutorialTb.Location = new System.Drawing.Point(510, 32);
+            this.tutorialTb.Location = new System.Drawing.Point(177, 308);
             this.tutorialTb.Name = "tutorialTb";
             this.tutorialTb.Size = new System.Drawing.Size(100, 20);
             this.tutorialTb.TabIndex = 68;
-            this.tutorialTb.Text = "Year";
+            this.tutorialTb.Text = "Tutorial";
             // 
             // tutorialBtn
             // 
@@ -408,7 +305,7 @@
             this.tutorialBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.tutorialBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tutorialBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.tutorialBtn.Location = new System.Drawing.Point(616, 18);
+            this.tutorialBtn.Location = new System.Drawing.Point(113, 338);
             this.tutorialBtn.Name = "tutorialBtn";
             this.tutorialBtn.Size = new System.Drawing.Size(116, 48);
             this.tutorialBtn.TabIndex = 71;
@@ -427,14 +324,6 @@
             this.Controls.Add(this.label8);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.tutorialTb);
-            this.Controls.Add(this.label7);
-            this.Controls.Add(this.autumnRb);
-            this.Controls.Add(this.winterRb);
-            this.Controls.Add(this.springRb);
-            this.Controls.Add(this.summerRb);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.yearPl);
-            this.Controls.Add(this.yearTb);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.assessmentDgv);
             this.Controls.Add(this.updateBtn);
@@ -485,14 +374,6 @@
         private System.Windows.Forms.Button updateBtn;
         private System.Windows.Forms.DataGridView assessmentDgv;
         private System.Windows.Forms.Button addBtn;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Panel yearPl;
-        private System.Windows.Forms.TextBox yearTb;
-        private System.Windows.Forms.RadioButton autumnRb;
-        private System.Windows.Forms.RadioButton winterRb;
-        private System.Windows.Forms.RadioButton springRb;
-        private System.Windows.Forms.RadioButton summerRb;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.TextBox tutorialTb;
