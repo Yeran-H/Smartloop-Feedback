@@ -10,6 +10,8 @@ using OpenAI_API;
 using OpenAI_API.Chat;
 using Smartloop_Feedback.Objects;
 using System.IO;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.Updated;
 
 namespace Smartloop_Feedback.Academic_Portfolio.AI
 {
@@ -43,7 +45,40 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 previousAssessmentCb.Items.Add(past.Item1);
             }
 
-            if (mainForm.position[4] != null)
+            if (mainForm.position[6] != null)
+            {
+                teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[6]].TeacherFeedback;
+                noteRb.Text = assessment.FeedbackList[(int)mainForm.position[6]].Notes;
+                fileTb.Text = assessment.FeedbackList[(int)mainForm.position[6]].FileName;
+                feedbackRb.Text = assessment.FeedbackList[(int)mainForm.position[6]].Feedback;
+                feedbackBtn.Visible = false;
+                loadAssessmentBtn.Text = "Download Assessment";
+
+                foreach(int attempt in assessment.FeedbackList[(int)mainForm.position[6]].PreviousAttemptId)
+                {
+                    for(int i = 0; i < previousAttemptCb.Items.Count; i++)
+                    {
+                        if ((int)previousAttemptCb.Items[i] == attempt)
+                        {
+                            previousAttemptCb.SetItemChecked(i, true);
+                            break;
+                        }
+                    }
+                }
+
+                foreach (string pastAssessment in assessment.FeedbackList[(int)mainForm.position[6]].PreviousAssessmentId)
+                {
+                    for (int i = 0; i < previousAssessmentCb.Items.Count; i++)
+                    {
+                        if ((string)previousAssessmentCb.Items[i] == pastAssessment)
+                        {
+                            previousAssessmentCb.SetItemChecked(i, true);
+                            break;
+                        }
+                    }
+                }
+            }
+            else if (mainForm.position[4] != null)
             {
                 teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].TeacherFeedback;
                 noteRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].Notes;
@@ -52,9 +87,9 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 feedbackBtn.Visible = false;
                 loadAssessmentBtn.Text = "Download Assessment";
 
-                foreach(int attempt in assessment.FeedbackList[(int)mainForm.position[4]].PreviousAttemptId)
+                foreach (int attempt in assessment.FeedbackList[(int)mainForm.position[4]].PreviousAttemptId)
                 {
-                    for(int i = 0; i < previousAttemptCb.Items.Count; i++)
+                    for (int i = 0; i < previousAttemptCb.Items.Count; i++)
                     {
                         if ((int)previousAttemptCb.Items[i] == attempt)
                         {
@@ -144,7 +179,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                         }
                     }
 
-                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousAttemptList, previousAssessmentList, assessment.StudentId, assessment.Id);
+                    FeedbackResult feedbackResult = new FeedbackResult(assessment.FeedbackList.Count + 1, teacherRb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(assessmentDocument), noteRb.Text, feedback, previousAttemptList, previousAssessmentList, assessment.UserId, assessment.Id);
                     assessment.FeedbackList.Add(feedbackResult.Id, feedbackResult);
                 }
                 else
@@ -191,7 +226,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
             rubricString.AppendLine(new string('-', separatorLength));
 
             // Append each criteria and its ratings
-            foreach (StudentCriteria criteria in assessment.CriteriaList)
+            foreach (Criteria criteria in assessment.CriteriaList)
             {
                 // Append the criteria description
                 rubricString.Append(criteria.Description + " | ");
@@ -250,8 +285,15 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.position[4] = null;
-            mainForm.MainPannel(2);
+            if (mainForm.position[6] != null)
+            {
+                mainForm.MainPannel(1);
+            }
+            else
+            {
+                mainForm.position[4] = null;
+                mainForm.MainPannel(2);
+            }
         }
     }
 }

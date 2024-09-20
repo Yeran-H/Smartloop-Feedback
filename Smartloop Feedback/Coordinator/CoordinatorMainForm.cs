@@ -76,7 +76,7 @@ namespace Smartloop_Feedback.Coordinator_Folder
                 case 2:
                     this.formLoaderPl.Controls.Clear();
 
-                    AddAssessmentForm addAssessment = new AddAssessmentForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    CoordinatorAddAssessmentForm addAssessment = new CoordinatorAddAssessmentForm(coordinator.CourseList[position[0]], this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
                     addAssessment.FormBorderStyle = FormBorderStyle.None;
                     this.formLoaderPl.Controls.Add(addAssessment);
                     addAssessment.Show();
@@ -123,6 +123,17 @@ namespace Smartloop_Feedback.Coordinator_Folder
         private void centrePannel_MouseUp(object sender, MouseEventArgs e)
         {
             dragging = false;
+        }
+
+        private void exitPb_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Do you want to sign out?", "Sign Out", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                LoginForm login = new LoginForm();
+                login.Show();
+                this.Hide();
+            }
         }
     }
 }

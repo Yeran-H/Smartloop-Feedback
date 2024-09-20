@@ -161,6 +161,7 @@
             this.exitPb.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.exitPb.TabIndex = 10;
             this.exitPb.TabStop = false;
+            this.exitPb.Click += new System.EventHandler(this.exitPb_Click);
             // 
             // titleLb
             // 

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Smartloop_Feedback.Objects.Updated.User_Object;
+using System;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -7,10 +8,10 @@ namespace Smartloop_Feedback
     public partial class AcademicSemesterBar : Form
     {
         private MainForm mainForm; // Reference to the main form
-        private StudentYear year; // Reference to the current year
+        private Objects.Updated.User_Object.YearAssociation year; // Reference to the current year
 
         // Constructor for academicSemesterBar
-        public AcademicSemesterBar(MainForm form, StudentYear year)
+        public AcademicSemesterBar(MainForm form, Objects.Updated.User_Object.YearAssociation year)
         {
             InitializeComponent(); // Initialize form components
             mainForm = form; // Set the main form reference
@@ -34,7 +35,7 @@ namespace Smartloop_Feedback
         // Event handler for the back button click
         private void backBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MenuPanel(0); // Navigate to the main menu panel
+            mainForm.MenuPanel(1); // Navigate to the main menu panel
         }
 
         // Common event handler for all semester button clicks

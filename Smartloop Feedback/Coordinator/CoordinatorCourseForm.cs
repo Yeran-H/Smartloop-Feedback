@@ -31,10 +31,10 @@ namespace Smartloop_Feedback.Coordinator
             creditTb.Text = course.CreditPoint.ToString();
             descriptionTb.Text = course.Description;
             canvasTb.Text = course.CanvasLink;
-            yearTb.Text = course.Year.ToString();
+            yearTb.Text = course.Year.Name.ToString();
             tutorialTb.Text = course.TutorNum.ToString();
 
-            switch (course.Semester)
+            switch (course.Semester.Name)
             {
                 case "Summer":
                     summerRb.Checked = true;
@@ -89,7 +89,7 @@ namespace Smartloop_Feedback.Coordinator
                 {
                     int rowIndex = assessmentDgv.Rows.Add(assessment.Name, assessment.Date, assessment.Weight, assessment.Mark, "View", "Delete");
                     DataGridViewRow row = assessmentDgv.Rows[rowIndex];
-                    row.Tag = assessment.Id;
+                    row.Tag = assessment.AssessmentId;
                 }
 
                 DataGridColor(assessmentDgv); // Apply color formatting to the DataGridView
@@ -212,7 +212,7 @@ namespace Smartloop_Feedback.Coordinator
 
             if (!string.IsNullOrEmpty(nameTb.Text) || !string.IsNullOrEmpty(descriptionTb.Text) || !string.IsNullOrEmpty(canvasTb.Text) || !string.IsNullOrEmpty(yearTb.Text))
             {
-                course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, yearTb.Text, semester, canvasTb.Text);
+                course.UpdateCourseToDatabase(Int32.Parse(codeTb.Text), nameTb.Text, Int32.Parse(creditTb.Text), descriptionTb.Text, Int32.Parse(yearTb.Text), semester, canvasTb.Text);
                 mainForm.MainPannel(0);
             }
             else

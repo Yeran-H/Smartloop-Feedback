@@ -1,4 +1,5 @@
 ﻿using Smartloop_Feedback.Objects;
+using Smartloop_Feedback.Objects.Updated.User_Object;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -11,16 +12,16 @@ namespace Smartloop_Feedback.Forms
     {
         private DateTime currentMonth; // Stores the current month being displayed
         private DateTime currentWeek; // Stores the current week being displayed
-        public OLDStudent student; // Reference to the student object
+        public User user; // Reference to the student object
         private bool isWeeklyView = false; // Flag to indicate whether the weekly view is active
 
-        public CourseScheduleForm(OLDStudent student)
+        public CourseScheduleForm(User user)
         {
             InitializeComponent();
             InitializeCalendar();
             currentMonth = DateTime.Now;
             currentWeek = DateTime.Now;
-            this.student = student;
+            this.user = user;
             DisplayCurrentMonth();
         }
 
@@ -156,7 +157,7 @@ namespace Smartloop_Feedback.Forms
             for (int day = 0; day < 7; day++)
             {
                 DateTime date = startOfWeek.AddDays(day);
-                var dayEvents = student.EventList.Values.Where(e => e.Date.Date == date.Date).ToList();
+                var dayEvents = user.EventList.Values.Where(e => e.Date.Date == date.Date).ToList();
                 foreach (var dayEvent in dayEvents)
                 {
                     for (int hour = dayEvent.StartTime.Hours; hour <= dayEvent.EndTime.Hours; hour++)
@@ -180,20 +181,20 @@ namespace Smartloop_Feedback.Forms
         // Get the color for an event on a specific date
         private Color GetEventColor(DateTime date)
         {
-            var eventForDate = student.EventList.Values.FirstOrDefault(e => e.Date.Date == date.Date);
+            var eventForDate = user.EventList.Values.FirstOrDefault(e => e.Date.Date == date.Date);
             return eventForDate != null ? Color.FromArgb(eventForDate.Color) : SystemColors.Control;
         }
 
         // Check if there are any events on a specific date
         private bool HasEvents(DateTime date)
         {
-            return student.EventList.Values.Any(e => e.Date.Date == date.Date);
+            return user.EventList.Values.Any(e => e.Date.Date == date.Date);
         }
 
         // Event handler for day button click
         private void DayButton_Click(object sender, EventArgs e, DateTime date)
         {
-            var dayEvents = student.EventList.Values.Where(ev => ev.Date.Date == date.Date).ToList();
+            var dayEvents = user.EventList.Values.Where(ev => ev.Date.Date == date.Date).ToList();
             if (dayEvents.Count > 0)
             {
                 using (EventListForm eventListForm = new EventListForm(dayEvents))
@@ -251,12 +252,12 @@ namespace Smartloop_Feedback.Forms
         // Event handler for add event button click
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (AddEventForm addEventForm = new AddEventForm(student.GetCourseList(), null))
+            using (AddEventForm addEventForm = new AddEventForm(user.GetCourseList(), null))
             {
                 if (addEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    Event events = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, addEventForm.newEvent.Category, addEventForm.newEvent.Color, student.Id, student.FindCourseId(addEventForm.newEvent.Category));
-                    student.EventList.Add(events.Id, events);
+                    Event events = new Event(addEventForm.newEvent.Name, addEventForm.newEvent.Date, addEventForm.newEvent.StartTime, addEventForm.newEvent.EndTime, addEventForm.newEvent.Category, addEventForm.newEvent.Color, user.Id, user.FindCourseId(addEventForm.newEvent.Category));
+                    user.EventList.Add(events.Id, events);
                     if (isWeeklyView)
                     {
                         DisplayCurrentWeek();
@@ -272,11 +273,11 @@ namespace Smartloop_Feedback.Forms
         // Edit an existing event
         private void EditEvent(Event selectedEvent)
         {
-            using (AddEventForm editEventForm = new AddEventForm(student.GetCourseList(), selectedEvent))
+            using (AddEventForm editEventForm = new AddEventForm(user.GetCourseList(), selectedEvent))
             {
                 if (editEventForm.ShowDialog() == DialogResult.OK)
                 {
-                    student.UpdateEvent(editEventForm.newEvent);
+                    user.UpdateEvent(editEventForm.newEvent);
                     if (isWeeklyView)
                     {
                         DisplayCurrentWeek();
@@ -292,7 +293,7 @@ namespace Smartloop_Feedback.Forms
         // Delete an existing event
         private void DeleteEvent(Event selectedEvent)
         {
-            student.DeleteEvent(selectedEvent);
+            user.DeleteEvent(selectedEvent);
             if (isWeeklyView)
             {
                 DisplayCurrentWeek();

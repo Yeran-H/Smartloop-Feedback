@@ -60,9 +60,9 @@ namespace Smartloop_Feedback.Coordinator
                 // Add rows to the DataGridView
                 foreach (Course course in coordinator.CourseList.Values)
                 {
-                    int rowIndex = courseDgv.Rows.Add(course.Year, course.Semester, course.Code, course.Name, "View", "Delete");
+                    int rowIndex = courseDgv.Rows.Add(course.Year.Name.ToString(), course.Semester.Name, course.Code, course.Name, "View", "Delete");
                     DataGridViewRow row = courseDgv.Rows[rowIndex];
-                    row.Tag = course.Id;
+                    row.Tag = course.CourseId;
                 }
 
                 DataGridColor(courseDgv); // Apply color formatting to the DataGridView
@@ -113,13 +113,13 @@ namespace Smartloop_Feedback.Coordinator
 
         private void addBtn_Click(object sender, EventArgs e)
         {
-            using (var addCourseForm = new AddCourseForm())
+            using (var addCourseForm = new CoordinatorAddCourseForm())
             {
                 if (addCourseForm.ShowDialog() == DialogResult.OK)
                 {
                     if (addCourseForm.course != null)
                     {
-                        coordinator.CourseList.Add(addCourseForm.course.Id, addCourseForm.course);
+                        coordinator.CourseList.Add(addCourseForm.course.CourseId, addCourseForm.course);
                         LoadCourseDGV();
                     }
                     else

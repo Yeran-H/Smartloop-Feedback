@@ -2,6 +2,8 @@
 using Smartloop_Feedback.Coordinator_Folder;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 using System;
 using System.Configuration;
 using System.Data.SqlClient;
@@ -239,9 +241,9 @@ namespace Smartloop_Feedback
                             this.Invoke(new Action(() =>
                             {
                                 // Create and show the main form, passing the student object
-                                //MainForm main = new MainForm(tutor);
-                                //main.Show();
-                                //this.Hide(); // Hide the login form
+                                MainForm main = new MainForm(tutor);
+                                main.Show();
+                                this.Hide(); // Hide the login form
                             }));
                         }
                         else

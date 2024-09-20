@@ -12,6 +12,9 @@ using Org.BouncyCastle.Tls;
 using System.Windows.Forms.DataVisualization.Charting;
 using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated;
+using Smartloop_Feedback.Objects.Updated.User_Object;
+using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 
 namespace Smartloop_Feedback
 {
@@ -231,11 +234,11 @@ namespace Smartloop_Feedback
             }
             else
             {
-                //Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
+                Tutor tutor = new Tutor(userId, name, email, password, profileImage, true);
 
-                //MainForm main = new MainForm(tutor);
-                //main.Show();
-                //this.Hide(); 
+                MainForm main = new MainForm(tutor);
+                main.Show();
+                this.Hide();
             }
         }
 
