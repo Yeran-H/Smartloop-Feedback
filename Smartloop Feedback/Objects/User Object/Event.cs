@@ -71,7 +71,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO event (name, date, startTime, endTime, category, color, courseId, studentId) VALUES (@name, @date, @startTime, @endTime, @category, @color, @courseId, @studentId); SELECT SCOPE_IDENTITY();"; // SQL query to insert event and get the generated ID
+                string sql = "INSERT INTO event (name, date, startTime, endTime, category, color, courseId, userId) VALUES (@name, @date, @startTime, @endTime, @category, @color, @courseId, @userId); SELECT SCOPE_IDENTITY();"; // SQL query to insert event and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -82,7 +82,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@category", Category); // Set the category parameter
                     cmd.Parameters.AddWithValue("@color", Color); // Set the color parameter
                     cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
-                    cmd.Parameters.AddWithValue("@studentId", UserId); // Set the studentId parameter
+                    cmd.Parameters.AddWithValue("@userId", UserId); // Set the studentId parameter
                     Id = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }
