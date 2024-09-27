@@ -152,7 +152,17 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
             using (SqlConnection conn = new SqlConnection(connStr))
             {
                 conn.Open();
-                string sql = "SELECT courseId FROM courseAssociation WHERE userId = @userId"; // SQL query to fetch courses
+                string sql;
+
+                if(IsStudent)
+                {
+                    sql = "SELECT courseId FROM courseAssociation WHERE studentId = @userId";
+                }
+                else
+                {
+                    sql = "SELECT courseId FROM courseAssociation WHERE tutorId = @userId";
+                }
+                
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@userId", Id); // Set the studentId parameter
@@ -180,11 +190,23 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                 conn.Open();
 
                 // SQL query to find the courseAssociation ID
-                string sql = @"
+                string sql;
+                if(IsStudent)
+                {
+                    sql = @"
                     SELECT ca.id
                     FROM courseAssociation ca
                     INNER JOIN course c ON ca.courseId = c.id
-                    WHERE c.name = @courseName AND ca.userId = @userId";
+                    WHERE c.name = @courseName AND ca.studentId = @userId";
+                }
+                else
+                {
+                    sql = @"
+                    SELECT ca.id
+                    FROM courseAssociation ca
+                    INNER JOIN course c ON ca.courseId = c.id
+                    WHERE c.name = @courseName AND ca.tutorId = @userId";
+                }
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn))
                 {
