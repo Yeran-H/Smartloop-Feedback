@@ -223,11 +223,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
         }
 
 
-        public void UpdateAssessmentToDatabase(bool isFinalised)
+        public async Task UpdateAssessmentToDatabase(bool isFinalised)
         {
-            if (isFinalised && Feedback == "")
+            if (isFinalised && string.IsNullOrEmpty(Feedback))
             {
-                GenerateFinalFeedback();
+                await GenerateFinalFeedback();
             }
 
             IsFinalised = isFinalised;
@@ -259,7 +259,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             }
         }
 
-        private async void GenerateFinalFeedback()
+        private async Task GenerateFinalFeedback()
         {
             api = new OpenAIAPI(apiKey);
             var conversation = api.Chat.CreateConversation();

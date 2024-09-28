@@ -113,7 +113,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
             }
         }
 
-        private void saveBtn_Click(object sender, EventArgs e)
+        private async void saveBtn_Click(object sender, EventArgs e)
         {
             string[] parts = markTb.Text.Split('/');
 
@@ -129,7 +129,8 @@ namespace Smartloop_Feedback.Academic_Portfolio
                 }
 
                 assessment.StudentMark = firstNumber;
-                assessment.UpdateAssessmentToDatabase(true);
+                await assessment.UpdateAssessmentToDatabase(true);
+                mainForm.MainPannel(9);
             }
             else
             {
