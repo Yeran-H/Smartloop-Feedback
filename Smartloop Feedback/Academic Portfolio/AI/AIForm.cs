@@ -45,7 +45,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                 previousAssessmentCb.Items.Add(past.Item1);
             }
 
-            if (mainForm.position[6] != null)
+            if (mainForm.position.Count == 7 && mainForm.position[6] != null)
             {
                 teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[6]].TeacherFeedback;
                 noteRb.Text = assessment.FeedbackList[(int)mainForm.position[6]].Notes;
@@ -78,7 +78,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     }
                 }
             }
-            else if (mainForm.position[4] != null)
+            else
             {
                 teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].TeacherFeedback;
                 noteRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].Notes;
@@ -285,7 +285,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
 
         private void backBtn_Click(object sender, EventArgs e)
         {
-            if (mainForm.position[6] != null)
+            if (mainForm.position.Count == 7 && mainForm.position[6] != null)
             {
                 mainForm.MainPannel(1);
             }

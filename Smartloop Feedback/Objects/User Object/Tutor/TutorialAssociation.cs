@@ -93,7 +93,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT id, assessmentID, isCompleted, general, FROM tutorialAssessment WHERE tutorialId = @tutorialId", conn); // Updated SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT id, assessmentID, isCompleted, generalFeedback FROM tutorialAssessment WHERE tutorialId = @tutorialId", conn); // Updated SQL query to fetch assessments
 
                 cmd.Parameters.AddWithValue("@tutorialId", Id); // Set the tutorialId parameter
 
