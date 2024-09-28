@@ -1,6 +1,7 @@
 ﻿using Smartloop_Feedback.Objects;
 using Smartloop_Feedback.Objects.Updated.User_Object;
 using Smartloop_Feedback.Objects.Updated.User_Object.Student;
+using Smartloop_Feedback.Objects.User_Object.Tutor;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -65,7 +66,7 @@ namespace Smartloop_Feedback.Dashboard
             {
                 foreach (SemesterAssociation semester in year.SemesterList.Values)
                 {
-                    foreach (StudentCourse course in semester.CourseList.Values)
+                    foreach (CourseAssociation course in semester.CourseList.Values)
                     {
                         if (!course.IsCompleted)
                         {

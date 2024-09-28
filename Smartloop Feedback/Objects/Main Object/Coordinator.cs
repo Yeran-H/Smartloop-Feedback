@@ -96,7 +96,7 @@ namespace Smartloop_Feedback.Objects
                 using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
                 {
                     conn.Open(); // Open the connection
-                    SqlCommand cmd = new SqlCommand("SELECT id, isStudent, semesterId, studentId, tutorId FROM courseAssociation WHERE courseId = @courseId", conn); // SQL query to fetch assessments
+                    SqlCommand cmd = new SqlCommand("SELECT id, isStudent, semesterId, studentId, tutorId, isCompleted FROM courseAssociation WHERE courseId = @courseId", conn); // SQL query to fetch assessments
                     cmd.Parameters.AddWithValue("@courseId", courseId); // Set the courseId parameter
 
                     using (SqlDataReader reader = cmd.ExecuteReader()) // Execute the query and get a reader
@@ -105,12 +105,12 @@ namespace Smartloop_Feedback.Objects
                         {
                             if(reader.GetBoolean(1))
                             {
-                                var temp = new StudentCourse(reader.GetInt32(0), courseId, reader.GetInt32(3), reader.GetInt32(2), reader.GetBoolean(1));
+                                var temp = new StudentCourse(reader.GetInt32(0), courseId, reader.GetInt32(3), reader.GetInt32(2), reader.GetBoolean(5), reader.GetBoolean(1));
                                 temp.DeleteStudentCourseFromDatabase();
                             }
                             else
                             {
-                                var temp = new TutorCourse(reader.GetInt32(0), courseId, reader.GetInt32(4), reader.GetInt32(2), reader.GetBoolean(1));
+                                var temp = new TutorCourse(reader.GetInt32(0), courseId, reader.GetInt32(4), reader.GetInt32(2), reader.GetBoolean(5), reader.GetBoolean(1));
                                 temp.DeleteTutorCourseFromDatabase();
                             }
                         }

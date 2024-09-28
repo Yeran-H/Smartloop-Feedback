@@ -208,6 +208,7 @@ END;
 CREATE TABLE courseAssociation (
     id INT IDENTITY(1,1) PRIMARY KEY,
     isStudent BIT,
+    isCompleted BIT,
     courseId INT,
 	semesterId INT,
     studentId INT,
@@ -244,7 +245,6 @@ END;
 CREATE TABLE studentCourse (
     id INT IDENTITY(1,1) PRIMARY KEY,
     courseAssociationId INT,
-    isCompleted BIT,
     courseMark DECIMAL (18,2),
     tutorialId INT,
     userId INT,

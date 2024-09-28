@@ -19,8 +19,8 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
         public SortedDictionary<int, TutorialAssociation> TutorTutorialList { get; set; }
 
-        public TutorCourse(int id, int courseId, int userId, int seemsterId, bool isStudent)
-            :base(id, courseId, userId, seemsterId, isStudent)
+        public TutorCourse(int id, int courseId, int userId, int seemsterId, bool isCompleted, bool isStudent)
+            :base(id, courseId, userId, seemsterId, isCompleted, isStudent)
         {
             TutorTutorialList = new SortedDictionary<int, TutorialAssociation>();
 
@@ -28,7 +28,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
         }
 
         public TutorCourse(int courseId, int userId, int seemsterId, bool isStudent, List<int> tutorialId)
-            : base(courseId, userId, seemsterId, isStudent)
+            : base(courseId, userId, seemsterId, false, isStudent)
         {
             TutorTutorialList = new SortedDictionary<int, TutorialAssociation>();
             AddTutorCourseToDatabase(tutorialId);

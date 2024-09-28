@@ -13,13 +13,12 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
     public class StudentCourse : CourseAssociation
     {
         private readonly string connStr = ConfigurationManager.ConnectionStrings["MySqlConnection"].ConnectionString; // Connection string for the database
-        public bool IsCompleted { get; set; }
         public double CourseMark { get; set; }
         public Tutorial Tutorial { get; set; }
         public SortedDictionary<int, StudentAssessment> StudentAssessmentList { get; set; }
 
-        public StudentCourse(int id, int courseId, int userId, int semesterId, bool isStudent)
-            : base(id, courseId, userId, semesterId, isStudent)
+        public StudentCourse(int id, int courseId, int userId, int semesterId, bool isCompleted, bool isStudent)
+            : base(id, courseId, userId, semesterId, isCompleted, isStudent)
         {
             LoadStudentCourseFromDatabase();
 
@@ -28,9 +27,8 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
         }
 
         public StudentCourse(int courseId, int userId, int semesterId, bool isStudent, int tutorialId)
-            : base(courseId, userId, semesterId, isStudent)
+            : base(courseId, userId, semesterId, false, isStudent)
         {
-            IsCompleted = false;
             CourseMark = 0.00;
             Tutorial = new Tutorial(tutorialId);
             AddStudentCourseToDatabase();
@@ -45,12 +43,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO studentCourse (courseAssociationId, isCompleted, courseMark, tutorialId, userId) VALUES (@courseAssociationId, @isCompleted, @courseMark, @tutorialId, @userId);"; // SQL query to insert student course
+                string sql = "INSERT INTO studentCourse (courseAssociationId, courseMark, tutorialId, userId) VALUES (@courseAssociationId, @courseMark, @tutorialId, @userId);"; // SQL query to insert student course
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
                     cmd.Parameters.AddWithValue("@courseAssociationId", Id); // Use the generated ID from CourseAssociation
-                    cmd.Parameters.AddWithValue("@isCompleted", IsCompleted); // Set the isCompleted parameter
                     cmd.Parameters.AddWithValue("@courseMark", CourseMark); // Set the courseMarks parameter
                     cmd.Parameters.AddWithValue("@tutorialId", Tutorial.Id);
                     cmd.Parameters.AddWithValue("@userId", UserId);
@@ -66,7 +63,7 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "SELECT isCompleted, courseMark, tutorialId FROM studentCourse WHERE courseAssociationId = @Id"; // SQL query to fetch courses
+                string sql = "SELECT courseMark, tutorialId FROM studentCourse WHERE courseAssociationId = @Id"; // SQL query to fetch courses
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -76,9 +73,8 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object.Student
                     {
                         if (reader.Read()) // Read each row
                         {
-                            IsCompleted = reader.GetBoolean(0);
-                            CourseMark = (double)reader.GetDecimal(1);
-                            Tutorial = new Tutorial(reader.GetInt32(2));
+                            CourseMark = (double)reader.GetDecimal(0);
+                            Tutorial = new Tutorial(reader.GetInt32(1));
                         }
                     }
                 }

@@ -74,7 +74,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                SqlCommand cmd = new SqlCommand("SELECT ca.id, ca.courseId, ca.studentId, ca.semesterId, ca.isStudent FROM courseAssociation ca JOIN studentCourse sc ON ca.id = sc.courseAssociationId WHERE ca.courseId = @courseId AND sc.tutorialId = @tutorialId", conn); // Updated SQL query to fetch assessments
+                SqlCommand cmd = new SqlCommand("SELECT ca.id, ca.courseId, ca.studentId, ca.semesterId, ca.isStudent, ca.isCompleted FROM courseAssociation ca JOIN studentCourse sc ON ca.id = sc.courseAssociationId WHERE ca.courseId = @courseId AND sc.tutorialId = @tutorialId", conn); // Updated SQL query to fetch assessments
 
                 cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
                 cmd.Parameters.AddWithValue("@tutorialId", Id); // Set the tutorialId parameter
@@ -83,7 +83,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
                 {
                     while (reader.Read()) // Read each row
                     {
-                        StudentList.Add(reader.GetInt32(0), new StudentCourse(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetBoolean(4)));
+                        StudentList.Add(reader.GetInt32(0), new StudentCourse(reader.GetInt32(0), reader.GetInt32(1), reader.GetInt32(2), reader.GetInt32(3), reader.GetBoolean(5), reader.GetBoolean(4)));
                     }
                 }
             }

@@ -79,11 +79,11 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
 
                 if (IsStudent)
                 {
-                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND studentId = @userId"; // SQL query to fetch courses
+                    sql = "SELECT id, isCompleted, courseId FROM courseAssociation WHERE semesterId = @semesterId AND studentId = @userId"; // SQL query to fetch courses
                 }
                 else
                 {
-                    sql = "SELECT id, courseId FROM courseAssociation WHERE semesterId = @semesterId AND tutorId = @userId"; // SQL query to fetch courses
+                    sql = "SELECT id, isCompleted, courseId FROM courseAssociation WHERE semesterId = @semesterId AND tutorId = @userId"; // SQL query to fetch courses
                 }
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
@@ -96,16 +96,17 @@ namespace Smartloop_Feedback.Objects.Updated.User_Object
                         while (reader.Read()) // Read each row
                         {
                             int courseAssociationId = reader.GetInt32(0);
-                            int courseId = reader.GetInt32(1);
+                            bool isCompleted = reader.IsDBNull(1);
+                            int courseId = reader.GetInt32(2);
 
                             if(IsStudent)
                             {
-                                StudentCourse studentCourse = new StudentCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
+                                StudentCourse studentCourse = new StudentCourse(courseAssociationId, courseId, UserId, Id, isCompleted, IsStudent);
                                 CourseList.Add(studentCourse.Code, studentCourse);
                             }
                             else
                             {
-                                TutorCourse tutorCourse = new TutorCourse(courseAssociationId, courseId, UserId, Id, IsStudent);
+                                TutorCourse tutorCourse = new TutorCourse(courseAssociationId, courseId, UserId, Id, isCompleted, IsStudent);
                                 CourseList.Add(tutorCourse.Code, tutorCourse);
                             }
                         }

@@ -251,16 +251,13 @@ namespace Smartloop_Feedback
             switch(num)
             {
                 case 0:
-                    if (user.IsStudent)
-                    {
-                        titleLb.Text = "Dashboard";
-                        this.formLoaderPl.Controls.Clear();
+                    titleLb.Text = "Dashboard";
+                    this.formLoaderPl.Controls.Clear();
 
-                        DashboardForm dashboard = new DashboardForm(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
-                        dashboard.FormBorderStyle = FormBorderStyle.None;
-                        this.formLoaderPl.Controls.Add(dashboard);
-                        dashboard.Show();
-                    }
+                    DashboardForm dashboard = new DashboardForm(user, this) { Dock = DockStyle.Fill, TopLevel = false, TopMost = true };
+                    dashboard.FormBorderStyle = FormBorderStyle.None;
+                    this.formLoaderPl.Controls.Add(dashboard);
+                    dashboard.Show();
                     break;
                 case 1:
                     var list = user.YearList[(int)position[0]].SemesterList[(string)position[1]].CourseList[(int)position[2]];
