@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
+using System.Threading.Tasks;
 
 namespace Smartloop_Feedback.Objects.User_Object.Tutor
 {
@@ -108,7 +109,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             }
         }
 
-        public void GetGeneralFeedback()
+        public async Task GetGeneralFeedback()
         {
             int count = 0;
 
@@ -122,7 +123,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
 
             if(count == AssessmentList.Count && GeneralFeedback == "")
             {
-                GenerateFinalFeedback();
+                await GenerateFinalFeedback();
                 IsCompleted = true;
 
                 using (SqlConnection conn = new SqlConnection(connStr))
@@ -151,7 +152,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             }
         }
 
-        private async void GenerateFinalFeedback()
+        private async Task GenerateFinalFeedback()
         {
             api = new OpenAIAPI(apiKey);
             var conversation = api.Chat.CreateConversation();

@@ -30,6 +30,8 @@ namespace Smartloop_Feedback.Academic_Portfolio
             feedbackRb.Visible = false;
             tutorialLb.Visible = false;
             feedbackLb.Visible = false;
+            feedbackCb.Visible = false;
+            assessmentCb.Visible = false;
             PopulateTutorialDGV();
         }
 
@@ -120,6 +122,8 @@ namespace Smartloop_Feedback.Academic_Portfolio
             feedbackRb.Visible = true;
             tutorialLb.Visible = true;
             feedbackLb.Visible = true;
+            feedbackCb.Visible = true;
+            assessmentCb.Visible = true;
 
 
             tutorialLb.Text = "Tutorial " + tutorCourse.TutorTutorialList[(int)mainForm.position[3]].Name + " Student List";
@@ -199,7 +203,10 @@ namespace Smartloop_Feedback.Academic_Portfolio
 
         private void PopulateFeedback()
         {
-            foreach(TutorialAssessment tutorialAssessment in tutorCourse.TutorTutorialList[(int)mainForm.position[3]].AssessmentList.Values)
+            assessmentCb.DisplayMember = "Key";
+            feedbackCb.DisplayMember = "Key";
+
+            foreach (TutorialAssessment tutorialAssessment in tutorCourse.TutorTutorialList[(int)mainForm.position[3]].AssessmentList.Values)
             {
                 KeyValuePair<string, int> pair = new KeyValuePair<string, int>(tutorialAssessment.Name, tutorialAssessment.Id);
                 assessmentCb.Items.Add(pair);
@@ -233,7 +240,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
             }
         }
 
-        private void assessmentCb_ItemCheck(object sender, ItemCheckEventArgs e)
+        private async void assessmentCb_ItemCheck(object sender, ItemCheckEventArgs e)
         {
             var selectedItem = assessmentCb.Items[e.Index];
 
@@ -242,8 +249,8 @@ namespace Smartloop_Feedback.Academic_Portfolio
 
             if (e.NewValue == CheckState.Checked)
             {
-                tutorCourse.TutorTutorialList[(int)mainForm.position[3]].AssessmentList[tag].UpdateAssessmentToDatabase(true);
-                tutorCourse.TutorTutorialList[(int)mainForm.position[3]].GetGeneralFeedback();
+                await tutorCourse.TutorTutorialList[(int)mainForm.position[3]].AssessmentList[tag].UpdateAssessmentToDatabase(true);
+                await tutorCourse.TutorTutorialList[(int)mainForm.position[3]].GetGeneralFeedback();
             }
         }
     }

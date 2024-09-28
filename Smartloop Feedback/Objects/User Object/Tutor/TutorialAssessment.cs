@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace Smartloop_Feedback.Objects.User_Object.Tutor
 {
@@ -55,11 +56,11 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             }
         }
 
-        public void UpdateAssessmentToDatabase(bool isFinalised)
+        public async Task UpdateAssessmentToDatabase(bool isFinalised)
         {
             if (isFinalised && General == "")
             {
-                GenerateFinalFeedback();
+                await GenerateFinalFeedback();
             }
 
             IsCompleted = isFinalised;
@@ -72,7 +73,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
                     UPDATE tutorialAssessment
                     SET 
                         isCompleted = @isCompleted,
-                        general = @general
+                        generalFeedback = @general
                     WHERE
                         id = @id";
 
@@ -89,7 +90,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
             }
         }
 
-        private async void GenerateFinalFeedback()
+        private async Task GenerateFinalFeedback()
         {
             api = new OpenAIAPI(apiKey);
             var conversation = api.Chat.CreateConversation();

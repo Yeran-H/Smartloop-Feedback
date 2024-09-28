@@ -103,7 +103,7 @@
             this.feedbackRb.Location = new System.Drawing.Point(428, 322);
             this.feedbackRb.Name = "feedbackRb";
             this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
-            this.feedbackRb.Size = new System.Drawing.Size(281, 117);
+            this.feedbackRb.Size = new System.Drawing.Size(310, 117);
             this.feedbackRb.TabIndex = 66;
             this.feedbackRb.Text = "";
             this.feedbackRb.Visible = false;
@@ -123,9 +123,9 @@
             // assessmentCb
             // 
             this.assessmentCb.FormattingEnabled = true;
-            this.assessmentCb.Location = new System.Drawing.Point(251, 283);
+            this.assessmentCb.Location = new System.Drawing.Point(175, 282);
             this.assessmentCb.Name = "assessmentCb";
-            this.assessmentCb.Size = new System.Drawing.Size(165, 169);
+            this.assessmentCb.Size = new System.Drawing.Size(247, 169);
             this.assessmentCb.TabIndex = 67;
             this.assessmentCb.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.assessmentCb_ItemCheck);
             // 
