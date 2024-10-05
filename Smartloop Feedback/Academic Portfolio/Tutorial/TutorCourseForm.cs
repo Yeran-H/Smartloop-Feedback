@@ -213,7 +213,7 @@ namespace Smartloop_Feedback.Academic_Portfolio
 
                 if (tutorialAssessment.IsCompleted)
                 {
-                    assessmentCb.SetItemChecked(feedbackCb.Items.Count - 1, true);
+                    assessmentCb.SetItemChecked(assessmentCb.Items.Count - 1, true);
                 }
 
                 feedbackCb.Items.Add(pair);

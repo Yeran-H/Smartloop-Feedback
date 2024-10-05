@@ -102,7 +102,7 @@ namespace Smartloop_Feedback.Objects.User_Object.Tutor
                 {
                     while (reader.Read()) // Read each row
                     {
-                        var temp = new TutorialAssessment(reader.GetInt32(0), reader.GetInt32(1), reader.GetBoolean(2), reader.GetString(3), Id);
+                        var temp = new TutorialAssessment(reader.GetInt32(0), reader.GetInt32(1), reader.GetBoolean(2), reader.IsDBNull(3) ? string.Empty : reader.GetString(3), Id);
                         AssessmentList.Add(temp.Id, temp);
                     }
                 }
