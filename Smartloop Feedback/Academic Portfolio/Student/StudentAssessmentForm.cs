@@ -52,8 +52,6 @@ namespace Smartloop_Feedback
             {
                 LoadAttemptData();
             }
-
-            isFinalised();
         }
 
         private void PopulateCheckListBox()
@@ -172,19 +170,6 @@ namespace Smartloop_Feedback
             }
         }
 
-        private void isFinalised()
-        {
-            if(assessment.IsFinalised)
-            {
-                markTb.Enabled = false;
-                dateP.Enabled = false;
-                descriptionRb.Enabled = false;
-                checklistCb.Enabled = false;
-                itemBtn.Enabled = false;
-                attemptBtn.Enabled = false;
-            }
-        }
-
         private void canvasBtn_Click(object sender, EventArgs e)
         {
             OpenUrl(assessment.CanvasLink);
@@ -213,15 +198,18 @@ namespace Smartloop_Feedback
 
         private void itemBtn_Click(object sender, EventArgs e)
         {
-            using (var addCheckList = new AddCheckListForm()) // Open the add year form
+            if(!assessment.IsFinalised)
             {
-                if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+                using (var addCheckList = new AddCheckListForm()) // Open the add year form
                 {
-                    string name = addCheckList.name; // Get the new year's name
+                    if (addCheckList.ShowDialog() == DialogResult.OK) // Check if the dialog result is OK
+                    {
+                        string name = addCheckList.name; // Get the new year's name
 
-                    assessment.CheckList.Add(new CheckList(name, assessment.UserId, false, assessment.Id));
+                        assessment.CheckList.Add(new CheckList(name, assessment.UserId, false, assessment.Id));
 
-                    PopulateCheckListBox();
+                        PopulateCheckListBox();
+                    }
                 }
             }
         }
@@ -285,7 +273,10 @@ namespace Smartloop_Feedback
 
         private void attemptBtn_Click(object sender, EventArgs e)
         {
-            mainForm.MainPannel(3);
+            if(!assessment.IsFinalised)
+            {
+                mainForm.MainPannel(3);
+            }
         }
 
         private void attemptDgv_CellClick(object sender, DataGridViewCellEventArgs e)

@@ -60,7 +60,7 @@
             // datePl
             // 
             this.datePl.BackColor = System.Drawing.Color.White;
-            this.datePl.Location = new System.Drawing.Point(517, 47);
+            this.datePl.Location = new System.Drawing.Point(517, 57);
             this.datePl.Name = "datePl";
             this.datePl.Size = new System.Drawing.Size(200, 1);
             this.datePl.TabIndex = 22;
@@ -70,7 +70,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Aptos", 12F);
             this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label1.Location = new System.Drawing.Point(513, 14);
+            this.label1.Location = new System.Drawing.Point(513, 24);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
@@ -80,7 +80,7 @@
             // titlePl
             // 
             this.titlePl.BackColor = System.Drawing.Color.White;
-            this.titlePl.Location = new System.Drawing.Point(283, 44);
+            this.titlePl.Location = new System.Drawing.Point(283, 54);
             this.titlePl.Name = "titlePl";
             this.titlePl.Size = new System.Drawing.Size(200, 1);
             this.titlePl.TabIndex = 25;
@@ -93,7 +93,7 @@
             this.markTb.Font = new System.Drawing.Font("Aptos", 12F);
             this.markTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
             this.markTb.HideSelection = false;
-            this.markTb.Location = new System.Drawing.Point(373, 21);
+            this.markTb.Location = new System.Drawing.Point(373, 31);
             this.markTb.Name = "markTb";
             this.markTb.Size = new System.Drawing.Size(110, 20);
             this.markTb.TabIndex = 24;
@@ -108,7 +108,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Aptos", 12F);
             this.label2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label2.Location = new System.Drawing.Point(279, 21);
+            this.label2.Location = new System.Drawing.Point(279, 31);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(89, 20);
@@ -131,7 +131,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(521, 329);
+            this.progressBar.Location = new System.Drawing.Point(535, 335);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(200, 23);
             this.progressBar.TabIndex = 29;
@@ -140,7 +140,7 @@
             // checklistCb
             // 
             this.checklistCb.FormattingEnabled = true;
-            this.checklistCb.Location = new System.Drawing.Point(521, 169);
+            this.checklistCb.Location = new System.Drawing.Point(535, 175);
             this.checklistCb.Name = "checklistCb";
             this.checklistCb.Size = new System.Drawing.Size(200, 154);
             this.checklistCb.TabIndex = 30;
@@ -154,7 +154,7 @@
             this.itemBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.itemBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.itemBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.itemBtn.Location = new System.Drawing.Point(551, 358);
+            this.itemBtn.Location = new System.Drawing.Point(565, 364);
             this.itemBtn.Name = "itemBtn";
             this.itemBtn.Size = new System.Drawing.Size(141, 52);
             this.itemBtn.TabIndex = 31;
@@ -170,7 +170,7 @@
             this.backBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.backBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.backBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.backBtn.Location = new System.Drawing.Point(11, 371);
+            this.backBtn.Location = new System.Drawing.Point(11, 407);
             this.backBtn.Name = "backBtn";
             this.backBtn.Size = new System.Drawing.Size(141, 52);
             this.backBtn.TabIndex = 34;
@@ -185,7 +185,7 @@
             this.canvasBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.canvasBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.canvasBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.canvasBtn.Location = new System.Drawing.Point(283, 66);
+            this.canvasBtn.Location = new System.Drawing.Point(283, 84);
             this.canvasBtn.Name = "canvasBtn";
             this.canvasBtn.Size = new System.Drawing.Size(141, 52);
             this.canvasBtn.TabIndex = 35;
@@ -200,7 +200,7 @@
             this.rubricBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.rubricBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.rubricBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.rubricBtn.Location = new System.Drawing.Point(430, 66);
+            this.rubricBtn.Location = new System.Drawing.Point(430, 84);
             this.rubricBtn.Name = "rubricBtn";
             this.rubricBtn.Size = new System.Drawing.Size(141, 52);
             this.rubricBtn.TabIndex = 36;
@@ -215,7 +215,7 @@
             this.attemptBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.attemptBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.attemptBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.attemptBtn.Location = new System.Drawing.Point(340, 335);
+            this.attemptBtn.Location = new System.Drawing.Point(336, 359);
             this.attemptBtn.Name = "attemptBtn";
             this.attemptBtn.Size = new System.Drawing.Size(141, 52);
             this.attemptBtn.TabIndex = 38;
@@ -244,7 +244,7 @@
             this.panelDetails.Controls.Add(this.dateP);
             this.panelDetails.Location = new System.Drawing.Point(1, 3);
             this.panelDetails.Name = "panelDetails";
-            this.panelDetails.Size = new System.Drawing.Size(728, 432);
+            this.panelDetails.Size = new System.Drawing.Size(748, 470);
             this.panelDetails.TabIndex = 42;
             // 
             // downloadBtn
@@ -254,7 +254,7 @@
             this.downloadBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.downloadBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
             this.downloadBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.downloadBtn.Location = new System.Drawing.Point(576, 66);
+            this.downloadBtn.Location = new System.Drawing.Point(576, 84);
             this.downloadBtn.Name = "downloadBtn";
             this.downloadBtn.Size = new System.Drawing.Size(141, 52);
             this.downloadBtn.TabIndex = 44;
@@ -268,7 +268,7 @@
             this.feedbackRb.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.feedbackRb.Font = new System.Drawing.Font("Aptos", 12F);
             this.feedbackRb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.feedbackRb.Location = new System.Drawing.Point(31, 142);
+            this.feedbackRb.Location = new System.Drawing.Point(31, 178);
             this.feedbackRb.Name = "feedbackRb";
             this.feedbackRb.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.feedbackRb.Size = new System.Drawing.Size(217, 219);
@@ -283,7 +283,7 @@
             this.attemptDgv.AllowUserToOrderColumns = true;
             this.attemptDgv.BackgroundColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
             this.attemptDgv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.attemptDgv.Location = new System.Drawing.Point(300, 178);
+            this.attemptDgv.Location = new System.Drawing.Point(296, 202);
             this.attemptDgv.Name = "attemptDgv";
             this.attemptDgv.ReadOnly = true;
             this.attemptDgv.Size = new System.Drawing.Size(206, 151);
@@ -297,7 +297,7 @@
             this.panelCriteria.Location = new System.Drawing.Point(3, 3);
             this.panelCriteria.Margin = new System.Windows.Forms.Padding(2);
             this.panelCriteria.Name = "panelCriteria";
-            this.panelCriteria.Size = new System.Drawing.Size(736, 432);
+            this.panelCriteria.Size = new System.Drawing.Size(736, 470);
             this.panelCriteria.TabIndex = 43;
             // 
             // bacBtn
@@ -338,7 +338,7 @@
             this.dateP.BorderSize = 0;
             this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
             this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateP.Location = new System.Drawing.Point(587, 9);
+            this.dateP.Location = new System.Drawing.Point(587, 19);
             this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
             this.dateP.Name = "dateP";
             this.dateP.Size = new System.Drawing.Size(130, 35);
@@ -352,7 +352,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.ClientSize = new System.Drawing.Size(730, 438);
+            this.ClientSize = new System.Drawing.Size(750, 477);
             this.Controls.Add(this.panelDetails);
             this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;

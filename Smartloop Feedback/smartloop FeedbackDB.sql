@@ -322,7 +322,6 @@ CREATE TABLE event (
     color INT,
     courseId INT,
     userId INT,
-    FOREIGN KEY (courseId) REFERENCES courseAssociation(id),
-    FOREIGN KEY (userId) REFERENCES student(userId)
+    FOREIGN KEY (courseId) REFERENCES courseAssociation(id)
 );
 GO
