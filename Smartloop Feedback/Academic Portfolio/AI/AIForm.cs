@@ -78,7 +78,7 @@ namespace Smartloop_Feedback.Academic_Portfolio.AI
                     }
                 }
             }
-            else
+            else if (mainForm.position.Count == 7 && mainForm.position[4] != null)
             {
                 teacherRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].TeacherFeedback;
                 noteRb.Text = assessment.FeedbackList[(int)mainForm.position[4]].Notes;
