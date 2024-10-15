@@ -53,7 +53,9 @@ namespace Smartloop_Feedback.Objects.Updated
                     }
                     else
                     {
-                        string sql = "INSERT INTO semester (name, yearId) VALUES (@name, @yearName); SELECT SCOPE_IDENTITY();"; // SQL query to insert year and get the generated ID
+                        conn.Close();
+                        conn.Open();
+                        string sql = "INSERT INTO semester (name, yearName) VALUES (@name, @yearName); SELECT SCOPE_IDENTITY();"; // SQL query to insert year and get the generated ID
 
                         using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                         {
