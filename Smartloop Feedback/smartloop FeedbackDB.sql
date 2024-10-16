@@ -19,6 +19,8 @@ CREATE TABLE year (
 );
 GO
 
+SET IDENTITY_INSERT year ON;
+
 -- Create the semester table
 CREATE TABLE semester (
     id INT IDENTITY(1,1) PRIMARY KEY,

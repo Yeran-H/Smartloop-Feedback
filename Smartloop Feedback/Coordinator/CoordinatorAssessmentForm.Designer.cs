@@ -29,7 +29,12 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CoordinatorAssessmentForm));
             this.panelDetails = new System.Windows.Forms.Panel();
+            this.label9 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.uploadTb = new System.Windows.Forms.TextBox();
+            this.loadAssessmentBtn = new System.Windows.Forms.Button();
             this.back1Btn = new System.Windows.Forms.Button();
             this.label8 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -55,6 +60,7 @@
             this.descriptionPl = new System.Windows.Forms.Panel();
             this.titlePl = new System.Windows.Forms.Panel();
             this.titleTb = new System.Windows.Forms.TextBox();
+            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.label7 = new System.Windows.Forms.Label();
             this.descriptionTb = new System.Windows.Forms.RichTextBox();
             this.panelCriteria = new System.Windows.Forms.Panel();
@@ -65,11 +71,6 @@
             this.criteriaDgv = new System.Windows.Forms.DataGridView();
             this.panelColumnInputs = new System.Windows.Forms.Panel();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.label9 = new System.Windows.Forms.Label();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.uploadTb = new System.Windows.Forms.TextBox();
-            this.loadAssessmentBtn = new System.Windows.Forms.Button();
-            this.dateP = new Smartloop_Feedback.Objects.DatePicker();
             this.panelDetails.SuspendLayout();
             this.panelCriteria.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.criteriaDgv)).BeginInit();
@@ -115,6 +116,54 @@
             this.panelDetails.Name = "panelDetails";
             this.panelDetails.Size = new System.Drawing.Size(750, 477);
             this.panelDetails.TabIndex = 3;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Aptos", 12F);
+            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.label9.Location = new System.Drawing.Point(532, 267);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(33, 20);
+            this.label9.TabIndex = 57;
+            this.label9.Text = "File";
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.Location = new System.Drawing.Point(536, 290);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(200, 1);
+            this.panel3.TabIndex = 56;
+            // 
+            // uploadTb
+            // 
+            this.uploadTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.uploadTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.uploadTb.Font = new System.Drawing.Font("Aptos", 12F);
+            this.uploadTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.uploadTb.HideSelection = false;
+            this.uploadTb.Location = new System.Drawing.Point(570, 267);
+            this.uploadTb.Name = "uploadTb";
+            this.uploadTb.Size = new System.Drawing.Size(166, 20);
+            this.uploadTb.TabIndex = 55;
+            this.uploadTb.TabStop = false;
+            // 
+            // loadAssessmentBtn
+            // 
+            this.loadAssessmentBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.loadAssessmentBtn.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.loadAssessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.loadAssessmentBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
+            this.loadAssessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.loadAssessmentBtn.Location = new System.Drawing.Point(573, 302);
+            this.loadAssessmentBtn.Name = "loadAssessmentBtn";
+            this.loadAssessmentBtn.Size = new System.Drawing.Size(141, 52);
+            this.loadAssessmentBtn.TabIndex = 54;
+            this.loadAssessmentBtn.Text = "Upload Assessment";
+            this.loadAssessmentBtn.UseVisualStyleBackColor = false;
+            this.loadAssessmentBtn.Click += new System.EventHandler(this.loadAssessmentBtn_Click);
             // 
             // back1Btn
             // 
@@ -410,6 +459,21 @@
             this.titleTb.Text = "Title";
             this.toolTip1.SetToolTip(this.titleTb, "Edit Title");
             // 
+            // dateP
+            // 
+            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
+            this.dateP.BorderSize = 0;
+            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
+            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dateP.Location = new System.Drawing.Point(119, 261);
+            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
+            this.dateP.Name = "dateP";
+            this.dateP.Size = new System.Drawing.Size(130, 35);
+            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
+            this.dateP.TabIndex = 9;
+            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
+            this.toolTip1.SetToolTip(this.dateP, "Edit Date");
+            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -534,69 +598,6 @@
             this.panelColumnInputs.Size = new System.Drawing.Size(222, 366);
             this.panelColumnInputs.TabIndex = 4;
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Aptos", 12F);
-            this.label9.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.label9.Location = new System.Drawing.Point(532, 267);
-            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(33, 20);
-            this.label9.TabIndex = 57;
-            this.label9.Text = "File";
-            // 
-            // panel3
-            // 
-            this.panel3.BackColor = System.Drawing.Color.White;
-            this.panel3.Location = new System.Drawing.Point(536, 290);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(200, 1);
-            this.panel3.TabIndex = 56;
-            // 
-            // uploadTb
-            // 
-            this.uploadTb.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.uploadTb.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.uploadTb.Font = new System.Drawing.Font("Aptos", 12F);
-            this.uploadTb.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.uploadTb.HideSelection = false;
-            this.uploadTb.Location = new System.Drawing.Point(570, 267);
-            this.uploadTb.Name = "uploadTb";
-            this.uploadTb.Size = new System.Drawing.Size(166, 20);
-            this.uploadTb.TabIndex = 55;
-            this.uploadTb.TabStop = false;
-            // 
-            // loadAssessmentBtn
-            // 
-            this.loadAssessmentBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.loadAssessmentBtn.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.loadAssessmentBtn.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.loadAssessmentBtn.Font = new System.Drawing.Font("Aptos Black", 11.25F, System.Drawing.FontStyle.Bold);
-            this.loadAssessmentBtn.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.loadAssessmentBtn.Location = new System.Drawing.Point(573, 302);
-            this.loadAssessmentBtn.Name = "loadAssessmentBtn";
-            this.loadAssessmentBtn.Size = new System.Drawing.Size(141, 52);
-            this.loadAssessmentBtn.TabIndex = 54;
-            this.loadAssessmentBtn.Text = "Upload Assessment";
-            this.loadAssessmentBtn.UseVisualStyleBackColor = false;
-            this.loadAssessmentBtn.Click += new System.EventHandler(this.loadAssessmentBtn_Click);
-            // 
-            // dateP
-            // 
-            this.dateP.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(0)))), ((int)(((byte)(57)))));
-            this.dateP.BorderSize = 0;
-            this.dateP.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.5F);
-            this.dateP.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dateP.Location = new System.Drawing.Point(119, 261);
-            this.dateP.MinimumSize = new System.Drawing.Size(4, 35);
-            this.dateP.Name = "dateP";
-            this.dateP.Size = new System.Drawing.Size(130, 35);
-            this.dateP.SkinColor = System.Drawing.Color.FromArgb(((int)(((byte)(16)))), ((int)(((byte)(34)))), ((int)(((byte)(61)))));
-            this.dateP.TabIndex = 9;
-            this.dateP.TextColor = System.Drawing.Color.FromArgb(((int)(((byte)(193)))), ((int)(((byte)(193)))), ((int)(((byte)(193)))));
-            this.toolTip1.SetToolTip(this.dateP, "Edit Date");
-            // 
             // CoordinatorAssessmentForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -606,6 +607,7 @@
             this.Controls.Add(this.panelDetails);
             this.Controls.Add(this.panelCriteria);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "CoordinatorAssessmentForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "EditAssessmentForm";

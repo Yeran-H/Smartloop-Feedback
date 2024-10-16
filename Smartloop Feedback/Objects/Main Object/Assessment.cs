@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.InteropServices;
 using System.Windows.Forms.DataVisualization.Charting;
@@ -93,7 +94,11 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@mark", Mark); // Set the mark parameter
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
                     cmd.Parameters.AddWithValue("@fileName", (object)FileName ?? DBNull.Value);
-                    cmd.Parameters.AddWithValue("@fileData", (object)FileData ?? DBNull.Value);
+
+                    SqlParameter fileDataParam = new SqlParameter("@fileData", SqlDbType.VarBinary, -1); // -1 indicates max size
+                    fileDataParam.Value = (object)FileData ?? DBNull.Value;
+                    cmd.Parameters.Add(fileDataParam);
+
                     cmd.Parameters.AddWithValue("@courseId", CourseId); // Set the courseId parameter
                     AssessmentId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }

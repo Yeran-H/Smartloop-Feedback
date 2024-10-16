@@ -21,7 +21,7 @@ namespace Smartloop_Feedback.Objects
         public string Name { get; set; } // Course name
         public int CreditPoint { get; set; } // Course credit points
         public string Description { get; set; } // Course description
-        public Updated.Year Year { get; set; }
+        public Year Year { get; set; }
         public Semester Semester { get; set; }
         public string CanvasLink { get; set; }
         public int TutorNum { get; set; }
@@ -39,7 +39,7 @@ namespace Smartloop_Feedback.Objects
             this.TutorNum = tutorNum;
             AssessmentList = new Dictionary<int, Assessment>();
             TutorialList = new Dictionary<int, Tutorial>();
-            Year = new Updated.Year(yearName);
+            Year = new Year(yearName);
             Semester = new Semester(semesterId);
             LoadAssessmentsFromDatabase();
             LoadTutorialFromDatabase();
@@ -55,7 +55,7 @@ namespace Smartloop_Feedback.Objects
             AssessmentList = new Dictionary<int, Assessment>();
             this.TutorNum = tutorNum;
             TutorialList = new Dictionary<int, Tutorial>();
-            Year = new Updated.Year(yearName);
+            Year = new Year(yearName);
             Semester = new Semester(semesterName, Year.Name);
             AddCourseToDatabase();
             AddTutorialFromDatabase(false);
@@ -103,7 +103,7 @@ namespace Smartloop_Feedback.Objects
             using (SqlConnection conn = new SqlConnection(connStr)) // Establish a database connection
             {
                 conn.Open(); // Open the connection
-                string sql = "INSERT INTO course (code, name, creditPoint, description, yearName, semesterId, canvasLink) VALUES (@code, @name, @creditPoint, @description, @yearName, @semesterId, @canvasLink); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
+                string sql = "INSERT INTO course (code, name, creditPoint, description, yearName, semesterId, tutorNum, canvasLink) VALUES (@code, @name, @creditPoint, @description, @yearName, @semesterId, @tutorNum, @canvasLink); SELECT SCOPE_IDENTITY();"; // SQL query to insert course and get the generated ID
 
                 using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                 {
@@ -114,6 +114,7 @@ namespace Smartloop_Feedback.Objects
                     cmd.Parameters.AddWithValue("@yearName", Year.Name);
                     cmd.Parameters.AddWithValue("@semesterId", Semester.SemesterId);
                     cmd.Parameters.AddWithValue("@canvasLink", CanvasLink); // Set the canvasLink parameter
+                    cmd.Parameters.AddWithValue("@tutorNum", TutorNum);
                     CourseId = Convert.ToInt32(cmd.ExecuteScalar()); // Execute the query and get the generated ID
                 }
             }

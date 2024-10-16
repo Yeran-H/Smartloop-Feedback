@@ -36,11 +36,15 @@ namespace Smartloop_Feedback.Objects.Updated
                     }
                     else
                     {
-                        string sql = "INSERT INTO year (name) VALUES (@name);"; // SQL query to insert year and get the generated ID
+                        conn.Close();
+                        conn.Open();
+
+                        string sql = "SET IDENTITY_INSERT year ON;INSERT INTO year (name) VALUES (@name);"; // SQL query to insert year and get the generated ID
 
                         using (SqlCommand cmd = new SqlCommand(sql, conn)) // Create a command
                         {
                             cmd.Parameters.AddWithValue("@name", Name); // Set the name parameter
+                            cmd.ExecuteNonQuery();
                         }
                     }
                 }

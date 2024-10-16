@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CoordinatorDashForm));
             this.addBtn = new System.Windows.Forms.Button();
             this.courseDgv = new System.Windows.Forms.DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).BeginInit();
@@ -64,7 +65,7 @@
             this.courseDgv.TabIndex = 50;
             this.courseDgv.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.courseDgv_CellClick);
             // 
-            // CoordinatorDash
+            // CoordinatorDashForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -73,7 +74,8 @@
             this.Controls.Add(this.courseDgv);
             this.Controls.Add(this.addBtn);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Name = "CoordinatorDash";
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "CoordinatorDashForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "CoordinatorDash";
             ((System.ComponentModel.ISupportInitialize)(this.courseDgv)).EndInit();

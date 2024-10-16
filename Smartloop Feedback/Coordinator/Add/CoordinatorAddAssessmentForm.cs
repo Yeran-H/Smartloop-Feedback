@@ -225,7 +225,16 @@ namespace Smartloop_Feedback.Forms
             }
 
             // Add a new assessment to the course
-            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, course.Description, typeTb.Text, dateP.Value.Date, double.Parse(weightTb.Text), double.Parse(markTb.Text), canvasTb.Text, System.IO.Path.GetFileName(fileTb.Text), Encoding.UTF8.GetBytes(ExtractTextFromPdf(fileTb.Text)),course.CourseId);
+            byte[] data = null;
+            string name = null;
+            if(fileTb.Text != "")
+            {
+                name = System.IO.Path.GetFileName(fileTb.Text);
+                data = Encoding.UTF8.GetBytes(ExtractTextFromPdf(fileTb.Text));
+            }
+
+
+            Assessment assessment = new Assessment(titleTb.Text, descriptionTb.Text, course.Description, typeTb.Text, dateP.Value.Date, double.Parse(weightTb.Text), double.Parse(markTb.Text), canvasTb.Text, name, data, course.CourseId);
             course.AddAssessment(assessment);
 
             // Prepare column names for ratings
