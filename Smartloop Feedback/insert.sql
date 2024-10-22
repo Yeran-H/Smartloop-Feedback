@@ -1,15 +1,15 @@
 ﻿-- Year Data Insert
-SET IDENTITY_INSERT [dbo].[year] ON
-INSERT INTO [dbo].[year] ([name]) VALUES (2020)
-INSERT INTO [dbo].[year] ([name]) VALUES (2024)
-SET IDENTITY_INSERT [dbo].[year] OFF
+-- SET IDENTITY_INSERT [dbo].[year] ON
+-- INSERT INTO [dbo].[year] ([name]) VALUES (2020)
+-- INSERT INTO [dbo].[year] ([name]) VALUES (2024)
+-- SET IDENTITY_INSERT [dbo].[year] ON
 
 -- Student Data Insert
 INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree]) VALUES (11111111, N'11111111', N'test@gmail.com', N'11111111', N'BA Software')
 INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree], [profileImage]) VALUES (13888767, N'Yeran', N'13888767@gmail.com', N'yerthisev03', N'BA Software', 0xFFD8FFE000104A46494600010101000000000000FFDB0043000302020302020303030304030304050805050404050A070706080C0A0C0C0B0A0B0B0D0E12100D0E110E0B0B1016101113141515150C0F171816141812141514FFDB00430103040405040509050509140D0B0D1414141414141414141414141414141414141414)
 
 -- Tutor Data Insert
-INSERT INTO [dbo].[tutor] ([tutorId], [name], [email], [password], [profileImage]) VALUES (97492185, N'Mahira Mohamed Mowjoon', N'mahira.athamlebbe@uts.edu.au', N'yerthisev03', <SQLVARIANT>)
+INSERT INTO [dbo].[tutor] ([tutorId], [name], [email], [password]) VALUES (97492185, N'Mahira Mohamed Mowjoon', N'mahira.athamlebbe@uts.edu.au', N'yerthisev03')
 
 -- Semester Data Insert
 SET IDENTITY_INSERT [dbo].[semester] ON
@@ -60,7 +60,7 @@ approach.
              CAST(100.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/files/8153909?module_item_id=2025032',
               N'Tutorial 6.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E6720200A5765656B20373A204167696C6520446576656C6F706D656E7420776974, 1)
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (3,
         N'Short Quiz',
          N'This assessment item includes 5individual open-book short quizzes conducted on Canvas',
@@ -70,7 +70,7 @@ VALUES (3,
              CAST(30.00 AS Decimal(18, 2)),
              CAST(30.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/external_tools/1990',
-              NULL, <SQLVARIANT>, 2)
+              2)
 INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
 VALUES (4,
         N'Weekly Activities',
