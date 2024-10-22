@@ -6,7 +6,7 @@
 
 -- Student Data Insert
 INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree]) VALUES (11111111, N'11111111', N'test@gmail.com', N'11111111', N'BA Software')
-INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree], [profileImage]) VALUES (13888767, N'Yeran', N'13888767@gmail.com', N'yerthisev03', N'BA Software', 0xFFD8FFE000104A46494600010101000000000000FFDB0043000302020302020303030304030304050805050404050A070706080C0A0C0C0B0A0B0B0D0E12100D0E110E0B0B1016101113141515150C0F171816141812141514FFDB00430103040405040509050509140D0B0D1414141414141414141414141414141414141414)
+INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree]) VALUES (13888767, N'Yeran', N'13888767@gmail.com', N'yerthisev03', N'BA Software')
 
 -- Tutor Data Insert
 INSERT INTO [dbo].[tutor] ([tutorId], [name], [email], [password]) VALUES (97492185, N'Mahira Mohamed Mowjoon', N'mahira.athamlebbe@uts.edu.au', N'yerthisev03')
@@ -25,7 +25,7 @@ SET IDENTITY_INSERT [dbo].[course] OFF
 
 -- Assessment Data Insert
 SET IDENTITY_INSERT [dbo].[assessment] ON
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (1,
         N'Requirements Analysis Report',
          N'Accompanying these instructions is a case study of the “Videos On The Go” company and its
@@ -45,8 +45,8 @@ details.
              CAST(20.00 AS Decimal(18, 2)),
              CAST(20.00 AS Decimal(18, 2)),
              N'none',
-              N'31269 BRM Autumn 2020 Assignment 1 DRAFT VERSION(1).pdf', 0x33313236392042524D20417574756D6E20323032302041737369676E6D656E74203120200A20200A554E4956455253495459204F4620544543484E4F4C4F47592C205359444E4559200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E67200A41737369676E6D656E742031202D20, 1)
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+              1)
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (2,
         N'Tutorial 6',
          N'Understand and practice agile software requirement specification
@@ -59,7 +59,7 @@ approach.
              CAST(7.00 AS Decimal(18, 2)),
              CAST(100.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/files/8153909?module_item_id=2025032',
-              N'Tutorial 6.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E6720200A5765656B20373A204167696C6520446576656C6F706D656E7420776974, 1)
+              1)
 INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (3,
         N'Short Quiz',
@@ -71,7 +71,7 @@ VALUES (3,
              CAST(30.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/external_tools/1990',
               2)
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (4,
         N'Weekly Activities',
          N'Part 1: In the first tutorial students form groups of up to five students. Students are expected to
@@ -90,8 +90,8 @@ in total).
              CAST(20.00 AS Decimal(18, 2)),
              CAST(100.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/files/7618062?module_item_id=1895271',
-              N'Tutorial Case Study.pdf', 0x5475746F7269616C2043617365205374756479200AE28098426F6F6B69736820426C697373E280992043617365207374756479200A54686520E28098426F6F6B69736820426C697373E28099206973206120626F6F6B2072657461696C696E6720636F6D70616E7920776869636820697320736974756174656420696E206120, 2)
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+              2)
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (5,
         N'A3 - Requirements Analysis Report',
          N'The assignment case study provides information to analyse the current charter boat
@@ -109,8 +109,8 @@ more details
              CAST(20.00 AS Decimal(18, 2)),
              CAST(20.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/assignments/194069',
-              N'31269 Assessment 3.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E67200A4173736573736D656E74203320526571756972656D656E747320416E616C, 2)
-INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [fileName], [fileData], [courseId])
+              2)
+INSERT INTO [dbo].[assessment] ([id], [name], [description], [courseDescription], [type], [date], [weight], [mark], [canvasLink], [courseId])
 VALUES (6,
         N'A4 - Requirement Specification Document',
          N'The assignment will require the students’ groups to analyse and assess the basic improvements thatthe
@@ -125,7 +125,7 @@ inthecasestudy.',
              CAST(30.00 AS Decimal(18, 2)),
              CAST(30.00 AS Decimal(18, 2)),
              N'https://canvas.uts.edu.au/courses/32705/assignments/194070',
-              N'31269 Assessment 4-3.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E67200A4173736573736D656E74203420E28093526571756972656D656E74732053, 2)
+              2)
 SET IDENTITY_INSERT [dbo].[assessment] OFF
 
 -- Tutorial Data Insert
@@ -429,11 +429,11 @@ SET IDENTITY_INSERT [dbo].[checkList] OFF
 
 -- Feedeback Result Data Insert
 SET IDENTITY_INSERT [dbo].[feedbackResult] ON
-INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [fileName], [fileData], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
+INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
 VALUES (1,
         1,
         N'I noticed that some of your assumptions contradict the information provided in the case study, particularly regarding the involvement of the third-party verification provider. It’s important to ensure your assumptions align with the facts given. Additionally, your decision gateways could use improvement. Many of them only indicate one option, which doesn’t provide a clear decision path. Please make sure both options are represented, and remember that gateways should not replace key processes. Some processes, such as ''provide required contact details,'' should be standalone steps rather than being converted into decision points. There are also a few missing processes, which might have been unintentionally turned into decision gateways. Ensure that each process is clearly defined and includes appropriate start and end events. Lastly, while your entity relationships are mostly strong, some could be improved for clarity. For instance, ‘agreement contract receives terms and service’ doesn’t quite make sense as written, and relationships like ‘staff retrieve identification’ could be simplified for readability. Overall, you’ve done excellent work, but refining these areas will further enhance the quality of your submission',
-         N'Assignment Task 1 Requirement Analysis_ Wrk 01 Group 1.pdf', 0x41737369676E6D656E74205461736B203120526571756972656D656E740A416E616C797369733A2057726B2030312047726F757020310A62207920596572616E20486574746961726163686368790A5375626D697373696F6E20646174653A2032372D4170722D323032302031303A3132504D20285554432B31303030290A53, N'Please review the assumptions I’ve made and check if they align with the case study details, especially regarding third-party involvement. I’m concerned that some might not be fully accurate. Additionally, could you examine my decision gateways to ensure they provide clear options for both outcomes? I’d like feedback on whether any processes have been turned into decision gateways by mistake, as I’m not sure if I’ve missed defining certain processes properly. When it comes to the entity relationships, please highlight any that don’t make sense when read aloud or seem overly complex. I want to ensure the relationships are logical and easy to follow. Finally, I would appreciate any guidance on improving the clarity and structure of my work overall. Thanks for helping me refine these areas.',
+         N'Please review the assumptions I’ve made and check if they align with the case study details, especially regarding third-party involvement. I’m concerned that some might not be fully accurate. Additionally, could you examine my decision gateways to ensure they provide clear options for both outcomes? I’d like feedback on whether any processes have been turned into decision gateways by mistake, as I’m not sure if I’ve missed defining certain processes properly. When it comes to the entity relationships, please highlight any that don’t make sense when read aloud or seem overly complex. I want to ensure the relationships are logical and easy to follow. Finally, I would appreciate any guidance on improving the clarity and structure of my work overall. Thanks for helping me refine these areas.',
                                                                                         N'Grade: 19/20
 
 Feedback:
@@ -458,11 +458,11 @@ Keep up the excellent work! If you focus on refining your assumptions, decision 
                                                                                          NULL,
                                                                                          3,
                                                                                          13888767)
-INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [fileName], [fileData], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
+INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
 VALUES (2,
         1,
         N'remember to follow the template for the user story map',
-         N'Tutorial 6.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E6720200A5765656B20373A204167696C6520446576656C6F706D656E7420776974, N'',
+         N'',
                                             N'Grade: 75/100
 
 Feedback:
@@ -481,11 +481,11 @@ Criterion:
                                              NULL,
                                              4,
                                              13888767)
-INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [fileName], [fileData], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
+INSERT INTO [dbo].[feedbackResult] ([id], [attempt], [teacherFeedback], [notes], [feedback], [previousAttemptId], [previousAssessmentId], [assessmentId], [userId])
 VALUES (3,
         2,
         N'Remember to use a rule-based approach for acceptance criteria. ',
-         N'Tutorial 6 sample for testing.pdf', 0x200A5461736B203120E28093557365722053746F72696573200A20200A312E20426F6F6B20526563656976696E672050726F63657373200AE2978F204173206120726563656976696E6720636C65726B2C20492077616E7420746F2072656365697665206175746F6D61746564206E6F74696669636174696F6E73207768656E, N'',
+         N'',
                                                                N'Grade: 80/100
 
 Feedback:
