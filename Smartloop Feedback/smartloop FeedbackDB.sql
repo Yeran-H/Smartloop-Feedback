@@ -15,11 +15,30 @@ GO
 
 -- Create the year table
 CREATE TABLE year (
-    name INT PRIMARY KEY,
+    name INT PRIMARY KEY
 );
 GO
 
-SET IDENTITY_INSERT year ON;
+-- Create the student table
+CREATE TABLE student (
+    studentId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    degree VARCHAR(225),
+    profileImage VARBINARY(MAX)
+);
+GO
+
+-- Create the tutor table
+CREATE TABLE tutor (
+    tutorId INT PRIMARY KEY,
+    name VARCHAR(225) NOT NULL,
+    email VARCHAR(225) NOT NULL,
+    password VARCHAR(225) NOT NULL,
+    profileImage VARBINARY(MAX)
+);
+GO
 
 -- Create the semester table
 CREATE TABLE semester (
@@ -43,6 +62,24 @@ CREATE TABLE course (
     tutorNum INT,
     FOREIGN KEY (yearName) REFERENCES year(name),
     FOREIGN KEY (semesterId) REFERENCES semester(id)
+);
+GO
+
+-- Create the assessment table (before tutorialAssessment and tutorialAssociation since they reference it)
+CREATE TABLE assessment (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    name VARCHAR(225),
+    description VARCHAR(MAX),
+    courseDescription VARCHAR(MAX),
+    type VARCHAR(225),
+    date DATE,
+    weight DECIMAL (18,2),
+    mark DECIMAL (18,2),
+    canvasLink VARCHAR(MAX),
+    fileName VARCHAR(MAX),
+    fileData VARBINARY(MAX),
+    courseId INT,
+    FOREIGN KEY (courseId) REFERENCES course(id)
 );
 GO
 
@@ -77,29 +114,11 @@ CREATE TABLE tutorialAssessment (
 );
 GO
 
--- Create the assessment table
-CREATE TABLE assessment (
-    id INT IDENTITY(1,1) PRIMARY KEY,
-    name VARCHAR(225),
-    description VARCHAR(MAX),
-    courseDescription VARCHAR(MAX),
-    type VARCHAR(225),
-    date DATE,
-    weight DECIMAL (18,2),
-    mark DECIMAL (18,2),
-    canvasLink VARCHAR(MAX),
-    fileName VARCHAR(MAX),
-    fileData VARBINARY(MAX),
-    courseId INT,
-    FOREIGN KEY (courseId) REFERENCES course(id)
-);
-GO
-
 -- Create the criteria table
 CREATE TABLE criteria (
     id INT IDENTITY(1,1) PRIMARY KEY,
     description VARCHAR(MAX),
-    assessmentId INT
+    assessmentId INT,
     FOREIGN KEY (assessmentId) REFERENCES assessment(id)
 );
 GO
@@ -109,29 +128,8 @@ CREATE TABLE rating (
     id INT IDENTITY(1,1) PRIMARY KEY,
     description VARCHAR(MAX),
     grade VARCHAR(225),
-    criteriaId INT
+    criteriaId INT,
     FOREIGN KEY (criteriaId) REFERENCES criteria(id)
-);
-GO
-
--- Create the student table
-CREATE TABLE student (
-    studentId INT PRIMARY KEY,
-    name VARCHAR(225) NOT NULL,
-    email VARCHAR(225) NOT NULL,
-    password VARCHAR(225) NOT NULL,
-    degree VARCHAR(225),
-    profileImage VARBINARY(MAX)
-);
-GO
-
--- Create the tutor table
-CREATE TABLE tutor (
-    tutorId INT PRIMARY KEY,
-    name VARCHAR(225) NOT NULL,
-    email VARCHAR(225) NOT NULL,
-    password VARCHAR(225) NOT NULL,
-    profileImage VARBINARY(MAX)
 );
 GO
 
@@ -142,32 +140,11 @@ CREATE TABLE yearAssociation (
     isStudent BIT,
     studentId INT,
     tutorId INT,
-	FOREIGN KEY (name) REFERENCES year(name),
+    FOREIGN KEY (name) REFERENCES year(name),
     FOREIGN KEY (studentId) REFERENCES student(studentId),
-    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId),
+    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId)
 );
 GO
-
--- Create a trigger to enforce that only one of studentId or tutorId is populated for Year
-CREATE TRIGGER TRG_Check_UserAssociation_Year
-ON yearAssociation
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    -- Check the condition for each inserted or updated row
-    IF EXISTS (
-        SELECT 1
-        FROM yearAssociation
-        WHERE 
-            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
-            (studentId IS NULL AND tutorId IS NULL)
-    )
-    BEGIN
-        -- If the condition is violated, raise an error
-        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
-        ROLLBACK TRANSACTION;
-    END
-END;
 
 -- Create the semesterAssociation table
 CREATE TABLE semesterAssociation (
@@ -175,36 +152,15 @@ CREATE TABLE semesterAssociation (
     name VARCHAR(MAX),
     isStudent BIT,
     yearId INT,
-	semesterId INT,
+    semesterId INT,
     studentId INT,
     tutorId INT,
-	FOREIGN KEY (semesterId) REFERENCES semester(id),
+    FOREIGN KEY (semesterId) REFERENCES semester(id),
     FOREIGN KEY (yearId) REFERENCES yearAssociation(id),
     FOREIGN KEY (studentId) REFERENCES student(studentId),
-    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId),
+    FOREIGN KEY (tutorId) REFERENCES tutor(tutorId)
 );
 GO
-
--- Create a trigger to enforce that only one of studentId or tutorId is populated for Semester
-CREATE TRIGGER TRG_Check_UserAssociation_Semester
-ON semesterAssociation
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    -- Check the condition for each inserted or updated row
-    IF EXISTS (
-        SELECT 1
-        FROM semesterAssociation
-        WHERE 
-            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
-            (studentId IS NULL AND tutorId IS NULL)
-    )
-    BEGIN
-        -- If the condition is violated, raise an error
-        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
-        ROLLBACK TRANSACTION;
-    END
-END;
 
 -- Create the courseAssociation table
 CREATE TABLE courseAssociation (
@@ -212,36 +168,15 @@ CREATE TABLE courseAssociation (
     isStudent BIT,
     isCompleted BIT,
     courseId INT,
-	semesterId INT,
+    semesterId INT,
     studentId INT,
     tutorId INT,
-	FOREIGN KEY (semesterId) REFERENCES semesterAssociation(id),
+    FOREIGN KEY (semesterId) REFERENCES semesterAssociation(id),
     FOREIGN KEY (courseId) REFERENCES course(id),
     FOREIGN KEY (studentId) REFERENCES student(studentId),
     FOREIGN KEY (tutorId) REFERENCES tutor(tutorId)
 );
 GO
-
--- Create a trigger to enforce that only one of studentId or tutorId is populated for Course
-CREATE TRIGGER TRG_Check_UserAssociation_CourseAssociation
-ON courseAssociation
-AFTER INSERT, UPDATE
-AS
-BEGIN
-    -- Check the condition for each inserted or updated row
-    IF EXISTS (
-        SELECT 1
-        FROM courseAssociation
-        WHERE 
-            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
-            (studentId IS NULL AND tutorId IS NULL)
-    )
-    BEGIN
-        -- If the condition is violated, raise an error
-        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
-        ROLLBACK TRANSACTION;
-    END
-END;
 
 -- Create the studentCourse table
 CREATE TABLE studentCourse (
@@ -250,7 +185,7 @@ CREATE TABLE studentCourse (
     courseMark DECIMAL (18,2),
     tutorialId INT,
     userId INT,
-	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
     FOREIGN KEY (tutorialId) REFERENCES tutorial(id),
     FOREIGN KEY (userId) REFERENCES student(studentId)
 );
@@ -262,7 +197,7 @@ CREATE TABLE tutorCourse (
     courseAssociationId INT,
     tutorialId VARCHAR(MAX),
     userId INT,
-	FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
+    FOREIGN KEY (courseAssociationId) REFERENCES courseAssociation(id),
     FOREIGN KEY (userId) REFERENCES tutor(tutorId)
 );
 GO
@@ -277,7 +212,7 @@ CREATE TABLE studentAssessment (
     feedback VARCHAR(MAX),
     courseId INT,
     userId INT,
-	FOREIGN KEY (assessmentId) REFERENCES assessment(id),
+    FOREIGN KEY (assessmentId) REFERENCES assessment(id),
     FOREIGN KEY (userId) REFERENCES student(studentId),
     FOREIGN KEY (courseId) REFERENCES courseAssociation(id)
 );
@@ -326,4 +261,66 @@ CREATE TABLE event (
     userId INT,
     FOREIGN KEY (courseId) REFERENCES courseAssociation(id)
 );
+GO
+
+-- Create the triggers (after all necessary tables are created)
+
+-- Trigger for yearAssociation
+CREATE TRIGGER TRG_Check_UserAssociation_Year
+ON yearAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM yearAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
+
+-- Trigger for semesterAssociation
+CREATE TRIGGER TRG_Check_UserAssociation_Semester
+ON semesterAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM semesterAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
+GO
+
+-- Trigger for courseAssociation
+CREATE TRIGGER TRG_Check_UserAssociation_CourseAssociation
+ON courseAssociation
+AFTER INSERT, UPDATE
+AS
+BEGIN
+    IF EXISTS (
+        SELECT 1
+        FROM courseAssociation
+        WHERE 
+            (studentId IS NOT NULL AND tutorId IS NOT NULL) OR 
+            (studentId IS NULL AND tutorId IS NULL)
+    )
+    BEGIN
+        RAISERROR('Either studentId or tutorId must be populated, but not both or neither.', 16, 1);
+        ROLLBACK TRANSACTION;
+    END
+END;
 GO
