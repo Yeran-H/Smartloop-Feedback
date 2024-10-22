@@ -587,6 +587,7 @@
     <None Include="Resources\back1.png" />
     <None Include="Resources\Event.png" />
     <None Include="Resources\search.png" />
+    <Content Include="insert.sql" />
     <Content Include="smartloop FeedbackDB.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
