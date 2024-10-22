@@ -4,6 +4,13 @@ INSERT INTO [dbo].[year] ([name]) VALUES (2020)
 INSERT INTO [dbo].[year] ([name]) VALUES (2024)
 SET IDENTITY_INSERT [dbo].[year] OFF
 
+-- Student Data Insert
+INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree]) VALUES (11111111, N'11111111', N'test@gmail.com', N'11111111', N'BA Software')
+INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree], [profileImage]) VALUES (13888767, N'Yeran', N'13888767@gmail.com', N'yerthisev03', N'BA Software', 0xFFD8FFE000104A46494600010101000000000000FFDB0043000302020302020303030304030304050805050404050A070706080C0A0C0C0B0A0B0B0D0E12100D0E110E0B0B1016101113141515150C0F171816141812141514FFDB00430103040405040509050509140D0B0D1414141414141414141414141414141414141414)
+
+-- Tutor Data Insert
+INSERT INTO [dbo].[tutor] ([tutorId], [name], [email], [password], [profileImage]) VALUES (97492185, N'Mahira Mohamed Mowjoon', N'mahira.athamlebbe@uts.edu.au', N'yerthisev03', <SQLVARIANT>)
+
 -- Semester Data Insert
 SET IDENTITY_INSERT [dbo].[semester] ON
 INSERT INTO [dbo].[semester] ([id], [name], [yearName]) VALUES (1, N'Autumn', 2020)
@@ -15,74 +22,6 @@ SET IDENTITY_INSERT [dbo].[course] ON
 INSERT INTO [dbo].[course] ([id], [code], [name], [creditPoint], [description], [yearName], [semesterId], [canvasLink], [tutorNum]) VALUES (1, 31269, N'Business Requirements Modelling', 6, N'This subject introduces information system concepts and describes how these concepts can be used to model business requirements. It outlines how the ability to capture information about the system in ways understood by its eventual users improves the final quality of the system. An overview of agile and non-agile software engineering principles, methods, tools and techniques is presented and practised in small teams. The subject introduces various analysis approaches found in contemporary system development including object-oriented methods, agile methods, business process modelling and entity-relationship modelling. It explores the relationships between these techniques and their application, and how they are used to capture and model the business requirements. Students apply various requirements elicitation, analysis, modelling and specification techniques to case studies in small teams.', 2020, 1, N'none', 1)
 INSERT INTO [dbo].[course] ([id], [code], [name], [creditPoint], [description], [yearName], [semesterId], [canvasLink], [tutorNum]) VALUES (2, 31269, N'Business Requirements Modelling', 6, N'This subject introduces information system concepts and describes how these concepts can be used to model business requirements. It outlines how the ability to capture information about the system in ways understood by its eventual users improves the final quality of the system. An overview of agile and non-agile software engineering principles, methods, tools and techniques is presented and practised in small teams. The subject introduces various analysis approaches found in contemporary system development including object-oriented methods, agile methods, business process modelling and entity-relationship modelling. It explores the relationships between these techniques and their application, and how they are used to capture and model the business requirements. Students apply various requirements elicitation, analysis, modelling and specification techniques to case studies in small teams.', 2024, 7, N'https://canvas.uts.edu.au/courses/32705/modules', 1)
 SET IDENTITY_INSERT [dbo].[course] OFF
-
--- Tutorial Data Insert
-SET IDENTITY_INSERT [dbo].[tutorial] ON
-INSERT INTO [dbo].[tutorial] ([id], [name], [courseId]) VALUES (1, N'1', 1)
-INSERT INTO [dbo].[tutorial] ([id], [name], [courseId]) VALUES (2, N'1', 2)
-SET IDENTITY_INSERT [dbo].[tutorial] OFF
-
--- Tutorial Association Data Insert
-SET IDENTITY_INSERT [dbo].[tutorialAssociation] ON
-INSERT INTO [dbo].[tutorialAssociation] ([id], [tutorialId], [generalFeedback], [isCompleted]) VALUES (1, 1, N'The students in this tutorial class have demonstrated notable advancements in their understanding of Business Process Modeling (BPM) and Entity Relationship Diagrams (ERD). The achievement of high scores, such as 19 out of 20 in Assignment Task 1, highlights their dedication and grasp of the concepts presented. Their attention to detail and thorough analysis reflect their commitment to mastering the subject matter.
-
-Areas of Improvement:
-
-Assumptions Alignment: Students need to ensure their assumptions are closely aligned with the case study to avoid contradictions, enhancing the coherence of their analysis.
-
-Decision Gateways Labeling: There is a need for clearer labeling of decision gateways. Students should work on distinguishing these from actual processes to avoid confusion.
-
-Process Clarity: Missing processes, especially those that are transformed into decision gateways, should be clearly defined to enhance the overall analysis.
-
-Entity-Relationship Refinements: Improving the readability and logical coherence of relationships in ERDs is essential for better understanding among peers.
-
-Data Model Enhancements: Revising relationships and cardinalities in the data model can strengthen overall analysis and provide a more robust framework.
-
-Recommendations Clarity: Students should aim to provide clear and rational process recommendations, enriching their analyses and insights.
-
-Suggestions for Further Improvement:
-
-Engagement with the Case Study: Students should engage closely with the case study, ensuring all assumptions align with the provided information to enhance clarity and precision.
-
-Practice Labeling: Encourage students to practice clear labeling of decision gateways, ensuring they understand the distinction from actual processes.
-
-Clarification of Missing Processes: Focus on clearly defining missing processes and refining ERDs for improved readability and logical consistency.
-
-Review of Data Model Relationships: Students should regularly review their data model relationships and cardinalities to ensure they accurately reflect underlying business processes.
-
-Actionable Recommendations: Emphasize the importance of providing clear, actionable recommendations based on their analyses to foster deeper insights.', 1)
-SET IDENTITY_INSERT [dbo].[tutorialAssociation] OFF
-
--- Tutorial Assessment Data Insert
-SET IDENTITY_INSERT [dbo].[tutorialAssessment] ON
-INSERT INTO [dbo].[tutorialAssessment] ([id], [tutorialId], [generalFeedback], [isCompleted], [assessmentId]) VALUES (1, 1, N'The students in this tutorial class have demonstrated notable advancements in their understanding of Business Process Modeling (BPM) and Entity Relationship Diagrams (ERD). The achievement of high scores, such as 19 out of 20 in Assignment Task 1, highlights their dedication and grasp of the concepts presented. Their attention to detail and thorough analysis reflect their commitment to mastering the subject matter.
-
-Areas of Improvement:
-
-Assumptions Alignment: Students need to ensure their assumptions are closely aligned with the case study to avoid contradictions, enhancing the coherence of their analysis.
-
-Decision Gateways Labeling: There is a need for clearer labeling of decision gateways. Students should work on distinguishing these from actual processes to avoid confusion.
-
-Process Clarity: Missing processes, especially those that are transformed into decision gateways, should be clearly defined to enhance the overall analysis.
-
-Entity-Relationship Refinements: Improving the readability and logical coherence of relationships in ERDs is essential for better understanding among peers.
-
-Data Model Enhancements: Revising relationships and cardinalities in the data model can strengthen overall analysis and provide a more robust framework.
-
-Recommendations Clarity: Students should aim to provide clear and rational process recommendations, enriching their analyses and insights.
-
-Suggestions for Further Improvement:
-
-Engagement with the Case Study: Students should engage closely with the case study, ensuring all assumptions align with the provided information to enhance clarity and precision.
-
-Practice Labeling: Encourage students to practice clear labeling of decision gateways, ensuring they understand the distinction from actual processes.
-
-Clarification of Missing Processes: Focus on clearly defining missing processes and refining ERDs for improved readability and logical consistency.
-
-Review of Data Model Relationships: Students should regularly review their data model relationships and cardinalities to ensure they accurately reflect underlying business processes.
-
-Actionable Recommendations: Emphasize the importance of providing clear, actionable recommendations based on their analyses to foster deeper insights.', 1, 1)
-SET IDENTITY_INSERT [dbo].[tutorialAssessment] OFF
 
 -- Assessment Data Insert
 SET IDENTITY_INSERT [dbo].[assessment] ON
@@ -188,6 +127,74 @@ inthecasestudy.',
              N'https://canvas.uts.edu.au/courses/32705/assignments/194070',
               N'31269 Assessment 4-3.pdf', 0x466163756C7479206F6620456E67696E656572696E6720616E64204954200A5363686F6F6C206F6620436F6D707574657220536369656E6365200A333132363920427573696E65737320526571756972656D656E7473204D6F64656C6C696E67200A4173736573736D656E74203420E28093526571756972656D656E74732053, 2)
 SET IDENTITY_INSERT [dbo].[assessment] OFF
+
+-- Tutorial Data Insert
+SET IDENTITY_INSERT [dbo].[tutorial] ON
+INSERT INTO [dbo].[tutorial] ([id], [name], [courseId]) VALUES (1, N'1', 1)
+INSERT INTO [dbo].[tutorial] ([id], [name], [courseId]) VALUES (2, N'1', 2)
+SET IDENTITY_INSERT [dbo].[tutorial] OFF
+
+-- Tutorial Association Data Insert
+SET IDENTITY_INSERT [dbo].[tutorialAssociation] ON
+INSERT INTO [dbo].[tutorialAssociation] ([id], [tutorialId], [generalFeedback], [isCompleted]) VALUES (1, 1, N'The students in this tutorial class have demonstrated notable advancements in their understanding of Business Process Modeling (BPM) and Entity Relationship Diagrams (ERD). The achievement of high scores, such as 19 out of 20 in Assignment Task 1, highlights their dedication and grasp of the concepts presented. Their attention to detail and thorough analysis reflect their commitment to mastering the subject matter.
+
+Areas of Improvement:
+
+Assumptions Alignment: Students need to ensure their assumptions are closely aligned with the case study to avoid contradictions, enhancing the coherence of their analysis.
+
+Decision Gateways Labeling: There is a need for clearer labeling of decision gateways. Students should work on distinguishing these from actual processes to avoid confusion.
+
+Process Clarity: Missing processes, especially those that are transformed into decision gateways, should be clearly defined to enhance the overall analysis.
+
+Entity-Relationship Refinements: Improving the readability and logical coherence of relationships in ERDs is essential for better understanding among peers.
+
+Data Model Enhancements: Revising relationships and cardinalities in the data model can strengthen overall analysis and provide a more robust framework.
+
+Recommendations Clarity: Students should aim to provide clear and rational process recommendations, enriching their analyses and insights.
+
+Suggestions for Further Improvement:
+
+Engagement with the Case Study: Students should engage closely with the case study, ensuring all assumptions align with the provided information to enhance clarity and precision.
+
+Practice Labeling: Encourage students to practice clear labeling of decision gateways, ensuring they understand the distinction from actual processes.
+
+Clarification of Missing Processes: Focus on clearly defining missing processes and refining ERDs for improved readability and logical consistency.
+
+Review of Data Model Relationships: Students should regularly review their data model relationships and cardinalities to ensure they accurately reflect underlying business processes.
+
+Actionable Recommendations: Emphasize the importance of providing clear, actionable recommendations based on their analyses to foster deeper insights.', 1)
+SET IDENTITY_INSERT [dbo].[tutorialAssociation] OFF
+
+-- Tutorial Assessment Data Insert
+SET IDENTITY_INSERT [dbo].[tutorialAssessment] ON
+INSERT INTO [dbo].[tutorialAssessment] ([id], [tutorialId], [generalFeedback], [isCompleted], [assessmentId]) VALUES (1, 1, N'The students in this tutorial class have demonstrated notable advancements in their understanding of Business Process Modeling (BPM) and Entity Relationship Diagrams (ERD). The achievement of high scores, such as 19 out of 20 in Assignment Task 1, highlights their dedication and grasp of the concepts presented. Their attention to detail and thorough analysis reflect their commitment to mastering the subject matter.
+
+Areas of Improvement:
+
+Assumptions Alignment: Students need to ensure their assumptions are closely aligned with the case study to avoid contradictions, enhancing the coherence of their analysis.
+
+Decision Gateways Labeling: There is a need for clearer labeling of decision gateways. Students should work on distinguishing these from actual processes to avoid confusion.
+
+Process Clarity: Missing processes, especially those that are transformed into decision gateways, should be clearly defined to enhance the overall analysis.
+
+Entity-Relationship Refinements: Improving the readability and logical coherence of relationships in ERDs is essential for better understanding among peers.
+
+Data Model Enhancements: Revising relationships and cardinalities in the data model can strengthen overall analysis and provide a more robust framework.
+
+Recommendations Clarity: Students should aim to provide clear and rational process recommendations, enriching their analyses and insights.
+
+Suggestions for Further Improvement:
+
+Engagement with the Case Study: Students should engage closely with the case study, ensuring all assumptions align with the provided information to enhance clarity and precision.
+
+Practice Labeling: Encourage students to practice clear labeling of decision gateways, ensuring they understand the distinction from actual processes.
+
+Clarification of Missing Processes: Focus on clearly defining missing processes and refining ERDs for improved readability and logical consistency.
+
+Review of Data Model Relationships: Students should regularly review their data model relationships and cardinalities to ensure they accurately reflect underlying business processes.
+
+Actionable Recommendations: Emphasize the importance of providing clear, actionable recommendations based on their analyses to foster deeper insights.', 1, 1)
+SET IDENTITY_INSERT [dbo].[tutorialAssessment] OFF
 
 -- Criteria Data Insert
 SET IDENTITY_INSERT [dbo].[criteria] ON
@@ -353,13 +360,6 @@ INSERT INTO [dbo].[rating] ([id], [description], [grade], [criteriaId]) VALUES (
 INSERT INTO [dbo].[rating] ([id], [description], [grade], [criteriaId]) VALUES (124, N' clarity', N'Developing', 32)
 INSERT INTO [dbo].[rating] ([id], [description], [grade], [criteriaId]) VALUES (125, N' header', N'Novice', 32)
 SET IDENTITY_INSERT [dbo].[rating] OFF
-
--- Student Data Insert
-INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree]) VALUES (11111111, N'11111111', N'test@gmail.com', N'11111111', N'BA Software')
-INSERT INTO [dbo].[student] ([studentId], [name], [email], [password], [degree], [profileImage]) VALUES (13888767, N'Yeran', N'13888767@gmail.com', N'yerthisev03', N'BA Software', 0xFFD8FFE000104A46494600010101000000000000FFDB0043000302020302020303030304030304050805050404050A070706080C0A0C0C0B0A0B0B0D0E12100D0E110E0B0B1016101113141515150C0F171816141812141514FFDB00430103040405040509050509140D0B0D1414141414141414141414141414141414141414)
-
--- Tutor Data Insert
-INSERT INTO [dbo].[tutor] ([tutorId], [name], [email], [password], [profileImage]) VALUES (97492185, N'Mahira Mohamed Mowjoon', N'mahira.athamlebbe@uts.edu.au', N'yerthisev03', <SQLVARIANT>)
 
 -- Year Association Data Insert
 SET IDENTITY_INSERT [dbo].[yearAssociation] ON
