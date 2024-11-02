@@ -3,11 +3,18 @@
 SmartLoop is an AI-powered feedback application designed to enhance student learning by providing personalized, dynamic, and actionable feedback. The application is built to streamline the feedback process for students, tutors, and course coordinators.
 
 ## Table of Contents
+- [Demo Video](#demo-video)
 - [Features](#features)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Technologies Used](#technologies-used)
 - [Capstone Project](#capstone-project)
+
+## Demo Video
+This video showcases a small demo of the Smart Loop Application
+
+[![YouTube Video](https://img.youtube.com/vi/YVtDCVoGfoQ/0.jpg)](https://www.youtube.com/watch?v=YVtDCVoGfoQ)
+
 
 ## Features
 
