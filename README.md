@@ -74,4 +74,4 @@ The SmartLoop Feedback application is the focus of Yeran Hettiarachchy's capston
 
 The application simplifies the feedback process for educators, allowing more time for focused teaching and student mentorship. This capstone project highlights how AI can enhance student engagement, improve learning outcomes, and streamline feedback delivery, benefiting both students and teachers in an evolving educational landscape.
 
-[View Capstone Report](https://github.com/Yeran-H)
+[View Capstone Report](https://www.linkedin.com/posts/yeran-hettiarachchy_capstoneproject-uts-aiineducation-activity-7312636117869084675-GrQ_?utm_source=share&utm_medium=member_desktop&rcm=ACoAAC-3Q1kBEldOqz6S-KPj0btr-xuyV-nzfcA)
